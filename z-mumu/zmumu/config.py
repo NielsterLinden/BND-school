@@ -33,6 +33,12 @@ DATA_DIR = OUTPUT_DIR / "data"
 # Uncertainty: 1.2% (CMS 2016 legacy luminosity calibration, CMS-LUM-17-003).
 LUMI_PB = 16290.713420
 LUMI_REL_UNC = 0.012
+# Cross-check (scripts/xcheck_efficiency.py): the normtag-corrected recorded
+# luminosity of the same certified lumisections, summed from the CMS Open Data
+# luminosity record for 2016 (recid 1059, pp_2016lumibyls.csv, normtag_PHYSICS):
+# Run2016G 7653.261 + Run2016H 8740.119 pb^-1. LUMI_PB above is 0.63% lower,
+# consistent with brilcalc run without --normtag.
+LUMI_PB_NORMTAG = 16393.381
 
 # --------------------------------------------------------------------------
 # Trigger
@@ -141,6 +147,47 @@ FS_REL_UNC = 0.50
 TRIG_METHOD_REL_UNC = 0.005
 # Muon momentum scale, propagated to the mass-window acceptance.
 MUON_SCALE_REL_UNC = 0.002
+
+# --------------------------------------------------------------------------
+# Cross-checks on the parent NanoAOD (scripts/xcheck_efficiency.py)
+# --------------------------------------------------------------------------
+# The unskimmed SingleMuon NanoAOD. Same era sub-directories as the skim, and it
+# still has the TrigObj_* branches the skim dropped.
+PARENT_DIR = Path("/dcache/atlas/sjankovy/BND/collision_data/SingleMuon")
+
+# HLT muon objects of the analysis paths. TrigObj_filterBits for muons:
+# 2 = Iso (hltL3crIso*, IsoMu*), 8 = IsoTkMu. Objects above the path threshold
+# are required; the matching is only trusted in events that fired the OR.
+TRIG_OBJ_BITS = 2 | 8
+TRIG_OBJ_PT_MIN = 24.0
+TRIG_MATCH_DR = 0.1
+# Systematic variation: drop objects whose L1 seed is in [20, 22) GeV. Those come
+# from L1_SingleMu20-seeded paths sharing the Iso filter, not from IsoMu24.
+TRIG_L1_VETO_BAND = (20.0, 22.0)
+
+# Finer pT binning than EFF_PT_BINS around the 24 GeV turn-on.
+TRIG_PT_BINS = [20.0, 22.0, 24.0, 25.0, 26.0, 27.0, 28.0, 30.0, 35.0, 40.0,
+                50.0, 60.0, 80.0, 120.0, 200.0]
+
+# --------------------------------------------------------------------------
+# Simulation: acceptance of the fiducial volume (scripts/mc_acceptance.py)
+# --------------------------------------------------------------------------
+# Streamed from CERN Open Data EOS over xrootd; the file lists come from
+# `cernopendata-client get-file-locations --recid <id> --protocol xrootd --verbose`.
+FILELIST_DIR = REPO_DIR / "filelists"
+DY_SAMPLES = {
+    "nlo": {"recid": 35669, "filelist": "DYJetsToLL_M-50_NLO_amcatnloFXFX_35669.sizes.tsv",
+            "label": "DYJetsToLL_M-50 amcatnloFXFX (NLO)"},
+    "lo":  {"recid": 35671, "filelist": "DYJetsToLL_M-50_LO_madgraphMLM_35671.sizes.tsv",
+            "label": "DYJetsToLL_M-50 madgraphMLM (LO)"},
+}
+# sigma(pp -> Z/gamma* -> ll, m_ll > 50 GeV) summed over e, mu, tau, NNLO. The
+# same number the z-ee subgroup uses; the combination expects 6077.22/3 per flavour.
+DY_XSEC_PB = 6077.22
+# Generator-level fiducial muons: GenDressedLepton (muon + photons within
+# dR < 0.1), |pdgId| == 13, no tau ancestor. The kinematic cuts and the mass
+# window are the reco-level ones above.
+GEN_MATCH_DR = 0.1
 
 # --------------------------------------------------------------------------
 # Processing

@@ -15,6 +15,19 @@ in the fiducial volume: exactly two opposite-sign muons, `pT > 26/20 GeV`,
 Full numbers in [`output/RESULTS.md`](output/RESULTS.md), plots in
 `output/plots/`, machine-readable in `output/results.json`.
 
+**Review (Niels, 14 Sep 2026).** Steps 1-6 reproduce exactly. Cross-checks with
+the unskimmed NanoAOD (trigger objects) and DY simulation find a biased trigger
+efficiency, background in the ID/iso tag-and-probe, a luminosity without
+normtag and a 1.1% migration effect. With those corrections, and the acceptance
+from DY NLO for the combination:
+
+```
+sigma_fid = 776.9 +/- 0.2 (stat) +/- 14.8 (syst) pb        (DY NLO prediction: 799.6 pb)
+sigma(pp -> Z/gamma* -> mu mu, m > 50 GeV) = 1968 pb       (A = 0.3947)
+```
+
+Not yet adopted in steps 1-6 -- see [`docs/08-review-and-crosschecks.md`](docs/08-review-and-crosschecks.md).
+
 ## Quick start
 
 ```bash
@@ -46,6 +59,7 @@ zmumu/                 the library
   objects.py           muon selection, FSR recovery, dimuon kinematics
   hists.py             histogram booking, persistence, CMS-style plotting
   stats.py             Clopper-Pearson intervals, error propagation
+  batch.py             per-file subprocess runner (resumable) + CERN catalogue helpers
 
 scripts/               one script per component, each runnable on its own
   step1_selection.py   OS / SS / e-mu regions, cutflow, mass spectra
@@ -54,8 +68,11 @@ scripts/               one script per component, each runnable on its own
   step4_signal.py      background-subtracted yield + fit validation
   step5_crosssection.py  combine and propagate uncertainties
   step6_report.py      results.json, RESULTS.md, summary plot
+  xcheck_efficiency.py review: trigger-object T&P, T&P background, lumi (parent NanoAOD)
+  mc_acceptance.py     review: acceptance A and method closure in DY simulation
 
-run_all.py             runs steps 1-6 in order
+run_all.py             runs steps 1-6 in order (the review scripts run separately)
+filelists/             cernopendata-client listings (xrootd URL, size, adler32) for the review scripts
 docs/                  the physics documentation (read 00-overview.md first)
 output/                plots + results (committed); output/data/ pickles are git-ignored
 ```
@@ -75,6 +92,7 @@ matching page in `docs/`.
 | [05-backgrounds.md](docs/05-backgrounds.md) | both background classes and why you need both |
 | [06-cross-section.md](docs/06-cross-section.md) | fiducial vs total, signal extraction, the formula |
 | [07-systematics.md](docs/07-systematics.md) | every uncertainty and how far to trust it |
+| [08-review-and-crosschecks.md](docs/08-review-and-crosschecks.md) | review: what was tested, what changes, inputs for the combination |
 
 ## Input data
 
@@ -90,6 +108,11 @@ Skimmed NanoAOD at
 in the `Muon` collection, from the 259 GB / 324 M event parent dataset at
 `/dcache/atlas/sjankovy/BND/collision_data/SingleMuon`. The skim keeps ~300 of
 the original 1363 branches.
+
+The review scripts read the parent NanoAOD and the DY samples (recids 35669,
+35671) from CERN EOS over xrootd (`xrootd` and `fsspec-xrootd` are in
+`requirements.txt`). dCache NFS reads of the parent stalled under parallel
+access on 14 Sep 2026, although the files match the catalogue checksums.
 
 Note that 39 trigger branches are not present in every file (the 2016 HLT menu
 changed during data-taking); `zmumu/io.py` handles this. The analysis triggers

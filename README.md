@@ -10,6 +10,7 @@ We analyse CMS 2016 open data (NanoAOD, 13 TeV) and split into three subgroups b
 | `z-ee/` | Z → e⁺e⁻ | `z-ee/handoff.md` |
 | `z-mumu/` | Z → μ⁺μ⁻ | `z-mumu/handoff.md` |
 | `z-tautau/` | Z → τ⁺τ⁻ | `z-tautau/handoff.md` |
+| `combination/` | Combination of all three channels | `combination/combination.ipynb` |
 | `reference/` | Shared material (intro slides, links) | – |
 
 Each subgroup owns its folder: put notebooks, scripts and plots there.
@@ -19,7 +20,14 @@ Keep `handoff.md` up to date so the other groups can pick up where you left off.
 
 - Work directly on `main`. Pull before you push (`git pull --rebase`).
 - Do **not** commit data files (ROOT files, large CSVs). Copy them locally and add the path/DOI to your `handoff.md` instead.
-- Strip notebook outputs before committing if they are large.
+- Strip notebook outputs before committing, but keep the numbers the combination needs (see below).
+
+## What the combination needs
+
+- `n_obs` — data events in the 60–120 GeV window
+- `n_bkg` — background in the same window
+- `acc_eff` — A·ε from MC
+- systematic uncertainties, same names in all three channels
 
 ## Useful links
 

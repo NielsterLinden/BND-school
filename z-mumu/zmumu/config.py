@@ -28,17 +28,17 @@ DATA_DIR = OUTPUT_DIR / "data"
 # --------------------------------------------------------------------------
 # Luminosity
 # --------------------------------------------------------------------------
-# Run2016G + Run2016H, run range 278820-284044, computed by the z-ee subgroup:
-#   brilcalc lumi -c web --begin 278820 --end 284044 -i datasets/GRL/GRL.txt -u /fb
+# Run2016G + Run2016H, run range 278820-284044, certified lumisections of
+# datasets/GRL/GRL.txt. The value is the normtag_PHYSICS recorded luminosity from the
+# CMS Open Data luminosity record for 2016 (recid 1059, pp_2016lumibyls.csv):
+# Run2016G 7653.261 + Run2016H 8740.119 pb^-1 (zmumu/pileup.py reproduces it exactly).
+# The first iteration used 16290.713420 pb^-1 (brilcalc without --normtag), 0.63% low;
+# the committed v1 outputs (output/RESULTS.md) were produced with that value.
 # Uncertainty: 1.2% (CMS 2016 legacy luminosity calibration, CMS-LUM-17-003).
-LUMI_PB = 16290.713420
+LUMI_PB = 16393.381
 LUMI_REL_UNC = 0.012
-# Cross-check (scripts/xcheck_efficiency.py): the normtag-corrected recorded
-# luminosity of the same certified lumisections, summed from the CMS Open Data
-# luminosity record for 2016 (recid 1059, pp_2016lumibyls.csv, normtag_PHYSICS):
-# Run2016G 7653.261 + Run2016H 8740.119 pb^-1. LUMI_PB above is 0.63% lower,
-# consistent with brilcalc run without --normtag.
-LUMI_PB_NORMTAG = 16393.381
+LUMI_PB_NORMTAG = 16393.381        # kept for the review scripts
+LUMI_PB_V1 = 16290.713420          # what steps 1-6 were run with
 
 # --------------------------------------------------------------------------
 # Trigger

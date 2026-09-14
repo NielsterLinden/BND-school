@@ -122,6 +122,7 @@ def fill_chunk(ev, out, key, is_mc, weighter=None, sf=None, calib=None, split_fl
                 continue
             idx = d["idx"]
             w0 = base[idx]
+            pp = np.ones(len(idx), dtype=bool)
             if is_mc:
                 if region == "CRemu":
                     pp = regions.is_prompt(d["flav1"]) & regions.is_prompt(d["flav_el"])
@@ -150,7 +151,8 @@ def fill_chunk(ev, out, key, is_mc, weighter=None, sf=None, calib=None, split_fl
                 for var in ("mass_fit", "mass_fine"):
                     e_ = edges(region, var)
                     for vname, warr in wvar.items():
-                        _fill(out, f"{smp}|{region}|{var}|{vname}", values[var][m], (warr[idx] * sfw["nominal"])[m], e_)
+                        _fill(out, f"{smp}|{region}|{var}|{vname}", values[var][m],
+                              (np.where(pp, warr[idx], 0.0) * sfw["nominal"])[m], e_)
                     for vname, s_ in sfw.items():
                         if vname == "nominal":
                             continue

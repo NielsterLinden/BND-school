@@ -16,7 +16,7 @@ Method: own skims of the unskimmed NanoAOD (data + all MC), pileup and L1-prefir
 tight-ID/iso/trigger scale factors from tag-and-probe fits, fake-factor non-prompt estimate,
 Z-peak momentum calibration, **TRExFitter v1.8.0** profile-likelihood fit of m(μμ) (30 × 2 GeV
 bins) with 24 nuisance parameters. Everything is in `docs/09`–`15`, `output/v2/RESULTS_v2.md`,
-`CLAUDE.md`. Reproduce: `source ../setup.sh && python run_v2.py --from 2` (~40 min).
+`CLAUDE.md`; slide deck: <https://claude.ai/code/artifact/8072b961-01d5-47ed-9804-ee21f70ac985>. Reproduce: `source ../setup.sh && python run_v2.py --from 2` (~40 min).
 
 ### What the combination gets (see `../fitting/CONVENTIONS.md`)
 

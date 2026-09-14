@@ -24,7 +24,7 @@ a data-driven **fake-factor** estimate of non-prompt muons (no QCD simulation), 
 momentum calibration, and a **TRExFitter v1.8.0** fit of the mass spectrum with 24 nuisance
 parameters. Full numbers: [`output/v2/RESULTS_v2.md`](output/v2/RESULTS_v2.md); machine-readable:
 `output/v2/results_v2.json`, `fit/results/zmumu_fit_result.json`; plots: `output/v2/plots/`;
-fit outputs: `fit/results/zmumu/`. Agents: read [`CLAUDE.md`](CLAUDE.md).
+fit outputs: `fit/results/zmumu/`. Twelve-slide summary deck: <https://claude.ai/code/artifact/8072b961-01d5-47ed-9804-ee21f70ac985>. Agents: read [`CLAUDE.md`](CLAUDE.md).
 
 Uncertainty budget (impact on the cross section): luminosity 1.16%, L1 prefiring 0.51%,
 muon efficiencies 0.50%, signal modelling (PDF, scales, parton shower, generator) 0.36%,

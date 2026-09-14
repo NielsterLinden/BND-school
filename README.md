@@ -10,7 +10,7 @@ We analyse CMS 2016 open data (NanoAOD, 13 TeV) and split into three subgroups b
 | `z-ee/` | Z → e⁺e⁻ | `z-ee/handoff.md` |
 | `z-mumu/` | Z → μ⁺μ⁻ | `z-mumu/handoff.md` |
 | `z-tautau/` | Z → τ⁺τ⁻ | `z-tautau/handoff.md` |
-| `combination/` | Combination of all three channels | `combination/combination.ipynb` |
+| `combination/` | Combination of all three channels | `combination/handoff.md` |
 | `reference/` | Shared material (intro slides, links) | – |
 
 Each subgroup owns its folder: put notebooks, scripts and plots there.
@@ -20,7 +20,7 @@ Keep `handoff.md` up to date so the other groups can pick up where you left off.
 
 - Work directly on `main`. Pull before you push (`git pull --rebase`).
 - Do **not** commit data files (ROOT files, large CSVs). Copy them locally and add the path/DOI to your `handoff.md` instead.
-- Strip notebook outputs before committing, but keep the numbers the combination needs (see below).
+- Strip notebook outputs before committing, but keep the numbers the combination needs (see below) in your `handoff.md`.
 
 ## What the combination needs
 

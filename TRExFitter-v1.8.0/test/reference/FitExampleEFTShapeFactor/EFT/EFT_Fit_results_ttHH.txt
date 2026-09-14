@@ -1,8 +1,0 @@
-NORMFACTORS 0 cttHH cttHH*cttHH
-Expression_muEFT_ttHH_R1L4bHi_c_bin0  0.99996  10.162  46.3114
-Expression_muEFT_ttHH_R1L4bHi_c_bin1  0.999964  10.1922  46.158
-Expression_muEFT_ttHH_R1L4bHi_c_bin2  0.999963  10.3191  46.851
-Expression_muEFT_ttHH_R1L4bHi_c_bin3  0.999965  10.3279  46.9733
-Expression_muEFT_ttHH_R1L4bHi_c_bin4  0.999966  10.3467  47.1855
-Expression_muEFT_ttHH_R1L4bHi_c_bin5  0.999963  10.3346  48.0678
-

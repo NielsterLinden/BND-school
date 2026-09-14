@@ -1,5 +1,0 @@
- |       | Signal Region1 | 
- | Background | 5740.33 pm 2870.16 | 
- | SignalSample1 | 20003.6 pm 34.0434 | 
- | Total | 25743.9 pm 2870.36 | 
- | Data 2015-2018 | 21628 | 

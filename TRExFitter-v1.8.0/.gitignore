@@ -1,9 +1,0 @@
-FitExample/
-ExampleInputs
-myFit.exe*
-*_C*
-.DS_Store
-*.o
-build/*
-.vscode/
-site/

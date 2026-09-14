@@ -1,0 +1,646 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[0m[#1] INFO:InputArguments -- Silent clipping of values to range in `RooRealVar::setVal()` enabled.
+[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleEFT.config
+[1;36m[ DEBUG   ][0;0m PlotOptionsSummary not specified setting Summary values to 'PlotOptions'
+[1;36m[ DEBUG   ][0;0m You do not have 'Options' option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Limit option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Significance option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m Have a usual variable in reg SR : 
+[1;36m[ DEBUG   ][0;0m 2*(cos_theta_x>0)+(cos_theta_y>0) and size of corrVar=1
+[1;36m[ DEBUG   ][0;0m Found EFT SM Reference sample singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m    Created new Sample SM_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m     Adding EFT mu NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m    Created new Sample SM_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m     Adding EFT mu NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m    Created new Sample SM_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m     Adding EFT mu NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m    Created new Sample SM_singletop_tchan_PowPy8_FS_SR_bin3
+[1;36m[ DEBUG   ][0;0m     Adding EFT mu NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin3
+[1;32m[ INFO    ][0;0m Successfully read config file.
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Job name: FitExampleEFT
+[1;32m[ INFO    ][0;0m Reading the following regions:
+[1;32m[ INFO    ][0;0m     Region: SR
+[1;32m[ INFO    ][0;0m Reading the following samples:
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST
+[1;32m[ INFO    ][0;0m      singletop_tchan_PowPy8_FS_GHOST
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_PowPy8_FS
+[1;32m[ INFO    ][0;0m      SM_singletop_tchan_PowPy8_FS_SR_bin0
+[1;32m[ INFO    ][0;0m      SM_singletop_tchan_PowPy8_FS_SR_bin1
+[1;32m[ INFO    ][0;0m      SM_singletop_tchan_PowPy8_FS_SR_bin2
+[1;32m[ INFO    ][0;0m      SM_singletop_tchan_PowPy8_FS_SR_bin3
+[1;32m[ INFO    ][0;0m      ttbar
+[1;32m[ INFO    ][0;0m Reading the following systematics:
+[1;32m[ INFO    ][0;0m  JVT
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Processing EFT inputs...
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Found new EFT sample: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m Param: ctW+ctW^2
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-3.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m Found new operator: ctW
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m Found new term: ctW
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 2
+[1;36m[ DEBUG   ][0;0m Found new term: ctW^2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -3.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW+ctW^2
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-2.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -2.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW+ctW^2
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=2.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 2.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW+ctW^2
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=3.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 3.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: citW+citW^2
+[1;36m[ DEBUG   ][0;0m Title: citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: citW=-1.5
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m Found new operator: citW
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new term: citW
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 2
+[1;36m[ DEBUG   ][0;0m Found new term: citW^2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.5
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: citW+citW^2
+[1;36m[ DEBUG   ][0;0m Title: citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: citW=-1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: citW + citW^2
+[1;36m[ DEBUG   ][0;0m Title: citW=c_{itW} 
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: citW=1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: citW + citW^2
+[1;36m[ DEBUG   ][0;0m Title: citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: citW=1.5
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.5
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: singletop_tchan_ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-3.0,citW=-1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new term: ctW*citW
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -3.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-3.0,citW=1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -3.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-2.0,citW=-1.5
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.5
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-2.0,citW=-1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-2.0,citW=1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-2.0,citW=1.5
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.5
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=2.0,citW=-1.5
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.5
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=2.0,citW=-1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=2.0,citW=1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=2.0,citW=1.5
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.5
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=3.0,citW=-1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 3.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=3.0,citW=1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 3.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;32m[ INFO    ][0;0m ------------------------------------------------------------------------
+[1;32m[ INFO    ][0;0m f(x[]) = [0] + [1]*x[0] + [2]*x[0]*x[0] + [3]*x[1] + [4]*x[1]*x[1] + [5]*x[0]*x[1]
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m x[0] : ctW
+[1;32m[ INFO    ][0;0m x[1] : citW
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m [0] = 0
+[1;32m[ INFO    ][0;0m [1] coefficient for:
+[1;32m[ INFO    ][0;0m       ctW^1
+[1;32m[ INFO    ][0;0m [2] coefficient for:
+[1;32m[ INFO    ][0;0m       ctW^2
+[1;32m[ INFO    ][0;0m [3] coefficient for:
+[1;32m[ INFO    ][0;0m       citW^1
+[1;32m[ INFO    ][0;0m [4] coefficient for:
+[1;32m[ INFO    ][0;0m       citW^2
+[1;32m[ INFO    ][0;0m [5] coefficient for:
+[1;32m[ INFO    ][0;0m       ctW^1
+[1;32m[ INFO    ][0;0m       citW^1
+[1;32m[ INFO    ][0;0m ------------------------------------------------------------------------
+[1;32m[ INFO    ][0;0m ------------------------------------------------------------------------
+[1;32m[ INFO    ][0;0m Parameters  : x[0]	x[1]	
+[1;32m[ INFO    ][0;0m Coefficients: ctW	citW	
+[1;32m[ INFO    ][0;0m Parameter   : -3.000000	0.000000	singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -2.000000	0.000000	singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 2.000000	0.000000	singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 3.000000	0.000000	singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 0.000000	-1.500000	singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 0.000000	-1.000000	singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 0.000000	1.000000	singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 0.000000	1.500000	singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -3.000000	-1.000000	singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -3.000000	1.000000	singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -2.000000	-1.500000	singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -2.000000	-1.000000	singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -2.000000	1.000000	singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -2.000000	1.500000	singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 2.000000	-1.500000	singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 2.000000	-1.000000	singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 2.000000	1.000000	singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 2.000000	1.500000	singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 3.000000	-1.000000	singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 3.000000	1.000000	singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m ------------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m  ==== singletop_tchan_PowPy8_FS ====
+[1;36m[ DEBUG   ][0;0m  Trying to open FitExampleEFT/EFT/EFT_Fit_results_singletop_tchan_PowPy8_FS.txt...
+[1;36m[ DEBUG   ][0;0m  Reading EFT fit results from file (FitExampleEFT/EFT/EFT_Fit_results_singletop_tchan_PowPy8_FS.txt not found)
+[1;36m[ DEBUG   ][0;0m  Opening file "FitExampleEFT/EFT/EFT_Fit_results_singletop_tchan_PowPy8_FS.txt"
+[1;36m[ DEBUG   ][0;0m --------------------
+[1;36m[ DEBUG   ][0;0m Reading Norm Factors...
+[1;36m[ DEBUG   ][0;0m --------------------
+[1;32m[ INFO    ][0;0m Fitting...
+[#1] INFO:ObjectHandling -- RooWorkspace::import(combined) importing dataset asimovData
+[#2] INFO:HistFactory -- Setting Parameter(s) of Interest as: ctW citW ttbar_NORM 
+
+=== Using the following for ModelConfig ===
+Observables:             RooArgSet:: = (channelCat,obs_x_SR)
+Parameters of Interest:  RooArgSet:: = (ctW,citW,ttbar_NORM)
+Nuisance Parameters:     RooArgSet:: = (alpha_JVT,gamma_stat_SR_bin_0,gamma_stat_SR_bin_1,gamma_stat_SR_bin_2,gamma_stat_SR_bin_3)
+Global Observables:      RooArgSet:: = (nom_alpha_JVT,nom_gamma_stat_SR_bin_0,nom_gamma_stat_SR_bin_1,nom_gamma_stat_SR_bin_2,nom_gamma_stat_SR_bin_3)
+PDF:                     RooSimultaneous::simPdf[ indexCat=channelCat SR=model_SR ] = 3.755e-06
+
+[1;36m[ DEBUG   ][0;0m Dumping data with the following parameters
+[1;36m[ DEBUG   ][0;0m     * Regions data type
+[1;36m[ DEBUG   ][0;0m        - Region: SR       DataType: 1
+[1;36m[ DEBUG   ][0;0m     * No NP values injected
+[1;36m[ DEBUG   ][0;0m     * Injected POI values
+[1;36m[ DEBUG   ][0;0m        - POI: citW       Value: 0
+[1;36m[ DEBUG   ][0;0m        - POI: ctW       Value: 0
+[1;36m[ DEBUG   ][0;0m Activating binned likelihood attribute for SR_model
+[#1] INFO:ObjectHandling -- RooWorkspace::import(combined) importing RooRealVar::weightVar
+RooDataSet::combAsimovData0[channelCat,obs_x_SR,weight:weightVar] = 4 entries (1318.73 weighted)
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Performing nominal fit...
+[1;32m[ INFO    ][0;0m Likelihood offset set to: initial
+[#1] INFO:ObjectHandling -- RooWorkspace::import(combined) importing dataset newasimovData
+[1;36m[ DEBUG   ][0;0m -> Entering in FitPDF function
+
+=== Using the following for ModelConfig ===
+Observables:             RooArgSet:: = (channelCat,obs_x_SR)
+Parameters of Interest:  RooArgSet:: = (ctW,citW,ttbar_NORM)
+Nuisance Parameters:     RooArgSet:: = (alpha_JVT,gamma_stat_SR_bin_0,gamma_stat_SR_bin_1,gamma_stat_SR_bin_2,gamma_stat_SR_bin_3)
+Global Observables:      RooArgSet:: = (nom_alpha_JVT,nom_gamma_stat_SR_bin_0,nom_gamma_stat_SR_bin_1,nom_gamma_stat_SR_bin_2,nom_gamma_stat_SR_bin_3)
+PDF:                     RooSimultaneous::simPdf[ indexCat=channelCat SR=model_SR ] = 2.89916e-06
+
+[#1] INFO:Minimization -- p.d.f. provides expected number of events, including extended term in likelihood.
+[#1] INFO:Minimization --  Including the following constraint terms in minimization: (alpha_JVTConstraint,gamma_stat_SR_bin_0_constraint,gamma_stat_SR_bin_1_constraint,gamma_stat_SR_bin_2_constraint,gamma_stat_SR_bin_3_constraint)
+[#1] INFO:Minimization -- The following global observables have been defined and their values are taken from the model: (nom_alpha_JVT,nom_gamma_stat_SR_bin_0,nom_gamma_stat_SR_bin_1,nom_gamma_stat_SR_bin_2,nom_gamma_stat_SR_bin_3)
+[#1] INFO:Fitting -- RooAbsPdf::fitTo(simPdf) fixing normalization set for coefficient determination to observables in data
+[#1] INFO:Fitting -- using generic CPU library compiled with no vectorizations
+[#1] INFO:Fitting -- Creation of NLL object took 3.51646 ms
+[1;32m[ INFO    ][0;0m POI: ctW
+[1;32m[ INFO    ][0;0m    -> Constant POI : 0
+[1;32m[ INFO    ][0;0m    -> Initial value of POI : 0
+[1;32m[ INFO    ][0;0m POI: citW
+[1;32m[ INFO    ][0;0m    -> Constant POI : 0
+[1;32m[ INFO    ][0;0m    -> Initial value of POI : 0
+[1;32m[ INFO    ][0;0m POI: ttbar_NORM
+[1;32m[ INFO    ][0;0m    -> Constant POI : 0
+[1;32m[ INFO    ][0;0m    -> Initial value of POI : 1
+[1;36m[ DEBUG   ][0;0m    -> Initial value of the NLL = 34.582
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m Fit try no. 1
+[1;32m[ INFO    ][0;0m ======================
+[1;32m[ INFO    ][0;0m 
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+Minuit2Minimizer: Minimize with max-calls 4000 convergence for edm < 0.01 strategy 1
+Warning in <Minuit2>: VariableMetricBuilder No improvement in line search
+Minuit2Minimizer : Valid minimum - status = 0
+FVAL  = 19.3272858140280377
+Edm   = 3.16629467608299338e-16
+Nfcn  = 113
+alpha_JVT	  = 0	 +/-  0.993344	(limited)
+citW	  = 0	 +/-  0.360905	(limited)
+ctW	  = 0	 +/-  0.429145	(limited)
+gamma_stat_SR_bin_0	  = 1	 +/-  0.0230196	(limited)
+gamma_stat_SR_bin_1	  = 1	 +/-  0.0230338	(limited)
+gamma_stat_SR_bin_2	  = 1	 +/-  0.0261884	(limited)
+gamma_stat_SR_bin_3	  = 1	 +/-  0.0262914	(limited)
+ttbar_NORM	  = 1	 +/-  0.505485	(limited)
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m          FIT FINALIZED SUCCESSFULLY : 
+[1;32m[ INFO    ][0;0m             - minuit status 0
+[1;32m[ INFO    ][0;0m             - hess status 0
+[1;32m[ INFO    ][0;0m             - Edm = 1.83069e-14
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m   Final value of the NLL = 34.58199987274516473690
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m -----------------------     ERROR DECOMPOSITION    -----------------------
+[1;32m[ INFO    ][0;0m   POI :  +/-tot.err  (+/-stat  +/-syst)
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m   ctW :  +/-0.429206  (+/-0.390797  +/-0.17747)
+[1;32m[ INFO    ][0;0m   citW :  +/-0.360912  (+/-0.328626  +/-0.149206)
+[1;32m[ INFO    ][0;0m   ttbar_NORM :  +/-0.505534  (+/-0.46042  +/-0.208756)
+[1;32m[ INFO    ][0;0m   Full breakdown will be written to file in the Fits/ folder.
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;36m[ DEBUG   ][0;0m Goodness-of-fit evaluation
+[1;36m[ DEBUG   ][0;0m 	Best fit NLL: 34.582
+[1;36m[ DEBUG   ][0;0m 	Saturated model NLL: 34.582
+[1;36m[ DEBUG   ][0;0m 	NDOF: 1
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m ----------------------- GOODNESS OF FIT EVALUATION -----------------------
+[1;32m[ INFO    ][0;0m   probability = 0.999998
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;36m[ DEBUG   ][0;0m Filling SubCategory map
+[1;36m[ DEBUG   ][0;0m Finding unique SubCategories
+[1;32m[ INFO    ][0;0m Producing group uncertainty breakdown for POI: ctW
+[1;32m[ INFO    ][0;0m The txt file will be stored here: FitExampleEFT/Fits/FitExampleEFT_group_errDecomp_ctW.txt
+[1;32m[ INFO    ][0;0m Writing impact yaml file to: FitExampleEFT/Fits/FitExampleEFT_group_errDecomp_ctW.yaml
+[1;32m[ INFO    ][0;0m Producing group uncertainty breakdown for POI: citW
+[1;32m[ INFO    ][0;0m The txt file will be stored here: FitExampleEFT/Fits/FitExampleEFT_group_errDecomp_citW.txt
+[1;32m[ INFO    ][0;0m Writing impact yaml file to: FitExampleEFT/Fits/FitExampleEFT_group_errDecomp_citW.yaml
+[1;32m[ INFO    ][0;0m Producing group uncertainty breakdown for POI: ttbar_NORM
+[1;32m[ INFO    ][0;0m The txt file will be stored here: FitExampleEFT/Fits/FitExampleEFT_group_errDecomp_ttbar_NORM.txt
+[1;32m[ INFO    ][0;0m Writing impact yaml file to: FitExampleEFT/Fits/FitExampleEFT_group_errDecomp_ttbar_NORM.yaml
+[1;32m[ INFO    ][0;0m Writing ranking yaml file to: FitExampleEFT/Rankings/Ranking_ctW_Breakdown.yaml
+[1;36m[ DEBUG   ][0;0m NP ordering...
+Info in <TCanvas::Print>: pdf file FitExampleEFT/Rankings/Ranking_ctW_Breakdown.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/Rankings/Ranking_ctW_Breakdown.png has been created
+[1;32m[ INFO    ][0;0m Writing ranking yaml file to: FitExampleEFT/Rankings/Ranking_citW_Breakdown.yaml
+[1;36m[ DEBUG   ][0;0m NP ordering...
+Info in <TCanvas::Print>: pdf file FitExampleEFT/Rankings/Ranking_citW_Breakdown.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/Rankings/Ranking_citW_Breakdown.png has been created
+[1;32m[ INFO    ][0;0m Writing ranking yaml file to: FitExampleEFT/Rankings/Ranking_ttbar_NORM_Breakdown.yaml
+[1;36m[ DEBUG   ][0;0m NP ordering...
+Info in <TCanvas::Print>: pdf file FitExampleEFT/Rankings/Ranking_ttbar_NORM_Breakdown.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/Rankings/Ranking_ttbar_NORM_Breakdown.png has been created
+[1;32m[ INFO    ][0;0m Running likelihood scan for the parameter = ctW
+[1;32m[ INFO    ][0;0m Likelihood offset set to: initial
+[1;32m[ INFO    ][0;0m POI: ctW
+[1;32m[ INFO    ][0;0m    -> Constant POI : 0
+[1;32m[ INFO    ][0;0m    -> Initial value of POI : 0
+[1;32m[ INFO    ][0;0m POI: citW
+[1;32m[ INFO    ][0;0m    -> Constant POI : 0
+[1;32m[ INFO    ][0;0m    -> Initial value of POI : 0
+[1;32m[ INFO    ][0;0m POI: ttbar_NORM
+[1;32m[ INFO    ][0;0m    -> Constant POI : 0
+[1;32m[ INFO    ][0;0m    -> Initial value of POI : 1
+[1;32m[ INFO    ][0;0m GetLikelihoodScan for NP = ctW
+[#1] INFO:Minimization -- p.d.f. provides expected number of events, including extended term in likelihood.
+[#1] INFO:Minimization --  Including the following constraint terms in minimization: (alpha_JVTConstraint,gamma_stat_SR_bin_0_constraint,gamma_stat_SR_bin_1_constraint,gamma_stat_SR_bin_2_constraint,gamma_stat_SR_bin_3_constraint)
+[#1] INFO:Minimization -- The following global observables have been defined and their values are taken from the model: (nom_alpha_JVT,nom_gamma_stat_SR_bin_0,nom_gamma_stat_SR_bin_1,nom_gamma_stat_SR_bin_2,nom_gamma_stat_SR_bin_3)
+[#1] INFO:Fitting -- RooAbsPdf::fitTo(simPdf) fixing normalization set for coefficient determination to observables in data
+[#1] INFO:Fitting -- Creation of NLL object took 1.17086 ms
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 1 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: -0.5, nll: 16.384
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 2 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: -0.388889, nll: 16.1552
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 3 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: -0.277778, nll: 15.9766
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 4 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: -0.166667, nll: 15.8527
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 5 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: -0.0555556, nll: 15.7884
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 6 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: 0.0555556, nll: 15.7886
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 7 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: 0.166667, nll: 15.8584
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 8 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: 0.277778, nll: 16.0028
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 9 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: 0.388889, nll: 16.2271
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 10 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: 0.5, nll: 16.5366
+[1;32m[ INFO    ][0;0m Writing LikelihoodScan yaml file to: FitExampleEFT/LHoodPlots/NLLscan_ctW.yaml
+Info in <TCanvas::Print>: pdf file FitExampleEFT/LHoodPlots/NLLscan_ctW.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/LHoodPlots/NLLscan_ctW.png has been created
+[1;32m[ INFO    ][0;0m Running likelihood scan for the parameter = citW
+[1;32m[ INFO    ][0;0m Likelihood offset set to: initial
+[1;32m[ INFO    ][0;0m POI: ctW
+[1;32m[ INFO    ][0;0m    -> Constant POI : 0
+[1;32m[ INFO    ][0;0m    -> Initial value of POI : 0
+[1;32m[ INFO    ][0;0m POI: citW
+[1;32m[ INFO    ][0;0m    -> Constant POI : 0
+[1;32m[ INFO    ][0;0m    -> Initial value of POI : 0
+[1;32m[ INFO    ][0;0m POI: ttbar_NORM
+[1;32m[ INFO    ][0;0m    -> Constant POI : 0
+[1;32m[ INFO    ][0;0m    -> Initial value of POI : 1
+[1;32m[ INFO    ][0;0m GetLikelihoodScan for NP = citW
+[#1] INFO:Minimization -- p.d.f. provides expected number of events, including extended term in likelihood.
+[#1] INFO:Minimization --  Including the following constraint terms in minimization: (alpha_JVTConstraint,gamma_stat_SR_bin_0_constraint,gamma_stat_SR_bin_1_constraint,gamma_stat_SR_bin_2_constraint,gamma_stat_SR_bin_3_constraint)
+[#1] INFO:Minimization -- The following global observables have been defined and their values are taken from the model: (nom_alpha_JVT,nom_gamma_stat_SR_bin_0,nom_gamma_stat_SR_bin_1,nom_gamma_stat_SR_bin_2,nom_gamma_stat_SR_bin_3)
+[#1] INFO:Fitting -- RooAbsPdf::fitTo(simPdf) fixing normalization set for coefficient determination to observables in data
+[#1] INFO:Fitting -- Creation of NLL object took 1.09682 ms
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 1 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: -0.5, nll: 19.1163
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 2 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: -0.388889, nll: 18.7458
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 3 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: -0.277778, nll: 18.4654
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 4 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: -0.166667, nll: 18.2774
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 5 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: -0.0555556, nll: 18.1829
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 6 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: 0.0555556, nll: 18.1829
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 7 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: 0.166667, nll: 18.2777
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 8 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: 0.277778, nll: 18.467
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 9 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: 0.388889, nll: 18.75
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m Running LHscan for point 10 out of 10 points
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+[1;36m[ DEBUG   ][0;0m Point: 0.5, nll: 19.1254
+[1;32m[ INFO    ][0;0m Writing LikelihoodScan yaml file to: FitExampleEFT/LHoodPlots/NLLscan_citW.yaml
+Info in <TCanvas::Print>: pdf file FitExampleEFT/LHoodPlots/NLLscan_citW.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/LHoodPlots/NLLscan_citW.png has been created
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Reading fit results from file
+Info in <TCanvas::Print>: pdf file FitExampleEFT/Pulls/All/NuisPar_Instrumental.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/Pulls/All/NuisPar_Instrumental.png has been created
+Info in <TCanvas::Print>: pdf file FitExampleEFT/Pulls/PullSig/NuisParSig_Instrumental.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/Pulls/PullSig/NuisParSig_Instrumental.png has been created
+Info in <TCanvas::Print>: pdf file FitExampleEFT/Pulls/RankedPullSig/NuisParSigRank_Instrumental.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/Pulls/RankedPullSig/NuisParSigRank_Instrumental.png has been created
+Info in <TCanvas::Print>: pdf file FitExampleEFT/Pulls/All/NuisPar.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/Pulls/All/NuisPar.png has been created
+Info in <TCanvas::Print>: pdf file FitExampleEFT/Pulls/PullSig/NuisParSig.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/Pulls/PullSig/NuisParSig.png has been created
+Info in <TCanvas::Print>: pdf file FitExampleEFT/Pulls/RankedPullSig/NuisParSigRank.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/Pulls/RankedPullSig/NuisParSigRank.png has been created
+Info in <TCanvas::Print>: pdf file FitExampleEFT/Gammas.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/Gammas.png has been created
+Info in <TCanvas::Print>: pdf file FitExampleEFT/EFTParams.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/EFTParams.png has been created
+Info in <TCanvas::Print>: pdf file FitExampleEFT/NormFactors.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/NormFactors.png has been created
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Reading fit results from file
+[1;32m[ INFO    ][0;0m Writing correlation yaml file to: FitExampleEFT/CorrelationMatrix.yaml
+Info in <TCanvas::Print>: pdf file FitExampleEFT/CorrMatrix.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/CorrMatrix.png has been created
+[1;32m[ INFO    ][0;0m Writing correlation yaml file to: FitExampleEFT/EFT_CorrelationMatrix.yaml
+Info in <TCanvas::Print>: pdf file FitExampleEFT/EFT_CorrMatrix.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/EFT_CorrMatrix.png has been created

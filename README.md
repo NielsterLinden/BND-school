@@ -12,6 +12,12 @@ We analyse CMS 2016 open data (NanoAOD, 13 TeV) and split into three subgroups b
 | `z-tautau/` | Z → τ⁺τ⁻ | `z-tautau/handoff.md` |
 | `combination/` | Combination of all three channels | `combination/handoff.md` |
 | `reference/` | Shared material (intro slides, links) | – |
+| `TRExFitter-v1.8.0/` | TRExFitter source (profile likelihood fits) | – |
+
+## TRExFitter version
+
+**Every agent and every subgroup must use TRExFitter v1.8.0** (the copy in `TRExFitter-v1.8.0/`).
+The combination relies on all three channels producing workspaces with the same fitter version, so do not use another release or `master`.
 
 Each subgroup owns its folder: put notebooks, scripts and plots there.
 Keep `handoff.md` up to date so the other groups can pick up where you left off.

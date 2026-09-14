@@ -1,0 +1,45 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[0m[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleMorphing.config
+[1;32m[ INFO    ][0;0m Successfully read config file.
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Job name: FitExampleMorphing
+[1;32m[ INFO    ][0;0m Reading the following regions:
+[1;32m[ INFO    ][0;0m     Region: SR_lep
+[1;32m[ INFO    ][0;0m     Region: CR_Wmass
+[1;32m[ INFO    ][0;0m Reading the following samples:
+[1;32m[ INFO    ][0;0m      Nom_lep
+[1;32m[ INFO    ][0;0m      Nom_Wmass
+[1;32m[ INFO    ][0;0m      PseudoData
+[1;32m[ INFO    ][0;0m      PseudoData
+[1;32m[ INFO    ][0;0m      Bkg_SR
+[1;32m[ INFO    ][0;0m      Bkg_CR
+[1;32m[ INFO    ][0;0m      Signal_0p7
+[1;32m[ INFO    ][0;0m      Signal_1p0
+[1;32m[ INFO    ][0;0m      Signal_1p5
+[1;32m[ INFO    ][0;0m      Signal_2p0
+[1;32m[ INFO    ][0;0m      Control_Wmass
+[1;32m[ INFO    ][0;0m Reading the following systematics:
+[1;32m[ INFO    ][0;0m  bTagSF_B_0
+[1;32m[ INFO    ][0;0m  JET_BJES_Response
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Reading histograms...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Creating/updating file FitExampleMorphing/Histograms/FitExampleMorphing_histos.root ...
+[1;32m[ INFO    ][0;0m   Region SR_lep ...
+[1;32m[ INFO    ][0;0m   Region CR_Wmass ...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Smoothing and/or Symmetrising Systematic Variations ...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Writing histograms to file FitExampleMorphing/Histograms/FitExampleMorphing_histos.root for region: SR_lep ...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Writing histograms to file FitExampleMorphing/Histograms/FitExampleMorphing_histos.root for region: CR_Wmass ...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Drawing red-blue plots for region: SR_lep
+[1;32m[ INFO    ][0;0m Drawing red-blue plots for region: CR_Wmass
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Drawing combined plots of syst effects on data for region: SR_lep...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Drawing combined plots of syst effects on data for region: CR_Wmass...

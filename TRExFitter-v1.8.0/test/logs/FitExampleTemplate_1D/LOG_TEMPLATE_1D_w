@@ -1,0 +1,266 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[0m[#1] INFO:InputArguments -- Silent clipping of values to range in `RooRealVar::setVal()` enabled.
+[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleTemplate_1D.config
+[1;36m[ DEBUG   ][0;0m PlotOptionsSummary not specified setting Summary values to 'PlotOptions'
+[1;36m[ DEBUG   ][0;0m You do not have 'Options' option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Limit option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Significance option in the config. It is ok, we just want to let you know.
+[1;32m[ INFO    ][0;0m StatOnly option is setting to OFF the MC-stat (gammas) as well.
+[1;32m[ INFO    ][0;0m To keep them on use the command line option 'Systematics=NONE'
+[1;32m[ INFO    ][0;0m or comment out all Systematics in config file.
+[1;32m[ INFO    ][0;0m Successfully read config file.
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Job name: FitExampleTemplate_1D
+[1;32m[ INFO    ][0;0m Reading the following regions:
+[1;32m[ INFO    ][0;0m     Region: SR_emu
+[1;32m[ INFO    ][0;0m Reading the following samples:
+[1;32m[ INFO    ][0;0m      Signal_1p0_170
+[1;32m[ INFO    ][0;0m      Signal_1p0_175
+[1;32m[ INFO    ][0;0m      PseudoData
+[1;32m[ INFO    ][0;0m      Bkg_SR
+[1;32m[ INFO    ][0;0m      Signal_1p0_172p5
+[1;32m[ INFO    ][0;0m Reading the following systematics:
+[1;32m[ INFO    ][0;0m  Dummy
+[1;32m[ INFO    ][0;0m  bTagSF_B_0
+[1;32m[ INFO    ][0;0m  CategoryReduction_JET_JER_EffectiveNP_2
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m -----------------------------
+[1;32m[ INFO    ][0;0m Reading histograms from file FitExampleTemplate_1D/Histograms/FitExampleTemplate_1D_histos.root ...
+[1;36m[ DEBUG   ][0;0m   Reading region SR_emu
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_1p0_170
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_1p0_175
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample PseudoData
+[1;36m[ DEBUG   ][0;0m     Reading sample Bkg_SR
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Bkg_SR
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Bkg_SR
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_1p0_172p5
+[1;36m[ DEBUG   ][0;0m       Reading norm ttbarXsec
+[1;36m[ DEBUG   ][0;0m       Reading shape templateSF_SR_emu_Signal_1p0_172p5
+[1;36m[ DEBUG   ][0;0m       Reading syst Dummy
+[1;36m[ DEBUG   ][0;0m       Reading syst bTagSF_B_0
+[1;36m[ DEBUG   ][0;0m       Reading syst CategoryReduction_JET_JER_EffectiveNP_2
+[1;32m[ INFO    ][0;0m Adding NormFactor: topMass used in the ShapeFactor reparametrization
+[1;32m[ INFO    ][0;0m Applying systematics pruning...
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Apply Systematics Pruning ...
+[1;32m[ INFO    ][0;0m No systematics => No Pruning applied.
+[1;32m[ INFO    ][0;0m Creating workspace...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Exporting to RooStats...
+[1;32m[ INFO    ][0;0m Creating workspace only with fit regions and dropped bins (no validation regions)
+[1;36m[ DEBUG   ][0;0m Output workspace path will have no special suffix ...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;36m[ DEBUG   ][0;0m Adding Channel: SR_emu
+[1;36m[ DEBUG   ][0;0m   Adding Data: SR_emu_PseudoData
+[1;36m[ DEBUG   ][0;0m   Adding Sample: Bkg_SR
+[1;36m[ DEBUG   ][0;0m   Adding Sample: Signal_1p0_172p5
+[1;36m[ DEBUG   ][0;0m     Adding NormFactor: ttbarXsec, 1
+[1;36m[ DEBUG   ][0;0m     Adding ShapeFactor: templateSF_SR_emu_Signal_1p0_172p5, 1
+[#2] PROGRESS:HistFactory -- Printing XML Files for measurement: FitExampleTemplate_1D
+[#2] PROGRESS:HistFactory -- Printing XML Files for channel: SR_emu
+[#2] PROGRESS:HistFactory -- Finished printing XML files
+[#2] PROGRESS:HistFactory -- Finished printing XML files
+[#2] PROGRESS:HistFactory -- Getting histogram FitExampleTemplate_1D/Histograms/FitExampleTemplate_1D_histos.root:SR_emu/PseudoData/nominal//SR_emu_PseudoData_regBin
+[#2] INFO:HistFactory -- Opened input file: FitExampleTemplate_1D/Histograms/FitExampleTemplate_1D_histos.root: 
+[#2] PROGRESS:HistFactory -- Getting histogram FitExampleTemplate_1D/Histograms/FitExampleTemplate_1D_histos.root:SR_emu/Bkg_SR/nominal//SR_emu_Bkg_SR_regBin
+[#2] PROGRESS:HistFactory -- Getting histogram FitExampleTemplate_1D/Histograms/FitExampleTemplate_1D_histos.root:SR_emu/Signal_1p0_172p5/nominal//SR_emu_Signal_1p0_172p5_regBin
+Measurement Name: FitExampleTemplate_1D	 OutputFilePrefix: FitExampleTemplate_1D/RooStats/FitExampleTemplate_1D	 POI: topMass	 Lumi: 1	 LumiRelErr: 0	 BinLow: 0	 BinHigh: 1	 ExportOnly: 1
+Constant Params:  Lumi
+Channels:
+	 Channel Name: SR_emu	 InputFile: 
+	 Data:
+	 	 InputFile: FitExampleTemplate_1D/Histograms/FitExampleTemplate_1D_histos.root	 HistoName: SR_emu_PseudoData_regBin	 HistoPath: SR_emu/PseudoData/nominal/	 HistoAddress: 0x434aa50
+	 statErrorConfig:
+	 	 RelErrorThreshold: 0	 ConstraintType: Poisson
+	 Samples: 
+	 	 Name: Bkg_SR	 	 Channel: SR_emu	 NormalizeByTheory: True	 StatErrorActivate: False
+	 	 	 	 	 InputFile: FitExampleTemplate_1D/Histograms/FitExampleTemplate_1D_histos.root	 HistName: SR_emu_Bkg_SR_regBin	 HistoPath: SR_emu/Bkg_SR/nominal/	 HistoAddress: 0x42f5d30
+	 	 Name: Signal_1p0_172p5	 	 Channel: SR_emu	 NormalizeByTheory: True	 StatErrorActivate: False
+	 	 	 	 	 InputFile: FitExampleTemplate_1D/Histograms/FitExampleTemplate_1D_histos.root	 HistName: SR_emu_Signal_1p0_172p5_regBin	 HistoPath: SR_emu/Signal_1p0_172p5/nominal/	 HistoAddress: 0x42b8e00
+	 End of Channel SR_emu
+[#2] INFO:HistFactory -- End Measurement: FitExampleTemplate_1D
+[#2] INFO:HistFactory -- Making Model and Measurements (Fast) for measurement: FitExampleTemplate_1D
+[#2] INFO:HistFactory -- using lumi = 1 and lumiError = 0 including bins between 0 and 1
+[#2] INFO:HistFactory -- fixing the following parameters:
+   Lumi
+[#2] INFO:HistFactory -- Creating the HistoToWorkspaceFactoryFast factory
+[#2] INFO:HistFactory -- Setting preprocess functions
+[#2] PROGRESS:HistFactory -- Starting to process channel: SR_emu
+[#2] PROGRESS:HistFactory -- 
+-----------------------------------------
+	Starting to process 'SR_emu' channel with 1 observables
+-----------------------------------------
+
+[#2] INFO:HistFactory -- processing hist SR_emu_Bkg_SR_regBin
+[#2] INFO:HistFactory -- Bkg_SR_SR_emu has no variation histograms 
+[#2] INFO:HistFactory -- making normFactor: ttbarXsec
+[#2] INFO:HistFactory -- processing hist SR_emu_Signal_1p0_172p5_regBin
+[#2] INFO:HistFactory -- Signal_1p0_172p5_SR_emu has no variation histograms 
+[#2] INFO:HistFactory -- Sample: Signal_1p0_172p5 in channel: SR_emu to be include a ShapeFactor.
+[#2] PROGRESS:HistFactory -- 
+-----------------------------------------
+	import model into workspace
+-----------------------------------------
+
+
+RooWorkspace(SR_emu) SR_emu workspace contents
+
+variables
+---------
+(Lumi,alpha_Dummy,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_0,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_1,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_10,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_11,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_12,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_13,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_14,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_15,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_16,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_17,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_18,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_19,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_2,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_3,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_4,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_5,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_6,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_7,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_8,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_9,nom_alpha_Dummy,obs_x_SR_emu,ttbarXsec)
+
+p.d.f.s
+-------
+RooRealSumPdf::SR_emu_model[ Bkg_SR_SR_emu_scaleFactors * Bkg_SR_SR_emu_shapes + Signal_1p0_172p5_SR_emu_scaleFactors * Signal_1p0_172p5_SR_emu_shapes ] = 1157.35
+RooGaussian::alpha_DummyConstraint[ x=alpha_Dummy mean=nom_alpha_Dummy sigma=1 ] = 1
+RooProdPdf::model_SR_emu[ alpha_DummyConstraint * SR_emu_model(obs_x_SR_emu) ] = 1157.35
+
+functions
+--------
+RooHistFunc::Bkg_SR_SR_emu_Hist_alphanominal[ depList=(obs_x_SR_emu) ] = 43.9639
+RooStats::HistFactory::FlexibleInterpVar::Bkg_SR_SR_emu_epsilon[ paramList=(alpha_Dummy) ] = 1
+RooProduct::Bkg_SR_SR_emu_scaleFactors[ Bkg_SR_SR_emu_epsilon * Lumi ] = 1
+RooProduct::Bkg_SR_SR_emu_shapes[ Bkg_SR_SR_emu_Hist_alphanominal * SR_emu_model_binWidth ] = 6.76368
+RooBinWidthFunction::SR_emu_model_binWidth[ HistFuncForBinWidth=Bkg_SR_SR_emu_Hist_alphanominal ] = 0.153846
+ParamHistFunc::SR_emu_templateSF_SR_emu_Signal_1p0_172p5_shapeFactor[ ] = 1
+RooHistFunc::Signal_1p0_172p5_SR_emu_Hist_alphanominal[ depList=(obs_x_SR_emu) ] = 7478.81
+RooStats::HistFactory::FlexibleInterpVar::Signal_1p0_172p5_SR_emu_epsilon[ paramList=(alpha_Dummy) ] = 1
+RooProduct::Signal_1p0_172p5_SR_emu_scaleFactors[ Signal_1p0_172p5_SR_emu_epsilon * ttbarXsec * Lumi ] = 1
+RooProduct::Signal_1p0_172p5_SR_emu_shapes[ Signal_1p0_172p5_SR_emu_Hist_alphanominal * SR_emu_templateSF_SR_emu_Signal_1p0_172p5_shapeFactor * SR_emu_model_binWidth ] = 1150.59
+
+datasets
+--------
+RooDataSet::obsData(obs_x_SR_emu)
+
+embedded datasets (in pdfs and functions)
+-----------------------------------------
+RooDataHist::Bkg_SR_SR_emu_Hist_alphanominalDHist(obs_x_SR_emu)
+RooDataHist::Signal_1p0_172p5_SR_emu_Hist_alphanominalDHist(obs_x_SR_emu)
+
+named sets
+----------
+ModelConfig_GlobalObservables:(nom_alpha_Dummy)
+ModelConfig_Observables:(obs_x_SR_emu)
+constraintTerms:(alpha_DummyConstraint)
+globalObservables:(nom_alpha_Dummy)
+likelihoodTerms:(SR_emu_model)
+observables:(obs_x_SR_emu)
+observablesSet:(obs_x_SR_emu)
+
+generic objects
+---------------
+RooStats::ModelConfig::ModelConfig
+
+[#2] INFO:HistFactory -- Setting Parameter(s) of Interest as: topMass 
+[#2] WARNING:HistFactory -- WARNING: Can't find parameter of interest: topMass in Workspace. Not setting in ModelConfig.
+
+=== Using the following for ModelConfig ===
+Observables:             RooArgSet:: = (obs_x_SR_emu)
+Parameters of Interest:  RooArgSet:: = ()
+Nuisance Parameters:     RooArgSet:: = (alpha_Dummy,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_0,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_1,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_10,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_11,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_12,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_13,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_14,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_15,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_16,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_17,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_18,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_19,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_2,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_3,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_4,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_5,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_6,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_7,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_8,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_9,ttbarXsec)
+Global Observables:      RooArgSet:: = (nom_alpha_Dummy)
+PDF:                     RooProdPdf::model_SR_emu[ alpha_DummyConstraint * SR_emu_model(obs_x_SR_emu) ] = 1157.35
+
+[#2] INFO:HistFactory -- full list of observables:
+(obs_x_SR_emu)
+[#2] PROGRESS:HistFactory -- 
+-----------------------------------------
+	Entering combination
+-----------------------------------------
+
+
+RooWorkspace(combined) combined contents
+
+variables
+---------
+(channelCat,nom_alpha_Dummy,obs_x_SR_emu)
+
+datasets
+--------
+RooDataSet::obsData(obs_x_SR_emu,channelCat)
+
+named sets
+----------
+ModelConfig_GlobalObservables:(nom_alpha_Dummy)
+ModelConfig_Observables:(obs_x_SR_emu,channelCat)
+globalObservables:(nom_alpha_Dummy)
+observables:(obs_x_SR_emu,channelCat)
+
+[#2] PROGRESS:HistFactory -- 
+-----------------------------------------
+	Importing combined model
+-----------------------------------------
+
+[#2] INFO:HistFactory -- setting Lumi constant
+[#2] PROGRESS:HistFactory -- 
+-----------------------------------------
+	create toy data
+-----------------------------------------
+
+[#1] INFO:NumericIntegration -- RooRealIntegral::init(SR_emu_model_Int[obs_x_SR_emu]) using numeric integrator RooBinIntegrator to calculate Int(obs_x_SR_emu)
+RooDataSet::AsimovData0[obs_x_SR_emu,channelCat,weight:binWeightAsimov] = 20 entries (326414 weighted)
+[#2] INFO:HistFactory -- Setting Parameter(s) of Interest as: topMass 
+[#2] WARNING:HistFactory -- WARNING: Can't find parameter of interest: topMass in Workspace. Not setting in ModelConfig.
+
+=== Using the following for ModelConfig ===
+Observables:             RooArgSet:: = (obs_x_SR_emu,channelCat)
+Parameters of Interest:  RooArgSet:: = ()
+Nuisance Parameters:     RooArgSet:: = (alpha_Dummy,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_0,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_1,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_10,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_11,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_12,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_13,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_14,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_15,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_16,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_17,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_18,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_19,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_2,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_3,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_4,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_5,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_6,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_7,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_8,gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_9,ttbarXsec)
+Global Observables:      RooArgSet:: = (nom_alpha_Dummy)
+PDF:                     RooSimultaneous::simPdf[ indexCat=channelCat SR_emu=model_SR_emu ] = 298.464
+
+Warning in <xRooNode::xRooNode>: Inferring initial errors of 20 parameters (gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_0,...) (give all nuisance parameters an error to avoid this msg)
+Warning in <xRooNode::xRooNode>: Inferring initial errors of 20 parameters (gamma_templateSF_SR_emu_Signal_1p0_172p5_bin_0,...) (give all nuisance parameters an error to avoid this msg)
+[1;32m[ INFO    ][0;0m Attaching metadata (titles, colours) to the WS
+[1;32m[ INFO    ][0;0m Reparametrizing the shape factors in the WS
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 0 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -6.139999e-02*topMass+1.159150e+01
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 1 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -5.620000e-02*topMass+1.069450e+01
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 2 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -5.100001e-02*topMass+9.797501e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 3 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -4.580000e-02*topMass+8.900500e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 4 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -4.060000e-02*topMass+8.003499e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 5 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -3.540001e-02*topMass+7.106501e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 6 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -3.020002e-02*topMass+6.209503e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 7 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -2.500000e-02*topMass+5.312500e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 8 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -1.980000e-02*topMass+4.415500e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 9 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -1.459998e-02*topMass+3.518497e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 10 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -9.400004e-03*topMass+2.621501e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 11 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -4.199987e-03*topMass+1.724498e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 12 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 1.000009e-03*topMass+8.274985e-01
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 13 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 6.199997e-03*topMass+-6.949954e-02
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 14 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 1.140000e-02*topMass+-9.665008e-01
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 15 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 1.660001e-02*topMass+-1.863501e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 16 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 2.179999e-02*topMass+-2.760497e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 17 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 2.700001e-02*topMass+-3.657502e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 18 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 3.219999e-02*topMass+-4.554498e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p0_172p5 in bin 19 : topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 3.740000e-02*topMass+-5.451500e+00
+[#2] PROGRESS:HistFactory -- Writing sample: Bkg_SR
+[#2] PROGRESS:HistFactory -- Writing sample: Signal_1p0_172p5
+[#2] PROGRESS:HistFactory -- Saved all histograms
+[#2] PROGRESS:HistFactory -- Saved Measurement
+[0;33m[ WARNING ][0;0m No VALIDATION regions found, will only produce workspace for fit regions
+[0;33m[ WARNING ][0;0m To add VALIDATION regions, rerun the "w" step with the option WorkspaceCreationType=FORPLOTS

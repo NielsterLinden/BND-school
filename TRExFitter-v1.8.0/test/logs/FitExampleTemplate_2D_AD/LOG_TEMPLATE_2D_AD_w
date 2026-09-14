@@ -1,0 +1,458 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[0m[#1] INFO:InputArguments -- Silent clipping of values to range in `RooRealVar::setVal()` enabled.
+[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleTemplate_2D_AD.config
+[1;36m[ DEBUG   ][0;0m PlotOptionsSummary not specified setting Summary values to 'PlotOptions'
+[1;36m[ DEBUG   ][0;0m You do not have 'Options' option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Limit option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Significance option in the config. It is ok, we just want to let you know.
+[1;32m[ INFO    ][0;0m Successfully read config file.
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Job name: FitExampleTemplate_2D_AD
+[1;32m[ INFO    ][0;0m Reading the following regions:
+[1;32m[ INFO    ][0;0m     Region: SR_emu
+[1;32m[ INFO    ][0;0m Reading the following samples:
+[1;32m[ INFO    ][0;0m      Signal_0p7_170
+[1;32m[ INFO    ][0;0m      Signal_0p7_172p5
+[1;32m[ INFO    ][0;0m      Signal_0p7_175
+[1;32m[ INFO    ][0;0m      Signal_1p0_170
+[1;32m[ INFO    ][0;0m      Signal_1p0_172p5
+[1;32m[ INFO    ][0;0m      Signal_1p0_175
+[1;32m[ INFO    ][0;0m      Signal_2p0_170
+[1;32m[ INFO    ][0;0m      Signal_2p0_172p5
+[1;32m[ INFO    ][0;0m      Signal_2p0_175
+[1;32m[ INFO    ][0;0m      PseudoData
+[1;32m[ INFO    ][0;0m      Bkg_SR
+[1;32m[ INFO    ][0;0m      Signal_1p5_172p5
+[1;32m[ INFO    ][0;0m Reading the following systematics:
+[1;32m[ INFO    ][0;0m  bTagSF_B_0
+[1;32m[ INFO    ][0;0m  CategoryReduction_JET_JER_EffectiveNP_2
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m -----------------------------
+[1;32m[ INFO    ][0;0m Reading histograms from file FitExampleTemplate_2D_AD/Histograms/FitExampleTemplate_2D_AD_histos.root ...
+[1;36m[ DEBUG   ][0;0m   Reading region SR_emu
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_0p7_170
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_0p7_172p5
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_0p7_175
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_1p0_170
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_1p0_172p5
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_1p0_175
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_2p0_170
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_2p0_172p5
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_2p0_175
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample PseudoData
+[1;36m[ DEBUG   ][0;0m     Reading sample Bkg_SR
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Bkg_SR
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Bkg_SR
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_1p5_172p5
+[1;36m[ DEBUG   ][0;0m       Reading norm ttbarXsec
+[1;36m[ DEBUG   ][0;0m       Reading shape templateSF_SR_emu_Signal_1p5_172p5
+[1;36m[ DEBUG   ][0;0m       Reading syst bTagSF_B_0
+[1;36m[ DEBUG   ][0;0m       Reading syst CategoryReduction_JET_JER_EffectiveNP_2
+[1;32m[ INFO    ][0;0m Adding NormFactor: topWidth used in the ShapeFactor reparametrization
+[1;32m[ INFO    ][0;0m Adding NormFactor: topMass used in the ShapeFactor reparametrization
+[1;32m[ INFO    ][0;0m Applying systematics pruning...
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Apply Systematics Pruning ...
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D_AD/NormalisationPlot.png has been created
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D_AD/Pruning.png has been created
+[1;32m[ INFO    ][0;0m Creating workspace...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Exporting to RooStats...
+[1;32m[ INFO    ][0;0m Creating workspace only with fit regions and dropped bins (no validation regions)
+[1;36m[ DEBUG   ][0;0m Output workspace path will have no special suffix ...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;36m[ DEBUG   ][0;0m Adding Channel: SR_emu
+[1;36m[ DEBUG   ][0;0m   Adding Data: SR_emu_PseudoData
+[1;36m[ DEBUG   ][0;0m   Adding Sample: Bkg_SR
+[1;36m[ DEBUG   ][0;0m     Adding Systematic: stat_Bkg_SR
+[1;36m[ DEBUG   ][0;0m   Adding Sample: Signal_1p5_172p5
+[1;36m[ DEBUG   ][0;0m     Adding NormFactor: ttbarXsec, 1
+[1;36m[ DEBUG   ][0;0m     Adding ShapeFactor: templateSF_SR_emu_Signal_1p5_172p5, 1
+[1;36m[ DEBUG   ][0;0m     Adding Systematic: bTagSF_B_0
+[1;36m[ DEBUG   ][0;0m     Adding Systematic: CategoryReduction_JET_JER_EffectiveNP_2
+[#2] PROGRESS:HistFactory -- Printing XML Files for measurement: FitExampleTemplate_2D_AD
+[#2] PROGRESS:HistFactory -- Printing XML Files for channel: SR_emu
+[#2] PROGRESS:HistFactory -- Finished printing XML files
+[#2] PROGRESS:HistFactory -- Finished printing XML files
+[#2] PROGRESS:HistFactory -- Getting histogram FitExampleTemplate_2D_AD/Histograms/FitExampleTemplate_2D_AD_histos.root:SR_emu/PseudoData/nominal//SR_emu_PseudoData_regBin
+[#2] INFO:HistFactory -- Opened input file: FitExampleTemplate_2D_AD/Histograms/FitExampleTemplate_2D_AD_histos.root: 
+[#2] PROGRESS:HistFactory -- Getting histogram FitExampleTemplate_2D_AD/Histograms/FitExampleTemplate_2D_AD_histos.root:SR_emu/Bkg_SR/nominal//SR_emu_Bkg_SR_regBin
+[#2] PROGRESS:HistFactory -- Getting histogram FitExampleTemplate_2D_AD/Histograms/FitExampleTemplate_2D_AD_histos.root:SR_emu/Bkg_SR/stat_Bkg_SR//SR_emu_Bkg_SR_stat_Bkg_SR_Up_Var_regBin
+[#2] PROGRESS:HistFactory -- Getting histogram FitExampleTemplate_2D_AD/Histograms/FitExampleTemplate_2D_AD_histos.root:SR_emu/Signal_1p5_172p5/nominal//SR_emu_Signal_1p5_172p5_regBin
+[#2] PROGRESS:HistFactory -- Getting histogram FitExampleTemplate_2D_AD/Histograms/FitExampleTemplate_2D_AD_histos.root:SR_emu/Signal_1p5_172p5/bTagSF_B_0//SR_emu_Signal_1p5_172p5_bTagSF_B_0_Shape_Down_regBin
+[#2] PROGRESS:HistFactory -- Getting histogram FitExampleTemplate_2D_AD/Histograms/FitExampleTemplate_2D_AD_histos.root:SR_emu/Signal_1p5_172p5/bTagSF_B_0//SR_emu_Signal_1p5_172p5_bTagSF_B_0_Shape_Up_regBin
+Measurement Name: FitExampleTemplate_2D_AD	 OutputFilePrefix: FitExampleTemplate_2D_AD/RooStats/FitExampleTemplate_2D_AD	 POI: topWidth	 Lumi: 1	 LumiRelErr: 0	 BinLow: 0	 BinHigh: 1	 ExportOnly: 1
+Constant Params:  Lumi
+Channels:
+	 Channel Name: SR_emu	 InputFile: 
+	 Data:
+	 	 InputFile: FitExampleTemplate_2D_AD/Histograms/FitExampleTemplate_2D_AD_histos.root	 HistoName: SR_emu_PseudoData_regBin	 HistoPath: SR_emu/PseudoData/nominal/	 HistoAddress: 0x2a2d390
+	 statErrorConfig:
+	 	 RelErrorThreshold: 0.03	 ConstraintType: Poisson
+	 Samples: 
+	 	 Name: Bkg_SR	 	 Channel: SR_emu	 NormalizeByTheory: True	 StatErrorActivate: False
+	 	 	 	 	 InputFile: FitExampleTemplate_2D_AD/Histograms/FitExampleTemplate_2D_AD_histos.root	 HistName: SR_emu_Bkg_SR_regBin	 HistoPath: SR_emu/Bkg_SR/nominal/	 HistoAddress: 0x2ae38e0
+	 	 Name: Signal_1p5_172p5	 	 Channel: SR_emu	 NormalizeByTheory: True	 StatErrorActivate: False
+	 	 	 	 	 InputFile: FitExampleTemplate_2D_AD/Histograms/FitExampleTemplate_2D_AD_histos.root	 HistName: SR_emu_Signal_1p5_172p5_regBin	 HistoPath: SR_emu/Signal_1p5_172p5/nominal/	 HistoAddress: 0x2a01650
+	 	 	 StatError Activate: 1	 InputFile: FitExampleTemplate_2D_AD/Histograms/FitExampleTemplate_2D_AD_histos.root	 HistName: 	 HistoPath: 	 HistoAddress: 0
+	 End of Channel SR_emu
+[#2] INFO:HistFactory -- End Measurement: FitExampleTemplate_2D_AD
+[#2] INFO:HistFactory -- Making Model and Measurements (Fast) for measurement: FitExampleTemplate_2D_AD
+[#2] INFO:HistFactory -- using lumi = 1 and lumiError = 0 including bins between 0 and 1
+[#2] INFO:HistFactory -- fixing the following parameters:
+   Lumi
+[#2] INFO:HistFactory -- Creating the HistoToWorkspaceFactoryFast factory
+[#2] INFO:HistFactory -- Setting preprocess functions
+[#2] PROGRESS:HistFactory -- Starting to process channel: SR_emu
+[#2] PROGRESS:HistFactory -- 
+-----------------------------------------
+	Starting to process 'SR_emu' channel with 1 observables
+-----------------------------------------
+
+[#2] INFO:HistFactory -- processing hist SR_emu_Bkg_SR_regBin
+[#2] INFO:HistFactory -- Bkg_SR_SR_emu has no variation histograms 
+[#2] INFO:HistFactory -- Sample: Bkg_SR in channel: SR_emu to include a ShapeSys.
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_0. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_1. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_2. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_3. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_4. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_5. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_6. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_7. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_8. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_9. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_10. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_11. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_12. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_13. Type of constraint: 1
+[#2] INFO:HistFactory -- Not creating constraint term for gamma_shape_stat_Bkg_SR_SR_emu_bin_13 because sigma = 0 (sigma<=0) (bin number = 13)
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_14. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_15. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_16. Type of constraint: 1
+[#2] INFO:HistFactory -- Not creating constraint term for gamma_shape_stat_Bkg_SR_SR_emu_bin_16 because sigma = 0 (sigma<=0) (bin number = 16)
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_17. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_18. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_shape_stat_Bkg_SR_SR_emu_bin_19. Type of constraint: 1
+[#2] INFO:HistFactory -- Not creating constraint term for gamma_shape_stat_Bkg_SR_SR_emu_bin_19 because sigma = 0 (sigma<=0) (bin number = 19)
+[#2] INFO:HistFactory -- making normFactor: ttbarXsec
+[#2] INFO:HistFactory -- processing hist SR_emu_Signal_1p5_172p5_regBin
+[#2] INFO:HistFactory -- Sample: Signal_1p5_172p5 to be included in Stat Error for channel SR_emu
+[#2] INFO:HistFactory -- Making Statistical Uncertainty Hist for  Channel: SR_emu Sample: Signal_1p5_172p5
+[#2] INFO:HistFactory -- Sample: Signal_1p5_172p5 in channel: SR_emu to be include a ShapeFactor.
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 1 Error = 8.56436 CentralVal = 1953.92 RelativeError = 0.00438317
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 2 Error = 12.2321 CentralVal = 3949.86 RelativeError = 0.00309685
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 3 Error = 15.4937 CentralVal = 6311.25 RelativeError = 0.00245494
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 4 Error = 18.2036 CentralVal = 8702.62 RelativeError = 0.00209174
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 5 Error = 20.6315 CentralVal = 11166.1 RelativeError = 0.0018477
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 6 Error = 22.9531 CentralVal = 13829.3 RelativeError = 0.00165974
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 7 Error = 25.1934 CentralVal = 16652.4 RelativeError = 0.0015129
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 8 Error = 27.1626 CentralVal = 19348.5 RelativeError = 0.00140386
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 9 Error = 28.816 CentralVal = 21771 RelativeError = 0.00132359
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 10 Error = 30.1208 CentralVal = 23765.5 RelativeError = 0.00126741
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 11 Error = 31.0424 CentralVal = 25199 RelativeError = 0.00123189
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 12 Error = 31.4708 CentralVal = 25899.1 RelativeError = 0.00121513
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 13 Error = 31.5727 CentralVal = 26016.3 RelativeError = 0.00121357
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 14 Error = 31.0172 CentralVal = 25096.8 RelativeError = 0.0012359
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 15 Error = 30.0162 CentralVal = 23492.5 RelativeError = 0.00127769
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 16 Error = 28.4504 CentralVal = 21081.4 RelativeError = 0.00134955
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 17 Error = 26.3229 CentralVal = 18051.4 RelativeError = 0.00145822
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 18 Error = 23.6607 CentralVal = 14568.3 RelativeError = 0.00162412
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 19 Error = 20.4441 CentralVal = 10874.4 RelativeError = 0.00188002
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 20 Error = 16.9684 CentralVal = 7484.94 RelativeError = 0.002267
+[#2] INFO:HistFactory -- About to create Constraint Terms from: mc_stat_SR_emu params: (gamma_stat_SR_emu_bin_0,gamma_stat_SR_emu_bin_1,gamma_stat_SR_emu_bin_2,gamma_stat_SR_emu_bin_3,gamma_stat_SR_emu_bin_4,gamma_stat_SR_emu_bin_5,gamma_stat_SR_emu_bin_6,gamma_stat_SR_emu_bin_7,gamma_stat_SR_emu_bin_8,gamma_stat_SR_emu_bin_9,gamma_stat_SR_emu_bin_10,gamma_stat_SR_emu_bin_11,gamma_stat_SR_emu_bin_12,gamma_stat_SR_emu_bin_13,gamma_stat_SR_emu_bin_14,gamma_stat_SR_emu_bin_15,gamma_stat_SR_emu_bin_16,gamma_stat_SR_emu_bin_17,gamma_stat_SR_emu_bin_18,gamma_stat_SR_emu_bin_19)
+[#2] INFO:HistFactory -- Using Poisson StatErrors in channel: SR_emu
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.00438317 for "gamma_stat_SR_emu_bin_0" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_0 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.00309685 for "gamma_stat_SR_emu_bin_1" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_1 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.00245494 for "gamma_stat_SR_emu_bin_2" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_2 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.00209174 for "gamma_stat_SR_emu_bin_3" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_3 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.0018477 for "gamma_stat_SR_emu_bin_4" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_4 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.00165974 for "gamma_stat_SR_emu_bin_5" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_5 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.0015129 for "gamma_stat_SR_emu_bin_6" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_6 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.00140386 for "gamma_stat_SR_emu_bin_7" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_7 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.00132359 for "gamma_stat_SR_emu_bin_8" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_8 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.00126741 for "gamma_stat_SR_emu_bin_9" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_9 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.00123189 for "gamma_stat_SR_emu_bin_10" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_10 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.00121513 for "gamma_stat_SR_emu_bin_11" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_11 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.00121357 for "gamma_stat_SR_emu_bin_12" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_12 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.0012359 for "gamma_stat_SR_emu_bin_13" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_13 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.00127769 for "gamma_stat_SR_emu_bin_14" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_14 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.00134955 for "gamma_stat_SR_emu_bin_15" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_15 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.00145822 for "gamma_stat_SR_emu_bin_16" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_16 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.00162412 for "gamma_stat_SR_emu_bin_17" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_17 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.00188002 for "gamma_stat_SR_emu_bin_18" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_18 to constant
+[#2] WARNING:HistFactory -- Warning: relative sigma 0.002267 for "gamma_stat_SR_emu_bin_19" falls below threshold of 0.03. Setting: gamma_stat_SR_emu_bin_19 to constant
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_0. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_1. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_2. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_3. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_4. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_5. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_6. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_7. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_8. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_9. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_10. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_11. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_12. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_13. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_14. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_15. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_16. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_17. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_18. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_emu_bin_19. Type of constraint: 1
+[#2] PROGRESS:HistFactory -- 
+-----------------------------------------
+	import model into workspace
+-----------------------------------------
+
+
+RooWorkspace(SR_emu) SR_emu workspace contents
+
+variables
+---------
+(Lumi,alpha_bTagSF_B_0,gamma_shape_stat_Bkg_SR_SR_emu_bin_0,gamma_shape_stat_Bkg_SR_SR_emu_bin_1,gamma_shape_stat_Bkg_SR_SR_emu_bin_10,gamma_shape_stat_Bkg_SR_SR_emu_bin_11,gamma_shape_stat_Bkg_SR_SR_emu_bin_12,gamma_shape_stat_Bkg_SR_SR_emu_bin_13,gamma_shape_stat_Bkg_SR_SR_emu_bin_14,gamma_shape_stat_Bkg_SR_SR_emu_bin_15,gamma_shape_stat_Bkg_SR_SR_emu_bin_16,gamma_shape_stat_Bkg_SR_SR_emu_bin_17,gamma_shape_stat_Bkg_SR_SR_emu_bin_18,gamma_shape_stat_Bkg_SR_SR_emu_bin_19,gamma_shape_stat_Bkg_SR_SR_emu_bin_2,gamma_shape_stat_Bkg_SR_SR_emu_bin_3,gamma_shape_stat_Bkg_SR_SR_emu_bin_4,gamma_shape_stat_Bkg_SR_SR_emu_bin_5,gamma_shape_stat_Bkg_SR_SR_emu_bin_6,gamma_shape_stat_Bkg_SR_SR_emu_bin_7,gamma_shape_stat_Bkg_SR_SR_emu_bin_8,gamma_shape_stat_Bkg_SR_SR_emu_bin_9,gamma_stat_SR_emu_bin_0,gamma_stat_SR_emu_bin_1,gamma_stat_SR_emu_bin_10,gamma_stat_SR_emu_bin_11,gamma_stat_SR_emu_bin_12,gamma_stat_SR_emu_bin_13,gamma_stat_SR_emu_bin_14,gamma_stat_SR_emu_bin_15,gamma_stat_SR_emu_bin_16,gamma_stat_SR_emu_bin_17,gamma_stat_SR_emu_bin_18,gamma_stat_SR_emu_bin_19,gamma_stat_SR_emu_bin_2,gamma_stat_SR_emu_bin_3,gamma_stat_SR_emu_bin_4,gamma_stat_SR_emu_bin_5,gamma_stat_SR_emu_bin_6,gamma_stat_SR_emu_bin_7,gamma_stat_SR_emu_bin_8,gamma_stat_SR_emu_bin_9,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_0,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_1,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_10,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_11,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_12,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_13,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_14,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_15,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_16,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_17,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_18,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_19,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_2,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_3,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_4,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_5,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_6,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_7,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_8,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_9,nom_alpha_bTagSF_B_0,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_0,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_1,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_10,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_11,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_12,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_14,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_15,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_17,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_18,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_2,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_3,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_4,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_5,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_6,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_7,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_8,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_9,nom_gamma_stat_SR_emu_bin_0,nom_gamma_stat_SR_emu_bin_1,nom_gamma_stat_SR_emu_bin_10,nom_gamma_stat_SR_emu_bin_11,nom_gamma_stat_SR_emu_bin_12,nom_gamma_stat_SR_emu_bin_13,nom_gamma_stat_SR_emu_bin_14,nom_gamma_stat_SR_emu_bin_15,nom_gamma_stat_SR_emu_bin_16,nom_gamma_stat_SR_emu_bin_17,nom_gamma_stat_SR_emu_bin_18,nom_gamma_stat_SR_emu_bin_19,nom_gamma_stat_SR_emu_bin_2,nom_gamma_stat_SR_emu_bin_3,nom_gamma_stat_SR_emu_bin_4,nom_gamma_stat_SR_emu_bin_5,nom_gamma_stat_SR_emu_bin_6,nom_gamma_stat_SR_emu_bin_7,nom_gamma_stat_SR_emu_bin_8,nom_gamma_stat_SR_emu_bin_9,obs_x_SR_emu,ttbarXsec)
+
+p.d.f.s
+-------
+RooRealSumPdf::SR_emu_model[ Bkg_SR_SR_emu_scaleFactors * Bkg_SR_SR_emu_shapes + Signal_1p5_172p5_SR_emu_scaleFactors * Signal_1p5_172p5_SR_emu_shapes ] = 1158.29
+RooGaussian::alpha_bTagSF_B_0Constraint[ x=alpha_bTagSF_B_0 mean=nom_alpha_bTagSF_B_0 sigma=1 ] = 1
+RooPoisson::gamma_shape_stat_Bkg_SR_SR_emu_bin_0_constraint[ x=nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_0 mean=gamma_shape_stat_Bkg_SR_SR_emu_bin_0_poisMean ] = 0.0814049
+RooPoisson::gamma_shape_stat_Bkg_SR_SR_emu_bin_10_constraint[ x=nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_10 mean=gamma_shape_stat_Bkg_SR_SR_emu_bin_10_poisMean ] = 0.0143161
+RooPoisson::gamma_shape_stat_Bkg_SR_SR_emu_bin_11_constraint[ x=nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_11 mean=gamma_shape_stat_Bkg_SR_SR_emu_bin_11_poisMean ] = 0.013419
+RooPoisson::gamma_shape_stat_Bkg_SR_SR_emu_bin_12_constraint[ x=nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_12 mean=gamma_shape_stat_Bkg_SR_SR_emu_bin_12_poisMean ] = 0.0141123
+RooPoisson::gamma_shape_stat_Bkg_SR_SR_emu_bin_14_constraint[ x=nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_14 mean=gamma_shape_stat_Bkg_SR_SR_emu_bin_14_poisMean ] = 0.0135194
+RooPoisson::gamma_shape_stat_Bkg_SR_SR_emu_bin_15_constraint[ x=nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_15 mean=gamma_shape_stat_Bkg_SR_SR_emu_bin_15_poisMean ] = 0.0119735
+RooPoisson::gamma_shape_stat_Bkg_SR_SR_emu_bin_17_constraint[ x=nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_17 mean=gamma_shape_stat_Bkg_SR_SR_emu_bin_17_poisMean ] = 0.0123103
+RooPoisson::gamma_shape_stat_Bkg_SR_SR_emu_bin_18_constraint[ x=nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_18 mean=gamma_shape_stat_Bkg_SR_SR_emu_bin_18_poisMean ] = 0.0122277
+RooPoisson::gamma_shape_stat_Bkg_SR_SR_emu_bin_1_constraint[ x=nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_1 mean=gamma_shape_stat_Bkg_SR_SR_emu_bin_1_poisMean ] = 0.0312156
+RooPoisson::gamma_shape_stat_Bkg_SR_SR_emu_bin_2_constraint[ x=nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_2 mean=gamma_shape_stat_Bkg_SR_SR_emu_bin_2_poisMean ] = 0.0246802
+RooPoisson::gamma_shape_stat_Bkg_SR_SR_emu_bin_3_constraint[ x=nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_3 mean=gamma_shape_stat_Bkg_SR_SR_emu_bin_3_poisMean ] = 0.0191961
+RooPoisson::gamma_shape_stat_Bkg_SR_SR_emu_bin_4_constraint[ x=nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_4 mean=gamma_shape_stat_Bkg_SR_SR_emu_bin_4_poisMean ] = 0.0205174
+RooPoisson::gamma_shape_stat_Bkg_SR_SR_emu_bin_5_constraint[ x=nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_5 mean=gamma_shape_stat_Bkg_SR_SR_emu_bin_5_poisMean ] = 0.0212745
+RooPoisson::gamma_shape_stat_Bkg_SR_SR_emu_bin_6_constraint[ x=nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_6 mean=gamma_shape_stat_Bkg_SR_SR_emu_bin_6_poisMean ] = 0.0152582
+RooPoisson::gamma_shape_stat_Bkg_SR_SR_emu_bin_7_constraint[ x=nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_7 mean=gamma_shape_stat_Bkg_SR_SR_emu_bin_7_poisMean ] = 0.0152367
+RooPoisson::gamma_shape_stat_Bkg_SR_SR_emu_bin_8_constraint[ x=nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_8 mean=gamma_shape_stat_Bkg_SR_SR_emu_bin_8_poisMean ] = 0.0138503
+RooPoisson::gamma_shape_stat_Bkg_SR_SR_emu_bin_9_constraint[ x=nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_9 mean=gamma_shape_stat_Bkg_SR_SR_emu_bin_9_poisMean ] = 0.016461
+RooPoisson::gamma_stat_SR_emu_bin_0_constraint[ x=nom_gamma_stat_SR_emu_bin_0 mean=gamma_stat_SR_emu_bin_0_poisMean ] = 0.00174863
+RooPoisson::gamma_stat_SR_emu_bin_10_constraint[ x=nom_gamma_stat_SR_emu_bin_10 mean=gamma_stat_SR_emu_bin_10_poisMean ] = 0.000491452
+RooPoisson::gamma_stat_SR_emu_bin_11_constraint[ x=nom_gamma_stat_SR_emu_bin_11 mean=gamma_stat_SR_emu_bin_11_poisMean ] = 0.000484766
+RooPoisson::gamma_stat_SR_emu_bin_12_constraint[ x=nom_gamma_stat_SR_emu_bin_12 mean=gamma_stat_SR_emu_bin_12_poisMean ] = 0.000484146
+RooPoisson::gamma_stat_SR_emu_bin_13_constraint[ x=nom_gamma_stat_SR_emu_bin_13 mean=gamma_stat_SR_emu_bin_13_poisMean ] = 0.000493054
+RooPoisson::gamma_stat_SR_emu_bin_14_constraint[ x=nom_gamma_stat_SR_emu_bin_14 mean=gamma_stat_SR_emu_bin_14_poisMean ] = 0.000509726
+RooPoisson::gamma_stat_SR_emu_bin_15_constraint[ x=nom_gamma_stat_SR_emu_bin_15 mean=gamma_stat_SR_emu_bin_15_poisMean ] = 0.000538392
+RooPoisson::gamma_stat_SR_emu_bin_16_constraint[ x=nom_gamma_stat_SR_emu_bin_16 mean=gamma_stat_SR_emu_bin_16_poisMean ] = 0.000581745
+RooPoisson::gamma_stat_SR_emu_bin_17_constraint[ x=nom_gamma_stat_SR_emu_bin_17 mean=gamma_stat_SR_emu_bin_17_poisMean ] = 0.00064793
+RooPoisson::gamma_stat_SR_emu_bin_18_constraint[ x=nom_gamma_stat_SR_emu_bin_18 mean=gamma_stat_SR_emu_bin_18_poisMean ] = 0.000750021
+RooPoisson::gamma_stat_SR_emu_bin_19_constraint[ x=nom_gamma_stat_SR_emu_bin_19 mean=gamma_stat_SR_emu_bin_19_poisMean ] = 0.000904401
+RooPoisson::gamma_stat_SR_emu_bin_1_constraint[ x=nom_gamma_stat_SR_emu_bin_1 mean=gamma_stat_SR_emu_bin_1_poisMean ] = 0.00123546
+RooPoisson::gamma_stat_SR_emu_bin_2_constraint[ x=nom_gamma_stat_SR_emu_bin_2 mean=gamma_stat_SR_emu_bin_2_poisMean ] = 0.000979378
+RooPoisson::gamma_stat_SR_emu_bin_3_constraint[ x=nom_gamma_stat_SR_emu_bin_3 mean=gamma_stat_SR_emu_bin_3_poisMean ] = 0.000834482
+RooPoisson::gamma_stat_SR_emu_bin_4_constraint[ x=nom_gamma_stat_SR_emu_bin_4 mean=gamma_stat_SR_emu_bin_4_poisMean ] = 0.000737125
+RooPoisson::gamma_stat_SR_emu_bin_5_constraint[ x=nom_gamma_stat_SR_emu_bin_5 mean=gamma_stat_SR_emu_bin_5_poisMean ] = 0.00066214
+RooPoisson::gamma_stat_SR_emu_bin_6_constraint[ x=nom_gamma_stat_SR_emu_bin_6 mean=gamma_stat_SR_emu_bin_6_poisMean ] = 0.000603559
+RooPoisson::gamma_stat_SR_emu_bin_7_constraint[ x=nom_gamma_stat_SR_emu_bin_7 mean=gamma_stat_SR_emu_bin_7_poisMean ] = 0.000560058
+RooPoisson::gamma_stat_SR_emu_bin_8_constraint[ x=nom_gamma_stat_SR_emu_bin_8 mean=gamma_stat_SR_emu_bin_8_poisMean ] = 0.000528036
+RooPoisson::gamma_stat_SR_emu_bin_9_constraint[ x=nom_gamma_stat_SR_emu_bin_9 mean=gamma_stat_SR_emu_bin_9_poisMean ] = 0.000505625
+RooProdPdf::model_SR_emu[ gamma_shape_stat_Bkg_SR_SR_emu_bin_0_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_1_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_2_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_3_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_4_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_5_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_6_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_7_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_8_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_9_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_10_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_11_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_12_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_14_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_15_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_17_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_18_constraint * alpha_bTagSF_B_0Constraint * gamma_stat_SR_emu_bin_0_constraint * gamma_stat_SR_emu_bin_1_constraint * gamma_stat_SR_emu_bin_2_constraint * gamma_stat_SR_emu_bin_3_constraint * gamma_stat_SR_emu_bin_4_constraint * gamma_stat_SR_emu_bin_5_constraint * gamma_stat_SR_emu_bin_6_constraint * gamma_stat_SR_emu_bin_7_constraint * gamma_stat_SR_emu_bin_8_constraint * gamma_stat_SR_emu_bin_9_constraint * gamma_stat_SR_emu_bin_10_constraint * gamma_stat_SR_emu_bin_11_constraint * gamma_stat_SR_emu_bin_12_constraint * gamma_stat_SR_emu_bin_13_constraint * gamma_stat_SR_emu_bin_14_constraint * gamma_stat_SR_emu_bin_15_constraint * gamma_stat_SR_emu_bin_16_constraint * gamma_stat_SR_emu_bin_17_constraint * gamma_stat_SR_emu_bin_18_constraint * gamma_stat_SR_emu_bin_19_constraint * SR_emu_model(obs_x_SR_emu) ] = 6.6141e-91
+
+functions
+--------
+RooHistFunc::Bkg_SR_SR_emu_Hist_alphanominal[ depList=(obs_x_SR_emu) ] = 43.9639
+RooProduct::Bkg_SR_SR_emu_scaleFactors[ Bkg_SR_SR_emu_epsilon * Lumi ] = 1
+RooProduct::Bkg_SR_SR_emu_shapes[ Bkg_SR_SR_emu_Hist_alphanominal * SR_emu_shape_stat_Bkg_SR_SR_emu_ShapeSys * SR_emu_model_binWidth ] = 6.76368
+RooBinWidthFunction::SR_emu_model_binWidth[ HistFuncForBinWidth=Bkg_SR_SR_emu_Hist_alphanominal ] = 0.153846
+ParamHistFunc::SR_emu_shape_stat_Bkg_SR_SR_emu_ShapeSys[ ] = 1
+ParamHistFunc::SR_emu_templateSF_SR_emu_Signal_1p5_172p5_shapeFactor[ ] = 1
+PiecewiseInterpolation::Signal_1p5_172p5_SR_emu_Hist_alpha[ ] = 7484.94
+RooHistFunc::Signal_1p5_172p5_SR_emu_Hist_alpha_0high[ depList=(obs_x_SR_emu) ] = 7458.7
+RooHistFunc::Signal_1p5_172p5_SR_emu_Hist_alpha_0low[ depList=(obs_x_SR_emu) ] = 7512.4
+RooHistFunc::Signal_1p5_172p5_SR_emu_Hist_alphanominal[ depList=(obs_x_SR_emu) ] = 7484.94
+RooStats::HistFactory::FlexibleInterpVar::Signal_1p5_172p5_SR_emu_epsilon[ paramList=(alpha_bTagSF_B_0) ] = 1
+RooProduct::Signal_1p5_172p5_SR_emu_scaleFactors[ Signal_1p5_172p5_SR_emu_epsilon * ttbarXsec * Lumi ] = 1
+RooProduct::Signal_1p5_172p5_SR_emu_shapes[ Signal_1p5_172p5_SR_emu_Hist_alpha * mc_stat_SR_emu * SR_emu_templateSF_SR_emu_Signal_1p5_172p5_shapeFactor * SR_emu_model_binWidth ] = 1151.53
+RooProduct::gamma_shape_stat_Bkg_SR_SR_emu_bin_0_poisMean[ gamma_shape_stat_Bkg_SR_SR_emu_bin_0 * gamma_shape_stat_Bkg_SR_SR_emu_bin_0_tau ] = 23.8497
+RooProduct::gamma_shape_stat_Bkg_SR_SR_emu_bin_10_poisMean[ gamma_shape_stat_Bkg_SR_SR_emu_bin_10 * gamma_shape_stat_Bkg_SR_SR_emu_bin_10_tau ] = 776.389
+RooProduct::gamma_shape_stat_Bkg_SR_SR_emu_bin_11_poisMean[ gamma_shape_stat_Bkg_SR_SR_emu_bin_11 * gamma_shape_stat_Bkg_SR_SR_emu_bin_11_tau ] = 883.692
+RooProduct::gamma_shape_stat_Bkg_SR_SR_emu_bin_12_poisMean[ gamma_shape_stat_Bkg_SR_SR_emu_bin_12 * gamma_shape_stat_Bkg_SR_SR_emu_bin_12_tau ] = 798.976
+RooProduct::gamma_shape_stat_Bkg_SR_SR_emu_bin_14_poisMean[ gamma_shape_stat_Bkg_SR_SR_emu_bin_14 * gamma_shape_stat_Bkg_SR_SR_emu_bin_14_tau ] = 870.604
+RooProduct::gamma_shape_stat_Bkg_SR_SR_emu_bin_15_poisMean[ gamma_shape_stat_Bkg_SR_SR_emu_bin_15 * gamma_shape_stat_Bkg_SR_SR_emu_bin_15_tau ] = 1109.97
+RooProduct::gamma_shape_stat_Bkg_SR_SR_emu_bin_17_poisMean[ gamma_shape_stat_Bkg_SR_SR_emu_bin_17 * gamma_shape_stat_Bkg_SR_SR_emu_bin_17_tau ] = 1050.07
+RooProduct::gamma_shape_stat_Bkg_SR_SR_emu_bin_18_poisMean[ gamma_shape_stat_Bkg_SR_SR_emu_bin_18 * gamma_shape_stat_Bkg_SR_SR_emu_bin_18_tau ] = 1064.3
+RooProduct::gamma_shape_stat_Bkg_SR_SR_emu_bin_1_poisMean[ gamma_shape_stat_Bkg_SR_SR_emu_bin_1 * gamma_shape_stat_Bkg_SR_SR_emu_bin_1_tau ] = 163.167
+RooProduct::gamma_shape_stat_Bkg_SR_SR_emu_bin_2_poisMean[ gamma_shape_stat_Bkg_SR_SR_emu_bin_2 * gamma_shape_stat_Bkg_SR_SR_emu_bin_2_tau ] = 261.124
+RooProduct::gamma_shape_stat_Bkg_SR_SR_emu_bin_3_poisMean[ gamma_shape_stat_Bkg_SR_SR_emu_bin_3 * gamma_shape_stat_Bkg_SR_SR_emu_bin_3_tau ] = 431.745
+RooProduct::gamma_shape_stat_Bkg_SR_SR_emu_bin_4_poisMean[ gamma_shape_stat_Bkg_SR_SR_emu_bin_4 * gamma_shape_stat_Bkg_SR_SR_emu_bin_4_tau ] = 377.906
+RooProduct::gamma_shape_stat_Bkg_SR_SR_emu_bin_5_poisMean[ gamma_shape_stat_Bkg_SR_SR_emu_bin_5 * gamma_shape_stat_Bkg_SR_SR_emu_bin_5_tau ] = 351.477
+RooProduct::gamma_shape_stat_Bkg_SR_SR_emu_bin_6_poisMean[ gamma_shape_stat_Bkg_SR_SR_emu_bin_6 * gamma_shape_stat_Bkg_SR_SR_emu_bin_6_tau ] = 683.451
+RooProduct::gamma_shape_stat_Bkg_SR_SR_emu_bin_7_poisMean[ gamma_shape_stat_Bkg_SR_SR_emu_bin_7 * gamma_shape_stat_Bkg_SR_SR_emu_bin_7_tau ] = 685.385
+RooProduct::gamma_shape_stat_Bkg_SR_SR_emu_bin_8_poisMean[ gamma_shape_stat_Bkg_SR_SR_emu_bin_8 * gamma_shape_stat_Bkg_SR_SR_emu_bin_8_tau ] = 829.492
+RooProduct::gamma_shape_stat_Bkg_SR_SR_emu_bin_9_poisMean[ gamma_shape_stat_Bkg_SR_SR_emu_bin_9 * gamma_shape_stat_Bkg_SR_SR_emu_bin_9_tau ] = 587.194
+RooProduct::gamma_stat_SR_emu_bin_0_poisMean[ gamma_stat_SR_emu_bin_0 * gamma_stat_SR_emu_bin_0_tau ] = 52050.4
+RooProduct::gamma_stat_SR_emu_bin_10_poisMean[ gamma_stat_SR_emu_bin_10 * gamma_stat_SR_emu_bin_10_tau ] = 658957
+RooProduct::gamma_stat_SR_emu_bin_11_poisMean[ gamma_stat_SR_emu_bin_11 * gamma_stat_SR_emu_bin_11_tau ] = 677259
+RooProduct::gamma_stat_SR_emu_bin_12_poisMean[ gamma_stat_SR_emu_bin_12 * gamma_stat_SR_emu_bin_12_tau ] = 678997
+RooProduct::gamma_stat_SR_emu_bin_13_poisMean[ gamma_stat_SR_emu_bin_13 * gamma_stat_SR_emu_bin_13_tau ] = 654684
+RooProduct::gamma_stat_SR_emu_bin_14_poisMean[ gamma_stat_SR_emu_bin_14 * gamma_stat_SR_emu_bin_14_tau ] = 612557
+RooProduct::gamma_stat_SR_emu_bin_15_poisMean[ gamma_stat_SR_emu_bin_15 * gamma_stat_SR_emu_bin_15_tau ] = 549064
+RooProduct::gamma_stat_SR_emu_bin_16_poisMean[ gamma_stat_SR_emu_bin_16 * gamma_stat_SR_emu_bin_16_tau ] = 470278
+RooProduct::gamma_stat_SR_emu_bin_17_poisMean[ gamma_stat_SR_emu_bin_17 * gamma_stat_SR_emu_bin_17_tau ] = 379109
+RooProduct::gamma_stat_SR_emu_bin_18_poisMean[ gamma_stat_SR_emu_bin_18 * gamma_stat_SR_emu_bin_18_tau ] = 282926
+RooProduct::gamma_stat_SR_emu_bin_19_poisMean[ gamma_stat_SR_emu_bin_19 * gamma_stat_SR_emu_bin_19_tau ] = 194580
+RooProduct::gamma_stat_SR_emu_bin_1_poisMean[ gamma_stat_SR_emu_bin_1 * gamma_stat_SR_emu_bin_1_tau ] = 104270
+RooProduct::gamma_stat_SR_emu_bin_2_poisMean[ gamma_stat_SR_emu_bin_2 * gamma_stat_SR_emu_bin_2_tau ] = 165928
+RooProduct::gamma_stat_SR_emu_bin_3_poisMean[ gamma_stat_SR_emu_bin_3 * gamma_stat_SR_emu_bin_3_tau ] = 228553
+RooProduct::gamma_stat_SR_emu_bin_4_poisMean[ gamma_stat_SR_emu_bin_4 * gamma_stat_SR_emu_bin_4_tau ] = 292912
+RooProduct::gamma_stat_SR_emu_bin_5_poisMean[ gamma_stat_SR_emu_bin_5 * gamma_stat_SR_emu_bin_5_tau ] = 363012
+RooProduct::gamma_stat_SR_emu_bin_6_poisMean[ gamma_stat_SR_emu_bin_6 * gamma_stat_SR_emu_bin_6_tau ] = 436898
+RooProduct::gamma_stat_SR_emu_bin_7_poisMean[ gamma_stat_SR_emu_bin_7 * gamma_stat_SR_emu_bin_7_tau ] = 507403
+RooProduct::gamma_stat_SR_emu_bin_8_poisMean[ gamma_stat_SR_emu_bin_8 * gamma_stat_SR_emu_bin_8_tau ] = 570811
+RooProduct::gamma_stat_SR_emu_bin_9_poisMean[ gamma_stat_SR_emu_bin_9 * gamma_stat_SR_emu_bin_9_tau ] = 622534
+ParamHistFunc::mc_stat_SR_emu[ ] = 1
+
+datasets
+--------
+RooDataSet::obsData(obs_x_SR_emu)
+
+embedded datasets (in pdfs and functions)
+-----------------------------------------
+RooDataHist::Bkg_SR_SR_emu_Hist_alphanominalDHist(obs_x_SR_emu)
+RooDataHist::Signal_1p5_172p5_SR_emu_Hist_alphanominalDHist(obs_x_SR_emu)
+RooDataHist::Signal_1p5_172p5_SR_emu_Hist_alpha_0lowDHist(obs_x_SR_emu)
+RooDataHist::Signal_1p5_172p5_SR_emu_Hist_alpha_0highDHist(obs_x_SR_emu)
+
+named sets
+----------
+ModelConfig_GlobalObservables:(nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_0,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_1,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_2,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_3,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_4,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_5,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_6,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_7,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_8,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_9,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_10,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_11,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_12,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_14,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_15,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_17,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_18,nom_alpha_bTagSF_B_0,nom_gamma_stat_SR_emu_bin_0,nom_gamma_stat_SR_emu_bin_1,nom_gamma_stat_SR_emu_bin_2,nom_gamma_stat_SR_emu_bin_3,nom_gamma_stat_SR_emu_bin_4,nom_gamma_stat_SR_emu_bin_5,nom_gamma_stat_SR_emu_bin_6,nom_gamma_stat_SR_emu_bin_7,nom_gamma_stat_SR_emu_bin_8,nom_gamma_stat_SR_emu_bin_9,nom_gamma_stat_SR_emu_bin_10,nom_gamma_stat_SR_emu_bin_11,nom_gamma_stat_SR_emu_bin_12,nom_gamma_stat_SR_emu_bin_13,nom_gamma_stat_SR_emu_bin_14,nom_gamma_stat_SR_emu_bin_15,nom_gamma_stat_SR_emu_bin_16,nom_gamma_stat_SR_emu_bin_17,nom_gamma_stat_SR_emu_bin_18,nom_gamma_stat_SR_emu_bin_19)
+ModelConfig_Observables:(obs_x_SR_emu)
+constraintTerms:(gamma_shape_stat_Bkg_SR_SR_emu_bin_0_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_1_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_2_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_3_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_4_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_5_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_6_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_7_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_8_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_9_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_10_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_11_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_12_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_14_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_15_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_17_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_18_constraint,alpha_bTagSF_B_0Constraint,gamma_stat_SR_emu_bin_0_constraint,gamma_stat_SR_emu_bin_1_constraint,gamma_stat_SR_emu_bin_2_constraint,gamma_stat_SR_emu_bin_3_constraint,gamma_stat_SR_emu_bin_4_constraint,gamma_stat_SR_emu_bin_5_constraint,gamma_stat_SR_emu_bin_6_constraint,gamma_stat_SR_emu_bin_7_constraint,gamma_stat_SR_emu_bin_8_constraint,gamma_stat_SR_emu_bin_9_constraint,gamma_stat_SR_emu_bin_10_constraint,gamma_stat_SR_emu_bin_11_constraint,gamma_stat_SR_emu_bin_12_constraint,gamma_stat_SR_emu_bin_13_constraint,gamma_stat_SR_emu_bin_14_constraint,gamma_stat_SR_emu_bin_15_constraint,gamma_stat_SR_emu_bin_16_constraint,gamma_stat_SR_emu_bin_17_constraint,gamma_stat_SR_emu_bin_18_constraint,gamma_stat_SR_emu_bin_19_constraint)
+globalObservables:(nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_0,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_1,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_2,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_3,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_4,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_5,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_6,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_7,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_8,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_9,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_10,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_11,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_12,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_14,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_15,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_17,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_18,nom_alpha_bTagSF_B_0,nom_gamma_stat_SR_emu_bin_0,nom_gamma_stat_SR_emu_bin_1,nom_gamma_stat_SR_emu_bin_2,nom_gamma_stat_SR_emu_bin_3,nom_gamma_stat_SR_emu_bin_4,nom_gamma_stat_SR_emu_bin_5,nom_gamma_stat_SR_emu_bin_6,nom_gamma_stat_SR_emu_bin_7,nom_gamma_stat_SR_emu_bin_8,nom_gamma_stat_SR_emu_bin_9,nom_gamma_stat_SR_emu_bin_10,nom_gamma_stat_SR_emu_bin_11,nom_gamma_stat_SR_emu_bin_12,nom_gamma_stat_SR_emu_bin_13,nom_gamma_stat_SR_emu_bin_14,nom_gamma_stat_SR_emu_bin_15,nom_gamma_stat_SR_emu_bin_16,nom_gamma_stat_SR_emu_bin_17,nom_gamma_stat_SR_emu_bin_18,nom_gamma_stat_SR_emu_bin_19)
+likelihoodTerms:(SR_emu_model)
+observables:(obs_x_SR_emu)
+observablesSet:(obs_x_SR_emu)
+
+generic objects
+---------------
+RooStats::ModelConfig::ModelConfig
+
+[#2] INFO:HistFactory -- Setting Parameter(s) of Interest as: topWidth 
+[#2] WARNING:HistFactory -- WARNING: Can't find parameter of interest: topWidth in Workspace. Not setting in ModelConfig.
+
+=== Using the following for ModelConfig ===
+Observables:             RooArgSet:: = (obs_x_SR_emu)
+Parameters of Interest:  RooArgSet:: = ()
+Nuisance Parameters:     RooArgSet:: = (alpha_bTagSF_B_0,gamma_shape_stat_Bkg_SR_SR_emu_bin_0,gamma_shape_stat_Bkg_SR_SR_emu_bin_1,gamma_shape_stat_Bkg_SR_SR_emu_bin_10,gamma_shape_stat_Bkg_SR_SR_emu_bin_11,gamma_shape_stat_Bkg_SR_SR_emu_bin_12,gamma_shape_stat_Bkg_SR_SR_emu_bin_14,gamma_shape_stat_Bkg_SR_SR_emu_bin_15,gamma_shape_stat_Bkg_SR_SR_emu_bin_17,gamma_shape_stat_Bkg_SR_SR_emu_bin_18,gamma_shape_stat_Bkg_SR_SR_emu_bin_2,gamma_shape_stat_Bkg_SR_SR_emu_bin_3,gamma_shape_stat_Bkg_SR_SR_emu_bin_4,gamma_shape_stat_Bkg_SR_SR_emu_bin_5,gamma_shape_stat_Bkg_SR_SR_emu_bin_6,gamma_shape_stat_Bkg_SR_SR_emu_bin_7,gamma_shape_stat_Bkg_SR_SR_emu_bin_8,gamma_shape_stat_Bkg_SR_SR_emu_bin_9,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_0,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_1,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_10,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_11,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_12,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_13,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_14,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_15,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_16,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_17,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_18,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_19,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_2,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_3,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_4,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_5,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_6,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_7,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_8,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_9,ttbarXsec)
+Global Observables:      RooArgSet:: = (nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_0,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_1,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_2,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_3,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_4,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_5,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_6,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_7,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_8,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_9,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_10,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_11,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_12,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_14,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_15,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_17,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_18,nom_alpha_bTagSF_B_0,nom_gamma_stat_SR_emu_bin_0,nom_gamma_stat_SR_emu_bin_1,nom_gamma_stat_SR_emu_bin_2,nom_gamma_stat_SR_emu_bin_3,nom_gamma_stat_SR_emu_bin_4,nom_gamma_stat_SR_emu_bin_5,nom_gamma_stat_SR_emu_bin_6,nom_gamma_stat_SR_emu_bin_7,nom_gamma_stat_SR_emu_bin_8,nom_gamma_stat_SR_emu_bin_9,nom_gamma_stat_SR_emu_bin_10,nom_gamma_stat_SR_emu_bin_11,nom_gamma_stat_SR_emu_bin_12,nom_gamma_stat_SR_emu_bin_13,nom_gamma_stat_SR_emu_bin_14,nom_gamma_stat_SR_emu_bin_15,nom_gamma_stat_SR_emu_bin_16,nom_gamma_stat_SR_emu_bin_17,nom_gamma_stat_SR_emu_bin_18,nom_gamma_stat_SR_emu_bin_19)
+PDF:                     RooProdPdf::model_SR_emu[ gamma_shape_stat_Bkg_SR_SR_emu_bin_0_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_1_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_2_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_3_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_4_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_5_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_6_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_7_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_8_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_9_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_10_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_11_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_12_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_14_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_15_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_17_constraint * gamma_shape_stat_Bkg_SR_SR_emu_bin_18_constraint * alpha_bTagSF_B_0Constraint * gamma_stat_SR_emu_bin_0_constraint * gamma_stat_SR_emu_bin_1_constraint * gamma_stat_SR_emu_bin_2_constraint * gamma_stat_SR_emu_bin_3_constraint * gamma_stat_SR_emu_bin_4_constraint * gamma_stat_SR_emu_bin_5_constraint * gamma_stat_SR_emu_bin_6_constraint * gamma_stat_SR_emu_bin_7_constraint * gamma_stat_SR_emu_bin_8_constraint * gamma_stat_SR_emu_bin_9_constraint * gamma_stat_SR_emu_bin_10_constraint * gamma_stat_SR_emu_bin_11_constraint * gamma_stat_SR_emu_bin_12_constraint * gamma_stat_SR_emu_bin_13_constraint * gamma_stat_SR_emu_bin_14_constraint * gamma_stat_SR_emu_bin_15_constraint * gamma_stat_SR_emu_bin_16_constraint * gamma_stat_SR_emu_bin_17_constraint * gamma_stat_SR_emu_bin_18_constraint * gamma_stat_SR_emu_bin_19_constraint * SR_emu_model(obs_x_SR_emu) ] = 6.6141e-91
+
+[#2] INFO:HistFactory -- full list of observables:
+(obs_x_SR_emu)
+[#2] PROGRESS:HistFactory -- 
+-----------------------------------------
+	Entering combination
+-----------------------------------------
+
+
+RooWorkspace(combined) combined contents
+
+variables
+---------
+(channelCat,nom_alpha_bTagSF_B_0,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_0,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_1,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_10,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_11,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_12,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_14,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_15,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_17,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_18,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_2,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_3,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_4,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_5,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_6,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_7,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_8,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_9,nom_gamma_stat_SR_emu_bin_0,nom_gamma_stat_SR_emu_bin_1,nom_gamma_stat_SR_emu_bin_10,nom_gamma_stat_SR_emu_bin_11,nom_gamma_stat_SR_emu_bin_12,nom_gamma_stat_SR_emu_bin_13,nom_gamma_stat_SR_emu_bin_14,nom_gamma_stat_SR_emu_bin_15,nom_gamma_stat_SR_emu_bin_16,nom_gamma_stat_SR_emu_bin_17,nom_gamma_stat_SR_emu_bin_18,nom_gamma_stat_SR_emu_bin_19,nom_gamma_stat_SR_emu_bin_2,nom_gamma_stat_SR_emu_bin_3,nom_gamma_stat_SR_emu_bin_4,nom_gamma_stat_SR_emu_bin_5,nom_gamma_stat_SR_emu_bin_6,nom_gamma_stat_SR_emu_bin_7,nom_gamma_stat_SR_emu_bin_8,nom_gamma_stat_SR_emu_bin_9,obs_x_SR_emu)
+
+datasets
+--------
+RooDataSet::obsData(obs_x_SR_emu,channelCat)
+
+named sets
+----------
+ModelConfig_GlobalObservables:(nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_0,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_1,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_2,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_3,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_4,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_5,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_6,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_7,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_8,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_9,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_10,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_11,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_12,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_14,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_15,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_17,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_18,nom_alpha_bTagSF_B_0,nom_gamma_stat_SR_emu_bin_0,nom_gamma_stat_SR_emu_bin_1,nom_gamma_stat_SR_emu_bin_2,nom_gamma_stat_SR_emu_bin_3,nom_gamma_stat_SR_emu_bin_4,nom_gamma_stat_SR_emu_bin_5,nom_gamma_stat_SR_emu_bin_6,nom_gamma_stat_SR_emu_bin_7,nom_gamma_stat_SR_emu_bin_8,nom_gamma_stat_SR_emu_bin_9,nom_gamma_stat_SR_emu_bin_10,nom_gamma_stat_SR_emu_bin_11,nom_gamma_stat_SR_emu_bin_12,nom_gamma_stat_SR_emu_bin_13,nom_gamma_stat_SR_emu_bin_14,nom_gamma_stat_SR_emu_bin_15,nom_gamma_stat_SR_emu_bin_16,nom_gamma_stat_SR_emu_bin_17,nom_gamma_stat_SR_emu_bin_18,nom_gamma_stat_SR_emu_bin_19)
+ModelConfig_Observables:(obs_x_SR_emu,channelCat)
+globalObservables:(nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_0,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_1,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_2,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_3,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_4,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_5,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_6,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_7,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_8,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_9,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_10,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_11,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_12,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_14,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_15,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_17,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_18,nom_alpha_bTagSF_B_0,nom_gamma_stat_SR_emu_bin_0,nom_gamma_stat_SR_emu_bin_1,nom_gamma_stat_SR_emu_bin_2,nom_gamma_stat_SR_emu_bin_3,nom_gamma_stat_SR_emu_bin_4,nom_gamma_stat_SR_emu_bin_5,nom_gamma_stat_SR_emu_bin_6,nom_gamma_stat_SR_emu_bin_7,nom_gamma_stat_SR_emu_bin_8,nom_gamma_stat_SR_emu_bin_9,nom_gamma_stat_SR_emu_bin_10,nom_gamma_stat_SR_emu_bin_11,nom_gamma_stat_SR_emu_bin_12,nom_gamma_stat_SR_emu_bin_13,nom_gamma_stat_SR_emu_bin_14,nom_gamma_stat_SR_emu_bin_15,nom_gamma_stat_SR_emu_bin_16,nom_gamma_stat_SR_emu_bin_17,nom_gamma_stat_SR_emu_bin_18,nom_gamma_stat_SR_emu_bin_19)
+observables:(obs_x_SR_emu,channelCat)
+
+[#2] PROGRESS:HistFactory -- 
+-----------------------------------------
+	Importing combined model
+-----------------------------------------
+
+[#2] INFO:HistFactory -- setting Lumi constant
+[#2] PROGRESS:HistFactory -- 
+-----------------------------------------
+	create toy data
+-----------------------------------------
+
+[#1] INFO:NumericIntegration -- RooRealIntegral::init(SR_emu_model_Int[obs_x_SR_emu]) using numeric integrator RooBinIntegrator to calculate Int(obs_x_SR_emu)
+RooDataSet::AsimovData0[obs_x_SR_emu,channelCat,weight:binWeightAsimov] = 20 entries (326414 weighted)
+[#2] INFO:HistFactory -- Setting Parameter(s) of Interest as: topWidth 
+[#2] WARNING:HistFactory -- WARNING: Can't find parameter of interest: topWidth in Workspace. Not setting in ModelConfig.
+
+=== Using the following for ModelConfig ===
+Observables:             RooArgSet:: = (obs_x_SR_emu,channelCat)
+Parameters of Interest:  RooArgSet:: = ()
+Nuisance Parameters:     RooArgSet:: = (alpha_bTagSF_B_0,gamma_shape_stat_Bkg_SR_SR_emu_bin_0,gamma_shape_stat_Bkg_SR_SR_emu_bin_1,gamma_shape_stat_Bkg_SR_SR_emu_bin_10,gamma_shape_stat_Bkg_SR_SR_emu_bin_11,gamma_shape_stat_Bkg_SR_SR_emu_bin_12,gamma_shape_stat_Bkg_SR_SR_emu_bin_14,gamma_shape_stat_Bkg_SR_SR_emu_bin_15,gamma_shape_stat_Bkg_SR_SR_emu_bin_17,gamma_shape_stat_Bkg_SR_SR_emu_bin_18,gamma_shape_stat_Bkg_SR_SR_emu_bin_2,gamma_shape_stat_Bkg_SR_SR_emu_bin_3,gamma_shape_stat_Bkg_SR_SR_emu_bin_4,gamma_shape_stat_Bkg_SR_SR_emu_bin_5,gamma_shape_stat_Bkg_SR_SR_emu_bin_6,gamma_shape_stat_Bkg_SR_SR_emu_bin_7,gamma_shape_stat_Bkg_SR_SR_emu_bin_8,gamma_shape_stat_Bkg_SR_SR_emu_bin_9,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_0,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_1,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_10,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_11,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_12,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_13,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_14,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_15,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_16,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_17,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_18,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_19,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_2,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_3,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_4,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_5,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_6,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_7,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_8,gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_9,ttbarXsec)
+Global Observables:      RooArgSet:: = (nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_0,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_1,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_2,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_3,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_4,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_5,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_6,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_7,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_8,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_9,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_10,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_11,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_12,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_14,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_15,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_17,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_18,nom_alpha_bTagSF_B_0,nom_gamma_stat_SR_emu_bin_0,nom_gamma_stat_SR_emu_bin_1,nom_gamma_stat_SR_emu_bin_2,nom_gamma_stat_SR_emu_bin_3,nom_gamma_stat_SR_emu_bin_4,nom_gamma_stat_SR_emu_bin_5,nom_gamma_stat_SR_emu_bin_6,nom_gamma_stat_SR_emu_bin_7,nom_gamma_stat_SR_emu_bin_8,nom_gamma_stat_SR_emu_bin_9,nom_gamma_stat_SR_emu_bin_10,nom_gamma_stat_SR_emu_bin_11,nom_gamma_stat_SR_emu_bin_12,nom_gamma_stat_SR_emu_bin_13,nom_gamma_stat_SR_emu_bin_14,nom_gamma_stat_SR_emu_bin_15,nom_gamma_stat_SR_emu_bin_16,nom_gamma_stat_SR_emu_bin_17,nom_gamma_stat_SR_emu_bin_18,nom_gamma_stat_SR_emu_bin_19)
+PDF:                     RooSimultaneous::simPdf[ indexCat=channelCat SR_emu=model_SR_emu ] = 1.72417e-91
+
+Warning in <xRooNode::xRooNode>: Inferring initial errors of 20 parameters (gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_0,...) (give all nuisance parameters an error to avoid this msg)
+Warning in <xRooNode::xRooNode>: Inferring initial errors of 20 parameters (gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_0,...) (give all nuisance parameters an error to avoid this msg)
+[1;32m[ INFO    ][0;0m Attaching metadata (titles, colours) to the WS
+[1;32m[ INFO    ][0;0m Reparametrizing the shape factors in the WS
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 0 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 1.673519e-03*topWidth*topWidth+-1.771384e-04*topMass*topMass+-1.435001e-03*topWidth*topMass+2.661317e-01*topWidth+1.851560e-03*topMass+5.920305e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 1 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -6.217335e-04*topWidth*topWidth+-1.620496e-04*topMass*topMass+-1.409974e-03*topWidth*topMass+2.699080e-01*topWidth+1.841436e-03*topMass+5.466164e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 2 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 6.076789e-04*topWidth*topWidth+-1.487323e-04*topMass*topMass+-1.029385e-03*topWidth*topMass+1.959430e-01*topWidth+1.858396e-03*topMass+5.076559e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 3 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 2.907284e-04*topWidth*topWidth+-1.344443e-04*topMass*topMass+-8.493185e-04*topWidth*topMass+1.641308e-01*topWidth+1.863669e-03*topMass+4.652270e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 4 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 6.388954e-04*topWidth*topWidth+-1.208383e-04*topMass*topMass+-5.296250e-04*topWidth*topMass+1.025118e-01*topWidth+1.882419e-03*topMass+4.253100e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 5 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 3.064426e-04*topWidth*topWidth+-1.065299e-04*topMass*topMass+-3.581552e-04*topWidth*topMass+7.093240e-02*topWidth+1.891316e-03*topMass+3.829532e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 6 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 8.715213e-04*topWidth*topWidth+-9.197494e-05*topMass*topMass+-2.482744e-04*topWidth*topMass+4.851800e-02*topWidth+1.900692e-03*topMass+3.398645e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 7 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -5.659829e-04*topWidth*topWidth+-7.714460e-05*topMass*topMass+-1.855196e-04*topWidth*topMass+4.088755e-02*topWidth+1.899326e-03*topMass+2.956065e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 8 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -1.846788e-04*topWidth*topWidth+-6.257538e-05*topMass*topMass+-8.065883e-05*topWidth*topMass+1.839646e-02*topWidth+1.912188e-03*topMass+2.526007e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 9 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 2.500196e-04*topWidth*topWidth+-4.785382e-05*topMass*topMass+-1.047276e-05*topWidth*topMass+1.725359e-03*topWidth+1.925298e-03*topMass+2.091500e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 10 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 6.235976e-05*topWidth*topWidth+-3.282720e-05*topMass*topMass+-1.440395e-06*topWidth*topMass+1.271078e-04*topWidth+1.928046e-03*topMass+1.644323e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 11 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -1.480097e-04*topWidth*topWidth+-1.782053e-05*topMass*topMass+8.832874e-06*topWidth*topMass+-3.164970e-03*topWidth+1.935078e-03*topMass+1.199328e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 12 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -4.238932e-04*topWidth*topWidth+-2.708322e-06*topMass*topMass+-3.351044e-06*topWidth*topMass+-1.483532e-03*topWidth+1.939283e-03*topMass+7.501449e-01
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 13 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -6.320032e-04*topWidth*topWidth+1.246892e-05*topMass*topMass+-3.241879e-05*topWidth*topMass+2.075669e-03*topWidth+1.946176e-03*topMass+2.999889e-01
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 14 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 3.540866e-04*topWidth*topWidth+2.778427e-05*topMass*topMass+-9.672384e-05*topWidth*topMass+7.151407e-03*topWidth+1.961255e-03*topMass+-1.516381e-01
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 15 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 8.295306e-04*topWidth*topWidth+4.310422e-05*topMass*topMass+-1.563966e-04*topWidth*topMass+1.518331e-02*topWidth+1.967696e-03*topMass+-6.063929e-01
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 16 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 5.897813e-04*topWidth*topWidth+-9.192691e-07*topMass*topMass+-2.490241e-04*topWidth*topMass+2.989615e-02*topWidth+2.249400e-02*topMass+-2.834613e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 17 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 9.419612e-04*topWidth*topWidth+-2.704705e-06*topMass*topMass+-2.842571e-04*topWidth*topMass+3.589180e-02*topWidth+2.836576e-02*topMass+-3.795063e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 18 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: -1.632374e-04*topWidth*topWidth+8.864187e-05*topMass*topMass+-2.277489e-04*topWidth*topMass+3.261166e-02*topWidth+1.962513e-03*topMass+-1.966018e+00
+[1;32m[ INFO    ][0;0m Adding the extra dependencies for scale factor templateSF_SR_emu_Signal_1p5_172p5 in bin 19 : topWidth,topMass
+[1;32m[ INFO    ][0;0m Using the following formula: 9.618680e-05*topWidth*topWidth+1.025154e-04*topMass*topMass+6.492752e-05*topWidth*topMass+-9.781590e-03*topWidth+1.939622e-03*topMass+-2.387690e+00
+[#2] PROGRESS:HistFactory -- Writing sample: Bkg_SR
+[#2] PROGRESS:HistFactory -- Writing sample: Signal_1p5_172p5
+[#2] PROGRESS:HistFactory -- Saved all histograms
+[#2] PROGRESS:HistFactory -- Saved Measurement
+[0;33m[ WARNING ][0;0m No VALIDATION regions found, will only produce workspace for fit regions
+[0;33m[ WARNING ][0;0m To add VALIDATION regions, rerun the "w" step with the option WorkspaceCreationType=FORPLOTS

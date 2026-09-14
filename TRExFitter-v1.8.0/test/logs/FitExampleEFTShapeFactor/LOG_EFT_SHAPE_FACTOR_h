@@ -1,0 +1,32 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[0m[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleEFTShapeFactor.config
+[1;32m[ INFO    ][0;0m Successfully read config file.
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Job name: FitExampleEFTShapeFactor
+[1;32m[ INFO    ][0;0m Reading the following regions:
+[1;32m[ INFO    ][0;0m     Region: R1L4bHi_c
+[1;32m[ INFO    ][0;0m Reading the following samples:
+[1;32m[ INFO    ][0;0m      EFT_ttHH_eft_CttHH_min3
+[1;32m[ INFO    ][0;0m      EFT_ttHH_eft_CttHH_min1
+[1;32m[ INFO    ][0;0m      EFT_ttHH_eft_CttHH_1
+[1;32m[ INFO    ][0;0m      EFT_ttHH_eft_CttHH_3
+[1;32m[ INFO    ][0;0m      ttHH
+[1;32m[ INFO    ][0;0m      ttb
+[1;32m[ INFO    ][0;0m Reading the following systematics:
+[1;32m[ INFO    ][0;0m  Jet_eta_intercalibration
+[1;32m[ INFO    ][0;0m  ttb_4fs
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Reading histograms...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Creating/updating file FitExampleEFTShapeFactor/Histograms/FitExampleEFTShapeFactor_histos.root ...
+[1;32m[ INFO    ][0;0m   Region R1L4bHi_c ...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Smoothing and/or Symmetrising Systematic Variations ...
+[0;33m[ WARNING ][0;0m Systematic: ttb_4fs, histogram: R1L4bHi_c_ttb, chi^2 between original and smoothed variation gives probability 0.00769483 (up) and 1 (down), please check smoothing!
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Writing histograms to file FitExampleEFTShapeFactor/Histograms/FitExampleEFTShapeFactor_histos.root for region: R1L4bHi_c ...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Drawing red-blue plots for region: R1L4bHi_c

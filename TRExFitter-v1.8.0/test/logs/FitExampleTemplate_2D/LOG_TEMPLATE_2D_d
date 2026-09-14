@@ -1,0 +1,320 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[0m[#1] INFO:InputArguments -- Silent clipping of values to range in `RooRealVar::setVal()` enabled.
+[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleTemplate_2D.config
+[1;36m[ DEBUG   ][0;0m PlotOptionsSummary not specified setting Summary values to 'PlotOptions'
+[1;36m[ DEBUG   ][0;0m You do not have 'Options' option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Limit option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Significance option in the config. It is ok, we just want to let you know.
+[1;32m[ INFO    ][0;0m StatOnly option is setting to OFF the MC-stat (gammas) as well.
+[1;32m[ INFO    ][0;0m To keep them on use the command line option 'Systematics=NONE'
+[1;32m[ INFO    ][0;0m or comment out all Systematics in config file.
+[1;32m[ INFO    ][0;0m Successfully read config file.
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Job name: FitExampleTemplate_2D
+[1;32m[ INFO    ][0;0m Reading the following regions:
+[1;32m[ INFO    ][0;0m     Region: SR_emu
+[1;32m[ INFO    ][0;0m Reading the following samples:
+[1;32m[ INFO    ][0;0m      Signal_0p7_170
+[1;32m[ INFO    ][0;0m      Signal_0p7_172p5
+[1;32m[ INFO    ][0;0m      Signal_0p7_175
+[1;32m[ INFO    ][0;0m      Signal_1p0_170
+[1;32m[ INFO    ][0;0m      Signal_1p0_172p5
+[1;32m[ INFO    ][0;0m      Signal_1p0_175
+[1;32m[ INFO    ][0;0m      Signal_2p0_170
+[1;32m[ INFO    ][0;0m      Signal_2p0_172p5
+[1;32m[ INFO    ][0;0m      Signal_2p0_175
+[1;32m[ INFO    ][0;0m      PseudoData
+[1;32m[ INFO    ][0;0m      Bkg_SR
+[1;32m[ INFO    ][0;0m      Signal_1p5_172p5
+[1;32m[ INFO    ][0;0m Reading the following systematics:
+[1;32m[ INFO    ][0;0m  Dummy
+[1;32m[ INFO    ][0;0m  bTagSF_B_0
+[1;32m[ INFO    ][0;0m  CategoryReduction_JET_JER_EffectiveNP_2
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m -----------------------------
+[1;32m[ INFO    ][0;0m Reading histograms from file FitExampleTemplate_2D/Histograms/FitExampleTemplate_2D_histos.root ...
+[1;36m[ DEBUG   ][0;0m   Reading region SR_emu
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_0p7_170
+Warning in <xRooNode::xRooNode>: Inferring initial errors of 20 parameters (gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_0,...) (give all nuisance parameters an error to avoid this msg)
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_0p7_172p5
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_0p7_175
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_1p0_170
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_1p0_172p5
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_1p0_175
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_2p0_170
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_2p0_172p5
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_2p0_175
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample PseudoData
+[1;36m[ DEBUG   ][0;0m     Reading sample Bkg_SR
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Bkg_SR
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Bkg_SR
+[1;36m[ DEBUG   ][0;0m     Reading sample Signal_1p5_172p5
+[1;36m[ DEBUG   ][0;0m       Reading norm ttbarXsec
+[1;36m[ DEBUG   ][0;0m       Reading shape templateSF_SR_emu_Signal_1p5_172p5
+[1;36m[ DEBUG   ][0;0m       Reading syst Dummy
+[1;36m[ DEBUG   ][0;0m       Reading syst bTagSF_B_0
+[1;36m[ DEBUG   ][0;0m       Reading syst CategoryReduction_JET_JER_EffectiveNP_2
+[1;32m[ INFO    ][0;0m Adding NormFactor: topWidth used in the ShapeFactor reparametrization
+[1;32m[ INFO    ][0;0m Adding NormFactor: topMass used in the ShapeFactor reparametrization
+[1;32m[ INFO    ][0;0m Drawing plots from the workspace: FitExampleTemplate_2D/RooStats/FitExampleTemplate_2D_combined_FitExampleTemplate_2D_model.root
+[1;32m[ INFO    ][0;0m Drawing pre-fit plots...
+Warning in <xRooNode::xRooNode>: Inferring initial errors of 20 parameters (gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_18,...) (give all nuisance parameters an error to avoid this msg)
+
+20x20 matrix is as follows
+
+     |       0    |       1    |       2    |       3    |       4    |
+----------------------------------------------------------------------
+   0 |       1963           0           0           0           0 
+   1 |          0        3971           0           0           0 
+   2 |          0           0        6346           0           0 
+   3 |          0           0           0        8743           0 
+   4 |          0           0           0           0   1.121e+04 
+   5 |          0           0           0           0           0 
+   6 |          0           0           0           0           0 
+   7 |          0           0           0           0           0 
+   8 |          0           0           0           0           0 
+   9 |          0           0           0           0           0 
+  10 |          0           0           0           0           0 
+  11 |          0           0           0           0           0 
+  12 |          0           0           0           0           0 
+  13 |          0           0           0           0           0 
+  14 |          0           0           0           0           0 
+  15 |          0           0           0           0           0 
+  16 |          0           0           0           0           0 
+  17 |          0           0           0           0           0 
+  18 |          0           0           0           0           0 
+  19 |          0           0           0           0           0 
+
+
+     |       5    |       6    |       7    |       8    |       9    |
+----------------------------------------------------------------------
+   0 |          0           0           0           0           0 
+   1 |          0           0           0           0           0 
+   2 |          0           0           0           0           0 
+   3 |          0           0           0           0           0 
+   4 |          0           0           0           0           0 
+   5 |  1.389e+04           0           0           0           0 
+   6 |          0   1.672e+04           0           0           0 
+   7 |          0           0   1.942e+04           0           0 
+   8 |          0           0           0   2.186e+04           0 
+   9 |          0           0           0           0   2.385e+04 
+  10 |          0           0           0           0           0 
+  11 |          0           0           0           0           0 
+  12 |          0           0           0           0   1.323e-23 
+  13 |          0           0           0           0           0 
+  14 |          0           0           0           0  -1.323e-23 
+  15 |          0           0           0           0           0 
+  16 |          0           0           0           0           0 
+  17 |          0           0           0           0   6.617e-24 
+  18 |          0           0           0           0   6.617e-24 
+  19 |          0           0           0           0   3.309e-24 
+
+
+     |      10    |      11    |      12    |      13    |      14    |
+----------------------------------------------------------------------
+   0 |          0           0           0           0           0 
+   1 |          0           0           0           0           0 
+   2 |          0           0           0           0           0 
+   3 |          0           0           0           0           0 
+   4 |          0           0           0           0           0 
+   5 |          0           0           0           0           0 
+   6 |          0           0           0           0           0 
+   7 |          0           0           0           0           0 
+   8 |          0           0           0           0           0 
+   9 |          0           0   1.323e-23           0  -1.323e-23 
+  10 |  2.529e+04           0           0           0           0 
+  11 |          0   2.598e+04           0           0           0 
+  12 |          0           0    2.61e+04           0  -1.323e-23 
+  13 |          0           0           0   2.518e+04           0 
+  14 |          0           0  -1.323e-23           0   2.357e+04 
+  15 |          0           0           0           0           0 
+  16 |          0           0           0           0           0 
+  17 |          0           0   6.617e-24           0  -6.617e-24 
+  18 |          0           0   6.617e-24           0  -6.617e-24 
+  19 |          0           0   3.309e-24           0  -3.309e-24 
+
+
+     |      15    |      16    |      17    |      18    |      19    |
+----------------------------------------------------------------------
+   0 |          0           0           0           0           0 
+   1 |          0           0           0           0           0 
+   2 |          0           0           0           0           0 
+   3 |          0           0           0           0           0 
+   4 |          0           0           0           0           0 
+   5 |          0           0           0           0           0 
+   6 |          0           0           0           0           0 
+   7 |          0           0           0           0           0 
+   8 |          0           0           0           0           0 
+   9 |          0           0   6.617e-24   6.617e-24   3.309e-24 
+  10 |          0           0           0           0           0 
+  11 |          0           0           0           0           0 
+  12 |          0           0   6.617e-24   6.617e-24   3.309e-24 
+  13 |          0           0           0           0           0 
+  14 |          0           0  -6.617e-24  -6.617e-24  -3.309e-24 
+  15 |  2.115e+04           0           0           0           0 
+  16 |          0   1.812e+04           0           0           0 
+  17 |          0           0   1.463e+04   3.309e-24   1.654e-24 
+  18 |          0           0   3.309e-24   1.092e+04   1.654e-24 
+  19 |          0           0   1.654e-24   1.654e-24        7527 
+
+
+20x20 matrix is as follows
+
+     |       0    |       1    |       2    |       3    |       4    |
+----------------------------------------------------------------------
+   0 |  0.0005093          -0          -0          -0          -0 
+   1 |          0   0.0002518          -0          -0          -0 
+   2 |          0           0   0.0001576          -0          -0 
+   3 |          0           0           0   0.0001144          -0 
+   4 |          0           0           0           0   8.918e-05 
+   5 |          0           0           0           0           0 
+   6 |          0           0           0           0           0 
+   7 |          0           0           0           0           0 
+   8 |          0           0           0           0           0 
+   9 |          0           0           0           0           0 
+  10 |          0           0           0           0           0 
+  11 |          0           0           0           0           0 
+  12 |          0           0           0           0           0 
+  13 |          0           0           0           0           0 
+  14 |          0           0           0           0           0 
+  15 |          0           0           0           0           0 
+  16 |          0           0           0           0           0 
+  17 |          0           0           0           0           0 
+  18 |          0           0           0           0           0 
+  19 |          0           0           0           0           0 
+
+
+     |       5    |       6    |       7    |       8    |       9    |
+----------------------------------------------------------------------
+   0 |         -0          -0          -0          -0          -0 
+   1 |         -0          -0          -0          -0          -0 
+   2 |         -0          -0          -0          -0          -0 
+   3 |         -0          -0          -0          -0          -0 
+   4 |         -0          -0          -0          -0          -0 
+   5 |    7.2e-05          -0          -0          -0          -0 
+   6 |          0   5.981e-05          -0          -0          -0 
+   7 |          0           0   5.149e-05          -0          -0 
+   8 |          0           0           0   4.575e-05          -0 
+   9 |          0           0           0           0   4.193e-05 
+  10 |          0           0           0           0           0 
+  11 |          0           0           0           0           0 
+  12 |          0           0           0           0  -2.126e-32 
+  13 |          0           0           0           0           0 
+  14 |          0           0           0           0   2.354e-32 
+  15 |          0           0           0           0           0 
+  16 |          0           0           0           0           0 
+  17 |          0           0           0           0  -1.897e-32 
+  18 |          0           0           0           0   -2.54e-32 
+  19 |          0           0           0           0  -1.843e-32 
+
+
+     |      10    |      11    |      12    |      13    |      14    |
+----------------------------------------------------------------------
+   0 |         -0          -0          -0          -0          -0 
+   1 |         -0          -0          -0          -0          -0 
+   2 |         -0          -0          -0          -0          -0 
+   3 |         -0          -0          -0          -0          -0 
+   4 |         -0          -0          -0          -0          -0 
+   5 |         -0          -0          -0          -0          -0 
+   6 |         -0          -0          -0          -0          -0 
+   7 |         -0          -0          -0          -0          -0 
+   8 |         -0          -0          -0          -0          -0 
+   9 |         -0          -0  -2.126e-32          -0   2.354e-32 
+  10 |  3.955e-05          -0          -0          -0          -0 
+  11 |          0   3.849e-05          -0          -0          -0 
+  12 |          0           0   3.831e-05          -0   2.151e-32 
+  13 |          0           0           0   3.972e-05          -0 
+  14 |          0           0   2.151e-32           0   4.243e-05 
+  15 |          0           0           0           0           0 
+  16 |          0           0           0           0           0 
+  17 |          0           0  -1.733e-32           0   1.919e-32 
+  18 |          0           0  -2.321e-32           0    2.57e-32 
+  19 |          0           0  -1.684e-32           0   1.865e-32 
+
+
+     |      15    |      16    |      17    |      18    |      19    |
+----------------------------------------------------------------------
+   0 |         -0          -0          -0          -0          -0 
+   1 |         -0          -0          -0          -0          -0 
+   2 |         -0          -0          -0          -0          -0 
+   3 |         -0          -0          -0          -0          -0 
+   4 |         -0          -0          -0          -0          -0 
+   5 |         -0          -0          -0          -0          -0 
+   6 |         -0          -0          -0          -0          -0 
+   7 |         -0          -0          -0          -0          -0 
+   8 |         -0          -0          -0          -0          -0 
+   9 |         -0          -0  -1.897e-32   -2.54e-32  -1.843e-32 
+  10 |         -0          -0          -0          -0          -0 
+  11 |         -0          -0          -0          -0          -0 
+  12 |         -0          -0  -1.733e-32  -2.321e-32  -1.684e-32 
+  13 |         -0          -0          -0          -0          -0 
+  14 |         -0          -0   1.919e-32    2.57e-32   1.865e-32 
+  15 |  4.728e-05          -0          -0          -0          -0 
+  16 |          0   5.519e-05          -0          -0          -0 
+  17 |          0           0   6.836e-05  -2.071e-32  -1.503e-32 
+  18 |          0           0  -2.071e-32   9.155e-05  -2.012e-32 
+  19 |          0           0  -1.503e-32  -2.012e-32   0.0001329 
+
+[1;32m[ INFO    ][0;0m ----------------------- ---------------------------- -----------------------
+[1;32m[ INFO    ][0;0m ----------------------- PRE-FIT AGREEMENT EVALUATION -----------------------
+[1;32m[ INFO    ][0;0m --- REGION SR_emu:
+[1;32m[ INFO    ][0;0m   chi2        = 0.908453
+[1;32m[ INFO    ][0;0m   ndof        = 20
+[1;32m[ INFO    ][0;0m ----------------------- ---------------------------- -----------------------
+[1;32m[ INFO    ][0;0m ----------------------- ---------------------------- -----------------------
+[1;32m[ INFO    ][0;0m Writing prefit plot SR_emu yaml file to: FitExampleTemplate_2D/Plots/SR_emu_prefit.yaml
+[1;36m[ DEBUG   ][0;0m --------------------
+[1;36m[ DEBUG   ][0;0m Final bin contents
+[1;36m[ DEBUG   ][0;0m --------------------
+[1;36m[ DEBUG   ][0;0m 1:	1963.38 +0 -0
+[1;36m[ DEBUG   ][0;0m 2:	3970.99 +0 -0
+[1;36m[ DEBUG   ][0;0m 3:	6346.29 +0 -0
+[1;36m[ DEBUG   ][0;0m 4:	8743.49 +0 -0
+[1;36m[ DEBUG   ][0;0m 5:	11213.9 +0 -0
+[1;36m[ DEBUG   ][0;0m 6:	13888.2 +0 -0
+[1;36m[ DEBUG   ][0;0m 7:	16719.8 +0 -0
+[1;36m[ DEBUG   ][0;0m 8:	19419.6 +0 -0
+[1;36m[ DEBUG   ][0;0m 9:	21856.3 +0 -0
+[1;36m[ DEBUG   ][0;0m 10:	23851 +0 -0
+[1;36m[ DEBUG   ][0;0m 11:	25286.1 +0 -0
+[1;36m[ DEBUG   ][0;0m 12:	25982 +0 -0
+[1;36m[ DEBUG   ][0;0m 13:	26100.9 +0 -0
+[1;36m[ DEBUG   ][0;0m 14:	25178 +0 -0
+[1;36m[ DEBUG   ][0;0m 15:	23569.4 +0 -0
+[1;36m[ DEBUG   ][0;0m 16:	21148.8 +0 -0
+[1;36m[ DEBUG   ][0;0m 17:	18119.1 +0 -0
+[1;36m[ DEBUG   ][0;0m 18:	14628.2 +0 -0
+[1;36m[ DEBUG   ][0;0m 19:	10923.2 +0 -0
+[1;36m[ DEBUG   ][0;0m 20:	7526.76 +0 -0
+[1;32m[ INFO    ][0;0m Writing file FitExampleTemplate_2D/Histograms/SR_emu.root
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D/Plots/SR_emu.png has been created
+Warning in <xRooNode::xRooNode>: Inferring initial errors of 20 parameters (gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_11,...) (give all nuisance parameters an error to avoid this msg)
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D/Plots/Summary.png has been created
+Warning in <xRooNode::xRooNode>: Inferring initial errors of 20 parameters (gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_18,...) (give all nuisance parameters an error to avoid this msg)
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D/Plots/Summary_VR.png has been created
+Warning in <xRooNode::xRooNode>: Inferring initial errors of 20 parameters (gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_12,...) (give all nuisance parameters an error to avoid this msg)
+Warning in <xRooNode::xRooNode>: Inferring initial errors of 20 parameters (gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_0,...) (give all nuisance parameters an error to avoid this msg)
+Warning in <xRooNode::xRooNode>: Inferring initial errors of 20 parameters (gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_16,...) (give all nuisance parameters an error to avoid this msg)
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D/SignalRegions.png has been created
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Building Summary Plot...
+[1;36m[ DEBUG   ][0;0m 1:	326435	+0	-0
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Building Summary Plot...
+[1;36m[ DEBUG   ][0;0m 1:	326435	+0	-0
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Building Yields Table...
+[1;32m[ INFO    ][0;0m Writing prefit yield tables yaml file to: FitExampleTemplate_2D/Tables/Table_prefit.yaml
+[1;32m[ INFO    ][0;0m Printing syst tables

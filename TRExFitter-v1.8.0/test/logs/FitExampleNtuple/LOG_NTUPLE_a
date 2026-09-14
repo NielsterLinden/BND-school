@@ -1,0 +1,32 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[0m[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleNtuple.config
+[1;32m[ INFO    ][0;0m Successfully read config file.
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Job name: FitExampleNtuple
+[1;32m[ INFO    ][0;0m Reading the following regions:
+[1;32m[ INFO    ][0;0m     Region: ljets_5j3b_HT
+[1;32m[ INFO    ][0;0m     Region: ljets_6j4b_BDT
+[1;32m[ INFO    ][0;0m Reading the following samples:
+[1;32m[ INFO    ][0;0m      data
+[1;32m[ INFO    ][0;0m      ttlight
+[1;32m[ INFO    ][0;0m      ttc
+[1;32m[ INFO    ][0;0m      ttb
+[1;32m[ INFO    ][0;0m      ttH
+[1;32m[ INFO    ][0;0m Reading the following systematics:
+[1;32m[ INFO    ][0;0m  lumi
+[1;32m[ INFO    ][0;0m  PRW_DATASF
+[1;32m[ INFO    ][0;0m  JVT
+[1;32m[ INFO    ][0;0m  ttlight_Gen
+[1;32m[ INFO    ][0;0m  ttc_Gen
+[1;32m[ INFO    ][0;0m  ttb_Gen
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m -----------------------------
+[1;32m[ INFO    ][0;0m Reading histograms from file FitExampleNtuple/Histograms/FitExampleNtuple_ljets_5j3b_HT_histos.root ...
+[1;32m[ INFO    ][0;0m -----------------------------
+[1;32m[ INFO    ][0;0m Reading histograms from file FitExampleNtuple/Histograms/FitExampleNtuple_ljets_6j4b_BDT_histos.root ...
+[1;32m[ INFO    ][0;0m Drawing separation plots...
+[1;32m[ INFO    ][0;0m Separation: 4.37% in region ljets_5j3b_HT
+[1;32m[ INFO    ][0;0m Separation: 6.22% in region ljets_6j4b_BDT

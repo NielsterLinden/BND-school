@@ -1,0 +1,56 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[0m[#1] INFO:InputArguments -- Silent clipping of values to range in `RooRealVar::setVal()` enabled.
+[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleUnfoldingNormalized.config
+[1;36m[ DEBUG   ][0;0m PlotOptionsSummary not specified setting Summary values to 'PlotOptions'
+[1;36m[ DEBUG   ][0;0m You do not have 'Options' option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Limit option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Significance option in the config. It is ok, we just want to let you know.
+[1;32m[ INFO    ][0;0m Adding overall norm-factor to all truth bins to get normalized cross-section
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_1
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_2
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_3
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_4
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_5
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_6
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_7
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_8
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_9
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_10
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_11
+[1;32m[ INFO    ][0;0m Setting truth bin: 1 to use tau = 2
+[1;32m[ INFO    ][0;0m Adding expression to turn cross section into normalized cross-section for Unfolding: Unfolding
+[1;32m[ INFO    ][0;0m Setting truth bin: 3 to use tau = 2
+[1;32m[ INFO    ][0;0m Successfully read config file.
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Job name: FitExampleUnfoldingNormalized
+[1;32m[ INFO    ][0;0m Reading the following regions:
+[1;32m[ INFO    ][0;0m     Region: SR1
+[1;32m[ INFO    ][0;0m Reading the following samples:
+[1;32m[ INFO    ][0;0m      Data
+[1;32m[ INFO    ][0;0m      Bkg
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_1
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_2
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_3
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_4
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_5
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_6
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_7
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_8
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_9
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_10
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_11
+[1;32m[ INFO    ][0;0m Reading the following systematics:
+[1;32m[ INFO    ][0;0m  bTag_SF_B_eigen0
+[1;32m[ INFO    ][0;0m  Bkg_norm
+[1;32m[ INFO    ][0;0m  PS
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Running preparation step for unfolding...
+Info in <TCanvas::Print>: png file FitExampleUnfoldingNormalized/UnfoldingPlots/migration_Unfolding_SR1.png has been created
+Info in <TCanvas::Print>: png file FitExampleUnfoldingNormalized/UnfoldingPlots/response_Unfolding_SR1.png has been created
+WARNING: UnfoldingTools::Correct2DMatrix: Found a bin (9,4) with a negative content of -2.26362e-06, setting to 1e-6 +- 1e-6
+WARNING: UnfoldingTools::Correct2DMatrix: Found a bin (10,6) with a negative content of -2.07187e-05, setting to 1e-6 +- 1e-6
+[1;32m[ INFO    ][0;0m NF: Unfolding_Bin_002_mu, original Expression: (1.-Unfolding_Bin_001_mu*(0.200984)-Unfolding_Bin_003_mu*(0.129185)-Unfolding_Bin_004_mu*(0.102695)-Unfolding_Bin_005_mu*(0.081496)-Unfolding_Bin_006_mu*(0.064406)-Unfolding_Bin_007_mu*(0.091836)-Unfolding_Bin_008_mu*(0.058054)-Unfolding_Bin_009_mu*(0.037079)-Unfolding_Bin_010_mu*(0.056655)-Unfolding_Bin_011_mu*(0.016240))/(0.161369), Unfolding_Bin_001_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_003_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_004_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_005_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_006_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_007_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_008_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_009_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_010_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_011_mu[1.000000,-100.000000,100.000000]
+[1;32m[ INFO    ][0;0m 	Replaced Expression: (1.-Unfolding_Bin_001_mu*(0.200984)-Unfolding_Bin_003_mu*(0.129185)-Unfolding_Bin_004_mu*(0.102695)-Unfolding_Bin_005_mu*(0.081496)-Unfolding_Bin_006_mu*(0.064406)-Unfolding_Bin_007_mu*(0.091836)-Unfolding_Bin_008_mu*(0.058054)-Unfolding_Bin_009_mu*(0.037079)-Unfolding_Bin_010_mu*(0.056655)-Unfolding_Bin_011_mu*(0.016240))/(0.161369), Unfolding_Bin_001_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_003_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_004_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_005_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_006_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_007_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_008_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_009_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_010_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_011_mu[1.000000,-100.000000,100.000000]

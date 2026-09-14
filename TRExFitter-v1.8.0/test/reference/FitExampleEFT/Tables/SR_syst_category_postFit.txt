@@ -1,0 +1,2 @@
+ |       | Powheg FS      | Powheg FS      | Powheg FS      | Powheg FS      | ttbar |
+ | Instrumental | 0.000736 | 0.000848 | 0.00116 | 0.00128 | -0.00411 |

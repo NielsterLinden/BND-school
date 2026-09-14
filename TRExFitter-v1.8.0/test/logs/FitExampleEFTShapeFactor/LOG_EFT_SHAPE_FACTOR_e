@@ -1,0 +1,42 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[0m[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleEFTShapeFactor.config
+[1;32m[ INFO    ][0;0m Successfully read config file.
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Job name: FitExampleEFTShapeFactor
+[1;32m[ INFO    ][0;0m Reading the following regions:
+[1;32m[ INFO    ][0;0m     Region: R1L4bHi_c
+[1;32m[ INFO    ][0;0m Reading the following samples:
+[1;32m[ INFO    ][0;0m      EFT_ttHH_eft_CttHH_min3
+[1;32m[ INFO    ][0;0m      EFT_ttHH_eft_CttHH_min1
+[1;32m[ INFO    ][0;0m      EFT_ttHH_eft_CttHH_1
+[1;32m[ INFO    ][0;0m      EFT_ttHH_eft_CttHH_3
+[1;32m[ INFO    ][0;0m      ttHH
+[1;32m[ INFO    ][0;0m      ttb
+[1;32m[ INFO    ][0;0m Reading the following systematics:
+[1;32m[ INFO    ][0;0m  Jet_eta_intercalibration
+[1;32m[ INFO    ][0;0m  ttb_4fs
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m -----------------------------
+[1;32m[ INFO    ][0;0m Reading histograms from file FitExampleEFTShapeFactor/Histograms/FitExampleEFTShapeFactor_histos.root ...
+[1;32m[ INFO    ][0;0m ------------------------------------------------------------------------
+[1;32m[ INFO    ][0;0m f(x[]) = [0] + [1]*x[0] + [2]*x[0]*x[0]
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m x[0] : cttHH
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m [0] = 0
+[1;32m[ INFO    ][0;0m [1] coefficient for:
+[1;32m[ INFO    ][0;0m       cttHH^1
+[1;32m[ INFO    ][0;0m [2] coefficient for:
+[1;32m[ INFO    ][0;0m       cttHH^2
+[1;32m[ INFO    ][0;0m ------------------------------------------------------------------------
+[1;32m[ INFO    ][0;0m ------------------------------------------------------------------------
+[1;32m[ INFO    ][0;0m Parameters  : x[0]	
+[1;32m[ INFO    ][0;0m Coefficients: cttHH	
+[1;32m[ INFO    ][0;0m Parameter   : -3.000000	EFT_ttHH_eft_CttHH_min3
+[1;32m[ INFO    ][0;0m Parameter   : -1.000000	EFT_ttHH_eft_CttHH_min1
+[1;32m[ INFO    ][0;0m Parameter   : 1.000000	EFT_ttHH_eft_CttHH_1
+[1;32m[ INFO    ][0;0m Parameter   : 3.000000	EFT_ttHH_eft_CttHH_3
+[1;32m[ INFO    ][0;0m ------------------------------------------------------------------------

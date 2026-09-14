@@ -1,0 +1,15 @@
+[submodule "yaml-cpp"]
+	path = yaml-cpp
+	url = https://github.com/jbeder/yaml-cpp.git
+[submodule "UnfoldingCode"]
+	path = UnfoldingCode
+	url = ../../TRExStats/unfoldingcode.git
+[submodule "Blinder"]
+	path = Blinder
+	url = ../../TRExStats/Blinder.git
+[submodule "xroofit"]
+	path = xroofit
+	url = https://gitlab.cern.ch/will/xroofit.git
+[submodule "SystematicSmoothingTool"]
+	path = SystematicSmoothingTool
+	url = https://gitlab.cern.ch/atlas/statistics/SystematicSmoothingTool.git

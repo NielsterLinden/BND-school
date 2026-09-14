@@ -1,0 +1,705 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[0m[#1] INFO:InputArguments -- Silent clipping of values to range in `RooRealVar::setVal()` enabled.
+[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleEFT.config
+[1;36m[ DEBUG   ][0;0m PlotOptionsSummary not specified setting Summary values to 'PlotOptions'
+[1;36m[ DEBUG   ][0;0m You do not have 'Options' option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Limit option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Significance option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m Have a usual variable in reg SR : 
+[1;36m[ DEBUG   ][0;0m 2*(cos_theta_x>0)+(cos_theta_y>0) and size of corrVar=1
+[1;36m[ DEBUG   ][0;0m Found EFT SM Reference sample singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m    Created new Sample SM_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m     Adding EFT mu NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m    Created new Sample SM_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m     Adding EFT mu NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m    Created new Sample SM_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m     Adding EFT mu NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m    Created new Sample SM_singletop_tchan_PowPy8_FS_SR_bin3
+[1;36m[ DEBUG   ][0;0m     Adding EFT mu NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin3
+[1;32m[ INFO    ][0;0m Successfully read config file.
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Job name: FitExampleEFT
+[1;32m[ INFO    ][0;0m Reading the following regions:
+[1;32m[ INFO    ][0;0m     Region: SR
+[1;32m[ INFO    ][0;0m Reading the following samples:
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST
+[1;32m[ INFO    ][0;0m      singletop_tchan_PowPy8_FS_GHOST
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_PowPy8_FS
+[1;32m[ INFO    ][0;0m      SM_singletop_tchan_PowPy8_FS_SR_bin0
+[1;32m[ INFO    ][0;0m      SM_singletop_tchan_PowPy8_FS_SR_bin1
+[1;32m[ INFO    ][0;0m      SM_singletop_tchan_PowPy8_FS_SR_bin2
+[1;32m[ INFO    ][0;0m      SM_singletop_tchan_PowPy8_FS_SR_bin3
+[1;32m[ INFO    ][0;0m      ttbar
+[1;32m[ INFO    ][0;0m Reading the following systematics:
+[1;32m[ INFO    ][0;0m  JVT
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m -----------------------------
+[1;32m[ INFO    ][0;0m Reading histograms from file FitExampleEFT/Histograms/FitExampleEFT_histos.root ...
+[1;36m[ DEBUG   ][0;0m   Reading region SR
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample SM_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m       Reading norm Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m       Reading syst JVT
+[1;36m[ DEBUG   ][0;0m     Reading sample SM_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m       Reading norm Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m       Reading syst JVT
+[1;36m[ DEBUG   ][0;0m     Reading sample SM_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m       Reading norm Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m       Reading syst JVT
+[1;36m[ DEBUG   ][0;0m     Reading sample SM_singletop_tchan_PowPy8_FS_SR_bin3
+[1;36m[ DEBUG   ][0;0m       Reading norm Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin3
+[1;36m[ DEBUG   ][0;0m       Reading syst JVT
+[1;36m[ DEBUG   ][0;0m     Reading sample ttbar
+[1;36m[ DEBUG   ][0;0m       Reading norm ttbar_NORM
+[1;36m[ DEBUG   ][0;0m       Reading syst JVT
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_PowPy8_FS_GHOST in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_PowPy8_FS in region SR
+[1;36m[ DEBUG   ][0;0m   hist SM_singletop_tchan_PowPy8_FS_SR_bin0 in region SR
+[1;36m[ DEBUG   ][0;0m   found hist SM_singletop_tchan_PowPy8_FS_SR_bin0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist SM_singletop_tchan_PowPy8_FS_SR_bin1 in region SR
+[1;36m[ DEBUG   ][0;0m   found hist SM_singletop_tchan_PowPy8_FS_SR_bin1 in region SR
+[1;36m[ DEBUG   ][0;0m   hist SM_singletop_tchan_PowPy8_FS_SR_bin2 in region SR
+[1;36m[ DEBUG   ][0;0m   found hist SM_singletop_tchan_PowPy8_FS_SR_bin2 in region SR
+[1;36m[ DEBUG   ][0;0m   hist SM_singletop_tchan_PowPy8_FS_SR_bin3 in region SR
+[1;36m[ DEBUG   ][0;0m   found hist SM_singletop_tchan_PowPy8_FS_SR_bin3 in region SR
+[1;36m[ DEBUG   ][0;0m   hist ttbar in region SR
+[1;32m[ INFO    ][0;0m Processing EFT inputs and fitting to get parametrisation...
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Found new EFT sample: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m Param: ctW+ctW^2
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-3.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m Found new operator: ctW
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m Found new term: ctW
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 2
+[1;36m[ DEBUG   ][0;0m Found new term: ctW^2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -3.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW+ctW^2
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-2.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -2.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW+ctW^2
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=2.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 2.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW+ctW^2
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=3.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 3.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: citW+citW^2
+[1;36m[ DEBUG   ][0;0m Title: citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: citW=-1.5
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m Found new operator: citW
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new term: citW
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 2
+[1;36m[ DEBUG   ][0;0m Found new term: citW^2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.5
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: citW+citW^2
+[1;36m[ DEBUG   ][0;0m Title: citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: citW=-1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: citW + citW^2
+[1;36m[ DEBUG   ][0;0m Title: citW=c_{itW} 
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: citW=1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: citW + citW^2
+[1;36m[ DEBUG   ][0;0m Title: citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: citW=1.5
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.5
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: singletop_tchan_ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-3.0,citW=-1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new term: ctW*citW
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -3.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-3.0,citW=1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -3.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-2.0,citW=-1.5
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.5
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-2.0,citW=-1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-2.0,citW=1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-2.0,citW=1.5
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.5
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=2.0,citW=-1.5
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.5
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=2.0,citW=-1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=2.0,citW=1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=2.0,citW=1.5
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.5
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=3.0,citW=-1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 3.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=3.0,citW=1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 3.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;32m[ INFO    ][0;0m ------------------------------------------------------------------------
+[1;32m[ INFO    ][0;0m f(x[]) = [0] + [1]*x[0] + [2]*x[0]*x[0] + [3]*x[1] + [4]*x[1]*x[1] + [5]*x[0]*x[1]
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m x[0] : ctW
+[1;32m[ INFO    ][0;0m x[1] : citW
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m [0] = 0
+[1;32m[ INFO    ][0;0m [1] coefficient for:
+[1;32m[ INFO    ][0;0m       ctW^1
+[1;32m[ INFO    ][0;0m [2] coefficient for:
+[1;32m[ INFO    ][0;0m       ctW^2
+[1;32m[ INFO    ][0;0m [3] coefficient for:
+[1;32m[ INFO    ][0;0m       citW^1
+[1;32m[ INFO    ][0;0m [4] coefficient for:
+[1;32m[ INFO    ][0;0m       citW^2
+[1;32m[ INFO    ][0;0m [5] coefficient for:
+[1;32m[ INFO    ][0;0m       ctW^1
+[1;32m[ INFO    ][0;0m       citW^1
+[1;32m[ INFO    ][0;0m ------------------------------------------------------------------------
+[1;32m[ INFO    ][0;0m ------------------------------------------------------------------------
+[1;32m[ INFO    ][0;0m Parameters  : x[0]	x[1]	
+[1;32m[ INFO    ][0;0m Coefficients: ctW	citW	
+[1;32m[ INFO    ][0;0m Parameter   : -3.000000	0.000000	singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -2.000000	0.000000	singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 2.000000	0.000000	singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 3.000000	0.000000	singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 0.000000	-1.500000	singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 0.000000	-1.000000	singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 0.000000	1.000000	singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 0.000000	1.500000	singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -3.000000	-1.000000	singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -3.000000	1.000000	singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -2.000000	-1.500000	singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -2.000000	-1.000000	singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -2.000000	1.000000	singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -2.000000	1.500000	singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 2.000000	-1.500000	singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 2.000000	-1.000000	singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 2.000000	1.000000	singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 2.000000	1.500000	singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 3.000000	-1.000000	singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 3.000000	1.000000	singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m ------------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m  ==== singletop_tchan_PowPy8_FS ====
+[1;36m[ DEBUG   ][0;0m  Trying to open FitExampleEFT/EFT/EFT_Fit_results_singletop_tchan_PowPy8_FS.txt...
+[1;36m[ DEBUG   ][0;0m  Overwriting existing EFT plotting and fitting (FitExampleEFT/EFT/EFT_Fit_results_singletop_tchan_PowPy8_FS.txt already exists)
+[1;36m[ DEBUG   ][0;0m SM Ref: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m   Parameters: ctW+ctW^2(ctW_ctW2)
+[1;36m[ DEBUG   ][0;0m    Region: SR
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+Info in <TCanvas::Print>: pdf file FitExampleEFT/EFT/SR/singletop_tchan_PowPy8_FS/ctW_ctW2.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/EFT/SR/singletop_tchan_PowPy8_FS/ctW_ctW2.png has been created
+Info in <TCanvas::Print>: pdf file FitExampleEFT/EFT/SR/singletop_tchan_PowPy8_FS/citW_citW2.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/EFT/SR/singletop_tchan_PowPy8_FS/citW_citW2.png has been created
+Info in <TCanvas::Print>: pdf file FitExampleEFT/EFT/SR/singletop_tchan_PowPy8_FS/citW_citW2.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/EFT/SR/singletop_tchan_PowPy8_FS/citW_citW2.png has been created
+Info in <TCanvas::Print>: pdf file FitExampleEFT/EFT/SR/singletop_tchan_PowPy8_FS/ctWcitW.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/EFT/SR/singletop_tchan_PowPy8_FS/ctWcitW.png has been created
+[1;36m[ DEBUG   ][0;0m   Parameters: citW+citW^2(citW_citW2)
+[1;36m[ DEBUG   ][0;0m    Region: SR
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m   Parameters: citW + citW^2(citW_citW2)
+[1;36m[ DEBUG   ][0;0m    Region: SR
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m   Parameters: ctW*citW(ctWcitW)
+[1;36m[ DEBUG   ][0;0m    Region: SR
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m     Working on: singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Found Header Equation: 0 ctW ctW*ctW citW citW*citW ctWcitW
+[1;36m[ DEBUG   ][0;0m SM Ref: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m   Region: SR
+[1;36m[ DEBUG   ][0;0m     Bin: 0
+[1;36m[ DEBUG   ][0;0m N Variations: 21 N Operators: 2
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       - Fitting using Function: [0] + [1]*x[0] + [2]*x[0]*x[0] + [3]*x[1] + [4]*x[1]*x[1] + [5]*x[0]*x[1]
+[1;36m[ DEBUG   ][0;0m N par: 6
+[1;36m[ DEBUG   ][0;0m N dim: 2
+[1;36m[ DEBUG   ][0;0m       - Running fit...
+[1;36m[ DEBUG   ][0;0m       - Fit results:
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =     0.150964
+NDf                       =           15
+Edm                       =  3.98807e-21
+NCalls                    =          157
+p0                        =       1.0006   +/-   0.0121945   
+p1                        =     0.216369   +/-   0.00837633  
+p2                        =    0.0231683   +/-   0.00351484  
+p3                        =    0.0892769   +/-   0.0151445   
+p4                        =    0.0171433   +/-   0.011814    
+p5                        =    0.0139629   +/-   0.00729315  
+[1;36m[ DEBUG   ][0;0m         - 1D fit results:
+[1;36m[ DEBUG   ][0;0m           [0] + [1]*x[0] + [2]*x[0]*x[0]
+[1;36m[ DEBUG   ][0;0m            [0] (=[0]): 1.00
+[1;36m[ DEBUG   ][0;0m            [1] (=[1]): 0.22
+[1;36m[ DEBUG   ][0;0m            [2] (=[2]): 0.02
+[1;36m[ DEBUG   ][0;0m N terms: 3 eqn [0]+[1]*c_{tW}+[2]*c_{tW}*c_{tW}
+[1;36m[ DEBUG   ][0;0m         - 1D fit results:
+[1;36m[ DEBUG   ][0;0m           [0] + [1]*x[0] + [2]*x[0]*x[0]
+[1;36m[ DEBUG   ][0;0m            [0] (=[0]): 1.00
+[1;36m[ DEBUG   ][0;0m            [1] (=[3]): 0.09
+[1;36m[ DEBUG   ][0;0m            [2] (=[4]): 0.02
+[1;36m[ DEBUG   ][0;0m N terms: 3 eqn [0]+[1]*c_{itW}+[2]*c_{itW}*c_{itW}
+[1;36m[ DEBUG   ][0;0m     Bin: 1
+[1;36m[ DEBUG   ][0;0m N Variations: 21 N Operators: 2
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       - Fitting using Function: [0] + [1]*x[0] + [2]*x[0]*x[0] + [3]*x[1] + [4]*x[1]*x[1] + [5]*x[0]*x[1]
+[1;36m[ DEBUG   ][0;0m N par: 6
+[1;36m[ DEBUG   ][0;0m N dim: 2
+[1;36m[ DEBUG   ][0;0m       - Running fit...
+[1;36m[ DEBUG   ][0;0m       - Fit results:
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =     0.209336
+NDf                       =           15
+Edm                       =  1.38341e-20
+NCalls                    =          151
+p0                        =      1.00075   +/-   0.0120667   
+p1                        =     0.222231   +/-   0.00812678  
+p2                        =    0.0253085   +/-   0.0034089   
+p3                        =   -0.0910612   +/-   0.0145417   
+p4                        =    0.0171053   +/-   0.011305    
+p5                        =   -0.0146577   +/-   0.00701087  
+[1;36m[ DEBUG   ][0;0m         - 1D fit results:
+[1;36m[ DEBUG   ][0;0m           [0] + [1]*x[0] + [2]*x[0]*x[0]
+[1;36m[ DEBUG   ][0;0m            [0] (=[0]): 1.00
+[1;36m[ DEBUG   ][0;0m            [1] (=[1]): 0.22
+[1;36m[ DEBUG   ][0;0m            [2] (=[2]): 0.03
+[1;36m[ DEBUG   ][0;0m N terms: 3 eqn [0]+[1]*c_{tW}+[2]*c_{tW}*c_{tW}
+[1;36m[ DEBUG   ][0;0m         - 1D fit results:
+[1;36m[ DEBUG   ][0;0m           [0] + [1]*x[0] + [2]*x[0]*x[0]
+[1;36m[ DEBUG   ][0;0m            [0] (=[0]): 1.00
+[1;36m[ DEBUG   ][0;0m            [1] (=[3]): -0.09
+[1;36m[ DEBUG   ][0;0m            [2] (=[4]): 0.02
+[1;36m[ DEBUG   ][0;0m N terms: 3 eqn [0]+[1]*c_{itW}+[2]*c_{itW}*c_{itW}
+[1;36m[ DEBUG   ][0;0m     Bin: 2
+[1;36m[ DEBUG   ][0;0m N Variations: 21 N Operators: 2
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       - Fitting using Function: [0] + [1]*x[0] + [2]*x[0]*x[0] + [3]*x[1] + [4]*x[1]*x[1] + [5]*x[0]*x[1]
+[1;36m[ DEBUG   ][0;0m N par: 6
+[1;36m[ DEBUG   ][0;0m N dim: 2
+[1;36m[ DEBUG   ][0;0m       - Running fit...
+[1;36m[ DEBUG   ][0;0m       - Fit results:
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =     0.306434
+NDf                       =           15
+Edm                       =  2.16411e-22
+NCalls                    =          153
+p0                        =      1.00016   +/-   0.0141064   
+p1                        =    0.0744436   +/-   0.0083497   
+p2                        =   0.00927469   +/-   0.00389063  
+p3                        =     0.108569   +/-   0.0162709   
+p4                        =    0.0230388   +/-   0.0150946   
+p5                        =    0.0197328   +/-   0.00837427  
+[1;36m[ DEBUG   ][0;0m         - 1D fit results:
+[1;36m[ DEBUG   ][0;0m           [0] + [1]*x[0] + [2]*x[0]*x[0]
+[1;36m[ DEBUG   ][0;0m            [0] (=[0]): 1.00
+[1;36m[ DEBUG   ][0;0m            [1] (=[1]): 0.07
+[1;36m[ DEBUG   ][0;0m            [2] (=[2]): 0.01
+[1;36m[ DEBUG   ][0;0m N terms: 3 eqn [0]+[1]*c_{tW}+[2]*c_{tW}*c_{tW}
+[1;36m[ DEBUG   ][0;0m         - 1D fit results:
+[1;36m[ DEBUG   ][0;0m           [0] + [1]*x[0] + [2]*x[0]*x[0]
+[1;36m[ DEBUG   ][0;0m            [0] (=[0]): 1.00
+[1;36m[ DEBUG   ][0;0m            [1] (=[3]): 0.11
+[1;36m[ DEBUG   ][0;0m            [2] (=[4]): 0.02
+[1;36m[ DEBUG   ][0;0m N terms: 3 eqn [0]+[1]*c_{itW}+[2]*c_{itW}*c_{itW}
+[1;36m[ DEBUG   ][0;0m     Bin: 3
+[1;36m[ DEBUG   ][0;0m N Variations: 21 N Operators: 2
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       Reading in EFT variation: singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m       - Fitting using Function: [0] + [1]*x[0] + [2]*x[0]*x[0] + [3]*x[1] + [4]*x[1]*x[1] + [5]*x[0]*x[1]
+[1;36m[ DEBUG   ][0;0m N par: 6
+[1;36m[ DEBUG   ][0;0m N dim: 2
+[1;36m[ DEBUG   ][0;0m       - Running fit...
+[1;36m[ DEBUG   ][0;0m       - Fit results:
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =     0.221623
+NDf                       =           15
+Edm                       =  9.73566e-22
+NCalls                    =          155
+p0                        =      1.00008   +/-   0.0141491   
+p1                        =    0.0696349   +/-   0.00820177  
+p2                        =   0.00757805   +/-   0.00385743  
+p3                        =   -0.0974514   +/-   0.0160306   
+p4                        =    0.0227056   +/-   0.0150113   
+p5                        =   -0.0156697   +/-   0.00827613  
+Info in <TCanvas::Print>: pdf file FitExampleEFT/EFT/Fits/SR/singletop_tchan_PowPy8_FS/ctW.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/EFT/Fits/SR/singletop_tchan_PowPy8_FS/ctW.png has been created
+Info in <TCanvas::Print>: pdf file FitExampleEFT/EFT/Fits/SR/singletop_tchan_PowPy8_FS/citW.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/EFT/Fits/SR/singletop_tchan_PowPy8_FS/citW.png has been created
+[1;36m[ DEBUG   ][0;0m         - 1D fit results:
+[1;36m[ DEBUG   ][0;0m           [0] + [1]*x[0] + [2]*x[0]*x[0]
+[1;36m[ DEBUG   ][0;0m            [0] (=[0]): 1.00
+[1;36m[ DEBUG   ][0;0m            [1] (=[1]): 0.07
+[1;36m[ DEBUG   ][0;0m            [2] (=[2]): 0.01
+[1;36m[ DEBUG   ][0;0m N terms: 3 eqn [0]+[1]*c_{tW}+[2]*c_{tW}*c_{tW}
+[1;36m[ DEBUG   ][0;0m         - 1D fit results:
+[1;36m[ DEBUG   ][0;0m           [0] + [1]*x[0] + [2]*x[0]*x[0]
+[1;36m[ DEBUG   ][0;0m            [0] (=[0]): 1.00
+[1;36m[ DEBUG   ][0;0m            [1] (=[3]): -0.10
+[1;36m[ DEBUG   ][0;0m            [2] (=[4]): 0.02
+[1;36m[ DEBUG   ][0;0m N terms: 3 eqn [0]+[1]*c_{itW}+[2]*c_{itW}*c_{itW}
+[1;36m[ DEBUG   ][0;0m     Defining EFT mu NormFactor Expression for: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m              1.000601 + 0.216369*ctW + 0.023168*ctW*ctW + 0.089277*citW + 0.017143*citW*citW + 0.013963*ctW*citW:ctW[0.000000,-10.000000,10.000000],citW[0.000000,-10.000000,10.000000]
+[1;36m[ DEBUG   ][0;0m       --> Updating NF Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m          --> Now NF Expression_1.000601 + 0.216369*ctW + 0.023168*ctW*ctW + 0.089277*citW + 0.017143*citW*citW + 0.013963*ctW*citW
+[1;36m[ DEBUG   ][0;0m     Defining EFT mu NormFactor Expression for: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m              1.000747 + 0.222231*ctW + 0.025308*ctW*ctW + -0.091061*citW + 0.017105*citW*citW + -0.014658*ctW*citW:ctW[0.000000,-10.000000,10.000000],citW[0.000000,-10.000000,10.000000]
+[1;36m[ DEBUG   ][0;0m       --> Updating NF Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m          --> Now NF Expression_1.000747 + 0.222231*ctW + 0.025308*ctW*ctW + -0.091061*citW + 0.017105*citW*citW + -0.014658*ctW*citW
+[1;36m[ DEBUG   ][0;0m     Defining EFT mu NormFactor Expression for: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m              1.000164 + 0.074444*ctW + 0.009275*ctW*ctW + 0.108569*citW + 0.023039*citW*citW + 0.019733*ctW*citW:ctW[0.000000,-10.000000,10.000000],citW[0.000000,-10.000000,10.000000]
+[1;36m[ DEBUG   ][0;0m       --> Updating NF Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m          --> Now NF Expression_1.000164 + 0.074444*ctW + 0.009275*ctW*ctW + 0.108569*citW + 0.023039*citW*citW + 0.019733*ctW*citW
+[1;36m[ DEBUG   ][0;0m     Defining EFT mu NormFactor Expression for: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin3
+[1;36m[ DEBUG   ][0;0m              1.000082 + 0.069635*ctW + 0.007578*ctW*ctW + -0.097451*citW + 0.022706*citW*citW + -0.015670*ctW*citW:ctW[0.000000,-10.000000,10.000000],citW[0.000000,-10.000000,10.000000]
+[1;36m[ DEBUG   ][0;0m       --> Updating NF Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin3
+[1;36m[ DEBUG   ][0;0m          --> Now NF Expression_1.000082 + 0.069635*ctW + 0.007578*ctW*ctW + -0.097451*citW + 0.022706*citW*citW + -0.015670*ctW*citW

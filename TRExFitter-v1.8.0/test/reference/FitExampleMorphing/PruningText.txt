@@ -1,0 +1,28 @@
+-------///////                 ///////-------
+-------/////// IN PRUNING PLOT ///////-------
+-------///////                 ///////-------
+In Region : SR_lep
+ -> In Sample : Bkg_SR
+ --->>  bTagSF_B_0      is not present
+ --->>  bTagSF_B_0      is not present
+ --->>  JET_BJES_Response      is not present
+ --->>  JET_BJES_Response      is not present
+ -> In Sample : Bkg_CR
+ -> In Sample : Signal_0p7
+ --->>  bTagSF_B_0      is kept
+ --->>  bTagSF_B_0      is kept
+ --->>  JET_BJES_Response      is kept
+ --->>  JET_BJES_Response      is kept
+ -> In Sample : Control_Wmass
+In Region : CR_Wmass
+ -> In Sample : Bkg_SR
+ -> In Sample : Bkg_CR
+ --->>  bTagSF_B_0      is not present
+ --->>  bTagSF_B_0      is not present
+ --->>  JET_BJES_Response      is not present
+ --->>  JET_BJES_Response      is not present
+ -> In Sample : Control_Wmass
+ --->>  bTagSF_B_0      is not present
+ --->>  bTagSF_B_0      is kept
+ --->>  JET_BJES_Response      is not present
+ --->>  JET_BJES_Response      is kept

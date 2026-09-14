@@ -1,0 +1,304 @@
+-------///////                 ///////-------
+-------/////// IN PRUNING PLOT ///////-------
+-------///////                 ///////-------
+In Region : SR1
+ -> In Sample : Bkg
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  Bkg_norm      is norm only
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ -> In Sample : Unfolding_SR1_Truth_bin_1
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  Bkg_norm      is not present
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ -> In Sample : Unfolding_SR1_Truth_bin_2
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  Bkg_norm      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  PS      is not present
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ -> In Sample : Unfolding_SR1_Truth_bin_3
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  Bkg_norm      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ -> In Sample : Unfolding_SR1_Truth_bin_4
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  Bkg_norm      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ -> In Sample : Unfolding_SR1_Truth_bin_5
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  Bkg_norm      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ -> In Sample : Unfolding_SR1_Truth_bin_6
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  Bkg_norm      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ -> In Sample : Unfolding_SR1_Truth_bin_7
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  Bkg_norm      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ -> In Sample : Unfolding_SR1_Truth_bin_8
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  Bkg_norm      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ -> In Sample : Unfolding_SR1_Truth_bin_9
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  Bkg_norm      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is kept
+ --->>  PS      is kept
+ --->>  PS      is kept
+ -> In Sample : Unfolding_SR1_Truth_bin_10
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  Bkg_norm      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is kept
+ --->>  PS      is kept
+ -> In Sample : Unfolding_SR1_Truth_bin_11
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  Bkg_norm      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is not present
+ --->>  bTag_SF_B_eigen0      is kept
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is not present
+ --->>  PS      is kept

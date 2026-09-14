@@ -1,0 +1,2 @@
+ #!/bin/bash
+diff -w -I "Developed by" -I "HistoAddress" -I "Opened input file" -I "Pruning" -I "libSM.so" -I "libASImage" -I "png file FitExampleEFTShapeFactor/Pruning.png" -I "png file FitExampleEFTShapeFactor/NormalisationPlot.png" -I "using CPU computation library" -I "Version:" LOG_EFT_SHAPE_FACTOR_w test/logs/FitExampleEFTShapeFactor/LOG_EFT_SHAPE_FACTOR_w && diff FitExampleEFTShapeFactor/PruningText.txt test/reference/FitExampleEFTShapeFactor/PruningText.txt

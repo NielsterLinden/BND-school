@@ -1,0 +1,361 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[0m[#1] INFO:InputArguments -- Silent clipping of values to range in `RooRealVar::setVal()` enabled.
+[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleEFT.config
+[1;36m[ DEBUG   ][0;0m PlotOptionsSummary not specified setting Summary values to 'PlotOptions'
+[1;36m[ DEBUG   ][0;0m You do not have 'Options' option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Limit option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Significance option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m Have a usual variable in reg SR : 
+[1;36m[ DEBUG   ][0;0m 2*(cos_theta_x>0)+(cos_theta_y>0) and size of corrVar=1
+[1;36m[ DEBUG   ][0;0m Found EFT SM Reference sample singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m    Created new Sample SM_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m     Adding EFT mu NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m    Created new Sample SM_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m     Adding EFT mu NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m    Created new Sample SM_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m     Adding EFT mu NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m    Created new Sample SM_singletop_tchan_PowPy8_FS_SR_bin3
+[1;36m[ DEBUG   ][0;0m     Adding EFT mu NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin3
+[1;32m[ INFO    ][0;0m Successfully read config file.
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Job name: FitExampleEFT
+[1;32m[ INFO    ][0;0m Reading the following regions:
+[1;32m[ INFO    ][0;0m     Region: SR
+[1;32m[ INFO    ][0;0m Reading the following samples:
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST
+[1;32m[ INFO    ][0;0m      singletop_tchan_PowPy8_FS_GHOST
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_PowPy8_FS
+[1;32m[ INFO    ][0;0m      SM_singletop_tchan_PowPy8_FS_SR_bin0
+[1;32m[ INFO    ][0;0m      SM_singletop_tchan_PowPy8_FS_SR_bin1
+[1;32m[ INFO    ][0;0m      SM_singletop_tchan_PowPy8_FS_SR_bin2
+[1;32m[ INFO    ][0;0m      SM_singletop_tchan_PowPy8_FS_SR_bin3
+[1;32m[ INFO    ][0;0m      ttbar
+[1;32m[ INFO    ][0;0m Reading the following systematics:
+[1;32m[ INFO    ][0;0m  JVT
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Reading ntuples...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Creating/updating file FitExampleEFT/Histograms/FitExampleEFT_histos.root ...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Reading ntuples...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m   Reading region SR ...
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight)
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight)
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[538]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[562]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[448]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[530]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[62]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[106]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[320]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[365]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[0]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[12]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[23]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[211]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[38]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[57]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[371]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[390]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[505]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[524]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[525]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * (((1/weight_mc)*reweights[536]))
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight)
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;32m[ INFO    ][0;0m     Reading sample SM_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight)
+[1;36m[ DEBUG   ][0;0m Found EFT SM Reference SM_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin0
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin0 - Keep this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin1
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin0 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin2
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin0 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin3
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin0 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Adding NormFactor Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m     Reading systematic JVT
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * ((weight_jvt_UP/weight_jvt))
+[1;36m[ DEBUG   ][0;0m Found EFT SM Reference SM_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin0
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin0 - Keep this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin1
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin0 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin2
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin0 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin3
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin0 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * ((weight_jvt_DOWN/weight_jvt))
+[1;36m[ DEBUG   ][0;0m Found EFT SM Reference SM_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin0
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin0 - Keep this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin1
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin0 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin2
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin0 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin3
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin0 - Delete this bin
+[1;32m[ INFO    ][0;0m     Reading sample SM_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight)
+[1;36m[ DEBUG   ][0;0m Found EFT SM Reference SM_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin0
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin1 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin1
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin1 - Keep this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin2
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin1 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin3
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin1 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Adding NormFactor Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m     Reading systematic JVT
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * ((weight_jvt_UP/weight_jvt))
+[1;36m[ DEBUG   ][0;0m Found EFT SM Reference SM_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin0
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin1 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin1
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin1 - Keep this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin2
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin1 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin3
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin1 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * ((weight_jvt_DOWN/weight_jvt))
+[1;36m[ DEBUG   ][0;0m Found EFT SM Reference SM_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin0
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin1 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin1
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin1 - Keep this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin2
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin1 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin3
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin1 - Delete this bin
+[1;32m[ INFO    ][0;0m     Reading sample SM_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight)
+[1;36m[ DEBUG   ][0;0m Found EFT SM Reference SM_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin0
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin2 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin1
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin2 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin2
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin2 - Keep this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin3
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin2 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Adding NormFactor Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m     Reading systematic JVT
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * ((weight_jvt_UP/weight_jvt))
+[1;36m[ DEBUG   ][0;0m Found EFT SM Reference SM_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin0
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin2 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin1
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin2 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin2
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin2 - Keep this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin3
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin2 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * ((weight_jvt_DOWN/weight_jvt))
+[1;36m[ DEBUG   ][0;0m Found EFT SM Reference SM_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin0
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin2 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin1
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin2 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin2
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin2 - Keep this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin3
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin2 - Delete this bin
+[1;32m[ INFO    ][0;0m     Reading sample SM_singletop_tchan_PowPy8_FS_SR_bin3
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight)
+[1;36m[ DEBUG   ][0;0m Found EFT SM Reference SM_singletop_tchan_PowPy8_FS_SR_bin3
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin0
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin3 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin1
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin3 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin2
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin3 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin3
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin3 - Keep this bin
+[1;36m[ DEBUG   ][0;0m Adding NormFactor Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin3
+[1;36m[ DEBUG   ][0;0m     Reading systematic JVT
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * ((weight_jvt_UP/weight_jvt))
+[1;36m[ DEBUG   ][0;0m Found EFT SM Reference SM_singletop_tchan_PowPy8_FS_SR_bin3
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin0
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin3 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin1
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin3 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin2
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin3 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin3
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin3 - Keep this bin
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * ((weight_jvt_DOWN/weight_jvt))
+[1;36m[ DEBUG   ][0;0m Found EFT SM Reference SM_singletop_tchan_PowPy8_FS_SR_bin3
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin0
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin3 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin1
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin3 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin2
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin3 - Delete this bin
+[1;36m[ DEBUG   ][0;0m Checking _SR_bin3
+[1;36m[ DEBUG   ][0;0m Sample SM_singletop_tchan_PowPy8_FS_SR_bin3 - Keep this bin
+[1;32m[ INFO    ][0;0m     Reading sample ttbar
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight)
+[1;36m[ DEBUG   ][0;0m Adding NormFactor ttbar_NORM
+[1;36m[ DEBUG   ][0;0m     Reading systematic JVT
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * ((weight_jvt_UP/weight_jvt))
+[1;36m[ DEBUG   ][0;0m Full weight expression : (combined_weight) * ((weight_jvt_DOWN/weight_jvt))
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_PowPy8_FS_GHOST in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_PowPy8_FS in region SR
+[1;36m[ DEBUG   ][0;0m   hist SM_singletop_tchan_PowPy8_FS_SR_bin0 in region SR
+[1;36m[ DEBUG   ][0;0m   found hist SM_singletop_tchan_PowPy8_FS_SR_bin0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist SM_singletop_tchan_PowPy8_FS_SR_bin1 in region SR
+[1;36m[ DEBUG   ][0;0m   found hist SM_singletop_tchan_PowPy8_FS_SR_bin1 in region SR
+[1;36m[ DEBUG   ][0;0m   hist SM_singletop_tchan_PowPy8_FS_SR_bin2 in region SR
+[1;36m[ DEBUG   ][0;0m   found hist SM_singletop_tchan_PowPy8_FS_SR_bin2 in region SR
+[1;36m[ DEBUG   ][0;0m   hist SM_singletop_tchan_PowPy8_FS_SR_bin3 in region SR
+[1;36m[ DEBUG   ][0;0m   found hist SM_singletop_tchan_PowPy8_FS_SR_bin3 in region SR
+[1;36m[ DEBUG   ][0;0m   hist ttbar in region SR
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Multiplying singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Dividing singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 by sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST from sample singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Smoothing and/or Symmetrising Systematic Variations ...
+[1;36m[ DEBUG   ][0;0m Running CreateCustomAsimov
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Writing histograms to file FitExampleEFT/Histograms/FitExampleEFT_histos.root for region: SR ...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Drawing red-blue plots for region: SR
+Info in <TCanvas::Print>: pdf file FitExampleEFT/Systematics/JVT/SR/SR_SM_singletop_tchan_PowPy8_FS_SR_bin0_JVT.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/Systematics/JVT/SR/SR_SM_singletop_tchan_PowPy8_FS_SR_bin0_JVT.png has been created
+Info in <TCanvas::Print>: pdf file FitExampleEFT/Systematics/JVT/SR/SR_SM_singletop_tchan_PowPy8_FS_SR_bin1_JVT.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/Systematics/JVT/SR/SR_SM_singletop_tchan_PowPy8_FS_SR_bin1_JVT.png has been created
+Info in <TCanvas::Print>: pdf file FitExampleEFT/Systematics/JVT/SR/SR_SM_singletop_tchan_PowPy8_FS_SR_bin2_JVT.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/Systematics/JVT/SR/SR_SM_singletop_tchan_PowPy8_FS_SR_bin2_JVT.png has been created
+Info in <TCanvas::Print>: pdf file FitExampleEFT/Systematics/JVT/SR/SR_SM_singletop_tchan_PowPy8_FS_SR_bin3_JVT.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/Systematics/JVT/SR/SR_SM_singletop_tchan_PowPy8_FS_SR_bin3_JVT.png has been created
+Info in <TCanvas::Print>: pdf file FitExampleEFT/Systematics/JVT/SR/SR_ttbar_JVT.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/Systematics/JVT/SR/SR_ttbar_JVT.png has been created

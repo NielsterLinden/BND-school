@@ -1,0 +1,169 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[0m[#1] INFO:InputArguments -- Silent clipping of values to range in `RooRealVar::setVal()` enabled.
+[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleUnfoldingNormalized.config
+[1;36m[ DEBUG   ][0;0m PlotOptionsSummary not specified setting Summary values to 'PlotOptions'
+[1;36m[ DEBUG   ][0;0m You do not have 'Options' option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Limit option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Significance option in the config. It is ok, we just want to let you know.
+[1;32m[ INFO    ][0;0m Adding overall norm-factor to all truth bins to get normalized cross-section
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_1
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_2
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_3
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_4
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_5
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_6
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_7
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_8
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_9
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_10
+[1;32m[ INFO    ][0;0m Adding to sample Unfolding_SR1_Truth_bin_11
+[1;32m[ INFO    ][0;0m Setting truth bin: 1 to use tau = 2
+[1;32m[ INFO    ][0;0m Adding expression to turn cross section into normalized cross-section for Unfolding: Unfolding
+[1;32m[ INFO    ][0;0m Setting truth bin: 3 to use tau = 2
+[1;32m[ INFO    ][0;0m Successfully read config file.
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Job name: FitExampleUnfoldingNormalized
+[1;32m[ INFO    ][0;0m Reading the following regions:
+[1;32m[ INFO    ][0;0m     Region: SR1
+[1;32m[ INFO    ][0;0m Reading the following samples:
+[1;32m[ INFO    ][0;0m      Data
+[1;32m[ INFO    ][0;0m      Bkg
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_1
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_2
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_3
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_4
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_5
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_6
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_7
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_8
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_9
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_10
+[1;32m[ INFO    ][0;0m      Unfolding_SR1_Truth_bin_11
+[1;32m[ INFO    ][0;0m Reading the following systematics:
+[1;32m[ INFO    ][0;0m  bTag_SF_B_eigen0
+[1;32m[ INFO    ][0;0m  Bkg_norm
+[1;32m[ INFO    ][0;0m  PS
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m NF: Unfolding_Bin_002_mu, original Expression: (1.-Unfolding_Bin_001_mu*(0.200984)-Unfolding_Bin_003_mu*(0.129185)-Unfolding_Bin_004_mu*(0.102695)-Unfolding_Bin_005_mu*(0.081496)-Unfolding_Bin_006_mu*(0.064406)-Unfolding_Bin_007_mu*(0.091836)-Unfolding_Bin_008_mu*(0.058054)-Unfolding_Bin_009_mu*(0.037079)-Unfolding_Bin_010_mu*(0.056655)-Unfolding_Bin_011_mu*(0.016240))/(0.161369), Unfolding_Bin_001_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_003_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_004_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_005_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_006_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_007_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_008_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_009_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_010_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_011_mu[1.000000,-100.000000,100.000000]
+[1;32m[ INFO    ][0;0m 	Replaced Expression: (1.-Unfolding_Bin_001_mu*(0.200984)-Unfolding_Bin_003_mu*(0.129185)-Unfolding_Bin_004_mu*(0.102695)-Unfolding_Bin_005_mu*(0.081496)-Unfolding_Bin_006_mu*(0.064406)-Unfolding_Bin_007_mu*(0.091836)-Unfolding_Bin_008_mu*(0.058054)-Unfolding_Bin_009_mu*(0.037079)-Unfolding_Bin_010_mu*(0.056655)-Unfolding_Bin_011_mu*(0.016240))/(0.161369), Unfolding_Bin_001_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_003_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_004_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_005_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_006_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_007_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_008_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_009_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_010_mu[1.000000,-100.000000,100.000000],Unfolding_Bin_011_mu[1.000000,-100.000000,100.000000]
+[1;32m[ INFO    ][0;0m -----------------------------
+[1;32m[ INFO    ][0;0m Reading histograms from file FitExampleUnfoldingNormalized/Histograms/FitExampleUnfoldingNormalized_histos.root ...
+[1;36m[ DEBUG   ][0;0m   Reading region SR1
+[1;36m[ DEBUG   ][0;0m     Reading sample Data
+[1;36m[ DEBUG   ][0;0m     Reading sample Bkg
+[1;36m[ DEBUG   ][0;0m       Reading syst bTag_SF_B_eigen0
+[1;36m[ DEBUG   ][0;0m       Reading syst Bkg_norm
+[1;36m[ DEBUG   ][0;0m     Reading sample Unfolding_SR1_Truth_bin_1
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_1
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_1
+[1;36m[ DEBUG   ][0;0m       Reading norm TotalXsecOverTheory_Unfolding
+[1;36m[ DEBUG   ][0;0m       Reading norm Unfolding_Bin_001_mu
+[1;36m[ DEBUG   ][0;0m       Reading syst bTag_SF_B_eigen0
+[1;36m[ DEBUG   ][0;0m       Reading syst PS
+[1;36m[ DEBUG   ][0;0m     Reading sample Unfolding_SR1_Truth_bin_2
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_2
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_2
+[1;36m[ DEBUG   ][0;0m       Reading norm TotalXsecOverTheory_Unfolding
+[1;36m[ DEBUG   ][0;0m       Reading norm Unfolding_Bin_002_mu
+[1;36m[ DEBUG   ][0;0m       Reading syst bTag_SF_B_eigen0
+[1;36m[ DEBUG   ][0;0m       Reading syst PS
+[1;36m[ DEBUG   ][0;0m     Reading sample Unfolding_SR1_Truth_bin_3
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_3
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_3
+[1;36m[ DEBUG   ][0;0m       Reading norm TotalXsecOverTheory_Unfolding
+[1;36m[ DEBUG   ][0;0m       Reading norm Unfolding_Bin_003_mu
+[1;36m[ DEBUG   ][0;0m       Reading syst bTag_SF_B_eigen0
+[1;36m[ DEBUG   ][0;0m       Reading syst PS
+[1;36m[ DEBUG   ][0;0m     Reading sample Unfolding_SR1_Truth_bin_4
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_4
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_4
+[1;36m[ DEBUG   ][0;0m       Reading norm TotalXsecOverTheory_Unfolding
+[1;36m[ DEBUG   ][0;0m       Reading norm Unfolding_Bin_004_mu
+[1;36m[ DEBUG   ][0;0m       Reading syst bTag_SF_B_eigen0
+[1;36m[ DEBUG   ][0;0m       Reading syst PS
+[1;36m[ DEBUG   ][0;0m     Reading sample Unfolding_SR1_Truth_bin_5
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_5
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_5
+[1;36m[ DEBUG   ][0;0m       Reading norm TotalXsecOverTheory_Unfolding
+[1;36m[ DEBUG   ][0;0m       Reading norm Unfolding_Bin_005_mu
+[1;36m[ DEBUG   ][0;0m       Reading syst bTag_SF_B_eigen0
+[1;36m[ DEBUG   ][0;0m       Reading syst PS
+[1;36m[ DEBUG   ][0;0m     Reading sample Unfolding_SR1_Truth_bin_6
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_6
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_6
+[1;36m[ DEBUG   ][0;0m       Reading norm TotalXsecOverTheory_Unfolding
+[1;36m[ DEBUG   ][0;0m       Reading norm Unfolding_Bin_006_mu
+[1;36m[ DEBUG   ][0;0m       Reading syst bTag_SF_B_eigen0
+[1;36m[ DEBUG   ][0;0m       Reading syst PS
+[1;36m[ DEBUG   ][0;0m     Reading sample Unfolding_SR1_Truth_bin_7
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_7
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_7
+[1;36m[ DEBUG   ][0;0m       Reading norm TotalXsecOverTheory_Unfolding
+[1;36m[ DEBUG   ][0;0m       Reading norm Unfolding_Bin_007_mu
+[1;36m[ DEBUG   ][0;0m       Reading syst bTag_SF_B_eigen0
+[1;36m[ DEBUG   ][0;0m       Reading syst PS
+[1;36m[ DEBUG   ][0;0m     Reading sample Unfolding_SR1_Truth_bin_8
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_8
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_8
+[1;36m[ DEBUG   ][0;0m       Reading norm TotalXsecOverTheory_Unfolding
+[1;36m[ DEBUG   ][0;0m       Reading norm Unfolding_Bin_008_mu
+[1;36m[ DEBUG   ][0;0m       Reading syst bTag_SF_B_eigen0
+[1;36m[ DEBUG   ][0;0m       Reading syst PS
+[1;36m[ DEBUG   ][0;0m     Reading sample Unfolding_SR1_Truth_bin_9
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_9
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_9
+[1;36m[ DEBUG   ][0;0m       Reading norm TotalXsecOverTheory_Unfolding
+[1;36m[ DEBUG   ][0;0m       Reading norm Unfolding_Bin_009_mu
+[1;36m[ DEBUG   ][0;0m       Reading syst bTag_SF_B_eigen0
+[1;36m[ DEBUG   ][0;0m       Reading syst PS
+[1;36m[ DEBUG   ][0;0m     Reading sample Unfolding_SR1_Truth_bin_10
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_10
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_10
+[1;36m[ DEBUG   ][0;0m       Reading norm TotalXsecOverTheory_Unfolding
+[1;36m[ DEBUG   ][0;0m       Reading norm Unfolding_Bin_010_mu
+[1;36m[ DEBUG   ][0;0m       Reading syst bTag_SF_B_eigen0
+[1;36m[ DEBUG   ][0;0m       Reading syst PS
+[1;36m[ DEBUG   ][0;0m     Reading sample Unfolding_SR1_Truth_bin_11
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_11
+[1;36m[ DEBUG   ][0;0m Adding separate gammas as SHAPE systematic stat_Unfolding_SR1_Truth_bin_11
+[1;36m[ DEBUG   ][0;0m       Reading norm TotalXsecOverTheory_Unfolding
+[1;36m[ DEBUG   ][0;0m       Reading norm Unfolding_Bin_011_mu
+[1;36m[ DEBUG   ][0;0m       Reading syst bTag_SF_B_eigen0
+[1;36m[ DEBUG   ][0;0m       Reading syst PS
+[1;32m[ INFO    ][0;0m Drawing plots from the workspace: FitExampleUnfoldingNormalized/RooStats/FitExampleUnfoldingNormalized_combined_FitExampleUnfoldingNormalized_model.root
+[1;32m[ INFO    ][0;0m Drawing post-fit plots...
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Reading fit results from file
+[1;32m[ INFO    ][0;0m Writing postfit plot SR1 yaml file to: FitExampleUnfoldingNormalized/Plots/SR1_postfit.yaml
+[1;36m[ DEBUG   ][0;0m --------------------
+[1;36m[ DEBUG   ][0;0m Final bin contents
+[1;36m[ DEBUG   ][0;0m --------------------
+[1;36m[ DEBUG   ][0;0m 1:	4815.74 +129.435 -129.435
+[1;36m[ DEBUG   ][0;0m 2:	3829.44 +90.4746 -90.4746
+[1;36m[ DEBUG   ][0;0m 3:	3050.12 +88.8222 -88.8222
+[1;36m[ DEBUG   ][0;0m 4:	2385.95 +68.4332 -68.4332
+[1;36m[ DEBUG   ][0;0m 5:	1774.28 +56.8905 -56.8905
+[1;36m[ DEBUG   ][0;0m 6:	1317.71 +43.4163 -43.4163
+[1;36m[ DEBUG   ][0;0m 7:	1837.93 +55.1114 -55.1114
+[1;36m[ DEBUG   ][0;0m 8:	1110.17 +39.051 -39.051
+[1;36m[ DEBUG   ][0;0m 9:	585.076 +27.8785 -27.8785
+[1;36m[ DEBUG   ][0;0m 10:	801.151 +31.8365 -31.8365
+[1;36m[ DEBUG   ][0;0m 11:	121.039 +11.3139 -11.3139
+[1;32m[ INFO    ][0;0m Writing file FitExampleUnfoldingNormalized/Histograms/SR1_postFit.root
+Info in <TCanvas::Print>: png file FitExampleUnfoldingNormalized/Plots/SR1_postFit.png has been created
+Info in <TCanvas::Print>: png file FitExampleUnfoldingNormalized/Plots/Summary_postFit.png has been created
+Info in <TCanvas::Print>: png file FitExampleUnfoldingNormalized/Plots/Summary_postFit_VR.png has been created
+Info in <TCanvas::Print>: png file FitExampleUnfoldingNormalized/PieChart_postFit.png has been created
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Building Summary Plot...
+[1;36m[ DEBUG   ][0;0m 1:	21628.6	+477.881	-477.881
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Building Summary Plot...
+[1;36m[ DEBUG   ][0;0m 1:	21628.6	+477.881	-477.881
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Building Yields Table...
+[1;32m[ INFO    ][0;0m Writing postfit yield tables yaml file to: FitExampleUnfoldingNormalized/Tables/Table_postfit.yaml
+[1;32m[ INFO    ][0;0m Printing syst tables

@@ -1,0 +1,171 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[0m[1;32m[ INFO    ][0;0m Started reading the config for multifit
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleMorphMultifit.config
+[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleMorphing.config
+[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleMorphingDilep.config
+[1;32m[ INFO    ][0;0m Fitting combined workspace...
+[1;32m[ INFO    ][0;0m POI: topWidth
+[1;32m[ INFO    ][0;0m    -> Constant POI : 0
+[1;32m[ INFO    ][0;0m    -> Initial value of POI : 1.32
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m Fit try no. 1
+[1;32m[ INFO    ][0;0m ======================
+[1;32m[ INFO    ][0;0m 
+Minuit2Minimizer: Minimize with max-calls 43500 convergence for edm < 0.01 strategy 1
+Minuit2Minimizer : Valid minimum - status = 0
+FVAL  = 1008.85731528250676
+Edm   = 2.041439179598923e-06
+Nfcn  = 4971
+alpha_JET_BJES_Response	  = 0.00138249	 +/-  0.122304	(limited)
+alpha_bTagSF_B_0	  = -0.000215575	 +/-  0.182894	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_0	  = 0.999994	 +/-  0.138447	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_1	  = 0.999997	 +/-  0.1793	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_10	  = 0.999998	 +/-  0.0359393	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_11	  = 0.999998	 +/-  0.0334442	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_12	  = 0.999998	 +/-  0.0331731	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_13	  = 0.999998	 +/-  0.0323654	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_14	  = 0.999998	 +/-  0.0336925	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_15	  = 0.999998	 +/-  0.0344934	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_16	  = 0.999998	 +/-  0.0352692	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_17	  = 0.999998	 +/-  0.0389758	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_18	  = 0.999999	 +/-  0.0400627	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_19	  = 1	 +/-  0.0435071	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_2	  = 0.999998	 +/-  0.0781804	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_20	  = 1	 +/-  0.0473765	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_21	  = 1	 +/-  0.0506562	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_22	  = 1	 +/-  0.0560705	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_23	  = 1	 +/-  0.064529	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_24	  = 1	 +/-  0.0452956	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_3	  = 0.999999	 +/-  0.0606546	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_4	  = 0.999998	 +/-  0.0468665	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_5	  = 0.999998	 +/-  0.0412674	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_6	  = 0.999998	 +/-  0.0378503	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_7	  = 0.999998	 +/-  0.0367184	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_8	  = 0.999998	 +/-  0.0362472	(limited)
+gamma_shape_stat_Bkg_CR_CR_Wmass_bin_9	  = 0.999998	 +/-  0.0345601	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_0	  = 1	 +/-  0.0461145	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_1	  = 1	 +/-  0.0504477	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_10	  = 1	 +/-  0.0390959	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_11	  = 1	 +/-  0.0332591	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_12	  = 1	 +/-  0.0393762	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_13	  = 1	 +/-  0.0360095	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_14	  = 1	 +/-  0.0487329	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_15	  = 1	 +/-  0.0448693	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_16	  = 1	 +/-  0.054631	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_17	  = 1	 +/-  0.0503626	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_18	  = 1	 +/-  0.0656822	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_2	  = 1	 +/-  0.0316947	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_4	  = 1	 +/-  0.0401725	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_6	  = 1	 +/-  0.0331127	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_7	  = 1	 +/-  0.0375084	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_9	  = 1	 +/-  0.0526305	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_0	  = 0.999962	 +/-  0.203204	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_1	  = 1	 +/-  0.0780602	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_10	  = 1	 +/-  0.0358396	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_11	  = 1	 +/-  0.0335973	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_12	  = 1.00001	 +/-  0.0353308	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_14	  = 1	 +/-  0.0338484	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_15	  = 0.999999	 +/-  0.0299823	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_17	  = 1	 +/-  0.0308245	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_18	  = 1	 +/-  0.0306181	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_2	  = 0.999996	 +/-  0.0617363	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_3	  = 0.999999	 +/-  0.0480405	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_4	  = 0.999997	 +/-  0.0513407	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_5	  = 0.999999	 +/-  0.0532288	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_6	  = 0.999997	 +/-  0.0381956	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_7	  = 1.00001	 +/-  0.0381426	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_8	  = 1	 +/-  0.0346748	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_9	  = 1	 +/-  0.041201	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_0	  = 0.999922	 +/-  0.0676647	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_1	  = 0.999948	 +/-  0.0523175	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_10	  = 1.00001	 +/-  0.0319023	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_11	  = 0.999985	 +/-  0.0315607	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_12	  = 0.999984	 +/-  0.0317549	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_13	  = 1	 +/-  0.0326841	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_14	  = 0.999974	 +/-  0.0345834	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_15	  = 0.999957	 +/-  0.034292	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_16	  = 1.00004	 +/-  0.0377367	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_17	  = 1.00001	 +/-  0.0426076	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_18	  = 1.00005	 +/-  0.0474153	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_19	  = 1.00005	 +/-  0.049621	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_2	  = 1.00001	 +/-  0.0453859	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_20	  = 0.999969	 +/-  0.0565791	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_21	  = 1.00002	 +/-  0.0567386	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_22	  = 1	 +/-  0.0584838	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_23	  = 1.00004	 +/-  0.0709249	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_24	  = 1.00003	 +/-  0.0865799	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_3	  = 0.999982	 +/-  0.0419833	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_4	  = 0.999986	 +/-  0.0390205	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_5	  = 0.999951	 +/-  0.0388264	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_6	  = 1.00003	 +/-  0.0357246	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_7	  = 1	 +/-  0.0354322	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_8	  = 0.999981	 +/-  0.0319933	(limited)
+gamma_shape_stat_Bkg_SR_SR_lep_bin_9	  = 0.999978	 +/-  0.0314014	(limited)
+topWidth	  = 1.32171	 +/-  0.121364	(limited)
+ttbarXsec	  = 0.999996	 +/-  0.00441228	(limited)
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS LOWER error for parameter #85 : topWidth using max-calls 43500, tolerance 0.01
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS UPPER error for parameter #85 : topWidth using max-calls 43500, tolerance 0.01
+Minos: Lower error for parameter topWidth  :  -0.121981
+Minos: Upper error for parameter topWidth  :  0.122186
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m          FIT FINALIZED SUCCESSFULLY : 
+[1;32m[ INFO    ][0;0m             - minuit status 0
+[1;32m[ INFO    ][0;0m             - hess status 0
+[1;32m[ INFO    ][0;0m             - Edm = 2.04798e-06
+[1;32m[ INFO    ][0;0m             - minos status 0
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m   Final value of the NLL = 3934689.82329050730913877487
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m -----------------------     ERROR DECOMPOSITION    -----------------------
+[1;32m[ INFO    ][0;0m   POI :  +/-tot.err  (+/-stat  +/-syst)
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m   topWidth :  +/-0.121383  (+/-0.120704  +/-0.0128228)
+[1;32m[ INFO    ][0;0m   Full breakdown will be written to file in the Fits/ folder.
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m Producing group uncertainty breakdown for POI: topWidth
+[1;32m[ INFO    ][0;0m The txt file will be stored here: ./FitExampleMorphMultifit/Fits/FitExampleMorphMultifit_group_errDecomp_topWidth.txt
+[1;32m[ INFO    ][0;0m Writing impact yaml file to: ./FitExampleMorphMultifit/Fits/FitExampleMorphMultifit_group_errDecomp_topWidth.yaml
+[1;32m[ INFO    ][0;0m Writing ranking yaml file to: ./FitExampleMorphMultifit/Rankings/Ranking_topWidth_Breakdown.yaml
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m ----------------------- GOODNESS OF FIT EVALUATION -----------------------
+[1;32m[ INFO    ][0;0m   probability = 1
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m Comparing fits...
+[1;32m[ INFO    ][0;0m Adding Combined Fit
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Reading fit results from file
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Reading fit results from file
+[1;32m[ INFO    ][0;0m Adding Combined Fit
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Reading fit results from file
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Reading fit results from file
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Reading fit results from file
+[1;32m[ INFO    ][0;0m Writing correlation yaml file to: ./FitExampleMorphMultifit/CorrelationMatrix.yaml
+[1;32m[ INFO    ][0;0m Adding Fit: FitExampleMorphing, SingleLep, 
+[1;32m[ INFO    ][0;0m Adding Fit: FitExampleMorphingDilep, Dilep, 
+[1;32m[ INFO    ][0;0m Adding Combined Fit
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Reading fit results from file
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Reading fit results from file
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Reading fit results from file

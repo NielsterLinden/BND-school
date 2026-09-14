@@ -1,0 +1,10 @@
+-------///////                 ///////-------
+-------/////// IN PRUNING PLOT ///////-------
+-------///////                 ///////-------
+In Region : R1L4bHi_c
+ -> In Sample : ttHH
+ --->>  Jet_eta_intercalibration      is kept
+ --->>  ttb_4fs      is not present
+ -> In Sample : ttb
+ --->>  Jet_eta_intercalibration      is kept
+ --->>  ttb_4fs      is kept

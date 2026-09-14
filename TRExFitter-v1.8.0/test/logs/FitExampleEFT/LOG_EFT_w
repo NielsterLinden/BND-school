@@ -1,0 +1,769 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[0m[#1] INFO:InputArguments -- Silent clipping of values to range in `RooRealVar::setVal()` enabled.
+[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleEFT.config
+[1;36m[ DEBUG   ][0;0m PlotOptionsSummary not specified setting Summary values to 'PlotOptions'
+[1;36m[ DEBUG   ][0;0m You do not have 'Options' option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Limit option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Significance option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m Have a usual variable in reg SR : 
+[1;36m[ DEBUG   ][0;0m 2*(cos_theta_x>0)+(cos_theta_y>0) and size of corrVar=1
+[1;36m[ DEBUG   ][0;0m Found EFT SM Reference sample singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m    Created new Sample SM_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m     Adding EFT mu NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m    Created new Sample SM_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m     Adding EFT mu NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m    Created new Sample SM_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m     Adding EFT mu NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m    Created new Sample SM_singletop_tchan_PowPy8_FS_SR_bin3
+[1;36m[ DEBUG   ][0;0m     Adding EFT mu NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin3
+[1;32m[ INFO    ][0;0m Successfully read config file.
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Job name: FitExampleEFT
+[1;32m[ INFO    ][0;0m Reading the following regions:
+[1;32m[ INFO    ][0;0m     Region: SR
+[1;32m[ INFO    ][0;0m Reading the following samples:
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST
+[1;32m[ INFO    ][0;0m      singletop_tchan_PowPy8_FS_GHOST
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m      singletop_tchan_PowPy8_FS
+[1;32m[ INFO    ][0;0m      SM_singletop_tchan_PowPy8_FS_SR_bin0
+[1;32m[ INFO    ][0;0m      SM_singletop_tchan_PowPy8_FS_SR_bin1
+[1;32m[ INFO    ][0;0m      SM_singletop_tchan_PowPy8_FS_SR_bin2
+[1;32m[ INFO    ][0;0m      SM_singletop_tchan_PowPy8_FS_SR_bin3
+[1;32m[ INFO    ][0;0m      ttbar
+[1;32m[ INFO    ][0;0m Reading the following systematics:
+[1;32m[ INFO    ][0;0m  JVT
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m -----------------------------
+[1;32m[ INFO    ][0;0m Reading histograms from file FitExampleEFT/Histograms/FitExampleEFT_histos.root ...
+[1;36m[ DEBUG   ][0;0m   Reading region SR
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_PowPy8_FS_GHOST
+[1;36m[ DEBUG   ][0;0m Adding GHOST sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m Adding EFT sample.
+[1;36m[ DEBUG   ][0;0m     Reading sample SM_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m       Reading norm Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m       Reading syst JVT
+[1;36m[ DEBUG   ][0;0m     Reading sample SM_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m       Reading norm Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m       Reading syst JVT
+[1;36m[ DEBUG   ][0;0m     Reading sample SM_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m       Reading norm Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m       Reading syst JVT
+[1;36m[ DEBUG   ][0;0m     Reading sample SM_singletop_tchan_PowPy8_FS_SR_bin3
+[1;36m[ DEBUG   ][0;0m       Reading norm Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin3
+[1;36m[ DEBUG   ][0;0m       Reading syst JVT
+[1;36m[ DEBUG   ][0;0m     Reading sample ttbar
+[1;36m[ DEBUG   ][0;0m       Reading norm ttbar_NORM
+[1;36m[ DEBUG   ][0;0m       Reading syst JVT
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW0p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0_GHOST in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_PowPy8_FS_GHOST in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist singletop_tchan_PowPy8_FS in region SR
+[1;36m[ DEBUG   ][0;0m   hist SM_singletop_tchan_PowPy8_FS_SR_bin0 in region SR
+[1;36m[ DEBUG   ][0;0m   found hist SM_singletop_tchan_PowPy8_FS_SR_bin0 in region SR
+[1;36m[ DEBUG   ][0;0m   hist SM_singletop_tchan_PowPy8_FS_SR_bin1 in region SR
+[1;36m[ DEBUG   ][0;0m   found hist SM_singletop_tchan_PowPy8_FS_SR_bin1 in region SR
+[1;36m[ DEBUG   ][0;0m   hist SM_singletop_tchan_PowPy8_FS_SR_bin2 in region SR
+[1;36m[ DEBUG   ][0;0m   found hist SM_singletop_tchan_PowPy8_FS_SR_bin2 in region SR
+[1;36m[ DEBUG   ][0;0m   hist SM_singletop_tchan_PowPy8_FS_SR_bin3 in region SR
+[1;36m[ DEBUG   ][0;0m   found hist SM_singletop_tchan_PowPy8_FS_SR_bin3 in region SR
+[1;36m[ DEBUG   ][0;0m   hist ttbar in region SR
+[1;32m[ INFO    ][0;0m Applying systematics pruning...
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Apply Systematics Pruning ...
+Info in <TCanvas::Print>: pdf file FitExampleEFT/NormalisationPlot.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/NormalisationPlot.png has been created
+Info in <TCanvas::Print>: pdf file FitExampleEFT/Pruning.pdf has been created
+Info in <TCanvas::Print>: png file FitExampleEFT/Pruning.png has been created
+[1;32m[ INFO    ][0;0m Processing EFT inputs...
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Found new EFT sample: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m Param: ctW+ctW^2
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-3.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m Found new operator: ctW
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m Found new term: ctW
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 2
+[1;36m[ DEBUG   ][0;0m Found new term: ctW^2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -3.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW+ctW^2
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-2.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -2.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW+ctW^2
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=2.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 2.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW+ctW^2
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=3.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 3.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: citW+citW^2
+[1;36m[ DEBUG   ][0;0m Title: citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: citW=-1.5
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m Found new operator: citW
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new term: citW
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 2
+[1;36m[ DEBUG   ][0;0m Found new term: citW^2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.5
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: citW+citW^2
+[1;36m[ DEBUG   ][0;0m Title: citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: citW=-1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: citW + citW^2
+[1;36m[ DEBUG   ][0;0m Title: citW=c_{itW} 
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: citW=1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: citW + citW^2
+[1;36m[ DEBUG   ][0;0m Title: citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: citW=1.5
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 2
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.5
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: singletop_tchan_ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-3.0,citW=-1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new term: ctW*citW
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -3.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-3.0,citW=1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -3.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-2.0,citW=-1.5
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.5
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-2.0,citW=-1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-2.0,citW=1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=-2.0,citW=1.5
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = -2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.5
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=2.0,citW=-1.5
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.5
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=2.0,citW=-1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=2.0,citW=1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=2.0,citW=1.5
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 2.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.5
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=3.0,citW=-1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 3.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = -1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m EFT things happening here!
+[1;36m[ DEBUG   ][0;0m Param: ctW*citW
+[1;36m[ DEBUG   ][0;0m Title: ctW=c_{tW},citW=c_{itW}
+[1;36m[ DEBUG   ][0;0m Name:  singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;36m[ DEBUG   ][0;0m Value: ctW=3.0,citW=1.0
+[1;36m[ DEBUG   ][0;0m SMRef: singletop_tchan_PowPy8_FS
+[1;36m[ DEBUG   ][0;0m coeff: ctW (0) power: 1
+[1;36m[ DEBUG   ][0;0m coeff: citW (1) power: 1
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: ctW = 3.0
+[1;36m[ DEBUG   ][0;0m Found new coeff value setting: citW = 1.0
+[1;36m[ DEBUG   ][0;0m --------------------------------------------------------------------
+[1;32m[ INFO    ][0;0m ------------------------------------------------------------------------
+[1;32m[ INFO    ][0;0m f(x[]) = [0] + [1]*x[0] + [2]*x[0]*x[0] + [3]*x[1] + [4]*x[1]*x[1] + [5]*x[0]*x[1]
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m x[0] : ctW
+[1;32m[ INFO    ][0;0m x[1] : citW
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m [0] = 0
+[1;32m[ INFO    ][0;0m [1] coefficient for:
+[1;32m[ INFO    ][0;0m       ctW^1
+[1;32m[ INFO    ][0;0m [2] coefficient for:
+[1;32m[ INFO    ][0;0m       ctW^2
+[1;32m[ INFO    ][0;0m [3] coefficient for:
+[1;32m[ INFO    ][0;0m       citW^1
+[1;32m[ INFO    ][0;0m [4] coefficient for:
+[1;32m[ INFO    ][0;0m       citW^2
+[1;32m[ INFO    ][0;0m [5] coefficient for:
+[1;32m[ INFO    ][0;0m       ctW^1
+[1;32m[ INFO    ][0;0m       citW^1
+[1;32m[ INFO    ][0;0m ------------------------------------------------------------------------
+[1;32m[ INFO    ][0;0m ------------------------------------------------------------------------
+[1;32m[ INFO    ][0;0m Parameters  : x[0]	x[1]	
+[1;32m[ INFO    ][0;0m Coefficients: ctW	citW	
+[1;32m[ INFO    ][0;0m Parameter   : -3.000000	0.000000	singletop_tchan_ctW-3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -2.000000	0.000000	singletop_tchan_ctW-2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 2.000000	0.000000	singletop_tchan_ctW2p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 3.000000	0.000000	singletop_tchan_ctW3p0_IctW0p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 0.000000	-1.500000	singletop_tchan_ctW0p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 0.000000	-1.000000	singletop_tchan_ctW0p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 0.000000	1.000000	singletop_tchan_ctW0p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 0.000000	1.500000	singletop_tchan_ctW0p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -3.000000	-1.000000	singletop_tchan_ctW-3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -3.000000	1.000000	singletop_tchan_ctW-3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -2.000000	-1.500000	singletop_tchan_ctW-2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -2.000000	-1.000000	singletop_tchan_ctW-2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -2.000000	1.000000	singletop_tchan_ctW-2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : -2.000000	1.500000	singletop_tchan_ctW-2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 2.000000	-1.500000	singletop_tchan_ctW2p0_IctW-1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 2.000000	-1.000000	singletop_tchan_ctW2p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 2.000000	1.000000	singletop_tchan_ctW2p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 2.000000	1.500000	singletop_tchan_ctW2p0_IctW1p5_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 3.000000	-1.000000	singletop_tchan_ctW3p0_IctW-1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m Parameter   : 3.000000	1.000000	singletop_tchan_ctW3p0_IctW1p0_cptb0p0_cbW0p0_IcbW0p0_cqQ0p0
+[1;32m[ INFO    ][0;0m ------------------------------------------------------------------------
+[1;36m[ DEBUG   ][0;0m  ==== singletop_tchan_PowPy8_FS ====
+[1;36m[ DEBUG   ][0;0m  Trying to open FitExampleEFT/EFT/EFT_Fit_results_singletop_tchan_PowPy8_FS.txt...
+[1;36m[ DEBUG   ][0;0m  Reading EFT fit results from file (FitExampleEFT/EFT/EFT_Fit_results_singletop_tchan_PowPy8_FS.txt not found)
+[1;36m[ DEBUG   ][0;0m  Opening file "FitExampleEFT/EFT/EFT_Fit_results_singletop_tchan_PowPy8_FS.txt"
+[1;36m[ DEBUG   ][0;0m --------------------
+[1;36m[ DEBUG   ][0;0m Reading Norm Factors...
+[1;36m[ DEBUG   ][0;0m --------------------
+[1;36m[ DEBUG   ][0;0m     Defining EFT mu NormFactor Expression for: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m              1.000600 + 0.216369*ctW + 0.023168*ctW*ctW + 0.089277*citW + 0.017143*citW*citW + 0.013963*ctW*citW:ctW[0.000000,-10.000000,10.000000],citW[0.000000,-10.000000,10.000000]
+[1;36m[ DEBUG   ][0;0m       --> Updating NF Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m          --> Now NF Expression_1.000600 + 0.216369*ctW + 0.023168*ctW*ctW + 0.089277*citW + 0.017143*citW*citW + 0.013963*ctW*citW
+[1;36m[ DEBUG   ][0;0m     Defining EFT mu NormFactor Expression for: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m              1.000750 + 0.222231*ctW + 0.025309*ctW*ctW + -0.091061*citW + 0.017105*citW*citW + -0.014658*ctW*citW:ctW[0.000000,-10.000000,10.000000],citW[0.000000,-10.000000,10.000000]
+[1;36m[ DEBUG   ][0;0m       --> Updating NF Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m          --> Now NF Expression_1.000750 + 0.222231*ctW + 0.025309*ctW*ctW + -0.091061*citW + 0.017105*citW*citW + -0.014658*ctW*citW
+[1;36m[ DEBUG   ][0;0m     Defining EFT mu NormFactor Expression for: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m              1.000160 + 0.074444*ctW + 0.009275*ctW*ctW + 0.108569*citW + 0.023039*citW*citW + 0.019733*ctW*citW:ctW[0.000000,-10.000000,10.000000],citW[0.000000,-10.000000,10.000000]
+[1;36m[ DEBUG   ][0;0m       --> Updating NF Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m          --> Now NF Expression_1.000160 + 0.074444*ctW + 0.009275*ctW*ctW + 0.108569*citW + 0.023039*citW*citW + 0.019733*ctW*citW
+[1;36m[ DEBUG   ][0;0m     Defining EFT mu NormFactor Expression for: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin3
+[1;36m[ DEBUG   ][0;0m              1.000080 + 0.069635*ctW + 0.007578*ctW*ctW + -0.097451*citW + 0.022706*citW*citW + -0.015670*ctW*citW:ctW[0.000000,-10.000000,10.000000],citW[0.000000,-10.000000,10.000000]
+[1;36m[ DEBUG   ][0;0m       --> Updating NF Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin3
+[1;36m[ DEBUG   ][0;0m          --> Now NF Expression_1.000080 + 0.069635*ctW + 0.007578*ctW*ctW + -0.097451*citW + 0.022706*citW*citW + -0.015670*ctW*citW
+[1;32m[ INFO    ][0;0m Creating workspace...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Exporting to RooStats...
+[1;32m[ INFO    ][0;0m Creating workspace only with fit regions and dropped bins (no validation regions)
+[1;36m[ DEBUG   ][0;0m Output workspace path will have no special suffix ...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;36m[ DEBUG   ][0;0m Adding Channel: SR
+[1;36m[ DEBUG   ][0;0m   Adding Sample: SM_singletop_tchan_PowPy8_FS_SR_bin0
+[1;36m[ DEBUG   ][0;0m     Adding NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0, 1
+[1;36m[ DEBUG   ][0;0m     Adding Systematic: JVT
+[1;36m[ DEBUG   ][0;0m   Adding Sample: SM_singletop_tchan_PowPy8_FS_SR_bin1
+[1;36m[ DEBUG   ][0;0m     Adding NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1, 1
+[1;36m[ DEBUG   ][0;0m     Adding Systematic: JVT
+[1;36m[ DEBUG   ][0;0m   Adding Sample: SM_singletop_tchan_PowPy8_FS_SR_bin2
+[1;36m[ DEBUG   ][0;0m     Adding NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin2, 1
+[1;36m[ DEBUG   ][0;0m     Adding Systematic: JVT
+[1;36m[ DEBUG   ][0;0m   Adding Sample: SM_singletop_tchan_PowPy8_FS_SR_bin3
+[1;36m[ DEBUG   ][0;0m     Adding NormFactor: Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin3, 1
+[1;36m[ DEBUG   ][0;0m     Adding Systematic: JVT
+[1;36m[ DEBUG   ][0;0m   Adding Sample: ttbar
+[1;36m[ DEBUG   ][0;0m     Adding NormFactor: ttbar_NORM, 1
+[1;36m[ DEBUG   ][0;0m     Adding Systematic: JVT
+[#2] PROGRESS:HistFactory -- Printing XML Files for measurement: FitExampleEFT
+[#2] PROGRESS:HistFactory -- Printing XML Files for channel: SR
+[#2] PROGRESS:HistFactory -- Finished printing XML files
+[#2] PROGRESS:HistFactory -- Finished printing XML files
+[#2] PROGRESS:HistFactory -- Getting histogram FitExampleEFT/Histograms/FitExampleEFT_histos.root:SR/SM_singletop_tchan_PowPy8_FS_SR_bin0/nominal//SR_SM_singletop_tchan_PowPy8_FS_SR_bin0_regBin
+[#2] INFO:HistFactory -- Opened input file: FitExampleEFT/Histograms/FitExampleEFT_histos.root: 
+[#2] PROGRESS:HistFactory -- Getting histogram FitExampleEFT/Histograms/FitExampleEFT_histos.root:SR/SM_singletop_tchan_PowPy8_FS_SR_bin1/nominal//SR_SM_singletop_tchan_PowPy8_FS_SR_bin1_regBin
+[#2] PROGRESS:HistFactory -- Getting histogram FitExampleEFT/Histograms/FitExampleEFT_histos.root:SR/SM_singletop_tchan_PowPy8_FS_SR_bin2/nominal//SR_SM_singletop_tchan_PowPy8_FS_SR_bin2_regBin
+[#2] PROGRESS:HistFactory -- Getting histogram FitExampleEFT/Histograms/FitExampleEFT_histos.root:SR/SM_singletop_tchan_PowPy8_FS_SR_bin3/nominal//SR_SM_singletop_tchan_PowPy8_FS_SR_bin3_regBin
+[#2] PROGRESS:HistFactory -- Getting histogram FitExampleEFT/Histograms/FitExampleEFT_histos.root:SR/ttbar/nominal//SR_ttbar_regBin
+[#2] PROGRESS:HistFactory -- Getting histogram FitExampleEFT/Histograms/FitExampleEFT_histos.root:SR/ttbar/JVT//SR_ttbar_JVT_Shape_Down_regBin
+[#2] PROGRESS:HistFactory -- Getting histogram FitExampleEFT/Histograms/FitExampleEFT_histos.root:SR/ttbar/JVT//SR_ttbar_JVT_Shape_Up_regBin
+Measurement Name: FitExampleEFT	 OutputFilePrefix: FitExampleEFT/RooStats/FitExampleEFT	 POI: ctWcitWttbar_NORM	 Lumi: 1	 LumiRelErr: 0	 BinLow: 0	 BinHigh: 1	 ExportOnly: 1
+Constant Params:  Lumi
+Preprocess Functions:  expr::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0('1.000600 + 0.216369*ctW + 0.023168*ctW*ctW + 0.089277*citW + 0.017143*citW*citW + 0.013963*ctW*citW',{ctW[0.000000,-10.000000,10.000000],citW[0.000000,-10.000000,10.000000]}) expr::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1('1.000750 + 0.222231*ctW + 0.025309*ctW*ctW + -0.091061*citW + 0.017105*citW*citW + -0.014658*ctW*citW',{ctW[0.000000,-10.000000,10.000000],citW[0.000000,-10.000000,10.000000]}) expr::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin2('1.000160 + 0.074444*ctW + 0.009275*ctW*ctW + 0.108569*citW + 0.023039*citW*citW + 0.019733*ctW*citW',{ctW[0.000000,-10.000000,10.000000],citW[0.000000,-10.000000,10.000000]}) expr::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin3('1.000080 + 0.069635*ctW + 0.007578*ctW*ctW + -0.097451*citW + 0.022706*citW*citW + -0.015670*ctW*citW',{ctW[0.000000,-10.000000,10.000000],citW[0.000000,-10.000000,10.000000]})
+Channels:
+	 Channel Name: SR	 InputFile: 
+	 Data:
+	 	 InputFile: 	 HistoName: 	 HistoPath: 	 HistoAddress: 0
+	 statErrorConfig:
+	 	 RelErrorThreshold: 0.005	 ConstraintType: Poisson
+	 Samples: 
+	 	 Name: SM_singletop_tchan_PowPy8_FS_SR_bin0	 	 Channel: SR	 NormalizeByTheory: True	 StatErrorActivate: False
+	 	 	 	 	 InputFile: FitExampleEFT/Histograms/FitExampleEFT_histos.root	 HistName: SR_SM_singletop_tchan_PowPy8_FS_SR_bin0_regBin	 HistoPath: SR/SM_singletop_tchan_PowPy8_FS_SR_bin0/nominal/	 HistoAddress: 0x2c925f0
+	 	 	 StatError Activate: 1	 InputFile: FitExampleEFT/Histograms/FitExampleEFT_histos.root	 HistName: 	 HistoPath: 	 HistoAddress: 0
+	 	 Name: SM_singletop_tchan_PowPy8_FS_SR_bin1	 	 Channel: SR	 NormalizeByTheory: True	 StatErrorActivate: False
+	 	 	 	 	 InputFile: FitExampleEFT/Histograms/FitExampleEFT_histos.root	 HistName: SR_SM_singletop_tchan_PowPy8_FS_SR_bin1_regBin	 HistoPath: SR/SM_singletop_tchan_PowPy8_FS_SR_bin1/nominal/	 HistoAddress: 0x2be42e0
+	 	 	 StatError Activate: 1	 InputFile: FitExampleEFT/Histograms/FitExampleEFT_histos.root	 HistName: 	 HistoPath: 	 HistoAddress: 0
+	 	 Name: SM_singletop_tchan_PowPy8_FS_SR_bin2	 	 Channel: SR	 NormalizeByTheory: True	 StatErrorActivate: False
+	 	 	 	 	 InputFile: FitExampleEFT/Histograms/FitExampleEFT_histos.root	 HistName: SR_SM_singletop_tchan_PowPy8_FS_SR_bin2_regBin	 HistoPath: SR/SM_singletop_tchan_PowPy8_FS_SR_bin2/nominal/	 HistoAddress: 0x2aeca20
+	 	 	 StatError Activate: 1	 InputFile: FitExampleEFT/Histograms/FitExampleEFT_histos.root	 HistName: 	 HistoPath: 	 HistoAddress: 0
+	 	 Name: SM_singletop_tchan_PowPy8_FS_SR_bin3	 	 Channel: SR	 NormalizeByTheory: True	 StatErrorActivate: False
+	 	 	 	 	 InputFile: FitExampleEFT/Histograms/FitExampleEFT_histos.root	 HistName: SR_SM_singletop_tchan_PowPy8_FS_SR_bin3_regBin	 HistoPath: SR/SM_singletop_tchan_PowPy8_FS_SR_bin3/nominal/	 HistoAddress: 0x2af4ec0
+	 	 	 StatError Activate: 1	 InputFile: FitExampleEFT/Histograms/FitExampleEFT_histos.root	 HistName: 	 HistoPath: 	 HistoAddress: 0
+	 	 Name: ttbar	 	 Channel: SR	 NormalizeByTheory: True	 StatErrorActivate: False
+	 	 	 	 	 InputFile: FitExampleEFT/Histograms/FitExampleEFT_histos.root	 HistName: SR_ttbar_regBin	 HistoPath: SR/ttbar/nominal/	 HistoAddress: 0x2aba060
+	 	 	 StatError Activate: 1	 InputFile: FitExampleEFT/Histograms/FitExampleEFT_histos.root	 HistName: 	 HistoPath: 	 HistoAddress: 0
+	 End of Channel SR
+[#2] INFO:HistFactory -- End Measurement: FitExampleEFT
+[#2] INFO:HistFactory -- Making Model and Measurements (Fast) for measurement: FitExampleEFT
+[#2] INFO:HistFactory -- using lumi = 1 and lumiError = 0 including bins between 0 and 1
+[#2] INFO:HistFactory -- fixing the following parameters:
+   Lumi
+[#2] INFO:HistFactory -- Creating the HistoToWorkspaceFactoryFast factory
+[#2] INFO:HistFactory -- Setting preprocess functions
+[#2] PROGRESS:HistFactory -- Starting to process channel: SR
+[#2] PROGRESS:HistFactory -- 
+-----------------------------------------
+	Starting to process 'SR' channel with 1 observables
+-----------------------------------------
+
+[#2] INFO:HistFactory -- will preprocess this line: expr::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0('1.000600 + 0.216369*ctW + 0.023168*ctW*ctW + 0.089277*citW + 0.017143*citW*citW + 0.013963*ctW*citW',{ctW[0.000000,-10.000000,10.000000],citW[0.000000,-10.000000,10.000000]})
+
+RooWorkspace(SR) SR workspace contents
+
+variables
+---------
+(citW,ctW)
+
+functions
+--------
+RooFormulaVar::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0[ actualVars=(ctW,citW) formula="1.000600+0.216369*ctW+0.023168*ctW*ctW+0.089277*citW+0.017143*citW*citW+0.013963*ctW*citW" ] = 1.0006
+
+[#2] INFO:HistFactory -- will preprocess this line: expr::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1('1.000750 + 0.222231*ctW + 0.025309*ctW*ctW + -0.091061*citW + 0.017105*citW*citW + -0.014658*ctW*citW',{ctW[0.000000,-10.000000,10.000000],citW[0.000000,-10.000000,10.000000]})
+
+RooWorkspace(SR) SR workspace contents
+
+variables
+---------
+(citW,ctW)
+
+functions
+--------
+RooFormulaVar::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0[ actualVars=(ctW,citW) formula="1.000600+0.216369*ctW+0.023168*ctW*ctW+0.089277*citW+0.017143*citW*citW+0.013963*ctW*citW" ] = 1.0006
+RooFormulaVar::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1[ actualVars=(ctW,citW) formula="1.000750+0.222231*ctW+0.025309*ctW*ctW+-0.091061*citW+0.017105*citW*citW+-0.014658*ctW*citW" ] = 1.00075
+
+[#2] INFO:HistFactory -- will preprocess this line: expr::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin2('1.000160 + 0.074444*ctW + 0.009275*ctW*ctW + 0.108569*citW + 0.023039*citW*citW + 0.019733*ctW*citW',{ctW[0.000000,-10.000000,10.000000],citW[0.000000,-10.000000,10.000000]})
+
+RooWorkspace(SR) SR workspace contents
+
+variables
+---------
+(citW,ctW)
+
+functions
+--------
+RooFormulaVar::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0[ actualVars=(ctW,citW) formula="1.000600+0.216369*ctW+0.023168*ctW*ctW+0.089277*citW+0.017143*citW*citW+0.013963*ctW*citW" ] = 1.0006
+RooFormulaVar::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1[ actualVars=(ctW,citW) formula="1.000750+0.222231*ctW+0.025309*ctW*ctW+-0.091061*citW+0.017105*citW*citW+-0.014658*ctW*citW" ] = 1.00075
+RooFormulaVar::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin2[ actualVars=(ctW,citW) formula="1.000160+0.074444*ctW+0.009275*ctW*ctW+0.108569*citW+0.023039*citW*citW+0.019733*ctW*citW" ] = 1.00016
+
+[#2] INFO:HistFactory -- will preprocess this line: expr::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin3('1.000080 + 0.069635*ctW + 0.007578*ctW*ctW + -0.097451*citW + 0.022706*citW*citW + -0.015670*ctW*citW',{ctW[0.000000,-10.000000,10.000000],citW[0.000000,-10.000000,10.000000]})
+
+RooWorkspace(SR) SR workspace contents
+
+variables
+---------
+(citW,ctW)
+
+functions
+--------
+RooFormulaVar::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0[ actualVars=(ctW,citW) formula="1.000600+0.216369*ctW+0.023168*ctW*ctW+0.089277*citW+0.017143*citW*citW+0.013963*ctW*citW" ] = 1.0006
+RooFormulaVar::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1[ actualVars=(ctW,citW) formula="1.000750+0.222231*ctW+0.025309*ctW*ctW+-0.091061*citW+0.017105*citW*citW+-0.014658*ctW*citW" ] = 1.00075
+RooFormulaVar::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin2[ actualVars=(ctW,citW) formula="1.000160+0.074444*ctW+0.009275*ctW*ctW+0.108569*citW+0.023039*citW*citW+0.019733*ctW*citW" ] = 1.00016
+RooFormulaVar::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin3[ actualVars=(ctW,citW) formula="1.000080+0.069635*ctW+0.007578*ctW*ctW+-0.097451*citW+0.022706*citW*citW+-0.015670*ctW*citW" ] = 1.00008
+
+[#2] INFO:HistFactory -- processing hist SR_SM_singletop_tchan_PowPy8_FS_SR_bin0_regBin
+[#2] INFO:HistFactory -- SM_singletop_tchan_PowPy8_FS_SR_bin0_SR has no variation histograms 
+[#2] INFO:HistFactory -- Sample: SM_singletop_tchan_PowPy8_FS_SR_bin0 to be included in Stat Error for channel SR
+[#2] INFO:HistFactory -- Making Statistical Uncertainty Hist for  Channel: SR Sample: SM_singletop_tchan_PowPy8_FS_SR_bin0
+[#2] INFO:HistFactory -- processing hist SR_SM_singletop_tchan_PowPy8_FS_SR_bin1_regBin
+[#2] INFO:HistFactory -- SM_singletop_tchan_PowPy8_FS_SR_bin1_SR has no variation histograms 
+[#2] INFO:HistFactory -- Sample: SM_singletop_tchan_PowPy8_FS_SR_bin1 to be included in Stat Error for channel SR
+[#2] INFO:HistFactory -- Making Statistical Uncertainty Hist for  Channel: SR Sample: SM_singletop_tchan_PowPy8_FS_SR_bin1
+[#2] INFO:HistFactory -- processing hist SR_SM_singletop_tchan_PowPy8_FS_SR_bin2_regBin
+[#2] INFO:HistFactory -- SM_singletop_tchan_PowPy8_FS_SR_bin2_SR has no variation histograms 
+[#2] INFO:HistFactory -- Sample: SM_singletop_tchan_PowPy8_FS_SR_bin2 to be included in Stat Error for channel SR
+[#2] INFO:HistFactory -- Making Statistical Uncertainty Hist for  Channel: SR Sample: SM_singletop_tchan_PowPy8_FS_SR_bin2
+[#2] INFO:HistFactory -- processing hist SR_SM_singletop_tchan_PowPy8_FS_SR_bin3_regBin
+[#2] INFO:HistFactory -- SM_singletop_tchan_PowPy8_FS_SR_bin3_SR has no variation histograms 
+[#2] INFO:HistFactory -- Sample: SM_singletop_tchan_PowPy8_FS_SR_bin3 to be included in Stat Error for channel SR
+[#2] INFO:HistFactory -- Making Statistical Uncertainty Hist for  Channel: SR Sample: SM_singletop_tchan_PowPy8_FS_SR_bin3
+[#2] INFO:HistFactory -- making normFactor: ttbar_NORM
+[#2] INFO:HistFactory -- processing hist SR_ttbar_regBin
+[#2] INFO:HistFactory -- Sample: ttbar to be included in Stat Error for channel SR
+[#2] INFO:HistFactory -- Making Statistical Uncertainty Hist for  Channel: SR Sample: ttbar
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 1 Error = 8.74951 CentralVal = 370.702 RelativeError = 0.0236026
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 2 Error = 8.85875 CentralVal = 376.996 RelativeError = 0.0234983
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 3 Error = 7.65063 CentralVal = 284.191 RelativeError = 0.0269207
+[#2] INFO:HistFactory -- Making Total Uncertainty for bin 4 Error = 7.66676 CentralVal = 286.342 RelativeError = 0.0267748
+[#2] INFO:HistFactory -- About to create Constraint Terms from: mc_stat_SR params: (gamma_stat_SR_bin_0,gamma_stat_SR_bin_1,gamma_stat_SR_bin_2,gamma_stat_SR_bin_3)
+[#2] INFO:HistFactory -- Using Poisson StatErrors in channel: SR
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_bin_0. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_bin_1. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_bin_2. Type of constraint: 1
+[#2] INFO:HistFactory -- Creating constraint for: gamma_stat_SR_bin_3. Type of constraint: 1
+[#2] PROGRESS:HistFactory -- 
+-----------------------------------------
+	import model into workspace
+-----------------------------------------
+
+
+RooWorkspace(SR) SR workspace contents
+
+variables
+---------
+(Lumi,alpha_JVT,citW,ctW,gamma_stat_SR_bin_0,gamma_stat_SR_bin_1,gamma_stat_SR_bin_2,gamma_stat_SR_bin_3,nom_alpha_JVT,nom_gamma_stat_SR_bin_0,nom_gamma_stat_SR_bin_1,nom_gamma_stat_SR_bin_2,nom_gamma_stat_SR_bin_3,obs_x_SR,ttbar_NORM)
+
+p.d.f.s
+-------
+RooRealSumPdf::SR_model[ SM_singletop_tchan_PowPy8_FS_SR_bin0_SR_scaleFactors * SM_singletop_tchan_PowPy8_FS_SR_bin0_SR_shapes + SM_singletop_tchan_PowPy8_FS_SR_bin1_SR_scaleFactors * SM_singletop_tchan_PowPy8_FS_SR_bin1_SR_shapes + SM_singletop_tchan_PowPy8_FS_SR_bin2_SR_scaleFactors * SM_singletop_tchan_PowPy8_FS_SR_bin2_SR_shapes + SM_singletop_tchan_PowPy8_FS_SR_bin3_SR_scaleFactors * SM_singletop_tchan_PowPy8_FS_SR_bin3_SR_shapes + ttbar_SR_scaleFactors * ttbar_SR_shapes ] = 284.231
+RooGaussian::alpha_JVTConstraint[ x=alpha_JVT mean=nom_alpha_JVT sigma=1 ] = 1
+RooPoisson::gamma_stat_SR_bin_0_constraint[ x=nom_gamma_stat_SR_bin_0 mean=gamma_stat_SR_bin_0_poisMean ] = 0.00941563
+RooPoisson::gamma_stat_SR_bin_1_constraint[ x=nom_gamma_stat_SR_bin_1 mean=gamma_stat_SR_bin_1_poisMean ] = 0.00937402
+RooPoisson::gamma_stat_SR_bin_2_constraint[ x=nom_gamma_stat_SR_bin_2 mean=gamma_stat_SR_bin_2_poisMean ] = 0.0107392
+RooPoisson::gamma_stat_SR_bin_3_constraint[ x=nom_gamma_stat_SR_bin_3 mean=gamma_stat_SR_bin_3_poisMean ] = 0.010681
+RooProdPdf::model_SR[ alpha_JVTConstraint * gamma_stat_SR_bin_0_constraint * gamma_stat_SR_bin_1_constraint * gamma_stat_SR_bin_2_constraint * gamma_stat_SR_bin_3_constraint * SR_model(obs_x_SR) ] = 2.87758e-06
+
+functions
+--------
+RooFormulaVar::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0[ actualVars=(ctW,citW) formula="1.000600+0.216369*ctW+0.023168*ctW*ctW+0.089277*citW+0.017143*citW*citW+0.013963*ctW*citW" ] = 1.0006
+RooFormulaVar::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1[ actualVars=(ctW,citW) formula="1.000750+0.222231*ctW+0.025309*ctW*ctW+-0.091061*citW+0.017105*citW*citW+-0.014658*ctW*citW" ] = 1.00075
+RooFormulaVar::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin2[ actualVars=(ctW,citW) formula="1.000160+0.074444*ctW+0.009275*ctW*ctW+0.108569*citW+0.023039*citW*citW+0.019733*ctW*citW" ] = 1.00016
+RooFormulaVar::Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin3[ actualVars=(ctW,citW) formula="1.000080+0.069635*ctW+0.007578*ctW*ctW+-0.097451*citW+0.022706*citW*citW+-0.015670*ctW*citW" ] = 1.00008
+RooHistFunc::SM_singletop_tchan_PowPy8_FS_SR_bin0_SR_Hist_alphanominal[ depList=(obs_x_SR) ] = 0
+RooStats::HistFactory::FlexibleInterpVar::SM_singletop_tchan_PowPy8_FS_SR_bin0_SR_epsilon[ paramList=(alpha_JVT) ] = 1
+RooProduct::SM_singletop_tchan_PowPy8_FS_SR_bin0_SR_scaleFactors[ SM_singletop_tchan_PowPy8_FS_SR_bin0_SR_epsilon * Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin0 * Lumi ] = 1.0006
+RooProduct::SM_singletop_tchan_PowPy8_FS_SR_bin0_SR_shapes[ SM_singletop_tchan_PowPy8_FS_SR_bin0_SR_Hist_alphanominal * mc_stat_SR * SR_model_binWidth ] = 0
+RooHistFunc::SM_singletop_tchan_PowPy8_FS_SR_bin1_SR_Hist_alphanominal[ depList=(obs_x_SR) ] = 0
+RooStats::HistFactory::FlexibleInterpVar::SM_singletop_tchan_PowPy8_FS_SR_bin1_SR_epsilon[ paramList=(alpha_JVT) ] = 1
+RooProduct::SM_singletop_tchan_PowPy8_FS_SR_bin1_SR_scaleFactors[ SM_singletop_tchan_PowPy8_FS_SR_bin1_SR_epsilon * Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin1 * Lumi ] = 1.00075
+RooProduct::SM_singletop_tchan_PowPy8_FS_SR_bin1_SR_shapes[ SM_singletop_tchan_PowPy8_FS_SR_bin1_SR_Hist_alphanominal * mc_stat_SR * SR_model_binWidth ] = 0
+RooHistFunc::SM_singletop_tchan_PowPy8_FS_SR_bin2_SR_Hist_alphanominal[ depList=(obs_x_SR) ] = 248.109
+RooStats::HistFactory::FlexibleInterpVar::SM_singletop_tchan_PowPy8_FS_SR_bin2_SR_epsilon[ paramList=(alpha_JVT) ] = 1
+RooProduct::SM_singletop_tchan_PowPy8_FS_SR_bin2_SR_scaleFactors[ SM_singletop_tchan_PowPy8_FS_SR_bin2_SR_epsilon * Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin2 * Lumi ] = 1.00016
+RooProduct::SM_singletop_tchan_PowPy8_FS_SR_bin2_SR_shapes[ SM_singletop_tchan_PowPy8_FS_SR_bin2_SR_Hist_alphanominal * mc_stat_SR * SR_model_binWidth ] = 248.109
+RooHistFunc::SM_singletop_tchan_PowPy8_FS_SR_bin3_SR_Hist_alphanominal[ depList=(obs_x_SR) ] = 0
+RooStats::HistFactory::FlexibleInterpVar::SM_singletop_tchan_PowPy8_FS_SR_bin3_SR_epsilon[ paramList=(alpha_JVT) ] = 1
+RooProduct::SM_singletop_tchan_PowPy8_FS_SR_bin3_SR_scaleFactors[ SM_singletop_tchan_PowPy8_FS_SR_bin3_SR_epsilon * Expression_muEFT_singletop_tchan_PowPy8_FS_SR_bin3 * Lumi ] = 1.00008
+RooProduct::SM_singletop_tchan_PowPy8_FS_SR_bin3_SR_shapes[ SM_singletop_tchan_PowPy8_FS_SR_bin3_SR_Hist_alphanominal * mc_stat_SR * SR_model_binWidth ] = 0
+RooBinWidthFunction::SR_model_binWidth[ HistFuncForBinWidth=SM_singletop_tchan_PowPy8_FS_SR_bin0_SR_Hist_alphanominal ] = 1
+RooProduct::gamma_stat_SR_bin_0_poisMean[ gamma_stat_SR_bin_0 * gamma_stat_SR_bin_0_tau ] = 1795.07
+RooProduct::gamma_stat_SR_bin_1_poisMean[ gamma_stat_SR_bin_1 * gamma_stat_SR_bin_1_tau ] = 1811.04
+RooProduct::gamma_stat_SR_bin_2_poisMean[ gamma_stat_SR_bin_2 * gamma_stat_SR_bin_2_tau ] = 1379.83
+RooProduct::gamma_stat_SR_bin_3_poisMean[ gamma_stat_SR_bin_3 * gamma_stat_SR_bin_3_tau ] = 1394.91
+ParamHistFunc::mc_stat_SR[ ] = 1
+PiecewiseInterpolation::ttbar_SR_Hist_alpha[ ] = 36.0818
+RooHistFunc::ttbar_SR_Hist_alpha_0high[ depList=(obs_x_SR) ] = 36.0637
+RooHistFunc::ttbar_SR_Hist_alpha_0low[ depList=(obs_x_SR) ] = 36.0997
+RooHistFunc::ttbar_SR_Hist_alphanominal[ depList=(obs_x_SR) ] = 36.0818
+RooStats::HistFactory::FlexibleInterpVar::ttbar_SR_epsilon[ paramList=(alpha_JVT) ] = 1
+RooProduct::ttbar_SR_scaleFactors[ ttbar_SR_epsilon * ttbar_NORM * Lumi ] = 1
+RooProduct::ttbar_SR_shapes[ ttbar_SR_Hist_alpha * mc_stat_SR * SR_model_binWidth ] = 36.0818
+
+embedded datasets (in pdfs and functions)
+-----------------------------------------
+RooDataHist::SM_singletop_tchan_PowPy8_FS_SR_bin0_SR_Hist_alphanominalDHist(obs_x_SR)
+RooDataHist::SM_singletop_tchan_PowPy8_FS_SR_bin1_SR_Hist_alphanominalDHist(obs_x_SR)
+RooDataHist::SM_singletop_tchan_PowPy8_FS_SR_bin2_SR_Hist_alphanominalDHist(obs_x_SR)
+RooDataHist::SM_singletop_tchan_PowPy8_FS_SR_bin3_SR_Hist_alphanominalDHist(obs_x_SR)
+RooDataHist::ttbar_SR_Hist_alphanominalDHist(obs_x_SR)
+RooDataHist::ttbar_SR_Hist_alpha_0lowDHist(obs_x_SR)
+RooDataHist::ttbar_SR_Hist_alpha_0highDHist(obs_x_SR)
+
+named sets
+----------
+ModelConfig_GlobalObservables:(nom_alpha_JVT,nom_gamma_stat_SR_bin_0,nom_gamma_stat_SR_bin_1,nom_gamma_stat_SR_bin_2,nom_gamma_stat_SR_bin_3)
+ModelConfig_Observables:(obs_x_SR)
+constraintTerms:(alpha_JVTConstraint,gamma_stat_SR_bin_0_constraint,gamma_stat_SR_bin_1_constraint,gamma_stat_SR_bin_2_constraint,gamma_stat_SR_bin_3_constraint)
+globalObservables:(nom_alpha_JVT,nom_gamma_stat_SR_bin_0,nom_gamma_stat_SR_bin_1,nom_gamma_stat_SR_bin_2,nom_gamma_stat_SR_bin_3)
+likelihoodTerms:(SR_model)
+observables:(obs_x_SR)
+observablesSet:(obs_x_SR)
+
+generic objects
+---------------
+RooStats::ModelConfig::ModelConfig
+
+[#2] INFO:HistFactory -- Setting Parameter(s) of Interest as: ctW citW ttbar_NORM 
+
+=== Using the following for ModelConfig ===
+Observables:             RooArgSet:: = (obs_x_SR)
+Parameters of Interest:  RooArgSet:: = (ctW,citW,ttbar_NORM)
+Nuisance Parameters:     RooArgSet:: = (alpha_JVT,gamma_stat_SR_bin_0,gamma_stat_SR_bin_1,gamma_stat_SR_bin_2,gamma_stat_SR_bin_3)
+Global Observables:      RooArgSet:: = (nom_alpha_JVT,nom_gamma_stat_SR_bin_0,nom_gamma_stat_SR_bin_1,nom_gamma_stat_SR_bin_2,nom_gamma_stat_SR_bin_3)
+PDF:                     RooProdPdf::model_SR[ alpha_JVTConstraint * gamma_stat_SR_bin_0_constraint * gamma_stat_SR_bin_1_constraint * gamma_stat_SR_bin_2_constraint * gamma_stat_SR_bin_3_constraint * SR_model(obs_x_SR) ] = 2.87758e-06
+
+[#2] INFO:HistFactory -- full list of observables:
+(obs_x_SR)
+[#2] PROGRESS:HistFactory -- 
+-----------------------------------------
+	Entering combination
+-----------------------------------------
+
+
+RooWorkspace(combined) combined contents
+
+variables
+---------
+(channelCat,nom_alpha_JVT,nom_gamma_stat_SR_bin_0,nom_gamma_stat_SR_bin_1,nom_gamma_stat_SR_bin_2,nom_gamma_stat_SR_bin_3,obs_x_SR)
+
+named sets
+----------
+ModelConfig_GlobalObservables:(nom_alpha_JVT,nom_gamma_stat_SR_bin_0,nom_gamma_stat_SR_bin_1,nom_gamma_stat_SR_bin_2,nom_gamma_stat_SR_bin_3)
+ModelConfig_Observables:(obs_x_SR,channelCat)
+globalObservables:(nom_alpha_JVT,nom_gamma_stat_SR_bin_0,nom_gamma_stat_SR_bin_1,nom_gamma_stat_SR_bin_2,nom_gamma_stat_SR_bin_3)
+observables:(obs_x_SR,channelCat)
+
+[#2] PROGRESS:HistFactory -- 
+-----------------------------------------
+	Importing combined model
+-----------------------------------------
+
+[#2] INFO:HistFactory -- setting Lumi constant
+[#2] PROGRESS:HistFactory -- 
+-----------------------------------------
+	create toy data
+-----------------------------------------
+
+[#1] INFO:NumericIntegration -- RooRealIntegral::init(SR_model_Int[obs_x_SR]) using numeric integrator RooBinIntegrator to calculate Int(obs_x_SR)
+RooDataSet::AsimovData0[obs_x_SR,channelCat,weight:binWeightAsimov] = 4 entries (1318.73 weighted)
+[#2] INFO:HistFactory -- Setting Parameter(s) of Interest as: ctW citW ttbar_NORM 
+
+=== Using the following for ModelConfig ===
+Observables:             RooArgSet:: = (obs_x_SR,channelCat)
+Parameters of Interest:  RooArgSet:: = (ctW,citW,ttbar_NORM)
+Nuisance Parameters:     RooArgSet:: = (alpha_JVT,gamma_stat_SR_bin_0,gamma_stat_SR_bin_1,gamma_stat_SR_bin_2,gamma_stat_SR_bin_3)
+Global Observables:      RooArgSet:: = (nom_alpha_JVT,nom_gamma_stat_SR_bin_0,nom_gamma_stat_SR_bin_1,nom_gamma_stat_SR_bin_2,nom_gamma_stat_SR_bin_3)
+PDF:                     RooSimultaneous::simPdf[ indexCat=channelCat SR=model_SR ] = 3.755e-06
+
+[1;32m[ INFO    ][0;0m Attaching metadata (titles, colours) to the WS
+[#2] PROGRESS:HistFactory -- Writing sample: SM_singletop_tchan_PowPy8_FS_SR_bin0
+[#2] PROGRESS:HistFactory -- Writing sample: SM_singletop_tchan_PowPy8_FS_SR_bin1
+[#2] PROGRESS:HistFactory -- Writing sample: SM_singletop_tchan_PowPy8_FS_SR_bin2
+[#2] PROGRESS:HistFactory -- Writing sample: SM_singletop_tchan_PowPy8_FS_SR_bin3
+[#2] PROGRESS:HistFactory -- Writing sample: ttbar
+[#2] PROGRESS:HistFactory -- Saved all histograms
+[#2] PROGRESS:HistFactory -- Saved Measurement
+[0;33m[ WARNING ][0;0m No VALIDATION regions found, will only produce workspace for fit regions
+[0;33m[ WARNING ][0;0m To add VALIDATION regions, rerun the "w" step with the option WorkspaceCreationType=FORPLOTS

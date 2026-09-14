@@ -1,0 +1,40 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[0m[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleNtuple.config
+[1;32m[ INFO    ][0;0m Successfully read config file.
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Job name: FitExampleNtuple
+[1;32m[ INFO    ][0;0m Reading the following regions:
+[1;32m[ INFO    ][0;0m     Region: ljets_5j3b_HT
+[1;32m[ INFO    ][0;0m     Region: ljets_6j4b_BDT
+[1;32m[ INFO    ][0;0m Reading the following samples:
+[1;32m[ INFO    ][0;0m      data
+[1;32m[ INFO    ][0;0m      ttlight
+[1;32m[ INFO    ][0;0m      ttc
+[1;32m[ INFO    ][0;0m      ttb
+[1;32m[ INFO    ][0;0m      ttH
+[1;32m[ INFO    ][0;0m Reading the following systematics:
+[1;32m[ INFO    ][0;0m  lumi
+[1;32m[ INFO    ][0;0m  PRW_DATASF
+[1;32m[ INFO    ][0;0m  JVT
+[1;32m[ INFO    ][0;0m  ttlight_Gen
+[1;32m[ INFO    ][0;0m  ttc_Gen
+[1;32m[ INFO    ][0;0m  ttb_Gen
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m -----------------------------
+[1;32m[ INFO    ][0;0m Reading histograms from file FitExampleNtuple/Histograms/FitExampleNtuple_ljets_5j3b_HT_histos.root ...
+[1;32m[ INFO    ][0;0m -----------------------------
+[1;32m[ INFO    ][0;0m Reading histograms from file FitExampleNtuple/Histograms/FitExampleNtuple_ljets_6j4b_BDT_histos.root ...
+[1;32m[ INFO    ][0;0m Applying systematics pruning...
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Apply Systematics Pruning ...
+[1;32m[ INFO    ][0;0m Creating workspace...
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Exporting to RooStats...
+[1;32m[ INFO    ][0;0m Creating workspace only with fit regions and dropped bins (no validation regions)
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Attaching metadata (titles, colours) to the WS
+[0;33m[ WARNING ][0;0m No VALIDATION regions found, will only produce workspace for fit regions
+[0;33m[ WARNING ][0;0m To add VALIDATION regions, rerun the "w" step with the option WorkspaceCreationType=FORPLOTS

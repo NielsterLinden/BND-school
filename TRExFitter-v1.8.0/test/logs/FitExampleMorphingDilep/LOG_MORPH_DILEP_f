@@ -1,0 +1,163 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[0m[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleMorphingDilep.config
+[1;32m[ INFO    ][0;0m Successfully read config file.
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Job name: FitExampleMorphingDilep
+[1;32m[ INFO    ][0;0m Reading the following regions:
+[1;32m[ INFO    ][0;0m     Region: SR_emu
+[1;32m[ INFO    ][0;0m     Region: CR_ll
+[1;32m[ INFO    ][0;0m Reading the following samples:
+[1;32m[ INFO    ][0;0m      Nom_emu
+[1;32m[ INFO    ][0;0m      Nom_mbb
+[1;32m[ INFO    ][0;0m      PseudoData
+[1;32m[ INFO    ][0;0m      PseudoData
+[1;32m[ INFO    ][0;0m      Bkg_SR
+[1;32m[ INFO    ][0;0m      Bkg_CR
+[1;32m[ INFO    ][0;0m      Signal_0p7
+[1;32m[ INFO    ][0;0m      Signal_1p0
+[1;32m[ INFO    ][0;0m      Signal_1p5
+[1;32m[ INFO    ][0;0m      Signal_2p0
+[1;32m[ INFO    ][0;0m      Control_mbb
+[1;32m[ INFO    ][0;0m Reading the following systematics:
+[1;32m[ INFO    ][0;0m  bTagSF_B_0
+[1;32m[ INFO    ][0;0m  CategoryReduction_JET_JER_EffectiveNP_2
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Fitting...
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Performing nominal fit...
+[1;32m[ INFO    ][0;0m Likelihood offset set to: initial
+[1;32m[ INFO    ][0;0m POI: topWidth
+[1;32m[ INFO    ][0;0m    -> Constant POI : 0
+[1;32m[ INFO    ][0;0m    -> Initial value of POI : 1.32
+[1;32m[ INFO    ][0;0m  ---> Setting ttbarXsec to 1
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m Fit try no. 1
+[1;32m[ INFO    ][0;0m ======================
+[1;32m[ INFO    ][0;0m 
+Minuit2Minimizer: Minimize with max-calls 18000 convergence for edm < 0.01 strategy 1
+Minuit2Minimizer : Valid minimum - status = 0
+FVAL  = 431.751800408247675
+Edm   = 4.02776487620412643e-07
+Nfcn  = 997
+alpha_bTagSF_B_0	  = 5.07358e-05	 +/-  0.198111	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_0	  = 1	 +/-  0.0461159	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_1	  = 1	 +/-  0.0504487	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_10	  = 1	 +/-  0.0390959	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_11	  = 1	 +/-  0.0332591	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_12	  = 1	 +/-  0.0393762	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_13	  = 1	 +/-  0.0360095	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_14	  = 1	 +/-  0.0487328	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_15	  = 1	 +/-  0.0448693	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_16	  = 1	 +/-  0.0546309	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_17	  = 1	 +/-  0.0503626	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_18	  = 1	 +/-  0.0656821	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_2	  = 1	 +/-  0.031695	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_4	  = 1	 +/-  0.0401727	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_6	  = 1	 +/-  0.0331127	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_7	  = 1	 +/-  0.0375084	(limited)
+gamma_shape_stat_Bkg_CR_CR_ll_bin_9	  = 1	 +/-  0.0526305	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_0	  = 0.999983	 +/-  0.203213	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_1	  = 1.00001	 +/-  0.0780627	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_10	  = 1	 +/-  0.0358397	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_11	  = 1	 +/-  0.0335973	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_12	  = 1	 +/-  0.0353308	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_14	  = 0.999998	 +/-  0.0338485	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_15	  = 0.999997	 +/-  0.0299824	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_17	  = 0.999998	 +/-  0.0308245	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_18	  = 1	 +/-  0.0306181	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_2	  = 1	 +/-  0.0617386	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_3	  = 1	 +/-  0.0480418	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_4	  = 1	 +/-  0.0513419	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_5	  = 1	 +/-  0.0532301	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_6	  = 0.999998	 +/-  0.0381962	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_7	  = 1.00001	 +/-  0.0381431	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_8	  = 1	 +/-  0.0346751	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_9	  = 1	 +/-  0.0412013	(limited)
+topWidth	  = 1.32175	 +/-  0.209922	(limited)
+ttbarXsec	  = 1	 +/-  0.00469335	(limited)
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS LOWER error for parameter #34 : topWidth using max-calls 18000, tolerance 0.01
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS UPPER error for parameter #34 : topWidth using max-calls 18000, tolerance 0.01
+Minos: Lower error for parameter topWidth  :  -0.213645
+Minos: Upper error for parameter topWidth  :  0.214824
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m          FIT FINALIZED SUCCESSFULLY : 
+[1;32m[ INFO    ][0;0m             - minuit status 0
+[1;32m[ INFO    ][0;0m             - hess status 0
+[1;32m[ INFO    ][0;0m             - Edm = 4.02843e-07
+[1;32m[ INFO    ][0;0m             - minos status 0
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m   Final value of the NLL = 349331.97525617893552407622
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m -----------------------     ERROR DECOMPOSITION    -----------------------
+[1;32m[ INFO    ][0;0m   POI :  +/-tot.err  (+/-stat  +/-syst)
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m   topWidth :  +/-0.209928  (+/-0.209479  +/-0.0137269)
+[1;32m[ INFO    ][0;0m   Full breakdown will be written to file in the Fits/ folder.
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m ----------------------- GOODNESS OF FIT EVALUATION -----------------------
+[1;32m[ INFO    ][0;0m   probability = 1
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m Producing group uncertainty breakdown for POI: topWidth
+[1;32m[ INFO    ][0;0m The txt file will be stored here: FitExampleMorphingDilep/Fits/FitExampleMorphingDilep_group_errDecomp_topWidth.txt
+[1;32m[ INFO    ][0;0m Writing impact yaml file to: FitExampleMorphingDilep/Fits/FitExampleMorphingDilep_group_errDecomp_topWidth.yaml
+[1;32m[ INFO    ][0;0m Writing ranking yaml file to: FitExampleMorphingDilep/Rankings/Ranking_topWidth_Breakdown.yaml
+[1;32m[ INFO    ][0;0m Running likelihood scan for the parameter = topWidth
+[1;32m[ INFO    ][0;0m Likelihood offset set to: initial
+[1;32m[ INFO    ][0;0m POI: topWidth
+[1;32m[ INFO    ][0;0m    -> Constant POI : 0
+[1;32m[ INFO    ][0;0m    -> Initial value of POI : 1.32
+[1;32m[ INFO    ][0;0m  ---> Setting ttbarXsec to 1
+[1;32m[ INFO    ][0;0m GetLikelihoodScan for NP = topWidth
+[1;32m[ INFO    ][0;0m Running LHscan for point 1 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 2 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 3 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 4 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 5 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 6 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 7 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 8 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 9 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 10 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 11 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 12 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 13 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 14 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 15 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 16 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 17 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 18 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 19 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 20 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 21 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 22 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 23 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 24 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 25 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 26 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 27 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 28 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 29 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 30 out of 30 points
+[1;32m[ INFO    ][0;0m Writing LikelihoodScan yaml file to: FitExampleMorphingDilep/LHoodPlots/NLLscan_topWidth.yaml
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Reading fit results from file
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Reading fit results from file
+[1;32m[ INFO    ][0;0m Writing correlation yaml file to: FitExampleMorphingDilep/CorrelationMatrix.yaml

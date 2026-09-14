@@ -1,0 +1,180 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[0m[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleEFTShapeFactor.config
+[1;32m[ INFO    ][0;0m Successfully read config file.
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Job name: FitExampleEFTShapeFactor
+[1;32m[ INFO    ][0;0m Reading the following regions:
+[1;32m[ INFO    ][0;0m     Region: R1L4bHi_c
+[1;32m[ INFO    ][0;0m Reading the following samples:
+[1;32m[ INFO    ][0;0m      EFT_ttHH_eft_CttHH_min3
+[1;32m[ INFO    ][0;0m      EFT_ttHH_eft_CttHH_min1
+[1;32m[ INFO    ][0;0m      EFT_ttHH_eft_CttHH_1
+[1;32m[ INFO    ][0;0m      EFT_ttHH_eft_CttHH_3
+[1;32m[ INFO    ][0;0m      ttHH
+[1;32m[ INFO    ][0;0m      ttb
+[1;32m[ INFO    ][0;0m Reading the following systematics:
+[1;32m[ INFO    ][0;0m  Jet_eta_intercalibration
+[1;32m[ INFO    ][0;0m  ttb_4fs
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Processing EFT shape factors from file: FitExampleEFTShapeFactor/EFT/SF_ALL_EFT_Fit_results.txt
+[1;32m[ INFO    ][0;0m Adding NormFactor: cttHH used in the ShapeFactor reparametrization
+[1;32m[ INFO    ][0;0m Fitting...
+Warning in <xRooNode::xRooNode>: Inferring initial errors of 6 parameters (gamma_EFTSF_R1L4bHi_c_ttHH_bin_0,...) (give all nuisance parameters an error to avoid this msg)
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Performing nominal fit...
+[1;32m[ INFO    ][0;0m Likelihood offset set to: initial
+[1;32m[ INFO    ][0;0m POI: cttHH
+[1;32m[ INFO    ][0;0m    -> Constant POI : 0
+[1;32m[ INFO    ][0;0m    -> Initial value of POI : 0
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m Fit try no. 1
+[1;32m[ INFO    ][0;0m ======================
+[1;32m[ INFO    ][0;0m 
+Minuit2Minimizer: Minimize with max-calls 4500 convergence for edm < 0.01 strategy 1
+Warning in <Minuit2>: VariableMetricBuilder No improvement in line search
+Minuit2Minimizer : Valid minimum - status = 0
+FVAL  = 25.3708673595394139
+Edm   = 4.14302047963270314e-15
+Nfcn  = 130
+alpha_Jet_eta_intercalibration	  = 0	 +/-  0.982239	(limited)
+alpha_ttb_4fs	  = 0	 +/-  0.50562	(limited)
+cttHH	  = 0	 +/-  0.938085	(limited)
+gamma_stat_R1L4bHi_c_bin_0	  = 1	 +/-  0.024441	(limited)
+gamma_stat_R1L4bHi_c_bin_1	  = 1	 +/-  0.0347565	(limited)
+gamma_stat_R1L4bHi_c_bin_2	  = 1	 +/-  0.0385323	(limited)
+gamma_stat_R1L4bHi_c_bin_3	  = 1	 +/-  0.0491294	(limited)
+gamma_stat_R1L4bHi_c_bin_4	  = 1	 +/-  0.0713859	(limited)
+gamma_stat_R1L4bHi_c_bin_5	  = 1	 +/-  0.09672	(limited)
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS LOWER error for parameter #0 : alpha_Jet_eta_intercalibration using max-calls 4500, tolerance 0.01
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS UPPER error for parameter #0 : alpha_Jet_eta_intercalibration using max-calls 4500, tolerance 0.01
+Minos: Lower error for parameter alpha_Jet_eta_intercalibration  :  -0.986778
+Minos: Upper error for parameter alpha_Jet_eta_intercalibration  :  0.955438
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS LOWER error for parameter #1 : alpha_ttb_4fs using max-calls 4500, tolerance 0.01
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS UPPER error for parameter #1 : alpha_ttb_4fs using max-calls 4500, tolerance 0.01
+Minos: Lower error for parameter alpha_ttb_4fs  :  -0.517032
+Minos: Upper error for parameter alpha_ttb_4fs  :  0.488466
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS LOWER error for parameter #2 : cttHH using max-calls 4500, tolerance 0.01
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS UPPER error for parameter #2 : cttHH using max-calls 4500, tolerance 0.01
+Minos: Lower error for parameter cttHH  :  -0.581246
+Minos: Upper error for parameter cttHH  :  0.363706
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS LOWER error for parameter #3 : gamma_stat_R1L4bHi_c_bin_0 using max-calls 4500, tolerance 0.01
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS UPPER error for parameter #3 : gamma_stat_R1L4bHi_c_bin_0 using max-calls 4500, tolerance 0.01
+Minos: Lower error for parameter gamma_stat_R1L4bHi_c_bin_0  :  -0.0242494
+Minos: Upper error for parameter gamma_stat_R1L4bHi_c_bin_0  :  0.024662
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS LOWER error for parameter #4 : gamma_stat_R1L4bHi_c_bin_1 using max-calls 4500, tolerance 0.01
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS UPPER error for parameter #4 : gamma_stat_R1L4bHi_c_bin_1 using max-calls 4500, tolerance 0.01
+Minos: Lower error for parameter gamma_stat_R1L4bHi_c_bin_1  :  -0.0343781
+Minos: Upper error for parameter gamma_stat_R1L4bHi_c_bin_1  :  0.0351948
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS LOWER error for parameter #5 : gamma_stat_R1L4bHi_c_bin_2 using max-calls 4500, tolerance 0.01
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS UPPER error for parameter #5 : gamma_stat_R1L4bHi_c_bin_2 using max-calls 4500, tolerance 0.01
+Minos: Lower error for parameter gamma_stat_R1L4bHi_c_bin_2  :  -0.0380654
+Minos: Upper error for parameter gamma_stat_R1L4bHi_c_bin_2  :  0.0390073
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS LOWER error for parameter #6 : gamma_stat_R1L4bHi_c_bin_3 using max-calls 4500, tolerance 0.01
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS UPPER error for parameter #6 : gamma_stat_R1L4bHi_c_bin_3 using max-calls 4500, tolerance 0.01
+Minos: Lower error for parameter gamma_stat_R1L4bHi_c_bin_3  :  -0.048372
+Minos: Upper error for parameter gamma_stat_R1L4bHi_c_bin_3  :  0.0498565
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS LOWER error for parameter #7 : gamma_stat_R1L4bHi_c_bin_4 using max-calls 4500, tolerance 0.01
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS UPPER error for parameter #7 : gamma_stat_R1L4bHi_c_bin_4 using max-calls 4500, tolerance 0.01
+Minos: Lower error for parameter gamma_stat_R1L4bHi_c_bin_4  :  -0.0697792
+Minos: Upper error for parameter gamma_stat_R1L4bHi_c_bin_4  :  0.0729242
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS LOWER error for parameter #8 : gamma_stat_R1L4bHi_c_bin_5 using max-calls 4500, tolerance 0.01
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS UPPER error for parameter #8 : gamma_stat_R1L4bHi_c_bin_5 using max-calls 4500, tolerance 0.01
+Minos: Lower error for parameter gamma_stat_R1L4bHi_c_bin_5  :  -0.0936956
+Minos: Upper error for parameter gamma_stat_R1L4bHi_c_bin_5  :  0.098317
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m          FIT FINALIZED SUCCESSFULLY : 
+[1;32m[ INFO    ][0;0m             - minuit status 0
+[1;32m[ INFO    ][0;0m             - hess status 0
+[1;32m[ INFO    ][0;0m             - Edm = 9.98786e-16
+[1;32m[ INFO    ][0;0m             - minos status 0
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m   Final value of the NLL = 43.24115266266666424144
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m -----------------------     ERROR DECOMPOSITION    -----------------------
+[1;32m[ INFO    ][0;0m   POI :  +/-tot.err  (+/-stat  +/-syst)
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m   cttHH :  +/-0.93444  (+/-0.821504  +/-0.445318)
+[1;32m[ INFO    ][0;0m   Full breakdown will be written to file in the Fits/ folder.
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m ----------------------- GOODNESS OF FIT EVALUATION -----------------------
+[1;32m[ INFO    ][0;0m   probability = 1
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m Producing group uncertainty breakdown for POI: cttHH
+[1;32m[ INFO    ][0;0m The txt file will be stored here: FitExampleEFTShapeFactor/Fits/FitExampleEFTShapeFactor_group_errDecomp_cttHH.txt
+[1;32m[ INFO    ][0;0m Writing impact yaml file to: FitExampleEFTShapeFactor/Fits/FitExampleEFTShapeFactor_group_errDecomp_cttHH.yaml
+[1;32m[ INFO    ][0;0m Writing ranking yaml file to: FitExampleEFTShapeFactor/Rankings/Ranking_cttHH_Breakdown.yaml
+[1;32m[ INFO    ][0;0m Running likelihood scan for the parameter = cttHH
+[1;32m[ INFO    ][0;0m Likelihood offset set to: initial
+[1;32m[ INFO    ][0;0m POI: cttHH
+[1;32m[ INFO    ][0;0m    -> Constant POI : 0
+[1;32m[ INFO    ][0;0m    -> Initial value of POI : 0
+[1;32m[ INFO    ][0;0m GetLikelihoodScan for NP = cttHH
+[1;32m[ INFO    ][0;0m Running LHscan for point 1 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 2 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 3 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 4 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 5 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 6 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 7 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 8 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 9 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 10 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 11 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 12 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 13 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 14 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 15 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 16 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 17 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 18 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 19 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 20 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 21 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 22 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 23 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 24 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 25 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 26 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 27 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 28 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 29 out of 30 points
+[1;32m[ INFO    ][0;0m Running LHscan for point 30 out of 30 points
+[1;32m[ INFO    ][0;0m Writing LikelihoodScan yaml file to: FitExampleEFTShapeFactor/LHoodPlots/NLLscan_cttHH.yaml
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Reading fit results from file
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Reading fit results from file
+[1;32m[ INFO    ][0;0m Writing correlation yaml file to: FitExampleEFTShapeFactor/CorrelationMatrix.yaml

@@ -1,0 +1,181 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[0m[#1] INFO:InputArguments -- Silent clipping of values to range in `RooRealVar::setVal()` enabled.
+[1;32m[ INFO    ][0;0m Started reading the config
+[1;32m[ INFO    ][0;0m Reading config file: test/configs/FitExampleTemplate_2D_AD.config
+[1;36m[ DEBUG   ][0;0m PlotOptionsSummary not specified setting Summary values to 'PlotOptions'
+[1;36m[ DEBUG   ][0;0m You do not have 'Options' option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Limit option in the config. It is ok, we just want to let you know.
+[1;36m[ DEBUG   ][0;0m You do not have Significance option in the config. It is ok, we just want to let you know.
+[1;32m[ INFO    ][0;0m Successfully read config file.
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Job name: FitExampleTemplate_2D_AD
+[1;32m[ INFO    ][0;0m Reading the following regions:
+[1;32m[ INFO    ][0;0m     Region: SR_emu
+[1;32m[ INFO    ][0;0m Reading the following samples:
+[1;32m[ INFO    ][0;0m      Signal_0p7_170
+[1;32m[ INFO    ][0;0m      Signal_0p7_172p5
+[1;32m[ INFO    ][0;0m      Signal_0p7_175
+[1;32m[ INFO    ][0;0m      Signal_1p0_170
+[1;32m[ INFO    ][0;0m      Signal_1p0_172p5
+[1;32m[ INFO    ][0;0m      Signal_1p0_175
+[1;32m[ INFO    ][0;0m      Signal_2p0_170
+[1;32m[ INFO    ][0;0m      Signal_2p0_172p5
+[1;32m[ INFO    ][0;0m      Signal_2p0_175
+[1;32m[ INFO    ][0;0m      PseudoData
+[1;32m[ INFO    ][0;0m      Bkg_SR
+[1;32m[ INFO    ][0;0m      Signal_1p5_172p5
+[1;32m[ INFO    ][0;0m Reading the following systematics:
+[1;32m[ INFO    ][0;0m  bTagSF_B_0
+[1;32m[ INFO    ][0;0m  CategoryReduction_JET_JER_EffectiveNP_2
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Adding NormFactor: topWidth used in the ShapeFactor reparametrization
+[1;32m[ INFO    ][0;0m Adding NormFactor: topMass used in the ShapeFactor reparametrization
+[1;32m[ INFO    ][0;0m Fitting...
+Warning in <xRooNode::xRooNode>: Inferring initial errors of 20 parameters (gamma_templateSF_SR_emu_Signal_1p5_172p5_bin_0,...) (give all nuisance parameters an error to avoid this msg)
+[#1] INFO:ObjectHandling -- RooWorkspace::import(combined) importing dataset obsData
+[#1] INFO:ObjectHandling -- RooWorkspace::import(combined) importing dataset asimovData
+[#2] INFO:HistFactory -- Setting Parameter(s) of Interest as: topWidth 
+
+=== Using the following for ModelConfig ===
+Observables:             RooArgSet:: = (channelCat,obs_x_SR_emu)
+Parameters of Interest:  RooArgSet:: = (topWidth)
+Nuisance Parameters:     RooArgSet:: = (gamma_shape_stat_Bkg_SR_SR_emu_bin_0,gamma_shape_stat_Bkg_SR_SR_emu_bin_1,gamma_shape_stat_Bkg_SR_SR_emu_bin_2,gamma_shape_stat_Bkg_SR_SR_emu_bin_3,gamma_shape_stat_Bkg_SR_SR_emu_bin_4,gamma_shape_stat_Bkg_SR_SR_emu_bin_5,gamma_shape_stat_Bkg_SR_SR_emu_bin_6,gamma_shape_stat_Bkg_SR_SR_emu_bin_7,gamma_shape_stat_Bkg_SR_SR_emu_bin_8,gamma_shape_stat_Bkg_SR_SR_emu_bin_9,gamma_shape_stat_Bkg_SR_SR_emu_bin_10,gamma_shape_stat_Bkg_SR_SR_emu_bin_11,gamma_shape_stat_Bkg_SR_SR_emu_bin_12,gamma_shape_stat_Bkg_SR_SR_emu_bin_14,gamma_shape_stat_Bkg_SR_SR_emu_bin_15,gamma_shape_stat_Bkg_SR_SR_emu_bin_17,gamma_shape_stat_Bkg_SR_SR_emu_bin_18,alpha_bTagSF_B_0,ttbarXsec)
+Global Observables:      RooArgSet:: = (nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_0,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_1,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_2,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_3,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_4,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_5,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_6,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_7,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_8,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_9,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_10,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_11,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_12,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_14,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_15,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_17,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_18,nom_alpha_bTagSF_B_0,nom_gamma_stat_SR_emu_bin_0,nom_gamma_stat_SR_emu_bin_1,nom_gamma_stat_SR_emu_bin_2,nom_gamma_stat_SR_emu_bin_3,nom_gamma_stat_SR_emu_bin_4,nom_gamma_stat_SR_emu_bin_5,nom_gamma_stat_SR_emu_bin_6,nom_gamma_stat_SR_emu_bin_7,nom_gamma_stat_SR_emu_bin_8,nom_gamma_stat_SR_emu_bin_9,nom_gamma_stat_SR_emu_bin_10,nom_gamma_stat_SR_emu_bin_11,nom_gamma_stat_SR_emu_bin_12,nom_gamma_stat_SR_emu_bin_13,nom_gamma_stat_SR_emu_bin_14,nom_gamma_stat_SR_emu_bin_15,nom_gamma_stat_SR_emu_bin_16,nom_gamma_stat_SR_emu_bin_17,nom_gamma_stat_SR_emu_bin_18,nom_gamma_stat_SR_emu_bin_19)
+PDF:                     RooSimultaneous::simPdf[ indexCat=channelCat SR_emu=model_SR_emu ] = 1.72482e-91
+
+[1;36m[ DEBUG   ][0;0m Dumping data with the following parameters
+[1;36m[ DEBUG   ][0;0m     * Regions data type
+[1;36m[ DEBUG   ][0;0m        - Region: SR_emu       DataType: 0
+[1;36m[ DEBUG   ][0;0m     * No NP values injected
+[1;36m[ DEBUG   ][0;0m     * No POI values injected
+[#1] INFO:ObjectHandling -- RooWorkspace::import(combined) importing RooRealVar::weightVar
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m -------------------------------------------
+[1;32m[ INFO    ][0;0m Performing nominal fit...
+[1;32m[ INFO    ][0;0m Will use automatic differentiation for fitting
+[1;32m[ INFO    ][0;0m Likelihood offset set to: initial
+[1;36m[ DEBUG   ][0;0m Setting the variables to use MINOS with
+[#1] INFO:ObjectHandling -- RooWorkspace::import(combined) importing dataset newasimovData
+[1;36m[ DEBUG   ][0;0m -> Entering in FitPDF function
+
+=== Using the following for ModelConfig ===
+Observables:             RooArgSet:: = (channelCat,obs_x_SR_emu)
+Parameters of Interest:  RooArgSet:: = (topWidth)
+Nuisance Parameters:     RooArgSet:: = (gamma_shape_stat_Bkg_SR_SR_emu_bin_0,gamma_shape_stat_Bkg_SR_SR_emu_bin_1,gamma_shape_stat_Bkg_SR_SR_emu_bin_2,gamma_shape_stat_Bkg_SR_SR_emu_bin_3,gamma_shape_stat_Bkg_SR_SR_emu_bin_4,gamma_shape_stat_Bkg_SR_SR_emu_bin_5,gamma_shape_stat_Bkg_SR_SR_emu_bin_6,gamma_shape_stat_Bkg_SR_SR_emu_bin_7,gamma_shape_stat_Bkg_SR_SR_emu_bin_8,gamma_shape_stat_Bkg_SR_SR_emu_bin_9,gamma_shape_stat_Bkg_SR_SR_emu_bin_10,gamma_shape_stat_Bkg_SR_SR_emu_bin_11,gamma_shape_stat_Bkg_SR_SR_emu_bin_12,gamma_shape_stat_Bkg_SR_SR_emu_bin_14,gamma_shape_stat_Bkg_SR_SR_emu_bin_15,gamma_shape_stat_Bkg_SR_SR_emu_bin_17,gamma_shape_stat_Bkg_SR_SR_emu_bin_18,alpha_bTagSF_B_0,ttbarXsec)
+Global Observables:      RooArgSet:: = (nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_0,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_1,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_2,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_3,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_4,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_5,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_6,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_7,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_8,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_9,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_10,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_11,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_12,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_14,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_15,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_17,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_18,nom_alpha_bTagSF_B_0,nom_gamma_stat_SR_emu_bin_0,nom_gamma_stat_SR_emu_bin_1,nom_gamma_stat_SR_emu_bin_2,nom_gamma_stat_SR_emu_bin_3,nom_gamma_stat_SR_emu_bin_4,nom_gamma_stat_SR_emu_bin_5,nom_gamma_stat_SR_emu_bin_6,nom_gamma_stat_SR_emu_bin_7,nom_gamma_stat_SR_emu_bin_8,nom_gamma_stat_SR_emu_bin_9,nom_gamma_stat_SR_emu_bin_10,nom_gamma_stat_SR_emu_bin_11,nom_gamma_stat_SR_emu_bin_12,nom_gamma_stat_SR_emu_bin_13,nom_gamma_stat_SR_emu_bin_14,nom_gamma_stat_SR_emu_bin_15,nom_gamma_stat_SR_emu_bin_16,nom_gamma_stat_SR_emu_bin_17,nom_gamma_stat_SR_emu_bin_18,nom_gamma_stat_SR_emu_bin_19)
+PDF:                     RooSimultaneous::simPdf[ indexCat=channelCat SR_emu=model_SR_emu ] = 1.72482e-91
+
+[#1] INFO:Minimization -- p.d.f. provides expected number of events, including extended term in likelihood.
+[#1] INFO:Minimization --  Including the following constraint terms in minimization: (gamma_shape_stat_Bkg_SR_SR_emu_bin_0_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_1_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_2_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_3_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_4_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_5_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_6_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_7_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_8_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_9_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_10_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_11_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_12_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_14_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_15_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_17_constraint,gamma_shape_stat_Bkg_SR_SR_emu_bin_18_constraint,alpha_bTagSF_B_0Constraint,gamma_stat_SR_emu_bin_0_constraint,gamma_stat_SR_emu_bin_1_constraint,gamma_stat_SR_emu_bin_2_constraint,gamma_stat_SR_emu_bin_3_constraint,gamma_stat_SR_emu_bin_4_constraint,gamma_stat_SR_emu_bin_5_constraint,gamma_stat_SR_emu_bin_6_constraint,gamma_stat_SR_emu_bin_7_constraint,gamma_stat_SR_emu_bin_8_constraint,gamma_stat_SR_emu_bin_9_constraint,gamma_stat_SR_emu_bin_10_constraint,gamma_stat_SR_emu_bin_11_constraint,gamma_stat_SR_emu_bin_12_constraint,gamma_stat_SR_emu_bin_13_constraint,gamma_stat_SR_emu_bin_14_constraint,gamma_stat_SR_emu_bin_15_constraint,gamma_stat_SR_emu_bin_16_constraint,gamma_stat_SR_emu_bin_17_constraint,gamma_stat_SR_emu_bin_18_constraint,gamma_stat_SR_emu_bin_19_constraint)
+[#1] INFO:Minimization -- The following global observables have been defined and their values are taken from the model: (nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_0,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_1,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_2,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_3,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_4,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_5,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_6,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_7,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_8,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_9,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_10,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_11,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_12,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_14,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_15,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_17,nom_gamma_shape_stat_Bkg_SR_SR_emu_bin_18,nom_alpha_bTagSF_B_0,nom_gamma_stat_SR_emu_bin_0,nom_gamma_stat_SR_emu_bin_1,nom_gamma_stat_SR_emu_bin_2,nom_gamma_stat_SR_emu_bin_3,nom_gamma_stat_SR_emu_bin_4,nom_gamma_stat_SR_emu_bin_5,nom_gamma_stat_SR_emu_bin_6,nom_gamma_stat_SR_emu_bin_7,nom_gamma_stat_SR_emu_bin_8,nom_gamma_stat_SR_emu_bin_9,nom_gamma_stat_SR_emu_bin_10,nom_gamma_stat_SR_emu_bin_11,nom_gamma_stat_SR_emu_bin_12,nom_gamma_stat_SR_emu_bin_13,nom_gamma_stat_SR_emu_bin_14,nom_gamma_stat_SR_emu_bin_15,nom_gamma_stat_SR_emu_bin_16,nom_gamma_stat_SR_emu_bin_17,nom_gamma_stat_SR_emu_bin_18,nom_gamma_stat_SR_emu_bin_19)
+[#1] INFO:Fitting -- RooAbsPdf::fitTo(simPdf) fixing normalization set for coefficient determination to observables in data
+[#1] INFO:Fitting -- using generic CPU library compiled with no vectorizations
+[#1] INFO:Fitting -- Creation of NLL object took 5.5431 ms
+[#1] INFO:Fitting -- Function JIT time: 6.99419 s
+[#1] INFO:Fitting -- Gradient generation time: 171.425 ms
+[#1] INFO:Fitting -- Gradient IR to machine code time: 138.411 ms
+[1;32m[ INFO    ][0;0m POI: topWidth
+[1;32m[ INFO    ][0;0m    -> Constant POI : 0
+[1;32m[ INFO    ][0;0m    -> Initial value of POI : 1.5
+[1;32m[ INFO    ][0;0m  ---> Setting ttbarXsec to 1
+[1;36m[ DEBUG   ][0;0m    -> Initial value of the NLL = 329.69
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_simPdf_newasimovData) Summation contains a RooNLLVar, using its error level
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m Fit try no. 1
+[1;32m[ INFO    ][0;0m ======================
+[1;32m[ INFO    ][0;0m 
+[#1] INFO:Minimization -- [fitFCN] No discrete parameters, performing continuous minimization only
+Minuit2Minimizer: Minimize with max-calls 10500 convergence for edm < 0.01 strategy 1
+Warning in <Minuit2>: MnHesse Analytical calculator  	[   -0.00455477669  0.0003011607278  0.0001655958838  6.944187045e-05  0.0001357237582  0.0002544549712   0.000507776504  0.0004756144778  0.0006846149321  0.0005174135278....       0.667403392]	  numerical  	[  -0.004578578172  0.0002483302892  9.390048136e-05   -2.9819641e-05  3.354053894e-05  0.0001545617524  0.0004059190491  0.0003680305614  0.0005783956781  0.0004108684478....      0.5980718271]	  g2  	[      4237.131535      24.45717813      63.90684411        139.36785      148.6765326      141.3770556      147.5697037      166.6092667      162.0673274      163.1502863....       32076312.92]	
+Minuit2Minimizer : Valid minimum - status = 0
+FVAL  = 329.235586204143033
+Edm   = 2.25931948156682805e-06
+Nfcn  = 441
+alpha_bTagSF_B_0	  = -0.00240367	 +/-  0.896258	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_0	  = 1.00002	 +/-  0.20324	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_1	  = 0.999994	 +/-  0.0780619	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_10	  = 1	 +/-  0.03584	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_11	  = 1	 +/-  0.0335975	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_12	  = 1	 +/-  0.035331	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_14	  = 1	 +/-  0.0338491	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_15	  = 1.00001	 +/-  0.0299828	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_17	  = 0.999995	 +/-  0.0308247	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_18	  = 1	 +/-  0.0306189	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_2	  = 0.999999	 +/-  0.0617387	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_3	  = 1	 +/-  0.048042	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_4	  = 0.999999	 +/-  0.0513421	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_5	  = 0.999998	 +/-  0.0532303	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_6	  = 1	 +/-  0.0381965	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_7	  = 0.999998	 +/-  0.0381429	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_8	  = 1	 +/-  0.0346752	(limited)
+gamma_shape_stat_Bkg_SR_SR_emu_bin_9	  = 1	 +/-  0.0412021	(limited)
+topMass	  = 172.506	 +/-  0.210884	(limited)
+topWidth	  = 1.32211	 +/-  0.519303	(limited)
+ttbarXsec	  = 1.00003	 +/-  0.0200036	(limited)
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS LOWER error for parameter #19 : topWidth using max-calls 10500, tolerance 0.01
+******************************************************************************************************
+Minuit2Minimizer::GetMinosError - Run MINOS UPPER error for parameter #19 : topWidth using max-calls 10500, tolerance 0.01
+Minos: Lower error for parameter topWidth  :  -0.526943
+Minos: Upper error for parameter topWidth  :  0.538523
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m          FIT FINALIZED SUCCESSFULLY : 
+[1;32m[ INFO    ][0;0m             - minuit status 0
+[1;32m[ INFO    ][0;0m             - hess status 0
+[1;32m[ INFO    ][0;0m             - Edm = 2.26424e-06
+[1;32m[ INFO    ][0;0m             - minos status 0
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m 
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m   Final value of the NLL = 329.23558620414303277357
+[1;32m[ INFO    ][0;0m ***********************************************************
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m -----------------------     ERROR DECOMPOSITION    -----------------------
+[1;32m[ INFO    ][0;0m   POI :  +/-tot.err  (+/-stat  +/-syst)
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m   topWidth :  +/-0.519191  (+/-0.511205  +/-0.0907174)
+[1;32m[ INFO    ][0;0m   Full breakdown will be written to file in the Fits/ folder.
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;36m[ DEBUG   ][0;0m Goodness-of-fit evaluation
+[1;36m[ DEBUG   ][0;0m 	Best fit NLL: 329.236
+[1;36m[ DEBUG   ][0;0m 	Saturated model NLL: 329.235
+[1;36m[ DEBUG   ][0;0m 	NDOF: 17
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m ----------------------- GOODNESS OF FIT EVALUATION -----------------------
+[1;32m[ INFO    ][0;0m   probability = 1
+[1;32m[ INFO    ][0;0m ----------------------- -------------------------- -----------------------
+[1;36m[ DEBUG   ][0;0m Filling SubCategory map
+[1;36m[ DEBUG   ][0;0m Finding unique SubCategories
+[1;32m[ INFO    ][0;0m Producing group uncertainty breakdown for POI: topWidth
+[1;32m[ INFO    ][0;0m The txt file will be stored here: FitExampleTemplate_2D_AD/Fits/FitExampleTemplate_2D_AD_group_errDecomp_topWidth.txt
+[1;32m[ INFO    ][0;0m Writing impact yaml file to: FitExampleTemplate_2D_AD/Fits/FitExampleTemplate_2D_AD_group_errDecomp_topWidth.yaml
+[1;32m[ INFO    ][0;0m Writing ranking yaml file to: FitExampleTemplate_2D_AD/Rankings/Ranking_topWidth_Breakdown.yaml
+[1;36m[ DEBUG   ][0;0m NP ordering...
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D_AD/Rankings/Ranking_topWidth_Breakdown.png has been created
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Reading fit results from file
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D_AD/Pulls/All/NuisPar_Btag.png has been created
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D_AD/Pulls/PullSig/NuisParSig_Btag.png has been created
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D_AD/Pulls/RankedPullSig/NuisParSigRank_Btag.png has been created
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D_AD/Pulls/All/NuisPar_Jet.png has been created
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D_AD/Pulls/PullSig/NuisParSig_Jet.png has been created
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D_AD/Pulls/RankedPullSig/NuisParSigRank_Jet.png has been created
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D_AD/Pulls/All/NuisPar.png has been created
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D_AD/Pulls/PullSig/NuisParSig.png has been created
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D_AD/Pulls/RankedPullSig/NuisParSigRank.png has been created
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D_AD/Gammas.png has been created
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D_AD/NormFactors.png has been created
+[1;32m[ INFO    ][0;0m ------------------------------------------------------
+[1;32m[ INFO    ][0;0m Reading fit results from file
+[1;32m[ INFO    ][0;0m Writing correlation yaml file to: FitExampleTemplate_2D_AD/CorrelationMatrix.yaml
+Info in <TCanvas::Print>: png file FitExampleTemplate_2D_AD/CorrMatrix.png has been created

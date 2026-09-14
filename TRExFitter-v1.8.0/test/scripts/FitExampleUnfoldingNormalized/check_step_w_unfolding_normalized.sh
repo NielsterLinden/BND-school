@@ -1,0 +1,2 @@
+ #!/bin/bash
+diff -w -I "Developed by" -I "HistoAddress" -I "Opened input file" -I "Pruning" -I "libSM.so" -I "libASImage" -I "png file FitExampleUnfoldingNormalized" -I "using CPU computation library" -I "Version:" LOG_UNFOLDING_NORM_w test/logs/FitExampleUnfoldingNormalized/LOG_UNFOLDING_NORM_w && diff FitExampleUnfoldingNormalized/PruningText.txt test/reference/FitExampleUnfoldingNormalized/PruningText.txt

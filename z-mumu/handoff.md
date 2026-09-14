@@ -3,6 +3,8 @@
 ## Team
 
 - Karel de Vries
+- Eugene Shalugin
+- Niels Ter Linden
 
 ## What we worked on
 

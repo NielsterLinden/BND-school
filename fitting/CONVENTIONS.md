@@ -27,6 +27,7 @@ which the config in `fitting/trexconfig.py` maps onto exactly these names. Rules
   nominal templates (`trexhist.write` clips and reports);
 - region names are channel-prefixed and globally unique: `mumu_SR`, `mumu_CRemu`, `ee_SR`,
   `tautau_SR`, ... (MultiFit does not merge regions with the same name, it warns);
+  ττ additionally uses the sample `DYlowmass` (Z/γ*→ℓℓ, 10 < m < 50 GeV);
 - sample names: `Data`, `DYmumu`, `DYee`, `DYtautau`, `TTbar`, `SingleTop`, `WW`, `WZ`, `ZZ`,
   `Fakes` (data-driven; carries its own systematics and its own Sumw2);
 - one-sided variations provide only `__<syst>Up` (declare `Symmetrisation: ONESIDED`);
@@ -53,8 +54,12 @@ which the config in `fitting/trexconfig.py` maps onto exactly these names. Rules
 | `PDF`, `QCDScale`, `PS_ISR`, `PS_FSR`, `SigModel` | HISTO on the DY samples (vary the C factor only: renormalised to a constant fiducial yield) | yes | Signal modelling |
 | `MuonID`, `MuonIso`, `MuonTrigger`, `MuonReco` (OVERALL 0.4 %), `MuonScale`, `MuonRes` | HISTO/OVERALL | yes between channels that use muons (μμ, μτ_h) | Muon efficiency / Muon momentum |
 | `ElectronID`, `ElectronReco`, `ElectronTrigger`, `ElectronScale` | | yes between channels that use electrons | Electron efficiency / Electron energy |
-| `TauID`, `TauES` | | ττ only | Tau |
+| `TauID_DM0/1/10/11`, `TauTrigger_DM*`, `TauES_DM*`, `TauFakeEle`, `TauFakeMu` | HISTO | ττ only (would be shared with eτh/μτh) | Tau (SubCategory Tau ID / Tau trigger / Tau energy scale) |
+| `MET_Unclustered` | HISTO (shape) | channels that use MET | MET |
+| `XS_DYll` 5 % (Z→ee/μμ as a background in ττ), `XS_DYlowmass` 10 %, `XS_WJets` 10 % | OVERALL | yes | Background normalisation |
+| `MCStatNorm_<sample>_<channel>` | OVERALL (statistical normalisation of a smoothed template) | no | Background normalisation |
 | `FakeStat_<channel>`, `FakeMethod_<channel>` | HISTO on `Fakes` | no (channel suffix) | Fakes |
+| ττ: `FakeStat_tautau_DM*`, `FakeOSSS_tautau`, `FakeClosure_tautau` | HISTO on `Fakes` | no | Fakes |
 | MC statistics | per-bin gammas (`MCstatThreshold: 0`) | no | Gammas |
 
 Use the same `Category` strings, so the grouped-impact tables of the individual fits and of the

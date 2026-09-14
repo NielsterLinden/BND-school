@@ -60,3 +60,34 @@ grouped impacts (`FullSyst`, luminosity quoted separately), and the acceptance u
 (PDF 0.52%, scale 0.32%, alpha_s 0.03%, MC stat; from `scripts/mc_acceptance.py`) added in
 quadrature for the inclusive cross sections. The counting form `(N_data - N_bkg)/(L C)` is
 printed as a cross-check. Results: `fit/results/zmumu_fit_result.json`, `output/v2/RESULTS_v2.md`.
+
+## Result (14 Sep 2026)
+
+```
+mu_Z      = 0.9903 +0.0141 -0.0138        (stat 0.0003, syst 0.0140 of which lumi 0.0116)
+sigma_fid = 791.8 +- 0.2 (stat) +- 6.2 (syst) +- 9.3 (lumi) pb       GoF p = 0.33
+sigma(60 < m < 120) = 1935 +- 30 pb        sigma(m > 50) = 2006 +- 31 pb
+counting: (10 378 567 - 68 821) / (16393.381 x 0.7917) = 794.4 pb
+```
+
+| group | impact on mu_Z |
+|---|---:|
+| luminosity | 1.164% |
+| L1 prefiring | 0.506% |
+| muon efficiency | 0.503% |
+| signal modelling | 0.363% |
+| MC statistics (gammas) | 0.347% |
+| muon momentum | 0.268% |
+| pileup | 0.158% |
+| background normalisation | 0.093% |
+| fakes | 0.045% |
+| statistical | 0.031% |
+| **total systematic** | **1.397%** |
+
+Momentum calibration: kappa = 0.99911, 0.99923, 0.99874, 1.00038 (+-0.0005) and extra
+smearing 0, 0.62, 0.63, 0.91% in the four |eta| bins. Pulls: `Pileup` -1.5 sigma (the data
+prefer a lower minimum-bias cross section than 69.2 mb), `MuonIso` -1.1, `PDF` +1.3,
+`MuonScale`/`MuonRes` strongly constrained by the 2 GeV mass bins; all others within 1 sigma.
+The MINOS uncertainty on `mu_Z` is symmetric within 2%. Comparison: reviewer 797.2 pb (same
+volume, -0.7%), v1 773.2 pb, v1 revised 776.9 pb, aMC@NLO 799.6 pb (ratio 0.990), madgraph LO
+825.4 pb.

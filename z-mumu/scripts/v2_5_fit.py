@@ -96,7 +96,8 @@ def build_inputs(hists_all, fakes_res, gens, regions_used):
                 scale = n_fid_expected / float(g_pw["sumw_fid_dressed"])
                 out[trexhist.hname(region, "DYmumu", "SigModel", "Up")] = to_hist(
                     pw * scale, hists_all[f"DYmumu_powheg|{region}|mass_fit|nominal|w2"] * scale ** 2, e)
-                meta["sigmodel_powheg_over_nlo"] = float(np.sum(pw * scale) / np.sum(nom))
+                if region == "SR":
+                    meta["sigmodel_powheg_over_nlo"] = float(np.sum(pw * scale) / np.sum(nom))
         # fakes (SR only; the CRemu prompt subtraction is not part of the fake estimate)
         if region == "SR" and fakes_res is not None:
             f = np.array(fakes_res["templates"]["nominal"]); fv = np.array(fakes_res["templates"]["nominal_var"])
@@ -117,7 +118,8 @@ def build_inputs(hists_all, fakes_res, gens, regions_used):
 def make_config(regions_used, present, emu_control):
     mc = [s for s in MC_SAMPLES if trexhist.hname("SR", s) in present]
     blocks = [
-        tc.job(JOB, Label="Z #rightarrow #mu#mu", CmeLabel="13 TeV", LumiLabel="16.4 fb^{-1}", POI="mu_Z",
+        tc.job(JOB, ExperimentLabel="CMS Open Data", Label="Z #rightarrow #mu#mu", CmeLabel="13 TeV",
+               LumiLabel="16.4 fb^{-1}", POI="mu_Z",
                ReadFrom="HIST", HistoPath="fitinputs", HistoFile=JOB, OutputDir="results", MCstatThreshold=0,
                UseGammaPulls=True, SystControlPlots=True, SystCategoryTables=True, SystLarge=0.5,
                SuppressNegativeBinWarnings=True, GetChi2=True, DoSummaryPlot=True, DoTables=True, RankingMaxNP=25,

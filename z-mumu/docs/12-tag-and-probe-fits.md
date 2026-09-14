@@ -52,4 +52,19 @@ per-muon efficiencies (a sub-threshold second muon contributes its turn-on effic
 zero). Nuisance parameters `MuonID`, `MuonIso`, `MuonTrigger`: all cells shifted coherently by
 +-1 sigma (stat (+) syst) -- conservative for the statistical part, which is far below 0.1%.
 
-Numbers: `RESULTS_v2.md` (mean SFs, plateau efficiencies, per-cell tables in the JSON).
+## Results
+
+20.0 M data pairs, 14.7 M (weighted) simulated pairs; 320 fits per efficiency.
+
+| | data | simulation | scale factor (mean over cells) | stat | syst |
+|---|---:|---:|---:|---:|---:|
+| tight ID | 0.957 (20-25 GeV, barrel) ... 0.98 | 0.968 ... 0.99 | **0.980** (0.93-0.99) | 0.0014 | 0.0029 |
+| isolation | 0.86 (20-25 GeV) ... 0.99 | | **1.005** (1.00-1.04) | 0.0009 | 0.0033 |
+| anti-isolation (0.20-1.0) | | | 0.90 (large spread; only used as a cross-check of the fake-factor prompt subtraction) | | |
+| trigger, per muon on the plateau | **0.907** (|eta| bins 0.93 / 0.93 / 0.88 / 0.79) | **0.923** (0.95 / 0.97 / 0.88 / 0.83) | | | L1 veto in the data error |
+
+The data ID efficiency is 1-2% below the simulation everywhere, most in the forward endcap;
+the fit-vs-truth closure in simulation is -0.1% (ID) and -0.2% (iso). The isolation scale
+factor is flat in pileup (half-spread 0.0024 over four `PV_npvsGood` bins). Plots:
+`tnp_eff_{id,iso,antiiso}_vs_pt.png`, `tnp_sf_*_map.png`, `tnp_fits_*_lowpt.png`,
+`tnp_trig_eff_vs_pt.png`, `tnp_iso_vs_npv.png`; per-cell numbers in `output/v2/tnp/tnp_result.json`.

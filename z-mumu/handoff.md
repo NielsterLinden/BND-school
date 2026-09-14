@@ -6,7 +6,73 @@
 - Eugene Shalugin
 - Niels Ter Linden
 
-## What we worked on
+## v2 result (14 Sep 2026, MC-based, TRExFitter fit) -- **use this for the combination**
+
+> **σ_fid(pp → Z/γ* → μ⁺μ⁻; dressed, pT > 26/20 GeV, |η| < 2.4, 60 < m < 120 GeV) = 791.8 ± 0.2 (stat) ± 6.2 (syst) ± 9.3 (lumi) pb**
+> μ_Z = 0.990 ± 0.014 w.r.t. the aMC@NLO prediction (799.6 pb); GoF p = 0.33; counting cross-check 794.4 pb.
+> **σ(Z/γ* → μμ, 60 < m_Born < 120 GeV) = 1935 ± 30 pb** (A = 0.4092) · σ(m > 50 GeV) = 2006 ± 31 pb (A = 0.3947)
+
+Method: own skims of the unskimmed NanoAOD (data + all MC), pileup and L1-prefiring weights,
+tight-ID/iso/trigger scale factors from tag-and-probe fits, fake-factor non-prompt estimate,
+Z-peak momentum calibration, **TRExFitter v1.8.0** profile-likelihood fit of m(μμ) (30 × 2 GeV
+bins) with 24 nuisance parameters. Everything is in `docs/09`–`15`, `output/v2/RESULTS_v2.md`,
+`CLAUDE.md`. Reproduce: `source ../setup.sh && python run_v2.py --from 2` (~40 min).
+
+### What the combination gets (see `../fitting/CONVENTIONS.md`)
+
+| item | where |
+|---|---|
+| fit-input histograms (TH1D + Sumw2), names `mumu_SR__<sample>[__<NP>Up/Down]`, `mumu_CRemu__...` | `fit/fitinputs/zmumu.root` (not committed; regenerate with `python scripts/v2_5_fit.py --no-fit`; metadata in `zmumu.root.meta.json`) |
+| TRExFitter config (POI `mu_Z`, NP names/categories) | `fit/zmumu.config` (committed) |
+| workspace for the MultiFit | `fit/results/zmumu/RooStats/zmumu_combined_zmumu_model.root` |
+| fit result (μ, uncertainties, grouped impacts, σ's, tables) | `fit/results/zmumu_fit_result.json`, `output/v2/results_v2.json` |
+| skims for laptops (one ROOT file per sample, NanoAOD names, `manifest.json` with SHA-256) | `/project/atlas/users/nterlind/BND-school-skims-lite/` (bulk: `/data/atlas/users/nterlind/BND-school-cache/skims_v2/`) |
+
+Numbers in the notebook's variables (`combination/combination.ipynb`):
+
+| variable | value | note |
+|---|---:|---|
+| `n_obs` | 10,378,567 | tight ID, ≥ 1 trigger-matched muon, FSR-recovered mass |
+| `n_bkg` | 68,821 | prompt MC (Z→ττ 11.1k, tt̄ 31.6k, tW 2.9k, WW 3.8k, WZ 9.2k, ZZ 6.3k) + non-prompt 3.8k |
+| `C` | 0.7917 | N_sel(all corrections) / N_fid(dressed), aMC@NLO |
+| `A_60_120` / `A_m50` | 0.4092 / 0.3947 | dressed fiducial ÷ LHE μμ (60–120) / ÷ (6077.22/3) |
+| `acc_eff` | 0.3240 (60–120) / 0.3125 (m>50) | A × C |
+| `lumi_pb` | 16393.381 | normtag, record 1059 |
+
+Uncertainties (impact on μ_Z / σ), and correlation with the other channels:
+
+| group | relative | correlated | NP names |
+|---|---:|---|---|
+| luminosity | 1.16% | yes | `Lumi` |
+| L1 prefiring | 0.51% | yes | `L1Prefiring` |
+| muon efficiency (ID, iso, trigger, reco) | 0.50% | with μτ_h only | `MuonID`, `MuonIso`, `MuonTrigger`, `MuonReco` |
+| signal modelling (PDF, αs, scales, PS, generator) | 0.36% | yes | `PDF`, `AlphaS`, `QCDScale`, `PS_ISR`, `PS_FSR`, `SigModel` |
+| MC statistics | 0.35% | no | gammas |
+| muon momentum scale/resolution | 0.27% | with μτ_h only | `MuonScale`, `MuonRes` |
+| pileup | 0.16% | yes | `Pileup` |
+| background cross sections | 0.09% | yes | `XS_TTbar`, `XS_SingleTop`, `XS_WW`, `XS_WZ`, `XS_ZZ`, `XS_DYtautau` |
+| non-prompt | 0.05% | no | `FakeStat_mumu`, `FakeMethod_mumu` |
+| statistical | 0.03% | no | |
+| acceptance (for σ_tot only): PDF 0.52%, scale 0.32%, αs 0.03%, stat 0.05% | 0.61% | yes | outside the fit |
+
+Decisions the three channels still have to take together: the acceptance denominator
+(60 < m < 120 GeV recommended, vs m > 50 GeV) and NLO vs LO for A (3.2% apart).
+
+### Open issues after v2
+
+1. The pileup nuisance parameter is pulled by −1.5σ (data prefer ~7% fewer interactions than
+   the 69.2 mb profile): the profile is derived from the luminosity record, not from the
+   official `puWeights` file (unreachable). Impact on σ is 0.16%.
+2. The e-μ validation region shows a 8–10% data excess: no electron scale factors and no
+   non-prompt-electron estimate there; it is not in the fit (`--emu-control` promotes it).
+3. Official prefiring maps, Muon-POG scale factors and Rochester corrections would replace the
+   in-house versions (all three files need CERN credentials).
+4. The single-muon + jet fake-factor region is biased by the isolated trigger; the
+   prescaled non-isolated paths are in the skim if someone wants to fix it.
+5. `SigModel` compares aMC@NLO with powheg (C differs by 0.2%); the LO madgraph acceptance
+   (3.2% lower) is a convention question, not a systematic.
+
+## v1: what we worked on (first iteration, data-only)
 
 - Skimmed the CMS 2016 SingleMuon Open Data (Run2016G+H) down to events with ≥2 muons: **259 GB / 324 M events → 31.5 GB / 80.2 M events**, an 8.2× reduction. Kept ~300 of the original 1363 NanoAOD branches. Output lives on dCache (path below).
 - Built a complete **fiducial Z → μμ cross-section measurement** from that skim, with **no simulation anywhere** — none is available locally (`/dcache/atlas/sjankovy/BND/mc/` is empty), so efficiencies come from tag-and-probe and backgrounds from control regions in the data itself.
@@ -152,7 +218,7 @@ With 10.8 M signal events this measurement is nowhere near statistics-limited. *
 
 **Plots** (all in `output/plots/`): `step1_cutflow`, `step1_mass_regions`, `step1_mass_fsr`, `step1_mass_wide`, `step1_kinematics`, `step1_fsr_mass_shift`, `step2_eff_{id,iso}_vs_{pt,eta}`, `step2_eff_{id,iso}_map`, `step2_eff_trigger_vs_pt`, `step2_tagprobe_mass`, `step3_control_regions`, `step3_data_vs_background`, `step3_subtracted`, `step4_fit`, `step5_systematics`, `step6_summary`.
 
-## For the combination (`combination/combination.ipynb`)
+## v1 inputs for the combination (superseded by the v2 block above)
 
 > ⚠️ **Read this before plugging the numbers in.** The combination notebook computes
 > σ = (n_obs − n_bkg) / (A·ε · L) and expects all three channels to land near

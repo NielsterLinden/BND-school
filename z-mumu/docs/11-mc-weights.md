@@ -20,8 +20,10 @@ w = genWeight x sigma L / sum genWeight x w_PU(nTrueInt) x L1PreFiringWeight_Nom
   events (`GenSums`, mean 21.9). Up/Down: sigma_minbias +- 4.6%. Weights are renormalised
   to unit mean over the MC profile and clipped at 10.
 - **L1 pre-firing.** 2016 ECAL and muon-system prefiring; MC is weighted by
-  `L1PreFiringWeight_Nom`, the systematic uses `_Up/_Dn`. Mean weight in the signal region:
-  see `RESULTS_v2.md` (the reviewer quotes 0.980, i.e. a 2% effect v1 could not correct).
+  `L1PreFiringWeight_Nom`, the systematic uses `_Up/_Dn`. Mean weight of DY -> mu mu events in
+  the signal region: **0.9803** (muon system 0.9818, ECAL 0.9985) -- exactly the reviewer's
+  0.980, i.e. the 2% effect that v1 could not correct. The Up/Down variation is the largest
+  non-luminosity uncertainty of the result (0.51%).
 - **Scale factors** from our own tag-and-probe (docs/12): per-muon ID and isolation, per-event
   trigger `[1-(1-e1^data)(1-e2^data)] / [1-(1-e1^MC)(1-e2^MC)]` with the measured per-muon
   efficiencies including the turn-on bins. Reconstruction: SF = 1 +- 0.4%/muon (not measurable

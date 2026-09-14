@@ -45,11 +45,17 @@ def stack_plot(hall, region, var, filename, fakes_fine=None, logy=False, title="
         comps.append(v); labels.append(LABELS[smp]); cols.append(COLOURS[smp])
         tot += v; tot_var += var_v
     fig, (ax, rax) = plt.subplots(2, 1, figsize=(9, 9.5), sharex=True, gridspec_kw={"height_ratios": [3, 1], "hspace": 0.06})
-    hep.histplot(comps, bins=e, ax=ax, stack=True, histtype="fill", label=labels, color=cols, edgecolor="black", linewidth=0.4)
-    ax.fill_between(e, np.append(tot - np.sqrt(tot_var), 0), np.append(tot + np.sqrt(tot_var), 0), step="post",
+    # linear axes: plot in thousands when the scale is large (keeps the offset text off the CMS label)
+    unit = 1.0
+    if not logy and max(tot.max(), data.max()) >= 2e4:
+        unit = 1e3
+    hep.histplot([c_ / unit for c_ in comps], bins=e, ax=ax, stack=True, histtype="fill", label=labels, color=cols, edgecolor="black", linewidth=0.4)
+    ax.fill_between(e, np.append(tot - np.sqrt(tot_var), 0) / unit, np.append(tot + np.sqrt(tot_var), 0) / unit, step="post",
                     facecolor="none", hatch="////", edgecolor="grey", linewidth=0, label="MC stat.")
-    hep.histplot(data, bins=e, ax=ax, histtype="errorbar", color="black", label="Data", markersize=4, yerr=np.sqrt(np.maximum(data, 0)))
-    ax.set_ylabel(f"Events / {e[1]-e[0]:g}")
+    hep.histplot(data / unit, bins=e, ax=ax, histtype="errorbar", color="black", label="Data", markersize=4, yerr=np.sqrt(np.maximum(data, 0)) / unit)
+    gev = " GeV" if var in ("mass_fit", "mass_fine", "pt1", "pt2", "zpt", "met", "pt_el") else ""
+    ax.set_ylabel(f"Events / {e[1]-e[0]:g}{gev}" + (r" [$\times 10^3$]" if unit != 1.0 else ""))
+    tot, data = tot / unit, data / unit
     if logy:
         ax.set_yscale("log"); ax.set_ylim(max(tot.min() * 0.1, 0.5), tot.max() * 30)
     else:
@@ -59,8 +65,8 @@ def stack_plot(hall, region, var, filename, fakes_fine=None, logy=False, title="
     hists._title(ax, title or {"SR": "signal region", "SS": "same-sign region", "CRemu": r"e$\mu$ region"}[region])
     with np.errstate(divide="ignore", invalid="ignore"):
         ratio = np.where(tot > 0, data / tot, np.nan)
-        err = np.where(tot > 0, np.sqrt(np.maximum(data, 0)) / tot, np.nan)
-        band = np.where(tot > 0, np.sqrt(tot_var) / tot, 0)
+        err = np.where(tot > 0, np.sqrt(np.maximum(data * unit, 0)) / unit / tot, np.nan)
+        band = np.where(tot > 0, np.sqrt(tot_var) / unit / tot, 0)
     rax.fill_between(e, np.append(1 - band, 1), np.append(1 + band, 1), step="post", facecolor="none", hatch="////", edgecolor="grey", linewidth=0)
     rax.errorbar(c, ratio, yerr=err, fmt="o", color="black", markersize=3)
     rax.axhline(1.0, linestyle="--", color="grey")

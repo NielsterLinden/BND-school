@@ -119,7 +119,7 @@ def parse_ranking(path) -> list:
                 nums = [float(p.lstrip("+")) for p in parts[1:8]]
             except ValueError:
                 continue
-            rows.append({"name": parts[0], "pull": nums[0], "err_up": nums[1], "err_down": nums[2],
+            rows.append({"name": parts[0], "pull": nums[0], "err_up": abs(nums[1]), "err_down": abs(nums[2]),
                          "dpoi_up_post": nums[3], "dpoi_down_post": nums[4],
                          "dpoi_up_pre": nums[5], "dpoi_down_pre": nums[6]})
     return rows

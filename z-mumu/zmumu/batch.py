@@ -110,17 +110,20 @@ def cached_copy(name: str, subdir: str, catalogue: dict, cache_dir: Path, fetch:
 # The runner
 # --------------------------------------------------------------------------
 def run_files(tasks, script: Path, parts_dir: Path, workers: int, extra_args=(),
-              stall_s: float = 1200, retries: int = 1, fallback=None, log=print):
+              stall_s: float = 1200, retries: int = 1, fallback=None, log=print,
+              suffix: str = ".pkl"):
     """Run `script --one-file SOURCE --key KEY --out PART` for each (source, key).
 
     A task that fails or exceeds `stall_s` is retried `retries` times; before a
     retry, `fallback(source, key)` may return a replacement source (for example
     a verified local copy). Returns the list of notes about replaced sources.
+    `suffix` is the extension of the per-file output that marks a task as done
+    (".pkl" for the review scripts, ".root" for the v2 skims).
     """
     parts_dir = Path(parts_dir)
     parts_dir.mkdir(parents=True, exist_ok=True)
     queue = [(str(src), key, 0) for src, key in tasks
-             if not (parts_dir / f"{key}.pkl").exists()]
+             if not (parts_dir / f"{key}{suffix}").exists()]
     log(f"[batch] {len(tasks) - len(queue)} of {len(tasks)} files already done, "
         f"{len(queue)} to run with {workers} workers")
 
@@ -129,7 +132,7 @@ def run_files(tasks, script: Path, parts_dir: Path, workers: int, extra_args=(),
         while queue and len(running) < workers:
             src, key, attempt = queue.pop(0)
             cmd = [sys.executable, str(script), "--one-file", src, "--key", key,
-                   "--out", str(parts_dir / f"{key}.pkl"), *extra_args]
+                   "--out", str(parts_dir / f"{key}{suffix}"), *extra_args]
             proc = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE,
                                     text=True)
             running[proc] = (src, key, attempt, time.time())

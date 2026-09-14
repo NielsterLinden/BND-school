@@ -171,55 +171,98 @@ def fake_factor(data, mc, region="ss", cls="anti", mc_scale=1.0):
     return np.clip(ff, 0, None), err
 
 
-def apply_ff(data, mc, ff, charge="os", cls="anti", mc_scale=1.0, antiiso_sf=None):
-    """Fake mass template: sum over cells of FF x (data - prompt MC) in the application region."""
-    d = data[f"app_{charge}_{cls}"]
-    m = mc[f"app_{charge}_{cls}"] * mc_scale
-    if antiiso_sf is not None:
-        m = m * antiiso_sf[:, :, None]
-    diff = d - m
-    template = np.einsum("ij,ijk->k", ff, diff)
-    var = np.einsum("ij,ijk->k", ff ** 2, data[f"app_{charge}_{cls}_w2"] + mc_scale ** 2 * mc[f"app_{charge}_{cls}_w2"])
-    return template, var, diff
+def ff_weighted(hists, ff, charge="os", cls="anti"):
+    """FF-weighted mass spectrum and its variance from a (pT, |eta|, mass) application histogram."""
+    h = hists[f"app_{charge}_{cls}"]
+    v = hists[f"app_{charge}_{cls}_w2"]
+    return np.einsum("ij,ijk->k", ff, h), np.einsum("ij,ijk->k", ff ** 2, v)
+
+
+def fit_application(data, mc, ff, cls="anti", fake_shape="ss"):
+    """Non-prompt yield in the opposite-sign application region from a two-template fit.
+
+    D(m) = a P(m) + b F(m): P = FF-weighted prompt-prompt MC (Z peak), F = non-prompt shape
+    (FF-weighted same-sign data minus prompt MC, or an exponential). The prompt
+    normalisation `a` is fitted (replacing an assumed anti-isolation scale factor), so the
+    estimate does not rely on the absolute MC rate of Z events with a non-isolated muon.
+    Returns dict(n_fake, n_fake_err, a, b, template, template_var, chi2).
+    """
+    from scipy.optimize import nnls
+    d, d_var = ff_weighted(data, ff, "os", cls)
+    p, _ = ff_weighted(mc, ff, "os", cls)
+    if fake_shape == "ss":
+        f_ss, f_ss_var = ff_weighted(data, ff, "ss", cls)
+        pm, _ = ff_weighted(mc, ff, "ss", cls)
+        f = np.clip(f_ss - pm, 0, None)
+    else:
+        c = 0.5 * (MASS_EDGES[1:] + MASS_EDGES[:-1])
+        f = np.exp(-0.02 * (c - 60.0))
+    # 2 GeV bins for the fit (less noise in F), weighted least squares with data variances
+    k = 4
+    D, P, F = d.reshape(-1, k).sum(1), p.reshape(-1, k).sum(1), f.reshape(-1, k).sum(1)
+    sig = np.sqrt(np.maximum(d_var.reshape(-1, k).sum(1), 1.0))
+    A = np.stack([P / sig, F / sig], axis=1)
+    (a, b), _ = nnls(A, D / sig)
+    resid = D - a * P - b * F
+    chi2 = float(np.sum((resid / sig) ** 2))
+    # error on b from the normal equations
+    cov = np.linalg.pinv(A.T @ A)
+    b_err = float(np.sqrt(max(cov[1, 1], 0.0)))
+    template = b * f
+    return {"n_fake": float(template.sum()), "n_fake_err": float(b_err * f.sum()), "a": float(a), "b": float(b),
+            "template": template, "template_var": (b_err * f) ** 2, "chi2": chi2, "ndf": int(len(D) - 2),
+            "n_prompt_fitted": float(a * p.sum()), "n_prompt_mc": float(p.sum())}
 
 
 def summarise(data, mc, antiiso_sf=None):
     """All fake-factor maps, the SR template with its variations, and closure numbers."""
-    res = {"pt_edges": PT_EDGES.tolist(), "eta_edges": ETA_EDGES.tolist(), "maps": {}, "templates": {}}
+    res = {"pt_edges": PT_EDGES.tolist(), "eta_edges": ETA_EDGES.tolist(), "maps": {}, "templates": {}, "fits": {}}
     ff, ff_err = fake_factor(data, mc, "ss", "anti")
     res["maps"]["nominal"] = ff.tolist(); res["maps"]["nominal_err"] = ff_err.tolist()
     variants = {
-        "ff_stat_up": (ff + ff_err, "anti", 1.0),
-        "ff_stat_down": (np.clip(ff - ff_err, 0, None), "anti", 1.0),
-        "region_c": (fake_factor(data, mc, "c", "anti")[0], "anti", 1.0),
-        "anti_alt": (fake_factor(data, mc, "ss", "anti_alt")[0], "anti_alt", 1.0),
-        "mcsub_up": (fake_factor(data, mc, "ss", "anti", 1.3)[0], "anti", 1.3),
-        "mcsub_down": (fake_factor(data, mc, "ss", "anti", 0.7)[0], "anti", 0.7),
+        "ff_stat_up": (ff + ff_err, "anti", "ss"),
+        "ff_stat_down": (np.clip(ff - ff_err, 0, None), "anti", "ss"),
+        "region_c": (fake_factor(data, mc, "c", "anti")[0], "anti", "ss"),
+        "anti_alt": (fake_factor(data, mc, "ss", "anti_alt")[0], "anti_alt", "ss"),
+        "mcsub_up": (fake_factor(data, mc, "ss", "anti", 1.3)[0], "anti", "ss"),
+        "mcsub_down": (fake_factor(data, mc, "ss", "anti", 0.7)[0], "anti", "ss"),
+        "shape_expo": (ff, "anti", "expo"),
     }
     res["maps"]["region_c"] = variants["region_c"][0].tolist()
     res["maps"]["anti_alt"] = variants["anti_alt"][0].tolist()
-    nom, nom_var, _ = apply_ff(data, mc, ff, "os", "anti", 1.0, antiiso_sf)
-    res["templates"]["nominal"] = nom.tolist(); res["templates"]["nominal_var"] = nom_var.tolist()
-    for name, (f, cls, scale) in variants.items():
-        t, _, _ = apply_ff(data, mc, f, "os", cls, scale, antiiso_sf)
-        res["templates"][name] = t.tolist()
-    # closure in the same-sign application region
-    pred, pred_var, _ = apply_ff(data, mc, ff, "ss", "anti", 1.0, antiiso_sf)
+    nom = fit_application(data, mc, ff, "anti", "ss")
+    res["templates"]["nominal"] = nom["template"].tolist()
+    res["templates"]["nominal_var"] = nom["template_var"].tolist()
+    res["fits"]["nominal"] = {k: v for k, v in nom.items() if not isinstance(v, np.ndarray)}
+    for name, (f, cls, shape) in variants.items():
+        r = fit_application(data, mc, f, cls, shape)
+        res["templates"][name] = r["template"].tolist()
+        res["fits"][name] = {k: v for k, v in r.items() if not isinstance(v, np.ndarray)}
+    # plain subtraction with the anti-iso SF, for the record
+    d, _ = ff_weighted(data, ff, "os", "anti"); p, _ = ff_weighted(mc, ff, "os", "anti")
+    sf = antiiso_sf if antiiso_sf is not None else np.ones_like(ff)
+    p_sf, _ = ff_weighted({k: (v * sf[:, :, None] if k.startswith("app_os") else v) for k, v in mc.items()}, ff, "os", "anti")
+    res["fits"]["plain_subtraction"] = {"n_fake": float((d - p_sf).sum()), "n_prompt_mc_sf": float(p_sf.sum()), "n_data": float(d.sum())}
+    # closure in the same-sign application region (plain subtraction: prompt is small there)
+    pred, pred_var = ff_weighted(data, ff, "ss", "anti")
+    pm, _ = ff_weighted(mc, ff, "ss", "anti")
+    pred = pred - pm
     obs = data["tt_ss"] - mc["tt_ss"]
-    win = slice(0, None)
     res["closure"] = {"predicted_ss": float(pred.sum()), "predicted_ss_err": float(np.sqrt(pred_var.sum())),
                       "observed_ss": float(obs.sum()), "observed_ss_err": float(np.sqrt(data["tt_ss_w2"].sum() + mc["tt_ss_w2"].sum())),
                       "predicted_hist": pred.tolist(), "observed_hist": obs.tolist()}
-    n_nom = nom.sum()
-    res["yields"] = {"sr_fakes": float(n_nom), "sr_fakes_stat": float(np.sqrt(nom_var.sum())),
+    n_nom = nom["n_fake"]
+    res["yields"] = {"sr_fakes": float(n_nom), "sr_fakes_stat": float(nom["n_fake_err"]),
                      "sr_data_tight_tight": float(data["tt_os"].sum()), "ss_data_tight_tight": float(data["tt_ss"].sum()),
-                     "variants": {k: float(np.sum(v)) for k, v in res["templates"].items() if not k.endswith("_var")}}
-    # FakeMethod = largest deviation among the method variants (region, window, MC subtraction, closure)
-    devs = {k: abs(res["yields"]["variants"][k] - n_nom) for k in ("region_c", "anti_alt", "mcsub_up", "mcsub_down")}
-    closure_dev = abs(res["closure"]["observed_ss"] - res["closure"]["predicted_ss"]) / max(res["closure"]["predicted_ss"], 1e-9) * n_nom
+                     "variants": {k: float(np.sum(v)) for k, v in res["templates"].items() if not k.endswith("_var")},
+                     "prompt_norm_fitted": nom["a"], "os_over_ss_fakes": float(n_nom / max(res["closure"]["predicted_ss"], 1e-9))}
+    # region_c (single-muon + jet) is kept as a documented cross-check only: the IsoMu24 trigger
+    # depletes its anti-isolated denominator, so its FF is biased high by an order of magnitude.
+    devs = {k: abs(res["yields"]["variants"][k] - n_nom) for k in ("anti_alt", "mcsub_up", "mcsub_down", "shape_expo")}
+    closure_dev = abs(res["closure"]["observed_ss"] - res["closure"]["predicted_ss"]) / max(res["closure"]["predicted_ss"], 1e-9) * abs(n_nom)
     devs["closure"] = float(closure_dev)
     res["yields"]["method_deviations"] = devs
     worst = max(devs, key=devs.get)
-    res["yields"]["method_rel_unc"] = float(devs[worst] / max(n_nom, 1e-9))
+    res["yields"]["method_rel_unc"] = float(devs[worst] / max(abs(n_nom), 1e-9))
     res["yields"]["method_worst"] = worst
     return res

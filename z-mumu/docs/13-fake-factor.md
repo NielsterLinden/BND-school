@@ -25,21 +25,34 @@
 ## Application
 
 Opposite-sign events with exactly one tight (pT > 26, matched) and one anti-tight muon, no
-other tight muon, FSR-recovered 60 < m < 120 GeV:
-`N_fake(m) = sum FF(pT, |eta| of the anti-tight muon) x [data - prompt-prompt MC x SF_antiiso]`.
-The prompt subtraction is the delicate part: Z -> mu mu with one muon in the anti-isolation
-window is far more frequent than genuine fakes, so the MC prompt rate is calibrated with the
-anti-isolation scale factor from tag-and-probe. The resulting estimate has a large relative
-uncertainty but is a tiny fraction of the signal (v1's same-sign estimate: 2 375 events,
-0.02%).
+other tight muon, FSR-recovered 60 < m < 120 GeV. The FF-weighted mass spectrum of this
+region, `D(m) = sum_cells FF x data(m)`, is dominated by Z -> mu mu events with one muon in
+the anti-isolation window (~ 90 000 FF-weighted events against a few thousand genuine fakes),
+so a plain MC subtraction is unstable (it gave a *negative* yield with the anti-isolation
+scale factor from tag-and-probe, and swung by +-25 000 for a +-30% subtraction variation).
+The non-prompt yield is therefore obtained from a **two-template fit**
+`D(m) = a P(m) + b F(m)` in 2 GeV bins: `P` = FF-weighted prompt-prompt simulation (the Z
+peak), `F` = FF-weighted same-sign data minus prompt simulation (the non-prompt shape, which
+the closure test validates). The fitted `a` (0.88) is the prompt normalisation -- the
+same-sign region and the anti-isolation scale factor (0.945) are its cross-checks -- and
+`b F(m)` is the template of the signal region: **3 825 +- 80 events, 0.035% of the data**
+(v1's same-sign estimate: 2 375 x R_OS/SS). `b` = 1.84 is the opposite-/same-sign ratio of the
+non-prompt background in this region (charge-asymmetric W+jets fakes).
 
-Closure: the fake factor applied to same-sign tight + anti-tight events must reproduce the
-same-sign tight-tight yield after prompt subtraction (`ff_closure_and_template.png`).
+Closure: the fake factor applied to same-sign tight + anti-tight events reproduces the
+same-sign tight-tight yield after prompt subtraction: predicted 2 077 +- 20, observed
+1 922 +- 85 (`ff_closure_and_template.png`).
+
+The single-muon + jet region gives a fake factor ~ 17 x larger: the IsoMu24 online isolation
+depletes its anti-isolated denominator (the probe *is* the triggering muon). It is kept in
+`fakes.json` as a documented, biased cross-check and not used as a variant; the non-isolated
+prescaled paths (`HLT_Mu8/17`, `HLT_Mu3_PFJet40`, kept in the skim) would be the way to fix it.
 
 ## Uncertainties (nuisance parameters of the fit)
 
 - `FakeStat_mumu`: statistical uncertainty of the FF map, coherent over cells;
-- `FakeMethod_mumu`: largest of {alternative region, alternative anti-isolation window, prompt
-  subtraction +-30%, same-sign non-closure}, floored at 30% and capped at 100%.
+- `FakeMethod_mumu`: largest of {alternative anti-isolation window (+4%), prompt subtraction
+  +-30% in the FF measurement (-19% / +19%), exponential instead of the same-sign non-prompt
+  shape (-4%), same-sign non-closure (7%)}, floored at 30% and capped at 100% -> 30%.
 
 Numbers and the template: `RESULTS_v2.md`, `fakes.json`.

@@ -31,4 +31,11 @@ TRExFitter-v1.8.0.zip
 */fit/results/
 combination/fit/results/
 
+# presentation (Manim): render scratch and delivered videos stay out of git;
+# scenes / style / tools / data json / docs are committed
+presentation/work/
+presentation/media/
+presentation/clips/**/*.mp4
+presentation/**/*.png
+
 .asetup.save

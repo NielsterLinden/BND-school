@@ -26,7 +26,7 @@ import numpy as np
 from zmumu import batch, config, hists, pileup, skim, tnp
 
 OUT = config.OUTPUT_DIR / "v2" / "tnp"
-PLOTS = config.OUTPUT_DIR / "v2" / "plots"
+config.PLOT_DIR = config.OUTPUT_DIR / "v2" / "plots"   # v2 plots live next to the v2 results
 BRANCHES = ["run", "PV_npvsGood", "HLT_IsoMu24", "HLT_IsoTkMu24", "Muon_*", "TrigObj_*", "Flag_*",
             "genWeight", "Pileup_nTrueInt", "skim_cat"]
 
@@ -177,7 +177,7 @@ def plot(res, data, mc):
                 ax.errorbar(c, e, yerr=er, xerr=hw, fmt=mk, color=col, markersize=4, label=lab)
             e = np.array(res["eff"][f"{eff}_data_count"])[:, j]
             ax.plot(c, e, linestyle="none", marker="x", color="grey", label="data (SS-subtracted count)")
-            ax.set_xscale("log"); ax.set_xlabel(r"probe $p_T$ [GeV]"); ax.set_ylabel("efficiency")
+            hists.log_pt_axis(ax); ax.set_xlabel(r"probe $p_T$ [GeV]"); ax.set_ylabel("efficiency")
             lo = 0.0 if eff == "antiiso" else 0.75
             ax.set_ylim(lo, 1.05 if eff != "antiiso" else 0.3)
             ax.set_title(f"{eta[j]:.1f} < |$\\eta$| < {eta[j+1]:.1f}", fontsize=13)
@@ -194,7 +194,7 @@ def plot(res, data, mc):
                 ax.text(np.sqrt(pt[i] * pt[i + 1]), 0.5 * (eta[j] + eta[j + 1]), f"{sf[i,j]:.3f}\n±{err[i,j]:.3f}",
                         ha="center", va="center", fontsize=7)
         fig.colorbar(mesh, ax=ax, label=f"{nice} scale factor")
-        ax.set_xscale("log"); ax.set_xlabel(r"$p_T$ [GeV]"); ax.set_ylabel(r"|$\eta$|")
+        hists.log_pt_axis(ax); ax.set_xlabel(r"$p_T$ [GeV]"); ax.set_ylabel(r"|$\eta$|")
         hists._decorate(ax); hists._title(ax, f"{nice} data/MC scale factor")
         hists.save_fig(fig, f"tnp_sf_{eff}_map.png")
         # example fits: lowest pT bin in every eta bin, data and MC
@@ -219,7 +219,7 @@ def plot(res, data, mc):
         for sample, col in (("data", "black"), ("mc", "#1f77b4")):
             e = np.array(res["eff"][f"trig_{sample}"])[:, j]; er = np.array(res["eff_err"][f"trig_{sample}"])[:, j]
             ax.errorbar(tc, e, yerr=er, xerr=thw, fmt="o", color=col, markersize=4, label=sample)
-        ax.set_xscale("log"); ax.set_ylim(0, 1.05); ax.set_xlabel(r"probe $p_T$ [GeV]")
+        hists.log_pt_axis(ax); ax.set_ylim(0, 1.05); ax.set_xlabel(r"probe $p_T$ [GeV]")
         ax.set_ylabel("IsoMu24 || IsoTkMu24 per-muon efficiency")
         ax.set_title(f"{eta[j]:.1f} < |$\\eta$| < {eta[j+1]:.1f}", fontsize=13); ax.legend(fontsize=10)
     fig.suptitle("Trigger efficiency, trigger-object tag-and-probe (same-sign subtracted)", fontsize=15)
@@ -241,6 +241,7 @@ def main():
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--max-files", type=int, default=None)
     ap.add_argument("--summarise-only", action="store_true")
+    ap.add_argument("--plots-only", action="store_true")
     ap.add_argument("--skim-dir", default=None)
     ap.add_argument("--one-file", help=argparse.SUPPRESS)
     ap.add_argument("--key", help=argparse.SUPPRESS)
@@ -255,6 +256,10 @@ def main():
 
     OUT.mkdir(parents=True, exist_ok=True)
     pu_json = OUT / "pileup_weights.json"
+    if args.plots_only:
+        saved = pickle.load(open(OUT / "tnp_fits.pkl", "rb"))
+        plot(saved["result"], saved["data"], saved["mc"])
+        return
     if not args.summarise_only:
         pu = pileup.PileupWeights(pileup.mc_profile(("DY_NLO",), args.skim_dir))
         pu.to_json(pu_json)

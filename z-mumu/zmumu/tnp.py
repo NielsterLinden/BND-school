@@ -177,13 +177,12 @@ def fill(ev, out, weight=None, is_mc=False):
 
 
 # ----------------------------------------------------------------------------- fitting
-def _shift_smear(template, shift, sigma):
-    """Template (0.5 GeV bins) shifted by `shift` GeV and smeared by a Gaussian of `sigma` GeV."""
+def _shift_smear(template, shift, sigma, centres=MASS_CENTRES):
+    """Template (0.5 GeV bins at `centres`) shifted by `shift` GeV and smeared by a Gaussian of `sigma` GeV."""
     from scipy.ndimage import gaussian_filter1d
     step = MASS_EDGES[1] - MASS_EDGES[0]
     t = gaussian_filter1d(template, max(sigma / step, 1e-3), mode="nearest")
-    x = MASS_CENTRES - shift
-    t = np.interp(x, MASS_CENTRES, t, left=t[0], right=t[-1])
+    t = np.interp(centres - shift, centres, t, left=t[0], right=t[-1])
     s = t.sum()
     return t / s if s > 0 else np.full_like(t, 1.0 / len(t))
 
@@ -226,8 +225,8 @@ def fit_cell(pass_h, fail_h, tmpl_pass, tmpl_fail, pass_var=None, fail_var=None,
 
     def model(N, eps, dm_p, sg_p, dm_f, sg_f, Bp, Bf, *bp):
         bp_p, bp_f = bp[:n_bkg], bp[n_bkg:]
-        sp = _shift_smear(tp, dm_p, sg_p)
-        sf = _shift_smear(tf, dm_f, sg_f)
+        sp = _shift_smear(tp, dm_p, sg_p, x)
+        sf = _shift_smear(tf, dm_f, sg_f, x)
         mu_p = N * eps * sp + Bp * _bkg(bkg, bp_p, x, lo)
         mu_f = N * (1 - eps) * sf + Bf * _bkg(bkg, bp_f, x, lo)
         return mu_p, mu_f
@@ -283,7 +282,7 @@ def fit_cell(pass_h, fail_h, tmpl_pass, tmpl_fail, pass_var=None, fail_var=None,
     return {"eps": float(eps), "err": float(err), "N": float(m.values["N"]), "valid": bool(m.valid),
             "chi2": chi2, "ndf": int(2 * sel.sum() - m.nfit), "params": dict(zip(names, m.values)),
             "model_pass": mu_p, "model_fail": mu_f, "x": x,
-            "bkg_frac_fail": float((mu_f - m.values["N"] * (1 - eps) * _shift_smear(tf, m.values["dm_f"], m.values["sg_f"])).sum() / max(mu_f.sum(), 1e-9))}
+            "bkg_frac_fail": float((mu_f - m.values["N"] * (1 - eps) * _shift_smear(tf, m.values["dm_f"], m.values["sg_f"], x)).sum() / max(mu_f.sum(), 1e-9))}
 
 
 def count_eff(pass_h, fail_h, pass_ss=None, fail_ss=None, window=COUNT_WINDOW):

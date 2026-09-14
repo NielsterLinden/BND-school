@@ -29,6 +29,7 @@ import numpy as np
 from zmumu import batch, config, fakes, hists, momentum, pileup, regions, samples, skim, weights
 
 OUT = config.OUTPUT_DIR / "v2"
+config.PLOT_DIR = OUT / "plots"          # v2 plots live next to the v2 results
 BRANCHES = ["run", "event", "PV_npvsGood", "HLT_IsoMu24", "HLT_IsoTkMu24", "Muon_*", "TrigObj_*", "Flag_*",
             "FsrPhoton_*", "genWeight", "Pileup_nTrueInt", "L1PreFiringWeight_Nom", "skim_cat", "skim_prescale", "gen_lhe_flavour"]
 MC_KEYS = [k for k in samples.MC_KEYS if k != "DY_powheg"]
@@ -98,7 +99,7 @@ def plot_fakes(res, data, mc):
             for j in range(len(eta) - 1):
                 ax.text(np.sqrt(pt[i] * pt[i + 1]), 0.5 * (eta[j] + eta[j + 1]), f"{ff[i,j]:.3f}", ha="center", va="center", fontsize=8, color="white")
         fig.colorbar(mesh, ax=ax, label="fake factor N(tight)/N(anti-tight)")
-        ax.set_xscale("log"); ax.set_xlabel(r"muon $p_T$ [GeV]"); ax.set_ylabel(r"|$\eta$|"); ax.set_title(title, fontsize=12)
+        hists.log_pt_axis(ax); ax.set_xlabel(r"muon $p_T$ [GeV]"); ax.set_ylabel(r"|$\eta$|"); ax.set_title(title, fontsize=12)
     fig.tight_layout(); hists.save_fig(fig, "ff_maps.png")
     c = 0.5 * (fakes.MASS_EDGES[1:] + fakes.MASS_EDGES[:-1])
     fig, axes = plt.subplots(1, 2, figsize=(16, 6.5))

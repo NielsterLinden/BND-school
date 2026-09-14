@@ -20,6 +20,7 @@ import numpy as np
 from zmumu import config, hists, plotting
 
 OUT = config.OUTPUT_DIR / "v2"
+config.PLOT_DIR = OUT / "plots"          # v2 plots live next to the v2 results
 FIT = config.REPO_DIR / "fit" / "results" / "zmumu_fit_result.json"
 V1 = {"sigma_fid": 773.2, "sigma_fid_err": 11.9, "revised": 776.9, "revised_err": 14.8, "reviewer": 797.2,
       "reviewer_err": 797.2 * np.hypot(0.013, 0.012), "pred_nlo": 799.6, "pred_lo": 825.4}

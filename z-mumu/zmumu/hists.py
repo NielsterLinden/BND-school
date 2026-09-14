@@ -86,11 +86,15 @@ def load(filename: str):
 # Plotting
 # --------------------------------------------------------------------------
 def _decorate(ax, lumi_fb: float = None):
+    """CMS Open Data label (plain matplotlib: mplhep's label breaks on matplotlib 3.11)."""
     lumi_fb = config.LUMI_PB / 1000.0 if lumi_fb is None else lumi_fb
-    hep.cms.label("Open Data", data=True, lumi=round(lumi_fb, 1), year=2016, ax=ax)
+    ax.text(0.0, 1.005, "CMS", transform=ax.transAxes, fontsize=16, weight="bold", va="bottom", ha="left")
+    ax.text(0.085, 1.005, "Open Data", transform=ax.transAxes, fontsize=13, style="italic", va="bottom", ha="left")
+    ax.text(1.0, 1.005, f"{lumi_fb:.1f} fb$^{{-1}}$ (13 TeV, 2016)", transform=ax.transAxes, fontsize=12,
+            va="bottom", ha="right")
 
 
-def _title(ax, text, y=1.012):
+def _title(ax, text, y=1.055):
     """Caption above the axes, left-aligned.
 
     Not `ax.set_title`: mplhep puts the CMS label there, and the two collide.
@@ -98,6 +102,15 @@ def _title(ax, text, y=1.012):
     if text:
         ax.text(0.0, y, text, transform=ax.transAxes, fontsize=13,
                 style="italic", va="bottom", ha="left")
+
+
+def log_pt_axis(ax, ticks=(20, 30, 50, 100, 200)):
+    """Log-scale pT axis with plain tick labels (no 2x10^1 clutter)."""
+    from matplotlib.ticker import NullFormatter, ScalarFormatter
+    ax.set_xscale("log")
+    ax.set_xticks(list(ticks))
+    ax.xaxis.set_major_formatter(ScalarFormatter())
+    ax.xaxis.set_minor_formatter(NullFormatter())
 
 
 def save_fig(fig, filename: str) -> Path:

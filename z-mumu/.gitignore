@@ -1,0 +1,7 @@
+# Binary intermediates written by the analysis steps. Regenerate with
+# `.venv/bin/python run_all.py` (~80 s) rather than committing them.
+output/data/
+output/*.log
+
+# Plots, RESULTS.md and results.json are deliberately NOT ignored: they are
+# small (~2 MB) and are the point of the handoff.

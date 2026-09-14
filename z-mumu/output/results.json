@@ -1,0 +1,84 @@
+{
+  "generated": "2026-09-14",
+  "dataset": {
+    "path": "/dcache/atlas/kdevries/BND2026/DoubleMuonSkimmed",
+    "eras": [
+      "Run2016G__30530",
+      "Run2016H__30563"
+    ],
+    "luminosity_pb": 16290.71342,
+    "luminosity_rel_unc": 0.012
+  },
+  "fiducial_definition": {
+    "n_muons": 2,
+    "charge": "opposite sign",
+    "pt_lead_gev": 26.0,
+    "pt_sublead_gev": 20.0,
+    "abs_eta_max": 2.4,
+    "mass_window_gev": [
+      60.0,
+      120.0
+    ],
+    "muon_id": "Muon_mediumId",
+    "muon_iso": "pfRelIso04_all < 0.15"
+  },
+  "cutflow": {
+    "skim (>=2 muons in collection)": 80191719,
+    "golden JSON (certified lumi)": 78912289,
+    "HLT_IsoMu24 or HLT_IsoTkMu24": 47314794,
+    "MET filters + good PV": 47292438,
+    "exactly 2 selected muons": 11647158,
+    "leading muon pT > 26 GeV": 11477398,
+    "opposite sign": 11472359,
+    "60 < m(mumu) < 120 GeV": 10777373
+  },
+  "efficiencies": {
+    "reco_per_muon_external": 0.996,
+    "id_inclusive": 0.9775179407533836,
+    "iso_inclusive": 0.949509962377525,
+    "trigger_event": 0.9977276527007719,
+    "id_weighted_mu1": 0.9794134838884287,
+    "id_weighted_mu2": 0.9758991310509054,
+    "iso_weighted_mu1": 0.9676448398908818,
+    "iso_weighted_mu2": 0.9335154286175665,
+    "total_event": 0.8545533503942332,
+    "tag_probe_pairs": 21510663
+  },
+  "yields": {
+    "observed_os": 10777373.0,
+    "same_sign": 2375.0,
+    "emu": 23471.0,
+    "background_fake": 2375.0,
+    "background_flavour_symmetric": 11735.5,
+    "background_total": 14110.5,
+    "background_fraction": 0.001309270821377343,
+    "signal_counting": 10763262.5,
+    "signal_fit_crosscheck": 10183154.693740845
+  },
+  "fit_validation": {
+    "peak_gev": 90.78898429242564,
+    "peak_err_gev": 0.026050776118574464,
+    "resolution_gev": 1.447961080446837,
+    "resolution_err_gev": 0.03302514046837624,
+    "chi2": 104468.8024141991,
+    "ndf": 115
+  },
+  "cross_section": {
+    "sigma_fid_pb": 773.1515789881779,
+    "stat_pb": 0.2358181195398794,
+    "syst_pb": 11.923447046923656,
+    "total_pb": 11.925778786573888,
+    "relative_uncertainties": {
+      "statistical (data)": 0.00030500890892377685,
+      "background estimate": 0.0005562806054065336,
+      "eff: ID (tag-and-probe stat)": 5.382274357156105e-05,
+      "eff: isolation (T&P stat)": 7.96409915924605e-05,
+      "eff: trigger (stat)": 1.4322502567947359e-05,
+      "eff: trigger (method bias)": 0.005,
+      "eff: reconstruction (external)": 0.008032128514056226,
+      "FSR recovery": 1.5773788287739506e-05,
+      "muon momentum scale": 0.002,
+      "luminosity": 0.012
+    }
+  }
+}

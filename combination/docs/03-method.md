@@ -32,12 +32,15 @@ them at the combined value and re-solves until stable (the iterative BLUE of the
 combinations). It converges in 4 iterations and moves the result by less than 0.1 pb here, because
 the additive in-fit terms dominate.
 
-**The negative weight.** The ττ weight is −0.005. This is standard BLUE behaviour whenever the
-correlation exceeds the ratio of the two uncertainties (0.15 > 0.10 here): the less precise
+**The negative weight.** The ττ weight is −0.0004. This is standard BLUE behaviour whenever the
+correlation exceeds the ratio of the two uncertainties (0.114 > 0.110 here): the less precise
 measurement stops being an average-down and becomes a lever on the shared systematic. It is
-mathematically correct and it is small — it moves the central value by 1.5 pb, one twentieth of
-the uncertainty — but it is worth knowing that the combined value sits slightly *below* the μμ
-value even though the ττ value is above it.
+mathematically correct and it is now barely there — the two numbers that decide its sign are 4 %
+apart, and it moves the central value by 0.2 pb — but it is worth knowing that the combined value
+sits slightly *below* the μμ value even though the ττ value is above it. It went from −0.005 in
+the previous round to −0.0004 because z-tautau's `Signal modelling` category shrank when the
+channel stopped fitting its LO-vs-NLO generator systematic, which took most of what the two
+channels had in common out of the ττ uncertainty ([02](02-correlation-model.md)).
 
 ## Profile-likelihood cross-check
 
@@ -52,8 +55,8 @@ with u_c the quadrature sum of that channel's uncorrelated sources. For symmetri
 and ρ ∈ {0,1} this is algebraically identical to BLUE, which `run_combination.py --check` asserts
 (agreement better than 10⁻³ pb on the value and 2 % on the uncertainty). Two things it buys:
 
-1. the ττ channel's asymmetric uncertainty (+16.6 / −14.1 % on μ_Z) can be carried through with a
-   bifurcated response instead of being symmetrised. It changes the combined value by 0.8 pb;
+1. the ττ channel's asymmetric uncertainty (+12.1 / −10.4 % on μ_Z) can be carried through with a
+   bifurcated response instead of being symmetrised. It changes the combined value by 0.7 pb;
 2. a −2Δln L curve to plot (`output/plots/likelihood_scan.pdf`), which shows the parabola and the
    likelihood lying on top of each other — the honest way to say "the asymmetry does not matter
    here".

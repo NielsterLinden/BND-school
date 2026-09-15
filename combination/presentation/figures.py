@@ -4,7 +4,7 @@
     source ../setup.sh && python figures.py
 
 Writes figures/*.pdf and figures/*.png. Light background, to match beamer/metropolis and the
-channels' own CMS-style plots. The combination figures come from ../combination/output/plots/ and
+channels' own CMS-style plots. The combination figures come from ../output/plots/ and
 are not remade here.
 """
 
@@ -20,7 +20,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 HERE = Path(__file__).resolve().parent
-REPO = HERE.parent
+REPO = HERE.parents[1]          # the repository root (this deck lives in combination/)
+COMB = HERE.parent
 OUT = HERE / "figures"
 
 C_MUMU, C_TAUTAU, C_COMB, C_PRED, C_GREY = "#2B6CB0", "#EB811B", "#23373B", "#14B03D", "#8C8C94"
@@ -41,44 +42,55 @@ def save(fig, name):
 
 
 def mumu_fit_stability():
-    """Why the combination uses the counting extraction: z-mumu/REVIEW.md section 4, table 1.
+    """Why the combination can now use the shape fit: z-mumu's own stability table.
 
-    The five fit configurations the review ran, their mu_Z, and the +-0.7 % lineshape term
-    (half the spread) that the recommendation attaches to the counting value.
+    Read from `z-mumu/fit/results/stability.json`, the seven fit configurations the channel ran
+    after repairing the `SigModel` template (`z-mumu/REVIEW.md` section 0). Configurations with an
+    acceptable goodness of fit are shown filled, the ones the channel rejects are greyed.
     """
-    rows = [                                        # label, mu_Z, err, GoF p, is the chosen one
-        ("30 x 2 GeV bins\n(channel headline)", 0.9903, 0.0140, "0.33", False),
-        ("6 x 10 GeV bins", 0.9959, 0.0160, "0.0009", False),
-        ("1 bin = counting", 0.993539, None, "n/a (1 bin)", True),
-        ("30 bins, no SigModel", 1.00501, 0.0139, "0.0014", False),
-        ("30 bins, no SigModel,\nno smoothing", 1.00634, 0.0139, "0.0003", False),
-    ]
-    chosen = next(r[1] for r in rows if r[4])
-    fig, ax = plt.subplots(figsize=(8.4, 4.0))
-    ax.axvspan(chosen * (1 - 0.007), chosen * (1 + 0.007), color=C_PRED, alpha=0.18, lw=0,
-               label=r"assigned lineshape systematic $\pm$0.7 %")
-    ax.axvline(chosen, color=C_COMB, lw=1.5, label=r"used here: counting, $\mu_Z$ = 0.9935")
-    for i, (label, mu, err, gof, is_chosen) in enumerate(rows[::-1]):
-        colour = C_COMB if is_chosen else C_MUMU
-        ax.errorbar(mu, i, xerr=err, fmt="o" if is_chosen else "s", color=colour,
-                    ms=8 if is_chosen else 6, capsize=4, lw=2.0)
-        ax.text(1.0245, i, f"GoF p = {gof}", va="center", fontsize=9, color=C_GREY)
+    rows = json.loads((REPO / "z-mumu/fit/results/stability.json").read_text())
+    labels = {"zmumu": "12 x 5 GeV, two-sided SigModel\n(used here)",
+              "stab_2gev": "30 x 2 GeV", "stab_10gev": "6 x 10 GeV",
+              "stab_1bin": "1 bin = counting", "stab_nosig": "12 x 5 GeV, no SigModel",
+              "stab_smooth": "12 x 5 GeV, smoothed",
+              "stab_2gev_nosig": "30 x 2 GeV, no SigModel"}
+    baseline = next(r for r in rows if r["tag"] == "zmumu")
+    # the configurations the channel accepts: a real goodness of fit above 5 %
+    good = [r for r in rows if r["gof_p"] > 0.05]
+    lo, hi = min(r["mu"] for r in good), max(r["mu"] for r in good)
+
+    fig, ax = plt.subplots(figsize=(8.4, 4.4))
+    ax.axvspan(lo, hi, color=C_PRED, alpha=0.18, lw=0,
+               label=f"binnings with GoF p > 0.05: {lo:.4f}-{hi:.4f} "
+                     rf"($\pm${100 * (hi - lo) / 2 / baseline['mu']:.1f} %)")
+    ax.axvline(baseline["mu"], color=C_COMB, lw=1.5,
+               label=rf"used here: $\mu_Z$ = {baseline['mu']:.4f} $\pm$ {baseline['err_up']:.4f}")
+    for i, r in enumerate(rows[::-1]):
+        chosen = r["tag"] == "zmumu"
+        accepted = r["gof_p"] > 0.05
+        colour = C_COMB if chosen else (C_MUMU if accepted else C_GREY)
+        ax.errorbar(r["mu"], i, xerr=0.5 * (r["err_up"] + r["err_down"]),
+                    fmt="o" if chosen else "s", color=colour, ms=8 if chosen else 6,
+                    capsize=4, lw=2.0)
+        gof = "n/a (1 bin)" if r["tag"] == "stab_1bin" else f"{r['gof_p']:.3g}"
+        ax.text(1.0255, i, f"GoF p = {gof}", va="center", fontsize=9,
+                color=C_GREY if not accepted else "#444")
     ax.set_yticks(range(len(rows)))
-    ax.set_yticklabels([r[0] for r in rows[::-1]], fontsize=9.5)
+    ax.set_yticklabels([labels[r["tag"]] for r in rows[::-1]], fontsize=9.5)
     ax.set_ylim(-0.6, len(rows) - 0.35)
-    ax.set_xlim(0.972, 1.036)
+    ax.set_xlim(0.968, 1.042)
     ax.set_xticks([0.98, 0.99, 1.00, 1.01])
     ax.set_xlabel(r"$\mu_Z$ (Z $\to\mu\mu$)")
-    ax.legend(fontsize=9.5, loc="upper center", bbox_to_anchor=(0.45, -0.19), ncol=2)
+    ax.legend(fontsize=9.5, loc="upper center", bbox_to_anchor=(0.42, -0.17), ncol=1)
     ax.grid(axis="y", visible=False)
-    ax.set_title("the 30-bin fit is not robust: spread 0.990-1.006, only one has an acceptable GoF",
-                 loc="left", fontsize=9.5, color=C_GREY)
+    ax.set_title("after the SigModel repair the fit is stable; grey = rejected by the channel "
+                 "(GoF p < 0.05)", loc="left", fontsize=9.5, color=C_GREY)
     save(fig, "mumu_fit_stability")
 
 
 def precision_budget():
     """One picture of why the combination gains nothing: the correlated floor."""
-    payload = json.loads((REPO / "combination/output/combination_result.json").read_text())
+    payload = json.loads((COMB / "output/combination_result.json").read_text())
     res, mm = payload["combined"], payload["channels"]["mumu"]
     srcs = {s["name"]: s for s in payload["sources"]}
     corr = sum(v ** 2 for k, v in res["breakdown_pb"].items() if srcs[k]["rho"] >= 0.999) ** 0.5
@@ -112,8 +124,8 @@ def precision_budget():
 
 
 def main():
-    if not (REPO / "combination/output/combination_result.json").exists():
-        sys.exit("run ../combination/run_combination.py first")
+    if not (COMB / "output/combination_result.json").exists():
+        sys.exit("run ../run_combination.py first")
     print("writing deck figures:")
     mumu_fit_stability()
     precision_budget()

@@ -16,7 +16,7 @@ To get there, from the repository root:
     bash fitting/build_trexfitter.sh
     source setup.sh
     cd z-mumu   && python run_v2.py --from 4        # ~40 min: histograms -> fit inputs -> h/w/f
-    cd ../z-tautau && python run_all.py --from 3    # ~10 min: fake factors -> histograms -> h/w/f
+    cd ../z-tautau && python run_all.py --from 3    # ~25 min: fake factors, BDT, histograms -> h/w/f
     cd ../combination && python fit/run_multifit.py
 
 What the joint fit adds over the covariance combination (see docs/03-method.md):
@@ -76,18 +76,22 @@ Run from combination/fit/ once every channel has produced its workspace with `tr
 Stat-only: run every channel and this file with  "StatOnly=TRUE:Suffix=_statOnly".
 
 Correlation model: nuisance parameters are correlated by *name*, so everything the channels named
-identically (Lumi, Pileup, L1Prefiring, XS_*, PDF, QCDScale, PS_ISR, PS_FSR, SigModel) is one
-parameter in the combined likelihood. That is what the shared conventions were written for. One
-caveat the covariance combination treats differently (see docs/02-correlation-model.md): both
-channels call their generator comparison `SigModel`, but z-mumu compares powheg with aMC@NLO and
-z-tautau compares madgraph LO with aMC@NLO. They are different comparisons and should be
-decorrelated -- add to each channel's Job block, before building the workspace:
+identically (Lumi, Pileup, L1Prefiring, XS_*, PDF, QCDScale, PS_ISR, PS_FSR) is one parameter in
+the combined likelihood. That is what the shared conventions were written for.
+
+`SigModel` needs no action as the two channels stand today: only z-mumu fits it (powheg vs
+aMC@NLO, both NLO, two-sided inside a common 50 < m_LHE < 120 GeV window). z-tautau dropped its
+own generator systematic in v2.1 -- `SigModel_tautau` (madgraph LO vs aMC@NLO) is reported and not
+fitted, and it is not in the workspace (z-tautau/docs/07, docs/08). If that channel ever switches
+it on (`config.SIGMODEL_IN_FIT = True`), the two must be decorrelated, because an LO-vs-NLO
+difference and an NLO-vs-NLO difference are not one nuisance parameter -- add to each channel's
+Job block, before building the workspace:
 
     DecorrSysts: "SigModel"
     DecorrSuff: "_mumu"        (resp. "_tautau")
 
 A second caveat with no effect at this precision: Z/gamma* -> tautau is a *background* in the
-mu mu signal region (11.1k of 10.4M events) carrying an independent 5 % XS_DYtautau nuisance,
+mu mu signal region (11.0k of 10.4M events) carrying an independent 5 % XS_DYtautau nuisance,
 while it is the signal of the tautau channel. Under lepton universality it should scale with mu_Z;
 the difference is 0.005 % on the combined result."""
 

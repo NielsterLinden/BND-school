@@ -16,6 +16,29 @@ PREDICTION_NOTE = (
     "sections and not on `mu_Z`"
 )
 
+#: caveats carried over from the two channels' own open-issue lists, none of them corrected here.
+#: Each `{...}` is filled from the payload in `render`.
+CAVEATS = [
+    "`z-mumu` open issue 3: the data lineshape at 60-80 GeV lies between aMC@NLO and powheg, and "
+    "the fit resolves it by pulling `SigModel` by +0.66 sigma. This is the reason the extraction "
+    "still depends on the fit configuration at the few-per-mille level -- the accepted binnings "
+    "span {mumu_binning_span:.1f} pb on the combination ({mumu_binning_frac:.2f} of its total "
+    "uncertainty) and the 1-bin counting extraction sits {mumu_counting_shift:+.1f} pb away. "
+    "A third generator, or NLO electroweak corrections, would say which lineshape is right.",
+    "`z-mumu` open issue 1: the pileup profile is a two-parameter fit of the luminosity-record "
+    "profile to N_PV rather than the official `puWeights` file, which is unreachable in Open Data. "
+    "Data/MC in N_PV agree to 3 % over the bulk; the channel quotes 0.13 % for it.",
+    "`z-mumu` open issue 4: prefiring maps, muon scale factors and momentum corrections are "
+    "in-house (the official files need CERN credentials). The muon-efficiency term "
+    "({mumu_muon_pb:.0f} pb) is the largest uncertainty here after the luminosity.",
+    "`z-tautau` open issue 1: the channel recommends DeepTau **Tight** on both legs as the next "
+    "iteration's working point -- it is more precise ({tautau_tight_rel:.0f} % against "
+    "{tautau_rel:.0f} % on sigma) and fits better (GoF p = {tautau_tight_gof:.2f} against "
+    "{tautau_gof:.2f}) -- but has not adopted it as nominal. Using it shifts the combination by "
+    "{tautau_tight_shift:+.1f} pb and the universality ratio from {ratio:.2f} to "
+    "{tautau_tight_ratio:.2f}.",
+]
+
 REFERENCES = [
     ("CMS, 13 TeV, 206 pb^-1, 60 < m < 120 GeV", "1952 +- 4 (stat) +- 18 (syst) +- 45 (lumi) pb",
      "[CMS-SMP-20-004, arXiv:2408.03744](https://arxiv.org/abs/2408.03744)"),
@@ -37,6 +60,20 @@ def render(p: dict) -> str:
     lik, rat = p["likelihood"], p["ratio"]
     v = p["variations"]
     rel = 100 * c["relative"]
+
+    binning = [v[k]["value"] for k in ("baseline", "mumu_bins2gev", "mumu_bins10gev")]
+    caveats = "\n".join(
+        "* " + t.format(mumu_binning_span=max(binning) - min(binning),
+                        mumu_binning_frac=(max(binning) - min(binning)) / c["total_pb"],
+                        mumu_counting_shift=v["mumu_counting"]["shift"],
+                        mumu_muon_pb=c["breakdown_pb"]["Muon efficiency"],
+                        tautau_gof=tt["gof_p"], tautau_tight_shift=v["tautau_tight"]["shift"],
+                        ratio=rat["value"], tautau_tight_ratio=v["tautau_tight"]["ratio"],
+                        tautau_tight_gof=v["tautau_tight"]["channels"]["tautau"]["gof_p"],
+                        tautau_rel=100 * tt["sigma_err_pb"] / tt["sigma_pb"],
+                        tautau_tight_rel=100 * v["tautau_tight"]["channels"]["tautau"]["sigma_err_pb"]
+                        / v["tautau_tight"]["channels"]["tautau"]["sigma_pb"])
+        for t in CAVEATS)
 
     channel_rows = []
     for ch, name in ((mm, "Z -> mu mu"), (tt, "Z -> tau_h tau_h")):
@@ -89,11 +126,15 @@ combination reads their published results (`{mm['provenance'][0]}`,
 `{tt['provenance'][0]}`) and does not refit. The `reference` column is the aMC@NLO prediction each
 channel's `mu_Z` multiplies -- {PREDICTION_NOTE}. The `mu_Z` uncertainty shown is the in-fit one; the acceptance uncertainty (0.61 % for mu mu, 3.7 % for tau tau) sits outside both fits and is added in the `sigma` column.
 
-The z-mumu input is the **counting extraction** recommended by that channel's review
-(`z-mumu/REVIEW.md`, finding F3: the 30-bin shape fit moves `mu_Z` by up to 1.5 % with the binning
-and the shape systematics, so the review asks for the counting value plus a +-0.7 % lineshape
-term until the `SigModel` template is fixed). Using the 30-bin fit instead shifts the combination
-by {v['mumu_shapefit']['shift']:+.1f} pb, listed under the variations below.
+Both inputs are the channels' **current baselines**, re-published on 15 Sep 2026. For z-mumu that
+is the fit rebuilt after its own review (`z-mumu/REVIEW.md` section 0): 12 x 5 GeV bins instead of
+30 x 2 GeV, a two-sided `SigModel` template built inside a common 50 < m_LHE < 120 GeV window, no
+template smoothing and MINOS on every parameter. The review's stop-gap -- the counting extraction
+plus a +-0.7 % lineshape term -- is retired, because the fit it was protecting against is now
+stable to +-0.2 % across the binnings that describe the data; the counting extraction survives
+only as the `mumu counting` variation below ({v['mumu_counting']['shift']:+.1f} pb). For z-tautau
+it is v2.1, whose nominal is now the fake factor **with** the genuine-tau MC subtraction and whose
+OS/SS correction is applied per BDT category.
 
 ## Where the uncertainty comes from
 
@@ -105,7 +146,7 @@ The combination is **luminosity-dominated and completely dominated by the mu mu 
 
 * weights: mu mu {c['weights']['mumu']:+.4f}, tau tau {c['weights']['tautau']:+.4f};
 * mu mu alone gives {mm['alone_pb']:.0f} +- {mm['alone_err_pb']:.0f} pb, so adding the tau tau channel improves the uncertainty by {100 * (1 - c['total_pb'] / mm['alone_err_pb']):.2f} % -- it changes nothing;
-* the tau tau weight is **negative**. That is standard BLUE behaviour, not an error: when the correlation exceeds the ratio of the two uncertainties ({c['correlation_mumu_tautau']:.2f} > {mm['alone_err_pb'] / tt['alone_err_pb']:.2f} here), the less precise measurement is used to pull on the shared systematic rather than to average the value down. Its effect is {abs(c['sigma_pb'] - mm['alone_pb']):.1f} pb.
+* the tau tau weight is **negative**. That is standard BLUE behaviour, not an error: when the correlation exceeds the ratio of the two uncertainties ({c['correlation_mumu_tautau']:.3f} > {mm['alone_err_pb'] / tt['alone_err_pb']:.3f} here), the less precise measurement is used to pull on the shared systematic rather than to average the value down. Its effect is {abs(c['sigma_pb'] - mm['alone_pb']):.1f} pb.
 
 The reason there is nothing to gain: the luminosity uncertainty is {c['lumi_pb']:.0f} pb, fully correlated between the channels and therefore irreducible by combining. Both channels use the same 16393.381 pb^-1 with the same 1.2 %. A third channel of comparable precision would not help either; a better luminosity calibration would.
 
@@ -124,7 +165,7 @@ separately, with everything correlated cancelling:
 {_table(["variation", "sigma [pb]", "shift", "in sigma", "what it changes"], var_rows,
         ["---", "---:", "---:", "---:", "---"])}
 
-Every variation moves the result by less than {max(abs(d['shift']) for k, d in v.items() if k != 'baseline') / c['total_pb']:.2f} of the total uncertainty, and the two rows that bracket the correlation model (`rho zero`, `rho one`) span only {abs(v['rho_zero']['value'] - v['rho_one']['value']):.1f} pb. The correlation model is therefore not the limiting assumption -- the luminosity calibration is.
+Every variation moves the result by less than {max(abs(d['shift']) for k, d in v.items() if k != 'baseline') / c['total_pb']:.2f} of the total uncertainty. The largest is `mumu counting` ({v['mumu_counting']['shift']:+.1f} pb): the mu mu signal extraction, not the combination, is what the result is most sensitive to. The two rows that bracket the correlation model (`rho zero`, `rho one`) span only {abs(v['rho_zero']['value'] - v['rho_one']['value']):.1f} pb, and `sigmodel correlated` is exactly null because z-tautau no longer fits a generator nuisance parameter at all (`z-tautau/docs/07`). The correlation model is therefore not the limiting assumption -- the luminosity calibration is.
 
 ![variations](output/plots/variations.png)
 
@@ -153,15 +194,11 @@ recipe to run it is in that file; [docs/03-method.md](docs/03-method.md) explain
 fit would add. At this precision the difference is expected to be small -- the mu mu channel
 dominates and its own fit is already profiled -- but it is not zero, and the claim is not made.
 
-Known caveats inherited from the inputs, none of them corrected here:
+Known caveats inherited from the inputs, none of them corrected here. All nine findings of
+`z-mumu/REVIEW.md` were fixed by that channel before this combination was made, so what is left
+is each channel's own open-issue list:
 
-* `z-mumu/REVIEW.md` F8: `MuonReco` is documented as 0.4 % per muon but applied as 0.4 % per
-  event. If the per-muon reading is right, the mu mu muon-efficiency term grows by 0.35 % in
-  quadrature (+3 pb on the combined uncertainty, no shift in the value).
-* `z-mumu/REVIEW.md` F6: the pileup profile is ~4 % low; the channel quotes 0.16 % for it.
-* `z-tautau` open issue 1: the nominal fake factor double-counts genuine taus; the `mcsub`
-  variant is listed above and shifts the combination by
-  {v['tautau_mcsub']['shift']:+.1f} pb.
+{caveats}
 
 ## Reproduce
 

@@ -5,23 +5,35 @@ and is traceable to the channel that produced it (`provenance` on each `ChannelR
 
     from comb import inputs
     chans = inputs.load_channels()                     # {"mumu": ..., "tautau": ...}
-    chans = inputs.load_channels(mumu="shapefit", tautau="mcsub")
+    chans = inputs.load_channels(mumu="counting", tautau="tight")
+
+Both channels re-published on 15 Sep 2026 and the combination follows their new baselines:
+
+* **z-mumu** fixed the findings of its own review (`z-mumu/REVIEW.md` section 0): the fit runs in
+  12 x 5 GeV bins with a two-sided `SigModel` template built inside a common 50 < m_LHE < 120 GeV
+  window, no template smoothing, MINOS on every parameter. That fit is stable to +-0.2 % across
+  the binnings that describe the data, so the counting extraction and the +-0.7 % lineshape term
+  the review had recommended as a stop-gap are **no longer used**: the shape fit is the baseline
+  (`mumu="shapefit"`) and the channel's stability table supplies the alternative configurations.
+* **z-tautau** v2.1 makes the MC-subtracted fake factor its nominal (`nominal_variant` in its
+  results file) and corrects OS/SS per BDT category; `nosub` and the DeepTau-Tight working point
+  are its cross-checks.
 
 Two things are deliberately *not* symmetric between the channels:
 
-* the z-mumu review of 15 Sep 2026 (`z-mumu/REVIEW.md`, finding F3) showed the 30-bin shape fit is
-  not robust and recommends the **counting extraction** with an extra +-0.7 % lineshape term until
-  the `SigModel` template is fixed. That is the default here (`mumu="counting"`); the shape fit is
-  kept as the `"shapefit"` variant.
-* the two channels' `mu_Z` do not share a reference prediction (1954.1 pb for mumu against
-  1944.9 pb for tautau, a 0.47 % difference -- see docs/01-inputs.md), so the combination is done
-  on the cross sections, never on `mu_Z`.
+* the two `mu_Z` do not share a reference prediction (1953.9 pb for mumu against 1944.9 pb for
+  tautau, a 0.47 % difference -- see docs/01-inputs.md), so the combination is done on the cross
+  sections, never on `mu_Z`;
+* z-mumu fits a `SigModel` nuisance parameter (powheg vs aMC@NLO, both NLO); z-tautau does not.
+  Its generator comparison (`SigModel_tautau`, madgraph LO vs aMC@NLO) is reported and *not* used
+  as an uncertainty, and `z-tautau/docs/07` forbids correlating the two. `ChannelResult.sigmodel`
+  is therefore zero on the tautau side, which is what makes the split in `comb/model.py` a no-op
+  there.
 """
 
 from __future__ import annotations
 
 import json
-import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -29,15 +41,24 @@ REPO = Path(__file__).resolve().parents[2]
 
 # --- files read (all committed) -------------------------------------------------------------
 ZMUMU_FIT_JSON = REPO / "z-mumu/fit/results/zmumu_fit_result.json"
-ZMUMU_RESULTS_V2 = REPO / "z-mumu/output/v2/results_v2.json"
-ZMUMU_COUNTING_IMPACTS = REPO / "z-mumu/review/fitcheck/GroupedImpact_rebin30.txt"
-ZMUMU_COUNTING_FIT = REPO / "z-mumu/review/fitcheck/zmumu_rebin30.txt"
+ZMUMU_STABILITY = REPO / "z-mumu/fit/results/stability.json"
 ZTAUTAU_RESULTS = REPO / "z-tautau/output/results.json"
+ZTAUTAU_TIGHT_RESULTS = REPO / "z-tautau/variants/tight/output/results.json"
 
-# z-mumu REVIEW.md section 4, recommendation 3: half the spread of the fit-configuration table
-# (mu_Z = 0.990 / 0.996 / 0.9935 / 1.005 / 1.006) assigned as a lineshape-model uncertainty on the
-# counting extraction. Channel-specific (it is the mumu mass-template modelling), so uncorrelated.
-ZMUMU_LINESHAPE_REL = 0.007
+#: z-mumu fit configurations: name used here -> `tag` of the entry in `stability.json`.
+#: `None` is the nominal fit, which is the whole of `zmumu_fit_result.json`.
+#: Of the seven rows of that table only the ones the channel accepts are offered: the nominal
+#: (GoF p = 0.79), 6 x 10 GeV (0.50), 30 x 2 GeV (0.16) and the 1-bin counting extraction.
+#: `stab_nosig` and `stab_smooth` have p <= 0.01 and are rejected by the channel itself
+#: (`z-mumu/REVIEW.md` section 0), so they are not available as combination variants.
+ZMUMU_VARIANTS = {"shapefit": None, "bins2gev": "stab_2gev", "bins10gev": "stab_10gev",
+                  "counting": "stab_1bin"}
+
+#: z-tautau variants: name used here -> (results file, key in its `fit` block).
+#: `None` means "whatever that file calls `nominal_variant`", so the channel stays in charge of
+#: which of its fake-factor treatments is nominal.
+ZTAUTAU_VARIANTS = {"nominal": (ZTAUTAU_RESULTS, None), "mcsub": (ZTAUTAU_RESULTS, "mcsub"),
+                    "nosub": (ZTAUTAU_RESULTS, "nosub"), "tight": (ZTAUTAU_TIGHT_RESULTS, None)}
 
 #: nuisance parameters that make up the "Signal modelling" category in both channels
 #: (fitting/CONVENTIONS.md). `SigModel` is split off because the two channels compare different
@@ -80,7 +101,7 @@ class ChannelResult:
 
         In-fit impacts are impacts on mu and mu multiplies a fixed prediction, so they scale with
         sigma_pred, not with the measured sigma. This is the same bookkeeping the channels use
-        (z-mumu: sigma_fid_lumi_pb = 0.0116431 x 799.566).
+        (z-mumu: sigma_fid_lumi_pb = 0.0116267 x 799.566).
         """
         return self.groups.get(category, 0.0) * self.sigma_pred
 
@@ -100,31 +121,6 @@ class ChannelResult:
 
 
 # ---------------------------------------------------------------------------- parsers
-def _parse_grouped_impact(path: Path) -> dict[str, float]:
-    """TRExFitter `GroupedImpact_<poi>.txt`: '<Category>   <unc>  ( +<up>, -<down> )'."""
-    out = {}
-    rx = re.compile(r"^(\S.*?)\s{2,}(\S+)\s+\(")
-    for line in path.read_text().splitlines():
-        m = rx.match(line.strip())
-        if not m:
-            continue
-        try:
-            value = float(m.group(2))
-        except ValueError:          # TRExFitter writes '-nan' for a group it could not evaluate
-            continue
-        if value == value:          # drop NaN
-            out[m.group(1)] = abs(value)
-    return out
-
-
-def _parse_fit_txt_poi(path: Path, poi: str = "mu_Z") -> tuple[float, float, float]:
-    for line in path.read_text().splitlines():
-        m = re.match(rf"^{poi}\s+(\S+)\s+\+(\S+)\s+-(\S+)", line.strip())
-        if m:
-            return float(m.group(1)), float(m.group(2)), float(m.group(3))
-    raise RuntimeError(f"{poi} not found in {path}")
-
-
 def _drop_totals(groups: dict[str, float]) -> dict[str, float]:
     """Remove the summary rows and empty categories from a grouped-impact table."""
     return {k: v for k, v in groups.items() if k not in ("FullSyst", "Total") and v > 0.0}
@@ -138,43 +134,66 @@ def _ranking_tautau(fit: dict) -> dict[str, float]:
     return {r["name"]: 0.5 * (abs(r["impact_up"]) + abs(r["impact_down"])) for r in fit.get("ranking", [])}
 
 
+def _stability_entry(tag: str) -> dict:
+    """One row of z-mumu's fit-configuration stability table."""
+    rows = json.loads(ZMUMU_STABILITY.read_text())
+    for row in rows:
+        if row["tag"] == tag:
+            return row
+    raise RuntimeError(f"no entry {tag!r} in {ZMUMU_STABILITY}: have {[r['tag'] for r in rows]}")
+
+
 # ---------------------------------------------------------------------------- channels
-def load_mumu(variant: str = "counting") -> ChannelResult:
-    """Z -> mu mu. `variant` is "counting" (reviewed recommendation) or "shapefit" (30-bin fit)."""
+def load_mumu(variant: str = "shapefit") -> ChannelResult:
+    """Z -> mu mu. `variant` is a key of `ZMUMU_VARIANTS`.
+
+    "shapefit" is the channel's own post-review baseline: the 12 x 5 GeV profile-likelihood fit of
+    m(mu mu) with the two-sided `SigModel` template, MINOS everywhere and no smoothing.
+
+    The other keys are rows of the channel's stability table (`z-mumu/fit/results/stability.json`,
+    produced by `scripts/v2_5_fit_variants.py`). That table publishes mu_Z, the MINOS errors, the
+    total systematic and the goodness of fit per configuration, but **not** the grouped impacts
+    per configuration, so a variant keeps the nominal fit's category composition rescaled to its
+    own published total systematic. That is an approximation and it is only ever used for the
+    variations in `run_combination.VARIATIONS`, never for the baseline.
+    """
+    if variant not in ZMUMU_VARIANTS:
+        raise ValueError(f"unknown z-mumu variant {variant!r}: use {sorted(ZMUMU_VARIANTS)}")
     js = json.loads(ZMUMU_FIT_JSON.read_text())
     meta = js["meta"]
-    sigma_pred = meta["sigma_fid_pred_pb"] / meta["A_60_120"]     # 1954.1 pb
+    sigma_pred = meta["sigma_fid_pred_pb"] / meta["A_60_120"]     # 1953.9 pb
     a = meta["acceptance"]
     acc = {"pdf": a["A_pdf_rel"], "alphas": a["A_alphas_rel"], "scale": a["A_scale_rel"],
            "mcstat": a["A_stat"] / a["A"]}
     prov = [str(ZMUMU_FIT_JSON.relative_to(REPO))]
 
-    if variant == "shapefit":
-        groups = _drop_totals(js["grouped_impacts_mu"])
+    ranking = _ranking_mumu(js)
+    groups = _drop_totals(js["grouped_impacts_mu"])
+    syst_nominal = js["grouped_impacts_mu"]["FullSyst"]
+    tag = ZMUMU_VARIANTS[variant]
+
+    if tag is None:
         mu, up, down = js["mu"], js["mu_err_up"], js["mu_err_down"]
         stat = js["mu_stat_only_fit"]
         gof = js.get("gof", {}).get("gof_probability")
-    elif variant == "counting":
-        groups = _drop_totals(_parse_grouped_impact(ZMUMU_COUNTING_IMPACTS))
-        mu, _, _ = _parse_fit_txt_poi(ZMUMU_COUNTING_FIT)
-        # the 1-bin Hesse error is degenerate (REVIEW.md section 4); the data statistical
-        # uncertainty is sqrt(N_obs) / (N_obs - N_bkg), the same 0.031 % as the shape fit.
+        # a shape effect: take it from the post-fit ranking of the nuisance parameter itself
+        sigmodel = ranking.get("SigModel", 0.0)
+    else:
+        row = _stability_entry(tag)
+        mu, up, down = row["mu"], row["err_up"], row["err_down"]
+        # the data statistical uncertainty is a property of the dataset, not of the binning:
+        # sqrt(N_obs) / (N_obs - N_bkg) = 0.031 %, which is what the nominal fit's stat-only fit
+        # returns as well (asserted in run_combination.check).
         c = meta["counting"]
         stat = mu * c["n_obs"] ** 0.5 / (c["n_obs"] - c["n_bkg"])
-        groups["Lineshape model"] = ZMUMU_LINESHAPE_REL * mu
-        up = down = sum(v * v for v in groups.values()) ** 0.5
-        gof = None
-        prov += [str(ZMUMU_COUNTING_IMPACTS.relative_to(REPO)),
-                 str(ZMUMU_COUNTING_FIT.relative_to(REPO)), "z-mumu/REVIEW.md (F3, recommendation 3)"]
-    else:
-        raise ValueError(f"unknown z-mumu variant {variant!r}: use 'counting' or 'shapefit'")
-
-    ranking = _ranking_mumu(js)
-    # `SigModel` alone, to be decorrelated from the rest of the Signal modelling category. In the
-    # shape fit it is a shape effect (take it from the ranking); in the counting extraction only
-    # the powheg/aMC@NLO normalisation difference survives.
-    sigmodel = ranking.get("SigModel", 0.0) if variant == "shapefit" else \
-        abs(meta["sigmodel_powheg_over_nlo"] - 1.0) * mu
+        scale = row["syst_total"] / syst_nominal
+        groups = {k: v * scale for k, v in groups.items()}
+        gof = row["gof_p"] or None          # the 1-bin fit has no degrees of freedom left
+        # in the counting extraction the template's shape cannot act: only the powheg/aMC@NLO
+        # difference in the fiducial C factor survives
+        sigmodel = (abs(meta["sigmodel"]["C_ratio_powheg_over_nlo"] - 1.0) * mu if tag == "stab_1bin"
+                    else ranking.get("SigModel", 0.0) * scale)
+        prov.append(f"{ZMUMU_STABILITY.relative_to(REPO)} [{tag}: {row['label']}]")
 
     return ChannelResult(
         name="mumu", label=r"$Z\to\mu\mu$", variant=variant,
@@ -185,33 +204,51 @@ def load_mumu(variant: str = "counting") -> ChannelResult:
                "sigma_fid_pred_pb": meta["sigma_fid_pred_pb"],
                "A": meta["A_60_120"], "C": meta["C_factor"], "lumi_pb": meta["lumi_pb"],
                "n_obs": meta["counting"]["n_obs"], "n_bkg": meta["counting"]["n_bkg"],
+               "sr_bin_width_gev": meta["sr_bin_width_gev"],
                "shapefit_mu": js["mu"], "counting_sigma_fid_pb": meta["counting"]["sigma_fid_pb"]})
 
 
 def load_tautau(variant: str = "nominal") -> ChannelResult:
-    """Z -> tau_h tau_h. `variant` is the fake-factor variant: "nominal" or "mcsub"."""
-    js = json.loads(ZTAUTAU_RESULTS.read_text())
-    if variant not in js["fit"]:
-        raise ValueError(f"unknown z-tautau variant {variant!r}: use {sorted(js['fit'])}")
-    fit = js["fit"][variant]
+    """Z -> tau_h tau_h. `variant` is a key of `ZTAUTAU_VARIANTS`.
+
+    "nominal" resolves to whatever the channel's results file calls `nominal_variant` -- since
+    v2.1 that is `mcsub`, the fake factor with the genuine-tau MC subtraction. "nosub" is the
+    fake factor without it, and "tight" is the complete re-run with DeepTau Tight on both legs
+    (`z-tautau/variants/tight/`), which the channel recommends as the next iteration's working
+    point but has not adopted as nominal.
+    """
+    if variant not in ZTAUTAU_VARIANTS:
+        raise ValueError(f"unknown z-tautau variant {variant!r}: use {sorted(ZTAUTAU_VARIANTS)}")
+    path, key = ZTAUTAU_VARIANTS[variant]
+    js = json.loads(path.read_text())
+    key = key or js["nominal_variant"]
+    if key not in js["fit"]:
+        raise ValueError(f"{path.name} has no fit variant {key!r}: have {sorted(js['fit'])}")
+    fit = js["fit"][key]
     pred = js["prediction"]
     acc = {"pdf": pred["A_unc"]["A_pdf"], "alphas": pred["A_unc"]["A_alphas"],
            "scale": pred["A_unc"]["A_scale"], "isr": pred["A_unc"]["A_isr"],
            "fsr": pred["A_unc"]["A_fsr"], "mcstat": pred["A_mc_stat"]}
+    ranking = _ranking_tautau(fit)
     return ChannelResult(
-        name="tautau", label=r"$Z\to\tau_h\tau_h$", variant=variant,
+        name="tautau", label=r"$Z\to\tau_h\tau_h$",
+        variant=key if variant != "tight" else f"tight/{key}",
         mu=fit["mu"], mu_err_up=fit["mu_err_up"], mu_err_down=fit["mu_err_down"],
         mu_stat=fit["mu_stat"],
         sigma_pred=pred["sigma_tautau_60_120_pb"], groups=_drop_totals(fit["grouped_impact"]),
-        ranking=_ranking_tautau(fit), acc=acc,
-        sigmodel=_ranking_tautau(fit).get("SigModel", 0.0), gof_p=fit.get("gof_probability"),
-        provenance=[str(ZTAUTAU_RESULTS.relative_to(REPO))],
+        ranking=ranking, acc=acc,
+        # `SigModel_tautau` is reported, not fitted (z-tautau/docs/07); since v2.1 no `SigModel`
+        # appears in the ranking, so the generator part of the category is zero by construction.
+        sigmodel=ranking.get("SigModel", 0.0), gof_p=fit.get("gof_probability"),
+        provenance=[f"{path.relative_to(REPO)} [fit/{key}]"],
         extra={"sigma_fid_pb": fit["sigma_fid_pb"]["value"],
                "sigma_fid_pred_pb": pred["sigma_fid_pb"], "A": pred["A"],
                "C": js["for_combination"]["C"], "lumi_pb": js["lumi_pb"],
                "n_obs": js["for_combination"]["n_obs"],
-               "n_bkg": js["for_combination"]["n_bkg_prefit"]})
+               "n_bkg": js["for_combination"]["n_bkg_prefit"],
+               "sigmodel_C_LO_over_NLO": js["sigmodel"]["C_LO_over_NLO_fiducial"],
+               "mu_expected_asimov": fit["mu_expected_asimov"]})
 
 
-def load_channels(mumu: str = "counting", tautau: str = "nominal") -> dict[str, ChannelResult]:
+def load_channels(mumu: str = "shapefit", tautau: str = "nominal") -> dict[str, ChannelResult]:
     return {"mumu": load_mumu(mumu), "tautau": load_tautau(tautau)}

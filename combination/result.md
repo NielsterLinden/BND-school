@@ -7,14 +7,14 @@ CMS Open Data 2016, Run2016G+H, L = 16393.381 pb^-1 (normtag), sqrt(s) = 13 TeV.
 
 ## Result
 
-> **sigma(pp -> Z/gamma* -> ll, 60 < m_ll < 120 GeV) = 1940 +- 35 pb**
-> = 1940 +- 0.6 (stat) +- 23 (syst)
-> +- 12 (acc) +- 24 (lumi) pb   (1.79 %)
+> **sigma(pp -> Z/gamma* -> ll, 60 < m_ll < 120 GeV) = 1931 +- 35 pb**
+> = 1931 +- 0.6 (stat) +- 24 (syst)
+> +- 12 (acc) +- 23 (lumi) pb   (1.83 %)
 >
 > per lepton flavour, assuming lepton universality. Channel compatibility:
-> chi2/ndf = 0.79/1, p = 0.37.
+> chi2/ndf = 1.70/1, p = 0.19.
 
-The profile-likelihood form of the same combination, which carries the tau tau channel's asymmetric uncertainty exactly, gives 1939 +35 / -35 pb -- the same answer.
+The profile-likelihood form of the same combination, which carries the tau tau channel's asymmetric uncertainty exactly, gives 1930 +35 / -36 pb -- the same answer.
 
 ![combined result](output/plots/forest.png)
 
@@ -22,63 +22,62 @@ The profile-likelihood form of the same combination, which carries the tau tau c
 
 | channel | variant | mu_Z | reference [pb] | sigma(60-120) [pb] | rel. | GoF p |
 |---|---|---|---:|---:|---:|---:|
-| **Z -> mu mu** | counting | 0.9935 +0.0167 -0.0167 | 1953.9 | **1941 +- 35** | 1.8 % | n/a |
-| **Z -> tau_h tau_h** | nominal | 1.1596 +0.1920 -0.1632 | 1944.9 | **2255 +- 358** | 15.9 % | 0.18 |
+| **Z -> mu mu** | shapefit | 0.9881 +0.0159 -0.0156 | 1953.9 | **1931 +- 35** | 1.8 % | 0.79 |
+| **Z -> tau_h tau_h** | mcsub | 1.2045 +0.1452 -0.1250 | 1944.9 | **2343 +- 322** | 13.7 % | 0.22 |
 
 Both are TRExFitter v1.8.0 profile-likelihood fits performed by the channel groups; this
 combination reads their published results (`z-mumu/fit/results/zmumu_fit_result.json`,
-`z-tautau/output/results.json`) and does not refit. The `reference` column is the aMC@NLO prediction each
+`z-tautau/output/results.json [fit/mcsub]`) and does not refit. The `reference` column is the aMC@NLO prediction each
 channel's `mu_Z` multiplies -- the two channels normalise to slightly different aMC@NLO references for the same quantity (1953.9 pb for mu mu, 1944.9 pb for tau tau, a 0.47 % difference discussed in [docs/01-inputs.md](docs/01-inputs.md)), which is why the combination is done on the cross sections and not on `mu_Z`. The `mu_Z` uncertainty shown is the in-fit one; the acceptance uncertainty (0.61 % for mu mu, 3.7 % for tau tau) sits outside both fits and is added in the `sigma` column.
 
-The z-mumu input is the **counting extraction** recommended by that channel's review
-(`z-mumu/REVIEW.md`, finding F3: the 30-bin shape fit moves `mu_Z` by up to 1.5 % with the binning
-and the shape systematics, so the review asks for the counting value plus a +-0.7 % lineshape
-term until the `SigModel` template is fixed). Using the 30-bin fit instead shifts the combination
-by -6.5 pb, listed under the variations below.
+Both inputs are the channels' **current baselines**, re-published on 15 Sep 2026. For z-mumu that
+is the fit rebuilt after its own review (`z-mumu/REVIEW.md` section 0): 12 x 5 GeV bins instead of
+30 x 2 GeV, a two-sided `SigModel` template built inside a common 50 < m_LHE < 120 GeV window, no
+template smoothing and MINOS on every parameter. The review's stop-gap -- the counting extraction
+plus a +-0.7 % lineshape term -- is retired, because the fit it was protecting against is now
+stable to +-0.2 % across the binnings that describe the data; the counting extraction survives
+only as the `mumu counting` variation below (+11.2 pb). For z-tautau
+it is v2.1, whose nominal is now the fake factor **with** the genuine-tau MC subtraction and whose
+OS/SS correction is applied per BDT category.
 
 ## Where the uncertainty comes from
 
 | source | pb | of sigma | correlated? |
 |---|---:|---:|:---:|
-| Luminosity | 23.51 | 1.21 % | yes |
-| Lineshape model | 13.65 | 0.70 % | no |
-| Muon efficiency | 11.68 | 0.60 % | no |
-| L1 prefiring | 10.58 | 0.55 % | yes |
-| Acceptance: PDF | 10.02 | 0.52 % | yes |
-| Acceptance: QCD scale | 5.91 | 0.30 % | yes |
-| Pileup | 4.99 | 0.26 % | yes |
-| Signal modelling (PDF, scales, PS) | 4.62 | 0.24 % | yes |
-| Signal modelling (generator) | 3.46 | 0.18 % | no |
-| Muon momentum | 2.43 | 0.13 % | no |
-| Background normalisation | 2.38 | 0.12 % | yes |
-| Fakes | 1.88 | 0.10 % | no |
-| Gammas | 1.79 | 0.09 % | no |
-| Tau ID | 1.18 | 0.06 % | no |
-| Acceptance: MC stat. | 0.87 | 0.05 % | no |
-| Data statistics | 0.63 | 0.03 % | no |
-| Tau trigger | 0.48 | 0.02 % | no |
-| Acceptance: $\alpha_s$ | 0.47 | 0.02 % | yes |
-| Tau energy scale | 0.30 | 0.02 % | no |
-| Acceptance: ISR | 0.09 | 0.00 % | yes |
-| MET | 0.06 | 0.00 % | no |
+| Luminosity | 22.72 | 1.18 % | yes |
+| Muon efficiency | 17.00 | 0.88 % | no |
+| Acceptance: PDF | 9.97 | 0.52 % | yes |
+| L1 prefiring | 9.89 | 0.51 % | yes |
+| Signal modelling (generator) | 7.74 | 0.40 % | no |
+| Gammas | 7.46 | 0.39 % | no |
+| Muon momentum | 7.17 | 0.37 % | no |
+| Acceptance: QCD scale | 6.15 | 0.32 % | yes |
+| Signal modelling (PDF, scales, PS) | 5.65 | 0.29 % | yes |
+| Pileup | 2.61 | 0.14 % | yes |
+| Background normalisation | 1.57 | 0.08 % | yes |
+| Fakes | 0.87 | 0.04 % | no |
+| Acceptance: MC stat. | 0.86 | 0.04 % | no |
+| Data statistics | 0.61 | 0.03 % | no |
+| Acceptance: $\alpha_s$ | 0.52 | 0.03 % | yes |
+| Tau ID | 0.08 | 0.00 % | no |
 
 ![uncertainty breakdown](output/plots/breakdown.png)
 
 The combination is **luminosity-dominated and completely dominated by the mu mu channel**:
 
-* weights: mu mu +1.0048, tau tau -0.0048;
-* mu mu alone gives 1941 +- 35 pb, so adding the tau tau channel improves the uncertainty by 0.13 % -- it changes nothing;
-* the tau tau weight is **negative**. That is standard BLUE behaviour, not an error: when the correlation exceeds the ratio of the two uncertainties (0.15 > 0.10 here), the less precise measurement is used to pull on the shared systematic rather than to average the value down. Its effect is 1.5 pb.
+* weights: mu mu +1.0004, tau tau -0.0004;
+* mu mu alone gives 1931 +- 35 pb, so adding the tau tau channel improves the uncertainty by 0.00 % -- it changes nothing;
+* the tau tau weight is **negative**. That is standard BLUE behaviour, not an error: when the correlation exceeds the ratio of the two uncertainties (0.114 > 0.110 here), the less precise measurement is used to pull on the shared systematic rather than to average the value down. Its effect is 0.2 pb.
 
-The reason there is nothing to gain: the luminosity uncertainty is 24 pb, fully correlated between the channels and therefore irreducible by combining. Both channels use the same 16393.381 pb^-1 with the same 1.2 %. A third channel of comparable precision would not help either; a better luminosity calibration would.
+The reason there is nothing to gain: the luminosity uncertainty is 23 pb, fully correlated between the channels and therefore irreducible by combining. Both channels use the same 16393.381 pb^-1 with the same 1.2 %. A third channel of comparable precision would not help either; a better luminosity calibration would.
 
 ## Lepton universality
 
 This is the part the combination cannot test, because it *assumes* universality. Measured
 separately, with everything correlated cancelling:
 
-> **R = sigma(Z -> tau tau) / sigma(Z -> mu mu) = 1.16 +- 0.18**
-> (+0.9 sigma from 1, p = 0.38)
+> **R = sigma(Z -> tau tau) / sigma(Z -> mu mu) = 1.21 +- 0.17**
+> (+1.3 sigma from 1, p = 0.20)
 
 ![lepton universality](output/plots/universality.png)
 
@@ -86,14 +85,17 @@ separately, with everything correlated cancelling:
 
 | variation | sigma [pb] | shift | in sigma | what it changes |
 |---|---:|---:|---:|---|
-| tautau mcsub | 1937.8 | -2.0 | -0.06 | z-tautau fake factor with genuine-tau subtraction (its open issue 1) |
-| mumu shapefit | 1933.3 | -6.5 | -0.19 | z-mumu 30-bin shape fit instead of the reviewed counting extraction |
-| sigmodel correlated | 1938.4 | -1.4 | -0.04 | generator comparison treated as correlated between channels |
-| acc scale decorrelated | 1940.8 | +1.0 | +0.03 | acceptance QCD-scale term uncorrelated between channels |
-| rho zero | 1944.3 | +4.5 | +0.13 | all systematics uncorrelated (naive) |
-| rho one | 1937.8 | -2.0 | -0.06 | all systematics fully correlated |
+| tautau nosub | 1930.7 | +0.1 | +0.00 | z-tautau fake factor without the genuine-tau MC subtraction |
+| tautau tight | 1931.1 | +0.5 | +0.02 | z-tautau with DeepTau Tight on both legs (its recommended next WP) |
+| mumu counting | 1941.8 | +11.2 | +0.32 | z-mumu 1-bin counting extraction instead of the 12 x 5 GeV fit |
+| mumu bins2gev | 1934.4 | +3.8 | +0.11 | z-mumu fit in 30 x 2 GeV bins |
+| mumu bins10gev | 1926.1 | -4.5 | -0.13 | z-mumu fit in 6 x 10 GeV bins |
+| sigmodel correlated | 1930.6 | +0.0 | +0.00 | generator comparison treated as correlated between channels |
+| acc scale decorrelated | 1932.2 | +1.6 | +0.05 | acceptance QCD-scale term uncorrelated between channels |
+| rho zero | 1935.8 | +5.2 | +0.15 | all systematics uncorrelated (naive) |
+| rho one | 1927.1 | -3.5 | -0.10 | all systematics fully correlated |
 
-Every variation moves the result by less than 0.19 of the total uncertainty, and the two rows that bracket the correlation model (`rho zero`, `rho one`) span only 6.4 pb. The correlation model is therefore not the limiting assumption -- the luminosity calibration is.
+Every variation moves the result by less than 0.32 of the total uncertainty. The largest is `mumu counting` (+11.2 pb): the mu mu signal extraction, not the combination, is what the result is most sensitive to. The two rows that bracket the correlation model (`rho zero`, `rho one`) span only 8.7 pb, and `sigmodel correlated` is exactly null because z-tautau no longer fits a generator nuisance parameter at all (`z-tautau/docs/07`). The correlation model is therefore not the limiting assumption -- the luminosity calibration is.
 
 ![variations](output/plots/variations.png)
 
@@ -104,7 +106,7 @@ Every variation moves the result by less than 0.19 of the total uncertainty, and
 | CMS, 13 TeV, 206 pb^-1, 60 < m < 120 GeV | 1952 +- 4 (stat) +- 18 (syst) +- 45 (lumi) pb | [CMS-SMP-20-004, arXiv:2408.03744](https://arxiv.org/abs/2408.03744) |
 | ATLAS, 13 TeV, 81 pb^-1, 66 < m < 116 GeV | 1981 +- 7 (stat) +- 38 (syst) +- 42 (lumi) pb | [arXiv:1603.09222](https://arxiv.org/abs/1603.09222) |
 
-This work: **1940 +- 35 pb** (60 < m < 120 GeV). It agrees with the CMS measurement of the same quantity within 0.2 sigma, and with the aMC@NLO reference the channels normalise to (1945-1954 pb) within 0.3 sigma. The ATLAS number is quoted in a narrower mass window (66-116 GeV) and is not directly comparable.
+This work: **1931 +- 35 pb** (60 < m < 120 GeV). It agrees with the CMS measurement of the same quantity within 0.4 sigma, and with the aMC@NLO reference the channels normalise to (1945-1954 pb) within 0.5 sigma. The ATLAS number is quoted in a narrower mass window (66-116 GeV) and is not directly comparable.
 
 ![comparison](output/plots/comparison.png)
 
@@ -112,28 +114,27 @@ This work: **1940 +- 35 pb** (60 < m < 120 GeV). It agrees with the CMS measurem
 
 | source | rho | mu mu [pb] | tau tau [pb] |
 |---|:---:|---:|---:|
-| Tau ID | 0 | 0.00 | 244.03 |
-| Signal modelling (generator) | 0 | 3.35 | 165.52 |
-| Tau trigger | 0 | 0.00 | 99.82 |
-| Signal modelling (PDF, scales, PS) | 1 | 5.05 | 94.15 |
-| Gammas | 0 | 1.73 | 93.94 |
-| Acceptance: QCD scale | 1 | 6.20 | 76.16 |
-| Tau energy scale | 0 | 0.00 | 62.19 |
-| Data statistics | 0 | 0.61 | 35.88 |
-| Luminosity | 1 | 23.52 | 26.09 |
-| Pileup | 1 | 5.08 | 24.03 |
-| Acceptance: ISR | 1 | 0.00 | 21.02 |
-| Acceptance: MC stat. | 0 | 0.87 | 16.06 |
-| Fakes | 0 | 1.87 | 15.88 |
-| Lineshape model | 0 | 13.59 | 0.00 |
-| Acceptance: $\alpha_s$ | 1 | 0.52 | 13.22 |
-| MET | 0 | 0.00 | 12.30 |
-| Muon efficiency | 0 | 11.63 | 0.00 |
-| Acceptance: PDF | 1 | 10.03 | 11.00 |
-| Background normalisation | 1 | 2.42 | 10.95 |
-| L1 prefiring | 1 | 10.56 | 5.72 |
-| Acceptance: FSR | 1 | 0.00 | 5.56 |
-| Muon momentum | 0 | 2.42 | 0.00 |
+| Tau ID | 0 | 0.00 | 216.45 |
+| Fakes | 0 | 0.87 | 166.29 |
+| Gammas | 0 | 7.46 | 91.63 |
+| Tau trigger | 0 | 0.00 | 81.63 |
+| Acceptance: QCD scale | 1 | 6.17 | 79.11 |
+| Tau energy scale | 0 | 0.00 | 40.97 |
+| Data statistics | 0 | 0.61 | 39.48 |
+| Signal modelling (PDF, scales, PS) | 1 | 5.66 | 34.12 |
+| Background normalisation | 1 | 1.58 | 34.04 |
+| Luminosity | 1 | 22.72 | 19.95 |
+| Acceptance: ISR | 1 | 0.00 | 21.83 |
+| MET | 0 | 0.00 | 20.37 |
+| Pileup | 1 | 2.62 | 19.80 |
+| Muon efficiency | 0 | 16.99 | 0.00 |
+| Acceptance: MC stat. | 0 | 0.86 | 16.68 |
+| Acceptance: $\alpha_s$ | 1 | 0.52 | 13.74 |
+| Acceptance: PDF | 1 | 9.97 | 11.42 |
+| L1 prefiring | 1 | 9.89 | 3.43 |
+| Signal modelling (generator) | 0 | 7.74 | 0.00 |
+| Muon momentum | 0 | 7.17 | 0.00 |
+| Acceptance: FSR | 1 | 0.00 | 5.78 |
 
 Justification for every row: [docs/02-correlation-model.md](docs/02-correlation-model.md).
 
@@ -148,15 +149,14 @@ recipe to run it is in that file; [docs/03-method.md](docs/03-method.md) explain
 fit would add. At this precision the difference is expected to be small -- the mu mu channel
 dominates and its own fit is already profiled -- but it is not zero, and the claim is not made.
 
-Known caveats inherited from the inputs, none of them corrected here:
+Known caveats inherited from the inputs, none of them corrected here. All nine findings of
+`z-mumu/REVIEW.md` were fixed by that channel before this combination was made, so what is left
+is each channel's own open-issue list:
 
-* `z-mumu/REVIEW.md` F8: `MuonReco` is documented as 0.4 % per muon but applied as 0.4 % per
-  event. If the per-muon reading is right, the mu mu muon-efficiency term grows by 0.35 % in
-  quadrature (+3 pb on the combined uncertainty, no shift in the value).
-* `z-mumu/REVIEW.md` F6: the pileup profile is ~4 % low; the channel quotes 0.16 % for it.
-* `z-tautau` open issue 1: the nominal fake factor double-counts genuine taus; the `mcsub`
-  variant is listed above and shifts the combination by
-  -2.0 pb.
+* `z-mumu` open issue 3: the data lineshape at 60-80 GeV lies between aMC@NLO and powheg, and the fit resolves it by pulling `SigModel` by +0.66 sigma. This is the reason the extraction still depends on the fit configuration at the few-per-mille level -- the accepted binnings span 8.3 pb on the combination (0.23 of its total uncertainty) and the 1-bin counting extraction sits +11.2 pb away. A third generator, or NLO electroweak corrections, would say which lineshape is right.
+* `z-mumu` open issue 1: the pileup profile is a two-parameter fit of the luminosity-record profile to N_PV rather than the official `puWeights` file, which is unreachable in Open Data. Data/MC in N_PV agree to 3 % over the bulk; the channel quotes 0.13 % for it.
+* `z-mumu` open issue 4: prefiring maps, muon scale factors and momentum corrections are in-house (the official files need CERN credentials). The muon-efficiency term (17 pb) is the largest uncertainty here after the luminosity.
+* `z-tautau` open issue 1: the channel recommends DeepTau **Tight** on both legs as the next iteration's working point -- it is more precise (12 % against 14 % on sigma) and fits better (GoF p = 0.25 against 0.22) -- but has not adopted it as nominal. Using it shifts the combination by +0.5 pb and the universality ratio from 1.21 to 1.08.
 
 ## Reproduce
 

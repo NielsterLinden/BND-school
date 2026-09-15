@@ -459,20 +459,24 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                replaced by space on input line 138.
 
 
-[3 <../combination/output/plots/forest.pdf>]
-[4 <./figures/precision_budget.pdf>]
-[5 <../combination/output/plots/breakdown.pdf>]
-Overfull \vbox (2.63965pt too high) detected at line 212
+Overfull \vbox (1.12645pt too high) detected at line 157
 
-[6 <../combination/output/plots/universality.pdf>]
-[7 <../combination/output/plots/comparison.pdf>]
+[3 <../output/plots/forest.pdf>]
+[4 <./figures/precision_budget.pdf>]
+Overfull \vbox (1.87251pt too high) detected at line 195
+
+[5 <../output/plots/breakdown.pdf>]
+Overfull \vbox (2.63965pt too high) detected at line 213
+
+[6 <../output/plots/universality.pdf>]
+[7 <../output/plots/comparison.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 9.24994pt
-(hyperref)                replaced by space on input line 228.
+(hyperref)                replaced by space on input line 229.
 
 
-Overfull \hbox (1.81879pt too wide) in paragraph at lines 275--275
+Overfull \hbox (1.81879pt too wide) in paragraph at lines 276--276
  [] 
 
 [8]
@@ -480,40 +484,42 @@ Overfull \hbox (1.81879pt too wide) in paragraph at lines 275--275
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 9.24994pt
-(hyperref)                replaced by space on input line 323.
+(hyperref)                replaced by space on input line 324.
 
 
-[10 <../z-mumu/output/v2/plots/datamc_SR_mass_fit_log.png>]
+Overfull \vbox (6.68379pt too high) detected at line 357
+
+[10 <../../z-mumu/output/v2/plots/datamc_SR_mass_fit_log.png>]
 [11 <./figures/mumu_fit_stability.pdf>]
-Overfull \vbox (1.76079pt too high) detected at line 414
+Overfull \vbox (12.85321pt too high) detected at line 420
 
-[12 <../z-tautau/output/plots/fit_SR_postfit.png>]
-[13 <../z-tautau/output/plots/step3_fakefactors.png>]
+[12 <../../z-tautau/output/plots/fit_SR2_postfit.png>]
+[13 <../../z-tautau/output/plots/step3_fakefactors.png>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 9.24994pt
-(hyperref)                replaced by space on input line 459.
+(hyperref)                replaced by space on input line 466.
 
 
 [14]
-[15 <../combination/output/plots/sources.pdf>]
-[16 <../combination/output/plots/variations.pdf> <../combination/output/plots/l
-ikelihood_scan.pdf>] (./bnd_z_combination.vrb)
+[15 <../output/plots/sources.pdf>]
+[16 <../output/plots/variations.pdf> <../output/plots/likelihood_scan.pdf>]
+(./bnd_z_combination.vrb)
+Overfull \vbox (12.87628pt too high) detected at line 621
+
 [17]
 [18]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\translate ' on input line 644.
+(hyperref)                removing `\translate ' on input line 657.
 
 
 [19]
-Underfull \hbox (badness 10000) in paragraph at lines 685--685
+Underfull \hbox (badness 10000) in paragraph at lines 698--698
 []|$\OML/cmm/m/it/6 ^^[[]=\OT1/mathkerncmss/m/sl/6 A\OT1/cmss/m/n/6 (60[]120)$ 
 $=
 
 [20]
-Overfull \vbox (3.44511pt too high) detected at line 739
-
 [21]
 [22]
 [23]
@@ -565,7 +571,7 @@ cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss06
 00.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/pub
 lic/cm-super/sfss0700.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-d
 ist/fonts/type1/public/cm-super/sfss0800.pfb>
-Output written on bnd_z_combination.pdf (24 pages, 801024 bytes).
+Output written on bnd_z_combination.pdf (24 pages, 812196 bytes).
 Transcript written on bnd_z_combination.log.
 This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex)
  restricted \write18 enabled.
@@ -1025,20 +1031,24 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                replaced by space on input line 138.
 
 
-[3 <../combination/output/plots/forest.pdf>]
-[4 <./figures/precision_budget.pdf>]
-[5 <../combination/output/plots/breakdown.pdf>]
-Overfull \vbox (2.63965pt too high) detected at line 212
+Overfull \vbox (1.12645pt too high) detected at line 157
 
-[6 <../combination/output/plots/universality.pdf>]
-[7 <../combination/output/plots/comparison.pdf>]
+[3 <../output/plots/forest.pdf>]
+[4 <./figures/precision_budget.pdf>]
+Overfull \vbox (1.87251pt too high) detected at line 195
+
+[5 <../output/plots/breakdown.pdf>]
+Overfull \vbox (2.63965pt too high) detected at line 213
+
+[6 <../output/plots/universality.pdf>]
+[7 <../output/plots/comparison.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 9.24994pt
-(hyperref)                replaced by space on input line 228.
+(hyperref)                replaced by space on input line 229.
 
 
-Overfull \hbox (1.81879pt too wide) in paragraph at lines 275--275
+Overfull \hbox (1.81879pt too wide) in paragraph at lines 276--276
  [] 
 
 [8]
@@ -1046,40 +1056,42 @@ Overfull \hbox (1.81879pt too wide) in paragraph at lines 275--275
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 9.24994pt
-(hyperref)                replaced by space on input line 323.
+(hyperref)                replaced by space on input line 324.
 
 
-[10 <../z-mumu/output/v2/plots/datamc_SR_mass_fit_log.png>]
+Overfull \vbox (6.68379pt too high) detected at line 357
+
+[10 <../../z-mumu/output/v2/plots/datamc_SR_mass_fit_log.png>]
 [11 <./figures/mumu_fit_stability.pdf>]
-Overfull \vbox (1.76079pt too high) detected at line 414
+Overfull \vbox (12.85321pt too high) detected at line 420
 
-[12 <../z-tautau/output/plots/fit_SR_postfit.png>]
-[13 <../z-tautau/output/plots/step3_fakefactors.png>]
+[12 <../../z-tautau/output/plots/fit_SR2_postfit.png>]
+[13 <../../z-tautau/output/plots/step3_fakefactors.png>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 9.24994pt
-(hyperref)                replaced by space on input line 459.
+(hyperref)                replaced by space on input line 466.
 
 
 [14]
-[15 <../combination/output/plots/sources.pdf>]
-[16 <../combination/output/plots/variations.pdf> <../combination/output/plots/l
-ikelihood_scan.pdf>] (./bnd_z_combination.vrb)
+[15 <../output/plots/sources.pdf>]
+[16 <../output/plots/variations.pdf> <../output/plots/likelihood_scan.pdf>]
+(./bnd_z_combination.vrb)
+Overfull \vbox (12.87628pt too high) detected at line 621
+
 [17]
 [18]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\translate ' on input line 644.
+(hyperref)                removing `\translate ' on input line 657.
 
 
 [19]
-Underfull \hbox (badness 10000) in paragraph at lines 685--685
+Underfull \hbox (badness 10000) in paragraph at lines 698--698
 []|$\OML/cmm/m/it/6 ^^[[]=\OT1/mathkerncmss/m/sl/6 A\OT1/cmss/m/n/6 (60[]120)$ 
 $=
 
 [20]
-Overfull \vbox (3.44511pt too high) detected at line 739
-
 [21]
 [22]
 [23]
@@ -1125,5 +1137,5 @@ cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss06
 00.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/pub
 lic/cm-super/sfss0700.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-d
 ist/fonts/type1/public/cm-super/sfss0800.pfb>
-Output written on bnd_z_combination.pdf (24 pages, 801754 bytes).
+Output written on bnd_z_combination.pdf (24 pages, 812870 bytes).
 Transcript written on bnd_z_combination.log.

@@ -12,10 +12,10 @@ JOB=bnd_z_combination
 
 if [ "$1" = "--figures" ] || [ ! -f figures/precision_budget.pdf ]; then
     echo "== deck figures"
-    ( source ../setup.sh >/dev/null 2>&1; python figures.py )
+    ( source ../../setup.sh >/dev/null 2>&1; python figures.py )
 fi
-if [ ! -f ../combination/output/plots/forest.pdf ]; then
-    echo "!! ../combination/output/plots is empty -- run  cd ../combination && python run_combination.py"
+if [ ! -f ../output/plots/forest.pdf ]; then
+    echo "!! ../output/plots is empty -- run  cd .. && python run_combination.py"
     exit 1
 fi
 

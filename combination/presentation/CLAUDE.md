@@ -17,13 +17,19 @@ an unhelpful error. `build.sh` exports it; do not call `pdflatex` directly.
 ## Rules
 
 1. **Numbers come from the combination, never from memory.** Every figure in the text should be
-   traceable to `../combination/output/combination_result.json` or `../combination/result.md`. If
-   the combination is rerun and a number moves, the deck must be updated — it is not generated.
-   The slides that carry numbers: 1, 2, 3, 4, 13, 14, 18, 21, 22, 23.
+   traceable to `../output/combination_result.json` or `../result.md`. If the combination is
+   rerun and a number moves, the deck must be updated — it is **not** generated. Most slides
+   carry numbers; after any rerun, grep the `.tex` for the previous headline value and for the
+   per-channel μ_Z, and re-read the backup tables (breakdown, variations, channel numbers),
+   which are transcriptions of `result.md` tables.
+
+   This deck lives in `combination/presentation/`, so the combination outputs are `../output/`
+   and the channels are `../../z-mumu/`, `../../z-tautau/`. It was moved here from the repository
+   root in commit 2021f3f without its paths being fixed; they were repaired on 15 Sep 2026.
 2. **Figures are light background.** The channel plots are white CMS-style figures; a dark figure
    would be a black rectangle on the slide. Do **not** pull figures from
-   `../z-mumu/review/figures/` — those belong to the dark review deck.
-3. **Vector where it exists.** `../combination/output/plots/*.pdf` and `figures/*.pdf` are vector;
+   `../../z-mumu/review/figures/` — those belong to the dark review deck.
+3. **Vector where it exists.** `../output/plots/*.pdf` and `figures/*.pdf` are vector;
    the channel plots are only PNG (their groups do not commit PDFs), so those are used as PNG.
 4. **`\graphicspath` resolves the short names** — write `\fig{forest.pdf}`, not a path. The search
    order is `figures/`, the combination plots, z-mumu plots, z-tautau plots, z-tautau slides.

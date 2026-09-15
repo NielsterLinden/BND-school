@@ -42,7 +42,6 @@ CORRELATION: dict[str, float | str] = {
     "Gammas": 0.0,                      # per-bin MC statistics of disjoint selections
     "Fakes": 0.0,                       # fake factor vs fake factor, different regions and objects
     "MET": 0.0,                         # tau tau only
-    "Lineshape model": 0.0,             # z-mumu REVIEW.md F3/F4: a mumu mass-template issue
 }
 
 #: rho for the acceptance components, which live outside both fits.
@@ -112,6 +111,11 @@ def _split_signal_modelling(ch: ChannelResult) -> tuple[float, float]:
     The grouped impact is the quantity to preserve, so the category is split by the fraction that
     `SigModel` carries among the nuisance parameters of the category:
     f = impact(SigModel) / impact(category), capped at 1.
+
+    Since z-tautau v2.1 only z-mumu fits a `SigModel` parameter, so on the tautau side the
+    generator part is zero and the whole category is the correlated theory part. The split is
+    kept because it is the mu mu side that needs it, and because a channel that reinstates its
+    own generator nuisance parameter would be handled without a code change.
     """
     total = ch.group_pb("Signal modelling")
     if total <= 0:

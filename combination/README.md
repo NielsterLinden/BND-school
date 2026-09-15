@@ -3,11 +3,11 @@
 One cross section from the two finished BND-school channels, on CMS Open Data 2016
 (Run2016G+H, 16 393.381 pb⁻¹, √s = 13 TeV).
 
-> **σ(pp → Z/γ* → ℓℓ, 60 < m_ℓℓ < 120 GeV) = 1940 ± 35 pb**
-> = 1940 ± 0.6 (stat) ± 23 (syst) ± 12 (acc) ± 24 (lumi) pb, per lepton flavour,
-> assuming lepton universality.  χ²/ndf = 0.79/1 (p = 0.37).
+> **σ(pp → Z/γ* → ℓℓ, 60 < m_ℓℓ < 120 GeV) = 1931 ± 35 pb**
+> = 1931 ± 0.6 (stat) ± 24 (syst) ± 12 (acc) ± 23 (lumi) pb, per lepton flavour,
+> assuming lepton universality.  χ²/ndf = 1.70/1 (p = 0.19).
 >
-> Lepton universality: R = σ(Z→ττ)/σ(Z→μμ) = **1.16 ± 0.18** (+0.9σ from 1).
+> Lepton universality: R = σ(Z→ττ)/σ(Z→μμ) = **1.21 ± 0.17** (+1.3σ from 1).
 
 Full numbers and caveats: **[`result.md`](result.md)**. The physics write-up is in
 [`docs/`](docs/); start with [`docs/00-overview.md`](docs/00-overview.md).
@@ -58,7 +58,11 @@ exact recipe to produce the workspaces and run it, and
 
 | channel | extraction | μ_Z | σ(60–120) |
 |---|---|---|---|
-| Z → μ⁺μ⁻ | counting (per `z-mumu/REVIEW.md` F3) + 0.7 % lineshape | 0.9935 | 1941 ± 35 pb |
-| Z → τhτh | `nominal` fake factor | 1.160 ⁺⁰·¹⁹²₋₀.₁₆₃ | 2255 ± 358 pb |
+| Z → μ⁺μ⁻ | v2 shape fit, 12 × 5 GeV, after the channel's review fixes | 0.9881 ± 0.0159 | 1931 ± 35 pb |
+| Z → τhτh | v2.1, `mcsub` fake factor (the channel's nominal) | 1.205 ⁺⁰·¹⁴⁵₋₀.₁₂₅ | 2343 ± 322 pb |
+
+Both are the channels' own current baselines, re-published on 15 Sep 2026;
+`python run_combination.py --check` asserts every one of those numbers against the files the
+channel groups committed and fails loudly if either channel moves again.
 
 The presentation covering the whole analysis is in [`../presentation/`](../presentation/).

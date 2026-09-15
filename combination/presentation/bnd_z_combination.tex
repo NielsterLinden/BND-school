@@ -3,9 +3,9 @@
 % and their combination.  Final deliverable of the combination subgroup.
 %
 % Build:  bash build.sh        (needs the cvmfs TeX Live 2025: metropolis, pgfopts, siunitx)
-% Figures: ../combination/output/plots/*.pdf  (vector, made by run_combination.py)
+% Figures: ../output/plots/*.pdf  (vector, made by run_combination.py)
 %          figures/*.pdf                      (vector, made by figures.py)
-%          ../z-mumu/output/v2/plots/*.png, ../z-tautau/output/plots/*.png (channel plots)
+%          ../../z-mumu/output/v2/plots/*.png, ../../z-tautau/output/plots/*.png (channel plots)
 % =====================================================================================
 \documentclass[aspectratio=169,9pt,t]{beamer}
 \usetheme[progressbar=frametitle,numbering=fraction,block=fill,sectionpage=none]{metropolis}
@@ -14,8 +14,8 @@
 \usetikzlibrary{positioning,arrows.meta,shapes.geometric,fit,backgrounds,calc}
 \usepackage[per-mode=symbol]{siunitx}
 
-\graphicspath{{figures/}{../combination/output/plots/}{../z-mumu/output/v2/plots/}%
-              {../z-tautau/output/plots/}{../z-tautau/slides/}}
+\graphicspath{{figures/}{../output/plots/}{../../z-mumu/output/v2/plots/}%
+              {../../z-tautau/output/plots/}{../../z-tautau/slides/}}
 
 % ------------------------------------------------------------------ palette (matches the figures)
 \definecolor{mumu}{HTML}{2B6CB0}
@@ -65,10 +65,10 @@
 \begin{column}{0.52\textwidth}\small
 \textbf{The result}
 \begin{itemize}\setlength\itemsep{1pt}
-\item $\sigll = \mathbf{1940 \pm 35\pb}$ per lepton flavour
-\item the two channels agree: $\chi^{2}/\mathrm{ndf} = 0.79/1$, $p = 0.37$
-\item lepton universality: $R = \sigma(\tau\tau)/\sigma(\mm) = 1.16 \pm 0.18$
-\item \alert{combining gains 0.13\,\%} --- the luminosity uncertainty is
+\item $\sigll = \mathbf{1931 \pm 35\pb}$ per lepton flavour
+\item the two channels agree: $\chi^{2}/\mathrm{ndf} = 1.70/1$, $p = 0.19$
+\item lepton universality: $R = \sigma(\tau\tau)/\sigma(\mm) = 1.21 \pm 0.17$
+\item \alert{combining gains nothing} --- the luminosity uncertainty is
       fully correlated and cannot be combined away
 \end{itemize}
 \end{column}
@@ -99,8 +99,8 @@ $\sqrt{s} = \SI{13}{TeV}$, $L = \SI{16393.381}{pb^{-1}} \pm 1.2\,\%$ (normtag).
 (TRExFitter v1.8.0), same nuisance-parameter names:
 \begin{itemize}\setlength\itemsep{1pt}
 \item \textcolor{mumu}{$Z\to\mu^{+}\mu^{-}$}: 10.4 M events, $\delta\sigma/\sigma = 1.8\,\%$
-\item \textcolor{tautau}{$Z\to\thth$}: 47.6 k events, 81\,\% of them jet$\to$\tauh{} fakes,
-      $\delta\sigma/\sigma = 16\,\%$
+\item \textcolor{tautau}{$Z\to\thth$}: 47.6 k events, 80\,\% of them jet$\to$\tauh{} fakes,
+      $\delta\sigma/\sigma = 14\,\%$
 \end{itemize}
 
 \medskip
@@ -109,27 +109,27 @@ the \texttt{Category} contract of \texttt{fitting/CONVENTIONS.md}.
 
 \medskip
 \textbf{The answer, and the punchline:} the two agree, and combining them gains
-\alert{0.13\,\%} -- because the luminosity uncertainty is fully correlated and irreducible.
+\alert{nothing} -- because the luminosity uncertainty is fully correlated and irreducible.
 \end{column}
 
 \begin{column}{0.47\textwidth}
 \vspace{-2mm}
 \begin{block}{Result}
 \centering
-$\sigll = \mathbf{1940 \pm 35}\pb$\\[3pt]
-{\footnotesize $= 1940 \pm 0.6\,(\text{stat}) \pm 23\,(\text{syst}) \pm 12\,(\text{acc})
- \pm 24\,(\text{lumi})\pb$}\\[4pt]
+$\sigll = \mathbf{1931 \pm 35}\pb$\\[3pt]
+{\footnotesize $= 1931 \pm 0.6\,(\text{stat}) \pm 24\,(\text{syst}) \pm 12\,(\text{acc})
+ \pm 23\,(\text{lumi})\pb$}\\[4pt]
 {\footnotesize per lepton flavour, assuming lepton universality}\\[4pt]
-{\footnotesize channel compatibility $\chi^{2}/\mathrm{ndf} = 0.79/1$, $p = 0.37$}
+{\footnotesize channel compatibility $\chi^{2}/\mathrm{ndf} = 1.70/1$, $p = 0.19$}
 \end{block}
 \begin{block}{Lepton universality}
 \centering
-$R = \sigma(Z\to\tau\tau)/\sigma(Z\to\mm) = \mathbf{1.16 \pm 0.18}$\\[2pt]
-{\footnotesize $+0.9\sigma$ from unity; the luminosity cancels exactly}
+$R = \sigma(Z\to\tau\tau)/\sigma(Z\to\mm) = \mathbf{1.21 \pm 0.17}$\\[2pt]
+{\footnotesize $+1.3\sigma$ from unity; the luminosity cancels exactly}
 \end{block}
 \vspace{-1mm}
 {\footnotesize CMS measures $1952 \pm 4 \pm 18 \pm 45\pb$ for the same quantity
-(\href{https://arxiv.org/abs/2408.03744}{SMP-20-004}). We agree within $0.2\sigma$.}
+(\href{https://arxiv.org/abs/2408.03744}{SMP-20-004}). We agree within $0.4\sigma$.}
 \end{column}
 \end{columns}
 \end{frame}
@@ -143,9 +143,10 @@ $R = \sigma(Z\to\tau\tau)/\sigma(Z\to\mm) = \mathbf{1.16 \pm 0.18}$\\[2pt]
 \vspace{-3mm}
 \begin{columns}[T]
 \begin{column}{0.49\textwidth}\footnotesize
-Weights: $\mu\mu$ $+1.005$, $\tau\tau$ $-0.005$. A \emph{negative} weight is normal BLUE
-behaviour once $\rho$ exceeds the ratio of the uncertainties ($0.15 > 0.10$): the imprecise
-measurement becomes a lever on the shared systematic, not an average.
+Weights: $\mu\mu$ $+1.0004$, $\tau\tau$ $-0.0004$. A \emph{negative} weight is normal BLUE
+behaviour once $\rho$ exceeds the ratio of the uncertainties ($0.114 > 0.110$ --- marginally, now
+that $\tau\tau$ has dropped its generator systematic): the imprecise measurement becomes a lever
+on the shared systematic, not an average.
 \end{column}
 \begin{column}{0.49\textwidth}\footnotesize
 The green band is the aMC@NLO reference, drawn as a \emph{band} because the two channels normalise
@@ -162,14 +163,14 @@ handle (backup).
 \fig[\textwidth]{precision_budget.pdf}
 \end{column}
 \begin{column}{0.42\textwidth}\small
-$Z\to\mm$ alone: $1941 \pm 35\pb$.\\
-Combined: $1940 \pm 35\pb$.\\
-Improvement: \alert{0.13\,\%}.
+$Z\to\mm$ alone: $1930.7 \pm 35.36\pb$.\\
+Combined: $1930.6 \pm 35.36\pb$.\\
+Improvement: \alert{0.00\,\%}.
 
 \medskip
-\textbf{Why.} \SI{24}{pb} of the \SI{35}{pb} is the luminosity: identical normtag value, identical
+\textbf{Why.} \SI{23}{pb} of the \SI{35}{pb} is the luminosity: identical normtag value, identical
 runs, identical $\pm1.2\,\%$ in both channels. A fully correlated uncertainty cannot be combined
-away. Add the shared theory terms and the floor is \SI{29}{pb}.
+away. Add the shared theory terms and the floor is \SI{28}{pb}.
 
 \medskip
 A third channel of the same precision would not help either. The route to a better $Z$ cross
@@ -189,8 +190,8 @@ going to be limited by the number of collisions.}
 {\footnotesize Left: contribution of each source to the combined uncertainty
 ($\delta_s = \sqrt{w^{T}C_{s}w}$, adding in quadrature to the total); green = correlated between
 the channels. Right: the same systematics as each channel's fit reports them.
-The $\tau\tau$ channel's $\tauh$ ID (12.5\,\% on its own \muZ) survives into the combination as
-\SI{1.2}{pb}.}
+The $\tau\tau$ channel's $\tauh$ ID (11.1\,\% on its own \muZ) survives into the combination as
+\SI{0.08}{pb}.}
 \end{frame}
 
 \begin{frame}{Lepton universality --- what the $\tau\tau$ channel actually buys}
@@ -204,8 +205,8 @@ ratio every $\rho = 1$ source cancels exactly: luminosity, pileup, L1 prefiring,
 PDF/scale/shower terms.
 \end{column}
 \begin{column}{0.48\textwidth}\footnotesize
-What is left is the $\tau\tau$ channel's own calibration: $\tauh$ ID (12.5\,\%) and the LO-vs-NLO
-generator systematic (8.5\,\%). Improving those improves the \emph{universality test}; it does
+What is left is the $\tau\tau$ channel's own calibration: $\tauh$ ID (11.1\,\%) and the
+data-driven fake factor (8.6\,\%). Improving those improves the \emph{universality test}; it does
 essentially nothing for the cross section.
 \end{column}
 \end{columns}
@@ -216,7 +217,7 @@ essentially nothing for the cross section.
 \fig[0.72\textwidth]{comparison.pdf}
 \vspace{-2mm}
 {\footnotesize
-Agreement with the CMS measurement of exactly the same quantity is within $0.2\sigma$; the ATLAS
+Agreement with the CMS measurement of exactly the same quantity is within $0.4\sigma$; the ATLAS
 point uses a narrower window ($66$--$\SI{116}{GeV}$) and is shown for scale only. Both published
 numbers carry a \emph{larger} relative luminosity uncertainty than we do (2.3\,\% and 2.1\,\%
 against 1.2\,\%) --- they are early-Run-2 measurements, while the 2016 G+H normtag luminosity is
@@ -246,17 +247,17 @@ well measured. Note this is not a fully independent check: the same NNLO referen
 \node (ta1) [taubox, below right=6mm and 19mm of data] {\textcolor{tautau}{\textbf{Tau}} 160 GB, skim: 2 \tauh};
 \node (mu2) [mubox, below=of mu1] {tag-and-probe SFs, pileup, prefiring, fake factor};
 \node (ta2) [taubox, below=of ta1] {TauPOG SFs, MET-corrected $m_{\tau\tau}$, fake factor};
-\node (mu3) [mubox, below=of mu2] {$m(\mu\mu)$ templates, 24 nuisance parameters};
-\node (ta3) [taubox, below=of ta2] {$m_{\tau\tau}$ templates, 38 nuisance parameters};
-\node (mu4) [mubox, below=of mu3] {TRExFitter fit\\$\muZ = 0.9935$};
-\node (ta4) [taubox, below=of ta3] {TRExFitter fit\\$\muZ = 1.160$};
+\node (mu3) [mubox, below=of mu2] {$m(\mu\mu)$ templates, 23 nuisance parameters};
+\node (ta3) [taubox, below=of ta2] {$m_{\tau\tau}$ templates, 40 nuisance parameters};
+\node (mu4) [mubox, below=of mu3] {TRExFitter fit\\$\muZ = 0.9881$};
+\node (ta4) [taubox, below=of ta3] {TRExFitter fit\\$\muZ = 1.205$};
 
 \node (sh) [shared, below=7mm of data] {\textcolor{good!55!black}{\textbf{shared contract}}\\[1pt]
   \texttt{fitting/CONVENTIONS.md}\\[1pt]
   histogram names, POI \texttt{mu\_Z},\\ NP names and \texttt{Category} strings,\\
   $L$, $\sigma_{DY}$, acceptance convention};
 
-\node (comb) [cbox, below=6mm of $(mu4)!0.5!(ta4)$] {\textbf{combination}\\covariance + BLUE + ratio\\$\mathbf{1940 \pm 35\pb}$};
+\node (comb) [cbox, below=6mm of $(mu4)!0.5!(ta4)$] {\textbf{combination}\\covariance + BLUE + ratio\\$\mathbf{1931 \pm 35\pb}$};
 
 \draw[->,black!50] (data) -| (mu1);  \draw[->,black!50] (data) -| (ta1);
 \foreach \a/\b in {mu1/mu2, mu2/mu3, mu3/mu4, ta1/ta2, ta2/ta3, ta3/ta4}
@@ -348,52 +349,56 @@ $Z\to\tau\tau$ (11 k).
 \vspace{-3mm}
 \fig[0.72\textwidth]{datamc_SR_mass_fit_log.png}
 \vspace{-3mm}
-{\scriptsize The fitted distribution: $30 \times \SI{2}{GeV}$ bins. Note the ratio panel ---
-data sit 3--4\,\% below the prediction at $62$--$\SI{78}{GeV}$. That deficit is the reason the
-next slide exists.}
+{\scriptsize The distribution that is fitted, shown in \SI{1}{GeV} input bins; the fit runs in
+$12 \times \SI{5}{GeV}$. Note the ratio panel --- data sit 3--4\,\% below the prediction at
+$62$--$\SI{78}{GeV}$. That deficit is the reason the next slide exists.}
 \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}{$Z\to\mu\mu$: which number to take --- the channel's own review changed it}
+\begin{frame}{$Z\to\mu\mu$: which number to take --- the channel's review, and its repair}
 \begin{columns}[T]
 \begin{column}{0.54\textwidth}
 \vspace{-3mm}
 \fig[\textwidth]{mumu_fit_stability.pdf}
 \end{column}
 \begin{column}{0.44\textwidth}\footnotesize
-The channel's headline is a 30-bin shape fit, $\muZ = 0.9903 \pm 0.0140$. Its own review
-(\src{z-mumu/REVIEW.md}, F3) then showed the fit is \alert{not robust}: \muZ{} moves over
-$0.990$--$1.006$ with the binning and with whether the \texttt{SigModel} template is in.
+The channel's own review (\src{z-mumu/REVIEW.md}, F3/F4) found the 30-bin shape fit
+\alert{not robust}: \muZ{} moved over $0.990$--$1.006$, because the only template that could
+absorb a 3--4\,\% data deficit at 62--\SI{78}{GeV} was \texttt{SigModel} --- and that template
+mixed the generator comparison with a phase-space artefact (the powheg sample is generated with
+$m_{\mathrm{LHE}} < \SI{120}{GeV}$, depleting its two highest bins by 10\,\% and 33\,\%).
 
 \medskip
-Only the nominal configuration has an acceptable goodness of fit, and it gets there by pulling
-\texttt{SigModel} $0.5\sigma$ and constraining it to 10\,\% of its prior --- while that template
-is itself flawed (the powheg sample has a generator cut at $m_{\mathrm{LHE}} < \SI{120}{GeV}$,
-depleting its two highest bins by 10\,\% and 33\,\%).
+\textbf{The channel fixed both.} Fit in $12\times\SI{5}{GeV}$ bins so the shape parameters are not
+over-constrained, no smoothing, MINOS everywhere; \texttt{SigModel} rebuilt with both generators
+inside a common $50 < m_{\mathrm{LHE}} < \SI{120}{GeV}$ window and mirrored.
 
 \medskip
-\textbf{We follow the review's recommendation:} take the \alert{counting extraction}
-($\sigma_{\text{fid}} = \SI{794.4}{pb}$, $\muZ = 0.9935$) and add $\pm0.7\,\%$ as a lineshape
-systematic. Using the shape fit instead moves the combination by $-\SI{6.5}{pb}$ --- reported as a
-variation, not used.
+\textbf{We therefore take the shape fit:} $\muZ = 0.9881 \pm 0.0159$, GoF $p = 0.79$, stable to
+$\pm0.2\,\%$ across the binnings that describe the data. The $\pm0.7\,\%$ lineshape term the
+review had asked for as a stop-gap is \alert{retired} --- the two-sided template carries it inside
+the fit. Counting instead would move the combination by $+\SI{11.2}{pb}$: reported as a variation,
+not used.
 \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}{$Z\to\tauh\tauh$: a 16\,\% measurement where 81\,\% of the data is background}
+\begin{frame}{$Z\to\tauh\tauh$: a 14\,\% measurement where 87\,\% of the data is background}
 \begin{columns}[T]
 \begin{column}{0.46\textwidth}\footnotesize
 \textbf{Selection.} Double-$\tauh$ trigger (different path in G and H), both legs HLT-matched;
 two opposite-sign \tauh{} with $p_{T} > \SI{40}{GeV}$, $|\eta| < 2.1$, decay modes 0/1/10/11,
 DeepTau2017v2p1 Medium vs jets; $e$/$\mu$ veto keeps it orthogonal to the other channels.
-$\Rightarrow$ 47 586 events, of which \alert{$\sim$81\,\% are jets faking a \tauh}.
+$\Rightarrow$ 47 586 events, of which \alert{$\sim$80\,\% are jets faking a \tauh}.
 
 \medskip
 \textbf{No QCD simulation is used.} The fake background comes from data: a fake factor
 $\mathrm{FF}(\text{era}, \mathrm{DM}, N_{\text{jets}}, p_{T})$ measured in a same-sign region and
 applied to opposite-sign events whose leading \tauh{} fails Medium, times an OS/SS correction
-of 1.07--1.13 from the anti-isolated sideband.
+of 1.04--1.15 measured per (era, $N_{\text{jets}}$, BDT category) in the anti-isolated sideband
+--- new in v2.1, together with a $k$-fold BDT (held-out AUC 0.970) that splits the signal region
+into \alert{three categories} by signal purity.
 
 \medskip
 \textbf{Mass.} The visible di-$\tau$ mass is not a $Z$ mass. A per-event likelihood over the
@@ -403,12 +408,13 @@ resolution 11\,\% (against 0.80 / 13\,\% for $m_{\text{vis}}$).
 
 \begin{column}{0.52\textwidth}
 \vspace{-3mm}
-\fig[0.62\textwidth]{fit_SR_postfit.png}
+\fig[0.62\textwidth]{fit_SR2_postfit.png}
 \vspace{-3mm}
-{\scriptsize Post-fit $m_{\tau\tau}$, 14 bins, 0--\SI{350}{GeV}. Pink = the data-driven
-jet$\to$\tauh{} fake estimate; orange = $Z\to\tau\tau$. The shape fit is essential: a counting
-experiment here gives \SI{1812}{pb} because the high-mass sideband is what fixes the fake
-normalisation (it pulls it down by 2.8\,\%, moving $\sim$1100 events into the signal).}
+{\scriptsize Post-fit $m_{\tau\tau}$ in the most signal-like BDT category (score $> 0.90$,
+$S/B \approx 5.3$); the fit runs over all three, 14 bins each, 0--\SI{350}{GeV}. Pink = the
+data-driven jet$\to$\tauh{} fakes, orange = $Z\to\tau\tau$. Counting over the whole signal region
+instead gives \SI{2447}{pb} at $B/S \approx 8$: it is the low-score categories that fix the fake
+normalisation.}
 \end{column}
 \end{columns}
 \end{frame}
@@ -417,9 +423,9 @@ normalisation (it pulls it down by 2.8\,\%, moving $\sim$1100 events into the si
 \begin{columns}[T]
 \begin{column}{0.44\textwidth}\footnotesize
 \begin{center}\small
-$\muZ = 1.160\,^{+0.192}_{-0.163}$\\[2pt]
-$\sigma(60$--$120) = 2255 \pm 36\,^{+371}_{-315} \pm 83\pb$\\[2pt]
-{\footnotesize goodness of fit $p = 0.18$}
+$\muZ = 1.205\,^{+0.145}_{-0.125}$\\[2pt]
+$\sigma(60$--$120) = 2343 \pm 39\,^{+282}_{-243} \pm 86\pb$\\[2pt]
+{\footnotesize goodness of fit $p = 0.22$}
 \end{center}
 
 \medskip
@@ -427,18 +433,19 @@ $\sigma(60$--$120) = 2255 \pm 36\,^{+371}_{-315} \pm 83\pb$\\[2pt]
 \begin{tabular}{@{}lr@{}}
 \toprule
 source & impact on \muZ \\ \midrule
-$\tauh$ ID & 12.5\,\% \\
-signal modelling (LO vs NLO 8.5\,\%) & \phantom{0}9.8\,\% \\
-$\tauh$ trigger & \phantom{0}5.1\,\% \\
-MC statistics & \phantom{0}4.8\,\% \\
-$\tauh$ energy scale & \phantom{0}3.2\,\% \\
-luminosity & \phantom{0}1.3\,\% \\
-\alert{data statistics} & \alert{\phantom{0}1.8\,\%} \\
+$\tauh$ ID & 11.1\,\% \\
+fakes (fake factor) & \phantom{0}8.6\,\% \\
+MC statistics & \phantom{0}4.7\,\% \\
+$\tauh$ trigger & \phantom{0}4.2\,\% \\
+$\tauh$ energy scale & \phantom{0}2.1\,\% \\
+signal modelling (PDF, scales, PS) & \phantom{0}1.8\,\% \\
+luminosity & \phantom{0}1.0\,\% \\
+\alert{data statistics} & \alert{\phantom{0}2.0\,\%} \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\medskip
+\smallskip
 Acceptance $A = 0.23\,\%$ with a 3.7\,\% uncertainty --- the double \SI{40}{GeV} cut on the
 \emph{visible} $\tau$ momentum sits on the $Z$ $p_{T}$ tail, where the QCD scale dependence is
 3.4\,\%.
@@ -496,7 +503,7 @@ at the combined value until stable (4 iterations, $<\SI{0.1}{pb}$).
 \[ -2\ln L = \sum_{c}\frac{(x_{c}-\sigma-\sum_{s}d_{cs}\theta_{s})^{2}}{u_{c}^{2}}
    + \sum_{s}\theta_{s}^{2} \]
 which additionally carries the $\tau\tau$ channel's asymmetric error. Same answer:
-$1939\,^{+35}_{-35}$ against $1940 \pm 35\pb$.
+$1930\,^{+35}_{-36}$ against $1931 \pm 35\pb$.
 \end{column}
 \end{columns}
 \end{frame}
@@ -524,18 +531,22 @@ $1939\,^{+35}_{-35}$ against $1940 \pm 35\pb$.
 \begin{itemize}\setlength\itemsep{0pt}
 \item muon vs $\tauh$ calibrations: no common input
 \item \texttt{Gammas}: same sample, but $\mu\mu$ and \thth{} select disjoint events
-\item fakes, MET, the $\mu\mu$ lineshape term
+\item fakes, MET
 \item data statistics: \emph{disjoint} primary datasets, orthogonal triggers
 \end{itemize}
 
 \smallskip
-\textbf{The one genuine split.} Both channels call their generator systematic
-\texttt{SigModel}, so a MultiFit would correlate them by name --- but $\mu\mu$ compares two NLO
-generators (0.2\,\% on $C$) and $\tau\tau$ compares LO with NLO (7.3\,\%). We split the category
-by the ranking fraction and decorrelate that part.
+\textbf{The split of \texttt{Signal modelling}.} Both channels used to fit a generator
+systematic called \texttt{SigModel} --- but $\mu\mu$ compares two NLO generators (0.4\,\% on
+\muZ) and $\tau\tau$ compared LO with NLO. In v2.1 $\tau\tau$ \alert{dropped} its version: it is
+reported, not fitted, because ``nominal minus a worse model'' is a placeholder that double-counts
+\texttt{QCDScale}/\texttt{PS\_ISR}. We still split the category and decorrelate the generator
+part; on the $\tau\tau$ side it is now zero, so the ``\texttt{SigModel} correlated'' variation is
+exactly null.
 
 \smallskip
-$\Rightarrow$ $\rho(\mu\mu,\tau\tau) = \mathbf{0.15}$.
+$\Rightarrow$ $\rho(\mu\mu,\tau\tau) = \mathbf{0.114}$ --- it was 0.15 before $\tau\tau$ dropped
+that term.
 \end{column}
 \end{columns}
 \end{frame}
@@ -553,10 +564,11 @@ $\Rightarrow$ $\rho(\mu\mu,\tau\tau) = \mathbf{0.15}$.
 \end{columns}
 \vspace{-2mm}
 {\footnotesize
-Every variation moves the answer by less than $0.2\sigma$. The two rows that \emph{bracket the
+Every variation moves the answer by less than $0.35\sigma$. The two rows that \emph{bracket the
 entire correlation model} --- all systematics uncorrelated, all fully correlated --- span
-\SI{6.5}{pb}, a fifth of the total uncertainty. The largest single variation is not a correlation
-choice at all: it is which $\mu\mu$ extraction to take ($-\SI{6.5}{pb}$).
+\SI{8.7}{pb}, a quarter of the total uncertainty. The largest single variation is not a correlation
+choice at all: it is which $\mu\mu$ extraction to take ($+\SI{11.2}{pb}$ for counting instead of
+the fit). The two $\tau\tau$ rows move it by 0.1 and \SI{0.5}{pb}.
 \\[2pt]
 Right: the profile likelihood and the BLUE parabola lie on top of each other --- the honest way of
 saying that the $\tau\tau$ channel's asymmetry does not matter here.}
@@ -591,16 +603,17 @@ cd ../combination && python fit/run_multifit.py
 \item per-bin $\gamma$ parameters instead of one \texttt{Gammas} number
 \item the $\tau\tau$ asymmetry exactly
 \end{itemize}
-Expected to be small --- $\mu\mu$ carries 99.5\,\% of the weight and is already profiled --- but
-it is not measured, so the claim is not made.
+Expected to be small ($\mu\mu$ carries essentially all the weight and is already profiled),
+but it is not measured, so the claim is not made.
 
 \medskip
 \textbf{Inherited caveats we did not fix}
 \begin{itemize}\setlength\itemsep{1pt}
-\item $\mu\mu$: \texttt{MuonReco} documented per muon, applied per event ($+0.35\,\%$ if the
-      former); pileup profile $\sim$4\,\% low
-\item $\tau\tau$: the nominal fake factor double-counts genuine $\tau$s ($-\SI{2}{pb}$ with
-      \texttt{mcsub})
+\item $\mu\mu$: the 60--\SI{80}{GeV} lineshape lies between aMC@NLO and powheg, and the fit
+      resolves it with \texttt{SigModel} $+0.66\sigma$; prefiring, muon and pileup calibrations
+      all in-house
+\item $\tau\tau$: DeepTau \emph{Tight} is the channel's recommended next working point
+      ($+\SI{0.5}{pb}$, $R = 1.08 \pm 0.13$) but is not yet its nominal
 \item no $Z\to ee$ --- out of scope for this pass
 \end{itemize}
 \end{column}
@@ -612,15 +625,15 @@ it is not measured, so the claim is not made.
 \begin{column}{0.56\textwidth}
 \begin{block}{}
 \centering\large
-$\sigll = \mathbf{1940 \pm 35}\pb$\\[3pt]
-\normalsize $R = \sigma(Z\to\tau\tau)/\sigma(Z\to\mm) = \mathbf{1.16 \pm 0.18}$
+$\sigll = \mathbf{1931 \pm 35}\pb$\\[3pt]
+\normalsize $R = \sigma(Z\to\tau\tau)/\sigma(Z\to\mm) = \mathbf{1.21 \pm 0.17}$
 \end{block}
 \footnotesize
 \begin{enumerate}\setlength\itemsep{3pt}
 \item Two very different analyses of the same $\SI{16.4}{fb^{-1}}$ --- 10 M nearly
-      background-free events against 47 k events that are 81\,\% background --- \textbf{agree}.
-\item The combination is \textbf{luminosity-limited}: \SI{24}{pb} of the \SI{35}{pb}, fully
-      correlated, irreducible. Combining gains 0.13\,\%.
+      background-free events against 47 k events that are 87\,\% background --- \textbf{agree}.
+\item The combination is \textbf{luminosity-limited}: \SI{23}{pb} of the \SI{35}{pb}, fully
+      correlated, irreducible. Combining gains nothing at all (0.00\,\%).
 \item Data statistics are \SI{0.6}{pb}. \textbf{More collisions would change nothing};
       better calibration and more simulated events would.
 \item What the $\tau\tau$ channel really contributes is the \textbf{universality test}, where the
@@ -676,7 +689,7 @@ With 72 M generated events the statistical precision on either is 0.02\,\%, so t
       so the mismatch shows up as a band on the theory line rather than as a bias.
 \item A TRExFitter MultiFit with one shared \texttt{mu\_Z} would \emph{not} handle it --- it would
       fit one parameter against two references.
-\item Size today: the $\tau\tau$ weight is 0.5\,\%, so $\sim$0.002\,\% on the combination. It
+\item Size today: the $\tau\tau$ weight is 0.04\,\%, so $\sim$0.0002\,\% on the combination. It
       matters as soon as a second channel of comparable weight appears.
 \end{itemize}
 Recorded as a decision in \src{fitting/CONVENTIONS.md} \S6.
@@ -691,26 +704,25 @@ Recorded as a decision in \src{fitting/CONVENTIONS.md} \S6.
 \begin{tabular}{@{}lrrc@{}}
 \toprule
 source & pb & of $\sigma$ & corr. \\ \midrule
-Luminosity & 23.51 & 1.21\,\% & yes \\
-Lineshape model ($\mu\mu$) & 13.65 & 0.70\,\% & no \\
-Muon efficiency & 11.68 & 0.60\,\% & no \\
-L1 prefiring & 10.58 & 0.55\,\% & yes \\
-Acceptance: PDF & 10.02 & 0.52\,\% & yes \\
-Acceptance: QCD scale & 5.91 & 0.30\,\% & yes \\
-Pileup & 4.99 & 0.26\,\% & yes \\
-Sig. modelling (PDF, scales, PS) & 4.62 & 0.24\,\% & yes \\
-Sig. modelling (generator) & 3.46 & 0.18\,\% & no \\
-Muon momentum & 2.43 & 0.13\,\% & no \\
-Background normalisation & 2.38 & 0.12\,\% & yes \\
-Fakes & 1.88 & 0.10\,\% & no \\
-Gammas (MC stat.) & 1.79 & 0.09\,\% & no \\
-Tau ID & 1.18 & 0.06\,\% & no \\
-Acceptance: MC stat. & 0.87 & 0.05\,\% & no \\
-\alert{Data statistics} & \alert{0.63} & \alert{0.03\,\%} & no \\
-Tau trigger & 0.48 & 0.02\,\% & no \\
-Acceptance: $\alpha_{s}$ & 0.47 & 0.02\,\% & yes \\
-Tau energy scale & 0.30 & 0.02\,\% & no \\ \midrule
-\textbf{total} & \textbf{34.7} & \textbf{1.79\,\%} & \\
+Luminosity & 22.72 & 1.18\,\% & yes \\
+Muon efficiency & 17.00 & 0.88\,\% & no \\
+Acceptance: PDF & \phantom{0}9.97 & 0.52\,\% & yes \\
+L1 prefiring & \phantom{0}9.89 & 0.51\,\% & yes \\
+Sig. modelling (generator) & \phantom{0}7.74 & 0.40\,\% & no \\
+Gammas (MC stat.) & \phantom{0}7.46 & 0.39\,\% & no \\
+Muon momentum & \phantom{0}7.17 & 0.37\,\% & no \\
+Acceptance: QCD scale & \phantom{0}6.15 & 0.32\,\% & yes \\
+Sig. modelling (PDF, scales, PS) & \phantom{0}5.65 & 0.29\,\% & yes \\
+Pileup & \phantom{0}2.61 & 0.14\,\% & yes \\
+Background normalisation & \phantom{0}1.57 & 0.08\,\% & yes \\
+Fakes & \phantom{0}0.87 & 0.04\,\% & no \\
+Acceptance: MC stat. & \phantom{0}0.86 & 0.04\,\% & no \\
+\alert{Data statistics} & \alert{\phantom{0}0.61} & \alert{0.03\,\%} & no \\
+Acceptance: $\alpha_{s}$ & \phantom{0}0.52 & 0.03\,\% & yes \\
+Tau ID & \phantom{0}0.08 & 0.00\,\% & no \\
+Tau trigger & \phantom{0}0.03 & 0.00\,\% & no \\
+Tau energy scale & \phantom{0}0.02 & 0.00\,\% & no \\ \midrule
+\textbf{total} & \textbf{35.4} & \textbf{1.83\,\%} & \\
 \bottomrule
 \end{tabular}
 \end{column}
@@ -724,9 +736,9 @@ Reading the table:
 \begin{itemize}\setlength\itemsep{2pt}
 \item the top entry and three of the top seven are \textbf{correlated}, so they set a floor
       combining cannot touch;
-\item the second entry exists only because the $\mu\mu$ shape fit is not under control ---
-      fixing the \texttt{SigModel} template would likely remove most of \SI{13.7}{pb};
-\item everything the $\tau\tau$ channel contributes sums to \SI{1.2}{pb};
+\item the second entry is the $\mu\mu$ muon efficiency, \SI{17}{pb} --- in-house tag-and-probe
+      scale factors plus the 0.8\,\%/event reconstruction term;
+\item everything the $\tau\tau$ channel contributes sums to \SI{0.2}{pb};
 \item the data statistical uncertainty is \SI{0.6}{pb}, four orders of magnitude below the
       cross section.
 \end{itemize}
@@ -743,23 +755,27 @@ Generated table: \src{combination/result.md}, machine-readable version
 \begin{tabular}{@{}lrrl@{}}
 \toprule
 variation & $\sigma$ [pb] & shift & what it changes \\ \midrule
-\textbf{baseline} & \textbf{1939.8} & --- & $\mu\mu$ counting, $\tau\tau$ nominal, model of \S4 \\
-$\tau\tau$ \texttt{mcsub} & 1937.8 & $-2.0$ & fake factor with genuine-$\tau$ subtraction \\
-$\mu\mu$ shape fit & 1933.3 & $-6.5$ & the channel's 30-bin fit instead of counting \\
-\texttt{SigModel} correlated & 1938.4 & $-1.4$ & generator comparison shared between channels \\
-acc. scale decorrelated & 1940.8 & $+1.0$ & acceptance QCD-scale term independent \\
-$\rho = 0$ everywhere & 1944.3 & $+4.5$ & all systematics uncorrelated (naive) \\
-$\rho = 1$ everywhere & 1937.8 & $-2.0$ & all systematics fully correlated \\
+\textbf{baseline} & \textbf{1930.6} & --- & $\mu\mu$ shape fit, $\tau\tau$ \texttt{mcsub}, model of \S4 \\
+$\tau\tau$ \texttt{nosub} & 1930.7 & $+0.1$ & fake factor without the genuine-$\tau$ subtraction \\
+$\tau\tau$ Tight WP & 1931.1 & $+0.5$ & DeepTau Tight on both legs (the channel's next WP) \\
+$\mu\mu$ counting & 1941.8 & $+11.2$ & 1-bin extraction instead of the $12\times\SI{5}{GeV}$ fit \\
+$\mu\mu$ $30\times\SI{2}{GeV}$ & 1934.4 & $+3.8$ & alternative binning (GoF $p = 0.16$) \\
+$\mu\mu$ $6\times\SI{10}{GeV}$ & 1926.1 & $-4.5$ & alternative binning (GoF $p = 0.50$) \\
+\texttt{SigModel} correlated & 1930.6 & $+0.0$ & generator comparison shared --- null, see \S4 \\
+acc. scale decorrelated & 1932.2 & $+1.6$ & acceptance QCD-scale term independent \\
+$\rho = 0$ everywhere & 1935.8 & $+5.2$ & all systematics uncorrelated (naive) \\
+$\rho = 1$ everywhere & 1927.1 & $-3.5$ & all systematics fully correlated \\
 \bottomrule
 \end{tabular}
 
-\vspace{5mm}
+\vspace{4mm}
 \begin{columns}
-\begin{column}{0.8\textwidth}\footnotesize
+\begin{column}{0.85\textwidth}\footnotesize
 The $\rho = 0$ and $\rho = 1$ rows bracket every possible correlation assignment: they span
-\SI{6.5}{pb}, $0.19\sigma$. Whatever one believes about the correlations, the answer is the same
-to within a fifth of its uncertainty. Note also that $\rho = 1$ and the $\tau\tau$ \texttt{mcsub}
-variant happen to land on the same value by coincidence.
+\SI{8.7}{pb}, $0.25\sigma$. The single largest entry is not a correlation choice at all but the
+$\mu\mu$ signal extraction: counting instead of fitting moves the answer by \SI{11.2}{pb}, and the
+two binnings the channel accepts span \SI{8.3}{pb}. The two $\tau\tau$ rows move it by 0.1 and
+\SI{0.5}{pb} --- that channel cannot move this number, whatever it does.
 \end{column}
 \end{columns}
 \end{frame}
@@ -770,15 +786,15 @@ variant happen to land on the same value by coincidence.
 \toprule
  & \textcolor{mumu}{$Z\to\mu^{+}\mu^{-}$} & \textcolor{tautau}{$Z\to\tauh\tauh$} \\ \midrule
 selected events & 10\,378\,567 & 47\,586 \\
-background & 68\,821 (0.66\,\%) & 40\,248 (85\,\%, prefit) \\
+background & 68\,787 (0.66\,\%) & 41\,513 (87\,\%, prefit) \\
 $A$ (fiducial / $60$--$120$) & 0.4092 & 0.002314 \\
-$C$ (reco / fiducial) & 0.7917 & 0.1068 \\
-fit variable & $m(\mu\mu)$, $30\times\SI{2}{GeV}$ & $m_{\tau\tau}$, 14 bins, 0--\SI{350}{GeV} \\
-nuisance parameters & 24 ($+30$ $\gamma$) & 38 ($+14$ $\gamma$) \\
-\muZ & 0.9935 (counting) & $1.160\,^{+0.192}_{-0.163}$ \\
-$\sigma_{\text{fid}}$ & $\SI{794.4}{pb}$ (pred.\ 799.6) & $\SI{5.22}{pb}$ (pred.\ 4.50) \\
-$\sigma(60$--$120)$ & $1941 \pm 35\pb$ & $2255 \pm 358\pb$ \\
-goodness of fit & --- (1 bin) & $p = 0.18$ \\
+$C$ (reco / fiducial) & 0.7914 & 0.0654 \\
+fit variable & $m(\mu\mu)$, $12\times\SI{5}{GeV}$ & $m_{\tau\tau}$, $3\times14$ bins, 0--\SI{350}{GeV} \\
+nuisance parameters & 23 ($+12$ $\gamma$) & 40 ($+42$ $\gamma$) \\
+\muZ & $0.9881 \pm 0.0159$ & $1.205\,^{+0.145}_{-0.125}$ \\
+$\sigma_{\text{fid}}$ & $\SI{790.1}{pb}$ (pred.\ 799.6) & $\SI{5.42}{pb}$ (pred.\ 4.50) \\
+$\sigma(60$--$120)$ & $1931 \pm 35\pb$ & $2343 \pm 322\pb$ \\
+goodness of fit & $p = 0.79$ & $p = 0.22$ \\
 \bottomrule
 \end{tabular}
 
@@ -803,9 +819,9 @@ share a luminosity, a signal sample and a fitter, and nothing else.
 \texttt{combination/fit/comb.config} & the TRExFitter MultiFit, generated and validated, not run \\
 \texttt{combination/output/} & \texttt{combination\_result.json}, \texttt{plots/*.pdf} \\ \midrule
 \texttt{z-mumu/}, \texttt{z-tautau/} & the channel analyses, each with its own \texttt{README}, \texttt{docs/}, \texttt{handoff.md} \\
-\texttt{z-mumu/REVIEW.md} & the review that changed which $\mu\mu$ number we use \\
+\texttt{z-mumu/REVIEW.md} & the review, and the fixes that made the shape fit usable \\
 \texttt{fitting/CONVENTIONS.md} & the shared contract; \S6 records what the combination decided \\
-\texttt{presentation/} & this deck (\texttt{bash build.sh}) \\
+\texttt{combination/presentation/} & this deck (\texttt{bash build.sh}) \\
 \bottomrule
 \end{tabular}
 

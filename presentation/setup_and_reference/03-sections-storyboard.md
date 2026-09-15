@@ -59,7 +59,7 @@ one clip = one idea. Sources named so the fidelity checker can verify.
 | ✔ 5-03 | `tautau_detector` | chained: dissolves to the slice; a 1-prong τ_h (track, γγ in the ECAL, HCAL) and a 3-prong τ_h, two ν_τ leave unseen, the p_T^miss arrow recoils; camera zooms in | `signature("tau_h", prongs=...)`, `"met"` |
 | | `visible_mass` | why m_vis sits below m_Z: the missing neutrinos, then the likelihood mass | docs/04-ditau-mass.md |
 | | `fake_factor_tautau` | same-sign measurement → application region (81 % of the SR are jet→τ_h fakes) | docs/05-fake-factors.md |
-| | `tautau_stack` / `tautau_result` | frozen m_ττ stack and σ = 2255 pb result | z-tautau docs/08, handoff |
+| | `tautau_stack` / `tautau_result` | frozen m_ττ stack and σ = 2343 pb result | z-tautau docs/08, handoff |
 
 ## 6 — combination and conclusion (`6_combination`)
 

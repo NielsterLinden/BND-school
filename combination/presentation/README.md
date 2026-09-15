@@ -14,9 +14,9 @@ bash build.sh --figures    # regenerate figures/*.pdf first
 | | |
 |---|---|
 | LaTeX | the **cvmfs TeX Live 2025** (`/cvmfs/sft.cern.ch/lcg/external/texlive/2025`), which `build.sh` puts on `PATH`. The system TeX Live 2020 in `/bin` has beamer but no `metropolis`, `pgfopts` or `siunitx`. |
-| combination outputs | `../combination/output/plots/*.pdf` — run `cd ../combination && python run_combination.py` first; `build.sh` checks and says so |
-| deck figures | `figures/*.pdf` from `python figures.py` (needs `source ../setup.sh`) |
-| channel plots | `../z-mumu/output/v2/plots/*.png`, `../z-tautau/output/plots/*.png`, committed by those groups |
+| combination outputs | `../output/plots/*.pdf` — run `cd .. && python run_combination.py` first; `build.sh` checks and says so |
+| deck figures | `figures/*.pdf` from `python figures.py` (needs `source ../../setup.sh`) |
+| channel plots | `../../z-mumu/output/v2/plots/*.png`, `../../z-tautau/output/plots/*.png`, committed by those groups |
 
 `build.sh` reports undefined references, missing figures and overfull boxes, and prints the page
 count — a missing figure shows up as a hole on a slide, so it is worth reading the output.
@@ -43,7 +43,7 @@ match the figures: <span>`#2B6CB0`</span> for μμ, `#EB811B` for ττ, `#23373B
 `#14B03D` for "correlated / reference".
 
 (The dark house style of `prompts/presentation_style.md` is rendered in beamer by
-`../z-mumu/review/deck/zmumu_review.tex` if you ever want that variant; its figures are
+`../../z-mumu/review/deck/zmumu_review.tex` if you ever want that variant; its figures are
 dark-background and must not be mixed with these.)
 
 ## Files

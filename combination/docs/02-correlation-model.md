@@ -12,11 +12,11 @@ raises a `KeyError` — a new systematic must be given a correlation, never defa
 
 | category | μμ | ττ | why |
 |---|---:|---:|---|
-| `Luminosity` | 23.5 pb | 26.1 pb | the same 16 393.381 pb⁻¹ from the same normtag over the same certified runs, with the same ±1.2 %. There is no sense in which the two channels measured the luminosity independently. |
-| `Pileup` | 5.1 pb | 24.0 pb | both build the data pileup profile from the same Open Data luminosity table with σ_mb = 69.2 mb and reweight with the same prescription. Both inherit the same ~4 % bias (`z-mumu/REVIEW.md` F6). |
-| `L1 prefiring` | 10.6 pb | 5.7 pb | same maps, same per-event weight. |
-| `Background normalisation` | 2.4 pb | 11.0 pb | literally the same nuisance parameters (`XS_TTbar` 6 %, `XS_SingleTop`, `XS_WW`, `XS_WZ`, `XS_ZZ` 10 %) applied to the same MC samples. |
-| `Signal modelling` — PDF, α_s, QCD scale, PS ISR/FSR | 5.1 pb | 94.2 pb | the same NNPDF3.1 Hessian members, the same 7-point scale envelope and the same shower weights of the *same* aMC@NLO sample. The effect on each channel's C factor differs; the underlying parameter is one. |
+| `Luminosity` | 22.7 pb | 19.9 pb | the same 16 393.381 pb⁻¹ from the same normtag over the same certified runs, with the same ±1.2 %. There is no sense in which the two channels measured the luminosity independently. |
+| `Pileup` | 2.6 pb | 19.8 pb | both build the data pileup profile from the same Open Data luminosity table with σ_mb = 69.2 mb and reweight with the same prescription. Both inherit the same open issue (z-mumu's profile is fitted to N_PV rather than taken from the official `puWeights` file). |
+| `L1 prefiring` | 9.9 pb | 3.4 pb | same maps, same per-event weight. |
+| `Background normalisation` | 1.6 pb | 34.0 pb | literally the same nuisance parameters (`XS_TTbar` 6 %, `XS_SingleTop`, `XS_WW`, `XS_WZ`, `XS_ZZ` 10 %) applied to the same MC samples. |
+| `Signal modelling` — PDF, α_s, QCD scale, PS ISR/FSR | 5.7 pb | 34.1 pb | the same NNPDF3.1 Hessian members, the same 7-point scale envelope and the same shower weights of the *same* aMC@NLO sample. The effect on each channel's C factor differs; the underlying parameter is one. |
 
 ## ρ = 0: different objects, different methods, different events
 
@@ -27,21 +27,28 @@ raises a `KeyError` — a new systematic must be given a correlation, never defa
 | `Fakes` | μμ uses a same-sign muon fake factor with prompt subtraction; ττ uses a jet→τh fake factor binned in (era, DM, N_jets, p_T) with an OS/SS correction. Different regions, different objects, different statistics. |
 | `MET` | ττ only. |
 | `Electron efficiency` | μμ only, and zero (it applies to the eμ validation region, which is not in the fit). |
-| `Lineshape model` | the ±0.7 % from `z-mumu/REVIEW.md` F3/F4. It is a property of the μμ mass template and of the powheg/aMC@NLO comparison in the μμ phase space; nothing analogous enters the ττ fit, which fits m_ττ from 0 to 350 GeV. |
 | `Data statistics` | the two channels read **disjoint primary datasets** (`SingleMuon` and `Tau`) selected by orthogonal triggers. `rho_override` in `model.build` deliberately does not touch this source: its ρ is a fact, not a modelling choice. |
 
-## The one genuine split: `SigModel`
+## The split of `Signal modelling`, and why it is now one-sided
 
-Both channels call their generator systematic `SigModel`, so a TRExFitter MultiFit would
-correlate them by name. They are not the same comparison:
+Until z-tautau v2.0 both channels fitted a generator systematic called `SigModel`, so a
+TRExFitter MultiFit would have correlated them by name even though they are not the same
+comparison:
 
-| channel | comparison | effect on C |
-|---|---|---:|
-| μμ | powheg vs aMC@NLO (two NLO generators) | 0.2 % |
-| ττ | madgraph **LO** vs aMC@NLO | 7.3 % |
+| channel | comparison | status |
+|---|---|---|
+| μμ | powheg vs aMC@NLO (two NLO generators), two-sided, built inside a common 50 < m_LHE < 120 GeV window | **fitted**; 0.40 % of μ_Z |
+| ττ | madgraph **LO** vs aMC@NLO, C_LO/C_NLO = 0.867 | **reported, not fitted** since v2.1 |
 
-An LO-vs-NLO difference and an NLO-vs-NLO difference are not one nuisance parameter, so the
-category is split before the correlation is applied:
+z-tautau removed its version deliberately (`z-tautau/docs/07`, its `REVIEW.md` §3.4): the LO
+sample is simply the worse model of the visible-τ p_T spectrum whose slope at the 40 GeV threshold
+is what the number measures, an uncertainty built as "nominal minus a worse model" is a
+placeholder, it double-counts `QCDScale`/`PS_ISR`, and under its old name it would have been
+correlated in a MultiFit with the μμ NLO-vs-NLO comparison. Its `Signal modelling` category is
+now pure PDF/α_s/scale/PS.
+
+The split survives because the μμ side still needs it — and because a channel that reinstates its
+own generator parameter would be handled without a code change:
 
 ```
 f      = impact(SigModel) / impact(Signal modelling category)
@@ -49,12 +56,15 @@ s_gen  = s_category · f            ρ = 0
 s_th   = s_category · sqrt(1 − f²) ρ = 1
 ```
 
-which preserves the published category total exactly. `impact(SigModel)` comes from each
-channel's NP ranking, except for the μμ counting extraction where only the template's
-normalisation difference survives (0.17 %, from `sigmodel_powheg_over_nlo` in the fit-result
-JSON). Treating `SigModel` as correlated instead is the `sigmodel_correlated` variation: −1.4 pb.
+which preserves the published category total exactly. `impact(SigModel)` comes from each channel's
+NP ranking — zero for ττ, 0.40 % for μμ — except for the μμ counting extraction, where only the
+template's normalisation difference survives (0.28 %, `meta.sigmodel.C_ratio_powheg_over_nlo` in
+the fit-result JSON). The `sigmodel_correlated` variation is therefore **exactly null now**
+(0.0 pb): there is nothing on the ττ side to correlate it with. It is kept in the table to make
+that visible rather than silent.
 
-The same decorrelation is needed if the MultiFit is ever run; `fit/comb.config` documents the
+The same decorrelation would still be needed if the MultiFit were run *and* z-tautau switched its
+`SigModel_tautau` on (`config.SIGMODEL_IN_FIT = True`); `fit/comb.config` documents the
 `DecorrSysts`/`DecorrSuff` lines that implement it.
 
 ## Acceptance
@@ -71,11 +81,13 @@ The QCD-scale choice is the conservative one. The two fiducial volumes respond v
 to a scale variation — 0.32 % for μμ, 3.4 % for ττ, because the double 40 GeV visible-τ cut sits
 on the Z p_T tail — and one could argue they are different observables of the same variation
 rather than one shared parameter. Decorrelating it is the `acc_scale_decorrelated` variation:
-+1.0 pb, a twentieth of the total uncertainty. The choice does not matter at this precision.
++1.6 pb, a twentieth of the total uncertainty. The choice does not matter at this precision.
 
 ## What the resulting correlation is
 
-Summing the ρ = 1 sources gives **ρ(μμ, ττ) = 0.15**. That number is what produces the negative
-ττ weight in the BLUE ([03](03-method.md)); the bracketing variations `rho_zero` and `rho_one`
-span 6.5 pb, a fifth of the total uncertainty, so the whole correlation model is a sub-dominant
-assumption.
+Summing the ρ = 1 sources gives **ρ(μμ, ττ) = 0.114**. That number is what produces the negative
+ττ weight in the BLUE ([03](03-method.md)) — barely, since it only just exceeds the ratio of the
+two uncertainties, 35.4/322.0 = 0.110. The bracketing variations `rho_zero` and `rho_one` span
+8.7 pb, a quarter of the total uncertainty, so the whole correlation model is still a sub-dominant
+assumption: `mumu counting`, a single choice inside one channel, moves the result by more
+(+11.2 pb).

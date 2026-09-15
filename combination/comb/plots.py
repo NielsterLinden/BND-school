@@ -100,8 +100,9 @@ def breakdown(spec, res, out: Path) -> Path:
                 va="center", fontsize=8.5, color="#444")
     ax.set_xlabel(r"contribution to $\delta\sigma_{\rm comb}$  [pb]")
     ax.set_xlim(0, max(values) * 1.38)
+    # two lines: on one line this title runs into the right-hand axes
     ax.set_title(f"combined: {res.value:.0f} $\\pm$ {res.error:.0f} pb ({100 * res.rel:.2f} %)"
-                 "   -- green: correlated between the channels", loc="left", fontsize=10.5)
+                 "\ngreen: correlated between the channels", loc="left", fontsize=10.5)
     ax.grid(axis="y", visible=False)
 
     ax = axes[1]
@@ -235,7 +236,8 @@ def variations_plot(res, variations, out: Path) -> Path:
     the shifts on a zoomed axis; the baseline +-1 sigma band is marked at the edges for scale.
     """
     keys = [k for k in variations if k != "baseline"]
-    fig, ax = plt.subplots(figsize=(7.8, 3.4))
+    # one row per variation, plus room for the "+x.x pb" label that sits above the top marker
+    fig, ax = plt.subplots(figsize=(7.8, 1.3 + 0.42 * len(keys)))
     span = max(12.0, 1.35 * max(abs(variations[k]["shift"]) for k in keys))
     ax.axvline(res.value, color=C_COMB, lw=1.6, label=f"baseline {res.value:.0f} pb")
     for i, k in enumerate(keys[::-1]):
@@ -245,7 +247,7 @@ def variations_plot(res, variations, out: Path) -> Path:
                     xytext=(0, 11), ha="center", fontsize=9, color=C_GREY)
     ax.set_yticks(range(len(keys)))
     ax.set_yticklabels([k.replace("_", " ") for k in keys[::-1]], fontsize=10)
-    ax.set_ylim(-0.6, len(keys) - 0.25)
+    ax.set_ylim(-0.7, len(keys) - 0.1)
     ax.set_xlim(res.value - span, res.value + span)
     ax.set_xlabel(r"combined $\sigma(60<m<120)$  [pb]")
     top = ax.secondary_xaxis("top", functions=(lambda v: (v - res.value) / res.error,

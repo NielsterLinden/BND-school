@@ -26,10 +26,10 @@ and rerun. The same goes for the figures.
 
 | number | source |
 |---|---|
-| μμ μ_Z, grouped impacts, A, C, counting yields | `z-mumu/fit/results/zmumu_fit_result.json` |
-| μμ counting-fit grouped impacts and μ_Z | `z-mumu/review/fitcheck/GroupedImpact_rebin30.txt`, `zmumu_rebin30.txt` |
-| μμ ±0.7 % lineshape term | `z-mumu/REVIEW.md` §4 recommendation 3 (hard-coded as `inputs.ZMUMU_LINESHAPE_REL`) |
-| ττ everything | `z-tautau/output/results.json` |
+| μμ μ_Z, grouped impacts, ranking, A, C, counting yields | `z-mumu/fit/results/zmumu_fit_result.json` |
+| μμ alternative fit configurations (binnings, counting) | `z-mumu/fit/results/stability.json` |
+| ττ everything | `z-tautau/output/results.json` (the variant its own `nominal_variant` names) |
+| ττ Tight-WP cross-check | `z-tautau/variants/tight/output/results.json` |
 | correlations | `comb/model.CORRELATION`, `comb/model.ACC_CORRELATION` — *asserted*, justified in `docs/02` |
 | published CMS/ATLAS comparisons | `comb/plots.REFERENCES` and `comb/report.REFERENCES`, with arXiv links |
 
@@ -51,13 +51,22 @@ into the JSON.
 4. **`rho_override` does not touch `Data statistics`.** The two channels read disjoint primary
    datasets (`SingleMuon`, `Tau`); its ρ is a fact, not a modelling choice.
 5. **The negative ττ weight is correct.** BLUE gives a negative weight whenever ρ exceeds the
-   ratio of the two uncertainties (0.15 > 0.10 here). Do not clip it — explain it (`docs/03`).
-6. **The z-mumu input is the counting extraction, not the channel's headline shape fit.** That is
-   what `z-mumu/REVIEW.md` F3 recommends until the `SigModel` template is fixed. If the μμ group
-   fixes it and re-publishes, switch `inputs.load_channels(mumu=...)` back to `"shapefit"` and
-   drop the `Lineshape model` category — and update `run_combination.check()`, which asserts the
-   published values and will fail first.
-7. **Figures are light-background on purpose.** The deck is beamer/metropolis and the channel
+   ratio of the two uncertainties (0.114 > 0.110 here — it is marginal now). Do not clip it —
+   explain it (`docs/03`).
+6. **Each channel decides its own baseline; this folder follows it.** `load_tautau("nominal")`
+   reads `nominal_variant` out of the ττ results file rather than hard-coding a variant name —
+   that field flipped from `nominal` (unsubtracted) to `mcsub` between v2.0 and v2.1 and the
+   combination followed without a code change. On the μμ side the baseline is `"shapefit"`, the
+   fit the channel rebuilt after its own review; the counting extraction and the `Lineshape model`
+   category that `z-mumu/REVIEW.md` F3 asked for as a stop-gap are **retired** — the two-sided
+   `SigModel` carries that uncertainty inside the fit now, so re-adding the term would double
+   count. When a channel re-publishes, `run_combination.check()` asserts the published values and
+   fails first; fix it there, not by loosening the assertion.
+7. **μμ variants rescale, the μμ baseline does not.** `z-mumu/fit/results/stability.json` gives
+   μ_Z and the *total* systematic per fit configuration but no per-category breakdown, so
+   `load_mumu` gives a variant the nominal category composition scaled to its own total. That is
+   fine for `VARIATIONS`; never quote a variant as a result.
+8. **Figures are light-background on purpose.** The deck is beamer/metropolis and the channel
    plots are white; a dark figure would be a black rectangle on the slide. (The `z-mumu/review`
    deck is the dark house style — different deck, do not mix the two figure sets.)
 

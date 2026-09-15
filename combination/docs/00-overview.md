@@ -4,8 +4,12 @@ Two of the three BND-school channels finished a Z cross-section measurement on t
 Data 2016 sample (Run2016G+H, 16 393.381 pb⁻¹): `z-mumu` (Z → μ⁺μ⁻) and `z-tautau` (Z → τhτh).
 `z-ee` is out of scope. This folder turns the two into one number.
 
-> **σ(pp → Z/γ* → ℓℓ, 60 < m_ℓℓ < 120 GeV) = 1940 ± 35 pb**, per lepton flavour, assuming lepton
+> **σ(pp → Z/γ* → ℓℓ, 60 < m_ℓℓ < 120 GeV) = 1931 ± 35 pb**, per lepton flavour, assuming lepton
 > universality. See [`../result.md`](../result.md) for the full breakdown.
+
+The inputs are each channel's current baseline as re-published on 15 Sep 2026: z-mumu's fit
+rebuilt after its own review (12 × 5 GeV bins, two-sided `SigModel`) and z-tautau v2.1 (MC-
+subtracted fake factor as nominal, OS/SS correction per BDT category).
 
 ## The chain
 
@@ -34,7 +38,7 @@ still equals what that channel published.
 
 ## The honest summary
 
-The combination is **luminosity-dominated** (1.2 %, fully correlated) and the μμ channel is ten
-times more precise than the ττ channel, so combining gains 0.13 % on the uncertainty. That is not
+The combination is **luminosity-dominated** (1.2 %, fully correlated) and the μμ channel is nine
+times more precise than the ττ channel, so combining gains 0.00 % on the uncertainty. That is not
 a failure of the method: it is the result. What the ττ channel *does* buy is a lepton-universality
-test, R = σ(ττ)/σ(μμ) = 1.16 ± 0.18, in which the luminosity cancels exactly.
+test, R = σ(ττ)/σ(μμ) = 1.21 ± 0.17, in which the luminosity cancels exactly.

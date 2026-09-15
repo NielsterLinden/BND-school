@@ -7,40 +7,67 @@ files, and every `ChannelResult` carries a `provenance` list naming them.
 
 | item | file |
 |---|---|
-| μ_Z, grouped impacts, σ's, A, C, L, counting yields | `z-mumu/fit/results/zmumu_fit_result.json` |
-| grouped impacts of the 1-bin (counting) fit | `z-mumu/review/fitcheck/GroupedImpact_rebin30.txt` |
-| μ_Z of the 1-bin fit | `z-mumu/review/fitcheck/zmumu_rebin30.txt` |
-| the ±0.7 % lineshape term and why it exists | `z-mumu/REVIEW.md` §4 |
+| μ_Z, grouped impacts, ranking, σ's, A, C, L, counting yields | `z-mumu/fit/results/zmumu_fit_result.json` |
+| μ_Z, MINOS errors, total systematic and GoF of the alternative fit configurations | `z-mumu/fit/results/stability.json` |
 
-**Which extraction.** The channel's headline v2 number is a 30-bin profile-likelihood fit of
-m(μμ), μ_Z = 0.9903 ± 0.0140. Its own review (15 Sep 2026, finding F3) then showed that this fit
-is not robust: μ_Z moves between 0.990 and 1.006 depending on the binning and on whether the
-`SigModel` template is included, because the data show a 3–4 % deficit relative to aMC@NLO at
-62–78 GeV that only that one template can absorb — and that template is itself flawed (F4: the
-powheg sample has a generator cut at m_LHE < 120 GeV, depleting its two highest reconstructed
-bins by 10 % and 33 %). The review's recommendation 3 is to quote the **counting extraction**,
-σ_fid = 794.4 pb (μ_Z = 0.99354), with **±0.7 %** — half the spread of the fit-configuration
-table — added as a lineshape-model systematic.
+**Which extraction.** The channel's v2 measurement was reviewed on 15 Sep 2026 and the review's
+findings were fixed the same day (`z-mumu/REVIEW.md` §0). What the review had objected to (F3/F4)
+was that the 30 × 2 GeV fit absorbed a 3–4 % data deficit at 62–78 GeV into a `SigModel` template
+that itself carried a phase-space artefact — the powheg sample is generated with m_LHE < 120 GeV,
+so its two highest reconstructed bins were depleted by 10 % and 33 %. Both are repaired in the
+current fit:
 
-The combination follows that recommendation. Consequences:
+- 1 GeV input bins **fitted in 12 × 5 GeV bins**, so the shape nuisance parameters are no longer
+  over-constrained; no template smoothing; `UseMinos: all`;
+- the `SigModel` template is built with **both generators inside 50 < m_LHE < 120 GeV** and
+  mirrored to be two-sided — the last-bin ratio is 1.02 instead of 0.67.
 
-- the grouped impacts come from the 1-bin fit, not the 30-bin one. They are *larger* and more
-  honest: luminosity 1.204 % instead of 1.164 % (the 30-bin fit "measured" the luminosity from
-  the tt̄ sideband shape and constrained it to 0.82σ, which is a fit artefact, F5);
-- a `Lineshape model` category, μμ-only, carries the ±0.7 %;
-- the data statistical uncertainty is √N_obs/(N_obs − N_bkg) = 0.031 %, unchanged.
+The result is μ_Z = 0.98813 ± 0.0159 with GoF p = 0.79, and the channel's stability table spans
+0.9858–0.9901 over the binnings with p > 0.05 — ±0.2 %. **The combination therefore takes the
+shape fit** (`mumu="shapefit"`, the default), and the ±0.7 % lineshape term the review had asked
+for as a stop-gap is gone: the two-sided `SigModel` carries that uncertainty inside the fit, so
+adding it again would double-count. The `Lineshape model` category no longer exists.
 
-Running with the shape fit instead (`--` see `VARIATIONS["mumu_shapefit"]`) shifts the combined
-value by −6.5 pb and tightens it by 3 pb. It is reported, not used.
+The counting extraction (μ_Z = 0.99387, σ_fid = 794.7 pb) is kept as a **variation**, together
+with the two alternative binnings the channel accepts:
+
+| variant | configuration | μ_Z | GoF p | shift on the combination |
+|---|---|---:|---:|---:|
+| `shapefit` *(baseline)* | 12 × 5 GeV, two-sided `SigModel` | 0.98813 | 0.79 | — |
+| `bins2gev` | 30 × 2 GeV | 0.99012 | 0.16 | +3.8 pb |
+| `bins10gev` | 6 × 10 GeV | 0.98582 | 0.50 | −4.5 pb |
+| `counting` | 1 bin | 0.99387 | — | +11.2 pb |
+
+`stab_nosig` and `stab_smooth` are in the channel's table but not offered here: both have
+p ≤ 0.01 and the channel rejects them.
+
+The stability table publishes μ_Z, the MINOS errors, the total systematic and the goodness of fit
+per configuration, but **not** the grouped impacts per configuration. A variant therefore keeps
+the nominal fit's category composition rescaled to its own published total systematic (the largest
+rescaling is +5.4 % for the 1-bin fit). It is an approximation, and it is used only for the
+variations — never for the baseline, whose impacts are read directly.
 
 ## Z → τhτh
 
 | item | file |
 |---|---|
 | μ_Z, grouped impacts, ranking, σ's, A and its breakdown, prefit yields | `z-tautau/output/results.json` |
+| the DeepTau-Tight cross-check, same chain end to end | `z-tautau/variants/tight/output/results.json` |
 
-The `nominal` fake-factor variant (no MC subtraction) is the baseline, as the channel published
-it; `mcsub` is reported as a variation (−2.0 pb on the combination).
+The baseline is whatever that file calls `nominal_variant`, so the channel stays in charge of its
+own nominal. Since v2.1 (per-category OS/SS correction, SR0 used as a fake sideband) that is
+**`mcsub`**, the fake factor *with* the genuine-τ MC subtraction — the opposite of v2.0, where the
+unsubtracted variant was nominal. Two cross-checks are carried as variations: `nosub`
+(μ_Z = 1.166, +0.1 pb on the combination) and `tight` (μ_Z = 1.071, +0.5 pb), the complete re-run
+with DeepTau Tight on both legs that the channel recommends as the next iteration's working point
+but has not adopted.
+
+One consequence for the correlation model: since v2.1 **z-tautau does not fit a generator nuisance
+parameter at all**. Its `SigModel_tautau` (madgraph LO vs aMC@NLO, C_LO/C_NLO = 0.867) is reported
+and not used as an uncertainty, because the LO sample is simply the worse model of the visible-τ
+p_T spectrum and the number would double-count `QCDScale`/`PS_ISR` (`z-tautau/docs/07`). The
+`Signal modelling` category on the ττ side is therefore pure PDF/α_s/scale/PS — all of it
+correlated with μμ — and it shrank from 9.8 % to 1.8 % between v2.0 and v2.1.
 
 ## Two asymmetries between the channels
 
@@ -64,7 +91,7 @@ reference, drawn as a band in `output/plots/forest.pdf` rather than as a line.
 
 A TRExFitter MultiFit with a single shared `mu_Z` would *not* handle this — it would fit one
 number against two different references. At the current precision the effect is negligible
-(the ττ channel's weight is 0.5 %, so 0.47 % × 0.005 ≈ 0.002 % on the combination), but the
+(the ττ channel's weight is 0.04 %, so 0.47 % × 0.0004 ≈ 0.0002 % on the combination), but the
 channels should agree on one construction before a joint fit is quoted.
 
 **2. The acceptance lives outside both fits.** μ_Z is a fiducial signal strength; the conversion

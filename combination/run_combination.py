@@ -39,20 +39,34 @@ def check(verbose: bool = True) -> list[str]:
         if not good:
             raise AssertionError(notes[-1])
 
-    mm_fit = inputs.load_mumu("shapefit")
-    ok("z-mumu shape fit mu_Z", mm_fit.mu, 0.990297, 1e-6)
-    ok("z-mumu shape fit sigma(60-120)", mm_fit.sigma, 1934.97, 0.05, " pb")
-    mm = inputs.load_mumu("counting")
-    ok("z-mumu counting mu_Z", mm.mu, 0.993539, 1e-6)
-    ok("z-mumu counting sigma_fid", mm.extra["sigma_fid_pb"], 794.38, 0.02, " pb")
-    ok("z-mumu counting luminosity impact", mm.groups["Luminosity"], 0.0120375, 1e-7)
+    # --- z-mumu v2 after the review fixes (12 x 5 GeV shape fit); z-mumu/output/v2/RESULTS_v2.md
+    mm = inputs.load_mumu("shapefit")
+    ok("z-mumu shape fit mu_Z", mm.mu, 0.988134, 1e-6)
+    ok("z-mumu shape fit sigma_fid", mm.extra["sigma_fid_pb"], 790.08, 0.02, " pb")
+    ok("z-mumu shape fit sigma(60-120)", mm.sigma, 1930.75, 0.05, " pb")
+    ok("z-mumu shape fit luminosity impact", mm.groups["Luminosity"], 0.0116267, 1e-7)
+    ok("z-mumu shape fit GoF p", mm.gof_p, 0.792273, 1e-6)
+    # the data statistical uncertainty the stability variants use is the analytic one; it must
+    # agree with the channel's stat-only fit (comb/inputs.load_mumu)
+    c = mm.extra
+    ok("z-mumu data statistics, analytic vs stat-only fit",
+       c["n_obs"] ** 0.5 / (c["n_obs"] - c["n_bkg"]), mm.mu_stat / mm.mu, 2e-2 * mm.mu_stat / mm.mu)
+    mm_cnt = inputs.load_mumu("counting")
+    ok("z-mumu counting mu_Z", mm_cnt.mu, 0.993872, 1e-6)
+    ok("z-mumu counting sigma_fid", mm_cnt.extra["counting_sigma_fid_pb"], 794.65, 0.02, " pb")
 
+    # --- z-tautau v2.1 (per-category OS/SS correction); z-tautau/output/RESULTS.md
     tt = inputs.load_tautau("nominal")
-    ok("z-tautau mu_Z", tt.mu, 1.1596, 1e-4)
-    ok("z-tautau sigma(60-120)", tt.sigma, 2255.29, 0.05, " pb")
-    ok("z-tautau tau ID impact", tt.groups["Tau ID"], 0.125475, 1e-6)
-    tt_mc = inputs.load_tautau("mcsub")
-    ok("z-tautau mcsub mu_Z", tt_mc.mu, 1.20751, 1e-5)
+    ok("z-tautau nominal is the MC-subtracted fake factor", float(tt.variant == "mcsub"), 1.0, 0)
+    ok("z-tautau mu_Z", tt.mu, 1.20451, 1e-5)
+    ok("z-tautau sigma_fid", tt.extra["sigma_fid_pb"], 5.4209, 1e-4, " pb")
+    ok("z-tautau sigma(60-120)", tt.sigma, 2342.63, 0.05, " pb")
+    ok("z-tautau tau ID impact", tt.groups["Tau ID"], 0.111293, 1e-6)
+    ok("z-tautau GoF p", tt.gof_p, 0.21943, 1e-5)
+    # SigModel_tautau is reported, not fitted (z-tautau/docs/07): no generator NP on this side
+    ok("z-tautau has no fitted SigModel", tt.sigmodel, 0.0, 0)
+    ok("z-tautau nosub mu_Z", inputs.load_tautau("nosub").mu, 1.16576, 1e-5)
+    ok("z-tautau Tight-WP mu_Z", inputs.load_tautau("tight").mu, 1.07074, 1e-5)
 
     # every grouped-impact category must have a correlation assigned (model.build raises otherwise)
     spec = model.build({"mumu": mm, "tautau": tt})
@@ -92,10 +106,14 @@ def check(verbose: bool = True) -> list[str]:
 # ------------------------------------------------------------------------------- variations
 VARIATIONS = {
     "baseline": dict(),
-    "tautau_mcsub": dict(tautau="mcsub",
-                         why="z-tautau fake factor with genuine-tau subtraction (its open issue 1)"),
-    "mumu_shapefit": dict(mumu="shapefit",
-                          why="z-mumu 30-bin shape fit instead of the reviewed counting extraction"),
+    "tautau_nosub": dict(tautau="nosub",
+                         why="z-tautau fake factor without the genuine-tau MC subtraction"),
+    "tautau_tight": dict(tautau="tight",
+                         why="z-tautau with DeepTau Tight on both legs (its recommended next WP)"),
+    "mumu_counting": dict(mumu="counting",
+                          why="z-mumu 1-bin counting extraction instead of the 12 x 5 GeV fit"),
+    "mumu_bins2gev": dict(mumu="bins2gev", why="z-mumu fit in 30 x 2 GeV bins"),
+    "mumu_bins10gev": dict(mumu="bins10gev", why="z-mumu fit in 6 x 10 GeV bins"),
     "sigmodel_correlated": dict(build=dict(correlate_sigmodel=True),
                                 why="generator comparison treated as correlated between channels"),
     "acc_scale_decorrelated": dict(build=dict(correlate_acc_scale=False),
@@ -105,7 +123,7 @@ VARIATIONS = {
 }
 
 
-def run_variation(mumu="counting", tautau="nominal", build=None, **_):
+def run_variation(mumu="shapefit", tautau="nominal", build=None, **_):
     chans = inputs.load_channels(mumu=mumu, tautau=tautau)
     spec = model.build(chans, **(build or {}))
     return chans, spec, blue.combine(spec)
@@ -166,11 +184,16 @@ def main():
     variations = {}
     for key, cfg in VARIATIONS.items():
         why = cfg.pop("why", "the baseline")
-        _, vspec, vres = run_variation(**cfg)
+        vchans, vspec, vres = run_variation(**cfg)
         cfg["why"] = why
+        vrat = ratio.compute(vspec)
         variations[key] = {"value": vres.value, "error": vres.error, "why": why,
                            "weights": vres.weights, "chi2": vres.chi2, "pvalue": vres.pvalue,
-                           "shift": vres.value - res.value}
+                           "shift": vres.value - res.value,
+                           "ratio": vrat.value, "ratio_error": vrat.error,
+                           "channels": {n: {"variant": ch.variant, "sigma_pb": ch.sigma,
+                                            "sigma_err_pb": ch.sigma_err_total, "gof_p": ch.gof_p}
+                                        for n, ch in vchans.items()}}
         print(f"    {key:<24s} {vres.value:7.1f} +- {vres.error:5.1f} pb "
               f"({vres.value - res.value:+6.1f})   {why}")
 

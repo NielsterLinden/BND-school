@@ -101,7 +101,8 @@ for _k, _s in SAMPLES.items():
     _s.setdefault("era", None)
 
 # Relative normalisation uncertainties used as OVERALL nuisance parameters in the fit.
-XSEC_UNC = {"TTbar": 0.06, "SingleTop": 0.10, "WW": 0.10, "WZ": 0.10, "ZZ": 0.10, "DYtautau": 0.05}
+XSEC_UNC = {"TTbar": 0.06, "SingleTop": 0.10, "WW": 0.10, "WZ": 0.10, "ZZ": 0.10, "DYtautau": 0.05,
+            "WJets": 0.30}     # WJets: non-prompt-electron rate from MC, e-mu validation region only
 
 DATA_KEYS = [k for k, s in SAMPLES.items() if not s["is_mc"]]
 MC_KEYS = [k for k, s in SAMPLES.items() if s["is_mc"]]

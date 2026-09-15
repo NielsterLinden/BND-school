@@ -6,15 +6,15 @@ import numpy as np
 
 from . import config, hists, histograms as H
 
-STACK_ORDER = ["Fakes", "WW", "WZ", "ZZ", "SingleTop", "TTbar", "DYee", "DYtautau", "DYmumu"]
+STACK_ORDER = ["Fakes", "WJets", "WW", "WZ", "ZZ", "SingleTop", "TTbar", "DYee", "DYtautau", "DYmumu"]
 COLOURS = {"DYmumu": "#f2b134", "DYtautau": "#a04cb0", "DYee": "#4c9ee0", "TTbar": "#d62728", "SingleTop": "#e07b7b",
-           "WW": "#2ca6a4", "WZ": "#4dc0be", "ZZ": "#7fd4d2", "Fakes": "#9a9a9a"}
+           "WW": "#2ca6a4", "WZ": "#4dc0be", "ZZ": "#7fd4d2", "Fakes": "#9a9a9a", "WJets": "#8c6d4f"}
 LABELS = {"DYmumu": r"Z/$\gamma^*\to\mu\mu$", "DYtautau": r"Z/$\gamma^*\to\tau\tau$", "DYee": r"Z/$\gamma^*\to ee$",
           "TTbar": r"t$\bar{t}$", "SingleTop": "tW", "WW": "WW", "WZ": "WZ", "ZZ": "ZZ", "Fakes": "non-prompt (FF)"}
 XLABELS = {"mass_fit": r"$m_{\mu\mu}$ [GeV]", "mass_fine": r"$m_{\mu\mu}$ [GeV]", "pt1": r"leading muon $p_T$ [GeV]",
            "pt2": r"subleading muon $p_T$ [GeV]", "eta1": r"leading muon $\eta$", "eta2": r"subleading muon $\eta$",
            "phi1": r"leading muon $\phi$", "zpt": r"$p_T^{\mu\mu}$ [GeV]", "zy": r"$y^{\mu\mu}$", "npv": "good primary vertices",
-           "met": r"$p_T^{miss}$ [GeV]", "njet": "jets ($p_T$ > 30 GeV)", "iso1": "leading muon rel. iso.",
+           "met": r"PF $p_T^{miss}$ [GeV]", "puppimet": r"Puppi $p_T^{miss}$ [GeV]", "njet": "lepton-cleaned jets ($p_T$ > 30 GeV)", "iso1": "leading muon rel. iso.",
            "iso2": "subleading muon rel. iso.", "nfsr": "FSR photons", "pt_el": r"electron $p_T$ [GeV]"}
 
 
@@ -62,7 +62,8 @@ def stack_plot(hall, region, var, filename, fakes_fine=None, logy=False, title="
         ax.set_ylim(0, max(tot.max(), data.max()) * 1.35)
     ax.legend(fontsize=11, ncol=2, loc="upper right")
     hists._decorate(ax, lumi_fb=config.LUMI_PB_NORMTAG / 1000)
-    hists._title(ax, title or {"SR": "signal region", "SS": "same-sign region", "CRemu": r"e$\mu$ region"}[region])
+    hists._title(ax, title or {"SR": "signal region", "SS": "same-sign region", "CRemu": r"e$\mu$ region (OS), all MC",
+                               "SSemu": r"e$\mu$ region (SS), all MC"}[region])
     with np.errstate(divide="ignore", invalid="ignore"):
         ratio = np.where(tot > 0, data / tot, np.nan)
         err = np.where(tot > 0, np.sqrt(np.maximum(data * unit, 0)) / unit / tot, np.nan)
@@ -79,7 +80,7 @@ def all_plots(hall, fakes_res=None):
     made = []
     for region, vars_ in H.REGION_VARS.items():
         for var in vars_:
-            for logy in ((False, True) if var in ("mass_fit", "mass_fine", "pt1", "pt2", "zpt", "met") else (False,)):
+            for logy in ((False, True) if var in ("mass_fit", "mass_fine", "pt1", "pt2", "zpt", "met", "puppimet") else (False,)):
                 name = f"datamc_{region}_{var}{'_log' if logy else ''}.png"
                 if stack_plot(hall, region, var, name, fine, logy=logy):
                     made.append(name)

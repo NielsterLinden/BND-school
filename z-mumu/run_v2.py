@@ -6,7 +6,7 @@
     python run_v2.py --from 2            # after the skims exist
     python run_v2.py --from 2 --max-files 2 --workers 4     # quick smoke test
 
-Steps: 0 filelists, 1 skim, 2 tag-and-probe, 3 control (momentum + fakes), 4 histograms,
+Steps: 0 filelists, 1 skim, 2 pileup profile + tag-and-probe, 3 control (momentum + fakes), 4 histograms,
 5 fit, 6 report. Each step is also runnable on its own (scripts/v2_<n>_*.py).
 """
 
@@ -20,6 +20,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 STEPS = [(0, "file lists", "v2_0_filelists.py", []), (1, "skims", "v2_1_skim.py", ["--workers", "--max-files"]),
+         (2, "pileup profile", "v2_2_pileup.py", ["--workers", "--max-files"]),
          (2, "tag-and-probe", "v2_2_tnp.py", ["--workers", "--max-files"]),
          (3, "control regions", "v2_3_control.py", ["--workers", "--max-files"]),
          (4, "histograms", "v2_4_histograms.py", ["--workers", "--max-files"]),

@@ -261,9 +261,13 @@ def main():
         plot(saved["result"], saved["data"], saved["mc"])
         return
     if not args.summarise_only:
-        pu = pileup.PileupWeights(pileup.mc_profile(("DY_NLO",), args.skim_dir))
-        pu.to_json(pu_json)
-        print(f"[tnp] pileup: data <mu> {pu.data['nominal']['mean']:.2f}, MC <mu> "
+        if pu_json.exists():        # N_PV-matched profile from scripts/v2_2_pileup.py
+            pu = pileup.PileupWeights.from_json(pu_json)
+        else:
+            print("[tnp] no pileup_weights.json: run scripts/v2_2_pileup.py first (using the raw CSV profile)")
+            pu = pileup.PileupWeights(pileup.mc_profile(("DY_NLO",), args.skim_dir))
+            pu.to_json(pu_json)
+        print(f"[tnp] pileup: data <mu> {pu.data['nominal']['mean']:.2f} (scale {pu.scale:.3f}, smear {pu.rel_smear:.2f}), MC <mu> "
               f"{(pu.mc * np.arange(len(pu.mc))).sum() / pu.mc.sum():.2f}, L = {pu.data['nominal']['lumi_pb']:.3f} pb^-1")
         for key, is_mc in (("data_2016G", False), ("data_2016H", False), ("DY_NLO", True), ("DY_powheg", True)):
             files = skim.skim_files(key, args.skim_dir)[: args.max_files]

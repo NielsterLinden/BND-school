@@ -27,7 +27,7 @@ inside the data-only design are:
 ```
 
 `mu_Z` is the signal-strength normalisation factor of the DY -> mu mu template in the fit of the
-dimuon mass spectrum (60-120 GeV, 2 GeV bins) to the data. Because the template is normalised
+dimuon mass spectrum (60-120 GeV, 12 bins of 5 GeV; see docs/14 for the binning choice) to the data. Because the template is normalised
 to `sigma_th x L x N_sel/N_all`, the product is algebraically `(N_data - N_bkg)/(L x C)` with
 `C = N_sel(weighted)/N_fid`: the assumed DY cross section cancels, and the fit only adds the
 constraint of the backgrounds and of the nuisance parameters. The counting form is printed
@@ -43,10 +43,12 @@ A(60 < m_Born < 120) = 0.4092 (recommended for the combination) or A(m > 50) = 0
 | step | script | what it does | doc |
 |---|---|---|---|
 | 1 | `v2_1_skim.py` | skims of the unskimmed SingleMuon parent and of every MC sample | [10](10-skims.md) |
-| 2 | `v2_2_tnp.py` | pileup weights; ID / iso / trigger / anti-iso efficiencies from T&P fits; scale factors | [11](11-mc-weights.md), [12](12-tag-and-probe-fits.md) |
+| 2a | `v2_2_pileup.py` | pileup profile matched to the N_PV distribution of the signal region; pileup weights | [11](11-mc-weights.md) |
+| 2 | `v2_2_tnp.py` | ID / iso / trigger / anti-iso efficiencies from T&P fits; scale factors | [12](12-tag-and-probe-fits.md) |
 | 3 | `v2_3_control.py` | muon momentum calibration on the Z peak; fake-factor maps and the non-prompt template | [13](13-fake-factor.md), [14](14-fit-and-systematics.md) |
 | 4 | `v2_4_histograms.py` | every histogram: samples x regions x variables x systematic variations | [14](14-fit-and-systematics.md) |
 | 5 | `v2_5_fit.py` | TRExFitter inputs, config, fit, cross sections | [14](14-fit-and-systematics.md) |
+| 5b | `v2_5_fit_variants.py` | stability of mu_Z against the binning and the shape model | [14](14-fit-and-systematics.md) |
 | 6 | `v2_6_report.py` | data/MC plots, `RESULTS_v2.md`, summary | [15](15-combination-inputs.md) |
 
 ## Samples

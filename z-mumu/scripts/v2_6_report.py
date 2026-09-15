@@ -22,8 +22,42 @@ from zmumu import config, hists, plotting
 OUT = config.OUTPUT_DIR / "v2"
 config.PLOT_DIR = OUT / "plots"          # v2 plots live next to the v2 results
 FIT = config.REPO_DIR / "fit" / "results" / "zmumu_fit_result.json"
+STAB = config.REPO_DIR / "fit" / "results" / "stability.json"
+NOT_IN_FIT = {"DYmumu_powheg": "raw generator weights; SigModel template only", "WJets": "prompt-prompt part is a negative-weight fluctuation; e-mu regions only",
+              "DYother": "LHE flavour not e/mu/tau"}
 V1 = {"sigma_fid": 773.2, "sigma_fid_err": 11.9, "revised": 776.9, "revised_err": 14.8, "reviewer": 797.2,
       "reviewer_err": 797.2 * np.hypot(0.013, 0.012), "pred_nlo": 799.6, "pred_lo": 825.4}
+
+
+def lineshape_plot(hall, gens, fakes_res):
+    """powheg vs aMC@NLO lineshape: generator level (LHE mass, all generated mu mu events) and
+    reconstructed level inside the powheg generator window, next to the pre-fit data/MC ratio.
+    Documents where the SigModel template comes from (REVIEW.md F3/F4)."""
+    import matplotlib.pyplot as plt
+    from zmumu import histograms as H
+    hn = np.array(gens["DY_NLO"]["h_lhe_mll"]); hp = np.array(gens["DY_powheg"]["h_lhe_mll"])   # 1 GeV bins, 0-200
+    win = slice(60, 120)
+    rb = lambda a, k: a.reshape(-1, k).sum(axis=1)
+    n_lhe, p_lhe = rb(hn[win], 5) / hn[win].sum(), rb(hp[win], 5) / hp[win].sum()
+    e = H.edges("SR", "mass_fit")[::5]; c = 0.5 * (e[1:] + e[:-1])
+    dy = rb(hall["DYmumu|SR|mass_fit|lhe50120"], 5); pw = rb(hall["DYmumu_powheg|SR|mass_fit|nominal"], 5)
+    data = rb(hall["Data|SR|mass_fit|nominal"], 5)
+    mc = sum(rb(hall[f"{s}|SR|mass_fit|nominal"], 5) for s in ("DYmumu", "DYtautau", "DYee", "TTbar", "SingleTop", "WW", "WZ", "ZZ")
+             if f"{s}|SR|mass_fit|nominal" in hall)
+    if fakes_res:
+        f = np.array(fakes_res["templates"]["nominal"]); mc = mc + np.clip(rb(f, len(f) // len(c)), 0, None)
+    fig, ax = plt.subplots(figsize=(9, 6))
+    ax.step(e[:-1], p_lhe / n_lhe, where="post", color="tab:red", label="powheg / aMC@NLO, generator level (m_LHE, all mu mu events)")
+    ax.step(e[:-1], (pw / pw.sum()) / (dy / dy.sum()), where="post", color="tab:orange", linestyle="--",
+            label="powheg / aMC@NLO, reconstructed, both 50 < m_LHE < 120 GeV")
+    ax.errorbar(c, data / mc, yerr=np.sqrt(data) / mc, fmt="o", color="black", markersize=4, label=r"data / prediction, pre-fit ($\mu_Z$ = 1)")
+    ax.axhline(1, color="grey", linestyle=":")
+    ax.set_xlim(60, 120); ax.set_ylim(0.9, 1.06); ax.set_xlabel(r"$m_{\mu\mu}$ [GeV]"); ax.set_ylabel("ratio (shapes normalised in 60-120 GeV)")
+    ax.legend(fontsize=10, loc="lower right")
+    hists._decorate(ax, lumi_fb=config.LUMI_PB_NORMTAG / 1000); hists._title(ax, "Signal lineshape: generator comparison vs data")
+    hists.save_fig(fig, "sigmodel_lineshape.png")
+    return {"lhe_ratio_5gev": (p_lhe / n_lhe).tolist(), "reco_ratio_5gev": ((pw / pw.sum()) / (dy / dy.sum())).tolist(),
+            "data_over_pred_prefit_5gev": (data / mc).tolist()}
 
 
 def main():
@@ -31,6 +65,8 @@ def main():
     fakes_res = json.load(open(OUT / "fakes.json")) if (OUT / "fakes.json").exists() else None
     made = plotting.all_plots(hall, fakes_res)
     print(f"[report] {len(made)} data/MC plots")
+    gens = json.load(open(OUT / "gensums.json"))
+    lineshape = lineshape_plot(hall, gens, fakes_res) if "DYmumu|SR|mass_fit|lhe50120" in hall else None
     fit = json.load(open(FIT)) if FIT.exists() else None
     tnp = json.load(open(OUT / "tnp" / "tnp_result.json")) if (OUT / "tnp" / "tnp_result.json").exists() else None
     mom = json.load(open(OUT / "momentum.json")) if (OUT / "momentum.json").exists() else None
@@ -41,7 +77,9 @@ def main():
             yields.setdefault(region, {})[smp] = float(np.sum(v))
     if fakes_res:
         yields["SR"]["Fakes"] = fakes_res["yields"]["sr_fakes"]
-    result = {"generated": str(date.today()), "lumi_pb": config.LUMI_PB_NORMTAG, "yields": yields, "fit": fit,
+    stab = json.load(open(STAB)) if STAB.exists() else None
+    result = {"generated": str(date.today()), "lumi_pb": config.LUMI_PB_NORMTAG, "yields": yields, "fit": fit, "stability": stab,
+              "lineshape": lineshape,
               "fakes": fakes_res["yields"] if fakes_res else None, "momentum": mom,
               "tnp_meta": tnp["meta"] if tnp else None, "v1_reference": V1}
     with open(OUT / "results_v2.json", "w") as fh:
@@ -52,7 +90,10 @@ def main():
         lines += ["## Result", "",
                   f"**sigma_fid(pp -> Z/gamma* -> mu mu; dressed, pT > 26/20 GeV, |eta| < 2.4, 60 < m < 120 GeV) = "
                   f"{fit['sigma_fid_pb']:.1f} +- {fit['sigma_fid_stat_pb']:.1f} (stat) +- {fit['sigma_fid_syst_pb']:.1f} (syst) +- {fit['sigma_fid_lumi_pb']:.1f} (lumi) pb**", "",
-                  f"mu_Z = {fit['mu']:.4f} +{fit['mu_err_up']:.4f} -{fit['mu_err_down']:.4f}; goodness of fit p = {fit['gof']['gof_probability']}", "",
+                  f"mu_Z = {fit['mu']:.4f} +{fit['mu_err_up']:.4f} -{fit['mu_err_down']:.4f}; goodness of fit p = {fit['gof']['gof_probability']}; "
+                  f"signal region in {fit['meta'].get('sr_bin_width_gev', 2)} GeV bins", "",
+                  "The statistical uncertainty is the data one; the effective statistical limit of the fit is the MC "
+                  "statistics (gammas, see the breakdown), not the data.", "",
                   f"| quantity | value |", "|---|---:|",
                   f"| sigma(Z/gamma* -> mu mu, 60 < m < 120 GeV), A = {fit['A_60_120']:.4f} | {fit['sigma_60_120_pb']:.0f} +- {fit['sigma_60_120_tot_pb']:.0f} pb |",
                   f"| sigma(Z/gamma* -> mu mu, m > 50 GeV), A = {fit['A_m50']:.4f} | {fit['sigma_m50_pb']:.0f} +- {fit['sigma_m50_tot_pb']:.0f} pb |",
@@ -63,15 +104,27 @@ def main():
                   "## Uncertainty breakdown (impact on mu_Z, from the grouped-impact fit)", "", "| group | relative |", "|---|---:|"]
         for k, v in sorted(fit["grouped_impacts_mu"].items(), key=lambda kv: -kv[1]):
             lines.append(f"| {k} | {100*v:.3f}% |")
-        lines += [f"| statistical (stat-only fit) | {100*fit['mu_stat_only_fit']:.3f}% |", ""]
+        lines += [f"| statistical (stat-only fit) | {100*fit['mu_stat_only_fit']:.3f}% |", "",
+                  f"Luminosity quoted as the external {100*fit['mu_lumi']:.1f}% (profiled impact {100*fit['mu_lumi_profiled']:.3f}%).", ""]
+        if stab:
+            lines += ["## Stability of mu_Z against the fit configuration (scripts/v2_5_fit_variants.py)", "",
+                      "| configuration | mu_Z | GoF p | notable pulls (constraint) |", "|---|---:|---:|---|"]
+            for x in stab:
+                lines.append(f"| {x['label']} | {x['mu']:.4f} +{x['err_up']:.4f} -{x['err_down']:.4f} | {x['gof_p']} | {'; '.join(x['notable'][:5])} |")
+            mus = [x["mu"] for x in stab]
+            lines += ["", f"Spread of mu_Z over the variants: {min(mus):.4f} - {max(mus):.4f} (half-spread {50*(max(mus)-min(mus)):.2f}%).", ""]
         lines += ["## Leading nuisance parameters (ranking)", "", "| NP | pull | constraint | +impact | -impact |", "|---|---:|---:|---:|---:|"]
         for r in fit["ranking"][:12]:
             lines.append(f"| {r['name']} | {r['pull']:+.2f} | {0.5*(r['err_up']+r['err_down']):.2f} | {100*r['dpoi_up_post']:+.3f}% | {100*r['dpoi_down_post']:+.3f}% |")
         lines.append("")
-    lines += ["## Yields (mass_fit templates, prompt-prompt MC + data-driven fakes)", "", "| region | sample | events |", "|---|---|---:|"]
+    lines += ["## Yields (mass_fit templates; SR/SS: prompt-prompt MC + data-driven fakes; e-mu regions: all MC)", "",
+              "| region | sample | events |", "|---|---|---:|"]
     for region, d in yields.items():
         for smp, n in sorted(d.items(), key=lambda kv: -kv[1]):
+            if smp in NOT_IN_FIT and not (smp == "WJets" and region in ("CRemu", "SSemu")):
+                continue
             lines.append(f"| {region} | {smp} | {n:,.1f} |")
+    lines += ["", "Not listed: " + "; ".join(f"`{k}` ({v})" for k, v in NOT_IN_FIT.items()) + "."]
     if fakes_res:
         y = fakes_res["yields"]; c = fakes_res["closure"]
         lines += ["", "## Fake factor", "", f"SR non-prompt estimate {y['sr_fakes']:.0f} +- {y['sr_fakes_stat']:.0f} (stat); method uncertainty {100*y['method_rel_unc']:.0f}% (largest: {y['method_worst']}).",

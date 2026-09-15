@@ -24,10 +24,10 @@ import numpy as np
 from zmumu import batch, config, histograms as H, momentum, pileup, samples, skim, tnp, weights
 
 OUT = config.OUTPUT_DIR / "v2"
-BRANCHES = ["run", "event", "PV_npvsGood", "MET_pt", "HLT_IsoMu24", "HLT_IsoTkMu24", "Muon_*", "TrigObj_*",
-            "Flag_*", "FsrPhoton_*", "Jet_pt", "Jet_eta", "Jet_jetId", "Electron_*", "genWeight", "Pileup_nTrueInt",
-            "L1PreFiringWeight_*", "skim_cat", "skim_prescale", "gen_lhe_flavour", "LHEPdfWeight", "LHEScaleWeight",
-            "PSWeight"]
+BRANCHES = ["run", "event", "PV_npvsGood", "MET_pt", "PuppiMET_pt", "HLT_IsoMu24", "HLT_IsoTkMu24", "Muon_*", "TrigObj_*",
+            "Flag_*", "FsrPhoton_*", "Jet_pt", "Jet_eta", "Jet_phi", "Jet_jetId", "Electron_*", "genWeight", "Pileup_nTrueInt",
+            "L1PreFiringWeight_*", "skim_cat", "skim_prescale", "gen_lhe_flavour", "gen_mll_lhe", "gen_fid_dressed",
+            "LHEPdfWeight", "LHEScaleWeight", "PSWeight"]
 
 
 class _FixedWeighter(weights.Weighter):
@@ -119,7 +119,7 @@ def main():
         smp, region, var, variation = k.split("|")[:4]
         if var == "mass_fit" and variation == "nominal" and not k.endswith("|w2"):
             yields[(region, smp)] = float(np.sum(v))
-    for region in ("SR", "SS", "CRemu"):
+    for region in ("SR", "SS", "CRemu", "SSemu"):
         print(f"  {region}: " + ", ".join(f"{s} {yields[(r, s)]:,.1f}" for (r, s) in sorted(yields) if r == region))
     print(f"[hist] wrote {OUT / 'histograms.pkl'} ({len(total)} histograms)")
 

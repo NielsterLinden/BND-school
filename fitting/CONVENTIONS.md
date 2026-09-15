@@ -52,7 +52,7 @@ which the config in `fitting/trexconfig.py` maps onto exactly these names. Rules
 | `L1Prefiring` | HISTO | yes | L1 prefiring |
 | `XS_TTbar` 6 %, `XS_SingleTop` 10 %, `XS_WW` 10 %, `XS_WZ` 10 %, `XS_ZZ` 10 %, `XS_DYtautau` 5 % | OVERALL | yes | Background normalisation |
 | `PDF`, `QCDScale`, `PS_ISR`, `PS_FSR`, `SigModel` | HISTO on the DY samples (vary the C factor only: renormalised to a constant fiducial yield) | yes | Signal modelling |
-| `MuonID`, `MuonIso`, `MuonTrigger`, `MuonReco` (OVERALL 0.4 %), `MuonScale`, `MuonRes` | HISTO/OVERALL | yes between channels that use muons (μμ, μτ_h) | Muon efficiency / Muon momentum |
+| `MuonID`, `MuonIso`, `MuonTrigger`, `MuonReco` (OVERALL 0.4 % per muon, correlated: 0.8 % per event in μμ), `MuonScale`, `MuonRes` | HISTO/OVERALL | yes between channels that use muons (μμ, μτ_h) | Muon efficiency / Muon momentum |
 | `ElectronID`, `ElectronReco`, `ElectronTrigger`, `ElectronScale` | | yes between channels that use electrons | Electron efficiency / Electron energy |
 | `TauID_DM0/1/10/11`, `TauTrigger_DM*`, `TauES_DM*`, `TauFakeEle`, `TauFakeMu` | HISTO | ττ only (would be shared with eτh/μτh) | Tau (SubCategory Tau ID / Tau trigger / Tau energy scale) |
 | `MET_Unclustered` | HISTO (shape) | channels that use MET | MET |

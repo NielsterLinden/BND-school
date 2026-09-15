@@ -5,9 +5,15 @@ One pass per skim file (scripts/v2_4_histograms.py) fills numpy histograms keyed
 merged over files with zmumu.batch. The fit templates are the `mass_fit` histograms of the
 `SR` and `CRemu` regions; everything else is for the data/MC comparison plots.
 
-MC enters the SR/SS/CRemu only with *prompt* leptons (genPartFlav 1 or 15); non-prompt muons
-are estimated from data with the fake factor (zmumu.fakes). DY_NLO is split by LHE flavour
-into DYmumu / DYee / DYtautau. DY_powheg (raw generator weights) provides the SigModel template.
+MC enters the SR/SS only with *prompt* muons (genPartFlav 1 or 15); non-prompt muons are
+estimated from data with the fake factor (zmumu.fakes). In the e-mu regions (CRemu, SSemu)
+*all* MC events are kept: nothing data-driven replaces the non-prompt electrons there
+(W+jets jet -> e, Z -> mumu + conversion, Z -> tautau tau_h -> e, top b -> e), which are 9% of
+the OS e-mu region -- see REVIEW.md F1. DY_NLO is split by LHE flavour into DYmumu / DYee /
+DYtautau. DY_powheg (raw generator weights) provides the SigModel template; for that
+comparison the DYmumu nominal is also filled with the powheg generator window
+50 < m_LHE < 120 GeV ("lhe50120") together with the fiducial sums needed to normalise it.
+Jets are lepton-cleaned (dR > 0.4 to the selected leptons).
 
 Variations filled for MC: nominal, PileupUp/Down, L1PrefiringUp/Down, MuonID/MuonIso/
 MuonTriggerUp/Down (scale factors), MuonScaleUp/Down and MuonResUp/Down (re-selection with
@@ -23,15 +29,17 @@ import numpy as np
 from . import config, regions
 
 VARIABLES = {
-    "mass_fit": (30, 60.0, 120.0), "mass_fine": (120, 60.0, 120.0),
+    "mass_fit": (60, 60.0, 120.0), "mass_fine": (120, 60.0, 120.0),
     "pt1": (36, 20.0, 200.0), "pt2": (36, 20.0, 200.0), "eta1": (24, -2.4, 2.4), "eta2": (24, -2.4, 2.4),
     "phi1": (16, -np.pi, np.pi), "zpt": (40, 0.0, 200.0), "zy": (24, -2.4, 2.4), "npv": (50, 0.0, 50.0),
-    "met": (30, 0.0, 150.0), "njet": (8, 0.0, 8.0), "iso1": (30, 0.0, 0.15), "iso2": (30, 0.0, 0.15),
+    "met": (30, 0.0, 150.0), "puppimet": (30, 0.0, 150.0), "njet": (8, 0.0, 8.0), "iso1": (30, 0.0, 0.15), "iso2": (30, 0.0, 0.15),
     "nfsr": (4, 0.0, 4.0),
 }
 CREMU_MASS_FIT = (12, 60.0, 120.0)
-REGION_VARS = {"SR": list(VARIABLES), "SS": ["mass_fit", "mass_fine", "pt1", "pt2"],
-               "CRemu": ["mass_fit", "mass_fine", "pt1", "pt_el", "met", "njet", "npv"]}
+EMU_VARS = ["mass_fit", "mass_fine", "pt1", "pt_el", "met", "puppimet", "njet", "npv"]
+REGION_VARS = {"SR": list(VARIABLES), "SS": ["mass_fit", "mass_fine", "pt1", "pt2"], "CRemu": EMU_VARS, "SSemu": EMU_VARS}
+EMU_REGIONS = ("CRemu", "SSemu")
+LHE_WINDOW = (50.0, 120.0)        # generator cut of the powheg ZToMuMu_M-50To120 sample
 WEIGHT_VARIATIONS = ["PileupUp", "PileupDown", "L1PrefiringUp", "L1PrefiringDown",
                      "MuonIDUp", "MuonIDDown", "MuonIsoUp", "MuonIsoDown", "MuonTriggerUp", "MuonTriggerDown"]
 PT_VARIATIONS = ["MuonScaleUp", "MuonScaleDown", "MuonResUp", "MuonResDown"]
@@ -40,7 +48,7 @@ FLAVOUR_SAMPLE = {13: "DYmumu", 11: "DYee", 15: "DYtautau"}
 
 
 def edges(region, var):
-    if var == "mass_fit" and region == "CRemu":
+    if var == "mass_fit" and region in EMU_REGIONS:
         n, lo, hi = CREMU_MASS_FIT
     elif var == "pt_el":
         n, lo, hi = 36, 20.0, 200.0
@@ -57,13 +65,13 @@ def _fill(out, key, x, w, e):
 
 def _region_values(region, d, ev_idx_arrays):
     """Variable -> per-event array for a region selection dict `d`."""
-    npv, met, njet, nfsr = ev_idx_arrays
+    npv, met, puppimet, njet, nfsr = ev_idx_arrays
     vals = {"mass_fit": d["mass"], "mass_fine": d["mass"], "pt1": d.get("pt1"), "npv": npv[d["idx"]],
-            "met": met[d["idx"]], "njet": njet[d["idx"]]}
+            "met": met[d["idx"]], "puppimet": puppimet[d["idx"]], "njet": njet[d["idx"]]}
     if region in ("SR", "SS"):
         vals.update(pt2=d["pt2"], eta1=d["eta1"], eta2=d["eta2"], phi1=d["phi1"], zpt=d["zpt"], zy=d["zy"],
                     iso1=d["iso1"], iso2=d["iso2"], nfsr=nfsr[d["idx"]])
-    if region == "CRemu":
+    if region in EMU_REGIONS:
         vals["pt_el"] = d["pt_el"]
     return vals
 
@@ -80,9 +88,10 @@ def fill_chunk(ev, out, key, is_mc, weighter=None, sf=None, calib=None, split_fl
     n = len(ev)
     npv = np.asarray(ev.PV_npvsGood, dtype=float)
     met = np.asarray(ev.MET_pt, dtype=float)
-    njet = np.asarray(ak.sum((ev.Jet_pt > 30) & (abs(ev.Jet_eta) < 2.4) & (ev.Jet_jetId >= 2), axis=1), dtype=float)
+    puppimet = np.asarray(ev.PuppiMET_pt, dtype=float)
+    njet = regions.clean_jet_count(ev, regions.muon_masks(ev))
     nfsr = np.asarray(ak.num(ev.FsrPhoton_pt, axis=1), dtype=float)
-    extras = (npv, met, njet, nfsr)
+    extras = (npv, met, puppimet, njet, nfsr)
 
     if is_mc:
         pieces = weighter.pieces(ev)
@@ -94,7 +103,11 @@ def fill_chunk(ev, out, key, is_mc, weighter=None, sf=None, calib=None, split_fl
             "L1PrefiringDown": pieces["gen"] * pieces["pu"] * pieces["pref_down"],
         }
         flav = np.asarray(ev.gen_lhe_flavour) if split_flavour else None
-        prompt_mu = regions.is_prompt(ev.Muon_genPartFlav)
+        in_window = fid = None
+        if "gen_mll_lhe" in ak.fields(ev):
+            m_lhe = np.asarray(ev.gen_mll_lhe, dtype=float)
+            in_window = (m_lhe > LHE_WINDOW[0]) & (m_lhe < LHE_WINDOW[1])
+            fid = np.asarray(ev.gen_fid_dressed, dtype=bool)
     else:
         base = np.asarray(ev.skim_prescale, dtype=float)
         wvar, flav = {}, None
@@ -117,6 +130,7 @@ def fill_chunk(ev, out, key, is_mc, weighter=None, sf=None, calib=None, split_fl
         ones = np.ones(n, dtype=bool)
         sels = regions.dimuon_regions(e, masks, matched, ones)
         sels["CRemu"] = regions.emu_region(e, masks, matched, ones)
+        sels["SSemu"] = regions.emu_region(e, masks, matched, ones, same_sign=True)
         for region, d in sels.items():
             if d is None or len(d["idx"]) == 0:
                 continue
@@ -124,13 +138,11 @@ def fill_chunk(ev, out, key, is_mc, weighter=None, sf=None, calib=None, split_fl
             w0 = base[idx]
             pp = np.ones(len(idx), dtype=bool)
             if is_mc:
-                if region == "CRemu":
-                    pp = regions.is_prompt(d["flav1"]) & regions.is_prompt(d["flav_el"])
-                else:
+                if region not in EMU_REGIONS:       # e-mu regions keep the non-prompt MC (no replacement exists)
                     pp = regions.is_prompt(d["flav1"]) & regions.is_prompt(d["flav2"])
                 w0 = np.where(pp, w0, 0.0)
                 if sf is not None:
-                    sfw = (sf.single_muon_weights(d["pt1"], d["eta1"]) if region == "CRemu"
+                    sfw = (sf.single_muon_weights(d["pt1"], d["eta1"]) if region in EMU_REGIONS
                            else sf.event_weights(d["pt1"], d["eta1"], d["pt2"], d["eta2"]))
                 else:
                     sfw = {"nominal": np.ones(len(idx))}
@@ -146,6 +158,14 @@ def fill_chunk(ev, out, key, is_mc, weighter=None, sf=None, calib=None, split_fl
                     continue
                 for var in REGION_VARS[region]:
                     _fill(out, f"{smp}|{region}|{var}|nominal", values[var][m], (w0 * sfw["nominal"])[m], edges(region, var))
+                if is_mc and smp == "DYmumu" and region == "SR" and in_window is not None:
+                    # nominal restricted to the powheg generator window, and the fiducial sums (all / in window)
+                    wn = (w0 * sfw["nominal"])[m]
+                    for var in ("mass_fit", "mass_fine"):
+                        _fill(out, f"{smp}|{region}|{var}|lhe50120", values[var][m], wn * in_window[idx][m], edges(region, var))
+                    f_ = fid[idx][m]
+                    _fill(out, f"{smp}|{region}|fidsum|all", np.full(int(f_.sum()), 0.5), wn[f_], np.array([0.0, 1.0]))
+                    _fill(out, f"{smp}|{region}|fidsum|lhe50120", np.full(int(f_.sum()), 0.5), (wn * in_window[idx][m])[f_], np.array([0.0, 1.0]))
                 if not (is_mc and variations):
                     continue
                 for var in ("mass_fit", "mass_fine"):

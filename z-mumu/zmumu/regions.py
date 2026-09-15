@@ -16,6 +16,7 @@ Regions (all after MET filters and PV_npvsGood >= 1; masses are FSR-recovered):
     CRemu   exactly one tight muon (pT > 26, matched), no other tight/anti muon, exactly one
             electron (pT > 20, |eta| < 2.5, cutBased >= 3, not in the barrel-endcap gap), OS,
             60 < m(e mu) < 120
+    SSemu   same, same-sign (non-prompt-electron check: W+jets, conversions)
     FFapp   exactly one tight (pT > 26, matched) and exactly one anti muon, no other tight, OS,
             60 < m < 120    (fake-factor application region; SS variant for the closure)
 """
@@ -156,8 +157,9 @@ def ff_application(ev, masks, matched, clean):
     return out
 
 
-def emu_region(ev, masks, matched, clean):
-    """One tight trigger-matched muon (pT > 26), no other tight/anti muon, one electron, OS."""
+def emu_region(ev, masks, matched, clean, same_sign=False):
+    """One tight trigger-matched muon (pT > 26), no other tight/anti muon, one electron, OS
+    (or SS with `same_sign`)."""
     tight, anti = masks["tight"], masks["anti"]
     el = electron_mask(ev)
     n_t = ak.to_numpy(ak.sum(tight, axis=1))
@@ -183,7 +185,8 @@ def emu_region(ev, masks, matched, clean):
     px1, py1, pz1, e1 = objects.p4(mu_pt, mu_eta, mu_phi, mu_m)
     px2, py2, pz2, e2 = objects.p4(el_pt, el_eta, el_phi, el_m)
     mass = objects.invariant_mass(px1 + px2, py1 + py2, pz1 + pz2, e1 + e2)
-    sel = ((mu_pt > config.MU_PT_LEAD) & mu_match & (mu_q * el_q < 0)
+    charge = (mu_q * el_q > 0) if same_sign else (mu_q * el_q < 0)
+    sel = ((mu_pt > config.MU_PT_LEAD) & mu_match & charge
            & (mass > config.MASS_LO) & (mass < config.MASS_HI))
     out = {"idx": idx[sel], "pt1": mu_pt[sel], "eta1": mu_eta[sel], "pt_el": el_pt[sel], "eta_el": el_eta[sel],
            "mass": mass[sel], "match1": mu_match[sel]}
@@ -191,6 +194,20 @@ def emu_region(ev, masks, matched, clean):
         out["flav1"] = ak.to_numpy(ak.flatten(sub.Muon_genPartFlav[t]))[sel]
         out["flav_el"] = ak.to_numpy(ak.flatten(sub.Electron_genPartFlav[e]))[sel]
     return out
+
+
+def clean_jet_count(ev, masks, pt_min=30.0, eta_max=2.4, dr=0.4):
+    """Per-event number of jets (pT > 30, |eta| < 2.4, tight jet ID) with dR > 0.4 to every
+    tight/anti-tight muon and every selected electron (the leptons of all regions)."""
+    jet = (ev.Jet_pt > pt_min) & (abs(ev.Jet_eta) < eta_max) & (ev.Jet_jetId >= 2)
+    lep = masks["tight"] | masks["anti"]
+    el = electron_mask(ev)
+    lep_eta = ak.concatenate([ev.Muon_eta[lep], ev.Electron_eta[el]], axis=1)
+    lep_phi = ak.concatenate([ev.Muon_phi[lep], ev.Electron_phi[el]], axis=1)
+    j, l = ak.unzip(ak.cartesian([ak.zip({"eta": ev.Jet_eta, "phi": ev.Jet_phi}),
+                                  ak.zip({"eta": lep_eta, "phi": lep_phi})], axis=1, nested=True))
+    near = ak.any(objects.delta_r(j.eta, j.phi, l.eta, l.phi) < dr, axis=2)
+    return np.asarray(ak.sum(jet & ~near, axis=1), dtype=float)
 
 
 def is_prompt(flav):

@@ -23,7 +23,7 @@ import numpy as np  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from ztautau import analysis, config, samples  # noqa: E402
+from ztautau import analysis, config, plotting, samples  # noqa: E402
 
 NOMINAL = "mcsub" if config.FF_SUBTRACT_MC else "nosub"
 OTHER = "nosub" if NOMINAL == "mcsub" else "mcsub"
@@ -195,6 +195,7 @@ def main():
     ax.set_yticks([])
     ax.set_xlabel(r"$\sigma(pp\rightarrow Z/\gamma^*\rightarrow\tau\tau)$, $60<m<120$ GeV [pb]")
     ax.set_title(r"Z$\rightarrow\tau_h\tau_h$, CMS Open Data 2016 G+H, 16.4 fb$^{-1}$ (red: stat.)", fontsize=11)
+    plotting.fig_tag(fig)
     fig.savefig(config.PLOT_DIR / "step6_summary.png", bbox_inches="tight", dpi=130)
     fig.savefig(config.PLOT_DIR / "step6_summary.pdf", bbox_inches="tight")
     plt.close(fig)
@@ -208,6 +209,7 @@ def main():
         ax.text(100 * val + 0.2, i, f"{100 * val:.1f}%", va="center", fontsize=9)
     ax.set_xlabel(r"impact on $\mu_Z$ [%]")
     ax.set_title(f"Grouped uncertainties ({LABEL[NOMINAL]})", fontsize=11)
+    plotting.fig_tag(fig)
     fig.savefig(config.PLOT_DIR / "step6_impacts.png", bbox_inches="tight", dpi=130)
     fig.savefig(config.PLOT_DIR / "step6_impacts.pdf", bbox_inches="tight")
     plt.close(fig)

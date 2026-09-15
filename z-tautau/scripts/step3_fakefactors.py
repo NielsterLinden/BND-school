@@ -180,6 +180,7 @@ def main():
             ax.set_xlabel(r"$p_T(\tau_1)$ [GeV] (last bin: > 80)", fontsize=13)
             if e == 0 and i == 0:
                 ax.legend(fontsize=12, title="filled: MC subtracted (nominal), open: no subtraction", title_fontsize=11)
+    plotting.fig_tag(fig)
     fig.savefig(config.PLOT_DIR / "step3_fakefactors.png", bbox_inches="tight", dpi=90)
     fig.savefig(config.PLOT_DIR / "step3_fakefactors.pdf", bbox_inches="tight")
     plt.close(fig)
@@ -196,6 +197,7 @@ def main():
         ax.legend(fontsize=9)
     fig.suptitle("factorised closure corrections of the fake factor")
     fig.tight_layout()
+    plotting.fig_tag(fig)
     fig.savefig(config.PLOT_DIR / "step3_closure_corrections.png", bbox_inches="tight", dpi=110)
     fig.savefig(config.PLOT_DIR / "step3_closure_corrections.pdf", bbox_inches="tight")
     plt.close(fig)

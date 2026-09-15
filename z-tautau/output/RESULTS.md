@@ -29,33 +29,6 @@ Grouped impacts on mu_Z:
 | Pileup | 0.0055 |
 | L1 prefiring | 0.0018 |
 
-## FF without MC subtraction (cross-check) (cross-check)
-
-| quantity | value |
-|---|---|
-| mu_Z | 1.166 +0.142 -0.124 (stat 0.020, syst 0.132) |
-| expected (Asimov) | +0.120 -0.103 |
-| sigma_fid (tau_h tau_h, vis pT > 40, abs(eta) < 2.1, 60 < m < 120) | 5.247 +- 0.090 (stat) +- 0.592 (syst) pb  (pred. 4.501) |
-| sigma(pp -> Z/gamma* -> tautau, 60 < m < 120) | 2267 +- 39 (stat) +- 256 (syst) +- 83 (acc) pb  (pred. 1945) |
-| goodness of fit (saturated) | p = 0.163518 |
-
-Grouped impacts on mu_Z:
-
-| group | impact |
-|---|---|
-| FullSyst | 0.1311 |
-| Tau ID | 0.1091 |
-| Fakes | 0.0832 |
-| Gammas | 0.0434 |
-| Tau trigger | 0.0403 |
-| Tau energy scale | 0.0188 |
-| Signal modelling | 0.0178 |
-| Background normalisation | 0.0162 |
-| MET | 0.0100 |
-| Luminosity | 0.0098 |
-| Pileup | 0.0085 |
-| L1 prefiring | 0.0017 |
-
 Working point: DeepTau VSjet Tight on both legs.
 
 ## Prefit yields per BDT category (nominal)

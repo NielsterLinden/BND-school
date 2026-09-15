@@ -20,8 +20,8 @@ parses with `fitting/run_trex.py`), `scripts/step6_report.py`. Numbers: `output/
 * Nuisance parameters: `07-corrections-and-systematics.md` (39 NPs). Per-bin γ for the MC and fake-template
   statistics (the `Fakes` variance includes the FF statistics; W+jets has no per-bin γ: its statistical
   uncertainty is one normalisation parameter). Shape variations of τ ES and MET use TRExFitter smoothing (`Smoothing: 40`).
-* Runs: `h w f d p i r` on data, stat-only (`StatOnly=TRUE`), Asimov (`FitBlind=TRUE`), for both
-  fake-factor variants.
+* Runs: `h w f d p i r` on data, stat-only (`StatOnly=TRUE`), Asimov (`FitBlind=TRUE`). The unsubtracted
+  fake-factor cross-check is not produced by default (`step3_fakefactors.py --with-nosub`, `--ff-variant nosub` in steps 4/5).
 
 ## Result (v3 nominal: DeepTau Tight on both legs, MC-subtracted, closure-corrected fake factor)
 

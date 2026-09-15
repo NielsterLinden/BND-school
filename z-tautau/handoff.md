@@ -80,7 +80,12 @@ cd z-tautau
 source ../setup.sh
 python run_all.py --from 3        # from the ntuples: FF, BDT, histograms, fits, report (~25 min)
 python run_all.py                 # from NanoAOD: ~2 h
+rm -f slides/figs/*; python slides/make_figures.py      # slide figures (dark, vector) from the outputs above
+env -u PYTHONPATH -u LD_LIBRARY_PATH -u PYTHONHOME <betterplottingtool venv>/bin/python slides/build_deck.py   # the deck
 ```
+
+Every plot (`output/plots/`, `slides/figs/`) carries the stamp `v3: DeepTau Tight τh` (`config.PLOT_TAG`) and every
+slide a `v3 | DeepTau Tight` footer, so figures of different versions or working points cannot be mixed up.
 
 ## Results so far
 

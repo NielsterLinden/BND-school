@@ -21,7 +21,9 @@ EXTERNAL_DIR = CHANNEL_DIR / "external"                     # small, committed P
 # docs/08). BND_TAUTAU_WP=<other WP> runs the whole chain from step 3 with that working point and the
 # matching TauPOG ID and trigger scale factors into variants/<wp>/{output,fit} and a separate BDT.
 NOMINAL_WP = "Tight"
+VERSION = "v3"                        # analysis version stamped on every plot (with the working point)
 TAU_WP = os.environ.get("BND_TAUTAU_WP", NOMINAL_WP)
+PLOT_TAG = f"{VERSION}: DeepTau {TAU_WP} " + r"$\tau_h$"   # drawn by plotting.label on every figure
 _VARIANT = CHANNEL_DIR if TAU_WP == NOMINAL_WP else CHANNEL_DIR / "variants" / TAU_WP.lower()
 OUTPUT_DIR = _VARIANT / "output"
 PLOT_DIR = OUTPUT_DIR / "plots"

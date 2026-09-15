@@ -54,6 +54,7 @@ def dark_fig(figsize=(7, 4.4)):
     fig, ax = plt.subplots(figsize=figsize)
     for sp in ("top", "right"):
         ax.spines[sp].set_visible(False)
+    plotting.tag(ax, x=1.0, y=1.01, ha="right", va="bottom", color=DARK_FG, fontsize=10)   # version + working point
     return fig, ax
 
 
@@ -265,16 +266,18 @@ def ff_figures():
         ax.set_title(f"Run2016{era}, decay mode 1", fontsize=11, color=DARK_FG); ax.set_xlabel(r"$p_T(\tau_1)$ [GeV]  (last bin > 80)")
         ax.tick_params(colors=DARK_FG); [sp.set_color(DARK_FG) for sp in ax.spines.values()]
     axes[0].set_ylabel("fake factor"); axes[0].legend(fontsize=9, frameon=False)
-    fig.patch.set_facecolor(DARK_BG); save(fig, FIGS / "ff_dm1", dark=True); plt.close(fig)
+    fig.patch.set_facecolor(DARK_BG); plotting.fig_tag(fig, dark=True); save(fig, FIGS / "ff_dm1", dark=True); plt.close(fig)
     # closure corrections
     fig, axes = plt.subplots(1, 2, figsize=(10, 3.6))
     for ax, (var, xl) in zip(axes, (("eta", r"$|\eta(\tau_1)|$"), ("pt2", r"$p_T(\tau_2)$ [GeV] (last bin: > 80)"))):
         ax.set_facecolor(DARK_BG); ax.tick_params(colors=DARK_FG); [sp.set_color(DARK_FG) for sp in ax.spines.values()]
         for variant, col, lab in ((NOM, BLUE, "MC subtracted (nominal)"), ("nosub", MUTED, "no subtraction")):
+            if variant not in FF:          # the unsubtracted cross-check is only produced on request (step 3 --with-nosub)
+                continue
             c = FF[variant]["ff"]["closure"][var]; ed = np.asarray(c["edges"]); ed[-1] = min(ed[-1], 120.0)
             ax.errorbar(0.5 * (ed[1:] + ed[:-1]), c["values"], yerr=c["err"], xerr=np.diff(ed) / 2, fmt="o", color=col, label=lab)
         ax.axhline(1, color=MUTED, lw=0.8); ax.set_xlabel(xl); ax.set_ylabel("same-sign obs / FF prediction"); ax.set_ylim(0.8, 1.2); ax.legend(fontsize=9, frameon=False)
-    fig.patch.set_facecolor(DARK_BG); fig.tight_layout(); save(fig, FIGS / "closure_corrections", dark=True); plt.close(fig)
+    fig.patch.set_facecolor(DARK_BG); fig.tight_layout(); plotting.fig_tag(fig, dark=True); save(fig, FIGS / "closure_corrections", dark=True); plt.close(fig)
     # closure before / after in eta(tau1), pT(tau2), N_jets, m_tt
     for var, xl in (("t1_eta", r"$\eta(\tau_1)$"), ("t2_pt", r"$p_T(\tau_2)$ [GeV]"), ("njets", r"$N_{jets}$"), ("m_tt", r"$m_{\tau\tau}$ [GeV]")):
         c = FF[NOM]["closure"][var]; ed = np.asarray(c["edges"]); obs = np.asarray(c["obs"], float)

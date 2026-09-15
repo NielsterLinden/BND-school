@@ -48,6 +48,18 @@ def label(ax, extra: str | None = None, color="black"):
             va="bottom", color=color)
     if extra:
         ax.text(0.04, 0.95, extra, transform=ax.transAxes, fontsize=15, va="top", color=color)
+    tag(ax, y=0.905 if extra else 0.95, color=color)
+
+
+def tag(ax, y=0.95, x=0.04, color="black", fontsize=11.5, ha="left", va="top"):
+    """Version + working-point stamp (config.PLOT_TAG) so every figure says which analysis it comes from."""
+    muted = "#99999E" if color != "black" else "#555555"
+    ax.text(x, y, config.PLOT_TAG, transform=ax.transAxes, fontsize=fontsize, va=va, ha=ha, color=muted)
+
+
+def fig_tag(fig, dark=False, fontsize=10):
+    """The same stamp in the top-right corner of a figure with several axes (or no stack_plot header)."""
+    fig.text(0.995, 0.995, config.PLOT_TAG, ha="right", va="top", fontsize=fontsize, color="#99999E" if dark else "#555555")
 
 
 def stack_plot(path, edges, data, stack, xlabel, title=None, logy=False, band=None, ratio_range=(0.5, 1.5),

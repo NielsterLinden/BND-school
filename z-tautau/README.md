@@ -56,7 +56,7 @@ fit/ztautau*.config       generated TRExFitter configs (committed); fit/bdt_info
 output/plots/             all plots (PNG committed): step3_* fake factors, step3b_* BDT, step4_* control plots, fit_* TRExFitter, step6_* summary
 output/RESULTS.md, results.json   the numbers
 docs/                     physics documentation, read 00-overview.md first
-slides/                   the summary slide deck (PDF + LaTeX source)
+slides/                   the review deck: make_figures.py (dark vector figures -> figs/) + build_deck.py (PyMuPDF) -> ztautau_slides.pdf
 ```
 
 ## Documentation

@@ -76,7 +76,10 @@ BND_TAUTAU_WP=Medium python run_all.py --from 3        # the same chain with ano
 4. **uproot ≥ 5.6 writes `f["name"] = {dict}` as an RNTuple**, which `.arrays(library="np")` cannot read
    back. Write trees with `f.mktree(name, dict_of_arrays)` (this also fills the first chunk).
 5. **mplhep 1.1 label helpers (`hep.cms.label/text`) crash with the LCG_110 matplotlib** at draw time; use
-   `plotting.label`.
+   `plotting.label`. Every figure carries the stamp `config.PLOT_TAG` (`v3: DeepTau Tight τh`; `plotting.tag` /
+   `plotting.fig_tag`) so plots of different versions or working points cannot be confused; bump `config.VERSION`
+   when the result changes. The slide figures are rebuilt with `rm -f slides/figs/*; python slides/make_figures.py`
+   and the deck with `slides/build_deck.py` (PyMuPDF in the betterplottingtool venv, see its docstring).
 6. **dCache NFS**: stats and reads can hang or return EIO. Use `os.listdir` rather than per-file
    `exists()`, run every file in its own subprocess with a timeout (`batch.run_files`), fall back to EOS.
 7. A skim file whose events all fail the preselection has **no `Events` tree** (only `GenSums`); readers

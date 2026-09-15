@@ -165,6 +165,7 @@ def main():
         ax.axvline(e, color="grey", ls="--", lw=0.8)
     ax.set_xlabel("BDT score (held-out fold)"); ax.set_ylabel("normalised"); ax.legend(fontsize=9, frameon=False)
     ax.set_title(f"k-fold BDT: held-out AUC {np.mean(info['auc_test']):.3f}", fontsize=11)
+    plotting.fig_tag(fig)
     fig.savefig(config.PLOT_DIR / "step3b_bdt_score_shapes.png", bbox_inches="tight", dpi=120)
     fig.savefig(config.PLOT_DIR / "step3b_bdt_score_shapes.pdf", bbox_inches="tight")
     plt.close(fig)
@@ -173,6 +174,7 @@ def main():
     items = list(info["importance"].items())[::-1]
     ax.barh([k for k, _ in items], [v for _, v in items], color="#4a90d9")
     ax.set_xlabel("feature importance (gain, mean over folds)")
+    plotting.fig_tag(fig)
     fig.savefig(config.PLOT_DIR / "step3b_bdt_importance.png", bbox_inches="tight", dpi=120)
     fig.savefig(config.PLOT_DIR / "step3b_bdt_importance.pdf", bbox_inches="tight")
     plt.close(fig)

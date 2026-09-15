@@ -13,6 +13,7 @@ working-point comparison slide.
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -29,6 +30,8 @@ B = R["bdt"]; GI = FIT["grouped_impact"]
 H = json.loads((HERE / "history.json").read_text())      # v1, v2, v2.1 (Medium) numbers for the evolution slides
 MED = H["v2.1"]
 WP = R.get("tau_wp", "Tight")
+WPL = WP[0]                                              # T / M in the formulae
+VERSION = re.search(r'^VERSION = "(.+)"', (HERE.parent / "ztautau/config.py").read_text(), re.M).group(1)   # no LCG import in the venv
 
 
 def pm(v, up, dn, n=3):
@@ -40,7 +43,15 @@ MU = pm(FIT["mu"], FIT["mu_err_up"], FIT["mu_err_down"])
 
 
 class ZDeck(Deck):
-    """Deck + a text slide (title, bullet lines) and a two-column text/figure slide."""
+    """Deck + a text slide (title, bullet lines) and a two-column text/figure slide; every page carries a
+    version / working-point footer so it is clear which analysis the figures come from."""
+
+    FOOTER = f"{VERSION}  |  DeepTau {WP} on both taus  |  all figures from this version"
+
+    def _new(self):
+        p = super()._new()
+        self._text(p, self.M, self.s.page_h - 16 * self.k, self.FOOTER, 11 * self.k, self.s.muted, bold=False)
+        return p
 
     def bullets(self, title, lines, accent=None, size=15, x_frac=0.0, width_frac=1.0):
         p = self._new()
@@ -285,8 +296,8 @@ d.panels("Does the fake factor survive the score?  (validation)",
 # ---------------------------------------------------------------- 5. fakes
 d.divider(r"5.  Jet$\rightarrow\tau_h$ fakes")
 d.text_figures("The fake factor, MC subtracted and closure corrected",
-               [r"FF = [N(SS, $\tau_1$ M, $\tau_2$ M) - MC] / [N(SS, $\tau_1$ VVVL$\wedge\neg$M, $\tau_2$ M) - MC]",
-                r"$\times\ f(|\eta_1|)\,g(p_{T,2})$;  applied to OS events with $\tau_1$ failing Medium,",
+               [rf"FF = [N(SS, $\tau_1$ {WPL}, $\tau_2$ {WPL}) - MC] / [N(SS, $\tau_1$ VVVL$\wedge\neg${WPL}, $\tau_2$ {WPL}) - MC]",
+                rf"$\times\ f(|\eta_1|)\,g(p_{{T,2}})$;  applied to OS events with $\tau_1$ failing {WP},",
                 r"times $C_{OS/SS}$(era, $N_{jets}$) from the $\tau_2$-anti-isolated sideband.",
                 "",
                 "era x DM x N_jets x pT = 120 bins, ~10 % stat. each (per event into the template variance).",

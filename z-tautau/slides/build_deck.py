@@ -26,6 +26,7 @@ R = json.loads((HERE.parent / "output/results.json").read_text())
 FIT, FN = R["fit"]["mcsub"], R["fit"]["nosub"]
 Y = R["yields_prefit"]["mcsub"]; YR = R["yields_prefit_per_region"]
 B = R["bdt"]; GI = FIT["grouped_impact"]
+H = json.loads((HERE / "history.json").read_text())
 TIGHT = None
 tp = HERE.parent / "variants/tight/output/results.json"
 if tp.exists():
@@ -194,6 +195,52 @@ d.tables("Review findings and the v2 answers", [{
         ["v2.1 fake NPs pulled 0.6-1.5 sigma", "C_OS/SS per (era, N_jets, BDT category); SR0 fitted only above 110 GeV (fake sideband)", "pulls < 0.7 sigma"],
         ["5 eta(tau1) non-closure +-15 %", "diagnosed (FF depends on |eta|), corrected", "eta plots right"],
     ]}])
+
+d.text_figure("Evolution of the result: v1, v2, v2.1",
+              ["**v1 (reviewed)**", f"{H['v1']['what']}.  mu_Z = {H['v1']['mu']:.3f} +{H['v1']['up']:.3f} -{H['v1']['down']:.3f}, sigma = {H['v1']['sigma60']} pb, GoF p = {H['v1']['gof']:.2f}",
+               "", "**v2**", f"{H['v2']['what']}.  mu_Z = {H['v2']['mu']:.3f} +{H['v2']['up']:.3f} -{H['v2']['down']:.3f}, sigma = {H['v2']['sigma60']} pb, GoF p = {H['v2']['gof']:.3f}",
+               "", "**v2.1 (this result)**", f"C_OS/SS per BDT category, SR0 as fake sideband above 110 GeV.  mu_Z = {MU}, sigma = {s60['value']:.0f} pb, GoF p = {FIT['gof_probability']:.2f}",
+               "", "**Tight working point** (same v2.1 chain)", (f"mu_Z = {pm(TIGHT['fit']['mcsub']['mu'], TIGHT['fit']['mcsub']['mu_err_up'], TIGHT['fit']['mcsub']['mu_err_down'])}, sigma = {TIGHT['fit']['mcsub']['sigma_60_120_pb']['value']:.0f} pb, GoF p = {TIGHT['fit']['mcsub']['gof_probability']:.2f}" if TIGHT else ""),
+               "", "**Reading**", "The central value moved by +0.05 (MC subtraction) and -0.01 (per-category C); the uncertainty shrank from +19/-16 % to +12/-10 %, mostly by removing the LO-vs-NLO NP and adding MC statistics; the fit quality became acceptable once the fake-dominated category stopped being fitted under the peak."],
+              pdf("result_summary"), split=0.46)
+groups = ["Tau ID", "Fakes", "Gammas", "Tau trigger", "Tau energy scale", "Signal modelling", "Background normalisation", "MET", "Luminosity", "Pileup", "L1 prefiring"]
+tg = TIGHT["fit"]["mcsub"]["grouped_impact"] if TIGHT else {}
+rows = [[g, f"{H['v1']['impacts'].get(g, 0):.1f}", f"{H['v2']['impacts'].get(g, 0):.1f}", f"{100*GI.get(g, 0):.1f}", f"{100*tg.get(g, 0):.1f}" if TIGHT else "-"] for g in groups]
+rows.append(["data statistics", f"{100*H['v1']['stat']:.1f}", f"{100*H['v2']['stat']:.1f}", f"{100*FIT['mu_stat']:.1f}", f"{100*TIGHT['fit']['mcsub']['mu_stat']:.1f}" if TIGHT else "-"])
+rows.append(["total on mu_Z (+/-)", f"+{100*H['v1']['up']:.0f} / -{100*H['v1']['down']:.0f}", f"+{100*H['v2']['up']:.0f} / -{100*H['v2']['down']:.0f}", f"+{100*FIT['mu_err_up']:.0f} / -{100*FIT['mu_err_down']:.0f}", f"+{100*TIGHT['fit']['mcsub']['mu_err_up']:.0f} / -{100*TIGHT['fit']['mcsub']['mu_err_down']:.0f}" if TIGHT else "-"])
+rows.append(["goodness of fit p", f"{H['v1']['gof']:.2f}", f"{H['v2']['gof']:.3f}", f"{FIT['gof_probability']:.2f}", f"{TIGHT['fit']['mcsub']['gof_probability']:.2f}" if TIGHT else "-"])
+d.tables("Uncertainty budget across versions (impact on mu_Z in %)", [{"title": "grouped impacts; v1 'Signal modelling' was the LO-vs-NLO NP, v1 'Fakes' was under-estimated (one over-constrained NP)",
+    "headers": ["group", "v1", "v2", "v2.1 Medium", "v2.1 Tight"], "col_w": [300, 170, 170, 190, 190], "rows": rows}])
+v2p = H["v2"]["fake_pulls"]; cur = FIT["pulls"]
+def pull(d_, k):
+    v = d_.get(k); return f"{v[0]:+.2f} ({v[1]:.2f})" if v else "-"
+prow = [["FF OS/SS extrapolation (v2: one NP)", pull(v2p, "FakeOSSS_tautau"), "-"],
+        ["FF OS/SS SR0 / SR1 / SR2 (v2.1)", "-", " / ".join(pull(cur, f"FakeOSSS_tautau_c{k}") for k in range(3))],
+        ["FF non-closure SR1 m<110 / m>110", pull(v2p, "FakeClosure_tautau_c1_lo") + " / " + pull(v2p, "FakeClosure_tautau_c1_hi"), pull(cur, "FakeClosure_tautau_c1_lo") + " / " + pull(cur, "FakeClosure_tautau_c1_hi")],
+        ["FF non-closure SR2 m<110 / m>110", pull(v2p, "FakeClosure_tautau_c2_lo") + " / " + pull(v2p, "FakeClosure_tautau_c2_hi"), pull(cur, "FakeClosure_tautau_c2_lo") + " / " + pull(cur, "FakeClosure_tautau_c2_hi")],
+        ["FF non-closure SR0 m<110 / m>110", pull(v2p, "FakeClosure_tautau_c0_lo") + " / " + pull(v2p, "FakeClosure_tautau_c0_hi"), "not fitted / " + pull(cur, "FakeClosure_tautau_c0_hi")]]
+C = R["C_osss_per_category"]
+crow = [[f"category {k}", f"{R['fake_factors']['mcsub']['C_OS_SS_inclusive']:.3f} (inclusive)", f"{H['v2']['osss_sideband_check'][list(H['v2']['osss_sideband_check'])[k]]:.3f}",
+         " / ".join(f"{C[0][j][k]:.3f}" for j in range(3)), " / ".join(f"{C[1][j][k]:.3f}" for j in range(3))] for k in range(3)]
+d.tables("The fake-factor pulls: diagnosis and fix (v2 -> v2.1)", [
+    {"title": "pulls (post-fit constraint) of the fake nuisance parameters", "headers": ["parameter", "v2", "v2.1"], "col_w": [420, 300, 340], "rows": prow},
+    {"title": "diagnosis: tau2-anti-isolated sideband, observed / predicted with the inclusive C, and the per-category C now used (era G: 0 / 1 / >= 2 jets; era H)",
+     "headers": ["BDT category", "C used in v2", "sideband obs / pred (v2)", "C v2.1, Run2016G", "C v2.1, Run2016H"], "col_w": [220, 200, 240, 260, 260], "rows": crow}])
+d.bullets("How the issues were addressed, in one list",
+          ["**Reviewed (v1 -> v2)**",
+           "38 % of the signal template non-fiducial -> fiducial signal + non-fiducial DY background (5 % NP, theory variations on the ratio)",
+           "fake factor without MC subtraction (bias -0.05) -> MC-subtracted, W+jets with uniform weights; closure corrections in |eta(tau1)| (FF varies by +-15 %) and pT(tau2)",
+           "one over-constrained closure NP, FF statistics as 4 coherent NPs -> per-event FF statistics in the template variance, closure NPs per category and mass region",
+           "LO-vs-NLO 'SigModel' (7 %) correlated with mumu -> reported (fiducial C ratio 0.867), not fitted; NLO scales, PS, PDF",
+           "MC statistics 4.8 % -> DY 0J/1J/2J stitched per LHE_NpNLO (5x signal MC)",
+           "80 % fakes -> 5-fold XGBoost on mass-agnostic inputs, three categories, m_tautau fitted in each; FF closure in the score verified",
+           "wrong TRExFitter build (v1.10, StatAnalysis ROOT) -> submodule at v1.8.0, rebuilt against the LCG ROOT",
+           "",
+           "**Follow-up (v2 -> v2.1)**",
+           "fake NPs pulled 0.6-1.5 sigma -> the OS/SS charge correlation depends on the BDT topology: C per (era, N_jets, category), one NP per category",
+           "poor goodness of fit (p = 0.01) -> the fake-dominated category is a sideband: fitted above 110 GeV only (p = 0.22)",
+           "trigger paths and luminosity verified: both di-tau paths active and unprescaled in every certified lumisection; single-tau paths rejected (120 GeV threshold keeps 8 % of the signal, no POG scale factors)",
+           "Tight working point run through the same chain: +11/-10 % instead of +12/-10 %, closer to NNLO -> recommended next nominal"], size=13)
 
 # ---------------------------------------------------------------- 3. the fit
 d.divider("3.  The fit: three BDT categories")

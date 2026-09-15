@@ -90,12 +90,16 @@ def flow():
 
 # ------------------------------------------------------------------ 2. result summary and impacts
 def result_summary():
-    fig, ax = dark_fig((9, 4.2))
+    fig, ax = dark_fig((9, 5.4))
     pred = R["prediction"]["sigma_tautau_60_120_pb"]
     s = FIT["sigma_60_120_pb"]; sn = R["fit"]["nosub"]["sigma_60_120_pb"]
-    rows = [("v2 nominal (this result)", s["value"], s["stat"], s["err_down"], s["err_up"], BLUE),
-            ("v2, FF without MC subtraction", sn["value"], sn["stat"], sn["err_down"], sn["err_up"], MUTED),
-            ("v1 (reviewed)", 2255, 36, 315, 371, MUTED),
+    H = json.loads((HERE / "history.json").read_text())
+    tight = json.loads((HERE.parent / "variants/tight/output/results.json").read_text())["fit"]["mcsub"]["sigma_60_120_pb"]
+    rows = [("v2.1 nominal, Medium (this result)", s["value"], s["stat"], s["err_down"], s["err_up"], BLUE),
+            ("v2.1, DeepTau Tight (cross-check)", tight["value"], tight["stat"], tight["err_down"], tight["err_up"], ORANGE),
+            ("v2.1, FF without MC subtraction", sn["value"], sn["stat"], sn["err_down"], sn["err_up"], MUTED),
+            ("v2, inclusive OS/SS correction", H["v2"]["sigma60"], 40, H["v2"]["sigma_down"], H["v2"]["sigma_up"], MUTED),
+            ("v1 (reviewed)", H["v1"]["sigma60"], 36, H["v1"]["sigma_down"], H["v1"]["sigma_up"], MUTED),
             (r"Z$\rightarrow\mu\mu$ v2 (60$-$120)", 1935, 5, 30, 30, GREEN)]
     ax.axvspan(pred * 0.96, pred * 1.04, color=ORANGE, alpha=0.25); ax.axvline(pred, color=ORANGE)
     for i, (lab, v, st, dn, up, col) in enumerate(rows):

@@ -526,25 +526,26 @@ integrations, at the price of larger statistical errors per bin.
 
 ---
 
-## 7. Addendum (15 September 2026): what v2 did about it
+## 7. Addendum (15 September 2026): what v2, v2.1 and v3 did about it
 
-The analysis was redone after this review; the numbers below are the v2 result (`output/RESULTS.md`).
+The analysis was redone after this review: v2 (review fixes, BDT), v2.1 (fake-factor pulls fixed) and v3 (DeepTau Tight
+nominal). The numbers below are the v3 result (`output/RESULTS.md`); the earlier versions are in `slides/history.json`.
 
 | finding | action in v2 | where |
 |---|---|---|
 | 3.1 non-fiducial signal | `DYtautau` = fiducial part only (μ_Z); `DYtautau_nonfid` = background with `XS_DYtautau_nonfid` 5 % and the theory variations acting on the non-fid/fid ratio | `analysis.mc_components`, `docs/06` |
-| 3.2 no MC subtraction | `config.FF_SUBTRACT_MC = True`; `nosub` kept as a cross-check (μ_Z = 1.166 +0.142 -0.124 vs 1.205 +0.145 -0.125); W+jets subtracted with uniform weights after one event with weight −63 faked a 75 % non-closure in the top BDT bin | `fakes.py`, `analysis.subtraction_weights` |
+| 3.2 no MC subtraction | `config.FF_SUBTRACT_MC = True`; the unsubtracted variant is no longer produced (v2.1 cross-check: μ_Z 1.166 vs 1.205 at Medium); W+jets subtracted with uniform weights after one event with weight −63 faked a 75 % non-closure in the top BDT bin | `fakes.py`, `analysis.subtraction_weights` |
 | 3.3 τh ID prescriptions | documented (`docs/07`); the pT-binned cross-check and the DM categories remain open items | |
 | 3.4 `SigModel` | renamed `SigModel_tautau`, computed for the fiducial C (C_LO/C_NLO = 0.867), reported but not fitted (`config.SIGMODEL_IN_FIT`); NLO scale/PS/PDF variations kept; visible-pT spectra checked against data in the signal-dominated category | `docs/07` |
-| 3.5 fake uncertainty model | closure corrections f(\|η(τ1)\|), g(pT(τ2)); FF statistics per event into the `Fakes` variance; `FakeClosure_tautau_c<k>_lo\|hi` per category and mass region (sizes: c0/lo 15 %, c0/hi 1 %, c1/lo 5 %, c1/hi 7 %, c2/lo 12 %, c2/hi 55 %) | `fakes.closure_corrections`, `step4` |
+| 3.5 fake uncertainty model | closure corrections f(\|η(τ1)\|), g(pT(τ2)); FF statistics per event into the `Fakes` variance; `FakeClosure_tautau_c<k>_lo\|hi` per category and mass region; since v2.1 C_OS/SS per category (`FakeOSSS_tautau_c<k>`) and the fake-dominated category fitted above 110 GeV only (sizes: c0/lo 14 %, c0/hi 1 %, c1/lo 7 %, c1/hi 21 %, c2/lo 15 %, c2/hi 44 %) | `fakes.closure_corrections`, `step4` |
 | 3.6 MC statistics | DY 0J/1J/2J skimmed (with `LHE_NpNLO`) and stitched per jet bin with the inclusive sample's bin fractions; γ impact 4.7 % | `analysis.dy_norm` |
 | 3.7 trigger | unchanged (external); documented as such | |
 | 3.8 trigger SF on jet legs | SF = 1 for `genPartFlav = 0` legs | `corrections.trigger_sf` |
 | 3.9 second TRExFitter build | the checkout's binary had been built against the StatAnalysis ROOT and crashed under LCG (`TExMap::Add key not unique`, `munmap_chunk`); rebuilt with `fitting/build_trexfitter.sh` | |
-| 4.1 Tight WP | full chain rerun with `BND_TAUTAU_WP=Tight` (`variants/tight/`): μ_Z = 1.071 +0.114 −0.100, total +11.4/−10.0 % (Medium +14.5/−12.5 %), GoF p = 0.25 (Medium 0.01); recommended as the next nominal | `docs/08` |
+| 4.1 Tight WP | v2.1: the full chain rerun at Tight as a cross-check; **v3: Tight is the nominal** (`config.NOMINAL_WP`), Medium recorded in `slides/history.json` for the comparison in `docs/08` | `docs/08` |
 | 4.3 BDT | `ztautau/bdt.py`, `scripts/step3b_bdt.py`: 5-fold XGBoost, mass-agnostic inputs, three categories fitted in m_tt; held-out AUC 0.970 (higher than the 0.89 of section 4.3 because the signal is now the fiducial part only); same-sign closure in the score verified | `docs/09` |
 | 5 η non-closure | corrected; the residual is within ±5 % | `docs/05` |
 
-Result: μ_Z = 1.205 +0.145 -0.125 (v1: 1.160 +0.192 −0.163), σ(60–120) = 2343 +282 −243 pb, grouped impacts in `output/RESULTS.md`.
+Result: μ_Z = 1.071 +0.114 -0.100 (v1: 1.160 +0.192 −0.163), σ(60–120) = 2082 +222 −194 pb, grouped impacts in `output/RESULTS.md`.
 Still open (in `CLAUDE.md`): decay-mode categories, in-situ trigger efficiency, HT-binned W+jets, the high-mass DY
 sample, EWK Z.

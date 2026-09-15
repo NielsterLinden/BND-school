@@ -28,7 +28,7 @@ different quantity).
 | σ(Z/γ*→ττ, 60 < m < 120 GeV), prediction | 1944.9 pb |
 | σ_fid, prediction | 4.501 pb |
 | A = σ_fid / σ(60–120) | 0.002314 |
-| C = N_SR(fiducial signal, all categories) / (σ_fid · L) | 0.0654 |
+| C = N_SR(fiducial signal, all categories) / (σ_fid · L) | 0.0510 |
 
 A = 0.23 % is B(τhτh) ≈ 42 % times the chance that both visible τ carry pT > 40 GeV (≈ 0.55 %). A τ of
 45 GeV gives its visible products on average ~half its momentum, so only strongly boosted or asymmetric

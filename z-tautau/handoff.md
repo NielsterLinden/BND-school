@@ -1,8 +1,8 @@
-# Handoff – Z → τ⁺τ⁻ (τhτh), v2
+# Handoff – Z → τ⁺τ⁻ (τhτh), v3
 
 ## Team
 
-- Niels ter Linden (v1, with Claude Code agents); v2 by Claude Code (Fable 5.1) for Samuel Jankovych,
+- Niels ter Linden (v1, with Claude Code agents); v2, v2.1 and v3 by Claude Code (Fable 5.1) for Samuel Jankovych,
   after the review in `REVIEW.md`.
 
 ## What we worked on
@@ -18,14 +18,13 @@
 - Documentation: `README.md`, `CLAUDE.md`, `REVIEW.md` (the review of v1 and the numerical studies behind it in
   `review/`), `docs/00–09`, slides `slides/ztautau_slides.pdf`.
 
-**Result (v2, nominal):**
+**Result (v3, nominal: DeepTau Tight on both legs, MC-subtracted fake factor):**
 
-> **σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 2343 ± 39 (stat) +282/−243 (syst+stat) ± 86 (acc) pb** (NNLO 1945 pb)
-> **σ_fid(τhτh) = 5.42 ± 0.09 (stat) ± 0.60 (syst) pb** (prediction 4.50 pb) — μ_Z = 1.205 +0.145 -0.125
+> **σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 2082 ± 41 (stat) +222/−194 (syst+stat) ± 76 (acc) pb** (NNLO 1945 pb)
+> **σ_fid(τhτh) = 4.82 ± 0.09 (stat) ± 0.47 (syst) pb** (prediction 4.50 pb) — μ_Z = 1.071 +0.114 -0.100
 
 Cross-check without the MC subtraction in the fake-factor regions: μ_Z = 1.166 +0.142 -0.124.
-**Cross-check with DeepTau Tight on both legs** (`variants/tight/`, same chain): μ_Z = 1.071 +0.114 −0.100, σ(60–120) = 2082 +222 −194 pb,
-GoF p = 0.25 — more precise and a better fit; recommended as the nominal working point of the next iteration (`docs/08`).
+The same chain with DeepTau Medium (v2.1) gave μ_Z = 1.205 +0.145 −0.125, σ(60–120) = 2343 pb (`docs/08`, working-point comparison).
 
 ## Data and simulation used
 
@@ -53,15 +52,15 @@ GoF p = 0.25 — more precise and a better fit; recommended as the nominal worki
 - **Trigger:** `HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg` (G) / `HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg`
   (H). Both legs are matched to HLT τ objects (filterBits 2, pT > 35, ΔR < 0.5).
 - **Object selection:** τh pT > 40 GeV, |η| < 2.1, |dz| < 0.2, DM 0/1/10/11; DeepTau2017v2p1 VSe ≥ VVLoose,
-  VSmu ≥ VLoose; VSjet Medium (SR) or VVVLoose-not-Medium (fake-factor regions); most isolated pair with
+  VSmu ≥ VLoose; VSjet Tight (SR) or VVVLoose-not-Tight (fake-factor regions); most isolated pair with
   ΔR > 0.5; extra e/μ veto (orthogonal to eτ, μτ, ee, μμ).
-- **Event selection:** OS, both Medium → 47 586 events (80 % fakes). No mass cut; m_ττ from 0 to 350 GeV is
+- **Event selection:** OS, both Tight → 21 160 events (64 % fakes). No mass cut; m_ττ from 0 to 350 GeV is
   fitted in three BDT categories.
 - **Signal definition:** `DYtautau` = LHE ττ with 60 < m_LHE < 120 GeV, both τ hadronic, both visible τ pT > 40,
   |η| < 2.1 (62 % of the selected Z/γ*→ττ). The rest (`DYtautau_nonfid`, 30 % of it m_LHE > 120 GeV) is a
   background with a 5 % normalisation NP and the theory variations on the non-fid/fid ratio.
-- **Fakes:** FF(era, DM, N_jets, pT) = [N(SS, τ1 Medium) − MC] / [N(SS, τ1 VVVLoose!Medium) − MC], τ2 Medium,
-  times closure corrections f(|η(τ1)|) (±15 %) and g(pT(τ2)) (−6 %); applied to OS events with τ1 failing Medium
+- **Fakes:** FF(era, DM, N_jets, pT) = [N(SS, τ1 Tight) − MC] / [N(SS, τ1 VVVLoose!Tight) − MC], τ2 Tight,
+  times closure corrections f(|η(τ1)|) (±15 %) and g(pT(τ2)) (−6 %); applied to OS events with τ1 failing Tight
   (MC with a genuine τ1 subtracted, W+jets with uniform weights); multiplied by C_OS/SS(era, N_jets, BDT category) = 1.04–1.15 from the
   τ2 anti-isolated sideband. FF statistics per event into the template variance; residual non-closure per
   category × mass region as nuisance parameters.
@@ -85,43 +84,40 @@ python run_all.py                 # from NanoAOD: ~2 h
 
 ## Results so far
 
-| quantity | nominal (MC-subtracted FF) | no MC subtraction |
+| quantity | v3 (Tight, nominal) | v2.1 (Medium, same chain) |
 |---|---:|---:|
-| μ_Z | 1.205 +0.145 -0.125 | 1.166 +0.142 -0.124 |
-| expected (Asimov) | +0.118 −0.102 | |
-| σ(60–120) [pb] | 2343 +282 −243 | 2357 |
-| σ_fid [pb] | 5.42 ± 0.09 ± 0.60 | |
+| μ_Z | 1.071 +0.114 -0.100 | 1.166 +0.142 -0.124 |
+| expected (Asimov) | +0.106 −0.093 | +11.8 / −10.2 % |
+| σ(60–120) [pb] | 2082 +222 −194 | 2357 |
+| σ_fid [pb] | 4.82 ± 0.09 ± 0.47 | 4.82 ± 0.09 ± 0.47 |
 | GoF p | 0.22 | 0.16 |
-| **Tight WP (variants/tight)**: μ_Z | 1.071 +0.114 −0.100 | |
-| Tight WP: σ(60–120) [pb], GoF p | 2082 +222 −194, 0.32 | |
 
 Uncertainty on μ_Z (nominal, grouped impacts):
 
 | source | impact |
 |---|---:|
-| Tau ID | 11.1 % |
-| Fakes | 8.6 % |
-| Gammas | 4.7 % |
-| Tau trigger | 4.2 % |
-| Tau energy scale | 2.1 % |
-| Signal modelling | 1.8 % |
-| Background normalisation | 1.8 % |
-| MET | 1.0 % |
-| Luminosity | 1.0 % |
-| Pileup | 1.0 % |
+| Tau ID | 8.4 % |
+| Fakes | 6.5 % |
+| Gammas | 3.9 % |
+| Tau trigger | 3.0 % |
+| Background normalisation | 2.6 % |
+| Tau energy scale | 1.5 % |
+| Signal modelling | 1.3 % |
+| MET | 0.8 % |
+| Luminosity | 0.7 % |
+| Pileup | 0.6 % |
 | L1 prefiring | 0.2 % |
-| **data statistics** | **2.0 %** |
+| **data statistics** | **2.1 %** |
 
 Prediction: σ(Z/γ*→ττ, 60–120) = 1944.9 pb; σ_fid = 4.501 pb; A = 0.002314 ± 3.7 %
-(scale 3.4 %, PDF 0.5 %, α_s 0.6 %, ISR 0.9 %, FSR 0.2 %); C = 0.0654.
+(scale 3.4 %, PDF 0.5 %, α_s 0.6 %, ISR 0.9 %, FSR 0.2 %); C = 0.0510.
 
 ## For the combination
 
 **Profile-likelihood combination (recommended).**
 
 - Inputs, **all committed** (exception to the no-ROOT rule, they are 0.8–1.2 MB and the combination needs them
-  from any checkout): the histograms `fit/fitinputs/ztautau.root` (+ `ztautau_nosub.root`, the cross-check
-  variant, and the `.meta.json` sidecars), the config `fit/ztautau.config`, the workspace
+  from any checkout): the histograms `fit/fitinputs/ztautau.root` (+ the `.meta.json` sidecar), the config `fit/ztautau.config`, the workspace
   `fit/results/ztautau/RooStats/ztautau_combined_ztautau_model.root` (a copy of TRExFitter's
   `ztautau_allBinsFitRegions_combined_ztautau_model.root`, the name it uses when a region has `DropBins`)
   and `fit/results/ztautau_fit_result.json`. Job `ztautau`, POI `mu_Z`, regions `tautau_SR0`, `tautau_SR1`,
@@ -141,19 +137,18 @@ Prediction: σ(Z/γ*→ττ, 60–120) = 1944.9 pb; σ_fid = 4.501 pb; A = 0.002
 
 | variable | value |
 |---|---|
-| `n_obs` | 47 586 |
+| `n_obs` | 21 160 |
 | `n_bkg` (prefit, incl. non-fiducial DY) | 41459 |
-| `acc_eff` | 0.0001514 (for σ(60–120), L = 16393.381, fiducial signal) |
+| `acc_eff` | 0.0001179 (for σ(60–120), L = 16393.381, fiducial signal) |
 
-> ⚠️ Counting is useless here (B/S ≈ 8 over the whole signal region): use the fitted σ = 2343 +282 −243 pb with the
+> ⚠️ Counting is useless here (B/S ≈ 8 over the whole signal region): use the fitted σ = 2082 +222 −194 pb with the
 > uncertainties above. Correlated: lumi 1.2 %, acceptance 3.7 %. Uncorrelated: τh ID, trigger, fakes, MC stat.
 
 ## Open issues / next steps
 
-1. Adopt the Tight working point as nominal (more precise, GoF p = 0.25 instead of 0.01, `docs/08`).
-2. τh ID scale factors dominate: decay-mode categories and/or the combined fit to measure `TauID_DM*` in situ;
+1. τh ID scale factors dominate: decay-mode categories and/or the combined fit to measure `TauID_DM*` in situ;
    quote the pT-binned POG prescription (14 % different on the yield) as a cross-check.
-3. Trigger efficiency in situ (μτh tag-and-probe from SingleMuon) instead of the POG turn-on SFs.
-4. W+jets: HT-binned madgraph samples with LHE_HT stitching (the inclusive sample has pathological weights).
-5. High-mass DY sample (record 35629) stitched in m_LHE for the non-fiducial template; EWK Z→ττ.
-6. Add eτh and μτh (the skims would need looser lepton content).
+2. Trigger efficiency in situ (μτh tag-and-probe from SingleMuon) instead of the POG turn-on SFs.
+3. W+jets: HT-binned madgraph samples with LHE_HT stitching (the inclusive sample has pathological weights).
+4. High-mass DY sample (record 35629) stitched in m_LHE for the non-fiducial template; EWK Z→ττ.
+5. Add eτh and μτh (the skims would need looser lepton content).

@@ -3,7 +3,7 @@
 **Goal.** Measure σ(pp → Z/γ* → ττ) with both τ decaying hadronically, in CMS 2016 Open Data (Run2016G+H,
 Tau dataset, 16.4 fb⁻¹), with a binned profile-likelihood fit (TRExFitter v1.8.0) in the same framework as
 Z→μμ and Z→ee, so the three channels can be fitted together. This is v2: v1 was reviewed (`REVIEW.md`) and
-rebuilt.
+rebuilt; v3 (15 Sep 2026) uses the DeepTau Tight working point on both legs.
 
 **Chain.** `run_all.py` runs eight standalone scripts:
 
@@ -19,27 +19,27 @@ rebuilt.
 | 6 | `step6_report.py` | `output/results.json`, `RESULTS.md`, summary plots | 06, 08 |
 
 **Physics in six lines.**
-1. Two τh with pT > 40 GeV, |η| < 2.1, DeepTau Medium, opposite sign, di-τ trigger matched, lepton vetoes:
-   47 586 events.
-2. 80 % are jet→τh fakes: estimated from data with fake factors measured in same-sign events (simulated
+1. Two τh with pT > 40 GeV, |η| < 2.1, DeepTau Tight, opposite sign, di-τ trigger matched, lepton vetoes:
+   21 160 events.
+2. 64 % are jet→τh fakes: estimated from data with fake factors measured in same-sign events (simulated
    genuine τ subtracted, closure corrected in |η(τ1)| and pT(τ2)) and applied to events whose leading τ fails
-   Medium (no QCD simulation).
+   Tight (no QCD simulation).
 3. The MET is folded into the visible mass with a per-event likelihood (MET covariance + τ decay phase
    space). m_tt peaks at m_Z with 11 % resolution; fakes sit at 130–300 GeV.
 4. The signal is the **fiducial** Z→ττ (60 < m < 120 GeV, both visible τ pT > 40, |η| < 2.1; aMC@NLO
    inclusive + jet-binned, TauPOG corrections); the non-fiducial Z/γ*→ττ (38 % of the selected DY, mostly
    m > 120 GeV) is a theory-normalised background, like tt̄, W+jets, Z→ee and dibosons.
-5. A k-fold BDT on mass-agnostic kinematics sorts the signal region into three categories (S/B 0.02, 0.6, ≈ 5.3).
+5. A k-fold BDT on mass-agnostic kinematics sorts the signal region into three categories (S/B 0.04, 1.1, ≈ 10.9).
 6. μ_Z from the m_tt fit in the three categories; σ = μ_Z × prediction.
 
 **Result.**
 
-> **σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 2343 ± 39 (stat) +282/−243 (syst+stat) ± 86 (acc) pb**
-> (NNLO 1945 pb; μ_Z = 1.205 +0.145 -0.125) — **σ_fid(τhτh) = 5.42 ± 0.09 (stat) ± 0.60 (syst) pb** (prediction 4.50 pb)
+> **σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 2082 ± 41 (stat) +222/−194 (syst+stat) ± 76 (acc) pb**
+> (NNLO 1945 pb; μ_Z = 1.071 +0.114 -0.100) — **σ_fid(τhτh) = 4.82 ± 0.09 (stat) ± 0.47 (syst) pb** (prediction 4.50 pb)
 
 Limited by the external τh identification scale factors (11.2 %); data statistics 2.0 % on μ_Z. Goodness of fit p = 0.22; data/prediction rises with the visible-τ pT in the signal-dominated category (`08-fit-and-results.md`).
 
-**Cross-check with DeepTau Tight** on both legs (`variants/tight/`): μ_Z = 1.071 +0.114 −0.100, σ(60–120) = 2082 +222 −194 pb, GoF p = 0.25: more precise (`08-fit-and-results.md`).
+The same chain with DeepTau Medium (v2.1) gave μ_Z = 1.205 +0.145 −0.125 (`08-fit-and-results.md`, working-point comparison).
 
 **Read next:** `02-selection.md` for the selection, `05-fake-factors.md` for the background method,
 `09-bdt.md` for the categories, and `08-fit-and-results.md` for the result and what the combination should use.

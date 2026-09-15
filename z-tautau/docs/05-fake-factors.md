@@ -5,8 +5,9 @@ Code: `ztautau/fakes.py`, `scripts/step3_fakefactors.py`; plots `output/plots/st
 
 ## Why fakes dominate and why data-driven
 
-QCD multijet production is 10⁶ times larger than Z→ττ, and even at DeepTau Medium ~0.5–1 % of jets pass as
-τh. In the signal region **80 % of the events have at least one jet faking τh**. Simulating this needs
+QCD multijet production is 10⁶ times larger than Z→ττ, and even at DeepTau Tight a few per mille of jets pass as
+τh (Medium: 0.5–1 %). In the signal region **64 % of the events have at least one jet faking τh** (80 %
+with the Medium working point of v1–v2.1). Simulating this needs
 jet→τh fake rates at the per-mille level in the tails of the QCD cross section. The QCD MC samples are
 statistically far too small for that, and the simulated fake rates are known to be off. So the fakes come
 from data, and the QCD simulation is not used.
@@ -19,7 +20,7 @@ FF_corr                  = FF · f(|η(τ1)|) · g(pT(τ2))                     
 N_fakes(SR, cat k)       = Σ_{data in AR, cat k} C_OS/SS(era, N_jets) · FF_corr  −  Σ_{MC genuine τ1 in AR, cat k} w · C · FF_corr
 ```
 
-T = DeepTau VSjet Medium, L = VVVLoose and not Medium, "MC" = simulated events whose leading τ is not a
+T = DeepTau VSjet Tight (v3; Medium in v1–v2.1), L = VVVLoose and not T, "MC" = simulated events whose leading τ is not a
 jet (genuine τh, e or μ), weighted like the signal-region prediction.
 
 * **Same-sign (SS) pairs** are the determination region: Z→ττ is always OS, so SS pairs with an isolated
@@ -30,7 +31,7 @@ jet (genuine τh, e or μ), weighted like the signal-region prediction.
   and a jet as τ2 (W+jets, tt̄) are taken from simulation. Simulation keeps only events whose leading τ is
   not a jet, so nothing is counted twice. This is the CMS H→ττ convention for τhτh.
 * **MC subtraction (nominal since v2).** The determination and application regions contain genuine τ's
-  (table below), mostly Z→ττ with τ1 failing Medium in the AR: 1.3 % of the AR, but ~6 % of the signal,
+  (table below), mostly Z→ττ with τ1 failing the tight working point in the AR: ~1–2 % of the AR, but ~6 % of the signal,
   which the unsubtracted estimate double counts, and 3.9 % of the C numerator, which biases C up by 2.5 %.
   v1 quoted the unsubtracted variant as nominal; the review (`REVIEW.md` 3.2) showed the bias (Δμ = −0.05
   and a 7 % over-prediction of the fakes in the purest fake phase space). Every simulated sample is
@@ -38,18 +39,18 @@ jet (genuine τh, e or μ), weighted like the signal-region prediction.
   (each event carries the sample's mean weight, `analysis.subtraction_weights`): it is a real genuine-τ1
   component of the τ2-anti-isolated sideband (2 % of OSAI_T, worth 1.5 % on C), but with its raw weights a
   single event of weight −63 in the top BDT bin of SS_T faked a 75 % non-closure. The unsubtracted variant
-  (`nosub`) is still fitted as a cross-check.
+  is only produced on request (`step3_fakefactors.py --with-nosub`, `--ff-variant nosub`).
 
 | region | data | genuine τ1 (MC) | fraction |
 |---|---:|---:|---:|
-| SS_T (FF numerator) | 26 761 | 239 | 0.9 % |
-| SS_L (FF denominator) | 140 365 | 109 | 0.1 % |
-| AR (application) | 187 973 | 2 402 | 1.3 % |
-| OSAI_T (C numerator) | 219 737 | 8 518 | 3.9 % |
+| SS_T (FF numerator) | 9 554 | 164 | 1.7 % |
+| SS_L (FF denominator) | 86 929 | 110 | 0.1 % |
+| AR (application) | 120 805 | 2 996 | 2.5 % |
+| OSAI_T (C numerator) | 144 978 | 8 926 | 6.2 % |
 
 ### Binning — driven by closure
 
-| iteration | binning | same-sign closure |
+| iteration | binning | same-sign closure (Medium working point, v2) |
 |---|---|---|
 | 1 | DM × pT | N_jets: 1.09 / 0.89 / 0.83 / 0.75 for 0/1/2/≥3 jets; m_tt < 110 GeV over-predicted by ~15 % |
 | 2 | DM × **N_jets (0, 1, ≥2)** × pT | N_jets flat; m_tt within ±10 % (statistics) |
@@ -58,7 +59,7 @@ jet (genuine τh, e or μ), weighted like the signal-region prediction.
 
 Quark and gluon jets fake τh at different rates, and the jet multiplicity changes that mixture. The two
 eras use different HLT τ isolation. pT bins: 40, 45, 50, 60, 80, ∞ GeV → 2 × 4 × 3 × 5 = 120 bins;
-~27 000 SS_T events, median statistical uncertainty per bin 10 % (all 120 values:
+~9 554 SS_T events, median statistical uncertainty per bin ~10–15 % (all 120 values:
 `step3_fakefactors.png`; DM11 (3-prong + π⁰) fake factors are 3–5× smaller than for 1-prong).
 
 ### Closure corrections (new in v2)
@@ -87,20 +88,20 @@ multiplicity, inclusive in the BDT score (statistical uncertainty 0.004–0.010)
 
 | | 0 jets | 1 jet | ≥ 2 jets |
 |---|---:|---:|---:|
-| Run2016G | 1.051 | 1.070 | 1.056 |
-| Run2016H | 1.043 | 1.045 | 1.071 |
+| Run2016G | 1.057 | 1.086 | 1.077 |
+| Run2016H | 1.042 | 1.037 | 1.070 |
 
 (inclusive 1.052; without the subtraction 1.078: the difference is the genuine-τ contamination of the
-numerator, a third of it W+jets). As the τ2 sideband is tightened towards Medium, C rises by a few percent, so the extrapolation
-to τ2 = Medium carries a **3 % systematic**, added in quadrature to the statistical one (`FakeOSSS_tautau`).
+numerator, a third of it W+jets). As the τ2 sideband is tightened towards the tight working point, C rises by a few percent, so the extrapolation
+to τ2 = T carries a **3 % systematic**, added in quadrature to the statistical one (`FakeOSSS_tautau`).
 `step3_OSAI_m_tt_mcsub.png` shows that after C the SS→OS shape extrapolation holds within ±5 % over the
 full m_tt range.
 
-**C depends on the BDT category (v2.1).** With the inclusive C the same sideband is described to 0.4 % in
+**C depends on the BDT category (since v2.1).** With the inclusive C the same sideband is described to 0.4 % in
 the fake-dominated category but under-predicted by 6.5 % in the middle and 3 % in the signal-like
 category: the OS/SS charge correlation of the two jets depends on the topology the classifier selects
 (more quark-initiated, balanced dijets at high score). In the first v2 fit this showed up as positive
-pulls of every fake parameter of SR1 and SR2 (0.6–1.5 σ). Since v2.1 step 4 measures C per
+pulls of every fake parameter of SR1 and SR2 (0.6–1.5 σ). Since v2.1, step 4 measures C per
 (era, N_jets, BDT category) in the τ2-anti-isolated sideband (`fakes.osss_correction(..., n_cat)`), with
 one OS/SS nuisance parameter per category (`FakeOSSS_tautau_c<k>`, statistical ⊕ 3 %). A bin whose statistical
 error exceeds 10 % (the 0-jet bins of the signal-like category: 0.58 ± 0.16 in G) takes the N_jets-inclusive
@@ -108,12 +109,12 @@ value of its era and category:
 
 | | 0 jets | 1 jet | ≥ 2 jets |
 |---|---:|---:|---:|
-| category 0, Run2016G | 1.049 | 1.063 | 1.049 |
-| category 0, Run2016H | 1.040 | 1.035 | 1.061 |
-| category 1, Run2016G | 1.121 | 1.144 | 1.086 |
-| category 1, Run2016H | 1.133 | 1.138 | 1.118 |
-| category 2, Run2016G | 1.085 | 1.104 | 1.083 |
-| category 2, Run2016H | 1.103 | 1.115 | 1.099 |
+| category 0, Run2016G | 1.056 | 1.079 | 1.059 |
+| category 0, Run2016H | 1.039 | 1.029 | 1.058 |
+| category 1, Run2016G | 1.109 | 1.172 | 1.097 |
+| category 1, Run2016H | 1.163 | 1.149 | 1.113 |
+| category 2, Run2016G | 1.187 | 1.045 | 1.305 |
+| category 2, Run2016H | 1.072 | 0.960 | 1.151 |
 
 ## The uncertainty model (v2)
 

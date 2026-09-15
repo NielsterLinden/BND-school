@@ -23,14 +23,12 @@ from build_comparison_deck import Deck, smart_upper  # noqa: E402
 
 F = HERE / "figs"
 R = json.loads((HERE.parent / "output/results.json").read_text())
-FIT, FN = R["fit"]["mcsub"], R["fit"]["nosub"]
+FIT = R["fit"]["mcsub"]
 Y = R["yields_prefit"]["mcsub"]; YR = R["yields_prefit_per_region"]
 B = R["bdt"]; GI = FIT["grouped_impact"]
-H = json.loads((HERE / "history.json").read_text())
-TIGHT = None
-tp = HERE.parent / "variants/tight/output/results.json"
-if tp.exists():
-    TIGHT = json.loads(tp.read_text())
+H = json.loads((HERE / "history.json").read_text())      # v1, v2, v2.1 (Medium) numbers for the evolution slides
+MED = H["v2.1"]
+WP = R.get("tau_wp", "Tight")
 
 
 def pm(v, up, dn, n=3):
@@ -124,61 +122,44 @@ d = ZDeck(str(HERE / "ztautau_slides.pdf"), author="Samuel Jankovych", date="15 
 
 # ---------------------------------------------------------------- cover
 d.cover(r"$Z\rightarrow\tau_h\tau_h$ cross section with CMS Open Data",
-        "v2 after the review: MC-subtracted, closure-corrected fake factor, fiducial signal, k-fold BDT categories.",
+        f"v3: DeepTau {WP} on both legs, MC-subtracted closure-corrected fake factor, fiducial signal, k-fold BDT categories.",
         [rf"$\sigma(pp\rightarrow Z/\gamma^*\rightarrow\tau\tau,\ 60<m<120\ \mathrm{{GeV}}) = {s60['value']:.0f} \pm {s60['stat']:.0f}\ (\mathrm{{stat}})\ ^{{+{s60['err_up']:.0f}}}_{{-{s60['err_down']:.0f}}}\ (\mathrm{{syst}})\ \pm {s60['acceptance']:.0f}\ (\mathrm{{acc}})$ pb    (NNLO 1945 pb)",
-         rf"$\sigma_\mathrm{{fid}}(\tau_h\tau_h) = {sf['value']:.2f} \pm {sf['stat']:.2f} \pm {sf['syst']:.2f}$ pb  (pred. 4.50 pb),   $\mu_Z = {FIT['mu']:.3f}\,^{{+{FIT['mu_err_up']:.3f}}}_{{-{FIT['mu_err_down']:.3f}}}$   (v1: 1.160 +0.192 -0.163)",
-         "CMS 2016 Tau dataset, Run2016G+H, 16.4 fb-1; both taus hadronic; fakes from data (same-sign fake factor); TRExFitter v1.8.0.",
-         f"Precision +{100*FIT['mu_err_up']:.0f}/-{100*FIT['mu_err_down']:.0f} % (v1: +19/-16 %): tau ID SFs {100*GI['Tau ID']:.0f} %, fakes {100*GI['Fakes']:.0f} %, MC stat {100*GI['Gammas']:.0f} %, trigger {100*GI['Tau trigger']:.0f} %; data statistics {100*FIT['mu_stat']:.1f} %.",
-         f"Cross-check with DeepTau Tight on both legs: mu_Z = {TIGHT['fit']['mcsub']['mu']:.3f} +{TIGHT['fit']['mcsub']['mu_err_up']:.3f} -{TIGHT['fit']['mcsub']['mu_err_down']:.3f} ({100*TIGHT['fit']['mcsub']['mu_err_up']:.0f} % instead of {100*FIT['mu_err_up']:.0f} %), GoF p = {TIGHT['fit']['mcsub']['gof_probability']:.2f}: more precise, closer to NNLO -- recommended as the next nominal." if TIGHT else "",
-         "Sections: 1 result   2 what changed since the review   3 fit   4 BDT categories   5 fakes   6 signal definition and selection   7 findings, next steps",
+         rf"$\sigma_\mathrm{{fid}}(\tau_h\tau_h) = {sf['value']:.2f} \pm {sf['stat']:.2f} \pm {sf['syst']:.2f}$ pb  (pred. 4.50 pb),   $\mu_Z = {FIT['mu']:.3f}\,^{{+{FIT['mu_err_up']:.3f}}}_{{-{FIT['mu_err_down']:.3f}}}$   (v2.1 Medium: {MED['mu']:.3f} +{MED['up']:.3f} -{MED['down']:.3f}; v1: {H['v1']['mu']:.3f} +{H['v1']['up']:.3f} -{H['v1']['down']:.3f})",
+         f"CMS 2016 Tau dataset, Run2016G+H, 16.4 fb-1; both taus hadronic, DeepTau {WP}; fakes from data (same-sign fake factor); TRExFitter v1.8.0.",
+         f"Precision +{100*FIT['mu_err_up']:.0f}/-{100*FIT['mu_err_down']:.0f} % (v2.1 Medium: +{100*MED['up']:.0f}/-{100*MED['down']:.0f} %, v1: +19/-16 %): tau ID SFs {100*GI['Tau ID']:.0f} %, fakes {100*GI['Fakes']:.0f} %, MC stat {100*GI['Gammas']:.0f} %, trigger {100*GI['Tau trigger']:.0f} %; data statistics {100*FIT['mu_stat']:.1f} %; GoF p = {FIT['gof_probability']:.2f}.",
+         "Sections: 1 result   2 what changed (v1 -> v2 -> v2.1 -> v3)   3 fit   4 BDT categories   5 fakes   6 signal definition and selection   7 findings, next steps",
          "z-tautau/: README.md, CLAUDE.md, REVIEW.md, docs/00-09, review/  (code, documentation, review studies)"])
 
 # ---------------------------------------------------------------- 1. result
 d.divider("1.  Result")
 d.image(r"Method in one picture", pdf("flow"))
 d.text_figure(r"$\sigma(Z/\gamma^*\rightarrow\tau\tau)$ and $\mu_Z$",
-              ["**Nominal (v2)**",
+              [f"**Nominal (v3, DeepTau {WP})**",
                rf"$\mu_Z = {FIT['mu']:.3f}\,^{{+{FIT['mu_err_up']:.3f}}}_{{-{FIT['mu_err_down']:.3f}}}$   (stat. $\pm{FIT['mu_stat']:.3f}$, expected $^{{+{FIT['mu_expected_asimov']['err_up']:.3f}}}_{{-{FIT['mu_expected_asimov']['err_down']:.3f}}}$)",
                rf"$\sigma(60$-$120) = {s60['value']:.0f}\,^{{+{s60['err_up']:.0f}}}_{{-{s60['err_down']:.0f}}} \pm {s60['acceptance']:.0f}_A$ pb,   NNLO 1945 pb",
                rf"$\sigma_\mathrm{{fid}} = {sf['value']:.2f} \pm {sf['stat']:.2f} \pm {sf['syst']:.2f}$ pb,   prediction 4.50 pb",
                f"goodness of fit (saturated model): p = {FIT['gof_probability']:.3f}",
                "",
-               "**Cross-checks**",
-               rf"FF without MC subtraction: $\mu_Z = {FN['mu']:.3f}\,^{{+{FN['mu_err_up']:.3f}}}_{{-{FN['mu_err_down']:.3f}}}$ (fake normalisation re-measured by the fit)",
-               r"v1 (single region, unsubtracted FF, whole DY as signal): $\mu_Z = 1.160\,^{+0.192}_{-0.163}$",
+               "**Previous versions (same data)**",
+               rf"v2.1, DeepTau Medium, same chain: $\mu_Z = {MED['mu']:.3f}\,^{{+{MED['up']:.3f}}}_{{-{MED['down']:.3f}}}$, $\sigma = {MED['sigma60']}$ pb",
+               rf"v1 (single region, unsubtracted FF, whole DY as signal): $\mu_Z = {H['v1']['mu']:.3f}\,^{{+{H['v1']['up']:.3f}}}_{{-{H['v1']['down']:.3f}}}$",
                r"$Z\rightarrow\mu\mu$ v2: $\mu_Z = 0.990 \pm 0.014$, $\sigma(60$-$120) = 1935 \pm 30$ pb",
                "",
                "**Reading**",
-               r"$1.4\sigma$ above NNLO and $\mu\mu$; the excess sits at high visible-$\tau$ $p_T$ (section 7).",
+               rf"${(FIT['mu']-1)/FIT['mu_err_down']:.1f}\sigma$ above NNLO and $\mu\mu$; a residual rise of data/prediction with the visible-$\tau$ $p_T$ remains (section 7).",
                "Precision limited by the external tau ID scale factors, then by the fake estimate."],
               pdf("result_summary"))
 d.text_figure("Uncertainty budget",
               ["**Grouped impacts on** $\\mu_Z$"]
               + [f"{k}:  {100*v:.1f} %" for k, v in sorted(GI.items(), key=lambda kv: -kv[1]) if k != "FullSyst"]
               + [f"data statistics:  {100*FIT['mu_stat']:.1f} %", "",
-                 "**v1 for comparison**: tau ID 12.5 %, signal modelling 9.8 % (LO-vs-NLO NP, removed), trigger 5.1 %, MC stat 4.8 %, fakes 0.8 % (under-estimated, REVIEW.md 3.5).",
+                 f"**v2.1 (Medium) for comparison**: tau ID {MED['impacts']['Tau ID']:.1f} %, fakes {MED['impacts']['Fakes']:.1f} %, MC stat {MED['impacts']['Gammas']:.1f} %, trigger {MED['impacts']['Tau trigger']:.1f} %; **v1**: tau ID 12.5 %, LO-vs-NLO NP 9.8 % (removed), trigger 5.1 %, MC stat 4.8 %, fakes 0.8 % (under-estimated).",
                  "",
-                 "Fakes now carry an honest per-category closure uncertainty; MC stat improved by the jet-binned DY samples; signal modelling is scales + PS + PDF only."],
+                 "Fakes carry an honest per-category closure uncertainty; MC stat improved by the jet-binned DY samples; signal modelling is scales + PS + PDF only; Tight shrinks every group."],
               pdf("impacts"), split=0.42)
 
-if TIGHT:
-    TF = TIGHT["fit"]["mcsub"]; TG = TF["grouped_impact"]; TY = TIGHT["yields_prefit"]["mcsub"]
-    d.tables("Working-point cross-check: DeepTau Medium vs Tight on both legs  (cross-check, same chain)", [{
-        "title": "same chain (fake factors, BDT, categories, fit) with the Tight working point and its TauPOG scale factors",
-        "headers": ["quantity", "Medium (nominal)", "Tight"], "col_w": [360, 260, 260],
-        "rows": [["mu_Z", MU, pm(TF["mu"], TF["mu_err_up"], TF["mu_err_down"])],
-                 ["total uncertainty on mu_Z", f"+{100*FIT['mu_err_up']:.1f} / -{100*FIT['mu_err_down']:.1f} %", f"+{100*TF['mu_err_up']:.1f} / -{100*TF['mu_err_down']:.1f} %"],
-                 ["expected (Asimov)", f"+{100*FIT['mu_expected_asimov']['err_up']:.1f} / -{100*FIT['mu_expected_asimov']['err_down']:.1f} %", f"+{100*TF['mu_expected_asimov']['err_up']:.1f} / -{100*TF['mu_expected_asimov']['err_down']:.1f} %"],
-                 ["data statistics", f"{100*FIT['mu_stat']:.1f} %", f"{100*TF['mu_stat']:.1f} %"],
-                 ["tau ID", f"{100*GI['Tau ID']:.1f} %", f"{100*TG['Tau ID']:.1f} %"],
-                 ["fakes", f"{100*GI['Fakes']:.1f} %", f"{100*TG['Fakes']:.1f} %"],
-                 ["MC statistics", f"{100*GI['Gammas']:.1f} %", f"{100*TG['Gammas']:.1f} %"],
-                 ["tau trigger", f"{100*GI['Tau trigger']:.1f} %", f"{100*TG['Tau trigger']:.1f} %"],
-                 ["fiducial signal / fakes (prefit, all categories)", f"{Y['DYtautau']['value']:.0f} / {Y['Fakes']['value']:.0f}", f"{TY['DYtautau']['value']:.0f} / {TY['Fakes']['value']:.0f}"],
-                 ["goodness of fit p", f"{FIT['gof_probability']:.3f}", f"{TF['gof_probability']:.3f}"],
-                 ["BDT held-out AUC", f"{sum(B['training']['auc_test'])/5:.3f}", f"{sum(TIGHT['bdt']['training']['auc_test'])/5:.3f}"]]}])
 # ---------------------------------------------------------------- 2. what changed
-d.divider("2.  What changed since the review")
+d.divider("2.  What changed: v1 -> v2 -> v2.1 -> v3")
 d.tables("Review findings and the v2 answers", [{
     "title": "REVIEW.md findings (v1) and what v2 does",
     "headers": ["finding", "v2", "effect"],
@@ -193,39 +174,53 @@ d.tables("Review findings and the v2 answers", [{
         ["3.9 second TRExFitter build (StatAnalysis ROOT, v1.10)", "submodule reset to v1.8.0, rebuilt with fitting/build_trexfitter.sh", "reproducible"],
         ["4.3 80 % fakes: ML?", "5-fold XGBoost, mass-agnostic inputs, 3 categories, m_tautau fitted in each", "fakes where fakes are"],
         ["v2.1 fake NPs pulled 0.6-1.5 sigma", "C_OS/SS per (era, N_jets, BDT category); SR0 fitted only above 110 GeV (fake sideband)", "pulls < 0.7 sigma"],
+        ["4.1 Tight working point (v3)", "DeepTau Tight on both legs is the nominal: 2.7x fewer fakes, every uncertainty group smaller", "-2 % on the total"],
         ["5 eta(tau1) non-closure +-15 %", "diagnosed (FF depends on |eta|), corrected", "eta plots right"],
     ]}])
 
-d.text_figure("Evolution of the result: v1, v2, v2.1",
+d.text_figure("Evolution of the result: v1, v2, v2.1, v3",
               ["**v1 (reviewed)**", f"{H['v1']['what']}.  mu_Z = {H['v1']['mu']:.3f} +{H['v1']['up']:.3f} -{H['v1']['down']:.3f}, sigma = {H['v1']['sigma60']} pb, GoF p = {H['v1']['gof']:.2f}",
                "", "**v2**", f"{H['v2']['what']}.  mu_Z = {H['v2']['mu']:.3f} +{H['v2']['up']:.3f} -{H['v2']['down']:.3f}, sigma = {H['v2']['sigma60']} pb, GoF p = {H['v2']['gof']:.3f}",
-               "", "**v2.1 (this result)**", f"C_OS/SS per BDT category, SR0 as fake sideband above 110 GeV.  mu_Z = {MU}, sigma = {s60['value']:.0f} pb, GoF p = {FIT['gof_probability']:.2f}",
-               "", "**Tight working point** (same v2.1 chain)", (f"mu_Z = {pm(TIGHT['fit']['mcsub']['mu'], TIGHT['fit']['mcsub']['mu_err_up'], TIGHT['fit']['mcsub']['mu_err_down'])}, sigma = {TIGHT['fit']['mcsub']['sigma_60_120_pb']['value']:.0f} pb, GoF p = {TIGHT['fit']['mcsub']['gof_probability']:.2f}" if TIGHT else ""),
-               "", "**Reading**", "The central value moved by +0.05 (MC subtraction) and -0.01 (per-category C); the uncertainty shrank from +19/-16 % to +12/-10 %, mostly by removing the LO-vs-NLO NP and adding MC statistics; the fit quality became acceptable once the fake-dominated category stopped being fitted under the peak."],
+               "", "**v2.1**", f"{MED['what']}.  mu_Z = {MED['mu']:.3f} +{MED['up']:.3f} -{MED['down']:.3f}, sigma = {MED['sigma60']} pb, GoF p = {MED['gof']:.2f}",
+               "", f"**v3 (this result): DeepTau {WP} on both legs**", f"same chain, TauPOG {WP} scale factors, BDT retrained.  mu_Z = {MU}, sigma = {s60['value']:.0f} pb, GoF p = {FIT['gof_probability']:.2f}",
+               "", "**Reading**", f"v1 -> v2: +0.05 from the MC subtraction, uncertainty +19/-16 % -> +14/-12 % (LO-vs-NLO NP removed, MC statistics added). v2 -> v2.1: per-category C and the SR0 sideband fixed the fake pulls and the fit quality. v2.1 -> v3: Tight removes 2.7x more fakes than signal, every uncertainty group shrinks (+{100*FIT['mu_err_up']:.0f}/-{100*FIT['mu_err_down']:.0f} %), the central value moves {MED['mu']-FIT['mu']:.2f} closer to NNLO."],
               pdf("result_summary"), split=0.46)
 groups = ["Tau ID", "Fakes", "Gammas", "Tau trigger", "Tau energy scale", "Signal modelling", "Background normalisation", "MET", "Luminosity", "Pileup", "L1 prefiring"]
-tg = TIGHT["fit"]["mcsub"]["grouped_impact"] if TIGHT else {}
-rows = [[g, f"{H['v1']['impacts'].get(g, 0):.1f}", f"{H['v2']['impacts'].get(g, 0):.1f}", f"{100*GI.get(g, 0):.1f}", f"{100*tg.get(g, 0):.1f}" if TIGHT else "-"] for g in groups]
-rows.append(["data statistics", f"{100*H['v1']['stat']:.1f}", f"{100*H['v2']['stat']:.1f}", f"{100*FIT['mu_stat']:.1f}", f"{100*TIGHT['fit']['mcsub']['mu_stat']:.1f}" if TIGHT else "-"])
-rows.append(["total on mu_Z (+/-)", f"+{100*H['v1']['up']:.0f} / -{100*H['v1']['down']:.0f}", f"+{100*H['v2']['up']:.0f} / -{100*H['v2']['down']:.0f}", f"+{100*FIT['mu_err_up']:.0f} / -{100*FIT['mu_err_down']:.0f}", f"+{100*TIGHT['fit']['mcsub']['mu_err_up']:.0f} / -{100*TIGHT['fit']['mcsub']['mu_err_down']:.0f}" if TIGHT else "-"])
-rows.append(["goodness of fit p", f"{H['v1']['gof']:.2f}", f"{H['v2']['gof']:.3f}", f"{FIT['gof_probability']:.2f}", f"{TIGHT['fit']['mcsub']['gof_probability']:.2f}" if TIGHT else "-"])
-d.tables("Uncertainty budget across versions (impact on mu_Z in %)", [{"title": "grouped impacts; v1 'Signal modelling' was the LO-vs-NLO NP, v1 'Fakes' was under-estimated (one over-constrained NP)",
-    "headers": ["group", "v1", "v2", "v2.1 Medium", "v2.1 Tight"], "col_w": [300, 170, 170, 190, 190], "rows": rows}])
-v2p = H["v2"]["fake_pulls"]; cur = FIT["pulls"]
+rows = [[g, f"{H['v1']['impacts'].get(g, 0):.1f}", f"{H['v2']['impacts'].get(g, 0):.1f}", f"{MED['impacts'].get(g, 0):.1f}", f"{100*GI.get(g, 0):.1f}"] for g in groups]
+rows.append(["data statistics", f"{100*H['v1']['stat']:.1f}", f"{100*H['v2']['stat']:.1f}", f"{100*MED['stat']:.1f}", f"{100*FIT['mu_stat']:.1f}"])
+rows.append(["total on mu_Z (+/-)", f"+{100*H['v1']['up']:.0f} / -{100*H['v1']['down']:.0f}", f"+{100*H['v2']['up']:.0f} / -{100*H['v2']['down']:.0f}", f"+{100*MED['up']:.0f} / -{100*MED['down']:.0f}", f"+{100*FIT['mu_err_up']:.0f} / -{100*FIT['mu_err_down']:.0f}"])
+rows.append(["goodness of fit p", f"{H['v1']['gof']:.2f}", f"{H['v2']['gof']:.3f}", f"{MED['gof']:.2f}", f"{FIT['gof_probability']:.2f}"])
+d.tables("Uncertainty budget across versions (impact on mu_Z in %)", [{"title": "grouped impacts; v1 'Signal modelling' was the LO-vs-NLO NP, v1 'Fakes' was under-estimated (one over-constrained NP); v1-v2.1 Medium, v3 Tight",
+    "headers": ["group", "v1", "v2", "v2.1 (Medium)", f"v3 ({WP})"], "col_w": [300, 170, 170, 190, 190], "rows": rows}])
+yr = YR["tautau_SR2"]
+d.tables(f"Working point: DeepTau Medium (v2.1) vs {WP} (v3 nominal), same chain", [{
+    "title": "fake factors, closure corrections, C_OS/SS per category, BDT and fit all redone at the Tight working point with its TauPOG scale factors",
+    "headers": ["quantity", "Medium (v2.1)", f"{WP} (v3)"], "col_w": [380, 280, 280],
+    "rows": [["mu_Z", f"{MED['mu']:.3f} +{MED['up']:.3f} -{MED['down']:.3f}", MU],
+             ["total uncertainty on mu_Z", f"+{100*MED['up']:.1f} / -{100*MED['down']:.1f} %", f"+{100*FIT['mu_err_up']:.1f} / -{100*FIT['mu_err_down']:.1f} %"],
+             ["sigma(60-120) [pb]", f"{MED['sigma60']} +{MED['sigma_up']} -{MED['sigma_down']}", f"{s60['value']:.0f} +{s60['err_up']:.0f} -{s60['err_down']:.0f}"],
+             ["data statistics", f"{100*MED['stat']:.1f} %", f"{100*FIT['mu_stat']:.1f} %"],
+             ["tau ID / fakes / MC stat / trigger", f"{MED['impacts']['Tau ID']:.1f} / {MED['impacts']['Fakes']:.1f} / {MED['impacts']['Gammas']:.1f} / {MED['impacts']['Tau trigger']:.1f} %", f"{100*GI['Tau ID']:.1f} / {100*GI['Fakes']:.1f} / {100*GI['Gammas']:.1f} / {100*GI['Tau trigger']:.1f} %"],
+             ["fiducial signal / fakes (prefit, all categories)", f"{MED['yields']['DYtautau']} / {MED['yields']['Fakes']}", f"{Y['DYtautau']['value']:.0f} / {Y['Fakes']['value']:.0f}"],
+             ["SR2: signal / fakes", f"{MED['yields']['SR2_DYtautau']} / {MED['yields']['SR2_Fakes']}", f"{yr['DYtautau']['value']:.0f} / {yr['Fakes']['value']:.0f}"],
+             ["goodness of fit p", f"{MED['gof']:.2f}", f"{FIT['gof_probability']:.2f}"],
+             ["BDT held-out AUC", f"{MED['bdt_auc']:.3f}", f"{sum(B['training']['auc_test'])/5:.3f}"],
+             ["tau ID SF per DM (0/1/10/11)", MED["sf"], "0.90+-0.13, 0.89+-0.05, 0.94+-0.15, 0.81+-0.15"]]}])
+v2p = H["v2"]["fake_pulls"]; cur = MED["fake_pulls"]; v3p = FIT["pulls"]
 def pull(d_, k):
     v = d_.get(k); return f"{v[0]:+.2f} ({v[1]:.2f})" if v else "-"
-prow = [["FF OS/SS extrapolation (v2: one NP)", pull(v2p, "FakeOSSS_tautau"), "-"],
-        ["FF OS/SS SR0 / SR1 / SR2 (v2.1)", "-", " / ".join(pull(cur, f"FakeOSSS_tautau_c{k}") for k in range(3))],
-        ["FF non-closure SR1 m<110 / m>110", pull(v2p, "FakeClosure_tautau_c1_lo") + " / " + pull(v2p, "FakeClosure_tautau_c1_hi"), pull(cur, "FakeClosure_tautau_c1_lo") + " / " + pull(cur, "FakeClosure_tautau_c1_hi")],
-        ["FF non-closure SR2 m<110 / m>110", pull(v2p, "FakeClosure_tautau_c2_lo") + " / " + pull(v2p, "FakeClosure_tautau_c2_hi"), pull(cur, "FakeClosure_tautau_c2_lo") + " / " + pull(cur, "FakeClosure_tautau_c2_hi")],
-        ["FF non-closure SR0 m<110 / m>110", pull(v2p, "FakeClosure_tautau_c0_lo") + " / " + pull(v2p, "FakeClosure_tautau_c0_hi"), "not fitted / " + pull(cur, "FakeClosure_tautau_c0_hi")]]
+prow = [["FF OS/SS extrapolation (v2: one NP)", pull(v2p, "FakeOSSS_tautau"), "-", "-"],
+        ["FF OS/SS SR0 / SR1 / SR2 (per category)", "-", " / ".join(pull(cur, f"FakeOSSS_tautau_c{k}") for k in range(3)), " / ".join(pull(v3p, f"FakeOSSS_tautau_c{k}") for k in range(3))],
+        ["FF non-closure SR1 m<110 / m>110", pull(v2p, "FakeClosure_tautau_c1_lo") + " / " + pull(v2p, "FakeClosure_tautau_c1_hi"), pull(cur, "FakeClosure_tautau_c1_lo") + " / " + pull(cur, "FakeClosure_tautau_c1_hi"), pull(v3p, "FakeClosure_tautau_c1_lo") + " / " + pull(v3p, "FakeClosure_tautau_c1_hi")],
+        ["FF non-closure SR2 m<110 / m>110", pull(v2p, "FakeClosure_tautau_c2_lo") + " / " + pull(v2p, "FakeClosure_tautau_c2_hi"), pull(cur, "FakeClosure_tautau_c2_lo") + " / " + pull(cur, "FakeClosure_tautau_c2_hi"), pull(v3p, "FakeClosure_tautau_c2_lo") + " / " + pull(v3p, "FakeClosure_tautau_c2_hi")],
+        ["FF non-closure SR0 m<110 / m>110", pull(v2p, "FakeClosure_tautau_c0_lo") + " / " + pull(v2p, "FakeClosure_tautau_c0_hi"), "not fitted / " + pull(cur, "FakeClosure_tautau_c0_hi"), "not fitted / " + pull(v3p, "FakeClosure_tautau_c0_hi")]]
 C = R["C_osss_per_category"]
-crow = [[f"category {k}", f"{R['fake_factors']['mcsub']['C_OS_SS_inclusive']:.3f} (inclusive)", f"{H['v2']['osss_sideband_check'][list(H['v2']['osss_sideband_check'])[k]]:.3f}",
+crow = [[f"category {k}", "1.052 (inclusive)", f"{H['v2']['osss_sideband_check'][list(H['v2']['osss_sideband_check'])[k]]:.3f}",
          " / ".join(f"{C[0][j][k]:.3f}" for j in range(3)), " / ".join(f"{C[1][j][k]:.3f}" for j in range(3))] for k in range(3)]
-d.tables("The fake-factor pulls: diagnosis and fix (v2 -> v2.1)", [
-    {"title": "pulls (post-fit constraint) of the fake nuisance parameters", "headers": ["parameter", "v2", "v2.1"], "col_w": [420, 300, 340], "rows": prow},
-    {"title": "diagnosis: tau2-anti-isolated sideband, observed / predicted with the inclusive C, and the per-category C now used (era G: 0 / 1 / >= 2 jets; era H)",
-     "headers": ["BDT category", "C used in v2", "sideband obs / pred (v2)", "C v2.1, Run2016G", "C v2.1, Run2016H"], "col_w": [220, 200, 240, 260, 260], "rows": crow}])
+d.tables("The fake-factor pulls: diagnosis and fix (v2 -> v2.1 -> v3)", [
+    {"title": "pulls (post-fit constraint) of the fake nuisance parameters", "headers": ["parameter", "v2 (Medium)", "v2.1 (Medium)", f"v3 ({WP})"], "col_w": [360, 230, 260, 260], "rows": prow},
+    {"title": f"diagnosis (v2, Medium): tau2-anti-isolated sideband, observed / predicted with the inclusive C; and the per-category C of v3 ({WP}; era G: 0 / 1 / >= 2 jets; era H)",
+     "headers": ["BDT category", "C used in v2", "sideband obs / pred (v2)", f"C v3, Run2016G", f"C v3, Run2016H"], "col_w": [220, 200, 240, 260, 260], "rows": crow}])
 d.bullets("How the issues were addressed, in one list",
           ["**Reviewed (v1 -> v2)**",
            "38 % of the signal template non-fiducial -> fiducial signal + non-fiducial DY background (5 % NP, theory variations on the ratio)",
@@ -236,11 +231,11 @@ d.bullets("How the issues were addressed, in one list",
            "80 % fakes -> 5-fold XGBoost on mass-agnostic inputs, three categories, m_tautau fitted in each; FF closure in the score verified",
            "wrong TRExFitter build (v1.10, StatAnalysis ROOT) -> submodule at v1.8.0, rebuilt against the LCG ROOT",
            "",
-           "**Follow-up (v2 -> v2.1)**",
+           "**Follow-up (v2 -> v2.1 -> v3)**",
            "fake NPs pulled 0.6-1.5 sigma -> the OS/SS charge correlation depends on the BDT topology: C per (era, N_jets, category), one NP per category",
            "poor goodness of fit (p = 0.01) -> the fake-dominated category is a sideband: fitted above 110 GeV only (p = 0.22)",
            "trigger paths and luminosity verified: both di-tau paths active and unprescaled in every certified lumisection; single-tau paths rejected (120 GeV threshold keeps 8 % of the signal, no POG scale factors)",
-           "Tight working point run through the same chain: +11/-10 % instead of +12/-10 %, closer to NNLO -> recommended next nominal"], size=13)
+           f"Tight working point run through the same chain (v2.1 cross-check), then made the nominal (v3): +{100*FIT['mu_err_up']:.0f}/-{100*FIT['mu_err_down']:.0f} % instead of +{100*MED['up']:.0f}/-{100*MED['down']:.0f} %, closer to NNLO"], size=13)
 
 # ---------------------------------------------------------------- 3. the fit
 d.divider("3.  The fit: three BDT categories")
@@ -262,9 +257,8 @@ d.tables("Prefit yields per category", [{"title": "events, prefit (MC-subtracted
 # ---------------------------------------------------------------- 4. BDT
 d.divider("4.  The k-fold BDT")
 d.text_figures("Why a classifier, and what goes in",
-               ["**Why**: 80 % fakes; every fake uncertainty scales with B/S.",
-                "Tight WP: -63 % fakes for -24 % signal, same stat. power.",
-                "A classifier keeps the signal and sorts the events.",
+               [f"**Why**: {100*Y['Fakes']['value']/Y['Data']['value']:.0f} % fakes even at Tight (80 % at Medium); every fake uncertainty scales with B/S.",
+                "A classifier keeps the signal and sorts the events by topology.",
                 "",
                 "**Inputs** (mass-agnostic): $p_T(\\tau_{1,2})$, ratio, $|\\eta_{1,2}|$,",
                 r"$\Delta R$, $\Delta\phi$, MET, MET significance, $p_T^{vis}$,",
@@ -297,11 +291,11 @@ d.text_figures("The fake factor, MC subtracted and closure corrected",
                 "",
                 "era x DM x N_jets x pT = 120 bins, ~10 % stat. each (per event into the template variance).",
                 "",
-                "**MC subtraction**: genuine tau1 = 1.3 % of the AR but 6 % of the signal,",
-                "3.9 %% of the C numerator; C: 1.078 -> %.3f." % R["fake_factors"]["mcsub"]["C_OS_SS_inclusive"],
+                "**MC subtraction**: genuine tau1 = 1-2 % of the AR but ~6 % of the signal,",
+                "~4 %% of the C numerator; C inclusive %.3f (per category in the fit)." % R["fake_factors"]["mcsub"]["C_OS_SS_inclusive"],
                 "W+jets subtracted with uniform weights (raw weights 20-200, one at -63).",
                 "",
-                "**Closure corrections**: the FF varies by +-15 % with |eta(tau1)| (same shape",
+                "**Closure corrections** (derived at Medium in v2, re-derived at Tight): the FF varies by +-15 % with |eta(tau1)| (same shape",
                 "in both eras, all pT, N_jets and DMs: DeepTau's jet rejection is not eta-flat)",
                 "and by -6 % with pT(tau2). Residual non-closure per category and mass",
                 "region -> one nuisance parameter each: " + ", ".join(f"{k.split('_')[-2]}/{k.split('_')[-1]} {100*v['delta']:.0f} %" for k, v in R["closure_nps"].items()) + "."],
@@ -345,25 +339,25 @@ d.text_figure(r"MET correction of the visible mass: $m_{\tau\tau}$",
 d.tables("Selection and cutflow", [
     {"title": "selection", "headers": ["object", "requirement"], "col_w": [220, 900],
      "rows": [["trigger", "DoubleMedium(Combined)IsoPFTau35_Trk1_eta2p1_Reg (G: Iso, H: CombinedIso); both legs matched to HLT tau objects"],
-              ["tau_h", "pT > 40 GeV, |eta| < 2.1, |dz| < 0.2 cm, DM 0/1/10/11; DeepTau VSe VVLoose, VSmu VLoose; VSjet Medium (tight) / VVVLoose & !Medium (loose)"],
+              ["tau_h", f"pT > 40 GeV, |eta| < 2.1, |dz| < 0.2 cm, DM 0/1/10/11; DeepTau VSe VVLoose, VSmu VLoose; VSjet {WP} (tight) / VVVLoose & !{WP} (loose)"],
               ["pair", "most isolated pair, dR > 0.5; tau1 = leading pT (the fake-factor leg)"],
               ["vetoes", "no extra e / mu: orthogonal to e tau_h, mu tau_h, ee, mumu"],
               ["simulation", "events whose leading tau is a jet are dropped (covered by the fake factor)"]]},
     {"title": "cutflow", "headers": ["step", "Run2016G", "Run2016H"], "col_w": [420, 200, 200],
      "rows": [["NanoAOD", "79.6 M", "76.8 M"], ["skim (certified, trigger, >= 2 candidates)", "2.81 M", "2.22 M"],
               ["pair + MET filters", "2.03 M", "1.62 M"], ["trigger match", "1.99 M", "1.59 M"], ["lepton veto", "1.99 M", "1.59 M"],
-              ["signal region (OS, both Medium)", "24 106", "23 480"]]}])
+              [f"signal region (OS, both {WP})", f"{R['cutflow']['data_2016G'].get('SR', '-')}", f"{R['cutflow']['data_2016H'].get('SR', '-')}"]]}])
 
 # ---------------------------------------------------------------- 7. findings
 d.divider("7.  Findings and next steps")
 d.bullets("Findings",
-          [rf"1. $\sigma(60$-$120) = {s60['value']:.0f}\,^{{+{s60['err_up']:.0f}}}_{{-{s60['err_down']:.0f}}} \pm {s60['acceptance']:.0f}$ pb, $\mu_Z = {FIT['mu']:.2f}$: $1.4\sigma$ above NNLO and above $Z\rightarrow\mu\mu$ ($\mu_Z = 0.99$). Total $^{{+{100*FIT['mu_err_up']:.0f}}}_{{-{100*FIT['mu_err_down']:.0f}}}$ % (v1: +19/-16 %), data statistics {100*FIT['mu_stat']:.1f} %.",
+          [rf"1. $\sigma(60$-$120) = {s60['value']:.0f}\,^{{+{s60['err_up']:.0f}}}_{{-{s60['err_down']:.0f}}} \pm {s60['acceptance']:.0f}$ pb, $\mu_Z = {FIT['mu']:.2f}$: ${(FIT['mu']-1)/FIT['mu_err_down']:.1f}\sigma$ above NNLO and $Z\rightarrow\mu\mu$ ($\mu_Z = 0.99$). Total $^{{+{100*FIT['mu_err_up']:.0f}}}_{{-{100*FIT['mu_err_down']:.0f}}}$ % (v2.1 Medium: +{100*MED['up']:.0f}/-{100*MED['down']:.0f} %, v1: +19/-16 %), data statistics {100*FIT['mu_stat']:.1f} %.",
            "2. The limit is external: the TauPOG tau ID scale factors (%.0f %%); Z->tautau is how those SFs are measured, and the two POG prescriptions (DM- vs pT-binned) differ by 14 %% on the yield." % (100 * GI["Tau ID"]),
            "3. In the signal-dominated category data/prediction rises with the visible tau pT (1.0 at threshold, 1.2 above 70 GeV): part of mu > 1 comes from there (the fit quality itself is fine, p = %.2f, once the fake sideband is restricted to m > 110 GeV). Trigger turn-on modelling or the NLO Z pT spectrum; an in-situ trigger measurement is the next step." % FIT["gof_probability"],
            "4. The fake factor closes only with N_jets, era and |eta(tau1)| / pT(tau2) corrections; the FF is eta-dependent by +-15 % because DeepTau's jet rejection is not. The MC subtraction is not optional (bias -0.05 on mu; unsubtracted fakes 7 % high where there is no signal).",
            "5. 38 % of the selected Z->tautau is non-fiducial; kept in the signal template it makes the sideband mu-dependent. As a background it costs a 5 % normalisation NP and nothing else.",
            "6. The BDT categories give a nearly background-free Z peak (S/B %.1f) and confine the fake uncertainties (%.0f %%, now honest) to where the fakes are; the statistical gain is small (the measurement is systematics limited)." % (YR["tautau_SR2"]["DYtautau"]["value"] / YR["tautau_SR2"]["Fakes"]["value"], 100 * GI["Fakes"]),
-           ("8. Tight working point (same chain): mu_Z = %s, total +%.0f/-%.0f %% (Medium +%.0f/-%.0f %%), GoF p = %.2f: every uncertainty group shrinks, the visible-pT slope is weaker but still there. Recommended nominal for the next iteration and the combination." % (pm(TIGHT['fit']['mcsub']['mu'], TIGHT['fit']['mcsub']['mu_err_up'], TIGHT['fit']['mcsub']['mu_err_down']), 100*TIGHT['fit']['mcsub']['mu_err_up'], 100*TIGHT['fit']['mcsub']['mu_err_down'], 100*FIT['mu_err_up'], 100*FIT['mu_err_down'], TIGHT['fit']['mcsub']['gof_probability'])) if TIGHT else "",
+           "8. The Tight working point (v3 nominal) vs Medium (v2.1), same chain: mu_Z %s vs %.3f +%.3f -%.3f, total +%.0f/-%.0f %% vs +%.0f/-%.0f %%: every uncertainty group shrinks, the visible-pT slope is weaker but still there." % (MU, MED['mu'], MED['up'], MED['down'], 100*FIT['mu_err_up'], 100*FIT['mu_err_down'], 100*MED['up'], 100*MED['down']),
            "7. Reproducibility: this checkout's TRExFitter was a v1.10 commit built against the StatAnalysis ROOT; it is now the tagged v1.8.0 built with fitting/build_trexfitter.sh."], size=14)
 d.bullets("For the combination, and next steps",
           ["**For the combination**",

@@ -92,15 +92,12 @@ def flow():
 def result_summary():
     fig, ax = dark_fig((9, 5.4))
     pred = R["prediction"]["sigma_tautau_60_120_pb"]
-    s = FIT["sigma_60_120_pb"]; sn = R["fit"]["nosub"]["sigma_60_120_pb"]
+    s = FIT["sigma_60_120_pb"]
     H = json.loads((HERE / "history.json").read_text())
-    tight = json.loads((HERE.parent / "variants/tight/output/results.json").read_text())["fit"]["mcsub"]["sigma_60_120_pb"]
-    rows = [("v2.1 nominal, Medium (this result)", s["value"], s["stat"], s["err_down"], s["err_up"], BLUE),
-            ("v2.1, DeepTau Tight (cross-check)", tight["value"], tight["stat"], tight["err_down"], tight["err_up"], ORANGE),
-            ("v2.1, FF without MC subtraction", sn["value"], sn["stat"], sn["err_down"], sn["err_up"], MUTED),
-            ("v2, inclusive OS/SS correction", H["v2"]["sigma60"], 40, H["v2"]["sigma_down"], H["v2"]["sigma_up"], MUTED),
-            ("v1 (reviewed)", H["v1"]["sigma60"], 36, H["v1"]["sigma_down"], H["v1"]["sigma_up"], MUTED),
-            (r"Z$\rightarrow\mu\mu$ v2 (60$-$120)", 1935, 5, 30, 30, GREEN)]
+    rows = [("v3 nominal: DeepTau Tight (this result)", s["value"], s["stat"], s["err_down"], s["err_up"], BLUE)]
+    for key, col in (("v2.1", ORANGE), ("v2", MUTED), ("v1", MUTED)):
+        h = H[key]; rows.append((h["label"], h["sigma60"], h["sigma_stat"], h["sigma_down"], h["sigma_up"], col))
+    rows.append((r"Z$\rightarrow\mu\mu$ v2 (60$-$120)", 1935, 5, 30, 30, GREEN))
     ax.axvspan(pred * 0.96, pred * 1.04, color=ORANGE, alpha=0.25); ax.axvline(pred, color=ORANGE)
     for i, (lab, v, st, dn, up, col) in enumerate(rows):
         y = len(rows) - i

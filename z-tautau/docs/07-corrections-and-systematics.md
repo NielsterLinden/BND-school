@@ -9,16 +9,16 @@ converts them to the committed `external/tau_pog_UL2016postVFP.json`.
 
 | correction | applied to | value (UL2016 postVFP) |
 |---|---|---|
-| τh ID SF, VSjet Medium, **per decay mode** (TauPOG recommendation for τhτh, pT > 40) | genuine τh (`genPartFlav` 5) | DM0 0.923 ± 0.142, DM1 0.880 ± 0.054, DM10 0.868 ± 0.085, DM11 0.898 ± 0.163 |
+| τh ID SF, VSjet **Tight**, **per decay mode** (TauPOG recommendation for τhτh, pT > 40) | genuine τh (`genPartFlav` 5) | DM0 0.902 ± 0.126, DM1 0.892 ± 0.053, DM10 0.938 ± 0.148, DM11 0.812 ± 0.149 (Medium, v1–v2.1: 0.923 ± 0.142, 0.880 ± 0.054, 0.868 ± 0.085, 0.898 ± 0.163) |
 | τh energy scale | genuine τh; propagated to MET, m_tt and the BDT inputs | DM0 0.993 ± 0.009, DM1 0.991 ± 0.007, DM10 1.001 ± 0.007, DM11 0.997 ± 0.016 |
 | e→τh VSe VVLoose SF | prompt e / τ→e (flav 1, 3) | 1.06 ± 0.05 (barrel), 0.95 ± 0.06 (endcap) |
 | μ→τh VSmu VLoose SF | prompt μ / τ→μ (flav 2, 4) | 0.88–1.04 per \|η\| bin |
-| di-τ trigger leg SF(pT, DM) | every **genuine** leg (SF = 1 for a jet leg, `genPartFlav` 0, since v2) | ratio of the fitted data and MC efficiencies, e.g. 0.94–0.97 at 50 GeV; data efficiency 0.3–0.6 at 40 GeV (turn-on) |
+| di-τ trigger leg SF(pT, DM), for the **Tight** offline legs | every **genuine** leg (SF = 1 for a jet leg, `genPartFlav` 0, since v2) | ratio of the fitted data and MC efficiencies, e.g. 0.94–0.97 at 50 GeV; data efficiency 0.3–0.6 at 40 GeV (turn-on) |
 | pileup | all MC | data profile from the Open Data lumi-by-LS table (record 1059), σ_mb = 69.2 mb; same construction as z-mumu v2 |
 | L1 prefiring | all MC | `L1PreFiringWeight_Nom` (mean 0.990 for the signal) |
 
 **The two TauPOG ID prescriptions disagree.** The pT-binned SF for pT > 40 GeV is 0.823 +0.086 −0.036 for
-every decay mode, 7 % per leg below the DM-binned values used here, i.e. ~14 % on the τhτh yield (μ_Z would
+every decay mode (Medium; the Tight pT-binned value is similar), 7 % per leg below the DM-binned values, i.e. ~14 % on the τhτh yield (μ_Z would
 be ~14 % higher with it). The DM-binned set is the POG's recommendation for selections with a
 decay-mode-dependent trigger like the di-τ trigger, and it is what is used; the pT-binned result is a
 cross-check to be quoted, not a nuisance parameter (`REVIEW.md` 3.3). In the combination with ee/μμ the
@@ -36,7 +36,7 @@ over the three categories. The complete list with per-category sizes is in
 | `Lumi` | OVERALL, all MC | 1.2 % | correlated with ee, μμ |
 | `Pileup` | HISTO | ~1 % | σ_mb ± 4.6 %; correlated |
 | `L1Prefiring` | HISTO | 0.2 % | correlated |
-| `TauID_DM0/1/10/11` | HISTO | 9 / 6 / 4 / 3 % | TauPOG uncertainty, uncorrelated between DMs, correlated between the two legs |
+| `TauID_DM0/1/10/11` | HISTO | 8 / 6 / 5 / 3 % | TauPOG uncertainty (Tight), uncorrelated between DMs, correlated between the two legs |
 | `TauTrigger_DM*` | HISTO | 1–3 % | fitted SF uncertainty vs pT |
 | `TauES_DM*` | HISTO, shape (smoothed) | 1–2 % + shape | τ pT, MET, m_tt and the BDT score recomputed (events migrate between categories) |
 | `TauFakeEle`, `TauFakeMu` | HISTO | < 1.3 % on Z→ee | |
@@ -47,7 +47,7 @@ over the three categories. The complete list with per-category sizes is in
 | `XS_DYtautau_nonfid` 5 %, `XS_DYll` 5 %, `XS_DYlowmass` 10 %, `XS_TTbar` 6 %, `XS_SingleTop`/`XS_WW`/`XS_WZ`/`XS_ZZ`/`XS_WJets` 10 % | OVERALL | | |
 | `MCStatNorm_WJets_tautau` | OVERALL | 50 % | W+jets SR yield from very few simulated events with weights up to ~200; shape taken from τ2 ≥ VVVLoose per category |
 | `FakeOSSS_tautau_c<k>` | HISTO on fakes, per BDT category k | 3.0–3.5 % | C_OS/SS(era, N_jets, category) stat ⊕ 3 % extrapolation |
-| `FakeClosure_tautau_c<k>_lo`, `_hi` | HISTO on fakes, per category k and m_tt region | c0/lo 15 %, c0/hi 1 %, c1/lo 5 %, c1/hi 7 %, c2/lo 12 %, c2/hi 55 % | residual same-sign non-closure ⊕ its statistical error (`05-fake-factors.md`) |
+| `FakeClosure_tautau_c<k>_lo`, `_hi` | HISTO on fakes, per category k and m_tt region | c0/lo 14 %, c0/hi 1 %, c1/lo 7 %, c1/hi 21 %, c2/lo 15 %, c2/hi 44 % | residual same-sign non-closure ⊕ its statistical error (`05-fake-factors.md`) |
 | MC statistics | γ per bin (`MCstatThreshold 0`) | | signal and background templates; the `Fakes` template carries the AR data statistics **and** the FF statistics per event |
 
 **Not a nuisance parameter (reported only): `SigModel_tautau`.** The fiducial C factor with madgraph LO

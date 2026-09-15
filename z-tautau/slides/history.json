@@ -1,10 +1,158 @@
 {
- "v1": {"label": "v1 (reviewed, 14 Sep)", "mu": 1.160, "up": 0.192, "down": 0.163, "stat": 0.018, "sigma60": 2255, "sigma_up": 371, "sigma_down": 315, "gof": 0.18,
-        "impacts": {"Tau ID": 12.5, "Signal modelling": 9.8, "Tau trigger": 5.1, "Gammas": 4.8, "Tau energy scale": 3.2, "Luminosity": 1.3, "Pileup": 1.2, "Fakes": 0.8, "MET": 0.6, "Background normalisation": 0.6, "L1 prefiring": 0.3},
-        "what": "one region, unsubtracted FF, whole Z/gamma*->tautau as signal, LO-vs-NLO NP"},
- "v2": {"label": "v2 (review fixes + BDT, inclusive C)", "mu": 1.212, "up": 0.145, "down": 0.125, "stat": 0.020, "sigma60": 2358, "sigma_up": 282, "sigma_down": 242, "gof": 0.012,
-        "impacts": {"Tau ID": 11.2, "Fakes": 8.8, "Gammas": 4.7, "Tau trigger": 4.2, "Tau energy scale": 2.5, "Background normalisation": 1.8, "Signal modelling": 1.8, "MET": 1.2, "Luminosity": 1.0, "Pileup": 0.9, "L1 prefiring": 0.3},
-        "fake_pulls": {"FakeOSSS_tautau": [0.64, 0.45], "FakeClosure_tautau_c0_lo": [-0.05, 0.27], "FakeClosure_tautau_c0_hi": [-0.12, 0.95], "FakeClosure_tautau_c1_lo": [0.78, 0.74], "FakeClosure_tautau_c1_hi": [0.99, 0.66], "FakeClosure_tautau_c2_lo": [-0.09, 0.96], "FakeClosure_tautau_c2_hi": [1.45, 0.56]},
-        "osss_sideband_check": {"category 0 (< 0.55)": 0.996, "category 1 (0.55-0.90)": 1.065, "category 2 (> 0.90)": 1.031},
-        "what": "fiducial signal, MC-subtracted closure-corrected FF, jet-binned DY, k-fold BDT categories; one inclusive C_OS/SS"}
+ "v1": {
+  "label": "v1 (reviewed): Medium WP, one region, unsubtracted FF",
+  "mu": 1.16,
+  "up": 0.192,
+  "down": 0.163,
+  "stat": 0.018,
+  "sigma60": 2255,
+  "sigma_up": 371,
+  "sigma_down": 315,
+  "gof": 0.18,
+  "impacts": {
+   "Tau ID": 12.5,
+   "Signal modelling": 9.8,
+   "Tau trigger": 5.1,
+   "Gammas": 4.8,
+   "Tau energy scale": 3.2,
+   "Luminosity": 1.3,
+   "Pileup": 1.2,
+   "Fakes": 0.8,
+   "MET": 0.6,
+   "Background normalisation": 0.6,
+   "L1 prefiring": 0.3
+  },
+  "what": "one region, unsubtracted FF, whole Z/gamma*->tautau as signal, LO-vs-NLO NP",
+  "sigma_stat": 36
+ },
+ "v2": {
+  "label": "v2: Medium WP, review fixes + BDT, inclusive C_OS/SS",
+  "mu": 1.212,
+  "up": 0.145,
+  "down": 0.125,
+  "stat": 0.02,
+  "sigma60": 2358,
+  "sigma_up": 282,
+  "sigma_down": 242,
+  "gof": 0.012,
+  "impacts": {
+   "Tau ID": 11.2,
+   "Fakes": 8.8,
+   "Gammas": 4.7,
+   "Tau trigger": 4.2,
+   "Tau energy scale": 2.5,
+   "Background normalisation": 1.8,
+   "Signal modelling": 1.8,
+   "MET": 1.2,
+   "Luminosity": 1.0,
+   "Pileup": 0.9,
+   "L1 prefiring": 0.3
+  },
+  "fake_pulls": {
+   "FakeOSSS_tautau": [
+    0.64,
+    0.45
+   ],
+   "FakeClosure_tautau_c0_lo": [
+    -0.05,
+    0.27
+   ],
+   "FakeClosure_tautau_c0_hi": [
+    -0.12,
+    0.95
+   ],
+   "FakeClosure_tautau_c1_lo": [
+    0.78,
+    0.74
+   ],
+   "FakeClosure_tautau_c1_hi": [
+    0.99,
+    0.66
+   ],
+   "FakeClosure_tautau_c2_lo": [
+    -0.09,
+    0.96
+   ],
+   "FakeClosure_tautau_c2_hi": [
+    1.45,
+    0.56
+   ]
+  },
+  "osss_sideband_check": {
+   "category 0 (< 0.55)": 0.996,
+   "category 1 (0.55-0.90)": 1.065,
+   "category 2 (> 0.90)": 1.031
+  },
+  "what": "fiducial signal, MC-subtracted closure-corrected FF, jet-binned DY, k-fold BDT categories; one inclusive C_OS/SS",
+  "sigma_stat": 40
+ },
+ "v2.1": {
+  "label": "v2.1: Medium WP, per-category C, SR0 sideband",
+  "mu": 1.205,
+  "up": 0.145,
+  "down": 0.125,
+  "stat": 0.02,
+  "sigma60": 2343,
+  "sigma_up": 282,
+  "sigma_down": 243,
+  "sigma_stat": 39,
+  "gof": 0.22,
+  "impacts": {
+   "Tau ID": 11.1,
+   "Fakes": 8.6,
+   "Gammas": 4.7,
+   "Tau trigger": 4.2,
+   "Tau energy scale": 2.1,
+   "Background normalisation": 1.8,
+   "Signal modelling": 1.8,
+   "MET": 1.0,
+   "Luminosity": 1.0,
+   "Pileup": 1.0,
+   "L1 prefiring": 0.2
+  },
+  "fake_pulls": {
+   "FakeOSSS_tautau_c0": [
+    0.58,
+    0.45
+   ],
+   "FakeOSSS_tautau_c1": [
+    0.34,
+    0.82
+   ],
+   "FakeOSSS_tautau_c2": [
+    0.18,
+    0.97
+   ],
+   "FakeClosure_tautau_c0_hi": [
+    0.16,
+    0.96
+   ],
+   "FakeClosure_tautau_c1_lo": [
+    0.11,
+    0.79
+   ],
+   "FakeClosure_tautau_c1_hi": [
+    0.41,
+    0.7
+   ],
+   "FakeClosure_tautau_c2_lo": [
+    0.05,
+    0.96
+   ],
+   "FakeClosure_tautau_c2_hi": [
+    1.44,
+    0.55
+   ]
+  },
+  "yields": {
+   "DYtautau": 4827,
+   "Fakes": 36931,
+   "Data": 47586,
+   "SR2_DYtautau": 2790,
+   "SR2_Fakes": 529
+  },
+  "bdt_auc": 0.97,
+  "sf": "0.92\u00b10.14, 0.88\u00b10.05, 0.87\u00b10.09, 0.90\u00b10.16",
+  "what": "Medium WP; C_OS/SS per (era, N_jets, BDT category); fake-dominated category fitted above 110 GeV only"
+ }
 }

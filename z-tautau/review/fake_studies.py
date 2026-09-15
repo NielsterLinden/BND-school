@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-"""Numerical cross-checks for REVIEW.md (run from z-tautau/ after `source ../setup.sh`):
+"""NOTE: written for the v1 review at the DeepTau Medium working point; since v3 the default is Tight, so run
+with BND_TAUTAU_WP=Medium to reproduce the numbers quoted in REVIEW.md.
+
+Numerical cross-checks for REVIEW.md (run from z-tautau/ after `source ../setup.sh`):
 
     python review/fake_studies.py
 

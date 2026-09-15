@@ -16,11 +16,13 @@ REPO_DIR = CHANNEL_DIR.parent                               # BND-school/
 GRL_PATH = REPO_DIR / "datasets" / "GRL" / "GRL.txt"
 FILELIST_DIR = CHANNEL_DIR / "filelists"
 EXTERNAL_DIR = CHANNEL_DIR / "external"                     # small, committed POG inputs (JSON)
-# Working-point variant: BND_TAUTAU_WP=Tight runs the whole chain (from step 3) with DeepTau VSjet Tight
-# instead of Medium on both legs, with the matching TauPOG ID and trigger scale factors, into
-# variants/<wp>/{output,fit} and a separate BDT (docs/08, "working-point cross-check").
-TAU_WP = os.environ.get("BND_TAUTAU_WP", "Medium")
-_VARIANT = CHANNEL_DIR if TAU_WP == "Medium" else CHANNEL_DIR / "variants" / TAU_WP.lower()
+# Working point of both tau legs. v3 nominal: DeepTau VSjet Tight (v1/v2 used Medium: 80% fakes; Tight
+# removes 63% of them for 24% of the signal, and gave the more precise result with the same chain,
+# docs/08). BND_TAUTAU_WP=<other WP> runs the whole chain from step 3 with that working point and the
+# matching TauPOG ID and trigger scale factors into variants/<wp>/{output,fit} and a separate BDT.
+NOMINAL_WP = "Tight"
+TAU_WP = os.environ.get("BND_TAUTAU_WP", NOMINAL_WP)
+_VARIANT = CHANNEL_DIR if TAU_WP == NOMINAL_WP else CHANNEL_DIR / "variants" / TAU_WP.lower()
 OUTPUT_DIR = _VARIANT / "output"
 PLOT_DIR = OUTPUT_DIR / "plots"
 DATA_DIR = OUTPUT_DIR / "data"                              # git-ignored intermediates
@@ -31,7 +33,7 @@ CACHE_DIR = Path(os.environ.get("BND_TAUTAU_CACHE", "/data/atlas/users/sjankovy/
 SKIM_DIR = CACHE_DIR / "skims_v1"          # NanoAOD-format skims, one file per parent file
 NTUPLE_DIR = CACHE_DIR / "ntuples_v1"      # flat analysis ntuples, one file per sample (laptop bundle)
 DOWNLOAD_DIR = CACHE_DIR / "downloads"     # raw POG ROOT files before conversion
-BDT_DIR = CACHE_DIR / ("bdt" if TAU_WP == "Medium" else f"bdt_{TAU_WP.lower()}")   # k-fold BDT models (not committed)
+BDT_DIR = CACHE_DIR / ("bdt" if TAU_WP == NOMINAL_WP else f"bdt_{TAU_WP.lower()}")   # k-fold BDT models (not committed)
 
 # Luminosity-by-lumisection table of CMS Open Data record 1059 (PHYSICS normtag), used for the
 # pileup profile. Same file the z-mumu v2 analysis uses.
@@ -74,7 +76,7 @@ TAU_DZ_MAX = 0.2                         # cm
 TAU_VSE_BIT = 2                          # VVLoose  (TauPOG recommendation for tau_h tau_h)
 TAU_VSMU_BIT = 1                         # VLoose
 VSJET_BITS = {"VVVLoose": 1, "VVLoose": 2, "VLoose": 4, "Loose": 8, "Medium": 16, "Tight": 32, "VTight": 64, "VVTight": 128}
-TAU_VSJET_TIGHT_BIT = VSJET_BITS[TAU_WP]  # the signal-region ("tight") working point: Medium nominally
+TAU_VSJET_TIGHT_BIT = VSJET_BITS[TAU_WP]  # the signal-region ("tight") working point: Tight nominally (v3)
 TAU_VSJET_LOOSE_BIT = 1                  # VVVLoose: "loose" for the fake-factor regions
 PAIR_DR_MIN = 0.5
 # Candidates entering the pair choice (and the ntuples) are a little looser than the final cut so the
@@ -128,10 +130,10 @@ FF_NJET_BINS = [0, 1, 2]                 # lower edges; the last bin is inclusiv
 FF_BY_ERA = True
 ERA_LUMI_PB = (7653.261, 8740.119)       # (Run2016G, Run2016H), sum = LUMI_PB
 FF_DMS = TAU_DMS
-# Nominal: simulated events with a genuine leading tau are subtracted from the determination and
-# application regions (the classic fake factor; without it the application region double counts ~6% of
-# the signal and C_OS/SS is biased by +2.5%, REVIEW.md 3.2). The unsubtracted variant ("nosub") is
-# still computed alongside as a cross-check.
+# Simulated events with a genuine leading tau are subtracted from the determination and application
+# regions (the classic fake factor; without it the application region double counts ~6% of the signal
+# and C_OS/SS is biased by +2.5%, REVIEW.md 3.2). The unsubtracted variant is only computed on request
+# (step 4/5 --ff-variant nosub), it is not part of the nominal chain (v3).
 FF_SUBTRACT_MC = True
 # Factorised closure corrections of the FF, measured in same-sign data after the era x DM x N_jets x pT
 # table: the FF varies by +-15% with |eta(tau1)| (universal shape: barrel-endcap transition, tracker

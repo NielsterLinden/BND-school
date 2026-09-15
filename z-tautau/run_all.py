@@ -11,8 +11,8 @@ Steps (each is a standalone script in scripts/, documented in docs/):
     1 skims of data and simulation          (dCache/EOS; ~1 h on 12 cores, resumable)
     2 flat ntuples                          (~5 min)
     3 fake factors, closure corrections, OS/SS correction, closure; then the k-fold BDT (step3b)
-    4 histograms per BDT category, systematic variations, control plots, fit inputs   (both fake-factor variants)
-    5 TRExFitter fits                       (both fake-factor variants)
+    4 histograms per BDT category, systematic variations, control plots, fit inputs
+    5 TRExFitter fit (MC-subtracted fake factor; --ff-variant nosub on request)
     6 report: output/results.json, output/RESULTS.md, summary plots
 """
 
@@ -30,10 +30,8 @@ STEPS = {
     1: [["scripts/step1_skim.py"]],
     2: [["scripts/step2_ntuples.py"]],
     3: [["scripts/step3_fakefactors.py"], ["scripts/step3b_bdt.py"]],
-    4: [["scripts/step4_histograms.py", "--ff-variant", "mcsub"],
-        ["scripts/step4_histograms.py", "--ff-variant", "nosub", "--no-plots"]],
-    5: [["scripts/step5_fit.py", "--ff-variant", "mcsub"],
-        ["scripts/step5_fit.py", "--ff-variant", "nosub", "--skip-ranking"]],
+    4: [["scripts/step4_histograms.py"]],
+    5: [["scripts/step5_fit.py"]],
     6: [["scripts/step6_report.py"]],
 }
 

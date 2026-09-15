@@ -40,7 +40,7 @@ the two paths is used, as in the scale-factor derivation, with the luminosity-we
 | decay mode | 0, 1, 10, 11 | the modes with TauPOG ID/ES SFs; the new DMs 5, 6 are not calibrated |
 | DeepTau2017v2p1 VSe | ≥ VVLoose | TauPOG recommendation for τhτh |
 | DeepTau2017v2p1 VSmu | ≥ VLoose | TauPOG recommendation for τhτh |
-| DeepTau2017v2p1 VSjet | ≥ VVVLoose (candidate) / **Medium** (signal region) | "loose" and "tight" of the fake factor |
+| DeepTau2017v2p1 VSjet | ≥ VVVLoose (candidate) / **Tight** (signal region; Medium in v1–v2.1, `config.NOMINAL_WP`) | "loose" and "tight" of the fake factor |
 
 ## Pair selection
 
@@ -63,7 +63,7 @@ same-sign regions are built from the same pairs.
 
 ## Regions
 
-T = VSjet Medium, L = VVVLoose and not Medium, both τ pT > 40 GeV:
+T = VSjet Tight, L = VVVLoose and not Tight, both τ pT > 40 GeV:
 
 | region | charge | τ1 | τ2 | use |
 |---|---|---|---|---|
@@ -87,8 +87,8 @@ the fit regions `tautau_SR0/1/2`, the same-sign categories give the per-category
 | τ pair (ID, pT > 38, ΔR > 0.5) | 2,033,829 | 1,622,206 |
 | both legs trigger-matched | 1,993,984 | 1,591,799 |
 | extra-lepton veto (= ntuple) | 1,989,586 | 1,588,079 |
-| SR (both pT > 40, OS, both Medium) | 24,106 | 23,480 |
+| SR (both pT > 40, OS, both Tight) | 10 572 | 10 588 |
 
-Signal region total: **47,586 events**; the expected prefit composition (v2, MC-subtracted fake factor) is
-36931 jet→τh fakes (80 %), 4827 fiducial Z→ττ, 3025 non-fiducial Z/γ*→ττ, 575 tt̄, 540 W+jets,
-189 Z→ee and 122 dibosons. The signal region is fitted in three BDT categories (`09-bdt.md`).
+Signal region total: **21 160 events**; the expected prefit composition (v3, MC-subtracted fake factor) is
+13592 jet→τh fakes (64 %), 3759 fiducial Z→ττ, 2337 non-fiducial Z/γ*→ττ, 410 tt̄, 358 W+jets,
+110 Z→ee and 93 dibosons. The signal region is fitted in three BDT categories (`09-bdt.md`).

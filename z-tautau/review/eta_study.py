@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-"""Where does the eta(tau1) non-closure of the fake factor come from? (REVIEW.md section 3.5 / 6)
+"""NOTE: written for the v1 review at the DeepTau Medium working point; since v3 the default is Tight, so run
+with BND_TAUTAU_WP=Medium to reproduce the numbers quoted in REVIEW.md.
+
+Where does the eta(tau1) non-closure of the fake factor come from? (REVIEW.md section 3.5 / 6)
 
     python review/eta_study.py        # after source ../setup.sh; writes review/eta_study.txt, review/review_eta.png
 """

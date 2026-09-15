@@ -5,8 +5,8 @@ Code: `ztautau/bdt.py`, `scripts/step3b_bdt.py`; the categories are used by `ste
 
 ## Why
 
-With DeepTau Medium on both legs and no kinematic selection, the signal region is 80 % jet → τh fakes
-(S/B = 0.2). The fakes come from the application region of the data, so every fake-related uncertainty
+With DeepTau Medium on both legs and no kinematic selection, the signal region was 80 % jet → τh fakes
+(S/B = 0.2); with Tight (v3) it is 64 % (S/B = 0.28). The fakes come from the application region of the data, so every fake-related uncertainty
 (closure, OS/SS extrapolation, FF statistics, W+jets composition) acts on ~38 000 events and scales with B/S.
 The review (`REVIEW.md` section 4) quantified three ways out; the group chose a classifier, because it
 keeps the full signal and lets the fit see the fakes where they dominate and the signal where it dominates.
@@ -74,7 +74,7 @@ would make the score a mass variable and the categories a mass selection.
 |---|---|---|
 | `tautau_SR0` | < 0.55 | fake dominated: fixes the fake normalisation and shape (only its bins above 110 GeV are fitted, docs/08), holds most of the non-fiducial DY |
 | `tautau_SR1` | 0.55–0.90 | mixed |
-| `tautau_SR2` | > 0.90 | signal dominated (S/B ≈ 5): the Z peak with little background, also a clean τ energy-scale control |
+| `tautau_SR2` | > 0.90 | signal dominated (S/B ≈ 10.9): the Z peak with little background, also a clean τ energy-scale control |
 
 The boundaries were chosen on the signal score distribution (roughly its upper tercile and the fake-dominated
 bulk); they are not tuned on data. All three regions share the 14 m_tt bins of the inclusive fit.

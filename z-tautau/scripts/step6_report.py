@@ -27,7 +27,7 @@ from ztautau import analysis, config, samples  # noqa: E402
 
 NOMINAL = "mcsub" if config.FF_SUBTRACT_MC else "nosub"
 OTHER = "nosub" if NOMINAL == "mcsub" else "mcsub"
-LABEL = {"nosub": "FF without MC subtraction", "mcsub": "FF with genuine-tau subtraction"}
+LABEL = {"nosub": "FF without MC subtraction (cross-check)", "mcsub": "nominal (MC-subtracted fake factor)"}
 
 
 def job(variant):
@@ -110,7 +110,8 @@ def main():
         "yields_prefit_per_region": yields[NOMINAL]["regions"],
         "fake_factors": {v: {"C_OS_SS_per_njet": ff[v]["osss"]["C"], "C_OS_SS_stat": ff[v]["osss"]["stat"],
                              "C_OS_SS_inclusive": ff[v]["osss"]["inclusive"]["C"],
-                             "closure_corrections": ff[v]["ff"].get("closure")} for v in ("mcsub", "nosub")},
+                             "closure_corrections": ff[v]["ff"].get("closure")} for v in ("mcsub", "nosub") if v in ff},
+        "tau_wp": config.TAU_WP,
         "closure_nps": yields[NOMINAL]["meta"].get("closure_nps"),
         "C_osss_per_category": yields[NOMINAL]["meta"].get("C_osss"),
         "sigmodel": yields[NOMINAL]["meta"].get("sigmodel"), "dy_samples": yields[NOMINAL]["meta"].get("dy_samples"),
@@ -146,7 +147,7 @@ def main():
         for k, val in sorted(fv["grouped_impact"].items(), key=lambda kv: -kv[1]):
             lines.append(f"| {k} | {val:.4f} |")
         lines.append("")
-    lines += ["## Prefit yields per BDT category (nominal)", "",
+    lines += [f"Working point: DeepTau VSjet {config.TAU_WP} on both legs.", "", "## Prefit yields per BDT category (nominal)", "",
               "| sample | " + " | ".join(f"{r} ({lab})" for r, lab in zip(config.REGIONS, config.REGION_LABELS)) + " | all |",
               "|---|" + "---:|" * (len(config.REGIONS) + 1)]
     for k, v in y.items():

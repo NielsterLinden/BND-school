@@ -4,10 +4,9 @@
 
     python scripts/step3_fakefactors.py
 
-Reads the ntuples; writes output/data/fakefactors.json with two variants:
-    mcsub   (nominal) simulated events with a genuine leading tau subtracted from every FF region
-    nosub   (cross-check) no subtraction
-each with the era x DM x N_jets x pT table, the factorised closure corrections in |eta(tau1)| and pT(tau2),
+Reads the ntuples; writes output/data/fakefactors.json (variant "mcsub": simulated events with a genuine
+leading tau subtracted from every FF region; --with-nosub adds the unsubtracted cross-check) with the
+era x DM x N_jets x pT table, the factorised closure corrections in |eta(tau1)| and pT(tau2),
 the OS/SS correction C, the same-sign closure in several variables and the genuine-tau contamination of
 every region; and the plots output/plots/step3_*.png.
 """
@@ -49,6 +48,10 @@ def hist(x, w, edges):
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--with-nosub", action="store_true", help="also compute the unsubtracted variant")
+    args = ap.parse_args()
     config.PLOT_DIR.mkdir(parents=True, exist_ok=True)
     config.DATA_DIR.mkdir(parents=True, exist_ok=True)
     data = analysis.load_data()
@@ -75,7 +78,8 @@ def main():
               f"({100 * contamination[name]['fraction']:.2f}%)")
 
     results = {"contamination": contamination, "nominal": NOMINAL}
-    for variant, subtract in (("mcsub", True), ("nosub", False)):
+    variants = [("mcsub", True)] + ([("nosub", False)] if args.with_nosub else [])
+    for variant, subtract in variants:
         sub_ff = [(d, r["SS_T"], r["SS_L"], w) for _, d, r, w in mc_sub] if subtract else []
         sub_reg = [(d, r, w) for _, d, r, w in mc_sub] if subtract else []
         table = fakes.measure(data, reg["SS_T"], reg["SS_L"], sub_ff)
@@ -163,7 +167,7 @@ def main():
             ax = axes[e, i]
             for j, nj in enumerate(fakes.NJ_BINS):
                 lab = f"{nj} jets" if j < len(fakes.NJ_BINS) - 1 else rf"$\geq${nj} jets"
-                for variant, mfc, off in (("mcsub", colors[j], -1.0), ("nosub", "none", 1.0)):
+                for variant, mfc, off in [v for v in (("mcsub", colors[j], -1.0), ("nosub", "none", 1.0)) if v[0] in results]:
                     t = results[variant]["ff"]
                     ax.errorbar(centers + off + 0.6 * (j - 1), np.asarray(t["ff"])[e, i, j],
                                 yerr=np.asarray(t["err"])[e, i, j], fmt="o", color=colors[j], mfc=mfc,
@@ -182,7 +186,7 @@ def main():
     # closure-correction plot
     fig, axes = plt.subplots(1, 2, figsize=(11, 4))
     for ax, (var, xl) in zip(axes, (("eta", r"$|\eta(\tau_1)|$"), ("pt2", r"$p_T(\tau_2)$ [GeV] (last bin: > 80)"))):
-        for variant, mfc in (("mcsub", "black"), ("nosub", "none")):
+        for variant, mfc in [v for v in (("mcsub", "black"), ("nosub", "none")) if v[0] in results]:
             c = results[variant]["ff"]["closure"][var]
             ed = np.asarray(c["edges"]); ed[-1] = min(ed[-1], 120.0)
             ax.errorbar(0.5 * (ed[1:] + ed[:-1]), c["values"], yerr=c["err"], xerr=np.diff(ed) / 2, fmt="o", color="black",

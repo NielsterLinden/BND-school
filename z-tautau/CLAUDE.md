@@ -23,19 +23,19 @@ python run_all.py --from 3                  # normal iteration loop (~25 min): F
 python scripts/step3b_bdt.py --no-train     # only the BDT validation plots with the existing models
 python scripts/step4_histograms.py --no-plots           # fast histogram rebuild (nominal variant)
 python scripts/step5_fit.py --skip-ranking              # fast fit (~2 min)
-BND_TAUTAU_WP=Tight python run_all.py --from 3         # the same chain with DeepTau Tight on both legs -> variants/tight/
+BND_TAUTAU_WP=Medium python run_all.py --from 3        # the same chain with another working point -> variants/medium/
 ```
 
 * Long jobs (skims): launch detached (`nohup setsid python scripts/step1_skim.py ... > $BND_TAUTAU_CACHE/logs/x.log &`)
   and poll the log. Steps 1 and 2 are resumable/cheap; step 1 skips finished files.
 * Every script is standalone and its docstring is its usage. Physics constants are only in
   `ztautau/config.py`; sample definitions only in `ztautau/samples.py`.
-* Two fake-factor variants run everywhere: `mcsub` (nominal: simulated genuine-τ₁ events subtracted from the
-  FF regions) and `nosub` (cross-check). Files of the non-nominal variant carry the suffix `_nosub`.
+* Only the MC-subtracted fake factor (`mcsub`) is produced; `scripts/step3_fakefactors.py --with-nosub` and
+  `--ff-variant nosub` in steps 4/5 give the unsubtracted cross-check on request (files with the suffix `_nosub`).
 * The fake-dominated category `tautau_SR0` enters the fit only above `config.SIDEBAND_REGION_MTT_MIN`
   (110 GeV, `DropBins` in `step5_fit.py`): it is the fake sideband, not a signal region.
-* `BND_TAUTAU_WP` (default `Medium`) selects the VSjet working point of both legs and, for anything else
-  than Medium, redirects `output/`, `fit/` and the BDT models to `variants/<wp>/` (`config.py`). The TauPOG ID
+* `BND_TAUTAU_WP` (default `config.NOMINAL_WP` = `Tight` since v3) selects the VSjet working point of both legs and,
+  for anything else, redirects `output/`, `fit/` and the BDT models to `variants/<wp>/` (`config.py`). The TauPOG ID
   and trigger scale factors of every working point are in `external/*.json` (step 0).
 * The BDT (step 3b) must be retrained after any change to the fake factors, the selection or
   `config.BDT_*`; `bdt.load_models` refuses models trained with other features / folds.
@@ -108,14 +108,12 @@ BND_TAUTAU_WP=Tight python run_all.py --from 3         # the same chain with Dee
 | cutflow | `$BND_TAUTAU_CACHE/ntuples_v1/<sample>.meta.json` → `output/results.json["cutflow"]` |
 | fake factors, closure corrections, C_OS/SS, contamination | `output/data/fakefactors.json` (step 3) |
 | BDT training summary, category yields, closure in the score | `output/data/bdt.json`, `fit/bdt_info.json` (step 3b) |
-| prefit yields per category, closure NPs, prefit variation sizes | `output/data/yields[_nosub].json` (step 4) |
-| μ, impacts, pulls, ranking | `fit/results/ztautau[_nosub]_fit_result.json` (step 5) |
+| prefit yields per category, closure NPs, C_OS/SS per category | `output/data/yields.json` (step 4) |
+| μ, impacts, pulls, ranking | `fit/results/ztautau_fit_result.json` (step 5) |
 | everything collected | `output/results.json`, `output/RESULTS.md` (step 6) |
 
 ## Open issues (good next tasks)
 
-* Make the Tight working point nominal (`BND_TAUTAU_WP=Tight`): +11.4/−10.0 % instead of +14.5/−12.5 % on μ_Z,
-  GoF p = 0.25 instead of 0.01 (`docs/08`, working-point cross-check). Then update every number in docs/, README, handoff.
 * The τh ID SF uncertainty still dominates: in the combined fit with ee/μμ the ττ channel should be
   used to constrain the τh ID nuisance parameters rather than μ_Z; decay-mode categories would help.
 * The DM-binned and pT-binned TauPOG ID prescriptions differ by 7 % per leg (REVIEW.md 3.3); the pT-binned

@@ -34,12 +34,12 @@ rebuilt.
 
 **Result.**
 
-> **σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 2358 ± 40 (stat) +282/−242 (syst+stat) ± 86 (acc) pb**
-> (NNLO 1945 pb; μ_Z = 1.212 +0.145 -0.125) — **σ_fid(τhτh) = 5.46 ± 0.09 (stat) ± 0.60 (syst) pb** (prediction 4.50 pb)
+> **σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 2343 ± 39 (stat) +282/−243 (syst+stat) ± 86 (acc) pb**
+> (NNLO 1945 pb; μ_Z = 1.205 +0.145 -0.125) — **σ_fid(τhτh) = 5.42 ± 0.09 (stat) ± 0.60 (syst) pb** (prediction 4.50 pb)
 
-Limited by the external τh identification scale factors (11.2 %); data statistics 2.0 % on μ_Z. The goodness of fit is poor (p = 0.01): data/prediction rises with the visible-τ pT in the signal-dominated category (`08-fit-and-results.md`).
+Limited by the external τh identification scale factors (11.2 %); data statistics 2.0 % on μ_Z. Goodness of fit p = 0.22; data/prediction rises with the visible-τ pT in the signal-dominated category (`08-fit-and-results.md`).
 
-**Cross-check with DeepTau Tight** on both legs (`variants/tight/`): μ_Z = 1.099 +0.116 −0.102, σ(60–120) = 2137 +226 −198 pb, GoF p = 0.32: more precise and a better fit (`08-fit-and-results.md`).
+**Cross-check with DeepTau Tight** on both legs (`variants/tight/`): μ_Z = 1.071 +0.114 −0.100, σ(60–120) = 2082 +222 −194 pb, GoF p = 0.25: more precise (`08-fit-and-results.md`).
 
 **Read next:** `02-selection.md` for the selection, `05-fake-factors.md` for the background method,
 `09-bdt.md` for the categories, and `08-fit-and-results.md` for the result and what the combination should use.

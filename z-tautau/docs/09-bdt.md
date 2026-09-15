@@ -72,7 +72,7 @@ would make the score a mass variable and the categories a mass selection.
 
 | region | score | role |
 |---|---|---|
-| `tautau_SR0` | < 0.55 | fake dominated: fixes the fake normalisation and shape, holds most of the non-fiducial DY |
+| `tautau_SR0` | < 0.55 | fake dominated: fixes the fake normalisation and shape (only its bins above 110 GeV are fitted, docs/08), holds most of the non-fiducial DY |
 | `tautau_SR1` | 0.55–0.90 | mixed |
 | `tautau_SR2` | > 0.90 | signal dominated (S/B ≈ 5): the Z peak with little background, also a clean τ energy-scale control |
 

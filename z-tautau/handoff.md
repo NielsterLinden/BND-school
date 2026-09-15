@@ -20,12 +20,12 @@
 
 **Result (v2, nominal):**
 
-> **σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 2358 ± 40 (stat) +282/−242 (syst+stat) ± 86 (acc) pb** (NNLO 1945 pb)
-> **σ_fid(τhτh) = 5.46 ± 0.09 (stat) ± 0.60 (syst) pb** (prediction 4.50 pb) — μ_Z = 1.212 +0.145 -0.125
+> **σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 2343 ± 39 (stat) +282/−243 (syst+stat) ± 86 (acc) pb** (NNLO 1945 pb)
+> **σ_fid(τhτh) = 5.42 ± 0.09 (stat) ± 0.60 (syst) pb** (prediction 4.50 pb) — μ_Z = 1.205 +0.145 -0.125
 
-Cross-check without the MC subtraction in the fake-factor regions: μ_Z = 1.212 +0.144 -0.125.
-**Cross-check with DeepTau Tight on both legs** (`variants/tight/`, same chain): μ_Z = 1.099 +0.116 −0.102, σ(60–120) = 2137 +226 −198 pb,
-GoF p = 0.32 — more precise and a better fit; recommended as the nominal working point of the next iteration (`docs/08`).
+Cross-check without the MC subtraction in the fake-factor regions: μ_Z = 1.166 +0.142 -0.124.
+**Cross-check with DeepTau Tight on both legs** (`variants/tight/`, same chain): μ_Z = 1.071 +0.114 −0.100, σ(60–120) = 2082 +222 −194 pb,
+GoF p = 0.25 — more precise and a better fit; recommended as the nominal working point of the next iteration (`docs/08`).
 
 ## Data and simulation used
 
@@ -87,29 +87,29 @@ python run_all.py                 # from NanoAOD: ~2 h
 
 | quantity | nominal (MC-subtracted FF) | no MC subtraction |
 |---|---:|---:|
-| μ_Z | 1.212 +0.145 -0.125 | 1.212 +0.144 -0.125 |
-| expected (Asimov) | +0.117 −0.100 | |
-| σ(60–120) [pb] | 2358 +282 −242 | 2357 |
-| σ_fid [pb] | 5.46 ± 0.09 ± 0.60 | |
-| GoF p | 0.01 | 0.01 |
-| **Tight WP (variants/tight)**: μ_Z | 1.099 +0.116 −0.102 | |
-| Tight WP: σ(60–120) [pb], GoF p | 2137 +226 −198, 0.32 | |
+| μ_Z | 1.205 +0.145 -0.125 | 1.166 +0.142 -0.124 |
+| expected (Asimov) | +0.118 −0.102 | |
+| σ(60–120) [pb] | 2343 +282 −243 | 2357 |
+| σ_fid [pb] | 5.42 ± 0.09 ± 0.60 | |
+| GoF p | 0.22 | 0.16 |
+| **Tight WP (variants/tight)**: μ_Z | 1.071 +0.114 −0.100 | |
+| Tight WP: σ(60–120) [pb], GoF p | 2082 +222 −194, 0.32 | |
 
 Uncertainty on μ_Z (nominal, grouped impacts):
 
 | source | impact |
 |---|---:|
-| Tau ID | 11.2 % |
-| Fakes | 8.8 % |
+| Tau ID | 11.1 % |
+| Fakes | 8.6 % |
 | Gammas | 4.7 % |
 | Tau trigger | 4.2 % |
-| Tau energy scale | 2.5 % |
-| Background normalisation | 1.8 % |
+| Tau energy scale | 2.1 % |
 | Signal modelling | 1.8 % |
-| MET | 1.2 % |
+| Background normalisation | 1.8 % |
+| MET | 1.0 % |
 | Luminosity | 1.0 % |
-| Pileup | 0.9 % |
-| L1 prefiring | 0.3 % |
+| Pileup | 1.0 % |
+| L1 prefiring | 0.2 % |
 | **data statistics** | **2.0 %** |
 
 Prediction: σ(Z/γ*→ττ, 60–120) = 1944.9 pb; σ_fid = 4.501 pb; A = 0.002314 ± 3.7 %
@@ -140,12 +140,12 @@ Prediction: σ(Z/γ*→ττ, 60–120) = 1944.9 pb; σ_fid = 4.501 pb; A = 0.002
 | `n_bkg` (prefit, incl. non-fiducial DY) | 41459 |
 | `acc_eff` | 0.0001514 (for σ(60–120), L = 16393.381, fiducial signal) |
 
-> ⚠️ Counting is useless here (B/S ≈ 8 over the whole signal region): use the fitted σ = 2358 +282 −242 pb with the
+> ⚠️ Counting is useless here (B/S ≈ 8 over the whole signal region): use the fitted σ = 2343 +282 −243 pb with the
 > uncertainties above. Correlated: lumi 1.2 %, acceptance 3.7 %. Uncorrelated: τh ID, trigger, fakes, MC stat.
 
 ## Open issues / next steps
 
-1. Adopt the Tight working point as nominal (more precise, GoF p = 0.32 instead of 0.01, `docs/08`).
+1. Adopt the Tight working point as nominal (more precise, GoF p = 0.25 instead of 0.01, `docs/08`).
 2. τh ID scale factors dominate: decay-mode categories and/or the combined fit to measure `TauID_DM*` in situ;
    quote the pT-binned POG prescription (14 % different on the yield) as a cross-check.
 3. Trigger efficiency in situ (μτh tag-and-probe from SingleMuon) instead of the POG turn-on SFs.

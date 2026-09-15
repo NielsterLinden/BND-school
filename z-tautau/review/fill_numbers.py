@@ -39,7 +39,7 @@ tok = {
     "NVV": f"{y['WW']['value']+y['WZ']['value']+y['ZZ']['value']:.0f}",
     "NNP": str(len(f["pulls"])), "GAMMAS": f"{100*gi.get('Gammas', 0):.1f}\\,\\%", "TAUID": f"{100*gi.get('Tau ID', 0):.1f}\\,\\%",
     "SIGMODELIMPACT": "0 (removed)", "CATROWS": catrows, "CLOSURENPS": closure,
-    "FAKEPULL": f"\\texttt{{FakeOSSS}} pulled {f['pulls']['FakeOSSS_tautau'][0]:+.2f}$\\sigma$",
+    "FAKEPULL": f"\\texttt{{FakeOSSS}} pulled {f['pulls'].get('FakeOSSS_tautau', f['pulls'].get('FakeOSSS_tautau_c0'))[0]:+.2f}$\\sigma$",
     "FINDING1": f"Consistent with NNLO and with $\\mu\\mu$ ($\\mu_Z = 0.990$) within $1\\sigma$; data statistics {100*f['mu_stat']:.1f}\\,\\%, total $^{{+{100*f['mu_err_up']:.0f}}}_{{-{100*f['mu_err_down']:.0f}}}\\,\\%$.",
     "IMPACTS": impacts_md, "CLOSURE": closure_md,
     "COSSS": f"{r['fake_factors']['mcsub']['C_OS_SS_inclusive']:.3f}",

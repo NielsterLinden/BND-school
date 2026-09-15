@@ -184,6 +184,9 @@ FIT_BINS = [0.0, 40.0, 60.0, 70.0, 80.0, 90.0, 100.0, 110.0, 120.0, 130.0, 150.0
 REGION_PREFIX = "tautau_SR"
 REGIONS = [f"{REGION_PREFIX}{i}" for i in range(len(BDT_CATEGORY_EDGES) - 1)]     # one per BDT category
 REGION_LABELS = ["BDT < 0.55 (fake dominated)", "0.55 < BDT < 0.90", "BDT > 0.90 (signal dominated)"]
+# The fake-dominated category is the fake sideband: its bins below this m_tt are dropped from the fit
+# (S/B = 0.09 there with a 15% closure prior; left in, its OS/SS parameter was 49% correlated with mu_Z).
+SIDEBAND_REGION_MTT_MIN = 110.0
 JOB = "ztautau"
 DY_XSEC_PB = 6077.22             # sigma(Z/gamma* -> ll, m > 50) summed over flavours, NNLO (all channels)
 

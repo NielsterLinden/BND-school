@@ -6,55 +6,55 @@ CMS Open Data 2016 (Run2016G+H, Tau dataset), L = 16393.4 pb^-1 (+-1.2%). Binned
 
 | quantity | value |
 |---|---|
-| mu_Z | 1.212 +0.145 -0.125 (stat 0.020, syst 0.133) |
-| expected (Asimov) | +0.117 -0.100 |
-| sigma_fid (tau_h tau_h, vis pT > 40, abs(eta) < 2.1, 60 < m < 120) | 5.457 +- 0.092 (stat) +- 0.600 (syst) pb  (pred. 4.501) |
-| sigma(pp -> Z/gamma* -> tautau, 60 < m < 120) | 2358 +- 40 (stat) +- 259 (syst) +- 86 (acc) pb  (pred. 1945) |
-| goodness of fit (saturated) | p = 0.0117066 |
+| mu_Z | 1.205 +0.145 -0.125 (stat 0.020, syst 0.134) |
+| expected (Asimov) | +0.118 -0.102 |
+| sigma_fid (tau_h tau_h, vis pT > 40, abs(eta) < 2.1, 60 < m < 120) | 5.421 +- 0.091 (stat) +- 0.601 (syst) pb  (pred. 4.501) |
+| sigma(pp -> Z/gamma* -> tautau, 60 < m < 120) | 2343 +- 39 (stat) +- 260 (syst) +- 86 (acc) pb  (pred. 1945) |
+| goodness of fit (saturated) | p = 0.21943 |
 
 Grouped impacts on mu_Z:
 
 | group | impact |
 |---|---|
-| FullSyst | 0.1332 |
-| Tau ID | 0.1117 |
-| Fakes | 0.0876 |
-| Gammas | 0.0468 |
-| Tau trigger | 0.0424 |
-| Tau energy scale | 0.0252 |
-| Background normalisation | 0.0178 |
-| Signal modelling | 0.0176 |
-| MET | 0.0115 |
+| FullSyst | 0.1334 |
+| Tau ID | 0.1113 |
+| Fakes | 0.0855 |
+| Gammas | 0.0471 |
+| Tau trigger | 0.0420 |
+| Tau energy scale | 0.0211 |
+| Signal modelling | 0.0175 |
+| Background normalisation | 0.0175 |
+| MET | 0.0105 |
 | Luminosity | 0.0103 |
-| Pileup | 0.0095 |
-| L1 prefiring | 0.0027 |
+| Pileup | 0.0102 |
+| L1 prefiring | 0.0018 |
 
 ## FF without MC subtraction (cross-check)
 
 | quantity | value |
 |---|---|
-| mu_Z | 1.212 +0.144 -0.125 (stat 0.020, syst 0.133) |
-| expected (Asimov) | +0.117 -0.100 |
-| sigma_fid (tau_h tau_h, vis pT > 40, abs(eta) < 2.1, 60 < m < 120) | 5.454 +- 0.091 (stat) +- 0.598 (syst) pb  (pred. 4.501) |
-| sigma(pp -> Z/gamma* -> tautau, 60 < m < 120) | 2357 +- 39 (stat) +- 258 (syst) +- 86 (acc) pb  (pred. 1945) |
-| goodness of fit (saturated) | p = 0.0103816 |
+| mu_Z | 1.166 +0.142 -0.124 (stat 0.020, syst 0.132) |
+| expected (Asimov) | +0.120 -0.103 |
+| sigma_fid (tau_h tau_h, vis pT > 40, abs(eta) < 2.1, 60 < m < 120) | 5.247 +- 0.090 (stat) +- 0.592 (syst) pb  (pred. 4.501) |
+| sigma(pp -> Z/gamma* -> tautau, 60 < m < 120) | 2267 +- 39 (stat) +- 256 (syst) +- 83 (acc) pb  (pred. 1945) |
+| goodness of fit (saturated) | p = 0.163518 |
 
 Grouped impacts on mu_Z:
 
 | group | impact |
 |---|---|
-| FullSyst | 0.1325 |
-| Tau ID | 0.1116 |
-| Fakes | 0.0868 |
-| Gammas | 0.0447 |
-| Tau trigger | 0.0417 |
-| Tau energy scale | 0.0231 |
-| Background normalisation | 0.0177 |
-| Signal modelling | 0.0175 |
-| MET | 0.0119 |
-| Luminosity | 0.0102 |
-| Pileup | 0.0072 |
-| L1 prefiring | 0.0030 |
+| FullSyst | 0.1311 |
+| Tau ID | 0.1091 |
+| Fakes | 0.0832 |
+| Gammas | 0.0434 |
+| Tau trigger | 0.0403 |
+| Tau energy scale | 0.0188 |
+| Signal modelling | 0.0178 |
+| Background normalisation | 0.0162 |
+| MET | 0.0100 |
+| Luminosity | 0.0098 |
+| Pileup | 0.0085 |
+| L1 prefiring | 0.0017 |
 
 ## Prefit yields per BDT category (nominal)
 
@@ -71,9 +71,9 @@ Grouped impacts on mu_Z:
 | WW | 51 | 3 | 2 | 56 +- 3 |
 | WZ | 8 | 7 | 23 | 38 +- 2 |
 | ZZ | 8 | 8 | 12 | 28 +- 2 |
-| Fakes | 33684 | 2718 | 529 | 36931 +- 96 |
+| Fakes | 33535 | 2901 | 548 | 36985 +- 96 |
 | Data | 38328 | 5204 | 4054 | 47586 |
-| Total prediction | 38064 | 4716 | 3505 | 46286 |
+| Total prediction | 37916 | 4899 | 3524 | 46339 |
 
 BDT: held-out AUC 0.970 (folds 0.971, 0.970, 0.971, 0.968, 0.969); stat-only sensitivity (fakes fixed) inclusive 1.97% -> categories 1.84%
 
@@ -82,11 +82,11 @@ BDT: held-out AUC 0.970 (folds 0.971, 0.970, 0.971, 0.968, 0.969); stat-only sen
 | variable | value |
 |---|---|
 | n_obs | 47586 |
-| n_bkg_prefit | 41458.7 |
+| n_bkg_prefit | 41512.6 |
 | n_sig_prefit | 4826.87 |
 | acc_eff | 0.000151392 |
 | acc_eff_definition | N_SR(Z->tautau fiducial, prefit, all corrections, all categories) / (sigma_pred(Z/gamma*->tautau, 60<m_LHE<120) x L) |
-| sigma_counting_pb | 2468.88 |
+| sigma_counting_pb | 2447.15 |
 | A_fid | 0.00231403 |
 | C | 0.0654236 |
 

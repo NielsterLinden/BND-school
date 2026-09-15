@@ -128,7 +128,7 @@ d.cover(r"$Z\rightarrow\tau_h\tau_h$ cross section with CMS Open Data",
          rf"$\sigma_\mathrm{{fid}}(\tau_h\tau_h) = {sf['value']:.2f} \pm {sf['stat']:.2f} \pm {sf['syst']:.2f}$ pb  (pred. 4.50 pb),   $\mu_Z = {FIT['mu']:.3f}\,^{{+{FIT['mu_err_up']:.3f}}}_{{-{FIT['mu_err_down']:.3f}}}$   (v1: 1.160 +0.192 -0.163)",
          "CMS 2016 Tau dataset, Run2016G+H, 16.4 fb-1; both taus hadronic; fakes from data (same-sign fake factor); TRExFitter v1.8.0.",
          f"Precision +{100*FIT['mu_err_up']:.0f}/-{100*FIT['mu_err_down']:.0f} % (v1: +19/-16 %): tau ID SFs {100*GI['Tau ID']:.0f} %, fakes {100*GI['Fakes']:.0f} %, MC stat {100*GI['Gammas']:.0f} %, trigger {100*GI['Tau trigger']:.0f} %; data statistics {100*FIT['mu_stat']:.1f} %.",
-         f"Cross-check with DeepTau Tight on both legs: mu_Z = {TIGHT['fit']['mcsub']['mu']:.3f} +{TIGHT['fit']['mcsub']['mu_err_up']:.3f} -{TIGHT['fit']['mcsub']['mu_err_down']:.3f} ({100*TIGHT['fit']['mcsub']['mu_err_up']:.0f} % instead of {100*FIT['mu_err_up']:.0f} %), GoF p = {TIGHT['fit']['mcsub']['gof_probability']:.2f}: more precise, better fit, closer to NNLO -- recommended as the next nominal." if TIGHT else "",
+         f"Cross-check with DeepTau Tight on both legs: mu_Z = {TIGHT['fit']['mcsub']['mu']:.3f} +{TIGHT['fit']['mcsub']['mu_err_up']:.3f} -{TIGHT['fit']['mcsub']['mu_err_down']:.3f} ({100*TIGHT['fit']['mcsub']['mu_err_up']:.0f} % instead of {100*FIT['mu_err_up']:.0f} %), GoF p = {TIGHT['fit']['mcsub']['gof_probability']:.2f}: more precise, closer to NNLO -- recommended as the next nominal." if TIGHT else "",
          "Sections: 1 result   2 what changed since the review   3 fit   4 BDT categories   5 fakes   6 signal definition and selection   7 findings, next steps",
          "z-tautau/: README.md, CLAUDE.md, REVIEW.md, docs/00-09, review/  (code, documentation, review studies)"])
 
@@ -191,15 +191,16 @@ d.tables("Review findings and the v2 answers", [{
         ["3.8 trigger SF on jet legs", "SF = 1 for genPartFlav = 0 legs", "< 1 %"],
         ["3.9 second TRExFitter build (StatAnalysis ROOT, v1.10)", "submodule reset to v1.8.0, rebuilt with fitting/build_trexfitter.sh", "reproducible"],
         ["4.3 80 % fakes: ML?", "5-fold XGBoost, mass-agnostic inputs, 3 categories, m_tautau fitted in each", "fakes where fakes are"],
+        ["v2.1 fake NPs pulled 0.6-1.5 sigma", "C_OS/SS per (era, N_jets, BDT category); SR0 fitted only above 110 GeV (fake sideband)", "pulls < 0.7 sigma"],
         ["5 eta(tau1) non-closure +-15 %", "diagnosed (FF depends on |eta|), corrected", "eta plots right"],
     ]}])
 
 # ---------------------------------------------------------------- 3. the fit
 d.divider("3.  The fit: three BDT categories")
 d.panels(r"Prefit $m_{\tau\tau}$ per category", [pdf(f"prefit_tautau_SR{k}") for k in range(3)],
-         ["SR0: BDT < 0.55 (fake dominated)", "SR1: 0.55 < BDT < 0.90", "SR2: BDT > 0.90 (signal dominated)"], ncols=3)
+         ["SR0: BDT < 0.55 (fake dominated; fitted above 110 GeV)", "SR1: 0.55 < BDT < 0.90", "SR2: BDT > 0.90 (signal dominated)"], ncols=3)
 d.panels(r"Post-fit $m_{\tau\tau}$ per category", [pdf(f"postfit_tautau_SR{k}") for k in range(3)],
-         ["SR0 (post-fit total from TRExFitter)", "SR1", "SR2: S/B = %.1f" % (YR["tautau_SR2"]["DYtautau"]["value"] / YR["tautau_SR2"]["Fakes"]["value"])], ncols=3)
+         ["SR0 (post-fit total from TRExFitter; bins below 110 GeV not fitted)", "SR1", "SR2: S/B = %.1f" % (YR["tautau_SR2"]["DYtautau"]["value"] / YR["tautau_SR2"]["Fakes"]["value"])], ncols=3)
 d.panels("Nuisance-parameter ranking and pulls", [pdf("ranking"), pdf("pulls")],
          [r"top 15 by post-fit impact on $\mu_Z$", "all nuisance parameters"], ncols=2)
 rows = []
@@ -311,11 +312,11 @@ d.divider("7.  Findings and next steps")
 d.bullets("Findings",
           [rf"1. $\sigma(60$-$120) = {s60['value']:.0f}\,^{{+{s60['err_up']:.0f}}}_{{-{s60['err_down']:.0f}}} \pm {s60['acceptance']:.0f}$ pb, $\mu_Z = {FIT['mu']:.2f}$: $1.4\sigma$ above NNLO and above $Z\rightarrow\mu\mu$ ($\mu_Z = 0.99$). Total $^{{+{100*FIT['mu_err_up']:.0f}}}_{{-{100*FIT['mu_err_down']:.0f}}}$ % (v1: +19/-16 %), data statistics {100*FIT['mu_stat']:.1f} %.",
            "2. The limit is external: the TauPOG tau ID scale factors (%.0f %%); Z->tautau is how those SFs are measured, and the two POG prescriptions (DM- vs pT-binned) differ by 14 %% on the yield." % (100 * GI["Tau ID"]),
-           "3. In the signal-dominated category data/prediction rises with the visible tau pT (1.0 at threshold, 1.2 above 70 GeV): the origin of the poor goodness of fit (p = %.2f) and of part of mu > 1. Trigger turn-on modelling or the NLO Z pT spectrum; an in-situ trigger measurement is the next step." % FIT["gof_probability"],
+           "3. In the signal-dominated category data/prediction rises with the visible tau pT (1.0 at threshold, 1.2 above 70 GeV): part of mu > 1 comes from there (the fit quality itself is fine, p = %.2f, once the fake sideband is restricted to m > 110 GeV). Trigger turn-on modelling or the NLO Z pT spectrum; an in-situ trigger measurement is the next step." % FIT["gof_probability"],
            "4. The fake factor closes only with N_jets, era and |eta(tau1)| / pT(tau2) corrections; the FF is eta-dependent by +-15 % because DeepTau's jet rejection is not. The MC subtraction is not optional (bias -0.05 on mu; unsubtracted fakes 7 % high where there is no signal).",
            "5. 38 % of the selected Z->tautau is non-fiducial; kept in the signal template it makes the sideband mu-dependent. As a background it costs a 5 % normalisation NP and nothing else.",
            "6. The BDT categories give a nearly background-free Z peak (S/B %.1f) and confine the fake uncertainties (%.0f %%, now honest) to where the fakes are; the statistical gain is small (the measurement is systematics limited)." % (YR["tautau_SR2"]["DYtautau"]["value"] / YR["tautau_SR2"]["Fakes"]["value"], 100 * GI["Fakes"]),
-           ("8. Tight working point (same chain): mu_Z = %s, total +%.0f/-%.0f %% (Medium +%.0f/-%.0f %%), GoF p = %.2f: every uncertainty group shrinks, the visible-pT slope is weaker but still there, the fit is acceptable. Recommended nominal for the next iteration and the combination." % (pm(TIGHT['fit']['mcsub']['mu'], TIGHT['fit']['mcsub']['mu_err_up'], TIGHT['fit']['mcsub']['mu_err_down']), 100*TIGHT['fit']['mcsub']['mu_err_up'], 100*TIGHT['fit']['mcsub']['mu_err_down'], 100*FIT['mu_err_up'], 100*FIT['mu_err_down'], TIGHT['fit']['mcsub']['gof_probability'])) if TIGHT else "",
+           ("8. Tight working point (same chain): mu_Z = %s, total +%.0f/-%.0f %% (Medium +%.0f/-%.0f %%), GoF p = %.2f: every uncertainty group shrinks, the visible-pT slope is weaker but still there. Recommended nominal for the next iteration and the combination." % (pm(TIGHT['fit']['mcsub']['mu'], TIGHT['fit']['mcsub']['mu_err_up'], TIGHT['fit']['mcsub']['mu_err_down']), 100*TIGHT['fit']['mcsub']['mu_err_up'], 100*TIGHT['fit']['mcsub']['mu_err_down'], 100*FIT['mu_err_up'], 100*FIT['mu_err_down'], TIGHT['fit']['mcsub']['gof_probability'])) if TIGHT else "",
            "7. Reproducibility: this checkout's TRExFitter was a v1.10 commit built against the StatAnalysis ROOT; it is now the tagged v1.8.0 built with fitting/build_trexfitter.sh."], size=14)
 d.bullets("For the combination, and next steps",
           ["**For the combination**",

@@ -106,7 +106,14 @@ one OS/SS nuisance parameter per category (`FakeOSSS_tautau_c<k>`, statistical �
 error exceeds 10 % (the 0-jet bins of the signal-like category: 0.58 ± 0.16 in G) takes the N_jets-inclusive
 value of its era and category:
 
-@@CCAT@@
+| | 0 jets | 1 jet | ≥ 2 jets |
+|---|---:|---:|---:|
+| category 0, Run2016G | 1.049 | 1.063 | 1.049 |
+| category 0, Run2016H | 1.040 | 1.035 | 1.061 |
+| category 1, Run2016G | 1.121 | 1.144 | 1.086 |
+| category 1, Run2016H | 1.133 | 1.138 | 1.118 |
+| category 2, Run2016G | 1.085 | 1.104 | 1.083 |
+| category 2, Run2016H | 1.103 | 1.115 | 1.099 |
 
 ## The uncertainty model (v2)
 
@@ -114,7 +121,7 @@ value of its era and category:
 |---|---|---|---|
 | FF statistics | four NPs, one per DM, shifting all 30 bins of a DM coherently | per-event relative error of the FF bin, added to the `Fakes` template variance (γ parameters) | the 120 bin errors are independent; a coherent shift over-states the normalisation part (which the fit measures anyway in the fake-dominated category) and under-states the shape part |
 | OS/SS | 3 % ⊕ stat, one NP | C per (era, N_jets, BDT category), one NP per category (`FakeOSSS_tautau_c<k>`) | the charge correlation depends on the topology the BDT selects (3–6 % between categories) |
-| non-closure | one NP over all 14 m_tt bins, up = SS ratio, down = 1/ratio | one normalisation-type NP per **BDT category × mass region** (m_tt below / above 110 GeV): `FakeClosure_tautau_c<k>_lo|hi`, size = residual same-sign obs/pred deviation ⊕ its statistical error | v1's single NP tied the precise high-mass bins to the imprecise peak bins and was constrained to 0.32 σ by the former, which silently shrank the peak-bin uncertainty; per category and mass region the constraint comes from the right place |
+| non-closure | one NP over all 14 m_tt bins, up = SS ratio, down = 1/ratio | one normalisation-type NP per **BDT category × mass region** (m_tt below / above 110 GeV): `FakeClosure_tautau_c<k>_lo|hi`, size = residual same-sign obs/pred deviation ⊕ its statistical error (the SR0 low-mass bins are not fitted, so `c0_lo` is not used) | v1's single NP tied the precise high-mass bins to the imprecise peak bins and was constrained to 0.32 σ by the former, which silently shrank the peak-bin uncertainty; per category and mass region the constraint comes from the right place |
 | η(τ1), pT(τ2) dependence | absorbed by the non-closure NP | corrected | see above |
 | W+jets composition of the AR (quark-jet FF ≠ QCD FF) | not covered | not covered, ≲ 1 % of the fakes | noted in `REVIEW.md` 3.5 |
 

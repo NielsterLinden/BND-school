@@ -115,6 +115,9 @@ The combination (`combination/`, μμ ⊕ ττ; z-ee not yet available) settled 
   compares powheg with aMC@NLO (0.2 % on C) and ττ compares madgraph LO with aMC@NLO (7.3 %).
   §3 correlates by name, so a MultiFit needs `DecorrSysts: "SigModel"` + `DecorrSuff: "_<channel>"`
   in each Job block before the workspace is built. Every other name in §3 stays correlated.
+  *Since z-tautau v2 (15 Sep 2026) this is moot: the ττ parameter is `SigModel_tautau` and is not in the
+  workspace by default; the ττ signal is the fiducial `DYtautau` only, the fit has three regions
+  `tautau_SR0/1/2`, and the ττ reference σ^pred(60–120) = 1944.9 pb is unchanged.*
 - **Data statistics are uncorrelated between channels** — `SingleMuon` and `Tau` are disjoint
   primary datasets selected by orthogonal triggers. Worth stating because a future eτh/μτh channel
   would *not* be orthogonal to μμ and would need an overlap treatment.

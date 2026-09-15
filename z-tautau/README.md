@@ -11,10 +11,10 @@ reviewed in [`REVIEW.md`](REVIEW.md) and every issue raised there that could be 
 **Result** (v2, nominal)
 
 ```
-σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 2358 ± 40 (stat) +282/−242 (syst+stat) ± 86 (acc) pb     NNLO: 1945 pb
-σ_fid(τhτh, vis. pT > 40 GeV, |η| < 2.1, 60 < m < 120 GeV) = 5.46 ± 0.09 (stat) ± 0.60 (syst) pb   pred.: 4.50 pb
-μ_Z = 1.212 +0.145 -0.125   (without MC subtraction in the FF regions: 1.212 +0.144 -0.125)
-DeepTau Tight on both legs (variants/tight, cross-check): μ_Z = 1.099 +0.116 −0.102, σ(60–120) = 2137 +226 −198 pb, GoF p = 0.32
+σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 2343 ± 39 (stat) +282/−243 (syst+stat) ± 86 (acc) pb     NNLO: 1945 pb
+σ_fid(τhτh, vis. pT > 40 GeV, |η| < 2.1, 60 < m < 120 GeV) = 5.42 ± 0.09 (stat) ± 0.60 (syst) pb   pred.: 4.50 pb
+μ_Z = 1.205 +0.145 -0.125   (without MC subtraction in the FF regions: 1.166 +0.142 -0.124)
+DeepTau Tight on both legs (variants/tight, cross-check): μ_Z = 1.071 +0.114 −0.100, σ(60–120) = 2082 +222 −194 pb, GoF p = 0.25
 ```
 
 Details: [`output/RESULTS.md`](output/RESULTS.md), [`docs/08-fit-and-results.md`](docs/08-fit-and-results.md),
@@ -87,7 +87,7 @@ slides/                   the summary slide deck (PDF + LaTeX source)
 | 3.6 MC statistics | jet-binned DY 0J/1J/2J stitched to the inclusive sample |
 | 3.8 trigger SF on jet legs | SF = 1 for `genPartFlav = 0` legs |
 | 4.3 BDT | k-fold XGBoost on mass-agnostic kinematics, three categories fitted in m_ττ |
-| 4.1 Tight working point | full chain rerun with `BND_TAUTAU_WP=Tight`: +11.6/−10.2 % instead of +14.5/−12.5 %, GoF p = 0.32, μ_Z = 1.099 +0.116 −0.102 (`docs/08`); recommended as the next nominal |
+| 4.1 Tight working point | full chain rerun with `BND_TAUTAU_WP=Tight`: +11.4/−10.0 % instead of +14.5/−12.5 %, GoF p = 0.25, μ_Z = 1.071 +0.114 −0.100 (`docs/08`); recommended as the next nominal |
 | 5 η(τ1) non-closure | diagnosed (FF depends on \|η\| by ±15 %), corrected |
 | 3.9 second TRExFitter build | rebuilt with `fitting/build_trexfitter.sh` against the LCG ROOT |
 

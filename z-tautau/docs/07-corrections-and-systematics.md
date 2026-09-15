@@ -46,7 +46,7 @@ over the three categories. The complete list with per-category sizes is in
 | `PS_ISR`, `PS_FSR` | HISTO, fiducial-normalised | < 1 % | PSWeight 2 / 0.5 |
 | `XS_DYtautau_nonfid` 5 %, `XS_DYll` 5 %, `XS_DYlowmass` 10 %, `XS_TTbar` 6 %, `XS_SingleTop`/`XS_WW`/`XS_WZ`/`XS_ZZ`/`XS_WJets` 10 % | OVERALL | | |
 | `MCStatNorm_WJets_tautau` | OVERALL | 50 % | W+jets SR yield from very few simulated events with weights up to ~200; shape taken from τ2 ≥ VVVLoose per category |
-| `FakeOSSS_tautau` | HISTO on fakes | 3.0 % | C_OS/SS stat ⊕ 3 % extrapolation |
+| `FakeOSSS_tautau_c<k>` | HISTO on fakes, per BDT category k | 3.0–3.5 % | C_OS/SS(era, N_jets, category) stat ⊕ 3 % extrapolation |
 | `FakeClosure_tautau_c<k>_lo`, `_hi` | HISTO on fakes, per category k and m_tt region | c0/lo 15 %, c0/hi 1 %, c1/lo 5 %, c1/hi 7 %, c2/lo 12 %, c2/hi 55 % | residual same-sign non-closure ⊕ its statistical error (`05-fake-factors.md`) |
 | MC statistics | γ per bin (`MCstatThreshold 0`) | | signal and background templates; the `Fakes` template carries the AR data statistics **and** the FF statistics per event |
 

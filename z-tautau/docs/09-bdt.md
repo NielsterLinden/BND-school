@@ -60,7 +60,8 @@ would make the score a mass variable and the categories a mass selection.
 2. **Same-sign closure of the FF in the score** (`step3b_bdt_closure_SS.png`): SS_T observed vs FF × SS_L
    predicted, MC subtracted. This is *the* test that the fake factor does not depend on the score, i.e.
    that the categories do not bias the fake estimate. The residual per category and mass region becomes a
-   nuisance parameter in the fit (`FakeClosure_tautau_c<k>_lo|hi`, docs/05). A first version of this plot
+   nuisance parameter in the fit (`FakeClosure_tautau_c<k>_lo|hi`, docs/05). The OS/SS correction is
+   measured per category as well (the charge correlation depends on the topology, docs/05). A first version of this plot
    showed a 75 % non-closure in the top bin caused by a single W+jets event with weight −63 in the MC
    subtraction; W+jets is therefore subtracted with uniform weights (`analysis.subtraction_weights`).
 3. **Prefit signal-region score** (`step3b_bdt_SR_score[_log].png`): data vs fakes + simulation. The

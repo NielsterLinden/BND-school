@@ -18,6 +18,18 @@ The HLT τ reconstruction is different in the two eras (plain vs combined isolat
 matter for genuine τh (trigger SFs), but it changes which **jets** fire the trigger, so the fake factors are
 measured separately per era (`05-fake-factors.md`).
 
+**Were the paths active and unprescaled everywhere?** (`review/trigger_rate.py`) The luminosity used is
+the full certified luminosity of runs 278820–284044 (16393.4 pb⁻¹, 156 runs), so every certified
+lumisection must have had its path active. The selected-event rate (any charge and isolation, QCD
+dominated) is 260 events/pb⁻¹ in every run of G and 182 events/pb⁻¹ in every run of H (the CombinedIso
+path is tighter on jets); no run deviates by more than 30 %, no selected event lies outside a certified
+lumisection, and of the 88 825 lumisections with more than 0.03 pb⁻¹ only 32 have no selected event
+(fewer than the Poisson expectation of ~120). Both paths were therefore active and unprescaled in the
+whole data set, and the luminosity is the right one. These are the primary 2016 di-τ paths used by the
+CMS H→ττ analyses and the ones the TauPOG trigger scale factors are derived for; the other paths in the
+skims (`*PFTau40*`, `DoubleTight*`) are tighter versions with no scale factors. In simulation the OR of
+the two paths is used, as in the scale-factor derivation, with the luminosity-weighted SF.
+
 ## τh candidates
 
 | requirement | value | why |

@@ -42,7 +42,7 @@ BND_TAUTAU_WP=Tight python run_all.py --from 3         # the same chain with Dee
 
 * Histogram and nuisance-parameter names follow `../fitting/CONVENTIONS.md`: regions `tautau_SR0/1/2`
   (BDT categories), POI `mu_Z` on the **fiducial** signal `DYtautau` only, `DYtautau_nonfid` is a
-  background, channel-specific NPs end in `_tautau` (`SigModel_tautau`, `FakeOSSS_tautau`,
+  background, channel-specific NPs end in `_tautau` (`SigModel_tautau`, `FakeOSSS_tautau_c<k>`,
   `FakeClosure_tautau_c<k>_lo|hi`). The combination (`../fitting/combination_skeleton.config`) expects
   `fit/ztautau.config` and `fit/results/ztautau/`.
 * Luminosity 16393.381 pb⁻¹ (normtag), DY cross section 6077.22 pb: identical in all channels.

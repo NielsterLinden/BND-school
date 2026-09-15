@@ -112,6 +112,7 @@ def main():
                              "C_OS_SS_inclusive": ff[v]["osss"]["inclusive"]["C"],
                              "closure_corrections": ff[v]["ff"].get("closure")} for v in ("mcsub", "nosub")},
         "closure_nps": yields[NOMINAL]["meta"].get("closure_nps"),
+        "C_osss_per_category": yields[NOMINAL]["meta"].get("C_osss"),
         "sigmodel": yields[NOMINAL]["meta"].get("sigmodel"), "dy_samples": yields[NOMINAL]["meta"].get("dy_samples"),
         "bdt": {k: bdt[k] for k in ("training", "category_edges", "category_yields_prefit", "stat_only_sensitivity")} if bdt else None,
         "genuine_tau_contamination": ff["contamination"], "cutflow": cutflows,

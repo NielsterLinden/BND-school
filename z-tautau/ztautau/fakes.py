@@ -162,7 +162,8 @@ def njet_category(arr, mask=None):
 
 
 def per_event(values, arr, mask=None):
-    """Look up a number, a per-N_jet array, or an (era, N_jet) array for every event (in `mask`)."""
+    """Look up a number, a per-N_jet array, an (era, N_jet) array or an (era, N_jet, BDT category) array for
+    every event (in `mask`); the category comes from arr["_cat"] (set by the caller)."""
     v = np.asarray(values, dtype=float)
     n = len(arr["t1_pt"]) if mask is None else int(np.sum(mask))
     if v.ndim == 0:
@@ -172,7 +173,10 @@ def per_event(values, arr, mask=None):
     if v.ndim == 1:
         return v[nj]
     era = era_index(arr, m)
-    return np.tensordot(ERA_FRAC, v, axes=1)[nj] if era is None else v[era, nj]
+    if v.ndim == 2:
+        return np.tensordot(ERA_FRAC, v, axes=1)[nj] if era is None else v[era, nj]
+    cat = np.asarray(arr["_cat"])[m]
+    return np.tensordot(ERA_FRAC, v, axes=1)[nj, cat] if era is None else v[era, nj, cat]
 
 
 def fake_weights(arr, mask, table, c_osss, shift_dm=None, direction=0, with_err=False):
@@ -203,25 +207,54 @@ def _osss(data, regions_data, table_ai, subtract, sel=None):
     return {"C": c, "stat": float(stat), "obs": obs, "pred": pred, "obs_mc": obs_mc, "pred_mc": pred_mc}
 
 
-def osss_correction(data, regions_data, subtract=()):
-    """C_OS/SS per (era, N_jet) and inclusive, from the tau2 anti-isolated sideband: FF measured in SS-AI
-    and applied to OS-AI_L predicts OS-AI_T; C = observed / predicted.
+def osss_correction(data, regions_data, subtract=(), n_cat: int | None = None, max_rel_stat: float = 0.10):
+    """C_OS/SS per (era, N_jet) [and BDT category] and inclusive, from the tau2 anti-isolated sideband: FF
+    measured in SS-AI and applied to OS-AI_L predicts OS-AI_T; C = observed / predicted.
     subtract: iterable of (arrays, regions, weights) of simulation (shared out over eras by luminosity).
+    n_cat: if given, C is also measured per BDT category, read from arr["_cat"] of the data and of every
+    subtracted sample (the OS/SS charge correlation of the two jets depends on the topology the BDT selects:
+    with the inclusive C the signal-like categories were under-predicted by 3-6%, docs/05).
     """
     sub_ai = [(a, r["SSAI_T"], r["SSAI_L"], w) for a, r, w in subtract]
     table_ai = measure(data, regions_data["SSAI_T"], regions_data["SSAI_L"], sub_ai)
     out = {"inclusive": _osss(data, regions_data, table_ai, subtract)}
-    C = np.zeros((N_ERA, len(NJ_BINS)))
+    cats = [None] if n_cat is None else list(range(n_cat))
+    shape = (N_ERA, len(NJ_BINS)) + (() if n_cat is None else (n_cat,))
+    C = np.zeros(shape)
     stat = np.zeros_like(C)
     for e in range(N_ERA):
         for j in range(len(NJ_BINS)):
-            def sel(a, is_data, e=e, j=j):
-                nj = njet_category(a) == j
-                if is_data:
-                    return nj & ((a["era"] == e) if N_ERA > 1 else True)
-                return nj, float(ERA_FRAC[e])
-            res = _osss(data, regions_data, table_ai, subtract, sel)
-            C[e, j], stat[e, j] = res["C"], res["stat"]
+            for k in cats:
+                def sel(a, is_data, e=e, j=j, k=k):
+                    m = njet_category(a) == j
+                    if k is not None:
+                        m = m & (np.asarray(a["_cat"]) == k)
+                    if is_data:
+                        return m & ((a["era"] == e) if N_ERA > 1 else True)
+                    return m, float(ERA_FRAC[e])
+                res = _osss(data, regions_data, table_ai, subtract, sel)
+                idx = (e, j) if k is None else (e, j, k)
+                C[idx], stat[idx] = res["C"], res["stat"]
+    if n_cat is not None:
+        # a (era, N_jets, category) bin with a poor measurement (relative statistical error above
+        # `max_rel_stat`, e.g. 0-jet events in the signal-like category) takes the N_jets-inclusive value of
+        # its era and category instead
+        C_incl = np.zeros((N_ERA, n_cat)); stat_incl = np.zeros_like(C_incl)
+        for e in range(N_ERA):
+            for k in range(n_cat):
+                def sel(a, is_data, e=e, k=k):
+                    m = np.asarray(a["_cat"]) == k
+                    if is_data:
+                        return m & ((a["era"] == e) if N_ERA > 1 else True)
+                    return m, float(ERA_FRAC[e])
+                res = _osss(data, regions_data, table_ai, subtract, sel)
+                C_incl[e, k], stat_incl[e, k] = res["C"], res["stat"]
+        poor = stat / np.maximum(C, 1e-9) > max_rel_stat
+        out["replaced_by_njet_inclusive"] = [[int(e), int(j), int(k)] for e, j, k in zip(*np.where(poor))]
+        for e, j, k in zip(*np.where(poor)):
+            C[e, j, k], stat[e, j, k] = C_incl[e, k], stat_incl[e, k]
+        out["C_njet_inclusive"] = C_incl.tolist()
+        out["per_category"] = True
     out["C"] = C.tolist()
     out["stat"] = stat.tolist()
     out["table_ai"] = table_ai

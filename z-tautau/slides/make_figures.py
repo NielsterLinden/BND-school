@@ -136,6 +136,8 @@ def ranking_and_pulls():
                 rest = n[len(k):]
                 if k == "FakeClosure_tautau_c":
                     return v + rest[0] + (" m<110" if rest.endswith("lo") else " m>110")
+                if k == "FakeOSSS_tautau" and rest.startswith("_c"):
+                    return v + " SR" + rest[2:]
                 if k == "XS_":
                     return v + rest + ")"
                 return v + rest

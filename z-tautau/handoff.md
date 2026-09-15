@@ -62,7 +62,7 @@ GoF p = 0.32 — more precise and a better fit; recommended as the nominal worki
   background with a 5 % normalisation NP and the theory variations on the non-fid/fid ratio.
 - **Fakes:** FF(era, DM, N_jets, pT) = [N(SS, τ1 Medium) − MC] / [N(SS, τ1 VVVLoose!Medium) − MC], τ2 Medium,
   times closure corrections f(|η(τ1)|) (±15 %) and g(pT(τ2)) (−6 %); applied to OS events with τ1 failing Medium
-  (MC with a genuine τ1 subtracted, W+jets with uniform weights); multiplied by C_OS/SS(era, N_jets) = 1.04–1.09 from the
+  (MC with a genuine τ1 subtracted, W+jets with uniform weights); multiplied by C_OS/SS(era, N_jets, BDT category) = 1.04–1.15 from the
   τ2 anti-isolated sideband. FF statistics per event into the template variance; residual non-closure per
   category × mass region as nuisance parameters.
 - **Mass:** m_ττ is a per-event likelihood over the τ visible-energy fractions using the MET covariance
@@ -125,7 +125,7 @@ Prediction: σ(Z/γ*→ττ, 60–120) = 1944.9 pb; σ_fid = 4.501 pb; A = 0.002
 - Correlated NPs (shared names): `Lumi`, `Pileup`, `L1Prefiring`, `QCDScale`, `PDF`, `PS_ISR`, `PS_FSR`,
   `XS_TTbar`, `XS_SingleTop`, `XS_WW`, `XS_WZ`, `XS_ZZ`.
 - ττ-only NPs: `TauID_DM*`, `TauTrigger_DM*`, `TauES_DM*`, `TauFakeEle`, `TauFakeMu`, `MET_Unclustered`,
-  `XS_DYll`, `XS_DYlowmass`, `XS_DYtautau_nonfid`, `XS_WJets`, `MCStatNorm_WJets_tautau`, `FakeOSSS_tautau`,
+  `XS_DYll`, `XS_DYlowmass`, `XS_DYtautau_nonfid`, `XS_WJets`, `MCStatNorm_WJets_tautau`, `FakeOSSS_tautau_c*`,
   `FakeClosure_tautau_c*_lo|hi`. **`SigModel_tautau` is reported, not fitted, and must never be correlated
   with z-mumu's `SigModel`** (different quantities).
 - In the combination μ_Z will be fixed by ee/μμ, and this channel will mainly constrain the τh ID parameters;

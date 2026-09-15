@@ -63,7 +63,7 @@ which the config in `fitting/trexconfig.py` maps onto exactly these names. Rules
 | `XS_DYll` 5 % (Z→ee/μμ as a background in ττ), `XS_DYlowmass` 10 %, `XS_WJets` 10 %, `XS_DYtautau_nonfid` 5 % | OVERALL | yes | Background normalisation |
 | `MCStatNorm_<sample>_<channel>` | OVERALL (statistical normalisation of a smoothed template) | no | Background normalisation |
 | `FakeStat_<channel>`, `FakeMethod_<channel>` | HISTO on `Fakes` | no (channel suffix) | Fakes |
-| ττ: `FakeOSSS_tautau`, `FakeClosure_tautau_c<k>_lo`, `FakeClosure_tautau_c<k>_hi` (one per BDT category k and m_tt region below / above 110 GeV) | HISTO on `Fakes` (the FF statistics are in the `Fakes` Sumw2, i.e. in the γ parameters) | no | Fakes |
+| ττ: `FakeOSSS_tautau_c<k>`, `FakeClosure_tautau_c<k>_lo`, `FakeClosure_tautau_c<k>_hi` (one per BDT category k, the closure ones also per m_tt region below / above 110 GeV) | HISTO on `Fakes` (the FF statistics are in the `Fakes` Sumw2, i.e. in the γ parameters) | no | Fakes |
 | MC statistics | per-bin gammas (`MCstatThreshold: 0`) | no | Gammas |
 
 Use the same `Category` strings, so the grouped-impact tables of the individual fits and of the

@@ -112,7 +112,9 @@ def build_config(job: str, histo_file: str, meta: dict) -> str:
                                HistoNameSufUp="__SigModel_tautauUp", Samples=samples.SIGNAL, Symmetrisation="ONESIDED",
                                DropShapeIn="all", Category="Signal modelling"))
     # fakes
-    blocks.append(tc.histo_syst("FakeOSSS_tautau", "Fakes", "Fakes", title="FF OS/SS extrapolation"))
+    for name, info in meta.get("osss_nps", {"FakeOSSS_tautau": {"region": None}}).items():
+        blocks.append(tc.histo_syst(name, "Fakes", "Fakes", title="FF OS/SS extrapolation " + (info["region"] or "").replace("tautau_", ""),
+                                    regions=info["region"]))
     for name, info in meta.get("closure_nps", {}).items():
         cat, tag = name.split("_")[-2:]
         blocks.append(tc.histo_syst(name, "Fakes", "Fakes", title=f"FF non-closure {info['region'].replace('tautau_', '')} "

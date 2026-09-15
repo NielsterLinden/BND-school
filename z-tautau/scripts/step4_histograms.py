@@ -100,8 +100,6 @@ def main():
     suffix = "" if variant == nominal_variant else f"_{variant}"
     ffres = json.loads((config.DATA_DIR / "fakefactors.json").read_text())
     table = fakes.from_json(ffres[variant]["ff"])
-    c_osss = np.asarray(ffres[variant]["osss"]["C"])                     # per (era, jet-multiplicity category)
-    c_rel = np.hypot(np.asarray(ffres[variant]["osss"]["stat"]) / c_osss, config.FF_OSSS_SYST)
     edges = np.asarray(config.FIT_BINS)
     nb = len(edges) - 1
     var = config.FIT_VARIABLE
@@ -114,12 +112,32 @@ def main():
             return sc
         return (kin or d)[v] if v in analysis.KIN_KEYS else d[v]
 
-    # ------------------------------------------------------------------ data and fakes
+    # ------------------------------------------------------------------ data, simulation, C per category
     data = analysis.load_data()
     reg = analysis.regions(data)
     sc_d = analysis.scores(data, "data")
     cat_d = analysis.categories(data, "data")
+    data["_cat"] = cat_d
     ones = np.ones(len(data["run"]))
+    loaded = []
+    for key in analysis.available_mc():
+        d, meta = analysis.load(key)
+        if not len(d):
+            print(f"  {key}: empty ntuple")
+            continue
+        d = dict(d)
+        d["_cat"] = analysis.categories(d, key)
+        loaded.append((key, d, analysis.regions(d, is_mc=True), analysis.weights(d, key)))
+    # the OS/SS correction per (era, N_jets, BDT category): the charge correlation of the two jets depends on
+    # the topology the BDT selects (inclusive C under-predicts the signal-like categories by 3-6%, docs/05)
+    sub_c = [(d, r, analysis.subtraction_weights(k, w)) for k, d, r, w in loaded if k not in analysis.SUBTRACT_EXCLUDE] if subtract else []
+    osss = fakes.osss_correction(data, reg, sub_c, n_cat=NCAT)
+    c_osss = np.asarray(osss["C"])                                      # (era, N_jets, category)
+    c_rel = np.hypot(np.asarray(osss["stat"]) / c_osss, config.FF_OSSS_SYST)
+    if osss.get("replaced_by_njet_inclusive"):
+        print(f"  C_OS/SS bins (era, N_jets, category) replaced by the N_jets-inclusive value (stat > 10%): {osss['replaced_by_njet_inclusive']}")
+    for k in range(NCAT):
+        print(f"  C_OS/SS category {k}: " + "  ".join(f"era {'GH'[e]}: " + ", ".join(f"{c_osss[e, j, k]:.3f}+-{np.asarray(osss['stat'])[e, j, k]:.3f}" for j in range(c_osss.shape[1])) for e in range(c_osss.shape[0])))
     wf, wf2 = fakes.fake_weights(data, reg["AR"], table, c_osss, with_err=True)
     ar = reg["AR"]
     ss_book = {k: Book() for k in range(NCAT)}            # same-sign closure per category, MC subtracted
@@ -130,7 +148,7 @@ def main():
         fit.add(f"{region}__Fakes", h1(data[var][ar_k], wf[ar_k], edges, wf2[ar_k]))
         for d_, sgn in (("Up", 1), ("Down", -1)):
             rel = fakes.per_event(c_rel, data)
-            fit.add(f"{region}__Fakes__FakeOSSS_tautau{d_}", h1(data[var][ar_k], (wf * (1 + sgn * rel))[ar_k], edges))
+            fit.add(f"{region}__Fakes__FakeOSSS_tautau_c{k}{d_}", h1(data[var][ar_k], (wf * (1 + sgn * rel))[ar_k], edges))
         ss_book[k].add("obs", h1(data[var][reg["SS_T"] & (cat_d == k)], ones[reg["SS_T"] & (cat_d == k)], edges))
         ss_book[k].add("pred", h1(data[var][reg["SS_L"] & (cat_d == k)], wss[reg["SS_L"] & (cat_d == k)], edges))
         for v in CATEGORY_VARS:
@@ -146,7 +164,7 @@ def main():
             if rg == "SS_T":
                 book[v].add("Fakes", h1(x[reg["SS_L"]], wss[reg["SS_L"]], ed))
             if rg == "OSAI_T":
-                tai = fakes.from_json(ffres[variant]["ff_ai"])
+                tai = osss["table_ai"]
                 wai = fakes.fake_weights(data, reg["OSAI_L"], tai, c_osss)
                 book[v].add("Fakes", h1(x[reg["OSAI_L"]], wai[reg["OSAI_L"]], ed))
 
@@ -154,17 +172,11 @@ def main():
     mc_syst_names = analysis.WEIGHT_SYSTS + analysis.KINEMATIC_SYSTS
     relaxed = {}
     dy_keys = analysis.dy_stitch_keys()
-    for key in analysis.available_mc():
-        d, meta = analysis.load(key)
-        if not len(d):
-            print(f"  {key}: empty ntuple")
-            continue
+    for key, d, r, w in loaded:
         comps = analysis.mc_components(key)
-        r = analysis.regions(d, is_mc=True)
-        w = analysis.weights(d, key)
         wsub = analysis.subtraction_weights(key, w)       # W+jets: uniform weights in the FF regions
         sc_m = analysis.scores(d, key)
-        cat_m = analysis.categories(d, key)
+        cat_m = d["_cat"]
         for name, cm in comps:
             for k, region in enumerate(REGIONS):
                 sr = r["SR"] & cm & (cat_m == k)
@@ -180,7 +192,7 @@ def main():
                     neg = -h1(d[var][m], wm[m], edges) * np.array([[1], [0]])
                     fit.add(f"{region}__Fakes", neg)
                     for d_ in ("Up", "Down"):
-                        fit.add(f"{region}__Fakes__FakeOSSS_tautau{d_}", neg)
+                        fit.add(f"{region}__Fakes__FakeOSSS_tautau_c{k}{d_}", neg)
                     for v in CATEGORY_VARS:
                         ctrl[region][v].add("Fakes", -h1(val(d, v)[m], wm[m], CONTROL_VARS[v][0]) * np.array([[1], [0]]))
                     mss = r["SS_T"] & cm & (cat_m == k)
@@ -263,6 +275,7 @@ def main():
     sigmodel = {}
     try:
         dlo, _ = analysis.load("DY_LO")
+        dlo = dict(dlo)
         nlo, lo = analysis.signal_prediction(samples.DY_INCLUSIVE), analysis.signal_prediction("DY_LO")
         rlo = analysis.regions(dlo, is_mc=True)
         clo = analysis.categories(dlo, "DY_LO")
@@ -310,9 +323,11 @@ def main():
     sig = analysis.signal_prediction(samples.DY_INCLUSIVE)
     meta = {"variant": variant, "fit_variable": var, "bins": edges.tolist(), "regions": REGIONS,
             "region_labels": config.REGION_LABELS, "category_edges": config.BDT_CATEGORY_EDGES, "lumi_pb": config.LUMI_PB,
-            "C_osss": c_osss.tolist(), "C_osss_rel_unc": c_rel.tolist(), "signal_prediction": sig,
+            "C_osss": c_osss.tolist(), "C_osss_stat": osss["stat"], "C_osss_rel_unc": c_rel.tolist(), "signal_prediction": sig,
             "has_sigmodel": bool(sigmodel) and config.SIGMODEL_IN_FIT, "sigmodel": sigmodel, "mc_systs": mc_syst_names,
-            "theory_systs": analysis.THEORY_SYSTS, "fake_systs": ["FakeOSSS_tautau"] + list(closure_nps),
+            "theory_systs": analysis.THEORY_SYSTS, "fake_systs": [f"FakeOSSS_tautau_c{k}" for k in range(NCAT)] + list(closure_nps),
+            "osss_nps": {f"FakeOSSS_tautau_c{k}": {"region": REGIONS[k], "rel_unc": c_rel[:, :, k].tolist()} for k in range(NCAT)},
+            "C_osss_replaced": osss.get("replaced_by_njet_inclusive", []), "C_osss_njet_inclusive": osss.get("C_njet_inclusive"),
             "closure_nps": closure_nps, "smoothed": smooth_info, "dy_samples": dy_keys}
     rep = trexhist.write_fitinputs(out, names, meta=meta)
     print(f"fit inputs -> {out}: {rep['n_hists']} histograms, clipped {len(rep['clipped'])}")

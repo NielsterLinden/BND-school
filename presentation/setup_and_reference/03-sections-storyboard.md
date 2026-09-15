@@ -74,4 +74,4 @@ one clip = one idea. Sources named so the fidelity checker can verify.
 
 | # | candidate | what moves | source |
 |---|-----------|-----------|--------|
-| ✔ 7-01 | `mic_drop` | the CMS slice; a hand with a microphone comes in from the top, opens, the microphone drops into the centre and bursts into 24 rays in the NL / BE / DE flag colours (`FLAG`, outro only); rays and detector wedges fly off; "Thank you! / Any questions?" centred on the clean slide (the one clip with words) | closing slide |
+| ✔ 7-01 | `mic_drop` | the CMS slice; a hand with a microphone comes in from the top, opens, the microphone drops into the centre and explodes (flash, shock rings, sparks, camera shake); the detector cracks into 12 wedges; NL / BE / DE rays (`FLAG`, outro only) come in five staggered bursts at random angles and fly off, the wedges tumble off with them; "Thank you! / Any questions?" centred on the clean slide (the one clip with words) | closing slide |

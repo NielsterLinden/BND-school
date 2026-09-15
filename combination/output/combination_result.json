@@ -1,0 +1,486 @@
+{
+ "what": "sigma(pp -> Z/gamma* -> ll, 60 < m < 120 GeV) per lepton flavour, assuming lepton universality",
+ "combined": {
+  "sigma_pb": 1939.79231764513,
+  "total_pb": 34.67983279216109,
+  "relative": 0.017878116371891673,
+  "stat_pb": 0.6336404411240227,
+  "syst_pb": 22.655336150085585,
+  "acc_pb": 11.678859453786298,
+  "lumi_pb": 23.508068573767513,
+  "chi2": 0.793632255555595,
+  "ndf": 1,
+  "pvalue": 0.3730040660772824,
+  "weights": {
+   "mumu": 1.004824140795752,
+   "tautau": -0.004824140795752001
+  },
+  "iterations": 4,
+  "correlation_mumu_tautau": 0.14607737716380256,
+  "breakdown_pb": {
+   "Luminosity": 23.508068573767513,
+   "Lineshape model": 13.654704941459126,
+   "Muon efficiency": 11.684784051147044,
+   "L1 prefiring": 10.58369606314198,
+   "Acceptance: PDF": 10.022755992634332,
+   "Acceptance: QCD scale": 5.911529630637356,
+   "Pileup": 4.987613963308335,
+   "Signal modelling (PDF, scales, PS)": 4.6209771826992485,
+   "Signal modelling (generator)": 3.460224230811234,
+   "Muon momentum": 2.434464991475961,
+   "Background normalisation": 2.382486086196003,
+   "Fakes": 1.8789365410297911,
+   "Gammas": 1.7936046290272807,
+   "Tau ID": 1.177255104460295,
+   "Acceptance: MC stat.": 0.8745087097712363,
+   "Data statistics": 0.6336404411240227,
+   "Tau trigger": 0.48153134887989857,
+   "Acceptance: $\\alpha_s$": 0.47014210813791385,
+   "Tau energy scale": 0.30001686051631854,
+   "Acceptance: ISR": 0.08721231966066022,
+   "MET": 0.059342101413784834,
+   "Acceptance: FSR": 0.023082579837603524
+  }
+ },
+ "channels": {
+  "mumu": {
+   "variant": "counting",
+   "mu": 0.993539,
+   "mu_err_up": 0.016704827608364264,
+   "mu_err_down": 0.016704827608364264,
+   "mu_stat": 0.00031045998879037886,
+   "sigma_pb": 1941.3069962166333,
+   "sigma_err_pb": 34.72463241319368,
+   "sigma_pred_pb": 1953.9313466473218,
+   "gof_p": null,
+   "groups": {
+    "Background normalisation": 0.00124037,
+    "Fakes": 0.000956206,
+    "Gammas": 0.000883902,
+    "L1 prefiring": 0.00540467,
+    "Luminosity": 0.0120375,
+    "Muon efficiency": 0.00595143,
+    "Muon momentum": 0.00123995,
+    "Pileup": 0.0025994,
+    "Signal modelling": 0.00310202,
+    "Lineshape model": 0.006954773
+   },
+   "acceptance": {
+    "pdf": 0.0051655282427082805,
+    "alphas": 0.00026935566785504794,
+    "scale": 0.003195009388906489,
+    "mcstat": 0.0004473572012011982
+   },
+   "alone_pb": 1941.3069962166333,
+   "alone_err_pb": 34.72463241319368,
+   "provenance": [
+    "z-mumu/fit/results/zmumu_fit_result.json",
+    "z-mumu/review/fitcheck/GroupedImpact_rebin30.txt",
+    "z-mumu/review/fitcheck/zmumu_rebin30.txt",
+    "z-mumu/REVIEW.md (F3, recommendation 3)"
+   ],
+   "extra": {
+    "sigma_fid_pb": 794.3998710681603,
+    "sigma_fid_pred_pb": 799.5658661292213,
+    "A": 0.40920878182397075,
+    "C": 0.7916798530834724,
+    "lumi_pb": 16393.381,
+    "n_obs": 10378567.0,
+    "n_bkg": 68820.69517214427,
+    "shapefit_mu": 0.990297,
+    "counting_sigma_fid_pb": 794.3828381743527
+   }
+  },
+  "tautau": {
+   "variant": "nominal",
+   "mu": 1.1596,
+   "mu_err_up": 0.191958,
+   "mu_err_down": 0.163207,
+   "mu_stat": 0.01844725,
+   "sigma_pb": 2255.2859275192377,
+   "sigma_err_pb": 358.3263961436173,
+   "sigma_pred_pb": 1944.8826556737133,
+   "gof_p": 0.181743,
+   "groups": {
+    "Background normalisation": 0.00562794,
+    "Fakes": 0.00816521,
+    "Gammas": 0.0482986,
+    "L1 prefiring": 0.00294197,
+    "Luminosity": 0.013413,
+    "MET": 0.00632484,
+    "Pileup": 0.0123569,
+    "Signal modelling": 0.0979106,
+    "Tau ID": 0.125475,
+    "Tau energy scale": 0.0319766,
+    "Tau trigger": 0.0513229
+   },
+   "acceptance": {
+    "pdf": 0.004876573295209931,
+    "alphas": 0.005863808657953654,
+    "scale": 0.03377100809097459,
+    "isr": 0.009319714931003456,
+    "fsr": 0.0024666591233397815,
+    "mcstat": 0.007120722143838773
+   },
+   "alone_pb": 2255.2859275192377,
+   "alone_err_pb": 358.32639614361733,
+   "provenance": [
+    "z-tautau/output/results.json"
+   ],
+   "extra": {
+    "sigma_fid_pb": 5.21880250089624,
+    "sigma_fid_pred_pb": 4.500519576488651,
+    "A": 0.0023140314215664886,
+    "C": 0.1067735867892054,
+    "lumi_pb": 16393.381,
+    "n_obs": 47586.0,
+    "n_bkg": 40247.53458378434
+   }
+  }
+ },
+ "sources": [
+  {
+   "name": "Data statistics",
+   "kind": "statistical",
+   "rho": 0.0,
+   "sizes_pb": {
+    "mumu": 0.6066175039772974,
+    "tautau": 35.8777365698769
+   }
+  },
+  {
+   "name": "Background normalisation",
+   "kind": "in-fit",
+   "rho": 1.0,
+   "sizes_pb": {
+    "mumu": 2.4235978244409386,
+    "tautau": 10.945682893172318
+   }
+  },
+  {
+   "name": "Fakes",
+   "kind": "in-fit",
+   "rho": 0.0,
+   "sizes_pb": {
+    "mumu": 1.868360877252249,
+    "tautau": 15.880375308933559
+   }
+  },
+  {
+   "name": "Gammas",
+   "kind": "in-fit",
+   "rho": 0.0,
+   "sizes_pb": {
+    "mumu": 1.727083825164261,
+    "tautau": 93.93510943332241
+   }
+  },
+  {
+   "name": "L1 prefiring",
+   "kind": "in-fit",
+   "rho": 1.0,
+   "sizes_pb": {
+    "mumu": 10.560354131284381,
+    "tautau": 5.721786426512394
+   }
+  },
+  {
+   "name": "Lineshape model",
+   "kind": "in-fit",
+   "rho": 0.0,
+   "sizes_pb": {
+    "mumu": 13.589148973516433,
+    "tautau": 0.0
+   }
+  },
+  {
+   "name": "Luminosity",
+   "kind": "in-fit",
+   "rho": 1.0,
+   "sizes_pb": {
+    "mumu": 23.520448585267136,
+    "tautau": 26.086711060551515
+   }
+  },
+  {
+   "name": "MET",
+   "kind": "in-fit",
+   "rho": 0.0,
+   "sizes_pb": {
+    "mumu": 0.0,
+    "tautau": 12.30107161591133
+   }
+  },
+  {
+   "name": "Muon efficiency",
+   "kind": "in-fit",
+   "rho": 0.0,
+   "sizes_pb": {
+    "mumu": 11.62868563437727,
+    "tautau": 0.0
+   }
+  },
+  {
+   "name": "Muon momentum",
+   "kind": "in-fit",
+   "rho": 0.0,
+   "sizes_pb": {
+    "mumu": 2.422777173275347,
+    "tautau": 0.0
+   }
+  },
+  {
+   "name": "Pileup",
+   "kind": "in-fit",
+   "rho": 1.0,
+   "sizes_pb": {
+    "mumu": 5.079049142475048,
+    "tautau": 24.032720487894508
+   }
+  },
+  {
+   "name": "Signal modelling (PDF, scales, PS)",
+   "kind": "in-fit",
+   "rho": 1.0,
+   "sizes_pb": {
+    "mumu": 5.05078182718794,
+    "tautau": 94.14532999360247
+   }
+  },
+  {
+   "name": "Signal modelling (generator)",
+   "kind": "in-fit",
+   "rho": 0.0,
+   "sizes_pb": {
+    "mumu": 3.3506640693154126,
+    "tautau": 165.52400337361777
+   }
+  },
+  {
+   "name": "Tau ID",
+   "kind": "in-fit",
+   "rho": 0.0,
+   "sizes_pb": {
+    "mumu": 0.0,
+    "tautau": 244.0341512206592
+   }
+  },
+  {
+   "name": "Tau energy scale",
+   "kind": "in-fit",
+   "rho": 0.0,
+   "sizes_pb": {
+    "mumu": 0.0,
+    "tautau": 62.190734727416064
+   }
+  },
+  {
+   "name": "Tau trigger",
+   "kind": "in-fit",
+   "rho": 0.0,
+   "sizes_pb": {
+    "mumu": 0.0,
+    "tautau": 99.81701804887642
+   }
+  },
+  {
+   "name": "Acceptance: $\\alpha_s$",
+   "kind": "acceptance",
+   "rho": 1.0,
+   "sizes_pb": {
+    "mumu": 0.5229020424776083,
+    "tautau": 13.224565147948343
+   }
+  },
+  {
+   "name": "Acceptance: FSR",
+   "kind": "acceptance",
+   "rho": 1.0,
+   "sizes_pb": {
+    "mumu": 0.0,
+    "tautau": 5.5630216088551485
+   }
+  },
+  {
+   "name": "Acceptance: ISR",
+   "kind": "acceptance",
+   "rho": 1.0,
+   "sizes_pb": {
+    "mumu": 0.0,
+    "tautau": 21.01862193238302
+   }
+  },
+  {
+   "name": "Acceptance: MC stat.",
+   "kind": "acceptance",
+   "rho": 0.0,
+   "sizes_pb": {
+    "mumu": 0.8684576644997781,
+    "tautau": 16.0592644447742
+   }
+  },
+  {
+   "name": "Acceptance: PDF",
+   "kind": "acceptance",
+   "rho": 1.0,
+   "sizes_pb": {
+    "mumu": 10.027876116724196,
+    "tautau": 10.998067127203074
+   }
+  },
+  {
+   "name": "Acceptance: QCD scale",
+   "kind": "acceptance",
+   "rho": 1.0,
+   "sizes_pb": {
+    "mumu": 6.202494079661997,
+    "tautau": 76.1632793057133
+   }
+  }
+ ],
+ "likelihood": {
+  "value_pb": 1938.9725380468253,
+  "err_up_pb": 35.03339203736752,
+  "err_down_pb": 34.658927790666816,
+  "symmetric_pb": 1939.6054548124935,
+  "symmetric_err_pb": 34.67138149081585,
+  "valid": true
+ },
+ "ratio": {
+  "value": 1.161735846990976,
+  "error": 0.18258635532364723,
+  "z": 0.8858046742008063,
+  "pvalue": 0.3757227906386684,
+  "breakdown": {
+   "Tau ID": 0.12570611021144598,
+   "Signal modelling (generator)": 0.08528778182008445,
+   "Tau trigger": 0.0514174307533056,
+   "Gammas": 0.048398597065465086,
+   "Signal modelling (PDF, scales, PS)": 0.04547331043553126,
+   "Acceptance: QCD scale": 0.03552123374974206,
+   "Tau energy scale": 0.03203549714116217,
+   "Data statistics": 0.018484792618273307,
+   "Acceptance: ISR": 0.010827046919083747,
+   "Pileup": 0.00934020588489605,
+   "Acceptance: MC stat.": 0.008288707433334135,
+   "Fakes": 0.008256305985285648,
+   "Lineshape model": 0.008132150928936831,
+   "Muon efficiency": 0.006958951356572318,
+   "Acceptance: $\\alpha_s$": 0.006499276582903403,
+   "MET": 0.00633648961235116,
+   "Background normalisation": 0.004187952980993991,
+   "L1 prefiring": 0.0033722412464789672,
+   "Acceptance: FSR": 0.0028656063258911593,
+   "Muon momentum": 0.0014498619213503053,
+   "Luminosity": 0.000637630833595034,
+   "Acceptance: PDF": 0.0003356893206742267
+  }
+ },
+ "variations": {
+  "baseline": {
+   "value": 1939.79231764513,
+   "error": 34.67983279216109,
+   "why": "the baseline",
+   "weights": {
+    "mumu": 1.004824140795752,
+    "tautau": -0.004824140795752001
+   },
+   "chi2": 0.793632255555595,
+   "pvalue": 0.3730040660772824,
+   "shift": 0.0
+  },
+  "tautau_mcsub": {
+   "value": 1937.7895317003845,
+   "error": 34.57286379823469,
+   "why": "z-tautau fake factor with genuine-tau subtraction (its open issue 1)",
+   "weights": {
+    "mumu": 1.0086390597159576,
+    "tautau": -0.008639059715957671
+   },
+   "chi2": 1.23600665570534,
+   "pvalue": 0.26624205890112196,
+   "shift": -2.002785944745483
+  },
+  "mumu_shapefit": {
+   "value": 1933.2710991125425,
+   "error": 31.381710153717542,
+   "why": "z-mumu 30-bin shape fit instead of the reviewed counting extraction",
+   "weights": {
+    "mumu": 1.0053112068980539,
+    "tautau": -0.005311206898053762
+   },
+   "chi2": 0.8255688867943395,
+   "pvalue": 0.36355696913334,
+   "shift": -6.521218532587454
+  },
+  "sigmodel_correlated": {
+   "value": 1938.3653886986872,
+   "error": 34.56256308556512,
+   "why": "generator comparison treated as correlated between channels",
+   "weights": {
+    "mumu": 1.0093688054346268,
+    "tautau": -0.009368805434626714
+   },
+   "chi2": 0.8008230243660904,
+   "pvalue": 0.3708474126462019,
+   "shift": -1.4269289464427857
+  },
+  "acc_scale_decorrelated": {
+   "value": 1940.8218464229838,
+   "error": 34.719325702073164,
+   "why": "acceptance QCD-scale term uncorrelated between channels",
+   "weights": {
+    "mumu": 1.0015451667143296,
+    "tautau": -0.00154516671432958
+   },
+   "chi2": 0.7884446117228291,
+   "pvalue": 0.37457085547648483,
+   "shift": 1.029528777853784
+  },
+  "rho_zero": {
+   "value": 1944.2692777411128,
+   "error": 34.56656644033574,
+   "why": "all systematics uncorrelated (naive)",
+   "weights": {
+    "mumu": 0.9905653493621692,
+    "tautau": 0.009434650637830756
+   },
+   "chi2": 0.7710765294412146,
+   "pvalue": 0.37988422524136156,
+   "shift": 4.476960095982804
+  },
+  "rho_one": {
+   "value": 1937.8343603951732,
+   "error": 34.50059595552012,
+   "why": "all systematics fully correlated",
+   "weights": {
+    "mumu": 1.0110600918572876,
+    "tautau": -0.011060091857287733
+   },
+   "chi2": 0.8034992551085856,
+   "pvalue": 0.3700492047907523,
+   "shift": -1.9579572499567348
+  }
+ },
+ "checks": [
+  "pass  z-mumu shape fit mu_Z: 0.990297 (published 0.990297)",
+  "pass  z-mumu shape fit sigma(60-120): 1934.97 pb (published 1934.97 pb)",
+  "pass  z-mumu counting mu_Z: 0.993539 (published 0.993539)",
+  "pass  z-mumu counting sigma_fid: 794.4 pb (published 794.38 pb)",
+  "pass  z-mumu counting luminosity impact: 0.0120375 (published 0.0120375)",
+  "pass  z-tautau mu_Z: 1.1596 (published 1.1596)",
+  "pass  z-tautau sigma(60-120): 2255.29 pb (published 2255.29 pb)",
+  "pass  z-tautau tau ID impact: 0.125475 (published 0.125475)",
+  "pass  z-tautau mcsub mu_Z: 1.20751 (published 1.20751)",
+  "pass  every category mapped: 22 sources built from 14 categories",
+  "pass  closure: BLUE(mumu) value: 1941.31 pb (published 1941.31 pb)",
+  "pass  closure: BLUE(mumu) error: 34.7246 pb (published 34.7246 pb)",
+  "pass  closure: BLUE(tautau) value: 2255.29 pb (published 2255.29 pb)",
+  "pass  closure: BLUE(tautau) error: 358.326 pb (published 358.326 pb)",
+  "pass  closure: identical inputs, rho=0 -> error/sqrt(2): 24.554 pb (published 24.554 pb)",
+  "pass  closure: identical inputs, rho=0 -> equal weights: 0.5 (published 0.5)",
+  "pass  closure: identical inputs, systematics rho=1 -> only stat averages: 34.722 pb (published 34.722 pb)",
+  "pass  closure: likelihood vs BLUE, central value: 1939.61 pb (published 1939.61 pb)",
+  "pass  closure: likelihood vs BLUE, uncertainty: 34.6714 pb (published 34.6714 pb)"
+ ]
+}

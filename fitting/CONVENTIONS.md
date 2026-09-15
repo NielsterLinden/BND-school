@@ -88,3 +88,35 @@ trex-fitter mi  comb.config      # grouped impacts
 
 Stat-only: run every channel with `"StatOnly=TRUE:Suffix=_statOnly"` first, then the same option
 string on the MultiFit.
+
+## 6. Decisions taken by the combination (15 Sep 2026)
+
+§2 and §5 left two conventions "to be agreed" and the channels have since diverged in one place.
+The combination (`combination/`, μμ ⊕ ττ; z-ee not yet available) settled them as follows.
+
+- **Acceptance denominator: 60 < m < 120 GeV, NLO (aMC@NLO).** The recommendation of §2, and what
+  both finished channels already quote. The μμ fiducial volume is defined with *dressed* leptons
+  (ΔR < 0.1), the ττ one with LHE (Born-like) mass and `GenVisTau` momenta; the two definitions
+  are not mixed because each channel's A is used only to convert its own σ_fid.
+- **σ^pred(60–120) is not the same number in the two channels.** μμ builds it as
+  σ_fid^pred / A(60–120) = 799.566 / 0.409209 = **1953.9 pb**; ττ uses the LHE-ττ subset of the
+  same sample with 60 < m_LHE < 120 GeV, **1944.9 pb**. The two differ by **0.47 %** — a
+  definitional difference, not a statistical one. Until the channels agree on one construction:
+  - the combination multiplies each μ̂ by *its own* reference and combines the **cross sections**,
+    never `mu_Z`;
+  - a TRExFitter MultiFit with one shared `mu_Z` (§5) would fit one parameter against two
+    references. At the current precision the bias is ~0.002 % on the combination, but a channel
+    adding a third measurement of comparable weight should fix this first.
+- **`SigModel` must be decorrelated between channels.** Both channels use the name, but μμ
+  compares powheg with aMC@NLO (0.2 % on C) and ττ compares madgraph LO with aMC@NLO (7.3 %).
+  §3 correlates by name, so a MultiFit needs `DecorrSysts: "SigModel"` + `DecorrSuff: "_<channel>"`
+  in each Job block before the workspace is built. Every other name in §3 stays correlated.
+- **Data statistics are uncorrelated between channels** — `SingleMuon` and `Tau` are disjoint
+  primary datasets selected by orthogonal triggers. Worth stating because a future eτh/μτh channel
+  would *not* be orthogonal to μμ and would need an overlap treatment.
+- **Z/γ*→ττ as a background in the μμ signal region** carries its own `XS_DYtautau` (5 %) rather
+  than scaling with `mu_Z`, although under lepton universality it is the same process. 11.1k of
+  10.4M events: 0.005 % on the combination, documented rather than fixed.
+
+The rationale for each is in `combination/docs/02-correlation-model.md`; the resulting numbers in
+`combination/result.md`.

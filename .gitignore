@@ -37,7 +37,17 @@ presentation/work/
 presentation/media/
 presentation/clips/**/*.mp4
 presentation/**/*.png
+!presentation/figures/*.png
 
 .asetup.save
 z-mumu/review/review_pass.pkl
 z-mumu/review/deck/build.log
+
+# presentation build scratch
+presentation/*.log
+presentation/*.aux
+presentation/*.nav
+presentation/*.out
+presentation/*.snm
+presentation/*.toc
+presentation/*.vrb

@@ -3,6 +3,12 @@
 Read this first, then the channel `CLAUDE.md` you are working on. Shared workspace of three
 subgroups (Z→ee, Z→μμ, Z→ττ) plus a combination, on CMS 2016 Open Data (NanoAODv9, Run2016G+H).
 
+**State (15 Sep 2026):** μμ and ττ are finished; z-ee has no result. `combination/` combines the
+two (σ(Z/γ*→ℓℓ, 60–120 GeV) = 1940 ± 35 pb — `combination/result.md`) and `presentation/` holds
+the final deck. Both have their own `CLAUDE.md`. The combination is a covariance combination of
+the two channels' TRExFitter results, **not** a MultiFit — see `combination/fit/run_multifit.py`
+for the route to the joint fit. The conventions the combination settled are `fitting/CONVENTIONS.md` §6.
+
 ## Environment (one line, every shell)
 
 ```bash

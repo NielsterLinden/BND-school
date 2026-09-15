@@ -22,9 +22,9 @@ bins, MINOS on every parameter) with 24 nuisance parameters. Everything is in `d
 
 | item | where |
 |---|---|
-| fit-input histograms (TH1D + Sumw2), names `mumu_SR__<sample>[__<NP>Up/Down]`, `mumu_CRemu__...` | `fit/fitinputs/zmumu.root` (not committed; regenerate with `python scripts/v2_5_fit.py --no-fit`; metadata in `zmumu.root.meta.json`) |
+| fit-input histograms (TH1D + Sumw2), names `mumu_SR__<sample>[__<NP>Up/Down]`, `mumu_CRemu__...` | `fit/fitinputs/zmumu.root` (committed, 210 kB, force-added like the ττ inputs; regenerate with `python scripts/v2_5_fit.py --no-fit`; metadata in `zmumu.root.meta.json`) |
 | TRExFitter config (POI `mu_Z`, NP names/categories) | `fit/zmumu.config` (committed) |
-| workspace for the MultiFit | `fit/results/zmumu/RooStats/zmumu_combined_zmumu_model.root` |
+| workspace for the MultiFit | `fit/results/zmumu/RooStats/zmumu_combined_zmumu_model.root` (committed, 240 kB; `mumu_SR` only -- `mumu_CRemu` is a VALIDATION region) |
 | fit result (μ, uncertainties, grouped impacts, σ's, tables) | `fit/results/zmumu_fit_result.json`, `output/v2/results_v2.json` |
 | skims for laptops (one ROOT file per sample, NanoAOD names, `manifest.json` with SHA-256) | `/project/atlas/users/nterlind/BND-school-skims-lite/` (bulk: `/data/atlas/users/nterlind/BND-school-cache/skims_v2/`) |
 
@@ -57,6 +57,54 @@ Uncertainties (impact on μ_Z / σ), and correlation with the other channels:
 
 Decisions the three channels still have to take together: the acceptance denominator
 (60 < m < 120 GeV recommended, vs m > 50 GeV) and NLO vs LO for A (3.2% apart).
+
+### Cross-channel checks answered (15 Sep 2026)
+
+Asked by the combination: "resolve the REVIEW.md shape-fit issue or supply a reviewed counting
+configuration", "confirm the exact reference σ_fid^pred / A_60_120", "missing fit-input ROOT file",
+and for all channels "common truth mass definition, lepton universality, event orthogonality".
+
+- **Shape fit.** Fixed on 15 Sep (`REVIEW.md` §0, commit 3c95908): 12 × 5 GeV bins, two-sided
+  `SigModel` inside 50 < m_LHE < 120 GeV, no smoothing, MINOS on every parameter; GoF p = 0.79, stable
+  to ±0.2 % over the accepted binnings. The combination already uses this fit (`combination/result.md`).
+  The 1-bin counting configuration exists as `fit/stab_1bin.config` + `fit/fitinputs/stab_1bin.root`
+  (`python scripts/v2_5_fit_variants.py`), but it is a variation, not the measurement.
+- **Exact reference numbers** (`fit/results/zmumu_fit_result.json`, `meta_json` in the fit-input file,
+  all from `output/v2/gensums.json`, aMC@NLO `DYJetsToLL_M-50`, 6077.22 pb for the three flavours):
+
+  | quantity | construction | value |
+  |---|---|---:|
+  | σ_fid^pred (dressed ΔR < 0.1, pT > 26/20, \|η\| < 2.4, 60 < m_dressed < 120) | 6077.22 × Σw_fid / Σw | **799.566 pb** |
+  | A_60_120 | Σw_fid / Σw(LHE μμ, 60 < m_LHE < 120) | **0.409209** |
+  | σ^pred(Z/γ*→μμ, 60 < m_LHE < 120) = σ_fid^pred / A_60_120 | 6077.22 × Σw(LHE μμ, 60–120) / Σw | **1953.93 pb** |
+  | A_m50 | Σw_fid / Σw × 3 | 0.394703 |
+  | σ^pred(Z/γ*→μμ, m > 50) | 6077.22 / 3 | 2025.74 pb |
+
+  μ_Z multiplies σ_fid^pred; σ_fid = μ_Z × 799.566 pb does not depend on that choice (it is
+  N_sig / (C · L)), only the value of μ_Z does.
+- **Common truth mass definition.** The 60–120 GeV denominator of σ(60–120) is the **LHE mass**
+  (Born level, pre-FSR, the two outgoing LHE leptons) in this channel and in z-tautau
+  (`z-tautau/docs/06`); only the *fiducial* volumes differ (dressed leptons here, `GenVisTau` there),
+  and each channel's A converts only its own σ_fid. z-ee (`z-ee/handoff.md`) has no acceptance and no
+  truth definition yet; its quoted 1848.6 pb is not a 60–120 GeV Born-level number.
+  The ττ reference 1944.9 pb is the **same construction** as ours: 6077.22 × Σw(LHE ττ, 60–120) / Σw
+  from the same sample. The 0.47 % difference is the flavour share of the aMC@NLO sample, not a
+  definition: Σw(LHE ee) / Σw = 0.33386, μμ 0.33380, ττ 0.33234 (by the same formula the ee reference
+  would be 1954.1 pb). ee and μμ agree to 0.01 %; the ττ share is 0.44 % lower in the generator
+  (the τ mass is in the matrix element). It is irrelevant for the combination of cross sections and
+  a 0.002 % effect on a MultiFit with one shared `mu_Z` (`fitting/CONVENTIONS.md` §6).
+- **Lepton universality** is *assumed* in the normalisation (one 3-flavour NNLO cross section
+  split by the generator's LHE flavour sums) and *tested* by the combination
+  (R = σ(ττ)/σ(μμ) = 1.21 ± 0.17). Nothing in this channel's σ_fid or σ(60–120) uses another
+  flavour's cross section; Z→ττ in the SR is a background with its own `XS_DYtautau`.
+- **Event orthogonality.** μμ: `SingleMuon`, `HLT_IsoMu24||IsoTkMu24`, exactly two tight muons
+  (no electron or τ veto). ττ: `Tau` dataset, di-τh trigger, **vetoes** muons and electrons
+  → disjoint from μμ by construction. ee: `Electron` dataset, `HLT_Ele27`, exactly two medium electrons,
+  no muon veto. The only process that can enter both the μμ and the ee selection is ZZ → 4ℓ:
+  in the μμ SR the ZZ → 4ℓ sample contributes 1016 events, of which **61 events** (0.0006 % of the
+  10.38 M SR events) also have two OS medium electrons with 60 < m_ee < 120 GeV
+  (computed from the `ZZ_4L` skim with the SR selection). No overlap treatment is needed;
+  an electron veto in the SR would change nothing at the quoted precision.
 
 ### Review of v2 (15 Sep 2026) and what was fixed the same day -- `REVIEW.md`
 

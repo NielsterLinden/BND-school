@@ -125,6 +125,14 @@ The combination (`combination/`, μμ ⊕ ττ; z-ee not yet available) settled 
 - **Data statistics are uncorrelated between channels** — `SingleMuon` and `Tau` are disjoint
   primary datasets selected by orthogonal triggers. Worth stating because a future eτh/μτh channel
   would *not* be orthogonal to μμ and would need an overlap treatment.
+  *Checked by z-mumu (15 Sep 2026):* the ττ selection vetoes muons and electrons, so it is disjoint
+  from μμ and ee by construction; the μμ SR (exactly two tight muons, no electron veto) and an
+  ee-like selection (two OS medium electrons, 60 < m_ee < 120) share only ZZ → 4ℓ events: 61 of the
+  10.38 M μμ SR events (0.0006 %), negligible. The 0.47 % between the μμ and ττ references above is
+  *not* a different construction — both are 6077.22 pb × Σw(LHE flavour, 60 < m_LHE < 120)/Σw of
+  the same sample — but the generator's flavour shares: ee 0.33386, μμ 0.33380, ττ 0.33234
+  (the same formula gives 1954.1 pb for ee). The truth mass of the 60–120 denominator is the LHE
+  (Born-level) mass in both finished channels.
 - **Z/γ*→ττ as a background in the μμ signal region** carries its own `XS_DYtautau` (5 %) rather
   than scaling with `mu_Z`, although under lepton universality it is the same process. 11.1k of
   10.4M events: 0.005 % on the combination, documented rather than fixed.

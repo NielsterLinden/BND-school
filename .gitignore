@@ -22,3 +22,5 @@ env/
 .idea/
 .DS_Store
 Thumbs.db
+
+.asetup.save

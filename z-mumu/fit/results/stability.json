@@ -1,0 +1,119 @@
+[
+ {
+  "tag": "zmumu",
+  "label": "nominal: 12 x 5 GeV, SigModel two-sided (LHE window), no smoothing",
+  "mu": 0.988134,
+  "err_up": 0.0158981,
+  "err_down": 0.0155715,
+  "sigma_fid_pb": 790.0782175617319,
+  "gof_p": 0.792273,
+  "syst_total": 0.0157317,
+  "notable": [
+   "MuonRes +0.4 (0.12)",
+   "MuonScale -0.5 (0.14)",
+   "SigModel +0.7 (0.14)"
+  ]
+ },
+ {
+  "tag": "stab_2gev",
+  "label": "30 x 2 GeV",
+  "mu": 0.990121,
+  "err_up": 0.0156747,
+  "err_down": 0.0153003,
+  "sigma_fid_pb": 791.6669549377307,
+  "gof_p": 0.161244,
+  "syst_total": 0.0154845,
+  "notable": [
+   "MuonRes +0.2 (0.07)",
+   "MuonScale -0.5 (0.10)",
+   "PDF +1.4 (0.87)",
+   "PS_FSR -0.6 (0.52)",
+   "Pileup -0.4 (0.67)",
+   "QCDScale +0.6 (0.57)",
+   "SigModel +0.5 (0.10)"
+  ]
+ },
+ {
+  "tag": "stab_10gev",
+  "label": "6 x 10 GeV",
+  "mu": 0.98582,
+  "err_up": 0.0160233,
+  "err_down": 0.0156381,
+  "sigma_fid_pb": 788.2280221475089,
+  "gof_p": 0.502138,
+  "syst_total": 0.0158277,
+  "notable": [
+   "MuonRes +0.6 (0.53)",
+   "MuonScale -0.4 (0.29)",
+   "SigModel +0.7 (0.15)"
+  ]
+ },
+ {
+  "tag": "stab_1bin",
+  "label": "1 bin (counting)",
+  "mu": 0.993872,
+  "err_up": 0.016763,
+  "err_down": 0.0163941,
+  "sigma_fid_pb": 794.6661265015814,
+  "gof_p": 0.0,
+  "syst_total": 0.0165755,
+  "notable": []
+ },
+ {
+  "tag": "stab_nosig",
+  "label": "12 x 5 GeV, no SigModel",
+  "mu": 1.00728,
+  "err_up": 0.0157689,
+  "err_down": 0.0153751,
+  "sigma_fid_pb": 805.386705634642,
+  "gof_p": 0.00136417,
+  "syst_total": 0.0155691,
+  "notable": [
+   "MuonIso -2.3 (0.76)",
+   "MuonRes +0.2 (0.11)",
+   "MuonScale +0.1 (0.06)",
+   "MuonTrigger -1.2 (0.94)",
+   "PS_FSR +1.0 (0.72)",
+   "QCDScale -1.5 (0.63)"
+  ]
+ },
+ {
+  "tag": "stab_smooth",
+  "label": "12 x 5 GeV, MuonScale/MuonRes smoothed",
+  "mu": 1.00119,
+  "err_up": 0.0159758,
+  "err_down": 0.0155611,
+  "sigma_fid_pb": 800.5173495099151,
+  "gof_p": 0.014019,
+  "syst_total": 0.0157644,
+  "notable": [
+   "MuonIso -1.5 (0.85)",
+   "MuonRes +1.3 (0.77)",
+   "MuonScale +0.2 (0.33)",
+   "PS_FSR +1.1 (0.71)",
+   "QCDScale -1.0 (0.68)",
+   "SigModel +0.0 (0.13)"
+  ]
+ },
+ {
+  "tag": "stab_2gev_nosig",
+  "label": "30 x 2 GeV, no SigModel",
+  "mu": 1.00558,
+  "err_up": 0.0156751,
+  "err_down": 0.0152797,
+  "sigma_fid_pb": 804.0274436622223,
+  "gof_p": 0.000209046,
+  "syst_total": 0.0154742,
+  "notable": [
+   "MuonIso -3.0 (0.73)",
+   "MuonRes +0.1 (0.07)",
+   "MuonScale -0.0 (0.05)",
+   "MuonTrigger -1.5 (0.94)",
+   "PDF +1.2 (0.87)",
+   "PS_FSR +0.2 (0.49)",
+   "PS_ISR +1.0 (0.87)",
+   "Pileup -1.0 (0.66)",
+   "QCDScale -1.0 (0.48)"
+  ]
+ }
+]

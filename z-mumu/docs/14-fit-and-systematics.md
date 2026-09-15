@@ -86,4 +86,53 @@ common generator window. `scripts/v2_5_fit_variants.py` repeats the fit with 2 a
 bins, one bin (counting), without `SigModel` and with the old smoothing; the table is in
 `RESULTS_v2.md` and summarised below.
 
-RESULT_PLACEHOLDER
+## Result (15 Sep 2026, after the review fixes)
+
+```
+mu_Z      = 0.9881 +0.0159 -0.0156        (stat 0.0003, syst 0.0157 of which lumi 0.0120 external / 0.0116 profiled)
+sigma_fid = 790.1 +- 0.2 (stat) +- 8.5 (syst) +- 9.6 (lumi) pb       GoF p = 0.79 (12 bins)
+sigma(60 < m < 120) = 1931 +- 33 pb        sigma(m > 50) = 2002 +- 34 pb
+counting: (10 378 567 - 68 787) / (16393.381 x 0.7914) = 794.7 pb
+```
+
+| group | impact on mu_Z |
+|---|---:|
+| luminosity (external) | 1.20% (profiled 1.16%) |
+| muon efficiency (of which `MuonReco` 0.77%) | 0.87% |
+| L1 prefiring | 0.51% |
+| signal modelling | 0.49% |
+| MC statistics (gammas) | 0.38% |
+| muon momentum | 0.37% |
+| pileup | 0.13% |
+| background normalisation | 0.08% |
+| fakes | 0.04% |
+| statistical | 0.03% |
+| **total systematic** | **1.57%** (1.06% without the luminosity) |
+
+Stability (`fit/results/stability.json`, MINOS on every parameter):
+
+| configuration | mu_Z | GoF p |
+|---|---:|---:|
+| **12 x 5 GeV (nominal)** | **0.9881** | 0.79 |
+| 30 x 2 GeV | 0.9901 | 0.16 |
+| 6 x 10 GeV | 0.9858 | 0.50 |
+| 1 bin (= counting) | 0.9939 | -- |
+| 12 x 5 GeV without `SigModel` | 1.0073 | 0.001 |
+| 12 x 5 GeV, `MuonScale`/`MuonRes` smoothed (old setup) | 1.0012 | 0.014 |
+| 30 x 2 GeV without `SigModel` | 1.0056 | 0.0002 |
+
+The binnings that describe the data (p > 0.05) agree within +-0.2%; the counting extraction is
+0.6% higher because it does not use the shape information that pulls `SigModel` (+0.66 sigma:
+the data prefer a lineshape between aMC@NLO and powheg, `sigmodel_lineshape.png`), `MuonScale`
+(-0.48) and `MuonRes` (+0.40). Removing `SigModel` or smoothing the momentum templates gives
+fits that do not describe the data (p <= 0.01) and should not be used. Pulls of all other
+parameters are within +-0.8 sigma; `Pileup` is now +0.06 (was -1.5 before the N_PV-matched
+profile). Constraints: only the three shape parameters (`SigModel` 0.14, `MuonScale` 0.14,
+`MuonRes` 0.12) are constrained by the 10 M-event spectrum; `Lumi`, `MuonReco`, `L1Prefiring`
+stay at their priors (the first v2 fit reported 0.2-0.8 for them because the numerical Hesse
+covariance was ill-conditioned; MINOS fixes that, `UseMinos: all`).
+
+Momentum calibration and the previous v2 result (791.8 +- 6.2 +- 9.3 pb, 30 x 2 GeV, one-sided
+`SigModel`, `MuonReco` 0.4%, CSV pileup profile) are in the git history (commit fc9a998) and in
+REVIEW.md. Comparison: reviewer 797.2 pb (-0.9%), v1 773.2 pb, aMC@NLO 799.6 pb (ratio 0.988),
+madgraph LO 825.4 pb.

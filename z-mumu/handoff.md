@@ -6,16 +6,16 @@
 - Eugene Shalugin
 - Niels Ter Linden
 
-## v2 result (14 Sep 2026, MC-based, TRExFitter fit) -- **use this for the combination**
+## v2 result (15 Sep 2026, MC-based, TRExFitter fit, after the review fixes) -- **use this for the combination**
 
-> **σ_fid(pp → Z/γ* → μ⁺μ⁻; dressed, pT > 26/20 GeV, |η| < 2.4, 60 < m < 120 GeV) = 791.8 ± 0.2 (stat) ± 6.2 (syst) ± 9.3 (lumi) pb**
-> μ_Z = 0.990 ± 0.014 w.r.t. the aMC@NLO prediction (799.6 pb); GoF p = 0.33; counting cross-check 794.4 pb.
-> **σ(Z/γ* → μμ, 60 < m_Born < 120 GeV) = 1935 ± 30 pb** (A = 0.4092) · σ(m > 50 GeV) = 2006 ± 31 pb (A = 0.3947)
+> **σ_fid(pp → Z/γ* → μ⁺μ⁻; dressed, pT > 26/20 GeV, |η| < 2.4, 60 < m < 120 GeV) = 790.1 ± 0.2 (stat) ± 8.5 (syst) ± 9.6 (lumi) pb**
+> μ_Z = 0.988 ± 0.016 w.r.t. the aMC@NLO prediction (799.6 pb); GoF p = 0.79; counting cross-check 794.7 pb; ±0.2 % between binnings.
+> **σ(Z/γ* → μμ, 60 < m_Born < 120 GeV) = 1931 ± 33 pb** (A = 0.4092) · σ(m > 50 GeV) = 2002 ± 34 pb (A = 0.3947)
 
 Method: own skims of the unskimmed NanoAOD (data + all MC), pileup and L1-prefiring weights,
 tight-ID/iso/trigger scale factors from tag-and-probe fits, fake-factor non-prompt estimate,
-Z-peak momentum calibration, **TRExFitter v1.8.0** profile-likelihood fit of m(μμ) (30 × 2 GeV
-bins) with 24 nuisance parameters. Everything is in `docs/09`–`15`, `output/v2/RESULTS_v2.md`,
+Z-peak momentum calibration, **TRExFitter v1.8.0** profile-likelihood fit of m(μμ) (12 × 5 GeV
+bins, MINOS on every parameter) with 24 nuisance parameters. Everything is in `docs/09`–`15`, `output/v2/RESULTS_v2.md`,
 `CLAUDE.md`; slide deck: <https://claude.ai/code/artifact/8072b961-01d5-47ed-9804-ee21f70ac985>. Reproduce: `source ../setup.sh && python run_v2.py --from 2` (~40 min).
 
 ### What the combination gets (see `../fitting/CONVENTIONS.md`)
@@ -33,55 +33,60 @@ Numbers in the notebook's variables (`combination/combination.ipynb`):
 | variable | value | note |
 |---|---:|---|
 | `n_obs` | 10,378,567 | tight ID, ≥ 1 trigger-matched muon, FSR-recovered mass |
-| `n_bkg` | 68,821 | prompt MC (Z→ττ 11.1k, tt̄ 31.6k, tW 2.9k, WW 3.8k, WZ 9.2k, ZZ 6.3k) + non-prompt 3.8k |
-| `C` | 0.7917 | N_sel(all corrections) / N_fid(dressed), aMC@NLO |
+| `n_bkg` | 68,787 | prompt MC (Z→ττ 11.0k, tt̄ 31.6k, tW 2.9k, WW 3.8k, WZ 9.2k, ZZ 6.3k) + non-prompt 3.9k |
+| `C` | 0.7914 | N_sel(all corrections) / N_fid(dressed), aMC@NLO |
 | `A_60_120` / `A_m50` | 0.4092 / 0.3947 | dressed fiducial ÷ LHE μμ (60–120) / ÷ (6077.22/3) |
-| `acc_eff` | 0.3240 (60–120) / 0.3125 (m>50) | A × C |
+| `acc_eff` | 0.3238 (60–120) / 0.3124 (m>50) | A × C |
 | `lumi_pb` | 16393.381 | normtag, record 1059 |
 
 Uncertainties (impact on μ_Z / σ), and correlation with the other channels:
 
 | group | relative | correlated | NP names |
 |---|---:|---|---|
-| luminosity | 1.16% | yes | `Lumi` |
+| luminosity | 1.20% (external; profiled 1.16%) | yes | `Lumi` |
+| muon efficiency (ID, iso, trigger, reco 0.4%/muon correlated = 0.8%/event) | 0.87% | with μτ_h only | `MuonID`, `MuonIso`, `MuonTrigger`, `MuonReco` |
 | L1 prefiring | 0.51% | yes | `L1Prefiring` |
-| muon efficiency (ID, iso, trigger, reco) | 0.50% | with μτ_h only | `MuonID`, `MuonIso`, `MuonTrigger`, `MuonReco` |
-| signal modelling (PDF, αs, scales, PS, generator) | 0.36% | yes | `PDF`, `AlphaS`, `QCDScale`, `PS_ISR`, `PS_FSR`, `SigModel` |
-| MC statistics | 0.35% | no | gammas |
-| muon momentum scale/resolution | 0.27% | with μτ_h only | `MuonScale`, `MuonRes` |
-| pileup | 0.16% | yes | `Pileup` |
-| background cross sections | 0.09% | yes | `XS_TTbar`, `XS_SingleTop`, `XS_WW`, `XS_WZ`, `XS_ZZ`, `XS_DYtautau` |
-| non-prompt | 0.05% | no | `FakeStat_mumu`, `FakeMethod_mumu` |
+| signal modelling (PDF, αs, scales, PS, generator) | 0.49% | yes | `PDF`, `AlphaS`, `QCDScale`, `PS_ISR`, `PS_FSR`, `SigModel` |
+| MC statistics (the effective statistical limit: 10× the data statistics) | 0.38% | no | gammas |
+| muon momentum scale/resolution | 0.37% | with μτ_h only | `MuonScale`, `MuonRes` |
+| pileup | 0.13% | yes | `Pileup` |
+| background cross sections | 0.08% | yes | `XS_TTbar`, `XS_SingleTop`, `XS_WW`, `XS_WZ`, `XS_ZZ`, `XS_DYtautau` |
+| non-prompt | 0.04% | no | `FakeStat_mumu`, `FakeMethod_mumu` |
 | statistical | 0.03% | no | |
 | acceptance (for σ_tot only): PDF 0.52%, scale 0.32%, αs 0.03%, stat 0.05% | 0.61% | yes | outside the fit |
 
 Decisions the three channels still have to take together: the acceptance denominator
 (60 < m < 120 GeV recommended, vs m > 50 GeV) and NLO vs LO for A (3.2% apart).
 
-### Review of v2 (15 Sep 2026) -- read `REVIEW.md` before using the numbers above
+### Review of v2 (15 Sep 2026) and what was fixed the same day -- `REVIEW.md`
 
-Slides: `review/deck/zmumu_review.pdf`. The e-mu excess is the non-prompt-electron background removed by the
-prompt-only MC filter (data/MC = 0.996 with it included; validation region only, no effect). The p_T^miss
-mismatch is unsmeared MC jets + pileup/unclustered energy (not used anywhere). **The 30-bin fit is not robust:**
-mu_Z = 0.990 (nominal) / 0.996 (6 bins) / 0.9935 (1 bin = counting, 794.4 pb) / 1.005 (without the powheg
-`SigModel` template), because a 3-4% data deficit at 62-78 GeV is absorbed by over-constrained shape NPs and
-the `SigModel` template carries a generator-cut artefact. Until fixed, prefer the counting extraction
-(794.4 pb) with an extra +-0.7% lineshape-model term; `MuonReco` is 0.4% per event in the fit but documented
-per muon; the pileup profile is ~4% low; `njet` in the plots is not lepton-cleaned.
+Slides: `review/deck/zmumu_review.pdf` (pre-fix numbers). Findings and fixes, all in the result above:
+the e-mu "excess" was the non-prompt-electron background removed by the prompt-only MC filter -> the e-mu
+regions now keep all MC + W+jets (data/MC 0.992) and a same-sign e-mu region was added; the p_T^miss
+mismatch is unsmeared MC jets + pileup/unclustered energy (Puppi p_T^miss agrees; not used anywhere);
+the 30 x 2 GeV fit was not robust (over-constrained shape NPs, one-sided `SigModel` with a generator-cut
+artefact) -> 12 x 5 GeV bins, two-sided `SigModel` built inside the common 50 < m_LHE < 120 window, no
+smoothing, MINOS on all parameters, stability table in `RESULTS_v2.md` (+-0.2% between binnings that
+describe the data); pileup profile matched to N_PV (`Pileup` pull -1.5 -> +0.06); `MuonReco` 0.4%/muon ->
+0.8%/event; lepton-cleaned jets; luminosity quoted as the external 1.2%; `Fakes` template without Sumw2.
 
 ### Open issues after v2
 
-1. The pileup nuisance parameter is pulled by −1.5σ (data prefer ~7% fewer interactions than
-   the 69.2 mb profile): the profile is derived from the luminosity record, not from the
-   official `puWeights` file (unreachable). Impact on σ is 0.16%.
-2. The e-μ validation region shows a 8–10% data excess: no electron scale factors and no
-   non-prompt-electron estimate there; it is not in the fit (`--emu-control` promotes it).
-3. Official prefiring maps, Muon-POG scale factors and Rochester corrections would replace the
-   in-house versions (all three files need CERN credentials).
-4. The single-muon + jet fake-factor region is biased by the isolated trigger; the
+1. The pileup profile is a two-parameter (scale, bunch-to-bunch spread) fit of the luminosity-record
+   profile to the N_PV distribution, not the official `puWeights` file (unreachable). Data/MC in N_PV
+   agree to 3% over the bulk; the impact on σ is 0.13%.
+2. The e-μ regions have no electron scale factors and no data-driven non-prompt-electron estimate; the
+   same-sign e-μ region is under-predicted by 24% (W+jets MC statistics -- weights of ~36 per event --
+   and no QCD sample). Validation only; `--emu-control` would promote it to a control region.
+3. The data lineshape at 60-80 GeV lies between aMC@NLO and powheg (`sigmodel_lineshape.png`); the
+   fit resolves this with `SigModel` = +0.66 sigma. A third generator or NLO EW corrections would tell
+   which is right; the counting extraction (794.7 pb) is 0.6% above the fit for this reason.
+4. Official prefiring maps, Muon-POG scale factors and Rochester corrections would replace the
+   in-house versions (all three files need CERN credentials). The 0.4%/muon reconstruction term is
+   now the second-largest systematic.
+5. The single-muon + jet fake-factor region is biased by the isolated trigger; the
    prescaled non-isolated paths are in the skim if someone wants to fix it.
-5. `SigModel` compares aMC@NLO with powheg (C differs by 0.2%); the LO madgraph acceptance
-   (3.2% lower) is a convention question, not a systematic.
+6. The LO madgraph acceptance (3.2% lower) is a convention question, not a systematic.
 
 ## v1: what we worked on (first iteration, data-only)
 

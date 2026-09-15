@@ -149,7 +149,9 @@ def make_config(regions_used, present, emu_control, job=JOB, smoothing=False, bi
                SuppressNegativeBinWarnings=True, GetChi2=True, DoSummaryPlot=True, DoTables=True, RankingMaxNP=25,
                RankingPlot="ALL", ImageFormat="png", PlotOptions="YIELDS", RatioYmin=0.95, RatioYmax=1.05,
                RatioYminPostFit=0.98, RatioYmaxPostFit=1.02, DebugLevel=1),
-        tc.fit("fit", FitType="SPLUSB", FitRegion="CRSR", UseMinos="mu_Z", NumCPU=4),
+        # MINOS on every parameter: with 10 M events the numerical Hesse covariance is ill-conditioned (the POI and
+        # the pure-normalisation NPs are degenerate up to their priors) and reports errors of 0.2-0.4 for Lumi etc.
+        tc.fit("fit", FitType="SPLUSB", FitRegion="CRSR", UseMinos="all", NumCPU=4),
         tc.region("mumu_SR", Type="SIGNAL", HistoName="mumu_SR", VariableTitle="m_{#mu#mu} [GeV]",
                   Label="#mu#mu, 60 < m < 120 GeV", ShortLabel="SR", BinWidth=bin_width, LogScale=True),
     ]

@@ -10,7 +10,8 @@ STACK_ORDER = ["Fakes", "WJets", "WW", "WZ", "ZZ", "SingleTop", "TTbar", "DYee",
 COLOURS = {"DYmumu": "#f2b134", "DYtautau": "#a04cb0", "DYee": "#4c9ee0", "TTbar": "#d62728", "SingleTop": "#e07b7b",
            "WW": "#2ca6a4", "WZ": "#4dc0be", "ZZ": "#7fd4d2", "Fakes": "#9a9a9a", "WJets": "#8c6d4f"}
 LABELS = {"DYmumu": r"Z/$\gamma^*\to\mu\mu$", "DYtautau": r"Z/$\gamma^*\to\tau\tau$", "DYee": r"Z/$\gamma^*\to ee$",
-          "TTbar": r"t$\bar{t}$", "SingleTop": "tW", "WW": "WW", "WZ": "WZ", "ZZ": "ZZ", "Fakes": "non-prompt (FF)"}
+          "TTbar": r"t$\bar{t}$", "SingleTop": "tW", "WW": "WW", "WZ": "WZ", "ZZ": "ZZ", "Fakes": "non-prompt (FF)",
+          "WJets": r"W+jets (jet $\to$ e)"}
 XLABELS = {"mass_fit": r"$m_{\mu\mu}$ [GeV]", "mass_fine": r"$m_{\mu\mu}$ [GeV]", "pt1": r"leading muon $p_T$ [GeV]",
            "pt2": r"subleading muon $p_T$ [GeV]", "eta1": r"leading muon $\eta$", "eta2": r"subleading muon $\eta$",
            "phi1": r"leading muon $\phi$", "zpt": r"$p_T^{\mu\mu}$ [GeV]", "zy": r"$y^{\mu\mu}$", "npv": "good primary vertices",
@@ -71,7 +72,10 @@ def stack_plot(hall, region, var, filename, fakes_fine=None, logy=False, title="
     rax.fill_between(e, np.append(1 - band, 1), np.append(1 + band, 1), step="post", facecolor="none", hatch="////", edgecolor="grey", linewidth=0)
     rax.errorbar(c, ratio, yerr=err, fmt="o", color="black", markersize=3)
     rax.axhline(1.0, linestyle="--", color="grey")
-    rax.set_ylim(0.8, 1.2); rax.set_ylabel("Data / pred."); rax.set_xlabel(XLABELS.get(var, var))
+    xlabel = XLABELS.get(var, var)
+    if region in H.EMU_REGIONS and var in ("mass_fit", "mass_fine"):
+        xlabel = r"$m_{e\mu}$ [GeV]"
+    rax.set_ylim(0.8, 1.2); rax.set_ylabel("Data / pred."); rax.set_xlabel(xlabel)
     return hists.save_fig(fig, filename)
 
 

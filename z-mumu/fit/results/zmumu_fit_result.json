@@ -118,428 +118,428 @@
  "nps": {
   "AlphaS": [
    0.00471671,
-   0.97969,
-   0.97969
+   0.998129,
+   0.998448
   ],
   "FakeMethod_mumu": [
    0.0819718,
-   0.957304,
-   0.957304
+   0.991681,
+   0.987897
   ],
   "FakeStat_mumu": [
    0.0417102,
-   0.974666,
-   0.974666
+   0.996908,
+   0.996833
   ],
   "L1Prefiring": [
    -0.0617019,
-   0.370807,
-   0.370807
+   0.996992,
+   0.998203
   ],
   "Lumi": [
    0.0803771,
-   0.194969,
-   0.194969
+   0.997757,
+   0.994967
   ],
   "MuonID": [
    0.0723339,
-   0.761429,
-   0.761429
+   0.995638,
+   0.996108
   ],
   "MuonIso": [
    0.0133836,
-   0.473119,
-   0.473119
+   0.897751,
+   0.896194
   ],
   "MuonReco": [
    0.0534023,
-   0.295078,
-   0.295078
+   0.999506,
+   0.997258
   ],
   "MuonRes": [
    0.396278,
-   0.0966747,
-   0.0966747
+   0.119005,
+   0.118983
   ],
   "MuonScale": [
    -0.47646,
-   0.0932331,
-   0.0932331
+   0.138982,
+   0.139019
   ],
   "MuonTrigger": [
    0.00967847,
-   0.720466,
-   0.720466
+   0.973218,
+   0.97331
   ],
   "PDF": [
    0.560404,
-   0.868857,
-   0.868857
+   0.926382,
+   0.925969
   ],
   "PS_FSR": [
    0.108259,
-   0.684166,
-   0.684166
+   0.741495,
+   0.74058
   ],
   "PS_ISR": [
    0.444008,
-   0.789024,
-   0.789024
+   0.951801,
+   0.951129
   ],
   "Pileup": [
    0.0586776,
-   0.606117,
-   0.606117
+   0.820121,
+   0.821526
   ],
   "QCDScale": [
    0.761569,
-   0.581695,
-   0.581695
+   0.793209,
+   0.791685
   ],
   "SigModel": [
    0.656505,
-   0.0779267,
-   0.0779267
+   0.135659,
+   0.135844
   ],
   "XS_DYtautau": [
    0.150562,
-   0.951625,
-   0.951625
+   0.982643,
+   0.978884
   ],
   "XS_SingleTop": [
    0.0329573,
-   0.98216,
-   0.98216
+   0.998441,
+   0.999548
   ],
   "XS_TTbar": [
    0.188967,
-   0.918245,
-   0.918245
+   0.961142,
+   0.956686
   ],
   "XS_WW": [
    0.0297008,
-   0.984993,
-   0.984993
+   0.998586,
+   0.998608
   ],
   "XS_WZ": [
    0.00557741,
-   0.985324,
-   0.985324
+   1.00033,
+   0.999616
   ],
   "XS_ZZ": [
    -0.0134598,
-   0.986763,
-   0.986763
+   0.999939,
+   1.0
   ],
   "gamma_stat_mumu_SR_bin_0": [
    1.00582,
-   0.00466142,
-   0.00466142
+   0.00495042,
+   0.00492849
   ],
   "gamma_stat_mumu_SR_bin_1": [
    0.998595,
-   0.00375534,
-   0.00375534
+   0.0041966,
+   0.00417433
   ],
   "gamma_stat_mumu_SR_bin_10": [
    1.00169,
-   0.00504919,
-   0.00504919
+   0.00550102,
+   0.00547312
   ],
   "gamma_stat_mumu_SR_bin_11": [
    1.00471,
-   0.00689146,
-   0.00689146
+   0.0072424,
+   0.00718717
   ],
   "gamma_stat_mumu_SR_bin_2": [
    0.997063,
-   0.00309471,
-   0.00309471
+   0.00338138,
+   0.0033704
   ],
   "gamma_stat_mumu_SR_bin_3": [
    0.994978,
-   0.00221861,
-   0.00221861
+   0.00236214,
+   0.00235742
   ],
   "gamma_stat_mumu_SR_bin_4": [
    1.00147,
-   0.00163884,
-   0.00163884
+   0.00177827,
+   0.00177621
   ],
   "gamma_stat_mumu_SR_bin_5": [
    1.00003,
-   0.0010016,
-   0.0010016
+   0.00104952,
+   0.00104939
   ],
   "gamma_stat_mumu_SR_bin_6": [
    1.00002,
-   0.000781607,
-   0.000781607
+   0.000812763,
+   0.000811572
   ],
   "gamma_stat_mumu_SR_bin_7": [
    0.999934,
-   0.00209025,
-   0.00209025
+   0.00226434,
+   0.00225982
   ],
   "gamma_stat_mumu_SR_bin_8": [
    0.998726,
-   0.00240996,
-   0.00240996
+   0.00250442,
+   0.00250029
   ],
   "gamma_stat_mumu_SR_bin_9": [
    1.00253,
-   0.00373489,
-   0.00373489
+   0.00401969,
+   0.00400651
   ]
  },
  "ranking": [
   {
    "name": "Lumi",
    "pull": 0.0803771,
-   "err_up": 0.194969,
-   "err_down": 0.194969,
-   "dpoi_up_post": -0.00225935,
-   "dpoi_down_post": 0.00227319,
+   "err_up": 0.997757,
+   "err_down": 0.994967,
+   "dpoi_up_post": -0.0115075,
+   "dpoi_down_post": 0.011746,
    "dpoi_up_pre": -0.0115444,
    "dpoi_down_pre": 0.0118066
   },
   {
    "name": "MuonReco",
    "pull": 0.0534023,
-   "err_up": 0.295078,
-   "err_down": 0.295078,
-   "dpoi_up_post": -0.0022922,
-   "dpoi_down_post": 0.00228507,
+   "err_up": 0.999506,
+   "err_down": 0.997258,
+   "dpoi_up_post": -0.00770933,
+   "dpoi_down_post": 0.00777502,
    "dpoi_up_pre": -0.0077124,
    "dpoi_down_pre": 0.00781142
   },
   {
    "name": "Pileup",
    "pull": 0.0586776,
-   "err_up": 0.606117,
-   "err_down": 0.606117,
-   "dpoi_up_post": 0.000964189,
-   "dpoi_down_post": -0.00100474,
+   "err_up": 0.820121,
+   "err_down": 0.821526,
+   "dpoi_up_post": 0.00128911,
+   "dpoi_down_post": -0.00137092,
    "dpoi_up_pre": 0.00160901,
    "dpoi_down_pre": -0.00161204
   },
   {
    "name": "L1Prefiring",
    "pull": -0.0617019,
-   "err_up": 0.370807,
-   "err_down": 0.370807,
-   "dpoi_up_post": 0.00186418,
-   "dpoi_down_post": -0.00190005,
+   "err_up": 0.996992,
+   "err_down": 0.998203,
+   "dpoi_up_post": 0.00506529,
+   "dpoi_down_post": -0.00501535,
    "dpoi_up_pre": 0.00508297,
    "dpoi_down_pre": -0.0050602
   },
   {
    "name": "MuonID",
    "pull": 0.0723339,
-   "err_up": 0.761429,
-   "err_down": 0.761429,
-   "dpoi_up_post": -0.00145061,
-   "dpoi_down_post": 0.00135352,
+   "err_up": 0.995638,
+   "err_down": 0.996108,
+   "dpoi_up_post": -0.0018976,
+   "dpoi_down_post": 0.00185318,
    "dpoi_up_pre": -0.00190556,
    "dpoi_down_pre": 0.00184115
   },
   {
    "name": "MuonIso",
    "pull": 0.0133836,
-   "err_up": 0.473119,
-   "err_down": 0.473119,
-   "dpoi_up_post": -0.00154944,
-   "dpoi_down_post": 0.00150219,
+   "err_up": 0.897751,
+   "err_down": 0.896194,
+   "dpoi_up_post": -0.00285772,
+   "dpoi_down_post": 0.00288237,
    "dpoi_up_pre": -0.00322984,
    "dpoi_down_pre": 0.00320642
   },
   {
    "name": "MuonTrigger",
    "pull": 0.00967847,
-   "err_up": 0.720466,
-   "err_down": 0.720466,
-   "dpoi_up_post": -0.00111801,
-   "dpoi_down_post": 0.00106163,
+   "err_up": 0.973218,
+   "err_down": 0.97331,
+   "dpoi_up_post": -0.00150128,
+   "dpoi_down_post": 0.00146649,
    "dpoi_up_pre": -0.00154297,
    "dpoi_down_pre": 0.00148073
   },
   {
    "name": "MuonScale",
    "pull": -0.47646,
-   "err_up": 0.0932331,
-   "err_down": 0.0932331,
-   "dpoi_up_post": 0.00233263,
-   "dpoi_down_post": -0.00239582,
+   "err_up": 0.138982,
+   "err_down": 0.139019,
+   "dpoi_up_post": 0.00353227,
+   "dpoi_down_post": -0.00355956,
    "dpoi_up_pre": 0.0254548,
    "dpoi_down_pre": -0.025293
   },
   {
    "name": "MuonRes",
    "pull": 0.396278,
-   "err_up": 0.0966747,
-   "err_down": 0.0966747,
-   "dpoi_up_post": -0.00124348,
-   "dpoi_down_post": 0.00119171,
+   "err_up": 0.119005,
+   "err_down": 0.118983,
+   "dpoi_up_post": -0.00152551,
+   "dpoi_down_post": 0.00151259,
    "dpoi_up_pre": -0.012538,
    "dpoi_down_pre": 0.012676
   },
   {
    "name": "PDF",
    "pull": 0.560404,
-   "err_up": 0.868857,
-   "err_down": 0.868857,
-   "dpoi_up_post": 0.000800985,
-   "dpoi_down_post": -0.00082913,
+   "err_up": 0.926382,
+   "err_down": 0.925969,
+   "dpoi_up_post": 0.000847623,
+   "dpoi_down_post": -0.000878094,
    "dpoi_up_pre": 0.000891472,
    "dpoi_down_pre": -0.000901302
   },
   {
    "name": "AlphaS",
    "pull": 0.00471671,
-   "err_up": 0.97969,
-   "err_down": 0.97969,
-   "dpoi_up_post": 0.000199731,
-   "dpoi_down_post": -0.000245749,
+   "err_up": 0.998129,
+   "err_down": 0.998448,
+   "dpoi_up_post": 0.000203208,
+   "dpoi_down_post": -0.000250252,
    "dpoi_up_pre": 0.000203806,
    "dpoi_down_pre": -0.000255657
   },
   {
    "name": "QCDScale",
    "pull": 0.761569,
-   "err_up": 0.581695,
-   "err_down": 0.581695,
-   "dpoi_up_post": -0.000623374,
-   "dpoi_down_post": 0.000569108,
+   "err_up": 0.793209,
+   "err_down": 0.791685,
+   "dpoi_up_post": -0.000841019,
+   "dpoi_down_post": 0.000775934,
    "dpoi_up_pre": -0.00105448,
    "dpoi_down_pre": 0.00098829
   },
   {
    "name": "PS_ISR",
    "pull": 0.444008,
-   "err_up": 0.789024,
-   "err_down": 0.789024,
-   "dpoi_up_post": -0.000792131,
-   "dpoi_down_post": 0.000784222,
+   "err_up": 0.951801,
+   "err_down": 0.951129,
+   "dpoi_up_post": -0.000920438,
+   "dpoi_down_post": 0.000944129,
    "dpoi_up_pre": -0.000989368,
    "dpoi_down_pre": 0.000977849
   },
   {
    "name": "PS_FSR",
    "pull": 0.108259,
-   "err_up": 0.684166,
-   "err_down": 0.684166,
-   "dpoi_up_post": 0.00154656,
-   "dpoi_down_post": -0.00157691,
+   "err_up": 0.741495,
+   "err_down": 0.74058,
+   "dpoi_up_post": 0.00164734,
+   "dpoi_down_post": -0.00171468,
    "dpoi_up_pre": 0.00218153,
    "dpoi_down_pre": -0.00229262
   },
   {
    "name": "SigModel",
    "pull": 0.656505,
-   "err_up": 0.0779267,
-   "err_down": 0.0779267,
-   "dpoi_up_post": -0.00229292,
-   "dpoi_down_post": 0.0022608,
+   "err_up": 0.135659,
+   "err_down": 0.135844,
+   "dpoi_up_post": -0.00397832,
+   "dpoi_down_post": 0.00394439,
    "dpoi_up_pre": -0.0289937,
    "dpoi_down_pre": 0.0292753
   },
   {
    "name": "XS_DYtautau",
    "pull": 0.150562,
-   "err_up": 0.951625,
-   "err_down": 0.951625,
-   "dpoi_up_post": 0.000495938,
-   "dpoi_down_post": -0.000490867,
+   "err_up": 0.982643,
+   "err_down": 0.978884,
+   "dpoi_up_post": 0.000516869,
+   "dpoi_down_post": -0.000504102,
    "dpoi_up_pre": 0.000517668,
    "dpoi_down_pre": -0.000481081
   },
   {
    "name": "XS_TTbar",
    "pull": 0.188967,
-   "err_up": 0.918245,
-   "err_down": 0.918245,
-   "dpoi_up_post": 0.000611527,
-   "dpoi_down_post": -0.000611676,
+   "err_up": 0.961142,
+   "err_down": 0.956686,
+   "dpoi_up_post": 0.000647843,
+   "dpoi_down_post": -0.00063126,
    "dpoi_up_pre": 0.000682001,
    "dpoi_down_pre": -0.000675586
   },
   {
    "name": "XS_SingleTop",
    "pull": 0.0329573,
-   "err_up": 0.98216,
-   "err_down": 0.98216,
-   "dpoi_up_post": 4.2239e-05,
-   "dpoi_down_post": -0.000118703,
+   "err_up": 0.998441,
+   "err_down": 0.999548,
+   "dpoi_up_post": 4.39142e-05,
+   "dpoi_down_post": -0.000120426,
    "dpoi_up_pre": 5.80183e-05,
    "dpoi_down_pre": -0.000117072
   },
   {
    "name": "XS_WW",
    "pull": 0.0297008,
-   "err_up": 0.984993,
-   "err_down": 0.984993,
-   "dpoi_up_post": 7.80266e-05,
-   "dpoi_down_post": -0.000178156,
+   "err_up": 0.998586,
+   "err_down": 0.998608,
+   "dpoi_up_post": 8.77802e-05,
+   "dpoi_down_post": -0.000175418,
    "dpoi_up_pre": 7.97596e-05,
    "dpoi_down_pre": -0.000177159
   },
   {
    "name": "XS_WZ",
    "pull": 0.00557741,
-   "err_up": 0.985324,
-   "err_down": 0.985324,
-   "dpoi_up_post": -0.000153536,
-   "dpoi_down_post": 2.95997e-05,
+   "err_up": 1.00033,
+   "err_down": 0.999616,
+   "dpoi_up_post": -0.000153121,
+   "dpoi_down_post": 1.55926e-05,
    "dpoi_up_pre": -0.000154453,
    "dpoi_down_pre": 2.50959e-05
   },
   {
    "name": "XS_ZZ",
    "pull": -0.0134598,
-   "err_up": 0.986763,
-   "err_down": 0.986763,
-   "dpoi_up_post": -7.90417e-05,
-   "dpoi_down_post": -1.59729e-05,
+   "err_up": 0.999939,
+   "err_down": 1.0,
+   "dpoi_up_post": -7.96493e-05,
+   "dpoi_down_post": -9.84405e-06,
    "dpoi_up_pre": -7.77414e-05,
    "dpoi_down_pre": -8.19189e-06
   },
   {
    "name": "FakeStat_mumu",
    "pull": 0.0417102,
-   "err_up": 0.974666,
-   "err_down": 0.974666,
-   "dpoi_up_post": 0.00017589,
-   "dpoi_down_post": -0.000234752,
+   "err_up": 0.996908,
+   "err_down": 0.996833,
+   "dpoi_up_post": 0.000184476,
+   "dpoi_down_post": -0.000238026,
    "dpoi_up_pre": 0.000184282,
    "dpoi_down_pre": -0.000237595
   },
   {
    "name": "FakeMethod_mumu",
    "pull": 0.0819718,
-   "err_up": 0.957304,
-   "err_down": 0.957304,
-   "dpoi_up_post": 0.000367463,
-   "dpoi_down_post": -0.000428882,
+   "err_up": 0.991681,
+   "err_down": 0.987897,
+   "dpoi_up_post": 0.000381688,
+   "dpoi_down_post": -0.000441086,
    "dpoi_up_pre": 0.000374522,
    "dpoi_down_pre": -0.000431402
   },
   {
    "name": "gamma_stat_mumu_SR_bin_0",
    "pull": 0.934792,
-   "err_up": 0.749277,
-   "err_down": 0.749277,
-   "dpoi_up_post": 0.000819516,
-   "dpoi_down_post": -0.000874815,
+   "err_up": 0.795731,
+   "err_down": 0.792207,
+   "dpoi_up_post": 0.000876013,
+   "dpoi_down_post": -0.000922859,
    "dpoi_up_pre": 0.00114727,
    "dpoi_down_pre": -0.00116255
   },
   {
    "name": "gamma_stat_mumu_SR_bin_1",
    "pull": -0.244753,
-   "err_up": 0.654021,
-   "err_down": 0.654021,
-   "dpoi_up_post": 0.00202095,
-   "dpoi_down_post": -0.00206641,
+   "err_up": 0.730869,
+   "err_down": 0.726991,
+   "dpoi_up_post": 0.002242,
+   "dpoi_down_post": -0.00230001,
    "dpoi_up_pre": 0.00309677,
    "dpoi_down_pre": -0.00316662
   }

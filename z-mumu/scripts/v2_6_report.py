@@ -52,7 +52,7 @@ def lineshape_plot(hall, gens, fakes_res):
             label="powheg / aMC@NLO, reconstructed, both 50 < m_LHE < 120 GeV")
     ax.errorbar(c, data / mc, yerr=np.sqrt(data) / mc, fmt="o", color="black", markersize=4, label=r"data / prediction, pre-fit ($\mu_Z$ = 1)")
     ax.axhline(1, color="grey", linestyle=":")
-    ax.set_xlim(60, 120); ax.set_ylim(0.9, 1.06); ax.set_xlabel(r"$m_{\mu\mu}$ [GeV]"); ax.set_ylabel("ratio (shapes normalised in 60-120 GeV)")
+    ax.set_xlim(60, 120); ax.set_ylim(0.9, 1.06); ax.set_xlabel(r"$m_{\mu\mu}$ [GeV]"); ax.set_ylabel("ratio (shapes normalised 60-120 GeV)")
     ax.legend(fontsize=10, loc="lower right")
     hists._decorate(ax, lumi_fb=config.LUMI_PB_NORMTAG / 1000); hists._title(ax, "Signal lineshape: generator comparison vs data")
     hists.save_fig(fig, "sigmodel_lineshape.png")
@@ -111,8 +111,11 @@ def main():
                       "| configuration | mu_Z | GoF p | notable pulls (constraint) |", "|---|---:|---:|---|"]
             for x in stab:
                 lines.append(f"| {x['label']} | {x['mu']:.4f} +{x['err_up']:.4f} -{x['err_down']:.4f} | {x['gof_p']} | {'; '.join(x['notable'][:5])} |")
-            mus = [x["mu"] for x in stab]
-            lines += ["", f"Spread of mu_Z over the variants: {min(mus):.4f} - {max(mus):.4f} (half-spread {50*(max(mus)-min(mus)):.2f}%).", ""]
+            ok = [x["mu"] for x in stab if (x["gof_p"] or 0) > 0.05]
+            bad = [x["label"] for x in stab if x["gof_p"] is not None and x["gof_p"] <= 0.05 and "1 bin" not in x["label"]]
+            lines += ["", f"Spread of mu_Z over the shape fits that describe the data (GoF p > 0.05): {min(ok):.4f} - {max(ok):.4f} "
+                      f"(half-spread {50*(max(ok)-min(ok)):.2f}%). The 1-bin fit has no goodness of fit (0 degrees of freedom). "
+                      f"Rejected (p <= 0.05): {'; '.join(bad)}.", ""]
         lines += ["## Leading nuisance parameters (ranking)", "", "| NP | pull | constraint | +impact | -impact |", "|---|---:|---:|---:|---:|"]
         for r in fit["ranking"][:12]:
             lines.append(f"| {r['name']} | {r['pull']:+.2f} | {0.5*(r['err_up']+r['err_down']):.2f} | {100*r['dpoi_up_post']:+.3f}% | {100*r['dpoi_down_post']:+.3f}% |")

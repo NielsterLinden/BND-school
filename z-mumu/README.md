@@ -6,14 +6,15 @@ this folder; **v2 is the result**, v1 is kept as the documented first iteration.
 ## v2 result (MC-based, TRExFitter binned-likelihood fit) -- `run_v2.py`
 
 ```
-sigma_fid(pp -> Z/gamma* -> mu+ mu-) = 791.8 +/- 0.2 (stat) +/- 6.2 (syst) +/- 9.3 (lumi) pb
+sigma_fid(pp -> Z/gamma* -> mu+ mu-) = 790.1 +/- 0.2 (stat) +/- 8.5 (syst) +/- 9.6 (lumi) pb
 ```
 
 in the fiducial volume: two opposite-sign muons, `pT > 26/20 GeV`, `|eta| < 2.4`,
-`60 < m(mu mu) < 120 GeV`, dressed leptons (dR < 0.1). Signal strength `mu_Z = 0.990 +/- 0.014`
-against the aMC@NLO prediction of 799.6 pb; goodness of fit p = 0.33; counting cross-check
-`(N_obs - N_bkg)/(C L)` = 794.4 pb. Inclusive: `sigma(60 < m < 120 GeV) = 1935 +/- 30 pb`
-(A = 0.4092), `sigma(m > 50 GeV) = 2006 +/- 31 pb` (A = 0.3947). Reviewer's independent
+`60 < m(mu mu) < 120 GeV`, dressed leptons (dR < 0.1). Signal strength `mu_Z = 0.988 +/- 0.016`
+against the aMC@NLO prediction of 799.6 pb; goodness of fit p = 0.79 (12 bins of 5 GeV);
+counting cross-check `(N_obs - N_bkg)/(C L)` = 794.7 pb; the result moves by +/- 0.2% between
+the binnings that describe the data. Inclusive: `sigma(60 < m < 120 GeV) = 1931 +/- 33 pb`
+(A = 0.4092), `sigma(m > 50 GeV) = 2002 +/- 34 pb` (A = 0.3947). Reviewer's independent
 number for the same volume: 797.2 pb; v1: 773.2 pb.
 
 What v2 does that v1 could not (details in [`docs/09-v2-overview.md`](docs/09-v2-overview.md)):
@@ -24,12 +25,13 @@ a data-driven **fake-factor** estimate of non-prompt muons (no QCD simulation), 
 momentum calibration, and a **TRExFitter v1.8.0** fit of the mass spectrum with 24 nuisance
 parameters. Full numbers: [`output/v2/RESULTS_v2.md`](output/v2/RESULTS_v2.md); machine-readable:
 `output/v2/results_v2.json`, `fit/results/zmumu_fit_result.json`; plots: `output/v2/plots/`;
-fit outputs: `fit/results/zmumu/`. **Review (15 Sep 2026): [`REVIEW.md`](REVIEW.md), slides `review/deck/zmumu_review.pdf` -- the fit's central value depends on the shape model at the 1% level; see there before quoting the number.** Twelve-slide summary deck: <https://claude.ai/code/artifact/8072b961-01d5-47ed-9804-ee21f70ac985>. Agents: read [`CLAUDE.md`](CLAUDE.md).
+fit outputs: `fit/results/zmumu/`. Review (15 Sep 2026): [`REVIEW.md`](REVIEW.md), slides `review/deck/zmumu_review.pdf`; its findings (e-mu non-prompt electrons, pileup profile, fit binning and `SigModel` template, `MuonReco`, lepton-cleaned jets) are fixed in the numbers above -- the review's "status after the fixes" section says what changed. Twelve-slide summary deck (pre-review numbers): <https://claude.ai/code/artifact/8072b961-01d5-47ed-9804-ee21f70ac985>. Agents: read [`CLAUDE.md`](CLAUDE.md).
 
-Uncertainty budget (impact on the cross section): luminosity 1.16%, L1 prefiring 0.51%,
-muon efficiencies 0.50%, signal modelling (PDF, scales, parton shower, generator) 0.36%,
-MC statistics 0.35%, muon momentum 0.27%, pileup 0.16%, backgrounds 0.09%, fakes 0.05%,
-statistics 0.03%. Total 1.4% (0.8% without the luminosity).
+Uncertainty budget (impact on the cross section): luminosity 1.2% (external), muon
+efficiencies 0.87% (of which the external 0.4%/muon reconstruction term 0.77%), L1 prefiring
+0.51%, signal modelling (PDF, scales, parton shower, generator) 0.49%, MC statistics 0.38%,
+muon momentum 0.37%, pileup 0.13%, backgrounds 0.08%, fakes 0.04%, statistics 0.03%.
+Total 1.6% (1.06% without the luminosity).
 
 ## v1 result (data-only counting) -- `run_all.py`
 

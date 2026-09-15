@@ -14,6 +14,31 @@ robust against the choice of shape systematics and binning (μ_Z moves by up to 
 aMC@NLO template does not describe the 60–80 GeV tail and the fit uses over-constrained shape nuisance
 parameters to fix that.
 
+## 0. Status after the fixes (15 Sep 2026, same day)
+
+Every finding below was acted on in the commit that follows fc9a998; the numbers in sections
+1-8 describe the state *before*. What changed (details in `docs/14-fit-and-systematics.md`,
+`docs/11-mc-weights.md`, `output/v2/RESULTS_v2.md`):
+
+| finding | fix | effect |
+|---|---|---|
+| F1 e-μ region | all MC kept in the e-μ regions (+ W+jets, `XS_WJets` 30 %); same-sign e-μ region added (`SSemu`) | data/MC 0.992 in OS, flat in electron p_T, jets and mass; SS e-μ under-predicted by 24 % (W+jets MC statistics, no QCD) -- plots only |
+| F2 p_T^miss | Puppi p_T^miss added to the plots; nothing else needed | none |
+| F3/F5 fit not robust | 1 GeV input bins, **fit in 12 × 5 GeV bins**, no template smoothing, MINOS on every parameter (`UseMinos: all`; the Hesse covariance was ill-conditioned and gave the spurious 0.2-0.8 "constraints" on `Lumi`, `MuonReco`, ...), stability script `scripts/v2_5_fit_variants.py` | μ_Z = 0.9881 ± 0.0159, GoF p = 0.79; 0.9858-0.9901 over the binnings with p > 0.05; counting 0.9939; the no-`SigModel` and smoothed variants have p ≤ 0.01 and are rejected |
+| F4 `SigModel` template | powheg / aMC@NLO ratio with both generators inside 50 < m_LHE < 120 GeV, normalised to the NLO fiducial prediction in the window, two-sided (mirrored) | no edge artefact (last-bin ratio 1.02 instead of 0.67); pull +0.66 σ, constraint 0.14; C(powheg)/C(aMC@NLO) = 1.0028 |
+| 62-78 GeV deficit | generator-level comparison added (`sigmodel_lineshape.png`): powheg has 4-6 % less continuum than aMC@NLO at Born level; the data lie between | covered by the two-sided `SigModel`; listed as an open issue |
+| F6 pileup | profile scale (1.035) and bunch-to-bunch smearing (9 %) fitted to the SR N_PV distribution (`scripts/v2_2_pileup.py`) | N_PV data/MC within 3 % over the bulk (χ²/ndf 104 414 → 4 729 / 50); `Pileup` pull −1.5 → +0.06 |
+| F7 jets | `regions.clean_jet_count` (ΔR > 0.4 to tight/anti muons and selected electrons) | jet multiplicity peaks at 0 |
+| F8 `MuonReco` | 0.4 %/muon fully correlated → 0.8 % per event (`fitting/CONVENTIONS.md` updated) | +0.77 % impact; total systematic 1.57 % instead of 1.40 % |
+| F9 MC statistics | stated in `RESULTS_v2.md` and `handoff.md` | -- |
+| §7 small items | `DYmumu_powheg`/`WJets` rows dropped from the yields table (note added); `err_decomp` removed from the JSON; `Fakes` template without Sumw2; luminosity quoted as the external 1.2 % | -- |
+
+Result after the fixes: **σ_fid = 790.1 ± 0.2 (stat) ± 8.5 (syst) ± 9.6 (lumi) pb** (μ_Z = 0.988 ± 0.016),
+against 791.8 ± 6.2 ± 9.3 pb before. The central value barely moved; the systematic grew because
+`MuonReco` doubled and because the shape fit now runs in bins where the shape NPs are not
+over-constrained. The "±0.7 % lineshape term" recommended below is no longer needed: the two-sided
+`SigModel` carries it, and the fit is stable to ±0.2 % against the binning.
+
 ## 1. Summary of findings
 
 | # | finding | severity | effect on σ_fid |

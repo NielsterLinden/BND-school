@@ -58,6 +58,17 @@ Uncertainties (impact on μ_Z / σ), and correlation with the other channels:
 Decisions the three channels still have to take together: the acceptance denominator
 (60 < m < 120 GeV recommended, vs m > 50 GeV) and NLO vs LO for A (3.2% apart).
 
+### Review of v2 (15 Sep 2026) -- read `REVIEW.md` before using the numbers above
+
+Slides: `review/deck/zmumu_review.pdf`. The e-mu excess is the non-prompt-electron background removed by the
+prompt-only MC filter (data/MC = 0.996 with it included; validation region only, no effect). The p_T^miss
+mismatch is unsmeared MC jets + pileup/unclustered energy (not used anywhere). **The 30-bin fit is not robust:**
+mu_Z = 0.990 (nominal) / 0.996 (6 bins) / 0.9935 (1 bin = counting, 794.4 pb) / 1.005 (without the powheg
+`SigModel` template), because a 3-4% data deficit at 62-78 GeV is absorbed by over-constrained shape NPs and
+the `SigModel` template carries a generator-cut artefact. Until fixed, prefer the counting extraction
+(794.4 pb) with an extra +-0.7% lineshape-model term; `MuonReco` is 0.4% per event in the fit but documented
+per muon; the pileup profile is ~4% low; `njet` in the plots is not lepton-cleaned.
+
 ### Open issues after v2
 
 1. The pileup nuisance parameter is pulled by −1.5σ (data prefer ~7% fewer interactions than

@@ -39,3 +39,5 @@ presentation/clips/**/*.mp4
 presentation/**/*.png
 
 .asetup.save
+z-mumu/review/review_pass.pkl
+z-mumu/review/deck/build.log

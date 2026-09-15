@@ -3,8 +3,8 @@
 
     python scripts/step6_report.py
 
-Reads the fit results of both fake-factor variants (fit/results/ztautau[_mcsub]_fit_result.json), the
-yields and fake-factor summaries of steps 3-4 and the ntuple cutflows. Copies the key TRExFitter plots to
+Reads the fit results of both fake-factor variants (fit/results/ztautau[_nosub]_fit_result.json), the
+yields, fake-factor and BDT summaries of steps 3-4 and the ntuple cutflows. Copies the key TRExFitter plots to
 output/plots/fit_*.png so they are committed next to the analysis plots.
 """
 
@@ -25,9 +25,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from ztautau import analysis, config, samples  # noqa: E402
 
-NOMINAL = "mcsub" if config.FF_SUBTRACT_MC else "nominal"
-OTHER = "nominal" if NOMINAL == "mcsub" else "mcsub"
-LABEL = {"nominal": "FF without MC subtraction", "mcsub": "FF with genuine-tau subtraction"}
+NOMINAL = "mcsub" if config.FF_SUBTRACT_MC else "nosub"
+OTHER = "nosub" if NOMINAL == "mcsub" else "mcsub"
+LABEL = {"nosub": "FF without MC subtraction", "mcsub": "FF with genuine-tau subtraction"}
 
 
 def job(variant):
@@ -65,11 +65,15 @@ def summarise_fit(res):
 def copy_trex_plots(variant):
     base = config.FIT_DIR / "results" / job(variant)
     tag = "" if variant == NOMINAL else f"_{variant}"
-    for src, dst in (("Plots/tautau_SR_postFit.png", f"fit_SR_postfit{tag}.png"), ("Plots/tautau_SR.png", f"fit_SR_prefit{tag}.png"),
-                     ("NuisPar.png", f"fit_pulls{tag}.png"), ("CorrMatrix.png", f"fit_corrmatrix{tag}.png"),
-                     ("Rankings/RankingSysts_mu_Z_systs.png", f"fit_ranking{tag}.png"),
-                     ("Rankings/RankingSysts_mu_Z_Breakdown_syst.png", f"fit_ranking_breakdown{tag}.png"),
-                     ("Gammas.png", f"fit_gammas{tag}.png"), ("NormFactors.png", f"fit_normfactors{tag}.png")):
+    pairs = [("NuisPar.png", f"fit_pulls{tag}.png"), ("CorrMatrix.png", f"fit_corrmatrix{tag}.png"),
+             ("Rankings/RankingSysts_mu_Z_systs.png", f"fit_ranking{tag}.png"),
+             ("Rankings/RankingSysts_mu_Z_Breakdown_syst.png", f"fit_ranking_breakdown{tag}.png"),
+             ("Gammas.png", f"fit_gammas{tag}.png"), ("NormFactors.png", f"fit_normfactors{tag}.png"),
+             ("Plots/Summary_postFit.png", f"fit_summary_postfit{tag}.png"), ("Plots/Summary.png", f"fit_summary_prefit{tag}.png")]
+    for region in config.REGIONS:
+        short = region.replace("tautau_", "")
+        pairs += [(f"Plots/{region}_postFit.png", f"fit_{short}_postfit{tag}.png"), (f"Plots/{region}.png", f"fit_{short}_prefit{tag}.png")]
+    for src, dst in pairs:
         p = base / src
         if not p.exists():
             cand = sorted(base.glob(f"**/{Path(src).name}"))
@@ -83,8 +87,9 @@ def main():
     fits = {v: summarise_fit(r) for v, r in res.items()}
     yields = {v: load_json(config.DATA_DIR / f"yields{'' if v == NOMINAL else '_' + v}.json") for v in (NOMINAL, OTHER)}
     ff = load_json(config.DATA_DIR / "fakefactors.json")
-    sig = analysis.signal_prediction("DY_NLO")
-    cutflows = {k: analysis.load(k)[1]["cutflow"] for k in samples.DATA_KEYS + ["DY_NLO"]}
+    bdt = load_json(config.DATA_DIR / "bdt.json")
+    sig = analysis.signal_prediction(samples.DY_INCLUSIVE)
+    cutflows = {k: analysis.load(k)[1]["cutflow"] for k in samples.DATA_KEYS + [samples.DY_INCLUSIVE]}
 
     y = yields[NOMINAL]["yields"]
     n_obs = y["Data"]["value"]
@@ -95,14 +100,20 @@ def main():
     results = {
         "channel": "Z -> tau_h tau_h", "dataset": "CMS Open Data 2016 Tau Run2016G+H (UL NanoAODv9)",
         "lumi_pb": config.LUMI_PB, "lumi_rel_unc": config.LUMI_REL_UNC, "fit_variable": config.FIT_VARIABLE,
+        "regions": config.REGIONS, "category_edges": config.BDT_CATEGORY_EDGES,
         "nominal_variant": NOMINAL, "variants": {v: LABEL[v] for v in (NOMINAL, OTHER)},
         "prediction": sig, "fit": fits,
         "for_combination": {"n_obs": n_obs, "n_bkg_prefit": n_bkg, "n_sig_prefit": n_sig, "acc_eff": acc_eff,
-                            "acc_eff_definition": "N_SR(Z->tautau, prefit, all corrections) / (sigma_pred(Z/gamma*->tautau, 60<m_LHE<120) x L)",
+                            "acc_eff_definition": "N_SR(Z->tautau fiducial, prefit, all corrections, all categories) / (sigma_pred(Z/gamma*->tautau, 60<m_LHE<120) x L)",
                             "sigma_counting_pb": counting, "A_fid": sig["A"], "C": n_sig / (sig["sigma_fid_pb"] * config.LUMI_PB)},
         "yields_prefit": {v: yields[v]["yields"] if yields[v] else None for v in (NOMINAL, OTHER)},
+        "yields_prefit_per_region": yields[NOMINAL]["regions"],
         "fake_factors": {v: {"C_OS_SS_per_njet": ff[v]["osss"]["C"], "C_OS_SS_stat": ff[v]["osss"]["stat"],
-                             "C_OS_SS_inclusive": ff[v]["osss"]["inclusive"]["C"]} for v in ("nominal", "mcsub")},
+                             "C_OS_SS_inclusive": ff[v]["osss"]["inclusive"]["C"],
+                             "closure_corrections": ff[v]["ff"].get("closure")} for v in ("mcsub", "nosub")},
+        "closure_nps": yields[NOMINAL]["meta"].get("closure_nps"),
+        "sigmodel": yields[NOMINAL]["meta"].get("sigmodel"), "dy_samples": yields[NOMINAL]["meta"].get("dy_samples"),
+        "bdt": {k: bdt[k] for k in ("training", "category_edges", "category_yields_prefit", "stat_only_sensitivity")} if bdt else None,
         "genuine_tau_contamination": ff["contamination"], "cutflow": cutflows,
         "stat_only_sensitivity_fixed_bkg": yields[NOMINAL].get("stat_only_sensitivity"),
     }
@@ -116,14 +127,14 @@ def main():
     f = fits[NOMINAL]
     lines = ["# Z -> tau_h tau_h: results", "",
              f"CMS Open Data 2016 (Run2016G+H, Tau dataset), L = {config.LUMI_PB:.1f} pb^-1 (+-1.2%). "
-             f"Binned profile-likelihood fit of m_tt (MET-likelihood di-tau mass) in the signal region with "
-             f"TRExFitter v1.8.0. Generated by scripts/step6_report.py.", ""]
+             f"Binned profile-likelihood fit of m_tt (MET-likelihood di-tau mass) in {len(config.REGIONS)} BDT categories of the "
+             f"signal region with TRExFitter v1.8.0. Generated by scripts/step6_report.py.", ""]
     for v in (NOMINAL, OTHER):
         fv = fits[v]
         if not fv:
             continue
         s60, sf = fv["sigma_60_120_pb"], fv["sigma_fid_pb"]
-        lines += [f"## {LABEL[v]}{' (nominal)' if v == NOMINAL else ' (alternative)'}", "",
+        lines += [f"## {LABEL[v]}{' (nominal)' if v == NOMINAL else ' (cross-check)'}", "",
                   "| quantity | value |", "|---|---|",
                   f"| mu_Z | {fv['mu']:.3f} +{fv['mu_err_up']:.3f} -{fv['mu_err_down']:.3f} (stat {fv['mu_stat']:.3f}, syst {fv['mu_syst']:.3f}) |",
                   f"| expected (Asimov) | +{fv['mu_expected_asimov']['err_up']:.3f} -{fv['mu_expected_asimov']['err_down']:.3f} |" if fv["mu_expected_asimov"] else "| expected | n/a |",
@@ -134,9 +145,20 @@ def main():
         for k, val in sorted(fv["grouped_impact"].items(), key=lambda kv: -kv[1]):
             lines.append(f"| {k} | {val:.4f} |")
         lines.append("")
-    lines += ["## Prefit signal-region yields (nominal)", "", "| sample | events |", "|---|---:|"]
+    lines += ["## Prefit yields per BDT category (nominal)", "",
+              "| sample | " + " | ".join(f"{r} ({lab})" for r, lab in zip(config.REGIONS, config.REGION_LABELS)) + " | all |",
+              "|---|" + "---:|" * (len(config.REGIONS) + 1)]
     for k, v in y.items():
-        lines.append(f"| {k} | {v['value']:.0f}{' +- %.0f' % v['stat'] if 'stat' in v else ''} |")
+        if k == "Total":
+            continue
+        per = [results["yields_prefit_per_region"][r][k]["value"] for r in config.REGIONS]
+        lines.append(f"| {k} | " + " | ".join(f"{p:.0f}" for p in per) + f" | {v['value']:.0f}{' +- %.0f' % v['stat'] if 'stat' in v else ''} |")
+    lines.append(f"| Total prediction | " + " | ".join(f"{sum(results['yields_prefit_per_region'][r][s]['value'] for s in y if s not in ('Data', 'Total')):.0f}" for r in config.REGIONS) + f" | {y['Total']['value']:.0f} |")
+    if bdt:
+        t = bdt["training"]
+        lines += ["", f"BDT: held-out AUC {np.mean(t['auc_test']):.3f} (folds {', '.join(f'{a:.3f}' for a in t['auc_test'])}); "
+                  f"stat-only sensitivity (fakes fixed) inclusive {100 * bdt['stat_only_sensitivity']['inclusive']:.2f}% -> "
+                  f"categories {100 * bdt['stat_only_sensitivity']['categories']:.2f}%"]
     lines += ["", "## Inputs for the combination", "", "| variable | value |", "|---|---|"]
     for k, v in results["for_combination"].items():
         lines.append(f"| {k} | {v:.6g} |" if isinstance(v, float) else f"| {k} | {v} |")
@@ -161,7 +183,7 @@ def main():
     ax.axvline(pred, color="#c08a00")
     for i, (lab, val, stat, tot, dn, up) in enumerate(rows):
         yv = len(rows) - i
-        ax.errorbar([val], [yv], xerr=[[np.hypot(dn, stat * 0)], [up]], fmt="o", color="black", capsize=4, lw=1.5)
+        ax.errorbar([val], [yv], xerr=[[dn], [up]], fmt="o", color="black", capsize=4, lw=1.5)
         ax.errorbar([val], [yv], xerr=[[stat], [stat]], fmt="none", color="tab:red", capsize=0, lw=4)
         ax.text(1230, yv + 0.33, f"{lab}", fontsize=10, ha="left")
         ax.text(3270, yv + 0.33, f"{val:.0f} +{up:.0f} -{dn:.0f} pb (stat. {stat:.0f})", fontsize=10, ha="right")

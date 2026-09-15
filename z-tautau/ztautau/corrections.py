@@ -55,7 +55,7 @@ def id_sf(dm, genflav, abseta, shift_dm: int | None = None, direction: int = 0, 
     sf = np.ones(len(dm))
     genuine = genflav == 5
     for d in config.TAU_DMS:
-        val, err = p["id_vsjet_dm"]["Medium"][str(d)]
+        val, err = p["id_vsjet_dm"][config.TAU_WP][str(d)]
         sel = genuine & (dm == d)
         shift = direction * err if (kind == "id" and shift_dm == d) else 0.0
         sf[sel] = val + shift
@@ -68,9 +68,12 @@ def id_sf(dm, genflav, abseta, shift_dm: int | None = None, direction: int = 0, 
     return sf
 
 
-def trigger_sf(dm, pt, shift_dm: int | None = None, direction: int = 0):
-    """Di-tau trigger leg scale factor SF(pT, DM) with an optional +-1 sigma shift of one DM."""
-    t = pog()["trigger_ditau_Medium"]
+def trigger_sf(dm, pt, shift_dm: int | None = None, direction: int = 0, genflav=None):
+    """Di-tau trigger leg scale factor SF(pT, DM) with an optional +-1 sigma shift of one DM.
+
+    The SF is a genuine-tau_h efficiency ratio: legs that are jets in the simulation (genflav 0, the
+    subleading leg of W+jets / ttbar) get SF = 1."""
+    t = pog().get(f"trigger_ditau_{config.TAU_WP}") or pog()["trigger_ditau_Medium"]
     grid = np.asarray(t["pt"])
     idx = np.clip(np.searchsorted(grid, pt, side="right") - 1, 0, len(grid) - 1)
     sf = np.ones(len(pt))
@@ -80,6 +83,8 @@ def trigger_sf(dm, pt, shift_dm: int | None = None, direction: int = 0):
         if shift_dm == d and direction:
             vals = vals + direction * np.asarray(t[str(d)]["sf_err"])[idx[sel]]
         sf[sel] = vals
+    if genflav is not None:
+        sf = np.where(np.asarray(genflav) == 0, 1.0, sf)
     return sf
 
 

@@ -61,7 +61,9 @@ T = VSjet Medium, L = VVVLoose and not Medium, both τ pT > 40 GeV:
 | OSAI_T / OSAI_L | OS | T / L | L | OS/SS extrapolation check |
 | SSAI_T / SSAI_L | SS | T / L | L | fake factor for the OS/SS check |
 
-In simulation only events whose **leading τ is not a jet** (`Tau_genPartFlav != 0`) are used.
+In simulation only events whose **leading τ is not a jet** (`Tau_genPartFlav != 0`) are used. Each region is
+additionally split by the BDT score into three categories (`config.BDT_CATEGORY_EDGES`); the SR categories are
+the fit regions `tautau_SR0/1/2`, the same-sign categories give the per-category closure.
 
 ## Cutflow (full data set)
 
@@ -75,4 +77,6 @@ In simulation only events whose **leading τ is not a jet** (`Tau_genPartFlav !=
 | extra-lepton veto (= ntuple) | 1,989,586 | 1,588,079 |
 | SR (both pT > 40, OS, both Medium) | 24,106 | 23,480 |
 
-Signal region total: **47,586 events**; the expected composition is 81 % jet→τh fakes, 16 % Z→ττ.
+Signal region total: **47,586 events**; the expected prefit composition (v2, MC-subtracted fake factor) is
+36931 jet→τh fakes (80 %), 4827 fiducial Z→ττ, 3025 non-fiducial Z/γ*→ττ, 575 tt̄, 540 W+jets,
+189 Z→ee and 122 dibosons. The signal region is fitted in three BDT categories (`09-bdt.md`).

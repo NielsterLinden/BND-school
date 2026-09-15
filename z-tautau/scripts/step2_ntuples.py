@@ -44,7 +44,7 @@ READ = (["run", "luminosityBlock", "event", "PV_npvsGood", "MET_pt", "MET_phi", 
 READ_DATA = ["era"]
 READ_MC = ["Tau_genPartFlav", "genWeight", "Pileup_nTrueInt", "L1PreFiringWeight_Nom", "L1PreFiringWeight_Up",
            "L1PreFiringWeight_Dn", "GenMET_pt", "gen_lhe_flavour", "gen_mll_lhe", "gen_fid", "gen_n_vistau",
-           "gen_vis1_pt", "gen_vis2_pt"]
+           "gen_vis1_pt", "gen_vis2_pt", "LHE_Njets", "LHE_NpNLO", "LHE_Vpt"]
 VECTORS = {"LHEScaleWeight": 9, "PSWeight": 4, "LHEPdfWeight": 103}
 
 
@@ -114,6 +114,10 @@ def process_chunk(ev, is_mc, tes, cut):
         out["gen_lhe_flavour"] = _np(ev.gen_lhe_flavour, 0, np.uint8)
         out["gen_fid"] = _np(ev.gen_fid, False, bool)
         out["gen_n_vistau"] = _np(ev.gen_n_vistau, 0, np.int8)
+        # jet-binned stitching (analysis.dy_norm) needs the NLO parton multiplicity; old skims lack it
+        out["lhe_njets"] = _np(ev.LHE_Njets, 0, np.uint8) if "LHE_Njets" in ak.fields(ev) else np.zeros(len(ev), np.uint8)
+        out["lhe_npnlo"] = _np(ev.LHE_NpNLO, 0, np.uint8) if "LHE_NpNLO" in ak.fields(ev) else np.zeros(len(ev), np.uint8)
+        out["lhe_vpt"] = _np(ev.LHE_Vpt, 0.0) if "LHE_Vpt" in ak.fields(ev) else np.zeros(len(ev), np.float32)
         for b, size in VECTORS.items():
             if b in ak.fields(ev):
                 arr = ak.fill_none(ak.pad_none(ev[b], size, axis=1, clip=True), 1.0)

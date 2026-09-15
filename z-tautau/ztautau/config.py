@@ -16,16 +16,22 @@ REPO_DIR = CHANNEL_DIR.parent                               # BND-school/
 GRL_PATH = REPO_DIR / "datasets" / "GRL" / "GRL.txt"
 FILELIST_DIR = CHANNEL_DIR / "filelists"
 EXTERNAL_DIR = CHANNEL_DIR / "external"                     # small, committed POG inputs (JSON)
-OUTPUT_DIR = CHANNEL_DIR / "output"
+# Working-point variant: BND_TAUTAU_WP=Tight runs the whole chain (from step 3) with DeepTau VSjet Tight
+# instead of Medium on both legs, with the matching TauPOG ID and trigger scale factors, into
+# variants/<wp>/{output,fit} and a separate BDT (docs/08, "working-point cross-check").
+TAU_WP = os.environ.get("BND_TAUTAU_WP", "Medium")
+_VARIANT = CHANNEL_DIR if TAU_WP == "Medium" else CHANNEL_DIR / "variants" / TAU_WP.lower()
+OUTPUT_DIR = _VARIANT / "output"
 PLOT_DIR = OUTPUT_DIR / "plots"
 DATA_DIR = OUTPUT_DIR / "data"                              # git-ignored intermediates
-FIT_DIR = CHANNEL_DIR / "fit"
+FIT_DIR = _VARIANT / "fit"
 
 # Bulk storage (not in git). Override with BND_TAUTAU_CACHE=/somewhere on a laptop.
-CACHE_DIR = Path(os.environ.get("BND_TAUTAU_CACHE", "/data/atlas/users/nterlind/BND-school-cache/ztautau"))
+CACHE_DIR = Path(os.environ.get("BND_TAUTAU_CACHE", "/data/atlas/users/sjankovy/BND-school-cache/ztautau"))
 SKIM_DIR = CACHE_DIR / "skims_v1"          # NanoAOD-format skims, one file per parent file
 NTUPLE_DIR = CACHE_DIR / "ntuples_v1"      # flat analysis ntuples, one file per sample (laptop bundle)
 DOWNLOAD_DIR = CACHE_DIR / "downloads"     # raw POG ROOT files before conversion
+BDT_DIR = CACHE_DIR / ("bdt" if TAU_WP == "Medium" else f"bdt_{TAU_WP.lower()}")   # k-fold BDT models (not committed)
 
 # Luminosity-by-lumisection table of CMS Open Data record 1059 (PHYSICS normtag), used for the
 # pileup profile. Same file the z-mumu v2 analysis uses.
@@ -67,7 +73,8 @@ TAU_ETA_MAX = 2.1                        # HLT eta2p1
 TAU_DZ_MAX = 0.2                         # cm
 TAU_VSE_BIT = 2                          # VVLoose  (TauPOG recommendation for tau_h tau_h)
 TAU_VSMU_BIT = 1                         # VLoose
-TAU_VSJET_TIGHT_BIT = 16                 # Medium: the signal-region ("tight") working point
+VSJET_BITS = {"VVVLoose": 1, "VVLoose": 2, "VLoose": 4, "Loose": 8, "Medium": 16, "Tight": 32, "VTight": 64, "VVTight": 128}
+TAU_VSJET_TIGHT_BIT = VSJET_BITS[TAU_WP]  # the signal-region ("tight") working point: Medium nominally
 TAU_VSJET_LOOSE_BIT = 1                  # VVVLoose: "loose" for the fake-factor regions
 PAIR_DR_MIN = 0.5
 # Candidates entering the pair choice (and the ntuples) are a little looser than the final cut so the
@@ -121,9 +128,20 @@ FF_NJET_BINS = [0, 1, 2]                 # lower edges; the last bin is inclusiv
 FF_BY_ERA = True
 ERA_LUMI_PB = (7653.261, 8740.119)       # (Run2016G, Run2016H), sum = LUMI_PB
 FF_DMS = TAU_DMS
-# Nominal choice requested for this iteration: no subtraction of simulated genuine taus in the
-# determination and application regions. The subtracted variant is always computed alongside.
-FF_SUBTRACT_MC = False
+# Nominal: simulated events with a genuine leading tau are subtracted from the determination and
+# application regions (the classic fake factor; without it the application region double counts ~6% of
+# the signal and C_OS/SS is biased by +2.5%, REVIEW.md 3.2). The unsubtracted variant ("nosub") is
+# still computed alongside as a cross-check.
+FF_SUBTRACT_MC = True
+# Factorised closure corrections of the FF, measured in same-sign data after the era x DM x N_jets x pT
+# table: the FF varies by +-15% with |eta(tau1)| (universal shape: barrel-endcap transition, tracker
+# edge, REVIEW.md section 5) and by -7% with pT(tau2) at 60-100 GeV (isolation correlation of the two
+# jets). Applied multiplicatively in fakes.evaluate; each is obs/pred in same-sign events.
+FF_CLOSURE_ETA_BINS = [0.0, 0.4, 0.8, 1.2, 1.5, 1.8, 2.1]
+FF_CLOSURE_PT2_BINS = [40.0, 45.0, 50.0, 60.0, 80.0, 1000.0]
+# The residual non-closure in the fit variable becomes one normalisation-type nuisance parameter per
+# (BDT category, mass region below / above this split), docs/05-fake-factors.md.
+FF_CLOSURE_MASS_SPLIT = 110.0
 # Extra (non-statistical) relative uncertainty on the OS/SS extrapolation factors C_OS/SS (one per jet
 # category), added in quadrature to their statistical uncertainty. C rises from 1.05 to 1.08-1.09 as
 # the tau2 sideband is tightened towards Medium (after subtracting genuine taus), so the extrapolation
@@ -137,10 +155,35 @@ FF_OSSS_SYST = 0.03
 MASS_LO, MASS_HI = 60.0, 120.0
 FID_VIS_PT, FID_VIS_ETA = 40.0, 2.1
 
+# ------------------------------------------------------------------------------ BDT (docs/09-bdt.md)
+# k-fold gradient-boosted classifier, Z -> tautau (fiducial, simulation) against the fake estimate
+# (application-region data x FF). Mass-agnostic inputs only: the score defines categories and m_tt stays
+# the fit variable in each. Nothing that enters the definition of the fake-factor regions (tau1 isolation)
+# may be an input. Fold = event number mod BDT_K; every event is scored by the model that never saw it.
+BDT_K = 5
+BDT_FEATURES = ["t1_pt", "t2_pt", "pt_ratio", "t1_abseta", "t2_abseta", "dr_tt", "dphi_tt", "met", "met_sig",
+                "pt_vis", "dphi_met_tt", "pt_tt", "njets", "jet1_pt", "t1_dm", "t2_dm"]
+BDT_PARAMS = dict(n_estimators=300, max_depth=4, learning_rate=0.05, subsample=0.8, colsample_bytree=0.8,
+                  min_child_weight=5, tree_method="hist", n_jobs=1, random_state=20260915)
+BDT_TRAIN_ON_FIDUCIAL = True
+# category edges in the score: [0, 0.55) fake dominated (fixes the fake normalisation and shape),
+# [0.55, 0.90) mixed, [0.90, 1] signal dominated (S/B ~ 5)
+BDT_CATEGORY_EDGES = [0.0, 0.55, 0.90, 1.0]
+
+# Generator comparison for the fiducial C factor: madgraph LO (MLM) vs aMC@NLO FxFx, normalised to the
+# same fiducial cross section. The LO sample's softer visible-tau pT spectrum inside the fiducial volume
+# lowers C by ~15% (trigger turn-on), which is not a credible uncertainty of the NLO prediction: the LO
+# sample is the worse model, the NLO scale / PS / PDF variations already move the spectrum, and the pT
+# spectra are checked against data in the signal-dominated category (docs/07). The number is computed and
+# reported (SigModel_tautau); set SIGMODEL_IN_FIT = True to include it as a one-sided normalisation NP.
+SIGMODEL_IN_FIT = False
+
 # ------------------------------------------------------------------------------ fit
 FIT_VARIABLE = "m_tt"
 FIT_BINS = [0.0, 40.0, 60.0, 70.0, 80.0, 90.0, 100.0, 110.0, 120.0, 130.0, 150.0, 175.0, 200.0, 250.0, 350.0]
-REGION = "tautau_SR"
+REGION_PREFIX = "tautau_SR"
+REGIONS = [f"{REGION_PREFIX}{i}" for i in range(len(BDT_CATEGORY_EDGES) - 1)]     # one per BDT category
+REGION_LABELS = ["BDT < 0.55 (fake dominated)", "0.55 < BDT < 0.90", "BDT > 0.90 (signal dominated)"]
 JOB = "ztautau"
 DY_XSEC_PB = 6077.22             # sigma(Z/gamma* -> ll, m > 50) summed over flavours, NNLO (all channels)
 

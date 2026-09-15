@@ -18,9 +18,16 @@ anti-isolated sideband (tau2 L), where both charges are fake-dominated: FF measu
 applied to OS-AI_L predicts OS-AI_T; C = observed / predicted.
 
 Genuine-tau contamination: the SS and AR regions contain some genuine taus (mostly Z -> tau tau with
-a leading tau failing Medium in AR). The nominal of this iteration does not subtract the simulation
-(`config.FF_SUBTRACT_MC = False`, as requested); the variant with subtraction (MC events with a
-genuine leading tau, weighted like the SR prediction) is computed by the same code with `subtract`.
+a leading tau failing Medium in AR, 1.3% of it but ~6% of the signal). The nominal subtracts the
+simulation with a genuine leading tau (weighted like the SR prediction) everywhere (`subtract`); the
+unsubtracted variant is kept as a cross-check.
+
+Closure corrections (`closure_corrections`): after the table, the FF still depends on |eta(tau1)| (+-15%,
+the same shape in every era / DM / pT / N_jets bin: DeepTau's jet rejection is not eta-flat) and on
+pT(tau2) (-7% at 60-100 GeV). Both are corrected multiplicatively by their same-sign obs/pred ratios.
+
+Statistics: the statistical uncertainty of every FF bin is carried per event (`fake_weights(with_err)`)
+into the sum of squares of the fake template, i.e. into the per-bin gamma parameters of the fit.
 """
 
 from __future__ import annotations
@@ -90,23 +97,63 @@ def measure(data, num_mask, den_mask, subtract=()):
             "pt_bins": PT_BINS.tolist(), "njet_bins": NJ_BINS, "dms": DMS, "eras": ["G", "H"][:N_ERA]}
 
 
-def evaluate(table, arr, mask, shift_dm: int | None = None, direction: int = 0):
+def evaluate(table, arr, mask, shift_dm: int | None = None, direction: int = 0, closure: bool = True,
+             with_err: bool = False):
     """FF of the leading tau for the events in `mask` (array of length mask.sum()): per era for data, the
-    luminosity-weighted era average for simulation. Optional +-1 sigma (stat.) shift of one decay mode."""
+    luminosity-weighted era average for simulation. Optional +-1 sigma (stat.) shift of one decay mode.
+    `closure`: multiply by the factorised closure corrections stored in the table (`closure_corrections`).
+    `with_err`: also return the relative statistical uncertainty of the FF bin of every event."""
     idm, inj, ipt = _bin_index(arr["t1_pt"][mask], arr["t1_dm"][mask], arr["njets"][mask])
     ok = idm >= 0
     vals = np.asarray(table["ff"], dtype=float).copy()
+    errs = np.asarray(table["err"], dtype=float)
     if shift_dm is not None and direction:
         i = DMS.index(shift_dm)
-        vals[:, i] = np.maximum(vals[:, i] + direction * np.asarray(table["err"])[:, i], 0.0)
+        vals[:, i] = np.maximum(vals[:, i] + direction * errs[:, i], 0.0)
     ff = np.zeros(int(np.sum(mask)))
+    rel = np.zeros(int(np.sum(mask)))
     era = era_index(arr, mask)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        relerr = np.where(vals > 0, errs / vals, 0.0)
     if era is None:
         avg = np.tensordot(ERA_FRAC, vals, axes=1)
         ff[ok] = avg[idm[ok], inj[ok], ipt[ok]]
+        rel[ok] = np.tensordot(ERA_FRAC, relerr, axes=1)[idm[ok], inj[ok], ipt[ok]]
     else:
         ff[ok] = vals[era[ok], idm[ok], inj[ok], ipt[ok]]
-    return ff
+        rel[ok] = relerr[era[ok], idm[ok], inj[ok], ipt[ok]]
+    if closure and table.get("closure"):
+        for var, corr in table["closure"].items():
+            x = np.abs(arr["t1_eta"][mask]) if var == "eta" else arr["t2_pt"][mask]
+            edges = np.asarray(corr["edges"], dtype=float)
+            ib = np.clip(np.searchsorted(edges, x, side="right") - 1, 0, len(edges) - 2)
+            ff = ff * np.asarray(corr["values"], dtype=float)[ib]
+    return (ff, rel) if with_err else ff
+
+
+def closure_corrections(data, regions_data, table, subtract=()):
+    """Factorised closure corrections f(|eta(tau1)|) then g(pT(tau2)), each obs/pred in same-sign events
+    after the previous one (config.FF_CLOSURE_*_BINS). Stored in table["closure"] and applied by `evaluate`.
+    subtract: iterable of (arrays, regions, weights) of simulation with a genuine leading tau."""
+    table["closure"] = {}
+    for var, edges in (("eta", config.FF_CLOSURE_ETA_BINS), ("pt2", config.FF_CLOSURE_PT2_BINS)):
+        edges = np.asarray(edges, dtype=float)
+
+        def xval(a, m):
+            return np.abs(a["t1_eta"][m]) if var == "eta" else np.clip(a["t2_pt"][m], edges[0], edges[-1] - 1e-6)
+
+        obs = np.histogram(xval(data, regions_data["SS_T"]), bins=edges)[0].astype(float)
+        wp = evaluate(table, data, regions_data["SS_L"])
+        pred = np.histogram(xval(data, regions_data["SS_L"]), bins=edges, weights=wp)[0]
+        pred2 = np.histogram(xval(data, regions_data["SS_L"]), bins=edges, weights=wp ** 2)[0]
+        for a, r, w in subtract:
+            obs -= np.histogram(xval(a, r["SS_T"]), bins=edges, weights=w[r["SS_T"]])[0]
+            pred -= np.histogram(xval(a, r["SS_L"]), bins=edges, weights=w[r["SS_L"]] * evaluate(table, a, r["SS_L"]))[0]
+        ratio = np.where(pred > 0, obs / np.maximum(pred, 1e-9), 1.0)
+        err = ratio * np.sqrt(1.0 / np.maximum(obs, 1.0) + pred2 / np.maximum(pred, 1e-9) ** 2)
+        table["closure"][var] = {"edges": edges.tolist(), "values": ratio.tolist(), "err": err.tolist(),
+                                 "obs": obs.tolist(), "pred": pred.tolist()}
+    return table
 
 
 def njet_category(arr, mask=None):
@@ -128,12 +175,16 @@ def per_event(values, arr, mask=None):
     return np.tensordot(ERA_FRAC, v, axes=1)[nj] if era is None else v[era, nj]
 
 
-def fake_weights(arr, mask, table, c_osss, shift_dm=None, direction=0):
+def fake_weights(arr, mask, table, c_osss, shift_dm=None, direction=0, with_err=False):
     """Per-event fake weight FF x C for events in `mask` (zeros elsewhere); `c_osss` may be a number,
-    one value per N_jet category or an (era, N_jet) array."""
+    one value per N_jet category or an (era, N_jet) array. `with_err`: also the weight to use for the
+    sum of squares, w x sqrt(1 + relerr_FF^2), so the FF statistics enter the template variance bin by bin."""
     w = np.zeros(len(arr["t1_pt"]))
-    w[mask] = evaluate(table, arr, mask, shift_dm, direction) * per_event(c_osss, arr, mask)
-    return w
+    w2 = np.zeros(len(arr["t1_pt"]))
+    ff, rel = evaluate(table, arr, mask, shift_dm, direction, with_err=True)
+    w[mask] = ff * per_event(c_osss, arr, mask)
+    w2[mask] = w[mask] * np.sqrt(1.0 + rel ** 2)
+    return (w, w2) if with_err else w
 
 
 def _osss(data, regions_data, table_ai, subtract, sel=None):

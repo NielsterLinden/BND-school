@@ -49,7 +49,11 @@ COLLECTIONS = {
 MC_COLLECTION_EXTRA = {"Tau": ["genPartFlav", "genPartIdx"], "Muon": ["genPartFlav"],
                        "Electron": ["genPartFlav"], "Jet": ["hadronFlavour"]}
 MC_EVENT = ["genWeight", "Pileup_nTrueInt", "L1PreFiringWeight_Nom", "L1PreFiringWeight_Up",
-            "L1PreFiringWeight_Dn", "GenMET_pt", "GenMET_phi"]
+            "L1PreFiringWeight_Dn", "GenMET_pt", "GenMET_phi", "LHE_Njets", "LHE_NpNLO", "LHE_Vpt"]
+# LHE_NpNLO = number of partons of the NLO matrix element (0, 1, 2): the jet-binned aMC@NLO samples are
+# exclusive in it (LHE_Njets is not: the real-emission parton adds one). Generator-weight sums per bin
+# for the jet-binned stitching (analysis.dy_norm).
+NJET_STITCH_BINS = 3
 MC_VECTORS = ["LHEScaleWeight", "PSWeight", "LHEPdfWeight"]
 RUNS_BRANCHES = ["genEventCount", "genEventSumw", "genEventSumw2"]
 PU_BINS = 100
@@ -84,6 +88,7 @@ def blank_gensums():
         g[f"sumw_lhe_{fl}_60_120"] = 0.0
     g["sumw_fid"] = 0.0
     g["sumw2_fid"] = 0.0
+    g["sumw_npnlo"] = np.zeros(NJET_STITCH_BINS)        # per LHE_NpNLO bin (0, 1, >= 2), all events
     return g
 
 
@@ -112,6 +117,9 @@ def accumulate_gensums(g, ev, flav, mll, fid):
     g["sumw_fid"] += float(w[fid].sum())
     g["sumw2_fid"] += float((w[fid] ** 2).sum())
     fields = set(ak.fields(ev))
+    if "LHE_NpNLO" in fields:
+        nj = np.clip(ak.to_numpy(ev.LHE_NpNLO).astype(int), 0, NJET_STITCH_BINS - 1)
+        g["sumw_npnlo"] += np.bincount(nj, weights=w, minlength=NJET_STITCH_BINS)
     for branch, vname in (("LHEScaleWeight", "scale"), ("PSWeight", "ps"), ("LHEPdfWeight", "pdf")):
         if branch not in fields:
             continue

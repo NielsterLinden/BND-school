@@ -12,12 +12,13 @@ reads them.
   VVVLoose, VSe ≥ VVVLoose, VSmu ≥ VLoose. Deliberately looser than the analysis.
 * **Branches** (~150 of ~1350): event info, MET + covariance + unclustered shift, MET filters, the six
   di-τ triggers, Tau (all ID/iso), Muon/Electron (veto), Jet, TrigObj (τ objects only). Simulation adds
-  generator weight, pileup, L1 prefiring weights, LHE particles, GenVisTau, LHE scale/PS weights (PDF weights
-  for DY NLO only) and `gen_*` truth flags (LHE flavour, m_LHE, fiducial flag).
+  generator weight, pileup, L1 prefiring weights, LHE particles, GenVisTau, `LHE_Njets`, `LHE_NpNLO`, `LHE_Vpt`, LHE
+  scale/PS weights (PDF weights for the DY samples) and `gen_*` truth flags (LHE flavour, m_LHE, fiducial flag).
 * **`GenSums` tree** (simulation): sums over *all generated events* of the file before any cut: Σw, Σw²,
-  per-flavour and 60–120 GeV sums, fiducial sum, the pileup profile and per-member sums of the
-  scale/PS/PDF weights for {all, LHE ττ, LHE ττ 60–120, fiducial}. Normalisation, A and the
-  acceptance-normalised theory variations need nothing else.
+  per-flavour and 60–120 GeV sums, fiducial sum, the sums per LHE_NpNLO bin (`sumw_npnlo`, for the
+  jet-binned stitching), the pileup profile and per-member sums of the scale/PS/PDF weights for
+  {all, LHE ττ, LHE ττ 60–120, fiducial}. Normalisation, A and the acceptance-normalised theory
+  variations need nothing else.
 * **Robustness**: one subprocess per file (`ztautau/batch.py`) with a wall-clock limit; a failed or stalled
   dCache read is retried from EOS. 14 of 100 data files hit dCache I/O errors on 14 Sep 2026 and were read
   from EOS. Rerunning skips finished files. Every file has a `.root.json` provenance sidecar
@@ -30,8 +31,11 @@ reads them.
 | DY NLO | 41 | 71.8 M | 52,875 | 30 MB |
 | everything else | | | | < 50 MB |
 
-Location: `/data/atlas/users/nterlind/BND-school-cache/ztautau/skims_v1/` (≈ 1.6 GB total; ~20 min on 8
-workers for data, ~20 min for the simulation).
+Location: `$BND_TAUTAU_CACHE/skims_v1/` = `/data/atlas/users/sjankovy/BND-school-cache/ztautau/skims_v1/`
+(≈ 1.7 GB total; ~20 min on 8 workers for data, ~20 min for the simulation, ~45 min for the three
+jet-binned DY samples). The data and the small simulation samples are symlinks to the original v1 skims in
+`/data/atlas/users/nterlind/BND-school-cache/ztautau/skims_v1/`; the four DY samples were re-skimmed
+(14–15 September 2026) to add `LHE_NpNLO` and the per-jet-bin generator sums.
 
 ## Level 2: flat ntuples — `scripts/step2_ntuples.py` (**the laptop bundle**)
 
@@ -41,14 +45,14 @@ raw pT, η, φ, mass, DM, charge, ID bitmasks, raw DeepTau score, generator matc
 unclustered-energy shift, jets, **m_vis, m_col, m_tt**, pT_ττ, m_T^tot, ΔR, and in simulation the weights and
 truth. Everything downstream (steps 3–6) reads only these.
 
-Location: `/data/atlas/users/nterlind/BND-school-cache/ztautau/ntuples_v1/` — **≈ 310 MB for data + all
-simulation**. To work on a laptop:
+Location: `/data/atlas/users/sjankovy/BND-school-cache/ztautau/ntuples_v1/` — **≈ 330 MB for data + all
+simulation** (the MC ntuples also carry `lhe_njets`, `lhe_npnlo`, `lhe_vpt`). To work on a laptop:
 
 ```bash
-rsync -av stbc-i2.nikhef.nl:/data/atlas/users/nterlind/BND-school-cache/ztautau/ntuples_v1 ~/ztautau/
-export BND_TAUTAU_CACHE=~/ztautau          # ntuples_v1/ must be inside
-python run_all.py --from 3                  # fake factors, histograms, fits, report
+rsync -av stbc-i2.nikhef.nl:/data/atlas/users/sjankovy/BND-school-cache/ztautau/ntuples_v1 ~/ztautau/
+export BND_TAUTAU_CACHE=~/ztautau          # ntuples_v1/ must be inside; bdt/ is created by step 3b
+python run_all.py --from 3                  # fake factors, BDT, histograms, fits, report
 ```
 
-(steps 3–4 need python ≥ 3.10 with numpy, uproot, awkward, hist, matplotlib, mplhep; step 5 needs
-TRExFitter.)
+(steps 3–4 need python ≥ 3.10 with numpy, uproot, awkward, hist, matplotlib, mplhep, xgboost,
+scikit-learn; step 5 needs TRExFitter.)

@@ -1,0 +1,55 @@
+data events in ntuple: 3,577,665; SR 47,586; AR 187,973; SS_T 26,761
+loaded in 6s
+
+=== A. DeepTau VSjet working point (both legs), pT > 40 GeV; ID SF kept at the Medium values ===
+WP           data   signal    fakes fake frac S/B(70-110) sig kept stat-only d(mu) raw sig MC
+Medium      47586     7878    38219      0.80        1.55     1.00           1.87%      10437
+Tight       21160     5963    14211      0.67        2.69     0.76           1.91%       7829
+VTight       9935     4075     5446      0.55        3.79     0.52           2.13%       5401
+VVTight      4642     2580     1902      0.41        4.60     0.33           2.46%       3438
+
+=== B. tau pT threshold (both legs), Medium ===
+pT>        data   signal    fakes fake frac S/B(70-110) sig kept stat-only d(mu) <trig SF unc>
+    40    47586     7878    38219      0.80        1.55     1.00           1.87%          6.3%
+    45    26937     4599    21404      0.79        2.52     0.58           2.30%          6.5%
+    50    16123     3142    12248      0.76        3.02     0.40           2.71%          6.5%
+    55    10192     2195     7509      0.74        3.81     0.28           3.19%          6.4%
+    60     6716     1645     4728      0.70        4.00     0.21           3.72%          6.3%
+
+=== C. k-fold BDT, Z->tautau (SR, simulation) vs fakes (data AR x FF x C, nominal) ===
+nominal FF recomputed: fakes in SR = 38758 (committed prefit yield 38758); C inclusive 1.078
+training samples: signal 10,437 MC events (sum w 11466), fakes 187,973 AR events (sum w 38758); 5 folds by event number
+held-out AUC (signal vs fakes) = 0.888
+feature importance (gain, mean over folds): dR 0.28, pT(tt+MET) 0.14, dphi(t1,t2) 0.09, pT(vis tt) 0.07, pt1 0.07, DM2 0.05, DM1 0.04, pt2 0.04, |eta1| 0.04, |eta2| 0.03, dphi(MET,tt) 0.03, jet1 pT 0.03, MET sig. 0.02, MET 0.02, pt2/pt1 0.02, Njets 0.02
+score categories (signal quartiles): edges [0.0, 0.537, 0.832, 0.948, 1.0]
+ cat   signal    fakes    S/B S/B(70-110)  data SR
+   0     2464    34084   0.07        0.20    36514
+   1     2130     3724   0.57        0.80     6385
+   2     1657      785   2.11        2.58     2705
+   3     1627      165   9.84       12.43     1982
+stat-only d(mu)/mu, backgrounds fixed: inclusive m_tt fit 1.81%  ->  m_tt fit in 4 score categories 1.65%
+top category alone: signal 1627 (21% of signal), fakes 165
+same-sign closure in the BDT score (SS_T observed / FF x SS_L predicted):
+   score 0.0-0.1: obs    8839  pred     9126  ratio 0.968 +- 0.011
+   score 0.1-0.2: obs    4577  pred     4677  ratio 0.979 +- 0.016
+   score 0.2-0.3: obs    4326  pred     4177  ratio 1.036 +- 0.018
+   score 0.3-0.4: obs    3516  pred     3402  ratio 1.033 +- 0.019
+   score 0.4-0.5: obs    2291  pred     2208  ratio 1.038 +- 0.024
+   score 0.5-0.6: obs    1318  pred     1286  ratio 1.025 +- 0.032
+   score 0.6-0.7: obs     782  pred      791  ratio 0.988 +- 0.039
+   score 0.7-0.8: obs     557  pred      545  ratio 1.022 +- 0.048
+   score 0.8-0.9: obs     369  pred      381  ratio 0.968 +- 0.055
+   score 0.9-1.0: obs     186  pred      166  ratio 1.122 +- 0.091
+signal region in the BDT score (data / (fakes + signal + other MC)):
+   score 0.0-0.1: data   11462  fakes    11882  Z->tautau     177  other    233  ratio 0.932
+   score 0.1-0.2: data    6951  fakes     6662  Z->tautau     289  other    170  ratio 0.976
+   score 0.2-0.3: data    6695  fakes     6223  Z->tautau     454  other    135  ratio 0.983
+   score 0.3-0.4: data    5936  fakes     5076  Z->tautau     689  other    226  ratio 0.991
+   score 0.4-0.5: data    4254  fakes     3340  Z->tautau     665  other    203  ratio 1.011
+   score 0.5-0.6: data    2894  fakes     2040  Z->tautau     603  other     76  ratio 1.064
+   score 0.6-0.7: data    2146  fakes     1338  Z->tautau     631  other    154  ratio 1.011
+   score 0.7-0.8: data    1893  fakes      966  Z->tautau     812  other     18  ratio 1.054
+   score 0.8-0.9: data    2132  fakes      786  Z->tautau    1002  other     67  ratio 1.149
+   score 0.9-1.0: data    3223  fakes      445  Z->tautau    2555  other     -1  ratio 1.075
+
+done in 19s; plots -> /project/atlas/Users/sjankovy/BND/BND-school/z-tautau/review/review_bdt.png

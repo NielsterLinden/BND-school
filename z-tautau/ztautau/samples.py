@@ -46,6 +46,21 @@ SAMPLES = {
                    dcache=DCACHE_MC / "DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8__35669",
                    xsec_pb=6077.22, xsec_ref="[SMP] FEWZ NNLO, m_ll > 50 GeV, sum of e/mu/tau (all channels)",
                    fit_sample=None),
+    # jet-binned aMC@NLO FxFx samples (0, 1, 2 partons in the NLO matrix element, LHE_NpNLO exclusive):
+    # extra signal statistics, stitched with the inclusive sample per LHE_NpNLO bin (analysis.dy_norm);
+    # the jet-bin fractions come from the inclusive sample, so no separate cross sections are needed.
+    "DY_0J": dict(recid=35577, is_mc=True, group="DY", split_lhe=True, keep_pdf=True, optional=True,
+                  dataset="DYJetsToLL_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8",
+                  dcache=DCACHE_MC / "DYJetsToLL_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8__35577",
+                  xsec_pb=6077.22, xsec_ref="stitched to the inclusive sample per LHE_NpNLO bin", fit_sample=None),
+    "DY_1J": dict(recid=35595, is_mc=True, group="DY", split_lhe=True, keep_pdf=True, optional=True,
+                  dataset="DYJetsToLL_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8",
+                  dcache=DCACHE_MC / "DYJetsToLL_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8__35595",
+                  xsec_pb=6077.22, xsec_ref="stitched to the inclusive sample per LHE_NpNLO bin", fit_sample=None),
+    "DY_2J": dict(recid=35613, is_mc=True, group="DY", split_lhe=True, keep_pdf=True, optional=True,
+                  dataset="DYJetsToLL_2J_TuneCP5_13TeV-amcatnloFXFX-pythia8",
+                  dcache=DCACHE_MC / "DYJetsToLL_2J_TuneCP5_13TeV-amcatnloFXFX-pythia8__35613",
+                  xsec_pb=6077.22, xsec_ref="stitched to the inclusive sample per LHE_NpNLO bin", fit_sample=None),
     "DY_LO": dict(recid=35671, is_mc=True, group="DY_alt", split_lhe=True, keep_pdf=False, max_files=24,
                   dataset="DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8",
                   dcache=DCACHE_MC / "DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8__35671",
@@ -92,18 +107,25 @@ for _k, _s in SAMPLES.items():
     _s.setdefault("keep_pdf", False)
     _s.setdefault("max_files", None)
     _s.setdefault("xsec_pb", None)
+    _s.setdefault("optional", False)
     _s["key"] = _k
 
 DATA_KEYS = [k for k, s in SAMPLES.items() if not s["is_mc"]]
 MC_KEYS = [k for k, s in SAMPLES.items() if s["is_mc"]]
 NOMINAL_MC_KEYS = [k for k in MC_KEYS if SAMPLES[k]["group"] != "DY_alt"]
+# the Drell-Yan signal group: inclusive sample (normalisation, acceptance) + jet-binned samples (statistics)
+DY_INCLUSIVE = "DY_NLO"
+DY_STITCHED = ["DY_NLO", "DY_0J", "DY_1J", "DY_2J"]
 
 # Relative normalisation uncertainties of the backgrounds (OVERALL nuisance parameters; the names
 # follow fitting/CONVENTIONS.md, XS_DYll and XS_WJets are specific to this channel).
 XSEC_UNC = {"DYlowmass": 0.10, "TTbar": 0.06, "SingleTop": 0.10, "WW": 0.10, "WZ": 0.10, "ZZ": 0.10, "WJets": 0.10,
-            "DYee": 0.05, "DYmumu": 0.05}
-FIT_BACKGROUNDS = ["DYee", "DYmumu", "DYlowmass", "WJets", "TTbar", "SingleTop", "WW", "WZ", "ZZ"]
+            "DYee": 0.05, "DYmumu": 0.05, "DYtautau_nonfid": 0.05}
+# Z/gamma* -> tautau outside the fiducial volume (mostly m_LHE > 120 GeV, docs/06-cross-section.md) is a
+# background normalised to theory, not part of the signal strength.
 SIGNAL = "DYtautau"
+SIGNAL_NONFID = "DYtautau_nonfid"
+FIT_BACKGROUNDS = [SIGNAL_NONFID, "DYee", "DYmumu", "DYlowmass", "WJets", "TTbar", "SingleTop", "WW", "WZ", "ZZ"]
 LHE_SPLIT = {15: "DYtautau", 11: "DYee", 13: "DYmumu"}
 
 

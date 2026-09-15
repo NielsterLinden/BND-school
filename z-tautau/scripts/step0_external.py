@@ -82,7 +82,7 @@ def main():
            "tau_id": "DeepTau2017v2p1"}
     f = uproot.open(paths["id_dm"])
     out["id_vsjet_dm"] = {}
-    for wp in ("VVVLoose", "Medium"):
+    for wp in ("VVVLoose", "VVLoose", "VLoose", "Loose", "Medium", "Tight", "VTight", "VVTight"):
         h = f[wp]
         out["id_vsjet_dm"][wp] = {str(int(dm)): [float(h.values()[int(dm)]), float(h.errors()[int(dm)])]
                                   for dm in config.TAU_DMS}
@@ -92,22 +92,24 @@ def main():
     out["vse"] = {wp: th1(uproot.open(paths["vse"])[wp]) for wp in ("VVLoose",)}
     out["vsmu"] = {wp: th1(uproot.open(paths["vsmu"])[wp]) for wp in ("VLoose",)}
     t = uproot.open(paths["trigger"])
-    trig = {"pt": TRIG_GRID.tolist()}
-    for dm in config.TAU_DMS:
-        entry = {}
-        for kind in ("sf", "data", "mc"):
-            hist = t[f"{kind}_ditau_Medium_dm{dm}_fitted"]
-            idx = np.clip(np.searchsorted(hist.axis().edges(), TRIG_GRID, side="right") - 1, 0, len(hist.values()) - 1)
-            entry[kind] = hist.values()[idx].round(5).tolist()
-            entry[kind + "_err"] = hist.errors()[idx].round(5).tolist()
-        trig[str(dm)] = entry
-    out["trigger_ditau_Medium"] = trig
+    for wp in ("Medium", "Tight", "VTight"):          # offline VSjet working point of the legs
+        trig = {"pt": TRIG_GRID.tolist()}
+        for dm in config.TAU_DMS:
+            entry = {}
+            for kind in ("sf", "data", "mc"):
+                hist = t[f"{kind}_ditau_{wp}_dm{dm}_fitted"]
+                idx = np.clip(np.searchsorted(hist.axis().edges(), TRIG_GRID, side="right") - 1, 0, len(hist.values()) - 1)
+                entry[kind] = hist.values()[idx].round(5).tolist()
+                entry[kind + "_err"] = hist.errors()[idx].round(5).tolist()
+            trig[str(dm)] = entry
+        out[f"trigger_ditau_{wp}"] = trig
+    trig = out["trigger_ditau_Medium"]
     config.EXTERNAL_DIR.mkdir(parents=True, exist_ok=True)
     dest = config.EXTERNAL_DIR / "tau_pog_UL2016postVFP.json"
     dest.write_text(json.dumps(out, indent=1))
     print(f"TauPOG inputs -> {dest} ({dest.stat().st_size / 1e3:.0f} kB)")
     for dm in config.TAU_DMS:
-        sf, err = out["id_vsjet_dm"]["Medium"][str(dm)]
+        sf, err = out["id_vsjet_dm"][config.TAU_WP][str(dm)]
         tes, terr = out["tes_dm"][str(dm)]
         i = int(np.searchsorted(TRIG_GRID, 50.0))
         print(f"  DM{dm:>2d}: ID SF {sf:.3f} +- {err:.3f}   TES {tes:.3f} +- {terr:.3f}   "

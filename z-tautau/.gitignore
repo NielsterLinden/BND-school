@@ -10,3 +10,9 @@ slides/*.out
 slides/*.snm
 slides/*.toc
 slides/*.vrb
+variants/*/output/data/
+variants/*/output/plots/*.pdf
+variants/*/fit/fitinputs/
+variants/*/fit/results/
+slides/figs/*.png
+variants/*/output/plots/

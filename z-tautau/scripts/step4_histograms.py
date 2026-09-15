@@ -1,15 +1,18 @@
 #!/usr/bin/env python
-"""Step 4 -- histograms: TRExFitter inputs with all variations, control plots, yields (docs/07, docs/08).
+"""Step 4 -- histograms: TRExFitter inputs with all variations, control plots, yields (docs/07, docs/08, docs/09).
 
-    python scripts/step4_histograms.py [--ff-variant nominal|mcsub]
+    python scripts/step4_histograms.py [--ff-variant mcsub|nosub] [--no-plots]
 
-Fit inputs (fitting/CONVENTIONS.md): fit/fitinputs/ztautau[_mcsub].root with
-    tautau_SR__Data, tautau_SR__<sample>, tautau_SR__<sample>__<syst>Up/Down
-for the fit variable (config.FIT_VARIABLE) in the signal region. Samples: DYtautau (signal), DYee,
-DYmumu, WJets, TTbar, SingleTop, WW, WZ, ZZ (simulation, leading tau not a jet) and Fakes (data x FF).
-Also writes output/data/yields[_mcsub].json and output/plots/step4_*.png (data vs prediction in the SR
-and in the fake-factor regions for many variables) and a stat-only sensitivity comparison of the
-di-tau mass estimators.
+Fit inputs (fitting/CONVENTIONS.md): fit/fitinputs/ztautau[_nosub].root with, for every BDT category
+region tautau_SR<k> (config.REGIONS),
+    tautau_SR<k>__Data, tautau_SR<k>__<sample>, tautau_SR<k>__<sample>__<syst>Up/Down
+of the fit variable (config.FIT_VARIABLE). Samples: DYtautau (fiducial signal), DYtautau_nonfid, DYee,
+DYmumu, DYlowmass, WJets, TTbar, SingleTop, WW, WZ, ZZ (simulation, leading tau not a jet) and Fakes
+(data x FF, simulation with a genuine leading tau subtracted). The fake-factor statistics enter the Fakes
+template variance per bin; the residual same-sign non-closure per category and mass region is one
+nuisance parameter each (FakeClosure_tautau_c<k>_lo/hi).
+Also writes output/data/yields[_nosub].json and output/plots/step4_*.png (data vs prediction in the SR,
+per category, and in the fake-factor regions for many variables).
 """
 
 from __future__ import annotations
@@ -28,7 +31,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from fitting import trexhist  # noqa: E402
 from ztautau import analysis, config, fakes, plotting, samples  # noqa: E402
 
-REGION = config.REGION
+REGIONS = config.REGIONS
+NCAT = len(REGIONS)
 CONTROL_VARS = {
     "m_tt": (config.FIT_BINS, r"$m_{\tau\tau}$ (MET likelihood) [GeV]", True),
     "m_vis": (np.arange(0, 305, 10), r"$m_{vis}$ [GeV]", False),
@@ -46,17 +50,22 @@ CONTROL_VARS = {
     "nbjets": (np.arange(-0.5, 3.5, 1), r"$N_{b-jets}$", False),
     "npv": (np.arange(0, 60, 3), r"$N_{PV}$", False),
     "mt_tot": (np.arange(0, 305, 15), r"$m_T^{tot}$ [GeV]", False),
+    "bdt": (np.linspace(0, 1, 21), "BDT score", True),
 }
-STACK_GROUPS = [("DYll", ["DYee", "DYmumu"]), ("DYlowmass", ["DYlowmass"]), ("Diboson", ["WW", "WZ", "ZZ"]), ("Top", ["TTbar", "SingleTop"]),
-                ("WJets", ["WJets"]), ("Fakes", ["Fakes"]), ("DYtautau", ["DYtautau"])]
+CATEGORY_VARS = ["m_tt", "m_vis", "t1_pt", "t2_pt", "dr_tt", "met", "t1_eta", "njets"]
+STACK_GROUPS = [("DYll", ["DYee", "DYmumu"]), ("DYlowmass", ["DYlowmass"]), ("Diboson", ["WW", "WZ", "ZZ"]),
+                ("Top", ["TTbar", "SingleTop"]), ("WJets", ["WJets"]), ("Fakes", ["Fakes"]),
+                ("DYtautau_nonfid", ["DYtautau_nonfid"]), ("DYtautau", ["DYtautau"])]
 FIT_SAMPLES = [samples.SIGNAL] + samples.FIT_BACKGROUNDS + ["Fakes"]
+DY_COMPS = (samples.SIGNAL, samples.SIGNAL_NONFID)
 
 
-def h1(x, w, edges):
+def h1(x, w, edges, w2=None):
+    """2 x nbins: sum of weights and sum of squares (of `w2` if given, else of `w`)."""
     edges = np.asarray(edges, dtype=float)
     xc = np.clip(x, edges[0], edges[-1] - 1e-6)
     v, _ = np.histogram(xc, bins=edges, weights=w)
-    v2, _ = np.histogram(xc, bins=edges, weights=w ** 2)
+    v2, _ = np.histogram(xc, bins=edges, weights=(w if w2 is None else w2) ** 2)
     return np.stack([v, v2])
 
 
@@ -76,59 +85,75 @@ class Book:
     def add(self, name, vv):
         self.h[name] = self.h[name] + vv if name in self.h else vv.copy()
 
+    def get(self, name, n):
+        return self.h.get(name, np.zeros((2, n)))
+
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--ff-variant", choices=["nominal", "mcsub"], default="mcsub" if config.FF_SUBTRACT_MC else "nominal")
+    nominal_variant = "mcsub" if config.FF_SUBTRACT_MC else "nosub"
+    ap.add_argument("--ff-variant", choices=["mcsub", "nosub"], default=nominal_variant)
     ap.add_argument("--no-plots", action="store_true")
     args = ap.parse_args()
     variant = args.ff_variant
-    suffix = "" if variant == ("mcsub" if config.FF_SUBTRACT_MC else "nominal") else f"_{variant}"
+    subtract = variant == "mcsub"
+    suffix = "" if variant == nominal_variant else f"_{variant}"
     ffres = json.loads((config.DATA_DIR / "fakefactors.json").read_text())
     table = fakes.from_json(ffres[variant]["ff"])
     c_osss = np.asarray(ffres[variant]["osss"]["C"])                     # per (era, jet-multiplicity category)
     c_rel = np.hypot(np.asarray(ffres[variant]["osss"]["stat"]) / c_osss, config.FF_OSSS_SYST)
-    nonclosure = np.clip(np.asarray(ffres[variant]["nonclosure_m_tt"]["ratio"]), 0.5, 1.5)
-    edges = config.FIT_BINS
+    edges = np.asarray(config.FIT_BINS)
+    nb = len(edges) - 1
     var = config.FIT_VARIABLE
     fit = Book()
     ctrl = {rg: {v: Book() for v in CONTROL_VARS} for rg in ("SR", "AR", "SS_T", "OSAI_T")}
+    ctrl.update({rg: {v: Book() for v in CATEGORY_VARS} for rg in REGIONS})
+
+    def val(d, v, kin=None, sc=None):
+        if v == "bdt":
+            return sc
+        return (kin or d)[v] if v in analysis.KIN_KEYS else d[v]
 
     # ------------------------------------------------------------------ data and fakes
     data = analysis.load_data()
     reg = analysis.regions(data)
+    sc_d = analysis.scores(data, "data")
+    cat_d = analysis.categories(data, "data")
     ones = np.ones(len(data["run"]))
-    fit.add(f"{REGION}__Data", h1(data[var][reg["SR"]], ones[reg["SR"]], edges))
-    wf = fakes.fake_weights(data, reg["AR"], table, c_osss)
+    wf, wf2 = fakes.fake_weights(data, reg["AR"], table, c_osss, with_err=True)
     ar = reg["AR"]
-    fit.add(f"{REGION}__Fakes", h1(data[var][ar], wf[ar], edges))
-    for dm in fakes.DMS:
+    ss_book = {k: Book() for k in range(NCAT)}            # same-sign closure per category, MC subtracted
+    wss = fakes.fake_weights(data, reg["SS_L"], table, 1.0)
+    for k, region in enumerate(REGIONS):
+        sr_k, ar_k = reg["SR"] & (cat_d == k), ar & (cat_d == k)
+        fit.add(f"{region}__Data", h1(data[var][sr_k], ones[sr_k], edges))
+        fit.add(f"{region}__Fakes", h1(data[var][ar_k], wf[ar_k], edges, wf2[ar_k]))
         for d_, sgn in (("Up", 1), ("Down", -1)):
-            w = fakes.fake_weights(data, ar, table, c_osss, dm, sgn)
-            fit.add(f"{REGION}__Fakes__FakeStat_tautau_DM{dm}{d_}", h1(data[var][ar], w[ar], edges))
-    for d_, sgn in (("Up", 1), ("Down", -1)):
-        rel = fakes.per_event(c_rel, data)
-        fit.add(f"{REGION}__Fakes__FakeOSSS_tautau{d_}", h1(data[var][ar], (wf * (1 + sgn * rel))[ar], edges))
-    idx = np.clip(np.searchsorted(np.asarray(edges), data[var], side="right") - 1, 0, len(edges) - 2)
-    for d_, f in (("Up", nonclosure), ("Down", 1.0 / nonclosure)):
-        fit.add(f"{REGION}__Fakes__FakeClosure_tautau{d_}", h1(data[var][ar], (wf * f[idx])[ar], edges))
-    for rg, book in ctrl.items():
+            rel = fakes.per_event(c_rel, data)
+            fit.add(f"{region}__Fakes__FakeOSSS_tautau{d_}", h1(data[var][ar_k], (wf * (1 + sgn * rel))[ar_k], edges))
+        ss_book[k].add("obs", h1(data[var][reg["SS_T"] & (cat_d == k)], ones[reg["SS_T"] & (cat_d == k)], edges))
+        ss_book[k].add("pred", h1(data[var][reg["SS_L"] & (cat_d == k)], wss[reg["SS_L"] & (cat_d == k)], edges))
+        for v in CATEGORY_VARS:
+            ed = CONTROL_VARS[v][0]
+            ctrl[region][v].add("Data", h1(val(data, v)[sr_k], ones[sr_k], ed))
+            ctrl[region][v].add("Fakes", h1(val(data, v)[ar_k], wf[ar_k], ed, wf2[ar_k]))
+    for rg, book in ((r, ctrl[r]) for r in ("SR", "AR", "SS_T", "OSAI_T")):
         for v, (ed, _, _) in CONTROL_VARS.items():
-            book[v].add("Data", h1(data[v][reg[rg]], ones[reg[rg]], ed))
+            x = val(data, v, sc=sc_d)
+            book[v].add("Data", h1(x[reg[rg]], ones[reg[rg]], ed))
             if rg == "SR":
-                book[v].add("Fakes", h1(data[v][ar], wf[ar], ed))
+                book[v].add("Fakes", h1(x[ar], wf[ar], ed, wf2[ar]))
             if rg == "SS_T":
-                wss = fakes.fake_weights(data, reg["SS_L"], table, 1.0)
-                book[v].add("Fakes", h1(data[v][reg["SS_L"]], wss[reg["SS_L"]], ed))
+                book[v].add("Fakes", h1(x[reg["SS_L"]], wss[reg["SS_L"]], ed))
             if rg == "OSAI_T":
                 tai = fakes.from_json(ffres[variant]["ff_ai"])
                 wai = fakes.fake_weights(data, reg["OSAI_L"], tai, c_osss)
-                book[v].add("Fakes", h1(data[v][reg["OSAI_L"]], wai[reg["OSAI_L"]], ed))
-    fake_syst_names = [f"FakeStat_tautau_DM{dm}" for dm in fakes.DMS] + ["FakeOSSS_tautau", "FakeClosure_tautau"]
+                book[v].add("Fakes", h1(x[reg["OSAI_L"]], wai[reg["OSAI_L"]], ed))
 
     # ------------------------------------------------------------------ simulation
     mc_syst_names = analysis.WEIGHT_SYSTS + analysis.KINEMATIC_SYSTS
     relaxed = {}
+    dy_keys = analysis.dy_stitch_keys()
     for key in analysis.available_mc():
         d, meta = analysis.load(key)
         if not len(d):
@@ -137,139 +162,207 @@ def main():
         comps = analysis.mc_components(key)
         r = analysis.regions(d, is_mc=True)
         w = analysis.weights(d, key)
+        wsub = analysis.subtraction_weights(key, w)       # W+jets: uniform weights in the FF regions
+        sc_m = analysis.scores(d, key)
+        cat_m = analysis.categories(d, key)
         for name, cm in comps:
-            sr = r["SR"] & cm
-            fit.add(f"{REGION}__{name}", h1(d[var][sr], w[sr], edges))
-            if name in analysis.SMOOTHED_SAMPLES:
-                m = r["SR_relaxed"] & cm
-                relaxed[name] = relaxed.get(name, 0) + h1(d[var][m], w[m], edges)
-            for rg, book in ctrl.items():
-                for v, (ed, _, _) in CONTROL_VARS.items():
-                    book[v].add(name, h1(d[v][r[rg] & cm], w[r[rg] & cm], ed))
-            if variant == "mcsub":        # remove genuine taus from the FF application regions
-                wm = fakes.fake_weights(d, r["AR"] & cm, table, c_osss) * w
-                m = r["AR"] & cm
-                fit.add(f"{REGION}__Fakes", -h1(d[var][m], wm[m], edges) * np.array([[1], [0]]))
-                for fs in fake_syst_names:
+            for k, region in enumerate(REGIONS):
+                sr = r["SR"] & cm & (cat_m == k)
+                fit.add(f"{region}__{name}", h1(d[var][sr], w[sr], edges))
+                if name in analysis.SMOOTHED_SAMPLES:
+                    m = r["SR_relaxed"] & cm & (cat_m == k)
+                    relaxed[(name, region)] = relaxed.get((name, region), 0) + h1(d[var][m], w[m], edges)
+                for v in CATEGORY_VARS:
+                    ctrl[region][v].add(name, h1(val(d, v)[sr], w[sr], CONTROL_VARS[v][0]))
+                if subtract and key not in analysis.SUBTRACT_EXCLUDE:   # genuine taus out of the FF regions
+                    m = r["AR"] & cm & (cat_m == k)
+                    wm = fakes.fake_weights(d, m, table, c_osss) * wsub
+                    neg = -h1(d[var][m], wm[m], edges) * np.array([[1], [0]])
+                    fit.add(f"{region}__Fakes", neg)
                     for d_ in ("Up", "Down"):
-                        fit.add(f"{REGION}__Fakes__{fs}{d_}", -h1(d[var][m], wm[m], edges) * np.array([[1], [0]]))
-                book = ctrl["SR"]
+                        fit.add(f"{region}__Fakes__FakeOSSS_tautau{d_}", neg)
+                    for v in CATEGORY_VARS:
+                        ctrl[region][v].add("Fakes", -h1(val(d, v)[m], wm[m], CONTROL_VARS[v][0]) * np.array([[1], [0]]))
+                    mss = r["SS_T"] & cm & (cat_m == k)
+                    ss_book[k].add("obs_mc", h1(d[var][mss], wsub[mss], edges))
+                    msl = r["SS_L"] & cm & (cat_m == k)
+                    wm = fakes.fake_weights(d, msl, table, 1.0) * wsub
+                    ss_book[k].add("pred_mc", h1(d[var][msl], wm[msl], edges))
+            for rg, book in ((rr, ctrl[rr]) for rr in ("SR", "AR", "SS_T", "OSAI_T")):
                 for v, (ed, _, _) in CONTROL_VARS.items():
-                    book[v].add("Fakes", -h1(d[v][m], wm[m], ed) * np.array([[1], [0]]))
+                    x = val(d, v, sc=sc_m)
+                    book[v].add(name, h1(x[r[rg] & cm], w[r[rg] & cm], ed))
+                    if rg == "SR" and subtract and key not in analysis.SUBTRACT_EXCLUDE:
+                        m = r["AR"] & cm
+                        wm = fakes.fake_weights(d, m, table, c_osss) * wsub
+                        book[v].add("Fakes", -h1(x[m], wm[m], ed) * np.array([[1], [0]]))
         for syst in analysis.WEIGHT_SYSTS:
             for d_ in ("Up", "Down"):
                 ws = analysis.weights(d, key, syst, d_)
                 for name, cm in comps:
-                    sr = r["SR"] & cm
-                    fit.add(f"{REGION}__{name}__{syst}{d_}", h1(d[var][sr], ws[sr], edges))
+                    for k, region in enumerate(REGIONS):
+                        sr = r["SR"] & cm & (cat_m == k)
+                        fit.add(f"{region}__{name}__{syst}{d_}", h1(d[var][sr], ws[sr], edges))
         for syst in analysis.KINEMATIC_SYSTS:
             for d_ in ("Up", "Down"):
                 kin = analysis.kinematics(d, key, syst, d_)
                 rs = analysis.regions(d, kin, is_mc=True)
                 ws = analysis.weights(d, key, kin=kin)
+                cs = analysis.categories(d, key, kin, syst, d_)
                 for name, cm in comps:
-                    sr = rs["SR"] & cm
-                    fit.add(f"{REGION}__{name}__{syst}{d_}", h1(kin[var][sr], ws[sr], edges))
-        if key == "DY_NLO":
-            sr = r["SR"] & (d["gen_lhe_flavour"] == 15)
-            nominal = h1(d[var][sr], w[sr], edges)
-            for syst in analysis.THEORY_SYSTS:
-                fac = analysis.theory_weights(d, key, syst)
-                if fac is None:
+                    for k, region in enumerate(REGIONS):
+                        sr = rs["SR"] & cm & (cs == k)
+                        fit.add(f"{region}__{name}__{syst}{d_}", h1(kin[var][sr], ws[sr], edges))
+        if key in dy_keys:
+            for name, cm in comps:
+                if name not in DY_COMPS:
                     continue
-                members = [h1(d[var][sr], (w * fac[:, i])[sr], edges)[0] for i in range(fac.shape[1])]
-                up, dn = analysis.combine_theory(syst, nominal[0], members)
-                fit.add(f"{REGION}__{samples.SIGNAL}__{syst}Up", np.stack([up, nominal[1]]))
-                fit.add(f"{REGION}__{samples.SIGNAL}__{syst}Down", np.stack([dn, nominal[1]]))
-        print(f"  {key}: " + ", ".join(f"{n} {fit.h[f'{REGION}__{n}'][0].sum():.1f}" for n, _ in comps
-                                        if f"{REGION}__{n}" in fit.h), flush=True)
+                for syst in analysis.THEORY_SYSTS:
+                    fac = analysis.theory_weights(d, key, syst)
+                    if fac is None:
+                        continue
+                    for k, region in enumerate(REGIONS):
+                        sr = r["SR"] & cm & (cat_m == k)
+                        members = np.stack([h1(d[var][sr], (w * fac[:, i])[sr], edges)[0] for i in range(fac.shape[1])])
+                        # accumulate the member histograms over the stitched samples, combine at the end
+                        fit.add(f"__members__{region}__{name}__{syst}", np.concatenate([members, np.zeros((1, nb))]))
+        print(f"  {key}: " + ", ".join(f"{n} {sum(fit.get(f'{rg}__{n}', nb)[0].sum() for rg in REGIONS):.1f}" for n, _ in comps), flush=True)
+    # theory variations: envelope / quadrature on the summed member histograms
+    for name in list(fit.h):
+        if not name.startswith("__members__"):
+            continue
+        _, _, region, sample, syst = name.split("__")
+        members = fit.h.pop(name)[:-1]
+        nominal = fit.get(f"{region}__{sample}", nb)
+        up, dn = analysis.combine_theory(syst, nominal[0], members)
+        fit.add(f"{region}__{sample}__{syst}Up", np.stack([up, nominal[1]]))
+        fit.add(f"{region}__{sample}__{syst}Down", np.stack([dn, nominal[1]]))
 
     # smoothed templates: shape from the relaxed selection, normalisation of each variation from the SR;
     # the statistical uncertainty of the SR normalisation becomes one OVERALL nuisance parameter
     smooth_info = {}
     for sname in analysis.SMOOTHED_SAMPLES:
-        shape = relaxed.get(sname)
-        nom = fit.h.get(f"{REGION}__{sname}")
-        if shape is None or nom is None or shape[0].sum() <= 0 or nom[0].sum() <= 0:
+        tot_nom = sum(fit.get(f"{rg}__{sname}", nb) for rg in REGIONS)
+        if tot_nom[0].sum() <= 0:
             continue
-        norm_shape = np.maximum(shape[0], 0) / np.maximum(shape[0], 0).sum()
-        smooth_info[sname] = {"sr_yield": float(nom[0].sum()), "sr_stat_rel": float(np.sqrt(nom[1].sum()) / nom[0].sum()),
-                              "relaxed_yield": float(shape[0].sum())}
-        for name in [n for n in fit.h if n == f"{REGION}__{sname}" or n.startswith(f"{REGION}__{sname}__")]:
-            tot = fit.h[name][0].sum()
-            fit.h[name] = np.stack([norm_shape * tot, (norm_shape * tot) ** 2 * (shape[1].sum() / shape[0].sum() ** 2)])
-        print(f"  {sname}: SR shape from SR_relaxed ({shape[0].sum():.0f} events), SR yield {nom[0].sum():.0f} "
+        smooth_info[sname] = {"sr_yield": float(tot_nom[0].sum()), "sr_stat_rel": float(np.sqrt(tot_nom[1].sum()) / tot_nom[0].sum())}
+        for region in REGIONS:
+            shape = relaxed.get((sname, region))
+            nom = fit.h.get(f"{region}__{sname}")
+            if shape is None or nom is None or shape[0].sum() <= 0 or nom[0].sum() <= 0:
+                continue
+            norm_shape = np.maximum(shape[0], 0) / np.maximum(shape[0], 0).sum()
+            for name in [n for n in fit.h if n == f"{region}__{sname}" or n.startswith(f"{region}__{sname}__")]:
+                tot = fit.h[name][0].sum()
+                fit.h[name] = np.stack([norm_shape * tot, (norm_shape * tot) ** 2 * (shape[1].sum() / shape[0].sum() ** 2)])
+        print(f"  {sname}: shape from SR_relaxed per category, SR yield {tot_nom[0].sum():.0f} "
               f"+- {100 * smooth_info[sname]['sr_stat_rel']:.0f}% (MC stat)")
 
-    # alternative generator (LO madgraph) for the signal C factor, normalised to the NLO fiducial yield
+    # alternative generator (LO madgraph) for the *fiducial* signal C factor, normalised to the NLO fiducial
+    # cross section: a one-sided, normalisation-only variation SigModel_tautau (this channel only)
+    sigmodel = {}
     try:
         dlo, _ = analysis.load("DY_LO")
-        nlo, lo = analysis.signal_prediction("DY_NLO"), analysis.signal_prediction("DY_LO")
+        nlo, lo = analysis.signal_prediction(samples.DY_INCLUSIVE), analysis.signal_prediction("DY_LO")
         rlo = analysis.regions(dlo, is_mc=True)
+        clo = analysis.categories(dlo, "DY_LO")
         wlo = analysis.weights(dlo, "DY_LO") * nlo["sigma_fid_pb"] / lo["sigma_fid_pb"]
-        m = rlo["SR"] & (dlo["gen_lhe_flavour"] == 15)
-        fit.add(f"{REGION}__{samples.SIGNAL}__SigModelUp", h1(dlo[var][m], wlo[m], edges))
-        has_lo = True
+        for k, region in enumerate(REGIONS):
+            m = rlo["SR"] & (dlo["gen_lhe_flavour"] == 15) & dlo["gen_fid"].astype(bool) & (clo == k)
+            fit.add(f"{region}__{samples.SIGNAL}__SigModel_tautauUp", h1(dlo[var][m], wlo[m], edges))
+        tot_lo = sum(fit.get(f"{rg}__{samples.SIGNAL}__SigModel_tautauUp", nb)[0].sum() for rg in REGIONS)
+        tot_nlo = sum(fit.get(f"{rg}__{samples.SIGNAL}", nb)[0].sum() for rg in REGIONS)
+        sigmodel = {"C_LO_over_NLO_fiducial": tot_lo / tot_nlo}
+        print(f"  SigModel_tautau: fiducial C(LO) / C(NLO) = {tot_lo / tot_nlo:.4f}")
     except FileNotFoundError:
-        print("  DY_LO ntuple missing: no SigModel variation")
-        has_lo = False
+        print("  DY_LO ntuple missing: no SigModel_tautau variation")
+
+    # residual same-sign non-closure per category and mass region -> one nuisance parameter each
+    closure_nps = {}
+    lo_bins = edges[:-1] < config.FF_CLOSURE_MASS_SPLIT
+    for k, region in enumerate(REGIONS):
+        obs = ss_book[k].get("obs", nb)[0] - ss_book[k].get("obs_mc", nb)[0]
+        pred = ss_book[k].get("pred", nb)[0] - ss_book[k].get("pred_mc", nb)[0]
+        pred_var = ss_book[k].get("pred", nb)[1]
+        nom = fit.get(f"{region}__Fakes", nb)
+        for tag, sel in (("lo", lo_bins), ("hi", ~lo_bins)):
+            o, p, pv = obs[sel].sum(), pred[sel].sum(), pred_var[sel].sum()
+            ratio = o / p if p > 0 else 1.0
+            stat = ratio * np.sqrt(1 / max(o, 1) + pv / max(p, 1e-9) ** 2)
+            delta = float(np.hypot(ratio - 1, stat))
+            closure_nps[f"FakeClosure_tautau_c{k}_{tag}"] = {"region": region, "ratio": float(ratio), "stat": float(stat),
+                                                             "delta": delta, "obs": float(o), "pred": float(p)}
+            for d_, sgn in (("Up", 1), ("Down", -1)):
+                f = np.where(sel, 1 + sgn * delta, 1.0)
+                fit.add(f"{region}__Fakes__FakeClosure_tautau_c{k}_{tag}{d_}", np.stack([nom[0] * f, nom[1]]))
+            print(f"  {region} closure {tag}: obs/pred = {ratio:.3f} +- {stat:.3f} -> NP {100 * delta:.1f}%")
 
     # ------------------------------------------------------------------ write fit inputs
     names = {}
     for name, vv in fit.h.items():
         names[name] = to_hist(vv, edges)
-    # samples without any event still need a (tiny) template for TRExFitter
-    for s in FIT_SAMPLES:
-        nm = f"{REGION}__{s}"
-        if nm not in names:
-            names[nm] = to_hist(np.stack([np.full(len(edges) - 1, 1e-6), np.zeros(len(edges) - 1)]), edges)
+    for region in REGIONS:
+        for s in FIT_SAMPLES:
+            nm = f"{region}__{s}"
+            if nm not in names:      # samples without any event still need a (tiny) template for TRExFitter
+                names[nm] = to_hist(np.stack([np.full(nb, 1e-6), np.zeros(nb)]), edges)
     out = config.FIT_DIR / "fitinputs" / f"{config.JOB}{suffix}.root"
-    sig = analysis.signal_prediction("DY_NLO")
-    meta = {"variant": variant, "fit_variable": var, "bins": edges, "lumi_pb": config.LUMI_PB, "C_osss": c_osss.tolist(),
-            "C_osss_rel_unc": c_rel.tolist(), "signal_prediction": sig, "has_sigmodel": has_lo,
-            "mc_systs": mc_syst_names, "theory_systs": analysis.THEORY_SYSTS, "fake_systs": fake_syst_names,
-            "smoothed": smooth_info}
+    sig = analysis.signal_prediction(samples.DY_INCLUSIVE)
+    meta = {"variant": variant, "fit_variable": var, "bins": edges.tolist(), "regions": REGIONS,
+            "region_labels": config.REGION_LABELS, "category_edges": config.BDT_CATEGORY_EDGES, "lumi_pb": config.LUMI_PB,
+            "C_osss": c_osss.tolist(), "C_osss_rel_unc": c_rel.tolist(), "signal_prediction": sig,
+            "has_sigmodel": bool(sigmodel) and config.SIGMODEL_IN_FIT, "sigmodel": sigmodel, "mc_systs": mc_syst_names,
+            "theory_systs": analysis.THEORY_SYSTS, "fake_systs": ["FakeOSSS_tautau"] + list(closure_nps),
+            "closure_nps": closure_nps, "smoothed": smooth_info, "dy_samples": dy_keys}
     rep = trexhist.write_fitinputs(out, names, meta=meta)
     print(f"fit inputs -> {out}: {rep['n_hists']} histograms, clipped {len(rep['clipped'])}")
 
-    yields = {s: {"value": float(fit.h[f'{REGION}__{s}'][0].sum()) if f'{REGION}__{s}' in fit.h else 0.0,
-                  "stat": float(np.sqrt(fit.h[f'{REGION}__{s}'][1].sum())) if f'{REGION}__{s}' in fit.h else 0.0}
-              for s in FIT_SAMPLES}
-    yields["Data"] = {"value": float(fit.h[f"{REGION}__Data"][0].sum())}
-    pred = sum(yields[s]["value"] for s in FIT_SAMPLES)
-    yields["Total"] = {"value": pred}
-    # relative size of every variation on every sample (prefit)
+    yields = {"regions": {}, "yields": {}}
+    for region in REGIONS:
+        yields["regions"][region] = {s: {"value": float(fit.get(f"{region}__{s}", nb)[0].sum()),
+                                         "stat": float(np.sqrt(fit.get(f"{region}__{s}", nb)[1].sum()))} for s in FIT_SAMPLES}
+        yields["regions"][region]["Data"] = {"value": float(fit.get(f"{region}__Data", nb)[0].sum())}
+    for s in FIT_SAMPLES + ["Data"]:
+        yields["yields"][s] = {"value": sum(yields["regions"][r][s]["value"] for r in REGIONS)}
+        if s != "Data":
+            yields["yields"][s]["stat"] = float(np.sqrt(sum(yields["regions"][r][s]["stat"] ** 2 for r in REGIONS)))
+    yields["yields"]["Total"] = {"value": sum(yields["yields"][s]["value"] for s in FIT_SAMPLES)}
     impacts = {}
     for name, vv in fit.h.items():
         parts = name.split("__")
         if len(parts) == 3:
             nom = fit.h.get(f"{parts[0]}__{parts[1]}")
             if nom is not None and nom[0].sum() > 0:
-                impacts.setdefault(parts[1], {})[parts[2]] = float(vv[0].sum() / nom[0].sum() - 1)
-    (config.DATA_DIR / f"yields{suffix}.json").write_text(json.dumps({"yields": yields, "prefit_norm_effects": impacts,
-                                                                        "meta": meta}, indent=1, default=float))
-    print("SR yields: " + ", ".join(f"{s} {v['value']:.0f}" for s, v in yields.items()))
-
-    # ------------------------------------------------------------------ sensitivity of the mass variables
+                impacts.setdefault(parts[1], {}).setdefault(parts[2], {})[parts[0]] = float(vv[0].sum() / nom[0].sum() - 1)
+    # stat-only sensitivity of the m_tt shape, backgrounds fixed: inclusive vs categories
     sens = {}
-    for v in ("m_tt", "m_vis"):
-        book = ctrl["SR"][v]
-        s_ = book.h.get("DYtautau", np.zeros((2, 1)))[0]
-        b_ = sum(book.h[k][0] for k in book.h if k not in ("Data", "DYtautau"))
+    tot_s = sum(fit.get(f"{rg}__{samples.SIGNAL}", nb)[0] for rg in REGIONS)
+    tot_b = sum(fit.get(f"{rg}__{s}", nb)[0] for rg in REGIONS for s in FIT_SAMPLES if s != samples.SIGNAL)
+
+    def _sens(s_, b_):
         ok = (s_ + b_) > 0
-        sens[v] = float(1.0 / np.sqrt(np.sum(s_[ok] ** 2 / (s_[ok] + b_[ok]))))
-    print("stat-only relative sigma(mu) from the SR shape (backgrounds fixed): " + ", ".join(f"{k} {v:.4f}" for k, v in sens.items()))
-    js = json.loads((config.DATA_DIR / f"yields{suffix}.json").read_text())
-    js["stat_only_sensitivity"] = sens
-    (config.DATA_DIR / f"yields{suffix}.json").write_text(json.dumps(js, indent=1))
+        return float(np.sum(s_[ok] ** 2 / (s_[ok] + b_[ok])))
+    sens["inclusive"] = 1 / np.sqrt(_sens(tot_s, tot_b))
+    sens["categories"] = 1 / np.sqrt(sum(_sens(fit.get(f"{rg}__{samples.SIGNAL}", nb)[0],
+                                              sum(fit.get(f"{rg}__{s}", nb)[0] for s in FIT_SAMPLES if s != samples.SIGNAL)) for rg in REGIONS))
+    (config.DATA_DIR / f"yields{suffix}.json").write_text(json.dumps({**yields, "prefit_norm_effects": impacts, "meta": meta,
+                                                                        "stat_only_sensitivity": sens}, indent=1, default=float))
+    print("SR yields: " + ", ".join(f"{s} {v['value']:.0f}" for s, v in yields["yields"].items()))
+    for region in REGIONS:
+        y = yields["regions"][region]
+        print(f"  {region}: data {y['Data']['value']:.0f}, fakes {y['Fakes']['value']:.0f}, {samples.SIGNAL} {y[samples.SIGNAL]['value']:.0f}, "
+              f"{samples.SIGNAL_NONFID} {y[samples.SIGNAL_NONFID]['value']:.0f}")
+    print(f"stat-only relative sigma(mu), backgrounds fixed: inclusive {sens['inclusive']:.4f}, categories {sens['categories']:.4f}")
 
     if args.no_plots:
         return
     titles = {"SR": "signal region (OS, both Medium)", "AR": r"application region (OS, $\tau_1$ fails Medium)",
               "SS_T": "same sign, both Medium (FF closure)", "OSAI_T": r"OS, $\tau_2$ anti-isolated (C$_{OS/SS}$ check)"}
+    titles.update({rg: f"signal region, {lab}" for rg, lab in zip(REGIONS, config.REGION_LABELS)})
     for rg, books in ctrl.items():
-        for v, (ed, xl, logy) in CONTROL_VARS.items():
-            book = books[v].h
+        for v, book_ in books.items():
+            ed, xl, logy = CONTROL_VARS[v]
+            book = book_.h
             if "Data" not in book:
                 continue
             stack = []
@@ -282,7 +375,7 @@ def main():
             variable_bins = len(set(np.round(np.diff(ed), 6))) > 1 and v not in ("t1_dm", "t2_dm")
             plotting.stack_plot(config.PLOT_DIR / f"step4_{rg}_{v}{suffix}.png", ed, (dv, np.sqrt(dv)), stack, xl,
                                 title=titles[rg], logy=False, density=variable_bins)
-            if logy and rg == "SR":
+            if logy and rg in ("SR",) + tuple(REGIONS):
                 plotting.stack_plot(config.PLOT_DIR / f"step4_{rg}_{v}_log{suffix}.png", ed, (dv, np.sqrt(dv)), stack,
                                     xl, title=titles[rg], logy=True)
 

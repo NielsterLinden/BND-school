@@ -1,0 +1,78 @@
+|eta(tau1)| bins: 0.0-0.4 0.4-0.8 0.8-1.2 1.2-1.5 1.5-1.8 1.8-2.1
+
+=== 1. FF(|eta|) = N(SS, tau1 T) / N(SS, tau1 L), tau2 Medium, inclusive in era/DM/Njets/pT ===
+FF inclusive                        0.177  0.192  0.203  0.219  0.186  0.169   +-0.003 0.003 0.003 0.004 0.004 0.003
+  relative to its mean              0.928  1.005  1.065  1.148  0.975  0.888   +-0.003 0.003 0.003 0.004 0.004 0.003
+  N(T) per bin:   5645   5705   5824   3784   2918   2885
+
+=== 2. is the eta shape universal? FF(|eta|) / FF(|eta| inclusive), per era, DM, Njets, pT ===
+Run2016G (shape / mean)             0.932  1.000  1.062  1.156  0.969  0.891   +-0.019 0.020 0.021 0.029 0.027 0.025
+Run2016H (shape / mean)             0.925  1.012  1.067  1.142  0.981  0.885   +-0.019 0.021 0.022 0.030 0.028 0.025
+DM0 (shape / mean)                  0.882  0.954  1.161  1.267  1.018  0.824   +-0.031 0.034 0.042 0.055 0.045 0.037
+DM1 (shape / mean)                  0.906  0.997  1.054  1.157  0.985  0.926   +-0.019 0.021 0.022 0.030 0.031 0.029
+DM10 (shape / mean)                 0.994  1.031  1.073  1.008  0.907  0.931   +-0.029 0.031 0.033 0.040 0.036 0.038
+DM11 (shape / mean)                 0.896  1.048  1.023  1.218  0.954  0.906   +-0.042 0.046 0.046 0.066 0.060 0.052
+0 jets (shape / mean)               0.923  0.990  1.065  1.168  1.001  0.885   +-0.016 0.017 0.019 0.026 0.026 0.023
+1 jet (shape / mean)                0.925  1.008  1.080  1.155  0.923  0.911   +-0.029 0.031 0.032 0.043 0.038 0.036
+>=2 jets (shape / mean)             0.902  1.045  1.022  1.083  1.039  0.934   +-0.042 0.047 0.045 0.057 0.058 0.052
+pT 40-45 (shape / mean)             0.926  1.028  1.029  1.171  1.043  0.853   +-0.043 0.048 0.050 0.071 0.067 0.056
+pT 45-50 (shape / mean)             0.897  1.028  1.081  1.158  0.955  0.905   +-0.031 0.035 0.038 0.051 0.046 0.043
+pT 50-60 (shape / mean)             0.942  1.013  1.074  1.165  0.934  0.858   +-0.024 0.026 0.028 0.038 0.034 0.032
+pT 60-80 (shape / mean)             0.939  0.994  1.056  1.156  1.013  0.855   +-0.025 0.027 0.028 0.038 0.038 0.033
+pT > 80 (shape / mean)              0.908  0.968  1.076  1.094  0.964  1.022   +-0.035 0.038 0.040 0.051 0.052 0.051
+
+=== 3. dependence on the definition of 'loose': FF shape vs |eta| for tighter lower edges ===
+VVVLoose & !Medium (used)           0.928  1.005  1.065  1.148  0.975  0.888   +-0.013 0.015 0.015 0.021 0.020 0.018
+    mean FF 0.191, N(L) total 140365
+VVLoose & !Medium                   0.945  1.033  1.064  1.113  0.951  0.868   +-0.014 0.016 0.016 0.021 0.020 0.018
+    mean FF 0.294, N(L) total 91055
+VLoose & !Medium                    0.964  1.044  1.068  1.086  0.934  0.854   +-0.016 0.017 0.017 0.022 0.021 0.019
+    mean FF 0.498, N(L) total 53694
+Loose & !Medium                     0.974  1.063  1.064  1.036  0.929  0.867   +-0.020 0.023 0.023 0.027 0.027 0.025
+    mean FF 1.509, N(L) total 17731
+
+=== 4. what the loose population looks like vs |eta|: fraction of the L taus in each raw-score slice ===
+raw DeepTau VSjet quartiles of the L taus: [0.37, 0.517, 0.69]
+  lowest quartile (least tau-like)  0.258  0.266  0.247  0.237  0.235  0.236   +-0.000 0.000 0.000 0.000 0.000 0.000
+  highest quartile (closest to Medium)  0.239  0.241  0.249  0.268  0.262  0.263   +-0.000 0.000 0.000 0.000 0.000 0.000
+  median raw VSjet of T taus per |eta| bin:  0.944  0.944  0.943  0.943  0.942  0.938
+  median raw VSjet of L taus per |eta| bin:  0.508  0.504  0.516  0.531  0.530  0.530
+  Medium threshold in raw score (min raw of T): 0.8833; VVVLoose threshold (min raw of L): 0.2600
+  DM0 fraction among T taus         0.182  0.179  0.189  0.199  0.241  0.222   +-0.000 0.000 0.000 0.000 0.000 0.000
+  DM0 fraction among L taus         0.105  0.103  0.095  0.099  0.126  0.131   +-0.000 0.000 0.000 0.000 0.000 0.000
+  DM1 fraction among T taus         0.479  0.485  0.498  0.506  0.415  0.425   +-0.000 0.000 0.000 0.000 0.000 0.000
+  DM1 fraction among L taus         0.428  0.426  0.438  0.437  0.358  0.355   +-0.000 0.000 0.000 0.000 0.000 0.000
+  DM10 fraction among T taus        0.252  0.240  0.221  0.196  0.250  0.241   +-0.000 0.000 0.000 0.000 0.000 0.000
+  DM10 fraction among L taus        0.229  0.228  0.214  0.218  0.263  0.224   +-0.000 0.000 0.000 0.000 0.000 0.000
+  DM11 fraction among T taus        0.088  0.096  0.093  0.099  0.094  0.112   +-0.000 0.000 0.000 0.000 0.000 0.000
+  DM11 fraction among L taus        0.239  0.243  0.253  0.246  0.254  0.290   +-0.000 0.000 0.000 0.000 0.000 0.000
+
+=== 5. eta(tau2) and the tau2 leg: FF shape vs |eta(tau2)| (tau1 T / tau1 L, unchanged definition) ===
+FF vs |eta(tau2)| / mean            1.038  0.999  1.009  0.970  0.992  0.969   +-0.016 0.015 0.014 0.017 0.019 0.019
+
+=== 6. effect of adding |eta(tau1)| to the FF binning on the fake template ===
+  era G: SS closure ratio in |eta| bins [0.0, 0.8, 1.5, 2.1]: 0.952 1.104 0.944
+  era H: SS closure ratio in |eta| bins [0.0, 0.8, 1.5, 2.1]: 0.955 1.107 0.939
+  SR fake yield: nominal 38758, with |eta| correction 38748 (-0.03%)
+  m_tt bin        nominal   eta-corr   ratio
+     0-  40        194       196   1.011
+    40-  60        458       459   1.002
+    60-  70        247       248   1.003
+    70-  80        296       296   0.997
+    80-  90        352       352   0.999
+    90- 100        517       515   0.997
+   100- 110       1128      1128   1.001
+   110- 120       2520      2519   1.000
+   120- 130       3389      3395   1.002
+   130- 150       7139      7129   0.999
+   150- 175       6975      6948   0.996
+   175- 200       4657      4647   0.998
+   200- 250       5328      5338   1.002
+   250- 350       5559      5578   1.004
+  fakes in 60-110 GeV: 2540 -> 2539 (-0.04%); signal there ~ 4000
+  SS closure in t1_eta: obs/pred nominal   0.91 0.97 1.17 1.06 1.03 0.97 0.87 0.92 0.98 1.03 1.10 1.14 0.99 0.91
+  SS closure in t1_eta: obs/pred eta-corr  0.97 1.03 1.06 0.96 1.03 1.02 0.91 0.97 1.03 1.02 0.99 1.04 1.05 0.96
+  SS closure in m_tt: obs/pred nominal   0.89 1.03 1.01 1.02 1.11 0.91 0.91 1.01 1.01 1.02 1.02 0.99 0.99 0.99
+  SS closure in m_tt: obs/pred eta-corr  0.88 1.02 1.01 1.02 1.11 0.90 0.91 1.01 1.00 1.02 1.03 0.99 0.98 0.98
+
+plot -> /project/atlas/Users/sjankovy/BND/BND-school/z-tautau/review/review_eta.png

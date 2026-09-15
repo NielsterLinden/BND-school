@@ -19,8 +19,9 @@ z-ee, which the combination needs.
 
 | key | record | sample | role | σ [pb] | files used |
 |---|---|---|---|---:|---:|
-| `DY_NLO` | 35669 | DYJetsToLL_M-50 amcatnloFXFX | **signal** (LHE ττ), Z→ee/μμ backgrounds | 6077.22 (FEWZ NNLO, all flavours) | 41/41 |
-| `DY_LO` | 35671 | DYJetsToLL_M-50 madgraphMLM | alternative generator (C factor only) | 6077.22 | 24/61 |
+| `DY_NLO` | 35669 | DYJetsToLL_M-50 amcatnloFXFX | **signal** (LHE ττ, split into fiducial `DYtautau` and `DYtautau_nonfid`), Z→ee/μμ backgrounds; normalisation and acceptance | 6077.22 (FEWZ NNLO, all flavours) | 41/41 |
+| `DY_0J`, `DY_1J`, `DY_2J` | 35577, 35595, 35613 | DYJetsToLL_0J/1J/2J amcatnloFXFX | signal statistics, stitched per LHE_NpNLO bin to the inclusive sample (`analysis.dy_norm`) | as `DY_NLO` | 60/60, 76/76, 75/75 |
+| `DY_LO` | 35671 | DYJetsToLL_M-50 madgraphMLM | alternative generator (fiducial C factor cross-check) | 6077.22 | 24/61 |
 | `DY_lowmass` | 35631 | DYJetsToLL_M-10to50 amcatnloFXFX | Z/γ*→ℓℓ with m < 50 GeV | 18610 | 25/25 |
 | `WJets` | 69745 | WJetsToLNu amcatnloFXFX | W+jets with a genuine leading τh | 61526.7 | 28/28 |
 | `TTTo2L2Nu` | 67801 | powheg | tt̄ | 88.29 | 20/49 (EOS) |
@@ -30,6 +31,19 @@ z-ee, which the combination needs.
 
 * The sample normalisation is σ·L / Σ(generator weights of the *processed* files), so processing only
   some files of a large sample (tt̄) is unbiased, just statistically poorer.
+* **Jet-binned Drell-Yan stitching.** The 0J/1J/2J aMC@NLO samples have exactly 0, 1 and 2 partons in
+  the NLO matrix element (`LHE_NpNLO`; *not* `LHE_Njets`, which also counts the real-emission parton and
+  is therefore not exclusive: stitching in it over-counts by 7 %). Every DY event gets the weight
+  σ·L · f_j / Σ_samples Σw_sample(j), with f_j = Σw_incl(j)/Σw_incl the jet-bin fraction of the *inclusive*
+  sample (its FxFx merging defines the multiplicity mixture) and Σw_sample(j) the generator-weight sums
+  per bin from the `GenSums` trees. The inclusive sample alone reproduces σ·L/Σw_incl; the jet-binned
+  samples only enlarge the denominators, i.e. add statistics without any extra cross section. The
+  acceptance A and the theory sums come from the inclusive sample; the theory variations are renormalised
+  per sample to its own fiducial yield (`analysis.theory_weights`).
+* **Fiducial / non-fiducial split.** 38 % of the selected Z/γ*→ττ is outside the fiducial volume
+  (30 % has m_LHE > 120 GeV: the two 40 GeV visible-pT cuts enrich the γ* continuum by two orders of
+  magnitude relative to the peak, `REVIEW.md` 3.1). It is a separate sample `DYtautau_nonfid` with a 5 %
+  normalisation uncertainty plus the theory variations, and is *not* scaled by μ_Z.
 * **No QCD multijet simulation** is used anywhere: all jet→τh fakes come from the fake-factor method in data
   (`05-fake-factors.md`).
 * The inclusive diboson samples are used (not the exclusive decay samples z-mumu uses) because τh can come

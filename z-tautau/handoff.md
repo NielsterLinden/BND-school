@@ -119,9 +119,14 @@ Prediction: σ(Z/γ*→ττ, 60–120) = 1944.9 pb; σ_fid = 4.501 pb; A = 0.002
 
 **Profile-likelihood combination (recommended).**
 
-- Inputs: `fit/ztautau.config` and the workspace `fit/results/ztautau/RooStats/ztautau_combined_ztautau_model.root`.
-  Job `ztautau`, POI `mu_Z`, regions `tautau_SR0`, `tautau_SR1`, `tautau_SR2`. The entry in
-  `fitting/combination_skeleton.config` already points there.
+- Inputs, **all committed** (exception to the no-ROOT rule, they are 0.8–1.2 MB and the combination needs them
+  from any checkout): the histograms `fit/fitinputs/ztautau.root` (+ `ztautau_nosub.root`, the cross-check
+  variant, and the `.meta.json` sidecars), the config `fit/ztautau.config`, the workspace
+  `fit/results/ztautau/RooStats/ztautau_combined_ztautau_model.root` (a copy of TRExFitter's
+  `ztautau_allBinsFitRegions_combined_ztautau_model.root`, the name it uses when a region has `DropBins`)
+  and `fit/results/ztautau_fit_result.json`. Job `ztautau`, POI `mu_Z`, regions `tautau_SR0`, `tautau_SR1`,
+  `tautau_SR2` (SR0 fitted above 110 GeV only). The entry in `fitting/combination_skeleton.config` already
+  points there. Regenerate with `python run_all.py --from 4 --to 6` (~15 min from the ntuples).
 - Correlated NPs (shared names): `Lumi`, `Pileup`, `L1Prefiring`, `QCDScale`, `PDF`, `PS_ISR`, `PS_FSR`,
   `XS_TTbar`, `XS_SingleTop`, `XS_WW`, `XS_WZ`, `XS_ZZ`.
 - ττ-only NPs: `TauID_DM*`, `TauTrigger_DM*`, `TauES_DM*`, `TauFakeEle`, `TauFakeMu`, `MET_Unclustered`,

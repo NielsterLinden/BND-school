@@ -71,9 +71,12 @@ combination have the same rows.
 
 ## 4. Outputs every channel provides
 
-- `<channel>/fit/fitinputs/<channel>.root` (not committed; path in the channel's handoff.md),
+- `<channel>/fit/fitinputs/<channel>.root` (path in the channel's handoff.md; ττ commits it, 0.8 MB, so the
+  combination works from any checkout — `git add -f`),
 - `<channel>/fit/<channel>.config` (committed),
-- `<channel>/fit/results/<job>/RooStats/<job>_combined_<job>_model.root` (workspace, not committed),
+- `<channel>/fit/results/<job>/RooStats/<job>_combined_<job>_model.root` (workspace; ττ commits it. Note that
+  TRExFitter names it `<job>_allBinsFitRegions_combined_<job>_model.root` when a region uses `DropBins`; ττ
+  keeps a copy under the conventional name),
 - `<channel>/fit/results/<channel>_fit_result.json` written by `fitting/run_trex.py`
   (μ, uncertainties, grouped impacts, σ_fid, σ(60–120), n_obs, n_bkg, A, C, L),
 - the same numbers in the channel's `handoff.md`.

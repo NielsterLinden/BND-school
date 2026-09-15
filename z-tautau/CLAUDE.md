@@ -54,7 +54,11 @@ BND_TAUTAU_WP=Tight python run_all.py --from 3         # the same chain with Dee
   may become a BDT input (`config.BDT_FEATURES`). Every event is scored by the fold model that never saw it
   (`bdt.folds`: event number mod 5). Check `step3b_bdt_closure_SS.png` after any change.
 * Commit plots (PNG), `output/RESULTS.md`, `output/results.json`, `fit/*.config`, `fit/bdt_info.json`,
-  `external/*.json`, `filelists/`. Never commit ROOT files, `output/data/`, the BDT models or PDFs of plots.
+  `external/*.json`, `filelists/`, and — the one exception to the no-ROOT rule, because the combination reads
+  them from its own checkout — the fit inputs `fit/fitinputs/ztautau*.root` (+ `.meta.json`), the workspace
+  `fit/results/ztautau/RooStats/ztautau_combined_ztautau_model.root` and `fit/results/ztautau_fit_result.json`
+  (`git add -f`, they are git-ignored by pattern). Never commit other ROOT files, `output/data/`, the BDT
+  models or PDFs of plots.
 
 ## Pitfalls that already cost time here (do not reintroduce)
 

@@ -1,0 +1,14 @@
+number	section	name	scene_file	scene_class
+1	1_theory	drell_yan	scenes/s1_drell_yan.py	DrellYan
+2	2_cms_methods	cms_slice_build	scenes/s2_cms_slice.py	CMSSliceBuild
+3	2_cms_methods	cms_signatures	scenes/s2_cms_slice.py	CMSSignatures
+1	2_cms_methods	cms_logo_to_slice	scenes/s2_cms_logo.py	CMSLogoToSlice
+1	3_zee	ee_process	scenes/s3_zee.py	ZeeProcess
+2	3_zee	ee_detector	scenes/s3_zee.py	ZeeDetector
+1	4_zmumu	mumu_process	scenes/s4_zmumu.py	ZmumuProcess
+2	4_zmumu	mumu_detector	scenes/s4_zmumu.py	ZmumuDetector
+1	5_ztautau	tau_decay	scenes/s5_ztautau.py	TauDecay
+2	5_ztautau	tau_jet	scenes/s5_ztautau.py	TauJet
+3	5_ztautau	tautau_detector	scenes/s5_ztautau.py	ZtautauDetector
+1	6_combination	three_to_one	scenes/s6_combination.py	ThreeToOne
+1	7_outro	mic_drop	scenes/s7_outro.py	MicDrop

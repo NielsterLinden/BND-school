@@ -93,8 +93,3 @@ trex-fitter hwdfp fit.config
 
 ## Open issues / next steps
 
-- **Cross-section verification** — diboson/ttbar/W+jets cross-sections need to be checked against each record's own quoted value.
-- **Add systematics to the fit config** — the exported ROOT files already contain the weight-systematic and PDF/scale-envelope histograms; they just need to be wired into `fit.config`. At minimum add a luminosity uncertainty (~2.5% for 2016) and proper MC-statistical uncertainty treatment (e.g. `MCstatThreshold`) before any final number is quotable.
-- **σ(Z→ee) extraction:** remember the assumed DY cross-section (6077.22 pb) is the **inclusive DY→ℓℓ** value (summed over e/μ/τ), so `μ_signal × 6077.22` gives the inclusive measured cross-section — divide by 3 to get the ee-channel value, or extract acceptance × efficiency from the MC to be more precise.
-- **Exact per-channel PDF/scale envelopes:** the current accumulation runs over the full inclusive DY sample; split by channel inside the chunk loop if exact ee-only theory uncertainties are needed.
-- Consider adding a LHE-level channel-fraction validation step (pre-selection) to confirm the ee/μμ/ττ classifier is working correctly.

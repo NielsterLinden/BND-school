@@ -1,0 +1,1129 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./bnd_z_combination.tex
+LaTeX2e <2025-06-01> patch level 1
+L3 programming layer <2025-06-09>
+
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+r.cls
+Document Class: beamer 2025/06/15 v3.74 A class for typesetting presentations
+
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasemodes.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/etoolbox/eto
+olbox.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasedecode.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/iftex/ifte
+x.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaseoptions.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/graphics/key
+val.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/geometry/geo
+metry.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/iftex/ifvt
+ex.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/math/pgf
+math.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/utilitie
+s/pgfrcs.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/utilit
+ies/pgfutil-common.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/utilit
+ies/pgfutil-latex.def)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/utilit
+ies/pgfrcs.code.tex
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/pgf.re
+vision.tex)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/utilitie
+s/pgfkeys.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/utilit
+ies/pgfkeys.code.tex
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/utilit
+ies/pgfkeyslibraryfiltered.code.tex)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmath.code.tex
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathutil.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathparser.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfunctions.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfunctions.basic.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfunctions.trigonometric.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfunctions.random.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfunctions.comparison.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfunctions.base.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfunctions.round.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfunctions.misc.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfunctions.integerarithmetics.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathcalc.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfloat.code.tex)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/extsizes/siz
+e9.clo)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/basiclay
+er/pgfcore.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/graphics/gra
+phicx.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/graphics/gra
+phics.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/graphics/tri
+g.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/graphics-cfg
+/graphics.cfg)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/graphics-def
+/pdftex.def)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/systemla
+yer/pgfsys.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/system
+layer/pgfsys.code.tex
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/system
+layer/pgf.cfg)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/system
+layer/pgfsys-pdftex.def
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/system
+layer/pgfsys-common-pdf.def)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/system
+layer/pgfsyssoftpath.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/system
+layer/pgfsysprotocol.code.tex))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/xcolor/xcolo
+r.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/graphics-cfg
+/color.cfg)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/graphics/mat
+hcolor.ltx))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcore.code.tex
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfint.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorepoints.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorepathconstruct.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorepathusage.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorescopes.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcoregraphicstate.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcoretransformations.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorequick.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcoreobjects.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorepathprocessing.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorearrows.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcoreshade.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcoreimage.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcoreexternal.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorelayers.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcoretransparency.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorepatterns.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorerdf.code.tex)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/utilitie
+s/xxcolor.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/base/atbegsh
+i-ltx.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/hyperref/hyp
+erref.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/kvsetkeys/kv
+setkeys.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/kvdefineke
+ys/kvdefinekeys.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pdfescape/
+pdfescape.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/ltxcmds/lt
+xcmds.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pdftexcmds
+/pdftexcmds.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/infwarerr/
+infwarerr.sty)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/hycolor/hyco
+lor.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/hyperref/nam
+eref.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/refcount/ref
+count.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/gettitlest
+ring/gettitlestring.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/kvoptions/kv
+options.sty)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/stringenc/
+stringenc.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/hyperref/pd1
+enc.def)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/intcalc/in
+tcalc.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/hyperref/pue
+nc.def)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/url/url.sty)
+
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/bitset/bit
+set.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/bigintcalc
+/bigintcalc.sty))
+
+Package hyperref Message: Stopped early.
+
+)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/hyperref/hpd
+ftex.def
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/rerunfileche
+ck/rerunfilecheck.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/uniquecoun
+ter/uniquecounter.sty)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaserequires.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasecompatibility.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasefont.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amsfonts/ams
+symb.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amsfonts/ams
+fonts.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/sansmathacce
+nt/sansmathaccent.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/koma-script/
+scrlfile.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/koma-script/
+scrlfile-hook.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/koma-script/
+scrlogo.sty)))))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasetranslator.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/translator/t
+ranslator.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasemisc.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasetwoscreens.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaseoverlay.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasetitle.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasesection.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaseframe.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaseverbatim.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaseframesize.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaseframecomponents.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasecolor.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasenotes.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasetoc.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasetemplates.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaseauxtemplates.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaseboxes.sty)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaselocalstructure.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/tools/enumer
+ate.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasenavigation.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasenavigationsymbols.tex))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasetheorems.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amsmath/amsm
+ath.sty
+For additional information on amsmath, use the `?' option.
+
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amsmath/amst
+ext.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amsmath/amsg
+en.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amsmath/amsb
+sy.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amsmath/amso
+pn.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amscls/amsth
+m.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasethemes.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rthemedefault.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rfontthemedefault.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rcolorthemedefault.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rinnerthemedefault.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+routerthemedefault.sty)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamertheme-
+metropolis/beamerthememetropolis.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgfopts/pgfo
+pts.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamertheme-
+metropolis/beamerinnerthememetropolis.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/tools/calc.s
+ty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/frontend
+layer/tikz.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/basiclay
+er/pgf.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/module
+s/pgfmoduleshapes.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/module
+s/pgfmoduleplot.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/compatib
+ility/pgfcomp-version-0-65.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/compatib
+ility/pgfcomp-version-1-18.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/utilitie
+s/pgffor.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/utilit
+ies/pgffor.code.tex))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/fronte
+ndlayer/tikz/tikz.code.tex
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/librar
+ies/pgflibraryplothandlers.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/module
+s/pgfmodulematrix.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/fronte
+ndlayer/tikz/libraries/tikzlibrarytopaths.code.tex))))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamertheme-
+metropolis/beamerouterthememetropolis.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamertheme-
+metropolis/beamercolorthememetropolis.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamertheme-
+metropolis/beamerfontthememetropolis.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/iftex/ifxe
+tex.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/iftex/iflu
+atex.sty)
+
+Package beamerthememetropolis Warning: You need to compile with XeLaTeX or LuaL
+aTeX to use the Fira fonts on input line 95.
+
+))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/booktabs/boo
+ktabs.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/tools/array.
+sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/fronte
+ndlayer/tikz/libraries/tikzlibrarypositioning.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/librar
+ies/pgflibraryarrows.meta.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/fronte
+ndlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/librar
+ies/shapes/pgflibraryshapes.geometric.code.tex))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/fronte
+ndlayer/tikz/libraries/tikzlibraryfit.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/fronte
+ndlayer/tikz/libraries/tikzlibrarybackgrounds.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/fronte
+ndlayer/tikz/libraries/tikzlibrarycalc.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/siunitx/siun
+itx.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/translations
+/translations.sty))
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\\' on input line 50.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\to' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\mu' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\mu' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\to' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\tau' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\tau' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 53.
+
+
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/l3backend/l3
+backend-pdftex.def)
+No file bnd_z_combination.aux.
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/context/base/mkii/
+supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg
+/epstopdf-base.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/latexconfig/
+epstopdf-sys.cfg))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/translator/t
+ranslator-basic-dictionary-English.dict)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/translator/t
+ranslator-bibliography-dictionary-English.dict)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/translator/t
+ranslator-environment-dictionary-English.dict)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/translator/t
+ranslator-months-dictionary-English.dict)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/translator/t
+ranslator-numbers-dictionary-English.dict)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/translator/t
+ranslator-theorem-dictionary-English.dict)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/translations
+/translations-basic-dictionary-english.trsl)
+No file bnd_z_combination.nav.
+
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amsfonts/ums
+a.fd)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amsfonts/ums
+b.fd)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/sansmathacce
+nt/ot1mathkerncmss.fd)
+[1{/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-var/fonts/map/pdftex/updm
+ap/pdftex.map}{/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/en
+c/dvips/cm-super/cm-super-ts1.enc}]
+[2]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \hskip 9.24994pt
+(hyperref)                replaced by space on input line 138.
+
+
+[3 <../combination/output/plots/forest.pdf>]
+[4 <./figures/precision_budget.pdf>]
+[5 <../combination/output/plots/breakdown.pdf>]
+Overfull \vbox (2.63965pt too high) detected at line 212
+
+[6 <../combination/output/plots/universality.pdf>]
+[7 <../combination/output/plots/comparison.pdf>]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \hskip 9.24994pt
+(hyperref)                replaced by space on input line 228.
+
+
+Overfull \hbox (1.81879pt too wide) in paragraph at lines 275--275
+ [] 
+
+[8]
+[9]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \hskip 9.24994pt
+(hyperref)                replaced by space on input line 323.
+
+
+[10 <../z-mumu/output/v2/plots/datamc_SR_mass_fit_log.png>]
+[11 <./figures/mumu_fit_stability.pdf>]
+Overfull \vbox (1.76079pt too high) detected at line 414
+
+[12 <../z-tautau/output/plots/fit_SR_postfit.png>]
+[13 <../z-tautau/output/plots/step3_fakefactors.png>]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \hskip 9.24994pt
+(hyperref)                replaced by space on input line 459.
+
+
+[14]
+[15 <../combination/output/plots/sources.pdf>]
+[16 <../combination/output/plots/variations.pdf> <../combination/output/plots/l
+ikelihood_scan.pdf>] (./bnd_z_combination.vrb)
+[17]
+[18]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\translate ' on input line 644.
+
+
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 685--685
+[]|$\OML/cmm/m/it/6 ^^[[]=\OT1/mathkerncmss/m/sl/6 A\OT1/cmss/m/n/6 (60[]120)$ 
+$=
+
+[20]
+Overfull \vbox (3.44511pt too high) detected at line 739
+
+[21]
+[22]
+[23]
+[24] (./bnd_z_combination.aux)
+
+Package rerunfilecheck Warning: File `bnd_z_combination.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information)</cvmfs/sft.cern.ch/lcg/ext
+ernal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></c
+vmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/amsfon
+ts/cmextra/cmex8.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmmi10.pfb></cvmfs/sft.cern.ch/lcg/external/texli
+ve/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></cvmfs/sft.cern.ch
+/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb>
+</cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi7.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi8.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/
+2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></cvmfs/sft.cern.ch/lc
+g/external/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></c
+vmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr5.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmr6.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></cvmfs/sft.cern.ch/lcg/exte
+rnal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></cvmfs/sf
+t.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr9.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmss10.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></cvmfs/sft.cern.ch/lcg/external
+/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></cvmfs/sft.c
+ern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss
+bx10.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmssi10.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></cvmfs/sft.cern.ch/lcg/exte
+rnal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></cvmfs/
+sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmssi9.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmsy10.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></cvmfs/sft.cern.ch/lcg/exte
+rnal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></cvmfs/s
+ft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmsy7.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmsy8.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></cvmfs/sft.cern.ch/lcg/externa
+l/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></cvmfs/sft.
+cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss06
+00.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/pub
+lic/cm-super/sfss0700.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-d
+ist/fonts/type1/public/cm-super/sfss0800.pfb>
+Output written on bnd_z_combination.pdf (24 pages, 801024 bytes).
+Transcript written on bnd_z_combination.log.
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./bnd_z_combination.tex
+LaTeX2e <2025-06-01> patch level 1
+L3 programming layer <2025-06-09>
+
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+r.cls
+Document Class: beamer 2025/06/15 v3.74 A class for typesetting presentations
+
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasemodes.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/etoolbox/eto
+olbox.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasedecode.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/iftex/ifte
+x.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaseoptions.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/graphics/key
+val.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/geometry/geo
+metry.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/iftex/ifvt
+ex.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/math/pgf
+math.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/utilitie
+s/pgfrcs.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/utilit
+ies/pgfutil-common.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/utilit
+ies/pgfutil-latex.def)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/utilit
+ies/pgfrcs.code.tex
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/pgf.re
+vision.tex)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/utilitie
+s/pgfkeys.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/utilit
+ies/pgfkeys.code.tex
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/utilit
+ies/pgfkeyslibraryfiltered.code.tex)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmath.code.tex
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathutil.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathparser.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfunctions.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfunctions.basic.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfunctions.trigonometric.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfunctions.random.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfunctions.comparison.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfunctions.base.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfunctions.round.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfunctions.misc.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfunctions.integerarithmetics.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathcalc.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfmathfloat.code.tex)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/extsizes/siz
+e9.clo)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/basiclay
+er/pgfcore.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/graphics/gra
+phicx.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/graphics/gra
+phics.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/graphics/tri
+g.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/graphics-cfg
+/graphics.cfg)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/graphics-def
+/pdftex.def)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/systemla
+yer/pgfsys.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/system
+layer/pgfsys.code.tex
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/system
+layer/pgf.cfg)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/system
+layer/pgfsys-pdftex.def
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/system
+layer/pgfsys-common-pdf.def)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/system
+layer/pgfsyssoftpath.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/system
+layer/pgfsysprotocol.code.tex))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/xcolor/xcolo
+r.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/graphics-cfg
+/color.cfg)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/graphics/mat
+hcolor.ltx))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcore.code.tex
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/math/p
+gfint.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorepoints.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorepathconstruct.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorepathusage.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorescopes.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcoregraphicstate.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcoretransformations.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorequick.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcoreobjects.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorepathprocessing.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorearrows.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcoreshade.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcoreimage.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcoreexternal.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorelayers.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcoretransparency.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorepatterns.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/basicl
+ayer/pgfcorerdf.code.tex)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/utilitie
+s/xxcolor.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/base/atbegsh
+i-ltx.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/hyperref/hyp
+erref.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/kvsetkeys/kv
+setkeys.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/kvdefineke
+ys/kvdefinekeys.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pdfescape/
+pdfescape.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/ltxcmds/lt
+xcmds.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pdftexcmds
+/pdftexcmds.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/infwarerr/
+infwarerr.sty)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/hycolor/hyco
+lor.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/hyperref/nam
+eref.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/refcount/ref
+count.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/gettitlest
+ring/gettitlestring.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/kvoptions/kv
+options.sty)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/stringenc/
+stringenc.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/hyperref/pd1
+enc.def)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/intcalc/in
+tcalc.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/hyperref/pue
+nc.def)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/url/url.sty)
+
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/bitset/bit
+set.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/bigintcalc
+/bigintcalc.sty))
+
+Package hyperref Message: Stopped early.
+
+)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/hyperref/hpd
+ftex.def
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/rerunfileche
+ck/rerunfilecheck.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/uniquecoun
+ter/uniquecounter.sty)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaserequires.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasecompatibility.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasefont.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amsfonts/ams
+symb.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amsfonts/ams
+fonts.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/sansmathacce
+nt/sansmathaccent.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/koma-script/
+scrlfile.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/koma-script/
+scrlfile-hook.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/koma-script/
+scrlogo.sty)))))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasetranslator.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/translator/t
+ranslator.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasemisc.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasetwoscreens.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaseoverlay.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasetitle.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasesection.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaseframe.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaseverbatim.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaseframesize.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaseframecomponents.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasecolor.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasenotes.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasetoc.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasetemplates.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaseauxtemplates.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaseboxes.sty)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbaselocalstructure.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/tools/enumer
+ate.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasenavigation.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasenavigationsymbols.tex))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasetheorems.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amsmath/amsm
+ath.sty
+For additional information on amsmath, use the `?' option.
+
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amsmath/amst
+ext.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amsmath/amsg
+en.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amsmath/amsb
+sy.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amsmath/amso
+pn.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amscls/amsth
+m.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rbasethemes.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rthemedefault.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rfontthemedefault.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rcolorthemedefault.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+rinnerthemedefault.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamer/beame
+routerthemedefault.sty)))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamertheme-
+metropolis/beamerthememetropolis.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgfopts/pgfo
+pts.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamertheme-
+metropolis/beamerinnerthememetropolis.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/tools/calc.s
+ty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/frontend
+layer/tikz.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/basiclay
+er/pgf.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/module
+s/pgfmoduleshapes.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/module
+s/pgfmoduleplot.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/compatib
+ility/pgfcomp-version-0-65.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/compatib
+ility/pgfcomp-version-1-18.sty))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/pgf/utilitie
+s/pgffor.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/utilit
+ies/pgffor.code.tex))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/fronte
+ndlayer/tikz/tikz.code.tex
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/librar
+ies/pgflibraryplothandlers.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/module
+s/pgfmodulematrix.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/fronte
+ndlayer/tikz/libraries/tikzlibrarytopaths.code.tex))))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamertheme-
+metropolis/beamerouterthememetropolis.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamertheme-
+metropolis/beamercolorthememetropolis.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/beamertheme-
+metropolis/beamerfontthememetropolis.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/iftex/ifxe
+tex.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/iftex/iflu
+atex.sty)
+
+Package beamerthememetropolis Warning: You need to compile with XeLaTeX or LuaL
+aTeX to use the Fira fonts on input line 95.
+
+))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/booktabs/boo
+ktabs.sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/tools/array.
+sty)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/fronte
+ndlayer/tikz/libraries/tikzlibrarypositioning.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/librar
+ies/pgflibraryarrows.meta.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/fronte
+ndlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/librar
+ies/shapes/pgflibraryshapes.geometric.code.tex))
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/fronte
+ndlayer/tikz/libraries/tikzlibraryfit.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/fronte
+ndlayer/tikz/libraries/tikzlibrarybackgrounds.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/generic/pgf/fronte
+ndlayer/tikz/libraries/tikzlibrarycalc.code.tex)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/siunitx/siun
+itx.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/translations
+/translations.sty))
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\\' on input line 50.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\to' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\mu' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\mu' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\to' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\tau' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\tau' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 53.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 53.
+
+
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/l3backend/l3
+backend-pdftex.def) (./bnd_z_combination.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/context/base/mkii/
+supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg
+/epstopdf-base.sty
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/latexconfig/
+epstopdf-sys.cfg)) (./bnd_z_combination.out) (./bnd_z_combination.out)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/translator/t
+ranslator-basic-dictionary-English.dict)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/translator/t
+ranslator-bibliography-dictionary-English.dict)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/translator/t
+ranslator-environment-dictionary-English.dict)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/translator/t
+ranslator-months-dictionary-English.dict)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/translator/t
+ranslator-numbers-dictionary-English.dict)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/translator/t
+ranslator-theorem-dictionary-English.dict)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/translations
+/translations-basic-dictionary-english.trsl) (./bnd_z_combination.nav)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amsfonts/ums
+a.fd)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/amsfonts/ums
+b.fd)
+(/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/tex/latex/sansmathacce
+nt/ot1mathkerncmss.fd)
+[1{/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-var/fonts/map/pdftex/updm
+ap/pdftex.map}{/cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/en
+c/dvips/cm-super/cm-super-ts1.enc}]
+[2]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \hskip 9.24994pt
+(hyperref)                replaced by space on input line 138.
+
+
+[3 <../combination/output/plots/forest.pdf>]
+[4 <./figures/precision_budget.pdf>]
+[5 <../combination/output/plots/breakdown.pdf>]
+Overfull \vbox (2.63965pt too high) detected at line 212
+
+[6 <../combination/output/plots/universality.pdf>]
+[7 <../combination/output/plots/comparison.pdf>]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \hskip 9.24994pt
+(hyperref)                replaced by space on input line 228.
+
+
+Overfull \hbox (1.81879pt too wide) in paragraph at lines 275--275
+ [] 
+
+[8]
+[9]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \hskip 9.24994pt
+(hyperref)                replaced by space on input line 323.
+
+
+[10 <../z-mumu/output/v2/plots/datamc_SR_mass_fit_log.png>]
+[11 <./figures/mumu_fit_stability.pdf>]
+Overfull \vbox (1.76079pt too high) detected at line 414
+
+[12 <../z-tautau/output/plots/fit_SR_postfit.png>]
+[13 <../z-tautau/output/plots/step3_fakefactors.png>]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \hskip 9.24994pt
+(hyperref)                replaced by space on input line 459.
+
+
+[14]
+[15 <../combination/output/plots/sources.pdf>]
+[16 <../combination/output/plots/variations.pdf> <../combination/output/plots/l
+ikelihood_scan.pdf>] (./bnd_z_combination.vrb)
+[17]
+[18]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\translate ' on input line 644.
+
+
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 685--685
+[]|$\OML/cmm/m/it/6 ^^[[]=\OT1/mathkerncmss/m/sl/6 A\OT1/cmss/m/n/6 (60[]120)$ 
+$=
+
+[20]
+Overfull \vbox (3.44511pt too high) detected at line 739
+
+[21]
+[22]
+[23]
+[24] (./bnd_z_combination.aux) )
+(see the transcript file for additional information)</cvmfs/sft.cern.ch/lcg/ext
+ernal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></c
+vmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/amsfon
+ts/cmextra/cmex8.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmmi10.pfb></cvmfs/sft.cern.ch/lcg/external/texli
+ve/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></cvmfs/sft.cern.ch
+/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb>
+</cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi7.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi8.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/
+2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></cvmfs/sft.cern.ch/lc
+g/external/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></c
+vmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr5.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmr6.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></cvmfs/sft.cern.ch/lcg/exte
+rnal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></cvmfs/sf
+t.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr9.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmss10.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></cvmfs/sft.cern.ch/lcg/external
+/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></cvmfs/sft.c
+ern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss
+bx10.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmssi10.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></cvmfs/sft.cern.ch/lcg/exte
+rnal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></cvmfs/
+sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmssi9.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmsy10.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></cvmfs/sft.cern.ch/lcg/exte
+rnal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></cvmfs/s
+ft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmsy7.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmsy8.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></cvmfs/sft.cern.ch/lcg/externa
+l/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></cvmfs/sft.
+cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss06
+00.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-dist/fonts/type1/pub
+lic/cm-super/sfss0700.pfb></cvmfs/sft.cern.ch/lcg/external/texlive/2025/texmf-d
+ist/fonts/type1/public/cm-super/sfss0800.pfb>
+Output written on bnd_z_combination.pdf (24 pages, 801754 bytes).
+Transcript written on bnd_z_combination.log.

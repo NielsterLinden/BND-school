@@ -1,0 +1,44 @@
+- Category: Background normalisation
+  Impact: 0.0010472972754569
+  ImpactUp: 0.0010472972754569
+  ImpactDown: 0.0010472972754569
+- Category: Electron ID
+  Impact: 0.0046989342778522925
+  ImpactUp: 0.0046989342778522925
+  ImpactDown: 0.0046989342778522925
+- Category: Electron energy resolution
+  Impact: 0.0001296813606214324
+  ImpactUp: 0.0001296813606214324
+  ImpactDown: 0.0001296813606214324
+- Category: Electron energy scale
+  Impact: 2.9967686047485724e-06
+  ImpactUp: 2.9967686047485724e-06
+  ImpactDown: 2.9967686047485724e-06
+- Category: L1 prefiring
+  Impact: 0.004706639735784139
+  ImpactUp: 0.004706639735784139
+  ImpactDown: 0.004706639735784139
+- Category: Luminosity
+  Impact: 0.011916880768702039
+  ImpactUp: 0.011916880768702039
+  ImpactDown: 0.011916880768702039
+- Category: Pileup
+  Impact: 0.004412320322276768
+  ImpactUp: 0.004412320322276768
+  ImpactDown: 0.004412320322276768
+- Category: Signal modelling
+  Impact: 0.001971025969760588
+  ImpactUp: 0.001971025969760588
+  ImpactDown: 0.001971025969760588
+- Category: MC stat.
+  Impact: 0.005581050810243369
+  ImpactUp: 0.005581050810243369
+  ImpactDown: -0.005581050810243369
+- Category: Total syst.
+  Impact: 0.015551841954281732
+  ImpactUp: 0.015551841954281732
+  ImpactDown: -0.015551841954281732
+- Category: Stat unc.
+  Impact: .nan
+  ImpactUp: .nan
+  ImpactDown: .nan

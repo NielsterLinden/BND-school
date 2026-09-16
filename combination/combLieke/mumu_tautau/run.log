@@ -1,0 +1,27 @@
+Prepared mumu and tautau channel configs and generated/multifit.config
+PRELIMINARY REVIEW PENDING: Confirm common truth mass definition, lepton universality and event orthogonality
+POST-FIT ACCEPTANCE PENDING: Acceptance uncertainty deferred until the nominal MultiFit succeeds; follow channel post-fit prescriptions
+trex-fitter hw /project/atlas/Users/lgijsen/BND-school/combination/combLieke/mumu_tautau/generated/mumu.config
+trex-fitter hw /project/atlas/Users/lgijsen/BND-school/combination/combLieke/mumu_tautau/generated/tautau.config
+trex-fitter mwf /project/atlas/Users/lgijsen/BND-school/combination/combLieke/mumu_tautau/generated/multifit.config
+{
+  "observable": "Common per-flavour sigma(pp -> Z/gamma* -> ll), 60 < m_truth(ll) < 120 GeV, sqrt(s)=13 TeV, assuming lepton universality",
+  "reference_pb": 2000.0,
+  "mu_comb": 0.966833,
+  "sigma_pb": 1933.6660000000002,
+  "error_up_pb": 30.8434,
+  "error_down_pb": 30.129199999999997,
+  "fit_file": "/project/atlas/Users/lgijsen/BND-school/combination/combLieke/mumu_tautau/results/combLieke/Fits/combLieke.txt",
+  "validation": "Inspect logs, fit status, covariance quality, pulls and POI boundaries before quoting.",
+  "preliminary": true,
+  "review_pending": [
+    "Confirm common truth mass definition, lepton universality and event orthogonality"
+  ],
+  "uncertainty_scope": "in-fit only; acceptance fixed",
+  "acceptance_factors": {
+    "mumu": 1.0,
+    "tautau": 1.0
+  },
+  "acceptance_status": "pending_postfit",
+  "acceptance_note": "Nominal channel acceptance is included in the reference normalization. Acceptance uncertainty remains separate and must be propagated after the MultiFit, following channel prescriptions; no combined acceptance error or total has been assigned."
+}

@@ -1,0 +1,1482 @@
+-------///////                 ///////-------
+-------/////// IN PRUNING PLOT ///////-------
+-------///////                 ///////-------
+In Region : tautau_SR0
+ -> In Sample : DYtautau
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is shape only
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is kept
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is kept
+ --->>  TauFakeEle      is dropped
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is kept
+ --->>  PDF      is kept
+ --->>  PS_ISR      is kept
+ --->>  PS_FSR      is kept
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : DYtautau_nonfid
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is norm only
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is kept
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is dropped
+ --->>  TauFakeEle      is shape only
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is kept
+ --->>  PDF      is kept
+ --->>  PS_ISR      is kept
+ --->>  PS_FSR      is kept
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : DYee
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is norm only
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is dropped
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is dropped
+ --->>  TauID_DM1      is dropped
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is dropped
+ --->>  TauID_DM10      is dropped
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is dropped
+ --->>  TauTrigger_DM11      is shape only
+ --->>  TauES_DM11      is dropped
+ --->>  TauFakeEle      is kept
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : DYmumu
+ --->>  Lumi      is dropped
+ --->>  XS_DYll      is dropped
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is dropped
+ --->>  L1Prefiring      is dropped
+ --->>  TauID_DM0      is dropped
+ --->>  TauTrigger_DM0      is dropped
+ --->>  TauES_DM0      is dropped
+ --->>  TauID_DM1      is dropped
+ --->>  TauTrigger_DM1      is dropped
+ --->>  TauES_DM1      is dropped
+ --->>  TauID_DM10      is dropped
+ --->>  TauTrigger_DM10      is dropped
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is dropped
+ --->>  TauTrigger_DM11      is dropped
+ --->>  TauES_DM11      is dropped
+ --->>  TauFakeEle      is dropped
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is dropped
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : DYlowmass
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is norm only
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is dropped
+ --->>  TauID_DM10      is dropped
+ --->>  TauTrigger_DM10      is dropped
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is dropped
+ --->>  TauTrigger_DM11      is dropped
+ --->>  TauES_DM11      is dropped
+ --->>  TauFakeEle      is dropped
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is dropped
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : WJets
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is norm only
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is norm only
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is dropped
+ --->>  TauTrigger_DM11      is dropped
+ --->>  TauES_DM11      is dropped
+ --->>  TauFakeEle      is kept
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is dropped
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : TTbar
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is norm only
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is shape only
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is kept
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is shape only
+ --->>  TauFakeEle      is kept
+ --->>  TauFakeMu      is shape only
+ --->>  MET_Unclustered      is shape only
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : SingleTop
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is norm only
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is shape only
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is shape only
+ --->>  TauFakeEle      is kept
+ --->>  TauFakeMu      is shape only
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : WW
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is norm only
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is kept
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is shape only
+ --->>  TauFakeEle      is kept
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is shape only
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : WZ
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is norm only
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is dropped
+ --->>  TauFakeEle      is kept
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : ZZ
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is norm only
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is dropped
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is kept
+ --->>  TauFakeEle      is dropped
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : Fakes
+ --->>  Lumi      is not present
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is not present
+ --->>  L1Prefiring      is not present
+ --->>  TauID_DM0      is not present
+ --->>  TauTrigger_DM0      is not present
+ --->>  TauES_DM0      is not present
+ --->>  TauID_DM1      is not present
+ --->>  TauTrigger_DM1      is not present
+ --->>  TauES_DM1      is not present
+ --->>  TauID_DM10      is not present
+ --->>  TauTrigger_DM10      is not present
+ --->>  TauES_DM10      is not present
+ --->>  TauID_DM11      is not present
+ --->>  TauTrigger_DM11      is not present
+ --->>  TauES_DM11      is not present
+ --->>  TauFakeEle      is not present
+ --->>  TauFakeMu      is not present
+ --->>  MET_Unclustered      is not present
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is kept
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is kept
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+In Region : tautau_SR1
+ -> In Sample : DYtautau
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is kept
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is kept
+ --->>  TauFakeEle      is dropped
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is kept
+ --->>  PDF      is kept
+ --->>  PS_ISR      is kept
+ --->>  PS_FSR      is kept
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : DYtautau_nonfid
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is norm only
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is shape only
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is kept
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is kept
+ --->>  TauFakeEle      is shape only
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is kept
+ --->>  PDF      is kept
+ --->>  PS_ISR      is kept
+ --->>  PS_FSR      is kept
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : DYee
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is norm only
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is dropped
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is dropped
+ --->>  TauID_DM1      is dropped
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is dropped
+ --->>  TauID_DM10      is dropped
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is dropped
+ --->>  TauTrigger_DM11      is dropped
+ --->>  TauES_DM11      is dropped
+ --->>  TauFakeEle      is kept
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : DYmumu
+ --->>  Lumi      is dropped
+ --->>  XS_DYll      is dropped
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is dropped
+ --->>  L1Prefiring      is dropped
+ --->>  TauID_DM0      is dropped
+ --->>  TauTrigger_DM0      is dropped
+ --->>  TauES_DM0      is dropped
+ --->>  TauID_DM1      is dropped
+ --->>  TauTrigger_DM1      is dropped
+ --->>  TauES_DM1      is dropped
+ --->>  TauID_DM10      is dropped
+ --->>  TauTrigger_DM10      is dropped
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is dropped
+ --->>  TauTrigger_DM11      is dropped
+ --->>  TauES_DM11      is dropped
+ --->>  TauFakeEle      is dropped
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is dropped
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : DYlowmass
+ --->>  Lumi      is dropped
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is dropped
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is dropped
+ --->>  L1Prefiring      is dropped
+ --->>  TauID_DM0      is dropped
+ --->>  TauTrigger_DM0      is dropped
+ --->>  TauES_DM0      is dropped
+ --->>  TauID_DM1      is dropped
+ --->>  TauTrigger_DM1      is dropped
+ --->>  TauES_DM1      is dropped
+ --->>  TauID_DM10      is dropped
+ --->>  TauTrigger_DM10      is dropped
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is dropped
+ --->>  TauTrigger_DM11      is dropped
+ --->>  TauES_DM11      is dropped
+ --->>  TauFakeEle      is dropped
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is dropped
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : WJets
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is norm only
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is norm only
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is dropped
+ --->>  TauID_DM0      is dropped
+ --->>  TauTrigger_DM0      is dropped
+ --->>  TauES_DM0      is dropped
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is dropped
+ --->>  TauTrigger_DM10      is dropped
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is dropped
+ --->>  TauTrigger_DM11      is dropped
+ --->>  TauES_DM11      is dropped
+ --->>  TauFakeEle      is dropped
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is dropped
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : TTbar
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is norm only
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is norm only
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is norm only
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is norm only
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is norm only
+ --->>  TauFakeEle      is kept
+ --->>  TauFakeMu      is shape only
+ --->>  MET_Unclustered      is norm only
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : SingleTop
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is norm only
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is dropped
+ --->>  TauFakeEle      is kept
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : WW
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is norm only
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is kept
+ --->>  TauFakeEle      is kept
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : WZ
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is norm only
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is kept
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is kept
+ --->>  TauFakeEle      is kept
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : ZZ
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is norm only
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is kept
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is kept
+ --->>  TauFakeEle      is dropped
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : Fakes
+ --->>  Lumi      is not present
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is not present
+ --->>  L1Prefiring      is not present
+ --->>  TauID_DM0      is not present
+ --->>  TauTrigger_DM0      is not present
+ --->>  TauES_DM0      is not present
+ --->>  TauID_DM1      is not present
+ --->>  TauTrigger_DM1      is not present
+ --->>  TauES_DM1      is not present
+ --->>  TauID_DM10      is not present
+ --->>  TauTrigger_DM10      is not present
+ --->>  TauES_DM10      is not present
+ --->>  TauID_DM11      is not present
+ --->>  TauTrigger_DM11      is not present
+ --->>  TauES_DM11      is not present
+ --->>  TauFakeEle      is not present
+ --->>  TauFakeMu      is not present
+ --->>  MET_Unclustered      is not present
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is kept
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is kept
+ --->>  FakeClosure_tautau_c1_lo      is kept
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+In Region : tautau_SR2
+ -> In Sample : DYtautau
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is kept
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is shape only
+ --->>  TauFakeEle      is dropped
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is kept
+ --->>  PDF      is kept
+ --->>  PS_ISR      is kept
+ --->>  PS_FSR      is kept
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : DYtautau_nonfid
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is norm only
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is kept
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is kept
+ --->>  TauFakeEle      is kept
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is kept
+ --->>  PDF      is kept
+ --->>  PS_ISR      is kept
+ --->>  PS_FSR      is kept
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : DYee
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is norm only
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is dropped
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is dropped
+ --->>  TauID_DM1      is dropped
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is dropped
+ --->>  TauID_DM10      is dropped
+ --->>  TauTrigger_DM10      is shape only
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is dropped
+ --->>  TauTrigger_DM11      is dropped
+ --->>  TauES_DM11      is dropped
+ --->>  TauFakeEle      is kept
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : DYmumu
+ --->>  Lumi      is dropped
+ --->>  XS_DYll      is dropped
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is dropped
+ --->>  L1Prefiring      is dropped
+ --->>  TauID_DM0      is dropped
+ --->>  TauTrigger_DM0      is dropped
+ --->>  TauES_DM0      is dropped
+ --->>  TauID_DM1      is dropped
+ --->>  TauTrigger_DM1      is dropped
+ --->>  TauES_DM1      is dropped
+ --->>  TauID_DM10      is dropped
+ --->>  TauTrigger_DM10      is dropped
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is dropped
+ --->>  TauTrigger_DM11      is dropped
+ --->>  TauES_DM11      is dropped
+ --->>  TauFakeEle      is dropped
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is dropped
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : DYlowmass
+ --->>  Lumi      is dropped
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is dropped
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is dropped
+ --->>  L1Prefiring      is dropped
+ --->>  TauID_DM0      is dropped
+ --->>  TauTrigger_DM0      is dropped
+ --->>  TauES_DM0      is dropped
+ --->>  TauID_DM1      is dropped
+ --->>  TauTrigger_DM1      is dropped
+ --->>  TauES_DM1      is dropped
+ --->>  TauID_DM10      is dropped
+ --->>  TauTrigger_DM10      is dropped
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is dropped
+ --->>  TauTrigger_DM11      is dropped
+ --->>  TauES_DM11      is dropped
+ --->>  TauFakeEle      is dropped
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is dropped
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : WJets
+ --->>  Lumi      is dropped
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is dropped
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is dropped
+ --->>  Pileup      is dropped
+ --->>  L1Prefiring      is dropped
+ --->>  TauID_DM0      is dropped
+ --->>  TauTrigger_DM0      is dropped
+ --->>  TauES_DM0      is dropped
+ --->>  TauID_DM1      is dropped
+ --->>  TauTrigger_DM1      is dropped
+ --->>  TauES_DM1      is dropped
+ --->>  TauID_DM10      is dropped
+ --->>  TauTrigger_DM10      is dropped
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is dropped
+ --->>  TauTrigger_DM11      is dropped
+ --->>  TauES_DM11      is dropped
+ --->>  TauFakeEle      is dropped
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is dropped
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : TTbar
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is norm only
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is kept
+ --->>  TauFakeEle      is kept
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : SingleTop
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is norm only
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is kept
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is dropped
+ --->>  TauFakeEle      is kept
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : WW
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is norm only
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is dropped
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is dropped
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is dropped
+ --->>  TauFakeEle      is kept
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : WZ
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is norm only
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is kept
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is kept
+ --->>  TauFakeEle      is shape only
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : ZZ
+ --->>  Lumi      is norm only
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is norm only
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  TauID_DM0      is kept
+ --->>  TauTrigger_DM0      is kept
+ --->>  TauES_DM0      is kept
+ --->>  TauID_DM1      is kept
+ --->>  TauTrigger_DM1      is kept
+ --->>  TauES_DM1      is dropped
+ --->>  TauID_DM10      is kept
+ --->>  TauTrigger_DM10      is kept
+ --->>  TauES_DM10      is dropped
+ --->>  TauID_DM11      is kept
+ --->>  TauTrigger_DM11      is kept
+ --->>  TauES_DM11      is dropped
+ --->>  TauFakeEle      is dropped
+ --->>  TauFakeMu      is dropped
+ --->>  MET_Unclustered      is kept
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is not present
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is not present
+ --->>  FakeClosure_tautau_c2_lo      is not present
+ -> In Sample : Fakes
+ --->>  Lumi      is not present
+ --->>  XS_DYll      is not present
+ --->>  XS_DYtautau_nonfid      is not present
+ --->>  XS_DYlowmass      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_SingleTop      is not present
+ --->>  XS_WW      is not present
+ --->>  XS_WZ      is not present
+ --->>  XS_ZZ      is not present
+ --->>  MCStatNorm_WJets_tautau      is not present
+ --->>  Pileup      is not present
+ --->>  L1Prefiring      is not present
+ --->>  TauID_DM0      is not present
+ --->>  TauTrigger_DM0      is not present
+ --->>  TauES_DM0      is not present
+ --->>  TauID_DM1      is not present
+ --->>  TauTrigger_DM1      is not present
+ --->>  TauES_DM1      is not present
+ --->>  TauID_DM10      is not present
+ --->>  TauTrigger_DM10      is not present
+ --->>  TauES_DM10      is not present
+ --->>  TauID_DM11      is not present
+ --->>  TauTrigger_DM11      is not present
+ --->>  TauES_DM11      is not present
+ --->>  TauFakeEle      is not present
+ --->>  TauFakeMu      is not present
+ --->>  MET_Unclustered      is not present
+ --->>  QCDScale      is not present
+ --->>  PDF      is not present
+ --->>  PS_ISR      is not present
+ --->>  PS_FSR      is not present
+ --->>  FakeOSSS_tautau_c0      is not present
+ --->>  FakeOSSS_tautau_c1      is not present
+ --->>  FakeOSSS_tautau_c2      is kept
+ --->>  FakeClosure_tautau_c0_hi      is not present
+ --->>  FakeClosure_tautau_c1_hi      is not present
+ --->>  FakeClosure_tautau_c1_lo      is not present
+ --->>  FakeClosure_tautau_c2_hi      is kept
+ --->>  FakeClosure_tautau_c2_lo      is kept

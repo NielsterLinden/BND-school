@@ -1,0 +1,106 @@
+{
+  "verified_date": "2026-09-16",
+  "references": [
+    {
+      "experiment": "ATLAS",
+      "channel": "ee",
+      "year": 2016,
+      "source": "https://arxiv.org/abs/1603.09222",
+      "location": "Table 2",
+      "original_mass_window_gev": [
+        66,
+        116
+      ],
+      "original_value_pb": 1987,
+      "uncertainty_components_pb": [
+        11,
+        41,
+        42
+      ],
+      "window_scale": 1.01425,
+      "value_pb": 2015.3147500000002,
+      "error_pb": 60.56694742906399
+    },
+    {
+      "experiment": "ATLAS",
+      "channel": "mumu",
+      "year": 2016,
+      "source": "https://arxiv.org/abs/1603.09222",
+      "location": "Table 2",
+      "original_mass_window_gev": [
+        66,
+        116
+      ],
+      "original_value_pb": 1977,
+      "uncertainty_components_pb": [
+        9,
+        41,
+        42
+      ],
+      "window_scale": 1.01425,
+      "value_pb": 2005.17225,
+      "error_pb": 60.22629822905439
+    },
+    {
+      "experiment": "ATLAS",
+      "channel": "combined",
+      "year": 2016,
+      "source": "https://arxiv.org/abs/1603.09222",
+      "location": "Table 3",
+      "original_mass_window_gev": [
+        66,
+        116
+      ],
+      "original_value_pb": 1981,
+      "uncertainty_components_pb": [
+        7,
+        38,
+        42
+      ],
+      "window_scale": 1.01425,
+      "value_pb": 2009.22925,
+      "error_pb": 57.88338167870378
+    },
+    {
+      "experiment": "CMS",
+      "channel": "combined",
+      "year": 2025,
+      "source": "https://arxiv.org/abs/2408.03744",
+      "location": "Published abstract",
+      "original_mass_window_gev": [
+        60,
+        120
+      ],
+      "original_value_pb": 1952,
+      "uncertainty_components_pb": [
+        4,
+        18,
+        45
+      ],
+      "window_scale": 1.0,
+      "value_pb": 1952,
+      "error_pb": 48.63126566315131
+    },
+    {
+      "experiment": "CMS",
+      "channel": "tautau",
+      "year": 2018,
+      "source": "https://arxiv.org/abs/1801.03535",
+      "location": "Published abstract",
+      "original_mass_window_gev": [
+        60,
+        120
+      ],
+      "original_value_pb": 1848,
+      "uncertainty_components_pb": [
+        12,
+        67
+      ],
+      "window_scale": 1.0,
+      "value_pb": 1848,
+      "error_pb": 68.06614430096654
+    }
+  ],
+  "window_conversion": "ATLAS conversion 1.01425 is the existing analysis LHE mass-window ratio from combination/comb/plots.py, not a number quoted in the ATLAS paper; no extra conversion uncertainty assigned.",
+  "cms_tautau_note": "Use published 12 pb statistical and 67 pb combined systematic/luminosity uncertainties."
+}

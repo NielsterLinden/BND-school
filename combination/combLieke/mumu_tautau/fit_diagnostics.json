@@ -1,0 +1,862 @@
+{
+  "status": 160,
+  "covariance_quality": 3,
+  "edm": 2.187794345913357e-06,
+  "min_nll": -4485.72317978907,
+  "status_history": [
+    {
+      "label": "MINIMIZE",
+      "code": 0
+    },
+    {
+      "label": "HESSE",
+      "code": 0
+    },
+    {
+      "label": "MINOS",
+      "code": 160
+    }
+  ],
+  "parameters": [
+    {
+      "name": "alpha_AlphaS",
+      "value": 0.01059646697168108,
+      "hesse_error": 0.9916618760018958,
+      "minos_up": 0.9982674344809267,
+      "minos_down": -0.9982876548117754,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_FakeClosure_tautau_c0_hi",
+      "value": 0.03582318767147809,
+      "hesse_error": 0.9474437153610806,
+      "minos_up": 0.9541858898434326,
+      "minos_down": -0.9527097116612414,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_FakeClosure_tautau_c1_hi",
+      "value": -0.1713929247894604,
+      "hesse_error": 0.5038484248755222,
+      "minos_up": 0.5236819286556764,
+      "minos_down": -0.4993974810871481,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_FakeClosure_tautau_c1_lo",
+      "value": 0.699353510756818,
+      "hesse_error": 0.826911677065669,
+      "minos_up": 0.8232397281049566,
+      "minos_down": -0.817001762129198,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_FakeClosure_tautau_c2_hi",
+      "value": 1.446993590552931,
+      "hesse_error": 0.827850816462049,
+      "minos_up": 0.8275205034683332,
+      "minos_down": -0.8458242538946893,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_FakeClosure_tautau_c2_lo",
+      "value": 0.05673170382425503,
+      "hesse_error": 0.9997144442607855,
+      "minos_up": 0.9856448410199008,
+      "minos_down": -0.9819466970700913,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_FakeMethod_mumu",
+      "value": 0.08663327942972579,
+      "hesse_error": 0.9682702918090007,
+      "minos_up": 0.9900627498907064,
+      "minos_down": -0.9860781041523238,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_FakeOSSS_tautau_c0",
+      "value": 0.08158062630420004,
+      "hesse_error": 0.5919497122093587,
+      "minos_up": 0.5902148565462466,
+      "minos_down": -0.5951430742351396,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_FakeOSSS_tautau_c1",
+      "value": 0.4016479493633616,
+      "hesse_error": 0.9231128488684409,
+      "minos_up": 0.9322162487548936,
+      "minos_down": -0.9212659004096052,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_FakeOSSS_tautau_c2",
+      "value": 0.2448235196795825,
+      "hesse_error": 0.9775889533615423,
+      "minos_up": 0.9921182967424425,
+      "minos_down": -0.9835309745077385,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_FakeStat_mumu",
+      "value": 0.04395383868833033,
+      "hesse_error": 0.9864925746548816,
+      "minos_up": 0.9966712133838418,
+      "minos_down": -0.9960468677880866,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_L1Prefiring",
+      "value": 0.006838077275028293,
+      "hesse_error": 0.992097698920612,
+      "minos_up": 0.99550779618511,
+      "minos_down": -0.995753798833952,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_Lumi",
+      "value": 0.04029802990373183,
+      "hesse_error": 0.9897612379071845,
+      "minos_up": 0.9930152063279563,
+      "minos_down": -0.9924437817228986,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_MCStatNorm_WJets_tautau",
+      "value": -0.4951128230451915,
+      "hesse_error": 0.4942331561933536,
+      "minos_up": 0.5271712572920547,
+      "minos_down": -0.5696898476693044,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_MET_Unclustered",
+      "value": -0.2250133778439141,
+      "hesse_error": 0.8958945549403945,
+      "minos_up": 0.902768349670561,
+      "minos_down": -0.8997490171361359,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_MuonID",
+      "value": 0.0527704028158711,
+      "hesse_error": 0.9885025691431548,
+      "minos_up": 0.9952693950494674,
+      "minos_down": -0.995099165447892,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_MuonIso",
+      "value": 0.04316907104837306,
+      "hesse_error": 0.8899588848140148,
+      "minos_up": 0.8946350441649571,
+      "minos_down": -0.8927888691018286,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_MuonReco",
+      "value": -0.001907814512101073,
+      "hesse_error": 0.9974943497603834,
+      "minos_up": 0.9950631538587182,
+      "minos_down": -0.9946850289931979,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_MuonRes",
+      "value": 0.3786483909076263,
+      "hesse_error": 0.1118544975391708,
+      "minos_up": 0.1122888474600139,
+      "minos_down": -0.1119675837628736,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_MuonScale",
+      "value": -0.479057775050558,
+      "hesse_error": 0.1299635676134593,
+      "minos_up": 0.129939927823946,
+      "minos_down": -0.1298871109648541,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_MuonTrigger",
+      "value": 0.0246095931632844,
+      "hesse_error": 0.9662867378422337,
+      "minos_up": 0.9724576844440947,
+      "minos_down": -0.9725530629366611,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_PDF",
+      "value": 0.5116969687941293,
+      "hesse_error": 0.9094251943581368,
+      "minos_up": 0.9150458706166733,
+      "minos_down": -0.9168173924290421,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_PS_FSR",
+      "value": 0.180720765601655,
+      "hesse_error": 0.5636189526130824,
+      "minos_up": 0.5692802801519544,
+      "minos_down": -0.5620694148482958,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_PS_ISR",
+      "value": 0.6369317812037565,
+      "hesse_error": 0.8879525277579076,
+      "minos_up": 0.8943813796481913,
+      "minos_down": -0.8941777400994002,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_Pileup",
+      "value": 0.3007429698990029,
+      "hesse_error": 0.6617291797989662,
+      "minos_up": 0.6575955158935332,
+      "minos_down": -0.665581615386595,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_QCDScale",
+      "value": 0.803790137607009,
+      "hesse_error": 0.6909047940600536,
+      "minos_up": 0.6938316899657986,
+      "minos_down": -0.6890751814576077,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_SigModel_mumu",
+      "value": 0.6571164639237089,
+      "hesse_error": 0.127046830924104,
+      "minos_up": 0.1267208657007149,
+      "minos_down": -0.1269031737118743,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_TauES_DM0",
+      "value": -0.3721217228891281,
+      "hesse_error": 0.9432917717446883,
+      "minos_up": 0.9529138308637528,
+      "minos_down": -0.9452680345786783,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_TauES_DM1",
+      "value": -0.3644997217827851,
+      "hesse_error": 0.9081370378182889,
+      "minos_up": 0.9243924048587949,
+      "minos_down": -0.9035284240066597,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_TauES_DM10",
+      "value": -0.2441516604286232,
+      "hesse_error": 0.9882421368618065,
+      "minos_up": 0.9949329045934686,
+      "minos_down": -0.9936695999917071,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_TauES_DM11",
+      "value": 0.01984820271119049,
+      "hesse_error": 0.9915215009699564,
+      "minos_up": 0.9980432534405351,
+      "minos_down": -0.9979345276635361,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_TauFakeEle",
+      "value": -0.03383004962887708,
+      "hesse_error": 0.9937908421176063,
+      "minos_up": 0.9991622260987775,
+      "minos_down": -0.9984520018493733,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_TauFakeMu",
+      "value": 0.0008874729360923593,
+      "hesse_error": 0.9933596228503534,
+      "minos_up": 1.000000295932267,
+      "minos_down": -1.000001628543195,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_TauID_DM0",
+      "value": 0.2722146335903612,
+      "hesse_error": 0.7639747934744736,
+      "minos_up": 0.7745858056987396,
+      "minos_down": -0.7463865356002607,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_TauID_DM1",
+      "value": 0.3421587455429165,
+      "hesse_error": 0.8733499910806622,
+      "minos_up": 0.8880443173756526,
+      "minos_down": -0.8640023814944588,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_TauID_DM10",
+      "value": -0.09174678443811407,
+      "hesse_error": 0.841667699083495,
+      "minos_up": 0.8565769991038309,
+      "minos_down": -0.8337168396882393,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_TauID_DM11",
+      "value": 0.1479258218001238,
+      "hesse_error": 0.9647811706480283,
+      "minos_up": 0.9739927767112804,
+      "minos_down": -0.970732782100658,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_TauTrigger_DM0",
+      "value": 0.2355953007710037,
+      "hesse_error": 0.9674969469860246,
+      "minos_up": 0.9802502987782085,
+      "minos_down": -0.9731873605021947,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_TauTrigger_DM1",
+      "value": 0.2203885789447739,
+      "hesse_error": 0.9520344843734903,
+      "minos_up": 0.96450199404386,
+      "minos_down": -0.9565844773584247,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_TauTrigger_DM10",
+      "value": 0.1092216631187474,
+      "hesse_error": 0.9735223056803536,
+      "minos_up": 0.9821951669638437,
+      "minos_down": -0.9800515325259349,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_TauTrigger_DM11",
+      "value": 0.07444120764436428,
+      "hesse_error": 0.9875672990737696,
+      "minos_up": 0.9952076967367052,
+      "minos_down": -0.9937592788375901,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_XS_DYll",
+      "value": -0.00676952108656129,
+      "hesse_error": 0.9931499739799561,
+      "minos_up": 0.9996453399222793,
+      "minos_down": -0.99964331453082,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_XS_DYlowmass",
+      "value": -0.005371573298879241,
+      "hesse_error": 0.9935302953966304,
+      "minos_up": 0.9999846876527412,
+      "minos_down": -0.9998998815266742,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_XS_DYtautau",
+      "value": 0.1625299783111913,
+      "hesse_error": 0.9715975115738291,
+      "minos_up": 0.9823101237623882,
+      "minos_down": -0.9792508990485315,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_XS_DYtautau_nonfid",
+      "value": -0.1040929443867435,
+      "hesse_error": 0.9569176928218179,
+      "minos_up": 0.9629983887429971,
+      "minos_down": -0.9613302544001254,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_XS_SingleTop",
+      "value": 0.01082570919724875,
+      "hesse_error": 0.9915189483503621,
+      "minos_up": 0.9988169392993697,
+      "minos_down": -0.9985869334025377,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_XS_TTbar",
+      "value": 0.1142433655061613,
+      "hesse_error": 0.9371650477854581,
+      "minos_up": 0.9464130467182171,
+      "minos_down": -0.944739274735796,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_XS_WJets",
+      "value": -0.03821591291463432,
+      "hesse_error": 0.996277482193269,
+      "minos_up": 1.000386503011472,
+      "minos_down": -0.9999582316434229,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_XS_WW",
+      "value": 0.02218497252053149,
+      "hesse_error": 0.9905345356778751,
+      "minos_up": 0.9981420076420533,
+      "minos_down": -0.99834507788858,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_XS_WZ",
+      "value": 0.03226847160785612,
+      "hesse_error": 0.9917208492120212,
+      "minos_up": 1.000330387274098,
+      "minos_down": -0.9994748829973308,
+      "at_boundary": false
+    },
+    {
+      "name": "alpha_XS_ZZ",
+      "value": 0.01407747177208601,
+      "hesse_error": 0.9926114137580349,
+      "minos_up": 0.9997613982066099,
+      "minos_down": -1.000076458686141,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_mumu_SR_bin_0",
+      "value": 1.005431546106693,
+      "hesse_error": 0.004850944016266068,
+      "minos_up": 0.004874575781864728,
+      "minos_down": -0.004852712233958716,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_mumu_SR_bin_1",
+      "value": 0.9993936719109261,
+      "hesse_error": 0.004021562647030408,
+      "minos_up": 0.004032264012210708,
+      "minos_down": -0.00402082732109194,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_mumu_SR_bin_10",
+      "value": 1.001468564102574,
+      "hesse_error": 0.005320074149657072,
+      "minos_up": 0.00534377197003252,
+      "minos_down": -0.005316018899060851,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_mumu_SR_bin_11",
+      "value": 1.005018575964941,
+      "hesse_error": 0.006721818370000743,
+      "minos_up": 0.006756268949141104,
+      "minos_down": -0.006713451809090955,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_mumu_SR_bin_2",
+      "value": 0.9970948178808291,
+      "hesse_error": 0.003311111102705322,
+      "minos_up": 0.003321483390024412,
+      "minos_down": -0.003311805176582355,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_mumu_SR_bin_3",
+      "value": 0.9948899460254665,
+      "hesse_error": 0.00233391529084559,
+      "minos_up": 0.00233899430052214,
+      "minos_down": -0.002334499099731838,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_mumu_SR_bin_4",
+      "value": 1.001496243368091,
+      "hesse_error": 0.001741560923251118,
+      "minos_up": 0.001745341730833627,
+      "minos_down": -0.00174328003916034,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_mumu_SR_bin_5",
+      "value": 1.000025637976967,
+      "hesse_error": 0.001045174303402341,
+      "minos_up": 0.001049208790801548,
+      "minos_down": -0.001048802338397516,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_mumu_SR_bin_6",
+      "value": 1.000026345230266,
+      "hesse_error": 0.0008089661534636527,
+      "minos_up": 0.000812166972262442,
+      "minos_down": -0.0008119227869127086,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_mumu_SR_bin_7",
+      "value": 0.9999466784931478,
+      "hesse_error": 0.002252567630687929,
+      "minos_up": 0.002262714600418007,
+      "minos_down": -0.002259474584804913,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_mumu_SR_bin_8",
+      "value": 0.998548944713081,
+      "hesse_error": 0.002454766240312878,
+      "minos_up": 0.00246072743187234,
+      "minos_down": -0.00245462888377261,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_mumu_SR_bin_9",
+      "value": 1.002142500487802,
+      "hesse_error": 0.003853785152388545,
+      "minos_up": 0.00386612406727349,
+      "minos_down": -0.003853237075717765,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR0_bin_0",
+      "value": 0.9825509092748133,
+      "hesse_error": 0.01932541103170893,
+      "minos_up": 0.01944898948212038,
+      "minos_down": -0.019222620078221,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR0_bin_1",
+      "value": 0.9981300417639702,
+      "hesse_error": 0.01434858994494742,
+      "minos_up": 0.01441864140851585,
+      "minos_down": -0.01429272211916414,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR0_bin_2",
+      "value": 1.003742957440824,
+      "hesse_error": 0.009030242523373366,
+      "minos_up": 0.009061371921682515,
+      "minos_down": -0.009006329124793612,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR0_bin_3",
+      "value": 1.006191314304527,
+      "hesse_error": 0.009114936348789238,
+      "minos_up": 0.009146269148649066,
+      "minos_down": -0.009092177582458885,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR0_bin_4",
+      "value": 0.9973886158305786,
+      "hesse_error": 0.01089907117487693,
+      "minos_up": 0.0109441861583257,
+      "minos_down": -0.01086264874364763,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR0_bin_5",
+      "value": 1.003982491533299,
+      "hesse_error": 0.01028944133910981,
+      "minos_up": 0.01031919213687763,
+      "minos_down": -0.0102655071010504,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR0_bin_6",
+      "value": 0.9905956860596443,
+      "hesse_error": 0.009855639833963925,
+      "minos_up": 0.00989397536778395,
+      "minos_down": -0.009824446987351155,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR1_bin_0",
+      "value": 0.8364698807750383,
+      "hesse_error": 0.399486830855091,
+      "minos_up": 0.472187377308117,
+      "minos_down": -0.3422042462471415,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR1_bin_1",
+      "value": 0.975892288583745,
+      "hesse_error": 0.08131037400862162,
+      "minos_up": 0.08391464944406575,
+      "minos_down": -0.07910740790175391,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR1_bin_10",
+      "value": 0.9842883796009658,
+      "hesse_error": 0.1752028002525828,
+      "minos_up": 0.1861593249818446,
+      "minos_down": -0.1664109474037052,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR1_bin_11",
+      "value": 0.6637319563149897,
+      "hesse_error": 0.3886538576223649,
+      "minos_up": 0.4689353749997466,
+      "minos_down": -0.3222011777989121,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR1_bin_12",
+      "value": 0.6926841573439921,
+      "hesse_error": 0.3507307076274557,
+      "minos_up": 0.4178241832148027,
+      "minos_down": -0.2959937568170266,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR1_bin_13",
+      "value": 1.124594168430575,
+      "hesse_error": 0.293906804671826,
+      "minos_up": 0.3232746318387079,
+      "minos_down": -0.2713288693731916,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR1_bin_2",
+      "value": 1.04771722506121,
+      "hesse_error": 0.05444994477704035,
+      "minos_up": 0.05555641638517728,
+      "minos_down": -0.0535779445586409,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR1_bin_3",
+      "value": 1.026477715133851,
+      "hesse_error": 0.04908988805592696,
+      "minos_up": 0.0500010311016395,
+      "minos_down": -0.04834191225551728,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR1_bin_4",
+      "value": 1.044623815811774,
+      "hesse_error": 0.04219390809168944,
+      "minos_up": 0.0427420434118185,
+      "minos_down": -0.04180158868980619,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR1_bin_5",
+      "value": 0.999283558639419,
+      "hesse_error": 0.03357911223964832,
+      "minos_up": 0.03401374128674014,
+      "minos_down": -0.03322458260045352,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR1_bin_6",
+      "value": 0.9892173839593047,
+      "hesse_error": 0.02946819693108432,
+      "minos_up": 0.0298176489799201,
+      "minos_down": -0.02918239298794149,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR1_bin_7",
+      "value": 0.9961174386202569,
+      "hesse_error": 0.02765155210611414,
+      "minos_up": 0.02797669997667174,
+      "minos_down": -0.02740586045447349,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR1_bin_8",
+      "value": 1.010508693914194,
+      "hesse_error": 0.04632124464892917,
+      "minos_up": 0.04721354428690694,
+      "minos_down": -0.0455987655003755,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR1_bin_9",
+      "value": 0.9986105728616848,
+      "hesse_error": 0.06510382629819217,
+      "minos_up": 0.06674559362441079,
+      "minos_down": -0.06374489721628349,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR2_bin_0",
+      "value": 1.345329182130018e-06,
+      "hesse_error": 48363.29876407055,
+      "minos_up": 50386.21320485449,
+      "minos_down": -1.345329182130018e-06,
+      "at_boundary": true
+    },
+    {
+      "name": "gamma_stat_tautau_SR2_bin_1",
+      "value": 0.9447219631783091,
+      "hesse_error": 0.114229028710987,
+      "minos_up": 0.1195397802797191,
+      "minos_down": -0.1097704679943524,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR2_bin_10",
+      "value": 1.341330685219237,
+      "hesse_error": 0.3470858240615521,
+      "minos_up": 0.3852579343042788,
+      "minos_down": -0.31816317819476,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR2_bin_11",
+      "value": 0.8938544333831633,
+      "hesse_error": 0.2655038302750526,
+      "minos_up": 0.2959635496835485,
+      "minos_down": -0.2406211187734445,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR2_bin_12",
+      "value": 0.1975486361879777,
+      "hesse_error": 0.3525320094818467,
+      "minos_up": 0.6150859424034972,
+      "minos_down": -0.1816479609533315,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR2_bin_13",
+      "value": 0.9350843772092507,
+      "hesse_error": 0.3354712101659901,
+      "minos_up": 0.3812895946278788,
+      "minos_down": -0.2987933936080824,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR2_bin_2",
+      "value": 0.9992911298922048,
+      "hesse_error": 0.05600811017017149,
+      "minos_up": 0.0572714150456922,
+      "minos_down": -0.05496331049792087,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR2_bin_3",
+      "value": 1.031351226609708,
+      "hesse_error": 0.03385390727430743,
+      "minos_up": 0.0343188992542816,
+      "minos_down": -0.0335042707476032,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR2_bin_4",
+      "value": 0.9953748572508763,
+      "hesse_error": 0.02598254594244648,
+      "minos_up": 0.02626801928533581,
+      "minos_down": -0.02577185191255059,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR2_bin_5",
+      "value": 0.9700306610069872,
+      "hesse_error": 0.02892538746931184,
+      "minos_up": 0.02929032898385054,
+      "minos_down": -0.02863746380659024,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR2_bin_6",
+      "value": 0.9952971394511164,
+      "hesse_error": 0.04394432328939474,
+      "minos_up": 0.04474751612089498,
+      "minos_down": -0.04328662223070433,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR2_bin_7",
+      "value": 1.184427262100251,
+      "hesse_error": 0.09489753993638017,
+      "minos_up": 0.09808715814048914,
+      "minos_down": -0.09254865463205361,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR2_bin_8",
+      "value": 1.183433235083139,
+      "hesse_error": 0.1570822418208828,
+      "minos_up": 0.1656557360294751,
+      "minos_down": -0.1503294739229678,
+      "at_boundary": false
+    },
+    {
+      "name": "gamma_stat_tautau_SR2_bin_9",
+      "value": 0.7749939978718878,
+      "hesse_error": 0.1422182543331472,
+      "minos_up": 0.1521617101952225,
+      "minos_down": -0.1336670687249417,
+      "at_boundary": false
+    },
+    {
+      "name": "mu_comb",
+      "value": 0.9668330041196694,
+      "hesse_error": 0.0155772714664501,
+      "minos_up": 0.01542174152675298,
+      "minos_down": -0.01506460172268848,
+      "at_boundary": false
+    }
+  ],
+  "workspace_regions": [
+    {
+      "name": "mumu_SR",
+      "entries": 12,
+      "sum_weights": 10378567
+    },
+    {
+      "name": "tautau_SR0",
+      "entries": 7,
+      "sum_weights": 15254
+    },
+    {
+      "name": "tautau_SR1",
+      "entries": 14,
+      "sum_weights": 2704
+    },
+    {
+      "name": "tautau_SR2",
+      "entries": 14,
+      "sum_weights": 2714
+    }
+  ],
+  "reported_gof_pvalue": 0.462546,
+  "poi": {
+    "name": "mu_comb",
+    "value": 0.9668330041196694,
+    "hesse_error": 0.0155772714664501,
+    "minos_up": 0.01542174152675298,
+    "minos_down": -0.01506460172268848,
+    "at_boundary": false
+  },
+  "poi_minos_crosscheck": {
+    "status": 0,
+    "covariance_quality": 3,
+    "edm": 2.187794345913357e-06
+  },
+  "parameters_at_boundary": [
+    "gamma_stat_tautau_SR2_bin_0"
+  ],
+  "error_decomposition_valid": false,
+  "valid_for_final_measurement": false,
+  "notes": [
+    "Nominal MINIMIZE and HESSE status 0, covariance quality 3; POI is not at a boundary.",
+    "All-parameter MINOS status 160: gamma_stat_tautau_SR2_bin_0 is at its lower boundary with a very large upper error.",
+    "An identical-model cross-check requesting MINOS only for mu_comb gives status 0 and identical central value and profile interval.",
+    "Automatic statistical/systematic error decomposition contains NaN and is not usable; quote only the full in-fit MINOS interval.",
+    "Acceptance uncertainty is deferred; common truth-definition and selected-event orthogonality reviews remain pending."
+  ]
+}

@@ -1,0 +1,9 @@
+Prepared three channel configs and generated/multifit.config
+PRELIMINARY REVIEW PENDING: ee: measurement_ready=false; Updated ee single-file delivery has 30 mass bins and PS_FSR/ElectronES/ElectronER. Common observable, overlap, trigger treatment and theory-response review remain pending. Acceptance uncertainty deferred.
+PRELIMINARY REVIEW PENDING: Confirm common truth mass definition, lepton universality and event orthogonality
+POST-FIT ACCEPTANCE PENDING: Acceptance uncertainty deferred until the nominal MultiFit succeeds; follow channel post-fit prescriptions
+trex-fitter hw /project/atlas/Users/lgijsen/BND-school/combination/combLieke/mumu_ee_tautau/generated/mumu.config
+trex-fitter hw /project/atlas/Users/lgijsen/BND-school/combination/combLieke/mumu_ee_tautau/generated/ee.config
+trex-fitter hw /project/atlas/Users/lgijsen/BND-school/combination/combLieke/mumu_ee_tautau/generated/tautau.config
+trex-fitter mwf /project/atlas/Users/lgijsen/BND-school/combination/combLieke/mumu_ee_tautau/generated/multifit.config
+ERROR: Command '['/project/atlas/users/lgijsen/BND-school/TRExFitter-v1.8.0/build/bin/trex-fitter', 'mwf', '/project/atlas/Users/lgijsen/BND-school/combination/combLieke/mumu_ee_tautau/generated/multifit.config']' returned non-zero exit status 139.

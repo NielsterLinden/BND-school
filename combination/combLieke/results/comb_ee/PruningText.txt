@@ -1,0 +1,64 @@
+-------///////                 ///////-------
+-------/////// IN PRUNING PLOT ///////-------
+-------///////                 ///////-------
+In Region : ee_SR
+ -> In Sample : DY_ee
+ --->>  LUMI      is norm only
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  ElectronRECO      is kept
+ --->>  ElectronID      is kept
+ --->>  PDF      is kept
+ --->>  QCDScale      is kept
+ --->>  XS_TTbar      is not present
+ --->>  XS_VV      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_DYtautau      is not present
+ -> In Sample : DY_tautau
+ --->>  LUMI      is norm only
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  ElectronRECO      is kept
+ --->>  ElectronID      is kept
+ --->>  PDF      is not present
+ --->>  QCDScale      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_VV      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_DYtautau      is norm only
+ -> In Sample : Diboson
+ --->>  LUMI      is norm only
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  ElectronRECO      is kept
+ --->>  ElectronID      is kept
+ --->>  PDF      is not present
+ --->>  QCDScale      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_VV      is norm only
+ --->>  XS_WJets      is not present
+ --->>  XS_DYtautau      is not present
+ -> In Sample : ttbar
+ --->>  LUMI      is norm only
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  ElectronRECO      is kept
+ --->>  ElectronID      is kept
+ --->>  PDF      is not present
+ --->>  QCDScale      is not present
+ --->>  XS_TTbar      is norm only
+ --->>  XS_VV      is not present
+ --->>  XS_WJets      is not present
+ --->>  XS_DYtautau      is not present
+ -> In Sample : Wjets
+ --->>  LUMI      is norm only
+ --->>  Pileup      is kept
+ --->>  L1Prefiring      is kept
+ --->>  ElectronRECO      is kept
+ --->>  ElectronID      is kept
+ --->>  PDF      is not present
+ --->>  QCDScale      is not present
+ --->>  XS_TTbar      is not present
+ --->>  XS_VV      is not present
+ --->>  XS_WJets      is norm only
+ --->>  XS_DYtautau      is not present

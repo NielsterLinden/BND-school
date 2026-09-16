@@ -1,0 +1,71 @@
+{
+  "reference_pb": 2000.0,
+  "observable": "Common per-flavour sigma(pp -> Z/gamma* -> ll), 60 < m_truth(ll) < 120 GeV, sqrt(s)=13 TeV, assuming lepton universality",
+  "common_observable_and_overlap_validated": false,
+  "channels": {
+    "mumu": {
+      "config": "z-mumu/fit/zmumu.config",
+      "histogram_dir": "z-mumu/fit/fitinputs",
+      "sigma_reference_pb": 1953.9313466473218,
+      "measurement_ready": true,
+      "acceptance_in_likelihood": false,
+      "pending": "Matching ROOT templates and metadata received 2026-09-16. Still need signed external acceptance responses and common truth definition confirmation.",
+      "provenance": [
+        "z-mumu/summary_deck/zmumu_summary.pdf, final slide (19) and review-fixes slide (17)",
+        "z-mumu/REVIEW.md section 0: status after fixes",
+        "z-mumu/fit/results/zmumu_fit_result.json: exact normalization metadata",
+        "z-mumu/fit/fitinputs/zmumu.root.meta.json: matching 5 GeV, two-sided SigModel delivery, 2026-09-16"
+      ]
+    },
+    "ee": {
+      "config": "z-ee/fit.config",
+      "histogram_dir": "datasets/z-ee",
+      "sigma_reference_pb": 1954.1032472811223,
+      "measurement_ready": false,
+      "acceptance_in_likelihood": false,
+      "pending": "Updated ee single-file delivery has 30 mass bins and PS_FSR/ElectronES/ElectronER. Common observable, overlap, trigger treatment and theory-response review remain pending. Acceptance uncertainty deferred.",
+      "provenance": [
+        "z-ee/fit.config: current single-file zee.root input, 14 systematic blocks, 30 bins",
+        "z-ee/z-ee.ipynb: saved LHE ee 60-120 reference 1954.1032472811223 pb",
+        "datasets/z-ee/zee.root: newly pulled templates, nominal and variations; audited before fit"
+      ],
+      "reference_definition": {
+        "level": "LHE outgoing leptons",
+        "channel": "ee",
+        "mass_min_gev": 60.0,
+        "mass_max_gev": 120.0,
+        "window": "60 <= m_LHE(ee) < 120 GeV",
+        "formula": "XSEC_PB[DY_inclusive_NLO] * sum_genWeight_ee_in_window / sum_genweight_Runs",
+        "source": "z-ee/z-ee.ipynb: truth_window_sumgenweight cell, saved reference_xsec_ee output",
+        "source_commit": "85c3a525cad56e8de31297c8d3c29c32b891dace"
+      }
+    },
+    "tautau": {
+      "config": "z-tautau/fit/ztautau.config",
+      "histogram_dir": "z-tautau/fit/fitinputs",
+      "sigma_reference_pb": 1944.8826556737133,
+      "measurement_ready": true,
+      "acceptance_in_likelihood": false,
+      "pending": "Signed external acceptance responses and agreed cross-channel correlations; resolve acceptance-total bookkeeping and confirm common observable. ROOT templates are present.",
+      "provenance": [
+        "z-tautau/output/RESULTS.md: nominal FF with genuine-tau subtraction",
+        "z-tautau/output/results.json: exact prediction and acceptance magnitudes",
+        "z-tautau/fit/ztautau.config: three BDT categories, fiducial signal only",
+        "z-tautau/handoff.md and fit/results/ztautau_fit_result.json; rechecked at 7a4e540",
+        "Current delivery uses Tight tau ID and mcsub fake factors, as in the prior two-channel fit."
+      ]
+    }
+  },
+  "acceptance": {
+    "method": "postfit_deferred",
+    "inputs_complete": false,
+    "combine_with_infit_quadrature": true,
+    "sources": [],
+    "prescription": {
+      "mumu": "z-mumu/scripts/v2_5_fit.py: sigma_extrapolated = sigma_fid / A; delta_sigma_acceptance = sigma_extrapolated * A_rel_unc, separate from in-fit errors",
+      "tautau": "z-tautau/scripts/step6_report.py: delta_sigma_acceptance = sigma_60_120 * sqrt(sum(A_unc^2) + A_mc_stat^2); report separately",
+      "ee": "No truth-window acceptance prescription supplied yet; revisit after nominal MultiFit",
+      "combination": "Defer propagation until MultiFit works. Do not apply three channel errors independently to the combined result, or divide by acceptance twice. Combined sensitivity/correlations must be accounted for in post-fit propagation."
+    }
+  }
+}

@@ -1,0 +1,5 @@
+Prepared three channel configs and generated/multifit.config
+PRELIMINARY REVIEW PENDING: ee: measurement_ready=false; Updated ee single-file delivery has 30 mass bins and PS_FSR/ElectronES/ElectronER. Common observable, overlap, trigger treatment and theory-response review remain pending. Acceptance uncertainty deferred.
+PRELIMINARY REVIEW PENDING: Confirm common truth mass definition, lepton universality and event orthogonality
+POST-FIT ACCEPTANCE PENDING: Acceptance uncertainty deferred until the nominal MultiFit succeeds; follow channel post-fit prescriptions
+Nominal fit ready

@@ -1,0 +1,400 @@
+[1mxRooFit -- Create/Explore/Modify Workspaces -- Development ongoing[0m 
+                xRooFit : http://gitlab.cern.ch/will/xroofit
+                Version: v0.0.1-63-g58420b1 [2026-01-30 10:47:53 +0000]
+[1mTRExFitter version -- v1.8.0
+[0m[0;33m[ WARNING ][0;0m trex-fitter.cc:47    16-09-2026 15:19:02 | Not able to pre-read the DebugLevel => keep the default (1).
+[1;32m[ INFO    ][0;0m ConfigReaderMu...:28 16-09-2026 15:19:02 | Started reading the config for multifit
+[1;32m[ INFO    ][0;0m ConfigParser....:386 16-09-2026 15:19:02 | Reading config file: /project/atlas/Users/lgijsen/BND-school/combination/combLieke/mumu_ee_tautau/generated/multifit.config
+[1;32m[ INFO    ][0;0m ConfigParser....:386 16-09-2026 15:19:02 | Reading config file: /project/atlas/Users/lgijsen/BND-school/TRExFitter-v1.8.0/multiFitSchema.config
+[1;32m[ INFO    ][0;0m ConfigReader.c...:48 16-09-2026 15:19:02 | Started reading the config
+[1;32m[ INFO    ][0;0m ConfigParser....:386 16-09-2026 15:19:02 | Reading config file: /project/atlas/Users/lgijsen/BND-school/combination/combLieke/mumu_ee_tautau/generated/mumu.config
+[1;32m[ INFO    ][0;0m ConfigParser....:386 16-09-2026 15:19:02 | Reading config file: /project/atlas/Users/lgijsen/BND-school/TRExFitter-v1.8.0/jobSchema.config
+[1;32m[ INFO    ][0;0m ConfigReader.c...:48 16-09-2026 15:19:02 | Started reading the config
+[1;32m[ INFO    ][0;0m ConfigParser....:386 16-09-2026 15:19:02 | Reading config file: /project/atlas/Users/lgijsen/BND-school/combination/combLieke/mumu_ee_tautau/generated/ee.config
+[1;32m[ INFO    ][0;0m ConfigParser....:386 16-09-2026 15:19:02 | Reading config file: /project/atlas/Users/lgijsen/BND-school/TRExFitter-v1.8.0/jobSchema.config
+[1;32m[ INFO    ][0;0m ConfigReader.c...:48 16-09-2026 15:19:02 | Started reading the config
+[1;32m[ INFO    ][0;0m ConfigParser....:386 16-09-2026 15:19:02 | Reading config file: /project/atlas/Users/lgijsen/BND-school/combination/combLieke/mumu_ee_tautau/generated/tautau.config
+[1;32m[ INFO    ][0;0m ConfigParser....:386 16-09-2026 15:19:02 | Reading config file: /project/atlas/Users/lgijsen/BND-school/TRExFitter-v1.8.0/jobSchema.config
+[1;32m[ INFO    ][0;0m trex-fitter.c...:142 16-09-2026 15:19:02 | Combining workspaces...
+[1;32m[ INFO    ][0;0m MultiFit.cc:279      16-09-2026 15:19:02 | Setting NF: reference_mumu to constant
+[#2] WARNING:HistFactory -- Warning: Setting parameter: reference_mumu to constant, but it is already listed as constant.  You may ignore this warning.
+[1;32m[ INFO    ][0;0m MultiFit.cc:279      16-09-2026 15:19:02 | Setting NF: reference_ee to constant
+[1;32m[ INFO    ][0;0m MultiFit.cc:279      16-09-2026 15:19:02 | Setting NF: reference_tautau to constant
+[1;32m[ INFO    ][0;0m trex-fitter.c...:146 16-09-2026 15:19:03 | Fitting combined workspace...
+[1;32m[ INFO    ][0;0m FitUtils.cc:720      16-09-2026 15:19:03 | POI: mu_comb
+[1;32m[ INFO    ][0;0m FitUtils.cc:721      16-09-2026 15:19:03 |    -> Constant POI : 0
+[1;32m[ INFO    ][0;0m FitUtils.cc:722      16-09-2026 15:19:03 |    -> Initial value of POI : 1
+[1;32m[ INFO    ][0;0m FittingTool.c...:241 16-09-2026 15:19:03 | 
+[1;32m[ INFO    ][0;0m FittingTool.c...:242 16-09-2026 15:19:03 | 
+[1;32m[ INFO    ][0;0m FittingTool.c...:243 16-09-2026 15:19:03 | 
+[1;32m[ INFO    ][0;0m FittingTool.c...:244 16-09-2026 15:19:03 | Fit try no. 1
+[1;32m[ INFO    ][0;0m FittingTool.c...:245 16-09-2026 15:19:03 | ======================
+[1;32m[ INFO    ][0;0m FittingTool.c...:246 16-09-2026 15:19:03 | 
+Minuit2Minimizer: Minimize with max-calls 89780 convergence for edm < 0.01 strategy 1
+RooAbsMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (3366.69) to force MIGRAD to back out of this region. Error log follows.
+Parameter values: 	alpha_AlphaS=0	alpha_ElectronER=0	alpha_ElectronES=0	alpha_ElectronID=0	alpha_ElectronRECO=0	alpha_FakeClosure_tautau_c0_hi=0	alpha_FakeClosure_tautau_c1_hi=0	alpha_FakeClosure_tautau_c1_lo=0	alpha_FakeClosure_tautau_c2_hi=0	alpha_FakeClosure_tautau_c2_lo=0	alpha_FakeMethod_mumu=-3.93766	alpha_FakeOSSS_tautau_c0=0	alpha_FakeOSSS_tautau_c1=0	alpha_FakeOSSS_tautau_c2=0	alpha_FakeStat_mumu=0	alpha_L1Prefiring=0	alpha_Lumi=0	alpha_MCStatNorm_WJets_tautau=0	alpha_MET_Unclustered=0	alpha_MuonID=0	alpha_MuonIso=0	alpha_MuonReco=0	alpha_MuonRes=0	alpha_MuonScale=0	alpha_MuonTrigger=0	alpha_PDF=0	alpha_PS_FSR=0	alpha_PS_ISR=0	alpha_Pileup=0	alpha_QCDScale=0	alpha_SigModel_mumu=0	alpha_TauES_DM0=0	alpha_TauES_DM1=0	alpha_TauES_DM10=0	alpha_TauES_DM11=0	alpha_TauFakeEle=0	alpha_TauFakeMu=0	alpha_TauID_DM0=0	alpha_TauID_DM1=0	alpha_TauID_DM10=0	alpha_TauID_DM11=0	alpha_TauTrigger_DM0=0	alpha_TauTrigger_DM1=0	alpha_TauTrigger_DM10=0	alpha_TauTrigger_DM11=0	alpha_XS_DYll=0	alpha_XS_DYlowmass=0	alpha_XS_DYtautau=-4.99867	alpha_XS_DYtautau_nonfid=0	alpha_XS_SingleTop=0	alpha_XS_TTbar=-4.087	alpha_XS_VV=-4.57506	alpha_XS_WJets=-4.98144	alpha_XS_WW=0	alpha_XS_WZ=-4.98094	alpha_XS_ZZ=-4.99855	gamma_stat_ee_SR_bin_0=1	gamma_stat_ee_SR_bin_1=1	gamma_stat_ee_SR_bin_10=1	gamma_stat_ee_SR_bin_11=1	gamma_stat_ee_SR_bin_12=1	gamma_stat_ee_SR_bin_13=0.961003	gamma_stat_ee_SR_bin_14=0.97846	gamma_stat_ee_SR_bin_15=0.965988	gamma_stat_ee_SR_bin_16=0.946852	gamma_stat_ee_SR_bin_17=0.886622	gamma_stat_ee_SR_bin_18=1	gamma_stat_ee_SR_bin_19=1	gamma_stat_ee_SR_bin_2=1	gamma_stat_ee_SR_bin_20=1	gamma_stat_ee_SR_bin_21=1	gamma_stat_ee_SR_bin_22=1	gamma_stat_ee_SR_bin_23=1	gamma_stat_ee_SR_bin_24=1	gamma_stat_ee_SR_bin_25=1	gamma_stat_ee_SR_bin_26=1	gamma_stat_ee_SR_bin_27=1	gamma_stat_ee_SR_bin_28=1	gamma_stat_ee_SR_bin_29=1	gamma_stat_ee_SR_bin_3=1	gamma_stat_ee_SR_bin_4=1	gamma_stat_ee_SR_bin_5=1	gamma_stat_ee_SR_bin_6=1	gamma_stat_ee_SR_bin_7=1	gamma_stat_ee_SR_bin_8=1	gamma_stat_ee_SR_bin_9=1	gamma_stat_mumu_SR_bin_0=1	gamma_stat_mumu_SR_bin_1=1	gamma_stat_mumu_SR_bin_10=1	gamma_stat_mumu_SR_bin_11=1	gamma_stat_mumu_SR_bin_2=1	gamma_stat_mumu_SR_bin_3=1	gamma_stat_mumu_SR_bin_4=1	gamma_stat_mumu_SR_bin_5=1	gamma_stat_mumu_SR_bin_6=1	gamma_stat_mumu_SR_bin_7=1	gamma_stat_mumu_SR_bin_8=1	gamma_stat_mumu_SR_bin_9=1	gamma_stat_tautau_SR0_bin_0=1	gamma_stat_tautau_SR0_bin_1=1	gamma_stat_tautau_SR0_bin_2=1	gamma_stat_tautau_SR0_bin_3=1	gamma_stat_tautau_SR0_bin_4=1	gamma_stat_tautau_SR0_bin_5=1	gamma_stat_tautau_SR0_bin_6=1	gamma_stat_tautau_SR1_bin_0=1	gamma_stat_tautau_SR1_bin_1=1	gamma_stat_tautau_SR1_bin_10=1	gamma_stat_tautau_SR1_bin_11=1	gamma_stat_tautau_SR1_bin_12=1	gamma_stat_tautau_SR1_bin_13=1	gamma_stat_tautau_SR1_bin_2=1	gamma_stat_tautau_SR1_bin_3=1	gamma_stat_tautau_SR1_bin_4=1	gamma_stat_tautau_SR1_bin_5=1	gamma_stat_tautau_SR1_bin_6=1	gamma_stat_tautau_SR1_bin_7=1	gamma_stat_tautau_SR1_bin_8=1	gamma_stat_tautau_SR1_bin_9=1	gamma_stat_tautau_SR2_bin_0=1	gamma_stat_tautau_SR2_bin_1=1	gamma_stat_tautau_SR2_bin_10=1	gamma_stat_tautau_SR2_bin_11=1	gamma_stat_tautau_SR2_bin_12=1	gamma_stat_tautau_SR2_bin_13=1	gamma_stat_tautau_SR2_bin_2=1	gamma_stat_tautau_SR2_bin_3=1	gamma_stat_tautau_SR2_bin_4=1	gamma_stat_tautau_SR2_bin_5=1	gamma_stat_tautau_SR2_bin_6=1	gamma_stat_tautau_SR2_bin_7=1	gamma_stat_tautau_SR2_bin_8=1	gamma_stat_tautau_SR2_bin_9=1	mu_comb=1
+
+RooAbsMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (3366.69) to force MIGRAD to back out of this region. Error log follows.
+Parameter values: 	alpha_AlphaS=0	alpha_ElectronER=0	alpha_ElectronES=0	alpha_ElectronID=0	alpha_ElectronRECO=0	alpha_FakeClosure_tautau_c0_hi=0	alpha_FakeClosure_tautau_c1_hi=0	alpha_FakeClosure_tautau_c1_lo=0	alpha_FakeClosure_tautau_c2_hi=0	alpha_FakeClosure_tautau_c2_lo=0	alpha_FakeMethod_mumu=-3.93766	alpha_FakeOSSS_tautau_c0=0	alpha_FakeOSSS_tautau_c1=0	alpha_FakeOSSS_tautau_c2=0	alpha_FakeStat_mumu=0	alpha_L1Prefiring=0	alpha_Lumi=0	alpha_MCStatNorm_WJets_tautau=0	alpha_MET_Unclustered=0	alpha_MuonID=0	alpha_MuonIso=0	alpha_MuonReco=0	alpha_MuonRes=0	alpha_MuonScale=0	alpha_MuonTrigger=0	alpha_PDF=0	alpha_PS_FSR=0	alpha_PS_ISR=0	alpha_Pileup=0	alpha_QCDScale=0	alpha_SigModel_mumu=0	alpha_TauES_DM0=0	alpha_TauES_DM1=0	alpha_TauES_DM10=0	alpha_TauES_DM11=0	alpha_TauFakeEle=0	alpha_TauFakeMu=0	alpha_TauID_DM0=0	alpha_TauID_DM1=0	alpha_TauID_DM10=0	alpha_TauID_DM11=0	alpha_TauTrigger_DM0=0	alpha_TauTrigger_DM1=0	alpha_TauTrigger_DM10=0	alpha_TauTrigger_DM11=0	alpha_XS_DYll=0	alpha_XS_DYlowmass=0	alpha_XS_DYtautau=-4.99867	alpha_XS_DYtautau_nonfid=0	alpha_XS_SingleTop=0	alpha_XS_TTbar=-4.087	alpha_XS_VV=-4.57506	alpha_XS_WJets=-4.98144	alpha_XS_WW=0	alpha_XS_WZ=-4.98094	alpha_XS_ZZ=-4.99855	gamma_stat_ee_SR_bin_0=1	gamma_stat_ee_SR_bin_1=1	gamma_stat_ee_SR_bin_10=1	gamma_stat_ee_SR_bin_11=1	gamma_stat_ee_SR_bin_12=1	gamma_stat_ee_SR_bin_13=0.961003	gamma_stat_ee_SR_bin_14=0.97846	gamma_stat_ee_SR_bin_15=0.965988	gamma_stat_ee_SR_bin_16=0.946852	gamma_stat_ee_SR_bin_17=0.931373	gamma_stat_ee_SR_bin_18=0.9432	gamma_stat_ee_SR_bin_19=1	gamma_stat_ee_SR_bin_2=1	gamma_stat_ee_SR_bin_20=1	gamma_stat_ee_SR_bin_21=1	gamma_stat_ee_SR_bin_22=1	gamma_stat_ee_SR_bin_23=1	gamma_stat_ee_SR_bin_24=1	gamma_stat_ee_SR_bin_25=1	gamma_stat_ee_SR_bin_26=1	gamma_stat_ee_SR_bin_27=1	gamma_stat_ee_SR_bin_28=1	gamma_stat_ee_SR_bin_29=1	gamma_stat_ee_SR_bin_3=1	gamma_stat_ee_SR_bin_4=1	gamma_stat_ee_SR_bin_5=1	gamma_stat_ee_SR_bin_6=1	gamma_stat_ee_SR_bin_7=1	gamma_stat_ee_SR_bin_8=1	gamma_stat_ee_SR_bin_9=1	gamma_stat_mumu_SR_bin_0=1	gamma_stat_mumu_SR_bin_1=1	gamma_stat_mumu_SR_bin_10=1	gamma_stat_mumu_SR_bin_11=1	gamma_stat_mumu_SR_bin_2=1	gamma_stat_mumu_SR_bin_3=1	gamma_stat_mumu_SR_bin_4=0.974217	gamma_stat_mumu_SR_bin_5=0.947297	gamma_stat_mumu_SR_bin_6=1	gamma_stat_mumu_SR_bin_7=1	gamma_stat_mumu_SR_bin_8=1	gamma_stat_mumu_SR_bin_9=1	gamma_stat_tautau_SR0_bin_0=1	gamma_stat_tautau_SR0_bin_1=1	gamma_stat_tautau_SR0_bin_2=1	gamma_stat_tautau_SR0_bin_3=1	gamma_stat_tautau_SR0_bin_4=1	gamma_stat_tautau_SR0_bin_5=1	gamma_stat_tautau_SR0_bin_6=1	gamma_stat_tautau_SR1_bin_0=1	gamma_stat_tautau_SR1_bin_1=1	gamma_stat_tautau_SR1_bin_10=1	gamma_stat_tautau_SR1_bin_11=1	gamma_stat_tautau_SR1_bin_12=1	gamma_stat_tautau_SR1_bin_13=1	gamma_stat_tautau_SR1_bin_2=1	gamma_stat_tautau_SR1_bin_3=1	gamma_stat_tautau_SR1_bin_4=1	gamma_stat_tautau_SR1_bin_5=1	gamma_stat_tautau_SR1_bin_6=1	gamma_stat_tautau_SR1_bin_7=1	gamma_stat_tautau_SR1_bin_8=1	gamma_stat_tautau_SR1_bin_9=1	gamma_stat_tautau_SR2_bin_0=1	gamma_stat_tautau_SR2_bin_1=1	gamma_stat_tautau_SR2_bin_10=1	gamma_stat_tautau_SR2_bin_11=1	gamma_stat_tautau_SR2_bin_12=1	gamma_stat_tautau_SR2_bin_13=1	gamma_stat_tautau_SR2_bin_2=1	gamma_stat_tautau_SR2_bin_3=1	gamma_stat_tautau_SR2_bin_4=1	gamma_stat_tautau_SR2_bin_5=1	gamma_stat_tautau_SR2_bin_6=1	gamma_stat_tautau_SR2_bin_7=1	gamma_stat_tautau_SR2_bin_8=1	gamma_stat_tautau_SR2_bin_9=1	mu_comb=1
+
+RooAbsMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (3366.69) to force MIGRAD to back out of this region. Error log follows.
+Parameter values: 	alpha_AlphaS=0	alpha_ElectronER=0	alpha_ElectronES=0	alpha_ElectronID=0	alpha_ElectronRECO=0	alpha_FakeClosure_tautau_c0_hi=0	alpha_FakeClosure_tautau_c1_hi=0	alpha_FakeClosure_tautau_c1_lo=0	alpha_FakeClosure_tautau_c2_hi=0	alpha_FakeClosure_tautau_c2_lo=0	alpha_FakeMethod_mumu=-3.93766	alpha_FakeOSSS_tautau_c0=0	alpha_FakeOSSS_tautau_c1=0	alpha_FakeOSSS_tautau_c2=0	alpha_FakeStat_mumu=0	alpha_L1Prefiring=0	alpha_Lumi=0	alpha_MCStatNorm_WJets_tautau=0	alpha_MET_Unclustered=0	alpha_MuonID=0	alpha_MuonIso=0	alpha_MuonReco=0	alpha_MuonRes=0	alpha_MuonScale=0	alpha_MuonTrigger=0	alpha_PDF=0	alpha_PS_FSR=0	alpha_PS_ISR=0	alpha_Pileup=0	alpha_QCDScale=0	alpha_SigModel_mumu=0	alpha_TauES_DM0=0	alpha_TauES_DM1=0	alpha_TauES_DM10=0	alpha_TauES_DM11=0	alpha_TauFakeEle=0	alpha_TauFakeMu=0	alpha_TauID_DM0=0	alpha_TauID_DM1=0	alpha_TauID_DM10=0	alpha_TauID_DM11=0	alpha_TauTrigger_DM0=0	alpha_TauTrigger_DM1=0	alpha_TauTrigger_DM10=0	alpha_TauTrigger_DM11=0	alpha_XS_DYll=0	alpha_XS_DYlowmass=0	alpha_XS_DYtautau=-4.99867	alpha_XS_DYtautau_nonfid=0	alpha_XS_SingleTop=0	alpha_XS_TTbar=-4.087	alpha_XS_VV=-4.57506	alpha_XS_WJets=-4.98144	alpha_XS_WW=0	alpha_XS_WZ=-4.98094	alpha_XS_ZZ=-4.99855	gamma_stat_ee_SR_bin_0=1	gamma_stat_ee_SR_bin_1=1	gamma_stat_ee_SR_bin_10=1	gamma_stat_ee_SR_bin_11=1	gamma_stat_ee_SR_bin_12=1	gamma_stat_ee_SR_bin_13=0.961003	gamma_stat_ee_SR_bin_14=0.97846	gamma_stat_ee_SR_bin_15=0.965988	gamma_stat_ee_SR_bin_16=0.946852	gamma_stat_ee_SR_bin_17=0.931373	gamma_stat_ee_SR_bin_18=0.9432	gamma_stat_ee_SR_bin_19=1	gamma_stat_ee_SR_bin_2=1	gamma_stat_ee_SR_bin_20=1	gamma_stat_ee_SR_bin_21=1	gamma_stat_ee_SR_bin_22=1	gamma_stat_ee_SR_bin_23=1	gamma_stat_ee_SR_bin_24=1	gamma_stat_ee_SR_bin_25=1	gamma_stat_ee_SR_bin_26=1	gamma_stat_ee_SR_bin_27=1	gamma_stat_ee_SR_bin_28=1	gamma_stat_ee_SR_bin_29=1	gamma_stat_ee_SR_bin_3=1	gamma_stat_ee_SR_bin_4=1	gamma_stat_ee_SR_bin_5=1	gamma_stat_ee_SR_bin_6=1	gamma_stat_ee_SR_bin_7=1	gamma_stat_ee_SR_bin_8=1	gamma_stat_ee_SR_bin_9=1	gamma_stat_mumu_SR_bin_0=1	gamma_stat_mumu_SR_bin_1=1	gamma_stat_mumu_SR_bin_10=1	gamma_stat_mumu_SR_bin_11=1	gamma_stat_mumu_SR_bin_2=1	gamma_stat_mumu_SR_bin_3=1	gamma_stat_mumu_SR_bin_4=0.974217	gamma_stat_mumu_SR_bin_5=0.979222	gamma_stat_mumu_SR_bin_6=0.961542	gamma_stat_mumu_SR_bin_7=1	gamma_stat_mumu_SR_bin_8=1	gamma_stat_mumu_SR_bin_9=1	gamma_stat_tautau_SR0_bin_0=1	gamma_stat_tautau_SR0_bin_1=1	gamma_stat_tautau_SR0_bin_2=1	gamma_stat_tautau_SR0_bin_3=1	gamma_stat_tautau_SR0_bin_4=1	gamma_stat_tautau_SR0_bin_5=1	gamma_stat_tautau_SR0_bin_6=1	gamma_stat_tautau_SR1_bin_0=1	gamma_stat_tautau_SR1_bin_1=1	gamma_stat_tautau_SR1_bin_10=1	gamma_stat_tautau_SR1_bin_11=1	gamma_stat_tautau_SR1_bin_12=1	gamma_stat_tautau_SR1_bin_13=1	gamma_stat_tautau_SR1_bin_2=1	gamma_stat_tautau_SR1_bin_3=1	gamma_stat_tautau_SR1_bin_4=1	gamma_stat_tautau_SR1_bin_5=1	gamma_stat_tautau_SR1_bin_6=1	gamma_stat_tautau_SR1_bin_7=1	gamma_stat_tautau_SR1_bin_8=1	gamma_stat_tautau_SR1_bin_9=1	gamma_stat_tautau_SR2_bin_0=1	gamma_stat_tautau_SR2_bin_1=1	gamma_stat_tautau_SR2_bin_10=1	gamma_stat_tautau_SR2_bin_11=1	gamma_stat_tautau_SR2_bin_12=1	gamma_stat_tautau_SR2_bin_13=1	gamma_stat_tautau_SR2_bin_2=1	gamma_stat_tautau_SR2_bin_3=1	gamma_stat_tautau_SR2_bin_4=1	gamma_stat_tautau_SR2_bin_5=1	gamma_stat_tautau_SR2_bin_6=1	gamma_stat_tautau_SR2_bin_7=1	gamma_stat_tautau_SR2_bin_8=1	gamma_stat_tautau_SR2_bin_9=1	mu_comb=1
+
+RooAbsMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (3366.69) to force MIGRAD to back out of this region. Error log follows.
+Parameter values: 	alpha_AlphaS=4.95435	alpha_ElectronER=2.95372	alpha_ElectronES=0	alpha_ElectronID=-0.343542	alpha_ElectronRECO=-3.03822	alpha_FakeClosure_tautau_c0_hi=1.01655	alpha_FakeClosure_tautau_c1_hi=0.261499	alpha_FakeClosure_tautau_c1_lo=1.28715	alpha_FakeClosure_tautau_c2_hi=1.76016	alpha_FakeClosure_tautau_c2_lo=0.799023	alpha_FakeMethod_mumu=-4.52806	alpha_FakeOSSS_tautau_c0=0.599932	alpha_FakeOSSS_tautau_c1=1.27817	alpha_FakeOSSS_tautau_c2=1.0039	alpha_FakeStat_mumu=-4.57005	alpha_L1Prefiring=2.50096	alpha_Lumi=-1.13034	alpha_MCStatNorm_WJets_tautau=0.643195	alpha_MET_Unclustered=-0.2106	alpha_MuonID=-4.01163	alpha_MuonIso=-2.77722	alpha_MuonReco=-1.21112	alpha_MuonRes=-0.219392	alpha_MuonScale=-0.0618828	alpha_MuonTrigger=-4.47242	alpha_PDF=-3.84264	alpha_PS_FSR=-4.24387	alpha_PS_ISR=-4.74045	alpha_Pileup=2.4324	alpha_QCDScale=-4.23986	alpha_SigModel_mumu=0.12757	alpha_TauES_DM0=0.896963	alpha_TauES_DM1=1.19969	alpha_TauES_DM10=0.418488	alpha_TauES_DM11=0.543941	alpha_TauFakeEle=0.310178	alpha_TauFakeMu=0.000590602	alpha_TauID_DM0=0.77736	alpha_TauID_DM1=1.02953	alpha_TauID_DM10=0.884067	alpha_TauID_DM11=1.84048	alpha_TauTrigger_DM0=1.81663	alpha_TauTrigger_DM1=1.5918	alpha_TauTrigger_DM10=1.79928	alpha_TauTrigger_DM11=1.48059	alpha_XS_DYll=0.130837	alpha_XS_DYlowmass=0.00412446	alpha_XS_DYtautau=-5	alpha_XS_DYtautau_nonfid=1.40662	alpha_XS_SingleTop=-4.38552	alpha_XS_TTbar=-4.99445	alpha_XS_VV=-4.99491	alpha_XS_WJets=-4.99999	alpha_XS_WW=4.13669	alpha_XS_WZ=-4.99946	alpha_XS_ZZ=-4.47062	gamma_stat_ee_SR_bin_0=0.866237	gamma_stat_ee_SR_bin_1=0.905878	gamma_stat_ee_SR_bin_10=0.976122	gamma_stat_ee_SR_bin_11=0.983676	gamma_stat_ee_SR_bin_12=0.671896	gamma_stat_ee_SR_bin_13=0.96472	gamma_stat_ee_SR_bin_14=0.937109	gamma_stat_ee_SR_bin_15=0.966733	gamma_stat_ee_SR_bin_16=0.954913	gamma_stat_ee_SR_bin_17=0.937365	gamma_stat_ee_SR_bin_18=0.941561	gamma_stat_ee_SR_bin_19=0.730288	gamma_stat_ee_SR_bin_2=0.784161	gamma_stat_ee_SR_bin_20=0.809115	gamma_stat_ee_SR_bin_21=0.953183	gamma_stat_ee_SR_bin_22=0.935255	gamma_stat_ee_SR_bin_23=0.986004	gamma_stat_ee_SR_bin_24=0.969278	gamma_stat_ee_SR_bin_25=0.958658	gamma_stat_ee_SR_bin_26=0.982554	gamma_stat_ee_SR_bin_27=1.00026	gamma_stat_ee_SR_bin_28=0.961571	gamma_stat_ee_SR_bin_29=0.975796	gamma_stat_ee_SR_bin_3=0.820229	gamma_stat_ee_SR_bin_4=0.871048	gamma_stat_ee_SR_bin_5=0.882898	gamma_stat_ee_SR_bin_6=0.941397	gamma_stat_ee_SR_bin_7=0.960079	gamma_stat_ee_SR_bin_8=0.897917	gamma_stat_ee_SR_bin_9=0.944575	gamma_stat_mumu_SR_bin_0=0.939906	gamma_stat_mumu_SR_bin_1=0.937346	gamma_stat_mumu_SR_bin_10=0.991293	gamma_stat_mumu_SR_bin_11=1.00682	gamma_stat_mumu_SR_bin_2=0.661488	gamma_stat_mumu_SR_bin_3=0.00126611	gamma_stat_mumu_SR_bin_4=0.973765	gamma_stat_mumu_SR_bin_5=0.978705	gamma_stat_mumu_SR_bin_6=0.97899	gamma_stat_mumu_SR_bin_7=0.928257	gamma_stat_mumu_SR_bin_8=0.965014	gamma_stat_mumu_SR_bin_9=0.982163	gamma_stat_tautau_SR0_bin_0=0.983181	gamma_stat_tautau_SR0_bin_1=1.00076	gamma_stat_tautau_SR0_bin_2=1.0062	gamma_stat_tautau_SR0_bin_3=1.00833	gamma_stat_tautau_SR0_bin_4=1.00153	gamma_stat_tautau_SR0_bin_5=1.00765	gamma_stat_tautau_SR0_bin_6=0.996929	gamma_stat_tautau_SR1_bin_0=0.835605	gamma_stat_tautau_SR1_bin_1=1.0084	gamma_stat_tautau_SR1_bin_10=1.06018	gamma_stat_tautau_SR1_bin_11=0.6912	gamma_stat_tautau_SR1_bin_12=0.763328	gamma_stat_tautau_SR1_bin_13=1.13866	gamma_stat_tautau_SR1_bin_2=1.0613	gamma_stat_tautau_SR1_bin_3=1.04656	gamma_stat_tautau_SR1_bin_4=1.05849	gamma_stat_tautau_SR1_bin_5=1.01582	gamma_stat_tautau_SR1_bin_6=1.002	gamma_stat_tautau_SR1_bin_7=1.00519	gamma_stat_tautau_SR1_bin_8=1.02339	gamma_stat_tautau_SR1_bin_9=1.01442	gamma_stat_tautau_SR2_bin_0=3.79776e-08	gamma_stat_tautau_SR2_bin_1=0.995494	gamma_stat_tautau_SR2_bin_10=1.34777	gamma_stat_tautau_SR2_bin_11=0.969876	gamma_stat_tautau_SR2_bin_12=0.154311	gamma_stat_tautau_SR2_bin_13=1.00685	gamma_stat_tautau_SR2_bin_2=1.03195	gamma_stat_tautau_SR2_bin_3=1.04775	gamma_stat_tautau_SR2_bin_4=1.01476	gamma_stat_tautau_SR2_bin_5=0.982212	gamma_stat_tautau_SR2_bin_6=1.01256	gamma_stat_tautau_SR2_bin_7=1.18472	gamma_stat_tautau_SR2_bin_8=1.2269	gamma_stat_tautau_SR2_bin_9=0.799487	mu_comb=0.986545
+
+RooAbsMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (3366.69) to force MIGRAD to back out of this region. Error log follows.
+Parameter values: 	alpha_AlphaS=2.5954	alpha_ElectronER=1.18981	alpha_ElectronES=0	alpha_ElectronID=-0.130696	alpha_ElectronRECO=-1.22875	alpha_FakeClosure_tautau_c0_hi=0.388792	alpha_FakeClosure_tautau_c1_hi=0.0994555	alpha_FakeClosure_tautau_c1_lo=0.494115	alpha_FakeClosure_tautau_c2_hi=0.681701	alpha_FakeClosure_tautau_c2_lo=0.304891	alpha_FakeMethod_mumu=-4.18759	alpha_FakeOSSS_tautau_c0=0.228553	alpha_FakeOSSS_tautau_c1=0.4906	alpha_FakeOSSS_tautau_c2=0.383895	alpha_FakeStat_mumu=-2.12232	alpha_L1Prefiring=0.989159	alpha_Lumi=-0.432936	alpha_MCStatNorm_WJets_tautau=0.245111	alpha_MET_Unclustered=-0.0800861	alpha_MuonID=-1.73334	alpha_MuonIso=-1.1101	alpha_MuonReco=-0.4644	alpha_MuonRes=-0.0834312	alpha_MuonScale=-0.0235271	alpha_MuonTrigger=-2.0432	alpha_PDF=-3.79289	alpha_PS_FSR=-1.87953	alpha_PS_ISR=-2.28292	alpha_Pileup=0.959772	alpha_QCDScale=-1.87686	alpha_SigModel_mumu=0.048504	alpha_TauES_DM0=0.342594	alpha_TauES_DM1=0.45994	alpha_TauES_DM10=0.15926	alpha_TauES_DM11=0.207146	alpha_TauFakeEle=0.117988	alpha_TauFakeMu=0.000224535	alpha_TauID_DM0=0.296566	alpha_TauID_DM1=0.393819	alpha_TauID_DM10=0.337624	alpha_TauID_DM11=0.714115	alpha_TauTrigger_DM0=0.70447	alpha_TauTrigger_DM1=0.614334	alpha_TauTrigger_DM10=0.697464	alpha_TauTrigger_DM11=0.570218	alpha_XS_DYll=0.0497466	alpha_XS_DYlowmass=0.00156804	alpha_XS_DYtautau=-4.99949	alpha_XS_DYtautau_nonfid=0.541024	alpha_XS_SingleTop=-3.5435	alpha_XS_TTbar=-4.60836	alpha_XS_VV=-4.81274	alpha_XS_WJets=-4.99268	alpha_XS_WW=-4.99991	alpha_XS_WZ=-4.99109	alpha_XS_ZZ=-4.48634	gamma_stat_ee_SR_bin_0=0.956103	gamma_stat_ee_SR_bin_1=0.96839	gamma_stat_ee_SR_bin_10=0.991784	gamma_stat_ee_SR_bin_11=0.994335	gamma_stat_ee_SR_bin_12=0.919552	gamma_stat_ee_SR_bin_13=0.962433	gamma_stat_ee_SR_bin_14=0.964746	gamma_stat_ee_SR_bin_15=0.966272	gamma_stat_ee_SR_bin_16=0.949978	gamma_stat_ee_SR_bin_17=0.933675	gamma_stat_ee_SR_bin_18=0.942579	gamma_stat_ee_SR_bin_19=0.926253	gamma_stat_ee_SR_bin_2=0.932041	gamma_stat_ee_SR_bin_20=0.944338	gamma_stat_ee_SR_bin_21=0.984018	gamma_stat_ee_SR_bin_22=0.97809	gamma_stat_ee_SR_bin_23=0.994836	gamma_stat_ee_SR_bin_24=0.988959	gamma_stat_ee_SR_bin_25=0.985245	gamma_stat_ee_SR_bin_26=0.993546	gamma_stat_ee_SR_bin_27=1.0001	gamma_stat_ee_SR_bin_28=0.986114	gamma_stat_ee_SR_bin_29=0.991075	gamma_stat_ee_SR_bin_3=0.94396	gamma_stat_ee_SR_bin_4=0.958304	gamma_stat_ee_SR_bin_5=0.962301	gamma_stat_ee_SR_bin_6=0.980117	gamma_stat_ee_SR_bin_7=0.986235	gamma_stat_ee_SR_bin_8=0.968122	gamma_stat_ee_SR_bin_9=0.981979	gamma_stat_mumu_SR_bin_0=0.980671	gamma_stat_mumu_SR_bin_1=0.98012	gamma_stat_mumu_SR_bin_10=0.996786	gamma_stat_mumu_SR_bin_11=1.00265	gamma_stat_mumu_SR_bin_2=0.911461	gamma_stat_mumu_SR_bin_3=0.62708	gamma_stat_mumu_SR_bin_4=0.974045	gamma_stat_mumu_SR_bin_5=0.979026	gamma_stat_mumu_SR_bin_6=0.979411	gamma_stat_mumu_SR_bin_7=0.980169	gamma_stat_mumu_SR_bin_8=0.988555	gamma_stat_mumu_SR_bin_9=0.993671	gamma_stat_tautau_SR0_bin_0=0.993728	gamma_stat_tautau_SR0_bin_1=1.00029	gamma_stat_tautau_SR0_bin_2=1.0024	gamma_stat_tautau_SR0_bin_3=1.00325	gamma_stat_tautau_SR0_bin_4=1.00059	gamma_stat_tautau_SR0_bin_5=1.00297	gamma_stat_tautau_SR0_bin_6=0.998842	gamma_stat_tautau_SR1_bin_0=0.936408	gamma_stat_tautau_SR1_bin_1=1.0032	gamma_stat_tautau_SR1_bin_10=1.02288	gamma_stat_tautau_SR1_bin_11=0.877696	gamma_stat_tautau_SR1_bin_12=0.907363	gamma_stat_tautau_SR1_bin_13=1.05245	gamma_stat_tautau_SR1_bin_2=1.02389	gamma_stat_tautau_SR1_bin_3=1.01804	gamma_stat_tautau_SR1_bin_4=1.02298	gamma_stat_tautau_SR1_bin_5=1.00607	gamma_stat_tautau_SR1_bin_6=1.00076	gamma_stat_tautau_SR1_bin_7=1.00198	gamma_stat_tautau_SR1_bin_8=1.00898	gamma_stat_tautau_SR1_bin_9=1.0055	gamma_stat_tautau_SR2_bin_0=0.384269	gamma_stat_tautau_SR2_bin_1=0.998287	gamma_stat_tautau_SR2_bin_10=1.12992	gamma_stat_tautau_SR2_bin_11=0.988523	gamma_stat_tautau_SR2_bin_12=0.596771	gamma_stat_tautau_SR2_bin_13=1.0026	gamma_stat_tautau_SR2_bin_2=1.01227	gamma_stat_tautau_SR2_bin_3=1.01876	gamma_stat_tautau_SR2_bin_4=1.00568	gamma_stat_tautau_SR2_bin_5=0.993319	gamma_stat_tautau_SR2_bin_6=1.0048	gamma_stat_tautau_SR2_bin_7=1.07286	gamma_stat_tautau_SR2_bin_8=1.08715	gamma_stat_tautau_SR2_bin_9=0.923213	mu_comb=0.994879
+
+RooAbsMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (3366.69) to force MIGRAD to back out of this region. Error log follows.
+Parameter values: 	alpha_AlphaS=0.147833	alpha_ElectronER=1.49463	alpha_ElectronES=0	alpha_ElectronID=-0.223029	alpha_ElectronRECO=-2.04633	alpha_FakeClosure_tautau_c0_hi=0.878185	alpha_FakeClosure_tautau_c1_hi=0.275628	alpha_FakeClosure_tautau_c1_lo=1.18195	alpha_FakeClosure_tautau_c2_hi=1.83867	alpha_FakeClosure_tautau_c2_lo=0.897926	alpha_FakeMethod_mumu=-3.69724	alpha_FakeOSSS_tautau_c0=0.529474	alpha_FakeOSSS_tautau_c1=1.19492	alpha_FakeOSSS_tautau_c2=1.06567	alpha_FakeStat_mumu=-1.49794	alpha_L1Prefiring=1.13992	alpha_Lumi=-0.518142	alpha_MCStatNorm_WJets_tautau=0.594209	alpha_MET_Unclustered=-0.274126	alpha_MuonID=-1.05457	alpha_MuonIso=-0.769167	alpha_MuonReco=-0.268616	alpha_MuonRes=-0.173963	alpha_MuonScale=-0.0720812	alpha_MuonTrigger=-1.41973	alpha_PDF=-3.57209	alpha_PS_FSR=-2.27609	alpha_PS_ISR=-1.22557	alpha_Pileup=1.39419	alpha_QCDScale=-2.5755	alpha_SigModel_mumu=0.0709833	alpha_TauES_DM0=0.727744	alpha_TauES_DM1=1.05635	alpha_TauES_DM10=0.323941	alpha_TauES_DM11=0.499065	alpha_TauFakeEle=0.273666	alpha_TauFakeMu=0.000483889	alpha_TauID_DM0=0.776021	alpha_TauID_DM1=1.01777	alpha_TauID_DM10=0.872008	alpha_TauID_DM11=1.76817	alpha_TauTrigger_DM0=1.78275	alpha_TauTrigger_DM1=1.56523	alpha_TauTrigger_DM10=1.7399	alpha_TauTrigger_DM11=1.37792	alpha_XS_DYll=0.116861	alpha_XS_DYlowmass=0.00246545	alpha_XS_DYtautau=-4.99977	alpha_XS_DYtautau_nonfid=1.28907	alpha_XS_SingleTop=-2.21088	alpha_XS_TTbar=-4.74171	alpha_XS_VV=-4.88517	alpha_XS_WJets=-4.98918	alpha_XS_WW=-4.17077	alpha_XS_WZ=-1.97136	alpha_XS_ZZ=0.422841	gamma_stat_ee_SR_bin_0=0.892393	gamma_stat_ee_SR_bin_1=0.933273	gamma_stat_ee_SR_bin_10=0.987104	gamma_stat_ee_SR_bin_11=0.994062	gamma_stat_ee_SR_bin_12=0.895473	gamma_stat_ee_SR_bin_13=0.96977	gamma_stat_ee_SR_bin_14=0.948679	gamma_stat_ee_SR_bin_15=0.971297	gamma_stat_ee_SR_bin_16=0.959381	gamma_stat_ee_SR_bin_17=0.942348	gamma_stat_ee_SR_bin_18=0.946492	gamma_stat_ee_SR_bin_19=0.815718	gamma_stat_ee_SR_bin_2=0.817093	gamma_stat_ee_SR_bin_20=0.853914	gamma_stat_ee_SR_bin_21=0.963505	gamma_stat_ee_SR_bin_22=0.948021	gamma_stat_ee_SR_bin_23=0.996036	gamma_stat_ee_SR_bin_24=0.97838	gamma_stat_ee_SR_bin_25=0.969859	gamma_stat_ee_SR_bin_26=0.994358	gamma_stat_ee_SR_bin_27=1.01259	gamma_stat_ee_SR_bin_28=0.976425	gamma_stat_ee_SR_bin_29=0.986701	gamma_stat_ee_SR_bin_3=0.853695	gamma_stat_ee_SR_bin_4=0.89972	gamma_stat_ee_SR_bin_5=0.906196	gamma_stat_ee_SR_bin_6=0.953804	gamma_stat_ee_SR_bin_7=0.972416	gamma_stat_ee_SR_bin_8=0.924775	gamma_stat_ee_SR_bin_9=0.961801	gamma_stat_mumu_SR_bin_0=0.973073	gamma_stat_mumu_SR_bin_1=0.965815	gamma_stat_mumu_SR_bin_10=1.00394	gamma_stat_mumu_SR_bin_11=1.0167	gamma_stat_mumu_SR_bin_2=0.844164	gamma_stat_mumu_SR_bin_3=0.263789	gamma_stat_mumu_SR_bin_4=0.979187	gamma_stat_mumu_SR_bin_5=0.983759	gamma_stat_mumu_SR_bin_6=0.98393	gamma_stat_mumu_SR_bin_7=0.97008	gamma_stat_mumu_SR_bin_8=0.980114	gamma_stat_mumu_SR_bin_9=0.994126	gamma_stat_tautau_SR0_bin_0=0.981925	gamma_stat_tautau_SR0_bin_1=0.999804	gamma_stat_tautau_SR0_bin_2=1.00562	gamma_stat_tautau_SR0_bin_3=1.00768	gamma_stat_tautau_SR0_bin_4=1.00095	gamma_stat_tautau_SR0_bin_5=1.00719	gamma_stat_tautau_SR0_bin_6=0.996678	gamma_stat_tautau_SR1_bin_0=0.830986	gamma_stat_tautau_SR1_bin_1=1.0123	gamma_stat_tautau_SR1_bin_10=1.07379	gamma_stat_tautau_SR1_bin_11=0.690555	gamma_stat_tautau_SR1_bin_12=0.81737	gamma_stat_tautau_SR1_bin_13=1.14238	gamma_stat_tautau_SR1_bin_2=1.05831	gamma_stat_tautau_SR1_bin_3=1.04831	gamma_stat_tautau_SR1_bin_4=1.05935	gamma_stat_tautau_SR1_bin_5=1.01233	gamma_stat_tautau_SR1_bin_6=0.995426	gamma_stat_tautau_SR1_bin_7=1.0036	gamma_stat_tautau_SR1_bin_8=1.02578	gamma_stat_tautau_SR1_bin_9=1.01694	gamma_stat_tautau_SR2_bin_0=5.54098e-05	gamma_stat_tautau_SR2_bin_1=1.00765	gamma_stat_tautau_SR2_bin_10=1.37403	gamma_stat_tautau_SR2_bin_11=0.949659	gamma_stat_tautau_SR2_bin_12=0.381066	gamma_stat_tautau_SR2_bin_13=1.03735	gamma_stat_tautau_SR2_bin_2=1.03288	gamma_stat_tautau_SR2_bin_3=1.0528	gamma_stat_tautau_SR2_bin_4=1.01446	gamma_stat_tautau_SR2_bin_5=0.98151	gamma_stat_tautau_SR2_bin_6=1.0085	gamma_stat_tautau_SR2_bin_7=1.18548	gamma_stat_tautau_SR2_bin_8=1.24114	gamma_stat_tautau_SR2_bin_9=0.783464	mu_comb=0.993882
+
+Minuit2Minimizer : Valid minimum - status = 0
+FVAL  = -14031.1307333863951
+Edm   = 4.2436593414111171e-06
+Nfcn  = 63102
+alpha_AlphaS	  = -0.102825	 +/-  0.948294	(limited)
+alpha_ElectronER	  = 1.46101	 +/-  0.918855	(limited)
+alpha_ElectronES	  = 0	 +/-  0.989326	(limited)
+alpha_ElectronID	  = 0.415535	 +/-  0.0638573	(limited)
+alpha_ElectronRECO	  = -1.55527	 +/-  0.838842	(limited)
+alpha_FakeClosure_tautau_c0_hi	  = -0.0781553	 +/-  0.889918	(limited)
+alpha_FakeClosure_tautau_c1_hi	  = -0.135484	 +/-  0.412316	(limited)
+alpha_FakeClosure_tautau_c1_lo	  = 0.775122	 +/-  0.667826	(limited)
+alpha_FakeClosure_tautau_c2_hi	  = 1.63252	 +/-  0.736377	(limited)
+alpha_FakeClosure_tautau_c2_lo	  = 0.258156	 +/-  0.90933	(limited)
+alpha_FakeMethod_mumu	  = 0.342575	 +/-  0.941572	(limited)
+alpha_FakeOSSS_tautau_c0	  = -0.226829	 +/-  0.583525	(limited)
+alpha_FakeOSSS_tautau_c1	  = 0.45294	 +/-  0.796101	(limited)
+alpha_FakeOSSS_tautau_c2	  = 0.339603	 +/-  0.919979	(limited)
+alpha_FakeStat_mumu	  = 0.203982	 +/-  0.991043	(limited)
+alpha_L1Prefiring	  = 2.63279	 +/-  0.827173	(limited)
+alpha_Lumi	  = -0.451439	 +/-  0.913593	(limited)
+alpha_MCStatNorm_WJets_tautau	  = -0.176755	 +/-  0.519152	(limited)
+alpha_MET_Unclustered	  = -0.199379	 +/-  0.852193	(limited)
+alpha_MuonID	  = 1.05974	 +/-  0.918813	(limited)
+alpha_MuonIso	  = 1.14699	 +/-  0.804318	(limited)
+alpha_MuonReco	  = 3.28499	 +/-  0.640995	(limited)
+alpha_MuonRes	  = 0.350175	 +/-  0.0923329	(limited)
+alpha_MuonScale	  = -0.399555	 +/-  0.104046	(limited)
+alpha_MuonTrigger	  = 0.546892	 +/-  0.909148	(limited)
+alpha_PDF	  = 1.49719	 +/-  0.861028	(limited)
+alpha_PS_FSR	  = -0.638217	 +/-  0.320076	(limited)
+alpha_PS_ISR	  = 1.62425	 +/-  0.766051	(limited)
+alpha_Pileup	  = -0.00406012	 +/-  0.278741	(limited)
+alpha_QCDScale	  = -1.16395	 +/-  0.303858	(limited)
+alpha_SigModel_mumu	  = 0.58855	 +/-  0.0964484	(limited)
+alpha_TauES_DM0	  = -0.439085	 +/-  0.828682	(limited)
+alpha_TauES_DM1	  = -0.224005	 +/-  0.80012	(limited)
+alpha_TauES_DM10	  = -0.249413	 +/-  0.942234	(limited)
+alpha_TauES_DM11	  = 0.0578531	 +/-  0.975142	(limited)
+alpha_TauFakeEle	  = -0.0267119	 +/-  0.978083	(limited)
+alpha_TauFakeMu	  = 0.00100685	 +/-  0.993375	(limited)
+alpha_TauID_DM0	  = 0.646429	 +/-  0.593848	(limited)
+alpha_TauID_DM1	  = 0.617094	 +/-  0.859054	(limited)
+alpha_TauID_DM10	  = 0.105399	 +/-  0.680571	(limited)
+alpha_TauID_DM11	  = 0.261059	 +/-  0.817787	(limited)
+alpha_TauTrigger_DM0	  = 0.357923	 +/-  0.832152	(limited)
+alpha_TauTrigger_DM1	  = 0.378902	 +/-  0.916715	(limited)
+alpha_TauTrigger_DM10	  = 0.198263	 +/-  0.876228	(limited)
+alpha_TauTrigger_DM11	  = 0.118215	 +/-  0.896937	(limited)
+alpha_XS_DYll	  = -0.00254331	 +/-  0.988311	(limited)
+alpha_XS_DYlowmass	  = -0.00657285	 +/-  0.993086	(limited)
+alpha_XS_DYtautau	  = -1.73875	 +/-  0.905119	(limited)
+alpha_XS_DYtautau_nonfid	  = -0.161389	 +/-  0.918747	(limited)
+alpha_XS_SingleTop	  = 0.108494	 +/-  0.993788	(limited)
+alpha_XS_TTbar	  = 0.424684	 +/-  0.878596	(limited)
+alpha_XS_VV	  = -0.229963	 +/-  0.985414	(limited)
+alpha_XS_WJets	  = -0.944547	 +/-  0.921759	(limited)
+alpha_XS_WW	  = 0.123466	 +/-  0.994083	(limited)
+alpha_XS_WZ	  = 0.0882738	 +/-  1.01282	(limited)
+alpha_XS_ZZ	  = 0.0466329	 +/-  1.01245	(limited)
+gamma_stat_ee_SR_bin_0	  = 0.966149	 +/-  0.00806516	(limited)
+gamma_stat_ee_SR_bin_1	  = 0.98932	 +/-  0.00811742	(limited)
+gamma_stat_ee_SR_bin_10	  = 1.01149	 +/-  0.00322867	(limited)
+gamma_stat_ee_SR_bin_11	  = 1.01854	 +/-  0.00259884	(limited)
+gamma_stat_ee_SR_bin_12	  = 1.00823	 +/-  0.00190138	(limited)
+gamma_stat_ee_SR_bin_13	  = 1.00147	 +/-  0.00127424	(limited)
+gamma_stat_ee_SR_bin_14	  = 0.996626	 +/-  0.000871928	(limited)
+gamma_stat_ee_SR_bin_15	  = 1.00702	 +/-  0.00446563	(limited)
+gamma_stat_ee_SR_bin_16	  = 0.996971	 +/-  0.00101889	(limited)
+gamma_stat_ee_SR_bin_17	  = 0.977853	 +/-  0.00157438	(limited)
+gamma_stat_ee_SR_bin_18	  = 0.979362	 +/-  0.00210743	(limited)
+gamma_stat_ee_SR_bin_19	  = 0.999903	 +/-  0.00300573	(limited)
+gamma_stat_ee_SR_bin_2	  = 0.946928	 +/-  0.0069928	(limited)
+gamma_stat_ee_SR_bin_20	  = 0.995719	 +/-  0.00378063	(limited)
+gamma_stat_ee_SR_bin_21	  = 1.01367	 +/-  0.00478177	(limited)
+gamma_stat_ee_SR_bin_22	  = 1.00407	 +/-  0.00540838	(limited)
+gamma_stat_ee_SR_bin_23	  = 1.03403	 +/-  0.00594932	(limited)
+gamma_stat_ee_SR_bin_24	  = 1.01277	 +/-  0.00657494	(limited)
+gamma_stat_ee_SR_bin_25	  = 1.00675	 +/-  0.00769923	(limited)
+gamma_stat_ee_SR_bin_26	  = 1.02638	 +/-  0.00824294	(limited)
+gamma_stat_ee_SR_bin_27	  = 1.04544	 +/-  0.00945667	(limited)
+gamma_stat_ee_SR_bin_28	  = 1.01307	 +/-  0.00999044	(limited)
+gamma_stat_ee_SR_bin_29	  = 1.01713	 +/-  0.0103969	(limited)
+gamma_stat_ee_SR_bin_3	  = 0.96495	 +/-  0.00658826	(limited)
+gamma_stat_ee_SR_bin_4	  = 0.977391	 +/-  0.00631013	(limited)
+gamma_stat_ee_SR_bin_5	  = 0.979543	 +/-  0.00555264	(limited)
+gamma_stat_ee_SR_bin_6	  = 0.992595	 +/-  0.00510547	(limited)
+gamma_stat_ee_SR_bin_7	  = 1.00398	 +/-  0.00461279	(limited)
+gamma_stat_ee_SR_bin_8	  = 0.989649	 +/-  0.00414553	(limited)
+gamma_stat_ee_SR_bin_9	  = 1.00079	 +/-  0.00377521	(limited)
+gamma_stat_mumu_SR_bin_0	  = 1.00735	 +/-  0.00463873	(limited)
+gamma_stat_mumu_SR_bin_1	  = 0.995885	 +/-  0.00378419	(limited)
+gamma_stat_mumu_SR_bin_10	  = 1.00928	 +/-  0.00446252	(limited)
+gamma_stat_mumu_SR_bin_11	  = 1.00925	 +/-  0.00584521	(limited)
+gamma_stat_mumu_SR_bin_2	  = 0.997658	 +/-  0.00317404	(limited)
+gamma_stat_mumu_SR_bin_3	  = 0.995571	 +/-  0.00213416	(limited)
+gamma_stat_mumu_SR_bin_4	  = 1.00068	 +/-  0.00161927	(limited)
+gamma_stat_mumu_SR_bin_5	  = 1.00023	 +/-  0.00101238	(limited)
+gamma_stat_mumu_SR_bin_6	  = 1.00008	 +/-  0.000780274	(limited)
+gamma_stat_mumu_SR_bin_7	  = 1	 +/-  0.00217892	(limited)
+gamma_stat_mumu_SR_bin_8	  = 0.99836	 +/-  0.00238968	(limited)
+gamma_stat_mumu_SR_bin_9	  = 1.00631	 +/-  0.00349814	(limited)
+gamma_stat_tautau_SR0_bin_0	  = 0.986007	 +/-  0.0202502	(limited)
+gamma_stat_tautau_SR0_bin_1	  = 0.997969	 +/-  0.0142526	(limited)
+gamma_stat_tautau_SR0_bin_2	  = 1.00475	 +/-  0.00828327	(limited)
+gamma_stat_tautau_SR0_bin_3	  = 1.0055	 +/-  0.00822836	(limited)
+gamma_stat_tautau_SR0_bin_4	  = 0.99706	 +/-  0.0108789	(limited)
+gamma_stat_tautau_SR0_bin_5	  = 1.00206	 +/-  0.00963465	(limited)
+gamma_stat_tautau_SR0_bin_6	  = 0.990153	 +/-  0.0103209	(limited)
+gamma_stat_tautau_SR1_bin_0	  = 0.83345	 +/-  0.438034	(limited)
+gamma_stat_tautau_SR1_bin_1	  = 0.980913	 +/-  0.081197	(limited)
+gamma_stat_tautau_SR1_bin_10	  = 1.07451	 +/-  0.184235	(limited)
+gamma_stat_tautau_SR1_bin_11	  = 0.676313	 +/-  0.404564	(limited)
+gamma_stat_tautau_SR1_bin_12	  = 0.776571	 +/-  0.400527	(limited)
+gamma_stat_tautau_SR1_bin_13	  = 1.12523	 +/-  0.268893	(limited)
+gamma_stat_tautau_SR1_bin_2	  = 1.04262	 +/-  0.0493695	(limited)
+gamma_stat_tautau_SR1_bin_3	  = 1.04292	 +/-  0.0445658	(limited)
+gamma_stat_tautau_SR1_bin_4	  = 1.05234	 +/-  0.0389662	(limited)
+gamma_stat_tautau_SR1_bin_5	  = 1.00637	 +/-  0.0316708	(limited)
+gamma_stat_tautau_SR1_bin_6	  = 0.979901	 +/-  0.0276349	(limited)
+gamma_stat_tautau_SR1_bin_7	  = 0.992066	 +/-  0.0243811	(limited)
+gamma_stat_tautau_SR1_bin_8	  = 1.0144	 +/-  0.0416925	(limited)
+gamma_stat_tautau_SR1_bin_9	  = 1.00479	 +/-  0.0631863	(limited)
+gamma_stat_tautau_SR2_bin_0	  = 2.80409e-10	 +/-  53165.8	(limited)
+gamma_stat_tautau_SR2_bin_1	  = 0.994676	 +/-  0.118952	(limited)
+gamma_stat_tautau_SR2_bin_10	  = 1.32039	 +/-  0.298161	(limited)
+gamma_stat_tautau_SR2_bin_11	  = 0.855197	 +/-  0.256491	(limited)
+gamma_stat_tautau_SR2_bin_12	  = 0.50153	 +/-  0.86173	(limited)
+gamma_stat_tautau_SR2_bin_13	  = 1.04989	 +/-  0.361975	(limited)
+gamma_stat_tautau_SR2_bin_2	  = 1.02145	 +/-  0.052444	(limited)
+gamma_stat_tautau_SR2_bin_3	  = 1.0301	 +/-  0.0292522	(limited)
+gamma_stat_tautau_SR2_bin_4	  = 0.990653	 +/-  0.0236344	(limited)
+gamma_stat_tautau_SR2_bin_5	  = 0.975144	 +/-  0.0284963	(limited)
+gamma_stat_tautau_SR2_bin_6	  = 0.994072	 +/-  0.0418971	(limited)
+gamma_stat_tautau_SR2_bin_7	  = 1.1756	 +/-  0.0871737	(limited)
+gamma_stat_tautau_SR2_bin_8	  = 1.24715	 +/-  0.153157	(limited)
+gamma_stat_tautau_SR2_bin_9	  = 0.747151	 +/-  0.136721	(limited)
+mu_comb	  = 0.954889	 +/-  0.0130543	(limited)
+Warning in <Minuit2>: MnPosDef Matrix forced pos-def by adding to diagonal 0.0184712
+[0;33m[ WARNING ][0;0m FittingTool.c...:268 16-09-2026 15:19:06 | 
+[0;33m[ WARNING ][0;0m FittingTool.c...:269 16-09-2026 15:19:06 |    *******************************
+[0;33m[ WARNING ][0;0m FittingTool.c...:270 16-09-2026 15:19:06 |    * Increasing Minuit strategy (was 1)
+[0;33m[ WARNING ][0;0m FittingTool.c...:272 16-09-2026 15:19:06 |    * Fit failed with : 
+[0;33m[ WARNING ][0;0m FittingTool.c...:273 16-09-2026 15:19:06 |       - minuit status 0
+[0;33m[ WARNING ][0;0m FittingTool.c...:274 16-09-2026 15:19:06 |       - hess status 0
+[0;33m[ WARNING ][0;0m FittingTool.c...:275 16-09-2026 15:19:06 |       - Edm = 0.000487443
+[0;33m[ WARNING ][0;0m FittingTool.c...:276 16-09-2026 15:19:06 |    * Retrying with strategy 2
+[0;33m[ WARNING ][0;0m FittingTool.c...:277 16-09-2026 15:19:06 |    ********************************
+[0;33m[ WARNING ][0;0m FittingTool.c...:278 16-09-2026 15:19:06 | 
+Minuit2Minimizer: Minimize with max-calls 89780 convergence for edm < 0.01 strategy 2
+Warning in <Minuit2>: MnPosDef Matrix forced pos-def by adding to diagonal 0.0177863
+Warning in <Minuit2>: DavidonErrorUpdator delgam < 0 : first derivatives increasing along search line (details in info log)
+Warning in <Minuit2>: VariableMetricBuilder Matrix not pos.def., try to make pos.def.
+Warning in <Minuit2>: MnPosDef Matrix forced pos-def by adding to diagonal 0.0817188
+Warning in <Minuit2>: VariableMetricBuilder No improvement in line search
+Warning in <Minuit2>: MnPosDef Matrix forced pos-def by adding to diagonal 0.047537
+Warning in <Minuit2>: VariableMetricBuilder Reached machine accuracy limit; Edm 9.13366e-05 is smaller than machine limit 0.000836321 while 1e-05 was requested
+Warning in <Minuit2>: Minuit2Minimizer::Minimize Covar was made pos def
+Minuit2Minimizer : Valid minimum - status = 1
+FVAL  = -14031.1309578039654
+Edm   = 9.13366079959502245e-05
+Nfcn  = 21959
+alpha_AlphaS	  = -0.102857	 +/-  0.959491	(limited)
+alpha_ElectronER	  = 1.45818	 +/-  0.93992	(limited)
+alpha_ElectronES	  = -2.66855e-06	 +/-  0.970872	(limited)
+alpha_ElectronID	  = 0.415558	 +/-  0.0241931	(limited)
+alpha_ElectronRECO	  = -1.55715	 +/-  0.259445	(limited)
+alpha_FakeClosure_tautau_c0_hi	  = -0.0785803	 +/-  0.89532	(limited)
+alpha_FakeClosure_tautau_c1_hi	  = -0.135137	 +/-  0.485871	(limited)
+alpha_FakeClosure_tautau_c1_lo	  = 0.775271	 +/-  0.786627	(limited)
+alpha_FakeClosure_tautau_c2_hi	  = 1.63201	 +/-  0.789027	(limited)
+alpha_FakeClosure_tautau_c2_lo	  = 0.257563	 +/-  1.03437	(limited)
+alpha_FakeMethod_mumu	  = 0.341815	 +/-  0.926954	(limited)
+alpha_FakeOSSS_tautau_c0	  = -0.22732	 +/-  0.533387	(limited)
+alpha_FakeOSSS_tautau_c1	  = 0.452922	 +/-  0.887318	(limited)
+alpha_FakeOSSS_tautau_c2	  = 0.339272	 +/-  0.976213	(limited)
+alpha_FakeStat_mumu	  = 0.203535	 +/-  0.949145	(limited)
+alpha_L1Prefiring	  = 2.63297	 +/-  0.19095	(limited)
+alpha_Lumi	  = -0.45193	 +/-  0.0844487	(limited)
+alpha_MCStatNorm_WJets_tautau	  = -0.176313	 +/-  0.490189	(limited)
+alpha_MET_Unclustered	  = -0.198877	 +/-  0.867995	(limited)
+alpha_MuonID	  = 1.06064	 +/-  0.521673	(limited)
+alpha_MuonIso	  = 1.14669	 +/-  0.318183	(limited)
+alpha_MuonReco	  = 3.28528	 +/-  0.15792	(limited)
+alpha_MuonRes	  = 0.350392	 +/-  0.0740316	(limited)
+alpha_MuonScale	  = -0.399666	 +/-  0.0623122	(limited)
+alpha_MuonTrigger	  = 0.547016	 +/-  0.541589	(limited)
+alpha_PDF	  = 1.5021	 +/-  0.858304	(limited)
+alpha_PS_FSR	  = -0.640154	 +/-  0.278395	(limited)
+alpha_PS_ISR	  = 1.62349	 +/-  0.649638	(limited)
+alpha_Pileup	  = -0.00724511	 +/-  0.251047	(limited)
+alpha_QCDScale	  = -1.16422	 +/-  0.240787	(limited)
+alpha_SigModel_mumu	  = 0.588639	 +/-  0.0469531	(limited)
+alpha_TauES_DM0	  = -0.437791	 +/-  0.919664	(limited)
+alpha_TauES_DM1	  = -0.224128	 +/-  0.876451	(limited)
+alpha_TauES_DM10	  = -0.249416	 +/-  0.965844	(limited)
+alpha_TauES_DM11	  = 0.058014	 +/-  0.968781	(limited)
+alpha_TauFakeEle	  = -0.0271481	 +/-  0.970526	(limited)
+alpha_TauFakeMu	  = 0.00100806	 +/-  0.970882	(limited)
+alpha_TauID_DM0	  = 0.650564	 +/-  0.850956	(limited)
+alpha_TauID_DM1	  = 0.615422	 +/-  1.23678	(limited)
+alpha_TauID_DM10	  = 0.10318	 +/-  0.472367	(limited)
+alpha_TauID_DM11	  = 0.26079	 +/-  0.906278	(limited)
+alpha_TauTrigger_DM0	  = 0.357309	 +/-  0.955447	(limited)
+alpha_TauTrigger_DM1	  = 0.377255	 +/-  0.986353	(limited)
+alpha_TauTrigger_DM10	  = 0.198966	 +/-  0.933679	(limited)
+alpha_TauTrigger_DM11	  = 0.118016	 +/-  0.958559	(limited)
+alpha_XS_DYll	  = -0.0025198	 +/-  0.970471	(limited)
+alpha_XS_DYlowmass	  = -0.00657746	 +/-  0.971086	(limited)
+alpha_XS_DYtautau	  = -1.73955	 +/-  0.857585	(limited)
+alpha_XS_DYtautau_nonfid	  = -0.16181	 +/-  0.927653	(limited)
+alpha_XS_SingleTop	  = 0.108322	 +/-  0.964618	(limited)
+alpha_XS_TTbar	  = 0.425182	 +/-  0.921982	(limited)
+alpha_XS_VV	  = -0.229934	 +/-  0.96071	(limited)
+alpha_XS_WJets	  = -0.943485	 +/-  0.899966	(limited)
+alpha_XS_WW	  = 0.123196	 +/-  0.962126	(limited)
+alpha_XS_WZ	  = 0.088112	 +/-  0.965589	(limited)
+alpha_XS_ZZ	  = 0.0466519	 +/-  0.967963	(limited)
+gamma_stat_ee_SR_bin_0	  = 0.966141	 +/-  0.00724493	(limited)
+gamma_stat_ee_SR_bin_1	  = 0.989339	 +/-  0.00795027	(limited)
+gamma_stat_ee_SR_bin_10	  = 1.01149	 +/-  0.00276037	(limited)
+gamma_stat_ee_SR_bin_11	  = 1.01854	 +/-  0.00233423	(limited)
+gamma_stat_ee_SR_bin_12	  = 1.00823	 +/-  0.00166022	(limited)
+gamma_stat_ee_SR_bin_13	  = 1.00147	 +/-  0.00121627	(limited)
+gamma_stat_ee_SR_bin_14	  = 0.996625	 +/-  0.000914594	(limited)
+gamma_stat_ee_SR_bin_15	  = 1.00702	 +/-  0.0106056	(limited)
+gamma_stat_ee_SR_bin_16	  = 0.996972	 +/-  0.000983383	(limited)
+gamma_stat_ee_SR_bin_17	  = 0.977859	 +/-  0.00151321	(limited)
+gamma_stat_ee_SR_bin_18	  = 0.97936	 +/-  0.00215664	(limited)
+gamma_stat_ee_SR_bin_19	  = 0.99991	 +/-  0.00300317	(limited)
+gamma_stat_ee_SR_bin_2	  = 0.946917	 +/-  0.00648284	(limited)
+gamma_stat_ee_SR_bin_20	  = 0.995721	 +/-  0.00371967	(limited)
+gamma_stat_ee_SR_bin_21	  = 1.01368	 +/-  0.00451744	(limited)
+gamma_stat_ee_SR_bin_22	  = 1.00408	 +/-  0.00529379	(limited)
+gamma_stat_ee_SR_bin_23	  = 1.03403	 +/-  0.00619607	(limited)
+gamma_stat_ee_SR_bin_24	  = 1.01277	 +/-  0.00649205	(limited)
+gamma_stat_ee_SR_bin_25	  = 1.00675	 +/-  0.00723919	(limited)
+gamma_stat_ee_SR_bin_26	  = 1.02639	 +/-  0.00827917	(limited)
+gamma_stat_ee_SR_bin_27	  = 1.04544	 +/-  0.00913991	(limited)
+gamma_stat_ee_SR_bin_28	  = 1.01311	 +/-  0.00974914	(limited)
+gamma_stat_ee_SR_bin_29	  = 1.01712	 +/-  0.00984616	(limited)
+gamma_stat_ee_SR_bin_3	  = 0.964936	 +/-  0.00589638	(limited)
+gamma_stat_ee_SR_bin_4	  = 0.977384	 +/-  0.00570819	(limited)
+gamma_stat_ee_SR_bin_5	  = 0.979542	 +/-  0.00523793	(limited)
+gamma_stat_ee_SR_bin_6	  = 0.992594	 +/-  0.00481198	(limited)
+gamma_stat_ee_SR_bin_7	  = 1.00399	 +/-  0.00434009	(limited)
+gamma_stat_ee_SR_bin_8	  = 0.989652	 +/-  0.00381145	(limited)
+gamma_stat_ee_SR_bin_9	  = 1.00078	 +/-  0.00325935	(limited)
+gamma_stat_mumu_SR_bin_0	  = 1.00735	 +/-  0.00431342	(limited)
+gamma_stat_mumu_SR_bin_1	  = 0.995873	 +/-  0.00336365	(limited)
+gamma_stat_mumu_SR_bin_10	  = 1.00928	 +/-  0.00484972	(limited)
+gamma_stat_mumu_SR_bin_11	  = 1.00924	 +/-  0.00559023	(limited)
+gamma_stat_mumu_SR_bin_2	  = 0.997659	 +/-  0.00277354	(limited)
+gamma_stat_mumu_SR_bin_3	  = 0.995574	 +/-  0.00204388	(limited)
+gamma_stat_mumu_SR_bin_4	  = 1.00068	 +/-  0.00144703	(limited)
+gamma_stat_mumu_SR_bin_5	  = 1.00023	 +/-  0.000890496	(limited)
+gamma_stat_mumu_SR_bin_6	  = 1.00008	 +/-  0.000714561	(limited)
+gamma_stat_mumu_SR_bin_7	  = 1	 +/-  0.00185431	(limited)
+gamma_stat_mumu_SR_bin_8	  = 0.998359	 +/-  0.0022842	(limited)
+gamma_stat_mumu_SR_bin_9	  = 1.00631	 +/-  0.00361965	(limited)
+gamma_stat_tautau_SR0_bin_0	  = 0.986001	 +/-  0.0189577	(limited)
+gamma_stat_tautau_SR0_bin_1	  = 0.997961	 +/-  0.0140211	(limited)
+gamma_stat_tautau_SR0_bin_2	  = 1.00474	 +/-  0.00879492	(limited)
+gamma_stat_tautau_SR0_bin_3	  = 1.0055	 +/-  0.00887787	(limited)
+gamma_stat_tautau_SR0_bin_4	  = 0.997059	 +/-  0.0106385	(limited)
+gamma_stat_tautau_SR0_bin_5	  = 1.00206	 +/-  0.0100034	(limited)
+gamma_stat_tautau_SR0_bin_6	  = 0.990148	 +/-  0.00965415	(limited)
+gamma_stat_tautau_SR1_bin_0	  = 0.833365	 +/-  0.38912	(limited)
+gamma_stat_tautau_SR1_bin_1	  = 0.98089	 +/-  0.0796847	(limited)
+gamma_stat_tautau_SR1_bin_10	  = 1.07447	 +/-  0.188743	(limited)
+gamma_stat_tautau_SR1_bin_11	  = 0.676216	 +/-  0.388864	(limited)
+gamma_stat_tautau_SR1_bin_12	  = 0.776588	 +/-  0.382948	(limited)
+gamma_stat_tautau_SR1_bin_13	  = 1.12513	 +/-  0.287299	(limited)
+gamma_stat_tautau_SR1_bin_2	  = 1.04262	 +/-  0.0525435	(limited)
+gamma_stat_tautau_SR1_bin_3	  = 1.04292	 +/-  0.0484867	(limited)
+gamma_stat_tautau_SR1_bin_4	  = 1.05238	 +/-  0.0407105	(limited)
+gamma_stat_tautau_SR1_bin_5	  = 1.00638	 +/-  0.0326573	(limited)
+gamma_stat_tautau_SR1_bin_6	  = 0.979876	 +/-  0.0283723	(limited)
+gamma_stat_tautau_SR1_bin_7	  = 0.992056	 +/-  0.0265604	(limited)
+gamma_stat_tautau_SR1_bin_8	  = 1.01437	 +/-  0.0448916	(limited)
+gamma_stat_tautau_SR1_bin_9	  = 1.0048	 +/-  0.0637524	(limited)
+gamma_stat_tautau_SR2_bin_0	  = 0.011342	 +/-  46200	(limited)
+gamma_stat_tautau_SR2_bin_1	  = 0.99457	 +/-  0.117442	(limited)
+gamma_stat_tautau_SR2_bin_10	  = 1.31997	 +/-  0.323441	(limited)
+gamma_stat_tautau_SR2_bin_11	  = 0.855091	 +/-  0.245013	(limited)
+gamma_stat_tautau_SR2_bin_12	  = 0.501765	 +/-  0.891198	(limited)
+gamma_stat_tautau_SR2_bin_13	  = 1.0499	 +/-  0.366726	(limited)
+gamma_stat_tautau_SR2_bin_2	  = 1.0214	 +/-  0.0542955	(limited)
+gamma_stat_tautau_SR2_bin_3	  = 1.03007	 +/-  0.0352165	(limited)
+gamma_stat_tautau_SR2_bin_4	  = 0.990607	 +/-  0.0265929	(limited)
+gamma_stat_tautau_SR2_bin_5	  = 0.975141	 +/-  0.0293341	(limited)
+gamma_stat_tautau_SR2_bin_6	  = 0.994044	 +/-  0.0432405	(limited)
+gamma_stat_tautau_SR2_bin_7	  = 1.17555	 +/-  0.0911311	(limited)
+gamma_stat_tautau_SR2_bin_8	  = 1.2472	 +/-  0.15914	(limited)
+gamma_stat_tautau_SR2_bin_9	  = 0.747063	 +/-  0.132539	(limited)
+mu_comb	  = 0.954883	 +/-  0.000986979	(limited)
+[0;33m[ WARNING ][0;0m FittingTool.c...:268 16-09-2026 15:19:07 | 
+[0;33m[ WARNING ][0;0m FittingTool.c...:269 16-09-2026 15:19:07 |    *******************************
+[0;33m[ WARNING ][0;0m FittingTool.c...:270 16-09-2026 15:19:07 |    * Increasing Minuit strategy (was 2)
+[0;33m[ WARNING ][0;0m FittingTool.c...:272 16-09-2026 15:19:07 |    * Fit failed with : 
+[0;33m[ WARNING ][0;0m FittingTool.c...:273 16-09-2026 15:19:07 |       - minuit status 1
+[0;33m[ WARNING ][0;0m FittingTool.c...:274 16-09-2026 15:19:07 |       - hess status 0
+[0;33m[ WARNING ][0;0m FittingTool.c...:275 16-09-2026 15:19:07 |       - Edm = 0.000386112
+[0;33m[ WARNING ][0;0m FittingTool.c...:276 16-09-2026 15:19:07 |    * Retrying with strategy 3
+[0;33m[ WARNING ][0;0m FittingTool.c...:277 16-09-2026 15:19:07 |    ********************************
+[0;33m[ WARNING ][0;0m FittingTool.c...:278 16-09-2026 15:19:07 | 
+Minuit2Minimizer: Minimize with max-calls 89780 convergence for edm < 0.01 strategy 3
+Warning in <Minuit2>: VariableMetricBuilder No improvement in line search
+Warning in <Minuit2>: VariableMetricBuilder Edm is limited by Machine accuracy - return current minimum
+Warning in <Minuit2>: VariableMetricBuilder Reached machine accuracy limit; Edm 0.000299126 is smaller than machine limit 0.000836321 while 1e-05 was requested
+Warning in <Minuit2>: VariableMetricBuilder No convergence; Edm 0.000299126 is above tolerance 0.0001
+Warning in <Minuit2>: Minuit2Minimizer::Minimize Minimization did NOT converge, Edm is above max
+Minuit2Minimizer : Invalid minimum - status = 3
+FVAL  = -14031.1
+Edm   = 0.000299126
+Nfcn  = 38847
+
+ *** Break *** segmentation violation
+[0;31m[ ERROR   ][0;0m FittingTool.c...:301 16-09-2026 15:19:08 | 
+[0;31m[ ERROR   ][0;0m FittingTool.c...:302 16-09-2026 15:19:08 | 
+[0;31m[ ERROR   ][0;0m FittingTool.c...:303 16-09-2026 15:19:08 | 
+[0;31m[ ERROR   ][0;0m FittingTool.c...:304 16-09-2026 15:19:08 | 
+[0;31m[ ERROR   ][0;0m FittingTool.c...:305 16-09-2026 15:19:08 | ***********************************************************
+[0;31m[ ERROR   ][0;0m FittingTool.c...:306 16-09-2026 15:19:08 | Fit failure unresolved with status 3
+[0;31m[ ERROR   ][0;0m FittingTool.c...:307 16-09-2026 15:19:08 |    Please investigate your workspace
+[0;31m[ ERROR   ][0;0m FittingTool.c...:308 16-09-2026 15:19:08 |    Find a wall : you will need it to crash your head on it
+[0;31m[ ERROR   ][0;0m FittingTool.c...:309 16-09-2026 15:19:08 | ***********************************************************
+[0;31m[ ERROR   ][0;0m FittingTool.c...:310 16-09-2026 15:19:08 | 
+[0;31m[ ERROR   ][0;0m FittingTool.c...:311 16-09-2026 15:19:08 | 
+[0;31m[ ERROR   ][0;0m FittingTool.c...:312 16-09-2026 15:19:08 | 
+[1;32m[ INFO    ][0;0m MultiFit.cc:549      16-09-2026 15:19:08 | ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m MultiFit.cc:550      16-09-2026 15:19:08 | -----------------------     ERROR DECOMPOSITION    -----------------------
+[1;32m[ INFO    ][0;0m MultiFit.cc:551      16-09-2026 15:19:08 |   POI :  +/-tot.err  (+/-stat  +/-syst)
+[1;32m[ INFO    ][0;0m MultiFit.cc:552      16-09-2026 15:19:08 | ----------------------- -------------------------- -----------------------
+[0;33m[ WARNING ][0;0m FittingTool.c...:949 16-09-2026 15:19:08 | No fit results found. Skipping error decomposition.
+[1;32m[ INFO    ][0;0m MultiFit.cc:559      16-09-2026 15:19:08 |   Full breakdown will be written to file in the Fits/ folder.
+[1;32m[ INFO    ][0;0m MultiFit.cc:560      16-09-2026 15:19:08 | ----------------------- -------------------------- -----------------------
+[1;32m[ INFO    ][0;0m FittingTool....:1223 16-09-2026 15:19:08 | Producing group uncertainty breakdown for POI: mu_comb
+[1;32m[ INFO    ][0;0m FittingTool....:1224 16-09-2026 15:19:08 | The txt file will be stored here: /project/atlas/Users/lgijsen/BND-school/combination/combLieke/mumu_ee_tautau/results/combLieke/Fits/combLieke_group_errDecomp_mu_comb.txt
+[1;32m[ INFO    ][0;0m YamlConverter...:361 16-09-2026 15:19:08 | Writing impact yaml file to: /project/atlas/Users/lgijsen/BND-school/combination/combLieke/mumu_ee_tautau/results/combLieke/Fits/combLieke_group_errDecomp_mu_comb.yaml
+[0;33m[ WARNING ][0;0m FittingTool....:1375 16-09-2026 15:19:08 | No fit result, will return empty vector
+[0;33m[ WARNING ][0;0m FittingTool....:1375 16-09-2026 15:19:08 | No fit result, will return empty vector
+[0;33m[ WARNING ][0;0m FittingTool....:1375 16-09-2026 15:19:08 | No fit result, will return empty vector

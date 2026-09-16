@@ -1,0 +1,68 @@
+- Category: Background normalisation
+  Impact: 0.0029908541956187567
+  ImpactUp: 0.0027520985014056216
+  ImpactDown: 0.002731257086050045
+- Category: Electron ID
+  Impact: 0.001092434001979265
+  ImpactUp: 0.0010037975198456547
+  ImpactDown: 0.0010231044895277145
+- Category: Electron efficiency
+  Impact: 0
+  ImpactUp: 0
+  ImpactDown: 0
+- Category: Fakes
+  Impact: 0.0010527479542676867
+  ImpactUp: 0.000997071379286733
+  ImpactDown: 0.0009566986296556094
+- Category: L1 prefiring
+  Impact: 0.0035978137313355724
+  ImpactUp: 0.00396014184274937
+  ImpactDown: 0.003906535884408445
+- Category: Luminosity
+  Impact: 0.014791805194619848
+  ImpactUp: 0.011849084180884385
+  ImpactDown: 0.012039913338268359
+- Category: MET
+  Impact: 0.00011566049088441715
+  ImpactUp: 0.00010753460078134198
+  ImpactDown: 0.00010565445886235262
+- Category: Muon efficiency
+  Impact: 0.006679495749248154
+  ImpactUp: 0.005982522781660835
+  ImpactDown: 0.006093445457878098
+- Category: Muon momentum
+  Impact: 0.0004392907000416884
+  ImpactUp: 0.00040482123664265884
+  ImpactDown: 0.00040052094442503104
+- Category: Pileup
+  Impact: 0.0007338436178298761
+  ImpactUp: 0.0006693627531246807
+  ImpactDown: 0.0006617025568283092
+- Category: Signal modelling
+  Impact: 0.0013583193845393532
+  ImpactUp: 0.0012238598927469147
+  ImpactDown: 0.001234369696276946
+- Category: Tau ID
+  Impact: 0.00028669197445063325
+  ImpactUp: 0.00025950724540104575
+  ImpactDown: 0.00026632252552380296
+- Category: Tau energy scale
+  Impact: 0.00024119151828378406
+  ImpactUp: 0.00021855109987623406
+  ImpactDown: 0.00022633180992651138
+- Category: Tau trigger
+  Impact: 0.0001620563110607984
+  ImpactUp: 0.00014827272160321942
+  ImpactDown: 0.00015082943626594885
+- Category: MC stat.
+  Impact: 0.004793838169636855
+  ImpactUp: 0.004426150127151148
+  ImpactDown: -0.004360458540499049
+- Category: Total syst.
+  Impact: 0.017701461835227264
+  ImpactUp: 0.01494319667705748
+  ImpactDown: -0.015101787787620898
+- Category: Stat unc.
+  Impact: .nan
+  ImpactUp: 0.0018659763884084019
+  ImpactDown: .nan

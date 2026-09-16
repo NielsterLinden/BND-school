@@ -34,6 +34,9 @@ python scripts/v2_1_skim.py              # (re)make the skims: ~1.5 h, resumable
 | 5 | `scripts/v2_5_fit.py` | `fit/fitinputs/zmumu.root`, `fit/zmumu.config`, `fit/results/zmumu/`, `fit/results/zmumu_fit_result.json` (`--rebin`, `--tag`, `--no-sigmodel`, `--quick` for variants) | step 4, trex-fitter |
 | 5b | `scripts/v2_5_fit_variants.py` | `fit/results/stability.json` (μ_Z vs binning / SigModel / smoothing) | step 5 |
 | 6 | `scripts/v2_6_report.py` | `output/v2/RESULTS_v2.md`, `results_v2.json`, plots `datamc_*`, `summary_v2.png` | step 5 |
+| 7 | `scripts/v2_7_reco_tnp.py` | `output/v2/tnp/reco_result.json`, `reco_fits.pkl`, plots `reco_*` (muon reconstruction SF, T&P on the **unskimmed** NanoAOD, ~15 min) | step 2a, dCache parents |
+| 8 | `scripts/v2_8_theory_acceptance.py` | `output/v2/cms_parity/theory_acceptance.json`, plot `cms_acc_vs_ptz.png` (A vs pT(Z), bare vs dressed, 25/25 volume) | DY NLO parents from EOS |
+| 9 | `scripts/v2_9_cms_parity.py` | `output/v2/cms_parity/parity_zmumu.{json,md}`, plots `cms_parity_*` (budget vs CMS-SMP-20-004, three options, comparison) | steps 7, 8, `v2_5_fit.py --reco-sf output/v2/tnp/reco_result.json --tag zmumu_recosf` |
 
 Every per-file step is resumable (parts in `output/v2/*_parts/`; delete a part to redo it) and
 has `--summarise-only` / `--merge-only`. Change a cut → rerun from step 2 (T&P) or 4 (histograms).
@@ -49,6 +52,8 @@ has `--summarise-only` / `--merge-only`. Change a cut → rerun from step 2 (T&P
 - `zmumu/fakes.py`, `zmumu/momentum.py` — fake factor; Z-peak momentum calibration.
 - `zmumu/histograms.py` — variables, binnings, systematic variations; `zmumu/plotting.py` — data/MC plots.
 - `scripts/v2_5_fit.py` — TRExFitter config (NP list, categories) and the σ extraction.
+- `zmumu/recoeff.py` — reconstruction-efficiency probes (stand-alone, isolated track) for step 7.
+- `../fitting/uncertainty_parity.py`, `../fitting/UNCERTAINTY_PARITY.md` — the comparison with a published budget (docs/16).
 - `../fitting/CONVENTIONS.md` — histogram/NP naming shared with the other channels.
 
 ## Traps (all cost time once)
@@ -64,3 +69,5 @@ has `--summarise-only` / `--merge-only`. Change a cut → rerun from step 2 (T&P
 - dCache stalls above ~8 readers; `batch.run_files` retries from EOS. Do not import ROOT in python.
 - The powheg `SigModel` template is normalised to the NLO fiducial prediction (its cross section is not used).
 - `hist` histograms for TRExFitter need `storage.Weight()` (Sumw2), see `fitting/trexhist.py`.
+- The reconstruction efficiency *is* measurable in NanoAODv9 (`Muon_isStandalone`, `IsoTrack`), but not in the skims (a failing probe is not a loose muon): step 7 reads the parents.
+- `A_60_120` theory uncertainties must use the `lhe_mumu_60_120` denominator; `mc_acceptance.py` (and so the baseline fit JSON) used m > 50 (docs/16 §4.2).

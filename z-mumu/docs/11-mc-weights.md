@@ -33,8 +33,9 @@ w = genWeight x sigma L / sum genWeight x w_PU(nTrueInt) x L1PreFiringWeight_Nom
   non-luminosity uncertainty of the result (0.51%).
 - **Scale factors** from our own tag-and-probe (docs/12): per-muon ID and isolation, per-event
   trigger `[1-(1-e1^data)(1-e2^data)] / [1-(1-e1^MC)(1-e2^MC)]` with the measured per-muon
-  efficiencies including the turn-on bins. Reconstruction: SF = 1 +- 0.4%/muon (not measurable
-  in NanoAOD; the simulation truth is 0.9986), taken as fully correlated between the two muons,
+  efficiencies including the turn-on bins. Reconstruction: SF = 1 +- 0.4%/muon (assigned; the
+  simulation truth is 0.9986. It *is* measurable on the unskimmed NanoAOD: 1.0001 +- 0.0013 per muon,
+  docs/16, applied only in the tagged fit `zmumu_recosf`), taken as fully correlated between the two muons,
   i.e. the `MuonReco` nuisance parameter is **0.8% per event** (the first v2 fit applied 0.4% per
   event, REVIEW.md F8).
 - **Theory variations on the signal** (PDF Hessian members, alpha_s, 7-point muR/muF, PS ISR/FSR)

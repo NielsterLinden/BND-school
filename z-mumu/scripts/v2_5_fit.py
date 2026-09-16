@@ -2,6 +2,7 @@
 """v2 step 5 -- TRExFitter inputs, config, fit, and the cross section.
 
     python scripts/v2_5_fit.py [--no-fit] [--emu-control] [--rebin 5] [--tag NAME] [--no-sigmodel] [--quick]
+                               [--reco-sf output/v2/tnp/reco_result.json]
 
 Reads output/v2/histograms.pkl, output/v2/fakes.json, output/v2/gensums.json and the
 acceptance numbers; writes fit/fitinputs/<tag>.root, fit/<tag>.config, runs trex-fitter
@@ -10,6 +11,9 @@ fit/results/<tag>_fit_result.json with mu, its uncertainty breakdown and the cro
 The signal-region mass histogram is stored with 1 GeV bins and rebinned by `--rebin`
 (default 5 -> 12 bins of 5 GeV; see docs/14 for why not 2 GeV). `--tag`, `--no-sigmodel`
 and `--quick` (h w f i only) serve the stability variants (scripts/v2_5_fit_variants.py).
+`--reco-sf` applies the measured muon reconstruction scale factor (scripts/v2_7_reco_tnp.py) to every
+MC template -- per event in the SR, per muon in the e-mu region -- and replaces the assigned 0.8 %
+`MuonReco` by its measured uncertainty (docs/16).
 See docs/14-fit-and-systematics.md and fitting/CONVENTIONS.md.
 """
 
@@ -139,7 +143,8 @@ def build_inputs(hists_all, fakes_res, gens, regions_used, rebin_sr=5, sigmodel=
     return out, meta
 
 
-def make_config(regions_used, present, emu_control, job=JOB, smoothing=False, bin_width=5):
+def make_config(regions_used, present, emu_control, job=JOB, smoothing=False, bin_width=5,
+                reco_unc=MUON_RECO_UNC, reco_title="Muon reconstruction (0.4%/muon, correlated)"):
     mc = [s for s in MC_SAMPLES if trexhist.hname("SR", s) in present]
     blocks = [
         tc.job(job, ExperimentLabel="CMS Open Data", Label="Z #rightarrow #mu#mu", CmeLabel="13 TeV",
@@ -176,8 +181,7 @@ def make_config(regions_used, present, emu_control, job=JOB, smoothing=False, bi
         blocks.append(tc.normfactor("mu_top", Title="#mu_{top}", Nominal=1, Min=0.0, Max=3.0, Samples="TTbar,SingleTop"))
     mc_list = ",".join(mc + emu_extra)
     blocks.append(tc.overall_syst("Lumi", config.LUMI_REL_UNC, -config.LUMI_REL_UNC, mc_list, "Luminosity", title="Luminosity"))
-    blocks.append(tc.overall_syst("MuonReco", MUON_RECO_UNC, -MUON_RECO_UNC, mc_list, "Muon efficiency",
-                                  title="Muon reconstruction (0.4%/muon, correlated)"))
+    blocks.append(tc.overall_syst("MuonReco", reco_unc, -reco_unc, mc_list, "Muon efficiency", title=reco_title))
     for s, unc in samples.XSEC_UNC.items():
         if s in mc + emu_extra and not (emu_control and s in ("TTbar", "SingleTop")):
             blocks.append(tc.overall_syst(f"XS_{s}", unc, -unc, s, "Background normalisation", title=f"{titles[s]} cross section",
@@ -251,6 +255,8 @@ def main():
     ap.add_argument("--no-sigmodel", action="store_true", help="drop the powheg SigModel template (stability check)")
     ap.add_argument("--smoothing", action="store_true", help="smooth the MuonScale/MuonRes templates (v2 default was on)")
     ap.add_argument("--quick", action="store_true", help="h w f i only (no plots, ranking or stat-only fit)")
+    ap.add_argument("--reco-sf", type=Path, default=None,
+                    help="reco_result.json of scripts/v2_7_reco_tnp.py: apply the measured reconstruction SF")
     args = ap.parse_args()
     JOB_ = args.tag
     if 60 % args.rebin:
@@ -264,6 +270,23 @@ def main():
     # rename regions to the channel-prefixed convention
     inputs = {n.replace("SR__", "mumu_SR__", 1).replace("CRemu__", "mumu_CRemu__", 1): h for n, h in inputs.items()}
     present = {n.replace("mumu_", "", 1) if n.startswith("mumu_") else n for n in inputs}
+    reco_unc, reco_title = MUON_RECO_UNC, "Muon reconstruction (0.4%/muon, correlated)"
+    if args.reco_sf:
+        rm = json.load(open(args.reco_sf))["meta"]
+        sf_evt, sf_mu = rm["sf_reco_per_event"], rm["sf_reco_per_muon"]
+        for name, h in inputs.items():
+            parts = name.split("__")
+            if parts[1] in ("Data", "Fakes"):
+                continue
+            f = sf_evt if parts[0] == "mumu_SR" else sf_mu
+            view = h.view()
+            view.value[...] = view.value * f
+            view.variance[...] = view.variance * f * f
+        reco_unc = rm["sf_reco_per_event_err"]
+        reco_title = f"Muon reconstruction (T&P, {100 * rm['sf_reco_per_muon_err']:.2f}%/muon, correlated)"
+        meta["reco_sf"] = {"source": str(args.reco_sf), "sf_per_event": sf_evt, "sf_per_muon": sf_mu,
+                           "unc_per_event": reco_unc}
+        print(f"[fit] reconstruction SF {sf_evt:.5f} per event applied to the MC templates; MuonReco = {100 * reco_unc:.3f} %")
     acc = {}
     acc_pkl = config.DATA_DIR / "mc_acceptance_nlo_result.pkl"
     if acc_pkl.exists():
@@ -289,7 +312,7 @@ def main():
         print(f"[fit] SigModel: C(powheg)/C(aMC@NLO) in the LHE window = {meta['sigmodel']['C_ratio_powheg_over_nlo']:.4f}, "
               f"fiducial fraction with m_LHE < 120: {meta['sigmodel']['frac_fid_in_lhe_window']:.4f}")
     (FIT / f"{JOB_}.config").write_text(make_config(regions_used, present, args.emu_control, job=JOB_, smoothing=args.smoothing,
-                                                    bin_width=args.rebin))
+                                                    bin_width=args.rebin, reco_unc=reco_unc, reco_title=reco_title))
     # counting cross-check
     data = inputs["mumu_SR__Data"].values().sum()
     bkg = sum(inputs[n].values().sum() for n in inputs if n.startswith("mumu_SR__") and n.count("__") == 1 and n not in ("mumu_SR__Data", "mumu_SR__DYmumu"))

@@ -1,0 +1,259 @@
+{
+ "schema": "uncertainty-parity/1",
+ "channel": "zmumu",
+ "channel_label": "Z\u2192\u03bc\u03bc (this work)",
+ "colour": "#2a78d6",
+ "observable": "\u03c3(Z/\u03b3*\u2192\u2113\u2113, 60 < m < 120 GeV)",
+ "unit": "pb",
+ "reference": {
+  "label": "CMS-SMP-20-004",
+  "cite": "arXiv:2408.03744, Tables 4, 7, 10, 13 (Z -> l+l-, 13 TeV, 206 pb^-1, 2017 low-pileup runs)",
+  "value": 1952.0,
+  "stat_pct": 0.20491803278688525,
+  "lumi_pct": 2.3,
+  "total_pct": 2.4913558229073414,
+  "note": "e and \u03bc fitted together (lepton universality); 2017 low-pileup runs, 13 TeV"
+ },
+ "measurement": {
+  "value": 1931.042994852695,
+  "stat_pct": 0.03141489406912573,
+  "fit": "z-mumu/fit/results/zmumu_recosf_fit_result.json",
+  "syst_pct_measured": 1.039391492909452,
+  "syst_pct_fit": 0.7741945041121696,
+  "syst_pct_acceptance": 0.6935110275511498,
+  "label": "\u03c3_fid / A(60-120), measured reconstruction SF applied"
+ },
+ "rows": [
+  {
+   "id": "lumi",
+   "source": "Luminosity",
+   "group": "luminosity",
+   "reference_pct": 2.3,
+   "ours_pct": 1.2,
+   "status": "better",
+   "treatment": "external",
+   "ours_how": "1.2 % for the 2016 legacy calibration (CMS-LUM-17-003), normtag luminosity 16393 pb^-1",
+   "reference_how": "2.3 % for the 2017 low-pileup runs (LUM-17-004)",
+   "rho_reference": 0.0,
+   "estimate": null
+  },
+  {
+   "id": "scale",
+   "source": "\u03bcR and \u03bcF scales",
+   "group": "theory",
+   "reference_pct": 0.66,
+   "ours_pct": 0.30654759818619526,
+   "status": "similar",
+   "treatment": "measured",
+   "rho_reference": 1.0,
+   "components": {
+    "acceptance (7-point, 60-120 GeV denominator)": 0.2899303709521184,
+    "C factor (fit, QCDScale)": 0.09955807327028816
+   },
+   "ours_how": "7-point envelope on A(60-120) 0.29 % \u2295 in the fit on C 0.10 %; a CMS-like 25/25 GeV volume gives 0.38 %",
+   "reference_how": "largest acceptance shift of the 6 non-extreme variations",
+   "estimate": null
+  },
+  {
+   "id": "pdf",
+   "source": "PDF + \u03b1s",
+   "group": "theory",
+   "reference_pct": 0.43,
+   "ours_pct": 0.5066041031628186,
+   "status": "similar",
+   "treatment": "measured",
+   "rho_reference": 1.0,
+   "components": {
+    "acceptance PDF (NNPDF3.1 Hessian)": 0.49999825108819246,
+    "acceptance \u03b1s": 0.030615855125863678,
+    "C factor (fit, PDF \u2295 AlphaS)": 0.0755786720250146
+   },
+   "ours_how": "NNPDF3.1 Hessian eigenvectors and \u03b1s \u00b1 0.0015 on A(60-120) and in the fit on C",
+   "reference_how": "NNPDF3.1 prescription on the acceptance",
+   "estimate": null
+  },
+  {
+   "id": "resum",
+   "source": "Boson pT (resummation) and generator on A",
+   "group": "theory",
+   "reference_pct": 0.12,
+   "status": "measured-now",
+   "treatment": "measured",
+   "ours_pct": 0.37902993947540947,
+   "components": {
+    "pT(Z) spectrum reweighted to our data (max with PS ISR)": 0.37543200833254353,
+    "powheg vs aMC@NLO": 0.044596276449926364,
+    "PS FSR (QCD)": 0.026938341911247887
+   },
+   "ours_how": "new: A with the pT(Z) spectrum reweighted to our measured pT(\u03bc\u03bc) (+0.38 %; PS ISR 0.07 %), powheg vs aMC@NLO (0.04 %), PS FSR (0.03 %)",
+   "reference_how": "DYTURBO NNLO+NNLL vs aMC@NLO on A, together with PYTHIA vs PHOTOS",
+   "rho_reference": 0.0,
+   "estimate": null
+  },
+  {
+   "id": "genC",
+   "source": "Generator and parton shower on C",
+   "group": "theory",
+   "reference_pct": null,
+   "ours_pct": 0.4228469854209739,
+   "status": "ours-only",
+   "treatment": "measured",
+   "components": {
+    "SigModel": 0.38190867825710373,
+    "PS_ISR": 0.09727224710255938,
+    "PS_FSR": 0.1532430895510004
+   },
+   "ours_how": "in the fit: powheg vs aMC@NLO lineshape (SigModel), PS ISR/FSR weights, all on C",
+   "reference_how": "no generator or shower term on the efficiency in the table",
+   "rho_reference": 0.0,
+   "estimate": null
+  },
+  {
+   "id": "qedfsr",
+   "source": "QED FSR model (PHOTOS vs PYTHIA)",
+   "group": "theory",
+   "reference_pct": null,
+   "status": "partial",
+   "treatment": "estimate",
+   "ours_pct": null,
+   "ours_how": "not measurable here: estimated (three options)",
+   "reference_how": "inside Resum. + FSR (0.12 %)",
+   "estimate": {
+    "why_not_measured": "every 2016 UL Drell-Yan sample in the Open Data (aMC@NLO FxFx, madgraph MLM, powheg) showers QED radiation with PYTHIA 8; a PHOTOS sample needs generation, GEANT4 simulation and reconstruction in CMSSW, which this cluster cannot run, and a generator-level PHOTOS run would only change A, while the sensitivity sits in C (reconstructed bare-muon pT cuts). The data rate of recovered FSR photons mixes the FSR model with the photon reconstruction efficiency, so it can size the effect but not measure it.",
+    "why_not_cited": "CMS-SMP-20-004 quotes PYTHIA vs PHOTOS only merged with the resummation uncertainty (0.12 %), for electrons and muons fitted together and for a Born-level fiducial volume with symmetric 25 GeV cuts; there is no muon-only or FSR-only number, and a Born-level volume is far more FSR-sensitive than our dressed one, so the number neither separates nor transfers. The generator-group PHOTOS/PYTHIA comparisons are internal.",
+    "options": {
+     "a": 0.12,
+     "b": 0.0,
+     "c": 0.10070080283758445
+    },
+    "derivation": "(size of the FSR effect) x (plausible model difference) = |A_bare/A_dressed - 1| = 1.09 % (generator level, bounds what the reconstructed bare-muon pT cuts can see) x |data/MC - 1| of the fraction of SR events with a recovered FSR photon = 9.2 % (attributing all of it to the FSR model, none to the photon efficiency) = 0.101 %"
+   },
+   "rho_reference": 0.0
+  },
+  {
+   "id": "prefire",
+   "source": "L1 trigger prefiring",
+   "group": "experimental",
+   "reference_pct": 0.34,
+   "ours_pct": 0.5152799898005234,
+   "status": "similar",
+   "treatment": "measured",
+   "ours_how": "NanoAOD L1PreFiringWeight Up/Dn (muon + ECAL maps, stat \u2295 20 %)",
+   "reference_how": "prefiring maps, stat \u2295 \u00b120 % of the probability",
+   "rho_reference": 0.0,
+   "estimate": null
+  },
+  {
+   "id": "eff",
+   "source": "Lepton ID, isolation, trigger efficiency",
+   "group": "experimental",
+   "reference_pct": 0.322490309931942,
+   "ours_pct": 0.3864333542740085,
+   "status": "similar",
+   "treatment": "measured",
+   "components": {
+    "MuonID": 0.19179114143071946,
+    "MuonIso": 0.29960203827636944,
+    "MuonTrigger": 0.15094871322673803
+   },
+   "ours_how": "own T&P fits, stat \u2295 syst (bkg shape, fit range, tag, powheg template, closure) shifted coherently over cells (conservative for the stat part); no charge binning (second order for Z: SF(\u03bc+)SF(\u03bc-))",
+   "reference_how": "T&P in charge \u00d7 pT \u00d7 \u03b7 bins, stat uncorrelated per bin; syst: fit model, PHOTOS FSR in templates, tag",
+   "rho_reference": 0.0,
+   "estimate": null
+  },
+  {
+   "id": "reco",
+   "source": "Muon reconstruction (tracking, stand-alone)",
+   "group": "experimental",
+   "reference_pct": null,
+   "ours_pct": 0.2647113285020733,
+   "status": "measured-now",
+   "treatment": "measured",
+   "components": {
+    "assigned before (0.4 %/muon)": 0.7835146852552387
+   },
+   "ours_how": "new: T&P on the unskimmed NanoAOD (stand-alone and isolated-track probes), SF per muon 1.0001 \u00b1 0.0013; was 1 \u00b1 0.004 assigned (0.78 % on \u03bc)",
+   "reference_how": "T&P, inside Efficiency (stat)/(syst)",
+   "rho_reference": 0.0,
+   "estimate": null
+  },
+  {
+   "id": "fakes",
+   "source": "QCD multijet / non-prompt",
+   "group": "experimental",
+   "reference_pct": 0.15652475842498528,
+   "ours_pct": 0.038766308538216665,
+   "status": "similar",
+   "treatment": "measured",
+   "ours_how": "fake factor (anti-isolated muons), stat + 30 % method",
+   "reference_how": "misidentification factor (iso/anti-iso), stat + \u00b110/20 % prompt contamination",
+   "rho_reference": 0.0,
+   "estimate": null
+  },
+  {
+   "id": "mcstat",
+   "source": "MC statistics",
+   "group": "experimental",
+   "reference_pct": 0.16,
+   "ours_pct": 0.36081464876350516,
+   "status": "similar",
+   "treatment": "measured",
+   "ours_how": "Barlow-Beeston lite gammas per bin \u2295 MC stat on A",
+   "reference_how": "Barlow-Beeston",
+   "rho_reference": 0.0,
+   "estimate": null
+  },
+  {
+   "id": "bkgxs",
+   "source": "EW + tt\u0304 cross sections",
+   "group": "experimental",
+   "reference_pct": 0.04,
+   "ours_pct": 0.07309665420738531,
+   "status": "similar",
+   "treatment": "measured",
+   "ours_how": "6 % tt\u0304, 10 % tW/WW/WZ/ZZ, 5 % Z\u2192\u03c4\u03c4",
+   "reference_how": "5 % top and diboson; \u03c4 backgrounds via theory ratios",
+   "rho_reference": 0.0,
+   "estimate": null
+  },
+  {
+   "id": "recoil",
+   "source": "Hadronic recoil calibration",
+   "group": "experimental",
+   "reference_pct": 0.05,
+   "ours_pct": 0.0,
+   "status": "not-applicable",
+   "treatment": "none",
+   "ours_how": "no p_T^miss in the Z selection",
+   "reference_how": "W recoil calibration, enters Z via the joint W+Z fit",
+   "rho_reference": 0.0,
+   "estimate": null
+  },
+  {
+   "id": "momentum",
+   "source": "Muon momentum scale and resolution",
+   "group": "experimental",
+   "reference_pct": null,
+   "ours_pct": 0.3543437830749398,
+   "status": "similar",
+   "treatment": "measured",
+   "ours_how": "Z-peak calibration per |\u03b7| (Rochester corrections not obtainable), shape NPs",
+   "reference_how": "Rochester corrections; shape NP, 'small', not tabulated",
+   "rho_reference": 0.0,
+   "estimate": null
+  },
+  {
+   "id": "pileup",
+   "source": "Pileup",
+   "group": "experimental",
+   "reference_pct": null,
+   "ours_pct": 0.14511892306478083,
+   "status": "ours-only",
+   "treatment": "measured",
+   "ours_how": "N_PV-matched profile, \u03c3_minbias \u00b1 4.6 %",
+   "reference_how": "low-pileup runs (<\u03bc> \u2248 3): not needed",
+   "rho_reference": 0.0,
+   "estimate": null
+  }
+ ]
+}

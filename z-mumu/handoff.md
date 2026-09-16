@@ -118,6 +118,20 @@ smoothing, MINOS on all parameters, stability table in `RESULTS_v2.md` (+-0.2% b
 describe the data); pileup profile matched to N_PV (`Pileup` pull -1.5 -> +0.06); `MuonReco` 0.4%/muon ->
 0.8%/event; lepton-cleaned jets; luminosity quoted as the external 1.2%; `Fakes` template without Sumw2.
 
+### Comparison with CMS-SMP-20-004 (16 Sep 2026) -- `docs/16-uncertainties-vs-cms.md`
+
+Every row of the CMS systematic table (arXiv:2408.03744, Table 7; e and μ fitted together) is mapped onto
+this analysis. Closed by measurements, in a **tagged variant only** (baseline, config and fit inputs
+unchanged): the muon reconstruction SF by tag-and-probe on the unskimmed NanoAOD,
+**1.0001 ± 0.0013 per muon** (was 1 ± 0.004 assigned; `scripts/v2_7_reco_tnp.py`,
+`fit/results/zmumu_recosf_fit_result.json`: μ_Z = 0.9883 ± 0.0141, σ_fid syst 8.5 → 6.1 pb), and the
+resummation/boson-pT uncertainty of the acceptance from our own pT(μμ) spectrum (+0.38 %, absent before).
+The acceptance theory uncertainties are now evaluated for the 60–120 GeV denominator (0.61 → 0.58 %).
+Estimated with three options: the QED FSR model (a 0.12 / b 0 / c 0.10 %). Result:
+**σ(60–120) = 1931 ± 0.6 ± 20.2 ± 23.2 pb against CMS 1952 ± 4 ± 18 ± 45 pb: −21 pb, −0.36σ**, whichever
+option. Plots `output/v2/plots/cms_parity_*`, `reco_*`; the same procedure for z-ee and z-tautau:
+`../fitting/UNCERTAINTY_PARITY.md` (agent `.claude/agents/uncertainty-parity-auditor.md`).
+
 ### Open issues after v2
 
 1. The pileup profile is a two-parameter (scale, bunch-to-bunch spread) fit of the luminosity-record

@@ -1507,6 +1507,22 @@ def check_order(scene, state: dict, order) -> None:
         raise AssertionError(f"scene z-order {got} != ORDER {list(order)}")
 
 
+def clip_open(scene, name: str, hold: float = 0.3) -> None:
+    """Open delivered clip ``name`` (a manim section; tools/deliver_chain.py writes
+    every section as its own MP4) on a short hold of the current frame."""
+    scene.next_section(name)
+    scene.wait(hold)
+
+
+def clip_cut(scene, name: str, tail: float = 0.1, hold: float = 0.3) -> None:
+    """End the running clip on its last change (``tail``) and open clip ``name``
+    on that same frame (``hold``): the two clips share the frame exactly. A name
+    repeated at the end of one scene and the start of the next is one clip
+    (joined by tools/deliver_chain.py)."""
+    scene.wait(tail)
+    clip_open(scene, name, hold)
+
+
 __all__ = [
     "CHAPTER", "CHAPTER_NAME", "PURPLE", "CYAN", "GREEN", "GOLD", "RED", "SLATE", "BLACK", "WHITE",
     "mix", "tint", "shade",
@@ -1525,5 +1541,5 @@ __all__ = [
     "mini_slice", "kappa_from_pt", "muon_pieces", "event_from_json", "muon_in_jet",
     "pair_from_json",
     "stack_hist", "ratio_panel", "colour_key", "pull_plot", "value_grid", "Slider", "slider",
-    "clock", "rain", "spine", "add_state", "check_order",
+    "clock", "rain", "spine", "add_state", "check_order", "clip_open", "clip_cut",
 ]

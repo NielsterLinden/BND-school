@@ -21,17 +21,32 @@ one clip = one idea. Sources named so the fidelity checker can verify.
 | archived (2-02) | `cms_slice_build` | inside-out build of the slice, superseded by the logo build (`00_archive/`) | `CMSSlice` |
 | archived (2-03) | `cms_signatures` | e, μ, τ_h, jet, γ signature legend on the slice, not used in the talk (`00_archive/`) | `signature()` |
 | ✔ 2-01 | `cms_logo_to_slice` | **the detector build**: CMS logo appears, expands to the top right, the quarter layers round up into the full slice, the detail fades in | `CMSLogo`, `logo_rings` |
-| | `pipe_a_map` | **the analysis spine** (schematic, no numbers): nodes appear left→right — collisions/detector → recorded & simulated events (two rivers merging into one file stack) → selection funnel → corrections (tag & probe) → backgrounds (control region) → comparison (stack + ratio) → fit (μ) → σ | all channel docs |
-| | `pipe_b_data` | chained: zoom on nodes 1–2; events flash in the slice and stream into a file stack that shrinks (skim); the simulated river (mini Drell-Yan → the same slice → the same files) merges in | z-mumu docs/10-skims.md |
-| | `pipe_c_selection` | chained: the funnel — a bar shrinks through trigger → ℓ ID/isolation → exactly two leptons → opposite sign → mass window (proportions only) | channel handoffs |
-| | `pipe_d_tnp` | chained: tag-and-probe — the tag is clean, the probe is tested; pass/fail histograms; ε = pass/(pass+fail); ε_data vs ε_MC → scale-factor slider | z-mumu docs/12 |
-| | `pipe_e_backgrounds` | chained: the stack of simulated processes; the one the simulation cannot give (fakes) comes from a control-region box (same-sign) → sliver at the bottom of the stack | docs/13-fake-factor.md, z-tautau docs/05 |
-| | `pipe_f_compare` | chained: data points over the stack, the ratio panel opens, the systematic band breathes | docs/14 |
-| | `pipe_g_fit` | chained: μ slider, nuisance-parameter pulls, ratio flattens; σ = μ·σ_pred and σ = (N − B)/(A·ε·L) lit term by term | fitting/CONVENTIONS.md §2 |
-| | `pipe_h_three` | chained: the spine shrinks to a strip and triplicates in ee green / μμ gold / ττ red → hand-off to section 3 | palette `CHANNEL` |
+| ✔ 2-04 | `pipe_a_map` | **the analysis spine**: nodes appear left→right — detector → recorded & simulated files → selection → tag & probe → backgrounds → comparison → fit → σ | all channel docs |
+| ✔ 2-05 | `pipe_b1_collisions` | chained: zoom on detector + files; collisions flash, tracks, files fly to a pile | z-mumu docs/10-skims.md |
+| ✔ 2-06 | `pipe_b2_skim` | chained: the pile of 8 squeezes to 2 (the skim) | docs/10 |
+| ✔ 2-07 | `pipe_b3_simulation` | chained: mini Drell-Yan → the same slice → purple simulated files join the pile | docs/10 |
+| ✔ 2-08 | `pipe_c1_trigger` | chained: zoom out, zoom into the funnel; trigger bar | docs/01 |
+| ✔ 2-09 | `pipe_c2_lepton_id` | chained: ℓ p_T, ID/iso cut | docs/01 |
+| ✔ 2-10 | `pipe_c3_two_leptons` | chained: N_ℓ = 2, then ℓ⁺ℓ⁻ | docs/01 |
+| ✔ 2-11 | `pipe_c4_mass_window` | chained: m_ℓℓ window: the surviving bar | docs/01, docs/14 |
+| ✔ 2-12 | `pipe_d1_tag_probe` | chained: zoom out, zoom into tag & probe; tag bold, probe dashed | docs/12 |
+| ✔ 2-13 | `pipe_d2_efficiency` | chained: probes fall into pass / fail; ε = N_pass/(N_pass+N_fail) | docs/12 |
+| ✔ 2-14 | `pipe_d3_scale_factor` | chained: the same in simulation (dashed purple); ε_data/ε_MC slider moves off 1 | docs/12 |
+| ✔ 2-15 | `pipe_e1_simulation_stack` | chained: zoom out, zoom into backgrounds: **real Z→μμ SR stack, log y, 2 GeV** builds VV+ττ → tt̄/tW → Z/γ*→ℓℓ (generic legend) | data/zmumu_sr_stack.json (nominal) |
+| ✔ 2-16 | `pipe_e2_control_region` | chained: dashed ℓ±ℓ± box, mini slice, same-sign pair with a lepton in a jet | docs/13 |
+| ✔ 2-17 | `pipe_e3_fake_factor` | chained: arrow × f into the real Fakes layer at the bottom of the stack | docs/13, data/zmumu_sr_stack.json |
+| ✔ 2-18 | `pipe_f1_data` | chained: zoom out, zoom into comparison: real stack + key; real data points | data/zmumu_sr_stack.json |
+| ✔ 2-19 | `pipe_f2_ratio` | chained: ratio panel: real data/pred (2 GeV) | data/zmumu_sr_stack.json |
+| ✔ 2-20 | `pipe_f3_uncertainty` | chained: the (schematic) systematic band breathes | docs/14 |
+| ✔ 2-21 | `pipe_g1_fit_model` | chained: zoom out, zoom into fit: μ_Z slider, θ₁…θ₅ rows, real pre-fit ratio (5 GeV) | data/zmumu_fit.json |
+| ✔ 2-22 | `pipe_g2_fit` | chained: the fit: μ moves and tightens, pulls move, ratio goes to the real post-fit (flat) | data/zmumu_fit.json |
+| ✔ 2-23 | `pipe_g3_cross_section` | chained: σ = μ_Z σ_pred; σ = (N − B)/(A ε L) lit term by term | CONVENTIONS.md §2, docs/06 |
+| ✔ 2-24 | `pipe_h_three` | chained: zoom out to the finished spine; it shrinks and triplicates in ee green / μμ gold / ττ red | palette `CHANNEL` |
 
 (The earlier candidates `open_data_pipeline`, `selection_funnel`, `xsec_formula`, `tag_and_probe`, `fake_factor`,
-`profile_likelihood`, `luminosity` are superseded by the `pipe_*` chain, 15 Sep 2026.)
+`profile_likelihood`, `luminosity` are superseded by the `pipe_*` chain, 15 Sep 2026. On 16 Sep the chain was cut
+into one-idea clips (manim sections, `tools/deliver_chain.py`; each zoom-out is joined to the next zoom-in) and the
+stacks became the real Z→μμ signal region on a log axis, user request.)
 
 ## 3 — Z → ee (`3_zee`)
 
@@ -49,17 +64,30 @@ one clip = one idea. Sources named so the fidelity checker can verify.
 |---|-----------|-----------|--------|
 | ✔ 4-01 | `mumu_process` | Drell-Yan diagram in the μμ flavour; the muon legs simply continue, straight and clean | — |
 | ✔ 4-02 | `mumu_detector` | chained: dissolves to the slice; two outlined gold tracks through everything, MIP dots in both calorimeters, stubs in the four muon stations | `signature("mu")` |
-| | `mumu_a_event` | chained on 4-02 (**real data from here on**, `data/zmumu_*.json`): the schematic tracks fade, a real SR event (φ, charge, p_T from data) is drawn; p_T values peel off and converge to m_μμ; the slice parks left, log-y axes appear right, first entry | data/zmumu_events.json |
-| | `mumu_b_rain` | chained: three more real events, a clock spins, dots rain into the plot, the 60 data bins grow to the real counts (10,378,567) | data/zmumu_sr_stack.json |
-| | `mumu_c_stack` | chained: the **uncorrected** simulation stack slides in under the data; the ratio panel opens at ≈ 0.94 (raw simulation ~6 % high) | data/zmumu_sr_stack.json (stage `raw`) |
-| | `mumu_d_control` | chained: the plot parks; the slice returns with a real same-sign pair (probe inside a jet): the control region | docs/13-fake-factor.md |
-| | `mumu_e_tenpairs` | chained: ten real same-sign pairs, a 10-box tally (9 anti-isolated probes, 1 isolated) → f = N_tight/N_anti ≈ 1/9; the real 6×4 fake-factor map | data/zmumu_fakes.json |
-| | `mumu_f_transfer` | chained: OS events with one anti-isolated muon × f → the real fake template slides into the stack; 3 870 ± 80 | RESULTS_v2.md |
-| | `mumu_g_corrections` | chained: pileup, L1 prefiring 0.980, ID SF 0.980, iso SF 1.006, trigger ε 0.907/0.923, κ — the stack steps through the frozen stages, the ratio ends at the pre-fit 0.965 … 1.01 | data/zmumu_corrections.json, docs/11-12 |
-| | `mumu_h_fit` | chained: rebin 60 → 12, pull plot, post-fit; μ_Z = 0.988 ± 0.016 → σ_fid = 790.1 ± 0.2 (stat) ± 8.5 (syst) ± 9.6 (lumi) pb, σ(60–120) = 1931 ± 33 pb beside the prediction 1953.9 pb | data/zmumu_fit.json, handoff.md |
+| ✔ 4-03 | `mumu_a1_event` | chained: chained on 4-02 (**real data from here on**, `data/zmumu_*.json`): schematic tracks fade, real SR event drawn (φ, charge, p_T), p_T values appear | data/zmumu_events.json |
+| ✔ 4-04 | `mumu_a2_mass` | chained: the p_T values converge to m_μμ | data/zmumu_events.json |
+| ✔ 4-05 | `mumu_a3_first_entry` | chained: slice parks left, log-y axes appear, m_μμ becomes the first entry | data/zmumu_events.json |
+| ✔ 4-06 | `mumu_b1_more_events` | chained: three more real events, each drops an entry | data/zmumu_events.json |
+| ✔ 4-07 | `mumu_b2_rain` | chained: clock, rain, the 60 bins grow to the real counts; N = 10,378,567 | data/zmumu_sr_stack.json |
+| ✔ 4-08 | `mumu_c1_simulation` | chained: bars → points; the **uncorrected** simulation stack slides in; colour key | data/zmumu_sr_stack.json (stage `raw`) |
+| ✔ 4-09 | `mumu_c2_ratio` | chained: ratio panel opens: data/pred = 0.944 | data/zmumu_sr_stack.json |
+| ✔ 4-10 | `mumu_d1_control_region` | chained: plot parks top right; slice returns in the dashed μ±μ± box | docs/13-fake-factor.md |
+| ✔ 4-11 | `mumu_d2_same_sign_pair` | chained: real same-sign pair: tag, probe inside a jet, charges | data/zmumu_events.json |
+| ✔ 4-12 | `mumu_e1_ten_pairs` | chained: ten real same-sign pairs fill a 10-box tally (9 anti-isolated, 1 isolated) | data/zmumu_events.json |
+| ✔ 4-13 | `mumu_e2_fake_factor` | chained: f = N_tight/N_anti = 1/9 | docs/13 |
+| ✔ 4-14 | `mumu_e3_ff_map` | chained: the real 6×4 fake-factor map, barrel cells highlighted | data/zmumu_fakes.json |
+| ✔ 4-15 | `mumu_f1_apply` | chained: back to the SR plot; N_fake = f × N_anti | docs/13 |
+| ✔ 4-16 | `mumu_f2_fake_template` | chained: the real fake template enters the stack (key gains Fakes); N_fake = 3870 ± 80 | RESULTS_v2.md, data/zmumu_fakes.json |
+| ✔ 4-17 | `mumu_g1_pileup` | chained: ⟨w_PU⟩ = 0.994: the prediction steps down | data/zmumu_sr_stack.json, docs/11 |
+| ✔ 4-18 | `mumu_g2_prefiring` | chained: ⟨w_L1⟩ = 0.980 | docs/11 |
+| ✔ 4-19 | `mumu_g3_lepton_sf` | chained: SF_ID 0.980, SF_iso 1.006, trigger ε 0.907/0.923 → ratio 0.994; κ_|η| 0.999…1.000 | data/zmumu_corrections.json, docs/12 |
+| ✔ 4-20 | `mumu_h1_rebin` | chained: rebin 60 → 12 (5 GeV) | data/zmumu_fit.json |
+| ✔ 4-21 | `mumu_h2_fit` | chained: pulls + μ slider; post-fit, ratio flat; μ_Z = 0.988 ± 0.016 | data/zmumu_fit.json |
+| ✔ 4-22 | `mumu_h3_sigma_fid` | chained: the plot parks left; μ_Z, σ_fid = 790.1 ± 0.2 ± 8.5 ± 9.6 pb, σ(60–120) = 1931 ± 33 pb | handoff.md |
+| ✔ 4-23 | `mumu_h4_sigma_total` | chained: σ(60–120) on its axis beside the prediction 1953.9 pb | CONVENTIONS.md §6 |
 
 (The earlier candidates `tnp_efficiency`, `momentum_calibration`, `mumu_stack`, `mumu_result` are superseded
-by the `mumu_*` chain, 15 Sep 2026.)
+by the `mumu_*` chain, 15 Sep 2026; cut into one-idea clips on 16 Sep.)
 
 ## 5 — Z → ττ (`5_ztautau`)
 

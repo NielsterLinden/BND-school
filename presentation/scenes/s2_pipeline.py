@@ -1,4 +1,4 @@
-"""Section 2 tail: how an analysis works, as one pipeline spine (schematic, no numbers).
+"""Section 2 tail: how an analysis works, as one pipeline spine (schematic; the stacks are real).
 
 Eight chained plain Scenes. ``PipeMap`` opens on an empty white frame; every
 later clip opens on the previous clip's final frame (same pure builder, same
@@ -32,8 +32,21 @@ What each node is (drawn lepton-generic, grounded in this project's Z->mumu anal
   5 data vs prediction, ratio, syst.     z-mumu/docs/14-fit-and-systematics.md
   6 fit: mu_Z, nuisance parameters,      fitting/CONVENTIONS.md section 2 (sigma_fid = mu x sigma_pred),
     sigma = (N - B)/(A eps L)            z-mumu/docs/06-cross-section.md
-Symbols only, no numbers anywhere (user decision, 15 Sep 2026); every shape is
-schematic (seeded RNG for texture).
+Symbols only (user decision, 15 Sep 2026), except the stacked histograms: on the user's
+request (16 Sep 2026) the stacks of pipe_e / pipe_f are the real Z->mumu signal region
+(data/zmumu_sr_stack.json, nominal prediction + Fakes, rebinned to 2 GeV) on a log axis
+with decade and mass tick labels, and the fit panel of pipe_g shows the real 5 GeV
+pre-fit -> post-fit data/pred (data/zmumu_fit.json). Everything else is schematic
+(seeded RNG for texture); the legend stays lepton-generic.
+
+Delivered clips (manim sections, tools/deliver_chain.py; a zoom-out and the next zoom-in
+share one clip name, so they are joined):
+    pipe_a_map | pipe_b1_collisions  pipe_b2_skim  pipe_b3_simulation |
+    pipe_c1_trigger  pipe_c2_lepton_id  pipe_c3_two_leptons  pipe_c4_mass_window |
+    pipe_d1_tag_probe  pipe_d2_efficiency  pipe_d3_scale_factor |
+    pipe_e1_simulation_stack  pipe_e2_control_region  pipe_e3_fake_factor |
+    pipe_f1_data  pipe_f2_ratio  pipe_f3_uncertainty |
+    pipe_g1_fit_model  pipe_g2_fit  pipe_g3_cross_section | pipe_h_three
 
 Zoom mechanics: a zoom is a camera map F(p) = to + z (p - about) applied to the
 whole spine (``Transform`` to a mapped copy of the same builder output, strokes
@@ -102,7 +115,7 @@ A = {
     # pipe_e: backgrounds ------------------------------------------------
     "e_box": (-4.75, -0.50), "e_box_wh": (2.95, 3.05), "e_slice_s": 0.43, "e_tag_phi": 2.55,
     "e_fake_phi": 0.25, "e_kappa": 0.8, "e_jet_half": 0.32, "e_plot": (2.35, -0.25), "e_plot_wh": (5.5, 3.3),
-    "e_key": (4.15, 0.80), "e_arrow": ((-3.20, -1.45), (63.5, 0.0075)),    # start (scene), end (m_ll, N): in the Fakes sliver
+    "e_key": (4.20, 1.10), "e_arrow": ((-3.15, -1.62), 65.0),    # start (scene), end mass: into the Fakes sliver
     # pipe_f: comparison -------------------------------------------------
     "f_plot": (1.35, 0.95), "f_plot_wh": (7.0, 2.8), "f_ratio": (1.35, -1.40), "f_ratio_h": 1.15,
     "f_key": (-5.25, 1.30), "f_band": 0.02,
@@ -114,23 +127,38 @@ A = {
     "h_box_tint": {"ee": 0.80, "mumu": 0.55, "tautau": 0.80},
 }
 
-# schematic shapes (seeded, no numbers on screen)
-EDGES = np.arange(60.0, 122.0, 2.0)                  # 30 bins "m_ll" (never labelled)
+# the stacks: the real Z->mumu signal region (nominal prediction + Fakes), 1 GeV -> 2 GeV bins
+SR = load_data("zmumu_sr_stack")
+FIT = load_data("zmumu_fit")
+assert SR["data"]["total"] == 10378567 and len(SR["edges"]) == 61
+assert len(FIT["sr_12bin"]["ratio_prefit"]) == 12
+
+
+def _r2(a) -> np.ndarray:
+    return np.asarray(a, dtype=float).reshape(30, 2).sum(axis=1)
+
+
+def _mc(*names) -> np.ndarray:
+    return sum(_r2(SR["mc"][n]["nominal"]) for n in names)
+
+
+EDGES = np.asarray(SR["edges"], dtype=float)[::2]    # 30 bins of 2 GeV, 60-120
+assert len(EDGES) == 31 and EDGES[0] == 60.0 and EDGES[-1] == 120.0
 XC = 0.5 * (EDGES[:-1] + EDGES[1:])
-SIG = schematic_zpeak(EDGES, height=0.80, sigma=3.2, seed=11, jitter=0.03, floor=0.0)
-# backgrounds: schematic but ordered as in the mumu SR (TTbar > VV > Fakes, z-mumu/output/v2/RESULTS_v2.md),
-# pointwise in every bin; Fakes the thinnest layer but >= 0.0125 (>= 4 px at 1080p on the pipe_f axes)
-TTB = 0.0225 * (1.0 - 0.15 * (XC - 60.0) / 60.0)
-VVB = 0.0148 + 0.0030 * np.exp(-((XC - 91.0) / 16.0) ** 2)
-FAK = 0.0127 + 0.0015 * np.exp(-(XC - 60.0) / 20.0)
 SIG_FILL = lighten(DETECTOR_ACCENT, 0.45)             # generic Z -> ll (method chapter tint)
-LAYERS = (("Fakes", FAK, SAMPLE["Fakes"]), ("VV", VVB, SAMPLE["WZ"]),
-          ("TTbar", TTB, SAMPLE["TTbar"]), ("Z", SIG, SIG_FILL))
-TOTAL = FAK + VVB + TTB + SIG
-_rng = np.random.default_rng(20260915)
-RATIO_PRE = 0.97 + 0.012 * _rng.standard_normal(len(XC))     # the pre-fit discrepancy
-RATIO_POST = 1.0 + 0.004 * _rng.standard_normal(len(XC))     # post-fit: flat
-DATA = TOTAL * RATIO_PRE
+# bottom-up; the legend is lepton-generic (the method), the numbers are the mumu channel's
+LAYERS = (("Fakes", _r2(SR["fakes"]["counts"]), SAMPLE["Fakes"]),
+          ("VV", _mc("WW", "WZ", "ZZ"), SAMPLE["WZ"]),
+          ("TauTau", _mc("DYtautau"), SAMPLE["DYtautau"]),
+          ("Top", _mc("TTbar", "SingleTop"), SAMPLE["TTbar"]),
+          ("Z", _mc("DYmumu"), SIG_FILL))
+TOTAL = sum(c for _, c, _ in LAYERS)
+DATA = _r2(SR["data"]["counts"])
+assert abs(TOTAL.sum() - SR["totals"]["nominal"]["mc_plus_fakes"]) < 1e-3
+Y_EXP = (1.8, 6.8)                                    # log axis 10^1.8 .. 10^6.8 events / 2 GeV
+EDGES12 = np.asarray(FIT["sr_12bin"]["edges"], dtype=float)
+RATIO12_PRE = np.asarray(FIT["sr_12bin"]["ratio_prefit"], dtype=float)
+RATIO12_POST = np.asarray(FIT["sr_12bin"]["ratio_postfit"], dtype=float)
 
 EDGES_T = np.arange(60.0, 121.0, 3.0)                # tag-and-probe spectra (20 bins)
 _PK = dict(sigma=4.2, tail=(1.0, 3.0), floor=0.0)
@@ -199,6 +227,16 @@ def axis_titles(dax, x_expr=None, y_expr=None, h=0.26, buff=0.28):
 def schematic_axes(x_length, y_length, y_top=1.15, center=ORIGIN):
     dax = DataAxes([60, 120, 10], [0, y_top, 0.5], x_length, y_length, x_ticks=[], y_ticks=[],
                    show_x_labels=False, show_y_labels=False)
+    return dax.move_frame_to(P(center))
+
+
+def log_axes(x_length, y_length, center, x_labels=True) -> DataAxes:
+    """The real-stack axes: log y (decade labels 10^3..10^6; none at the floor, where the
+    Fakes sliver and the control-region arrow are), mass ticks without the corner labels."""
+    dax = DataAxes([60, 120, 10], [*Y_EXP, 1], x_length, y_length, x_ticks=[70, 80, 90, 100, 110],
+                   y_ticks=[3, 4, 5, 6], y_log=True, show_x_labels=x_labels, tick_label_h=0.18,
+                   x_title=r"m_{\ell\ell}\ [\mathrm{GeV}]" if x_labels else None,
+                   y_title=r"\mathrm{events}\,/\,2\,\mathrm{GeV}", title_h=0.22, title_buff=0.16)
     return dax.move_frame_to(P(center))
 
 
@@ -412,11 +450,11 @@ def node_point(k):
 class PipeScene(Scene):
     DONE_BEFORE: tuple = ()
 
-    def open_chain(self):
+    def open_chain(self, clip: str):
         white_background(self)
         self.st = spine_state(self.DONE_BEFORE)
         add_state(self, self.st, ORDER_SPINE)
-        self.wait(0.3)
+        clip_open(self, clip)
 
     def zoom_in(self, detail, z, about, to, spine_target, run_time=1.3, extra=()):
         anims = [Transform(self.st["spine"], spine_target),
@@ -476,7 +514,7 @@ class PipeMap(Scene):
         white_background(self)
         st = spine_state(DONE["a"])
         sp, rv = st["spine"], st["river"]
-        self.wait(0.3)
+        clip_open(self, "pipe_a_map")
         T = 7.4
         anims = []
         for i in range(7):
@@ -511,7 +549,7 @@ class PipeData(PipeScene):
     DONE_BEFORE = DONE["a"]
 
     def construct(self):
-        self.open_chain()
+        self.open_chain("pipe_b1_collisions")
         z, about, to = A["b_zoom"], A["b_about"], A["b_to"]
         fresh = spine_state(())["spine"]
         c0 = P(to) + z * (P(node_point(0)) - P(about))               # zoomed beam spot
@@ -542,10 +580,11 @@ class PipeData(PipeScene):
             self.play(Create(trks, lag_ratio=0.0), run_time=0.45 * f, rate_func=rate_functions.linear)
             self.play(flight(slots[j]), FadeOut(trks), run_time=0.55 * f, rate_func=EASE)
         self.play(LaggedStart(*[flight(s) for s in slots[3:]], lag_ratio=0.35), run_time=0.9)
-        self.wait(0.1)
+        clip_cut(self, "pipe_b2_skim")
         # the skim: 8 -> 2
         self.play(ReplacementTransform(VGroup(*slots[:4]), VGroup(d0.copy())),
-                  ReplacementTransform(VGroup(*slots[4:]), VGroup(d1.copy())), run_time=0.6, rate_func=EASE)
+                  ReplacementTransform(VGroup(*slots[4:]), VGroup(d1.copy())), run_time=0.9, rate_func=EASE)
+        clip_cut(self, "pipe_b3_simulation")
         # the simulated river
         dy = dy_icon(A["b_dy"], s=A["b_dy_scale"], sw=3.0)
         self.play(FadeIn(dy, shift=DOWN * 0.15), run_time=0.4)
@@ -555,6 +594,7 @@ class PipeData(PipeScene):
         self.play(Create(strk, lag_ratio=0.0), run_time=0.35, rate_func=rate_functions.linear)
         s0, s1 = zicon.sim[0].copy(), zicon.sim[1].copy()
         self.play(LaggedStart(flight(s0), flight(s1), lag_ratio=0.4), FadeOut(strk), run_time=0.75)
+        clip_cut(self, "pipe_c1_trigger")
         self.zoom_out(DONE["b"], z, about, to)
         self.close_chain()
 
@@ -595,9 +635,10 @@ class PipeSelection(PipeScene):
     exactly two leptons, opposite sign, the mass window), each stage leaving a
     pale ghost; the surviving bar is cyan. Proportions only."""
     DONE_BEFORE = DONE["b"]
+    CUTS = {1: "pipe_c2_lepton_id", 2: "pipe_c3_two_leptons", 4: "pipe_c4_mass_window"}
 
     def construct(self):
-        self.open_chain()
+        self.open_chain("pipe_c1_trigger")
         k, z, to = 2, ZOOM, A["detail"]
         about = node_point(k)
         outline = funnel_outline()
@@ -607,14 +648,17 @@ class PipeSelection(PipeScene):
         bar = funnel_bar(0, GREY)
         self.play(GrowFromCenter(bar), FadeIn(labs[0], shift=RIGHT * 0.2), run_time=0.65, rate_func=EASE)
         for i in range(1, 5):
-            self.wait(0.15)
+            if i in self.CUTS:
+                clip_cut(self, self.CUTS[i])
+            else:
+                self.wait(0.15)
             mover = bar.copy()
             self.add(mover)
             self.play(Transform(mover, funnel_bar(i, DETECTOR_ACCENT if i == 4 else GREY)),
                       bar.animate.set_fill(col(LIGHT_GREY)).set_stroke(darken(LIGHT_GREY, 0.15)),
-                      FadeIn(labs[i], shift=RIGHT * 0.2), run_time=0.8, rate_func=EASE)
+                      FadeIn(labs[i], shift=RIGHT * 0.2), run_time=1.0, rate_func=EASE)
             bar = mover
-        self.wait(0.35)
+        clip_cut(self, "pipe_d1_tag_probe")
         self.zoom_out(DONE["c"], z, about, to)
         self.close_chain()
 
@@ -646,7 +690,7 @@ class PipeTnP(PipeScene):
     DONE_BEFORE = DONE["c"]
 
     def construct(self):
-        self.open_chain()
+        self.open_chain("pipe_d1_tag_probe")
         k, z, to = 3, ZOOM, A["detail"]
         about = node_point(k)
         det = mini_slice(A["d_slice_s"], A["d_slice"])
@@ -681,6 +725,7 @@ class PipeTnP(PipeScene):
         l_probe = near_end(r"\ell_{\mathrm{probe}}", end)
         self.play(LaggedStart(Create(tag), FadeIn(l_tag), Create(probe), FadeIn(l_probe), lag_ratio=0.45),
                   run_time=1.4)
+        clip_cut(self, "pipe_d2_efficiency")
         rain_p = probe_rain(end, ax_p, PASS, 8, seed=21)
         rain_f = probe_rain(end, ax_f, FAIL, 3, seed=22)
         drops = [rain_p[0], rain_p[1], rain_f[0], rain_p[2], rain_p[3], rain_p[4], rain_f[1], rain_p[5],
@@ -696,7 +741,7 @@ class PipeTnP(PipeScene):
         eps = tex(r"\varepsilon = \frac{N_{\mathrm{pass}}}{N_{\mathrm{pass}} + N_{\mathrm{fail}}}", h=0.30)
         eps.move_to(P(A["d_eps"]))
         self.play(FadeIn(eps, shift=UP * 0.2), run_time=0.6, rate_func=EASE)
-        self.wait(0.2)
+        clip_cut(self, "pipe_d3_scale_factor")
         mc_p = data_trace(ax_p, *step_xy(EDGES_T, PASS_MC), color=THEORY, stroke_width=3.5, dashed_=True)
         mc_f = data_trace(ax_f, *step_xy(EDGES_T, FAIL_MC), color=THEORY, stroke_width=3.5, dashed_=True)
         self.play(Create(mc_p), Create(mc_f), run_time=0.7, rate_func=rate_functions.linear)
@@ -708,7 +753,7 @@ class PipeTnP(PipeScene):
         sf.next_to(sl.axis, LEFT, buff=0.45)
         self.play(FadeIn(sf), FadeIn(sl), run_time=0.5)
         self.play(Transform(sl.marker, sl.marker_at(0.965, 0.012)), run_time=0.9, rate_func=EASE)
-        self.wait(0.2)
+        clip_cut(self, "pipe_e1_simulation_stack")
         self.zoom_out(DONE["d"], z, about, to)
         self.close_chain()
 
@@ -726,12 +771,21 @@ def jet_cone(det, phi, half) -> VGroup:
                   stroke_width=1.5)
 
 
-KEY_ROWS = ((r"Z/\gamma^{*}\to\ell\ell", SIG_FILL), (r"t\bar{t}", SAMPLE["TTbar"]),
-            (r"VV", SAMPLE["WZ"]), (r"\mathrm{Fakes}", SAMPLE["Fakes"]))
+KEY_ROWS = ((r"Z/\gamma^{*}\to\ell\ell", SIG_FILL), (r"t\bar{t},\ tW", SAMPLE["TTbar"]),
+            (r"VV,\ \tau\tau", SAMPLE["WZ"]), (r"\mathrm{Fakes}", SAMPLE["Fakes"]))
+KEY_ROW = {"Z": 0, "Top": 1, "VVTT": 2, "Fakes": 3}
 
 
 def stack_key() -> VGroup:
-    return colour_key(list(KEY_ROWS), label_h=0.21, swatch=(0.32, 0.21))
+    key = colour_key(list(KEY_ROWS), label_h=0.21, swatch=(0.32, 0.21))
+    sw = key.rows[KEY_ROW["VVTT"]][1]                 # two layers, one row: a two-stripe swatch
+    halves = VGroup(*[Rectangle(width=sw.width / 2, height=sw.height, stroke_width=0, fill_color=col(c),
+                                fill_opacity=0.95) for c in (SAMPLE["WZ"], SAMPLE["DYtautau"])])
+    halves.arrange(RIGHT, buff=0).move_to(sw)
+    frame = Rectangle(width=sw.width, height=sw.height, fill_opacity=0.0, stroke_color=darken(SAMPLE["WZ"], 0.25),
+                      stroke_width=1.0).move_to(sw)
+    key.rows[KEY_ROW["VVTT"]].submobjects[1] = VGroup(halves, frame)
+    return key
 
 
 class PipeBackgrounds(PipeScene):
@@ -747,22 +801,20 @@ class PipeBackgrounds(PipeScene):
     DONE_BEFORE = DONE["d"]
 
     def construct(self):
-        self.open_chain()
+        self.open_chain("pipe_e1_simulation_stack")
         k, z, to = 4, ZOOM, A["detail"]
         about = node_point(k)
-        dax = schematic_axes(*A["e_plot_wh"], center=A["e_plot"])
-        titles = axis_titles(dax, r"m_{\ell\ell}", r"N")
+        dax = log_axes(*A["e_plot_wh"], center=A["e_plot"])
         stack = stack_stage(dax, ())
-        detail = VGroup(dax, titles, stack)
+        detail = VGroup(dax, stack)
         self.zoom_in(detail, z, about, to, zoomed_spine(self.st["spine"], z, about, to))
         key = stack_key().move_to(P(A["e_key"]))
-        rows = {name: key.rows[i] for i, name in enumerate(("Z", "TTbar", "VV", "Fakes"))}
         present = []
-        for name in ("VV", "TTbar", "Z"):
-            present.append(name)
-            self.play(Transform(stack, stack_stage(dax, present)), FadeIn(rows[name], shift=LEFT * 0.15),
-                      run_time=0.75 if name != "Z" else 0.95, rate_func=EASE)
-        self.wait(0.15)
+        for layers, row in ((("VV", "TauTau"), "VVTT"), (("Top",), "Top"), (("Z",), "Z")):
+            present += layers
+            self.play(Transform(stack, stack_stage(dax, present)), FadeIn(key.rows[KEY_ROW[row]], shift=LEFT * 0.15),
+                      run_time=0.85 if row != "Z" else 1.05, rate_func=EASE)
+        clip_cut(self, "pipe_e2_control_region")
         bw, bh = A["e_box_wh"]
         box = DashedVMobject(RoundedRectangle(width=bw, height=bh, corner_radius=0.2, stroke_color=col(DETECTOR_ACCENT),
                                               stroke_width=3.0).move_to(P(A["e_box"])), num_dashes=44)
@@ -778,14 +830,17 @@ class PipeBackgrounds(PipeScene):
         jet = VGroup(jet_cone(geo, phi_j, A["e_jet_half"]), signature(geo, "jet", phi_j, seed=4))
         self.play(Create(tag), run_time=0.5, rate_func=rate_functions.linear)
         self.play(FadeIn(jet), Create(fake), run_time=0.7, rate_func=EASE)
-        a0, (ax, ay) = A["e_arrow"]
-        arrow = CurvedArrow(P(a0), dax.c2p(ax, ay), angle=0.7, color=col(DETECTOR_ACCENT), stroke_width=3.5)
+        clip_cut(self, "pipe_e3_fake_factor")
+        a0, m_end = A["e_arrow"]
+        j = int(np.searchsorted(EDGES, m_end) - 1)
+        y_end = np.sqrt(10 ** Y_EXP[0] * LAYERS[0][1][j])            # log-middle of the Fakes sliver
+        arrow = CurvedArrow(P(a0), dax.c2p(m_end, y_end), angle=0.45, color=col(DETECTOR_ACCENT), stroke_width=3.5)
         ff = tex(r"\times f", h=0.34, color=DETECTOR_ACCENT).next_to(arrow.point_from_proportion(0.5), DOWN, buff=0.14)
         self.play(Create(arrow), run_time=0.55, rate_func=EASE)
         self.play(FadeIn(ff, shift=UP * 0.15), run_time=0.35, rate_func=EASE)
-        self.play(Transform(stack, stack_stage(dax, ("VV", "TTbar", "Z", "Fakes"))),
-                  FadeIn(rows["Fakes"], shift=LEFT * 0.15), run_time=0.9, rate_func=EASE)
-        self.wait(0.2)
+        self.play(Transform(stack, stack_stage(dax, ("VV", "TauTau", "Top", "Z", "Fakes"))),
+                  FadeIn(key.rows[KEY_ROW["Fakes"]], shift=LEFT * 0.15), run_time=0.9, rate_func=EASE)
+        clip_cut(self, "pipe_f1_data")
         self.zoom_out(DONE["e"], z, about, to)
         self.close_chain()
 
@@ -802,22 +857,23 @@ class PipeCompare(PipeScene):
     DONE_BEFORE = DONE["e"]
 
     def construct(self):
-        self.open_chain()
+        self.open_chain("pipe_f1_data")
         k, z, to = 5, ZOOM, A["detail"]
         about = node_point(k)
-        dax = schematic_axes(*A["f_plot_wh"], center=A["f_plot"])
-        stack = stack_stage(dax, ("VV", "TTbar", "Z", "Fakes"))
+        dax = log_axes(*A["f_plot_wh"], center=A["f_plot"], x_labels=False)
+        stack = stack_stage(dax, ("VV", "TauTau", "Top", "Z", "Fakes"))
         key = stack_key().move_to(P(A["f_key"]))
-        y_t = axis_titles(dax, None, r"N")
-        self.zoom_in(VGroup(dax, y_t, stack, key), z, about, to, zoomed_spine(self.st["spine"], z, about, to))
+        self.zoom_in(VGroup(dax, stack, key), z, about, to, zoomed_spine(self.st["spine"], z, about, to))
         dots = VGroup(*[data_dot(dax, x, y, color=SAMPLE["Data"], radius=0.05) for x, y in zip(XC, DATA)])
         self.play(LaggedStart(*[GrowFromCenter(d) for d in dots], lag_ratio=0.12, group=dots), run_time=1.1)
+        clip_cut(self, "pipe_f2_ratio")
         rp = ratio_panel(dax, EDGES, DATA, TOTAL, center=A["f_ratio"], y_range=(0.9, 1.1, 0.1),
-                         y_length=A["f_ratio_h"], dot_radius=0.045, show_x_labels=False, show_y_labels=False)
-        r_t = VGroup(axis_titles(rp.dax, r"m_{\ell\ell}", None, buff=0.25),
-                     tex(r"\mathrm{data}/\mathrm{pred}", h=0.22).rotate(np.pi / 2).next_to(rp.dax.frame, LEFT, buff=0.3))
-        self.play(FadeIn(VGroup(rp.dax, rp.ref, r_t)), run_time=0.5, rate_func=EASE)
+                         y_length=A["f_ratio_h"], dot_radius=0.045, y_ticks=[0.9, 1.0, 1.1],
+                         x_title=r"m_{\ell\ell}\ [\mathrm{GeV}]", y_title=r"\mathrm{data}/\mathrm{pred}",
+                         title_h=0.22, title_buff=0.16)
+        self.play(FadeIn(VGroup(rp.dax, rp.ref)), run_time=0.5, rate_func=EASE)
         self.play(LaggedStart(*[GrowFromCenter(d) for d in rp.dots], lag_ratio=0.12, group=rp.dots), run_time=0.9)
+        clip_cut(self, "pipe_f3_uncertainty")
         wdt, op = ValueTracker(1.0), ValueTracker(0.0)
         xs, _ = step_xy(EDGES, TOTAL)
         _, tot = step_xy(EDGES, TOTAL)
@@ -837,7 +893,7 @@ class PipeCompare(PipeScene):
         band_m.clear_updaters()
         band_r.clear_updaters()
         self.remove(wdt, op)
-        self.wait(0.15)
+        clip_cut(self, "pipe_g1_fit_model")
         self.zoom_out(DONE["f"], z, about, to)
         self.close_chain()
 
@@ -861,7 +917,7 @@ class PipeFit(PipeScene):
     DONE_BEFORE = DONE["f"]
 
     def construct(self):
-        self.open_chain()
+        self.open_chain("pipe_g1_fit_model")
         k, z, to = 6, ZOOM, A["detail"]
         about = node_point(k)
         sl = slider(0.8, 1.2, 1.0, err=0.15, ref=1.0, length=A["g_slider_len"], ticks=[], marker_r=0.09)
@@ -874,20 +930,21 @@ class PipeFit(PipeScene):
                          tex=True).move_to(P(A["g_pulls"]))
         rw, rh = A["g_ratio_wh"]
         dax_h = schematic_axes(rw, 1.0, center=(A["g_ratio"][0], 3.5))      # geometry only (never added)
-        rp = ratio_panel(dax_h, EDGES, DATA, TOTAL, center=A["g_ratio"], y_range=(0.9, 1.1, 0.1), y_length=rh,
-                         dot_radius=0.045, show_x_labels=False, show_y_labels=False)
-        rp_post = ratio_panel(dax_h, EDGES, DATA, DATA / RATIO_POST, center=A["g_ratio"], y_range=(0.9, 1.1, 0.1),
-                              y_length=rh, dot_radius=0.045, show_x_labels=False, show_y_labels=False)
+        ones = np.ones(12)          # the real 5 GeV fit bins: data/pred pre-fit -> post-fit
+        rp = ratio_panel(dax_h, EDGES12, RATIO12_PRE, ones, center=A["g_ratio"], y_range=(0.9, 1.1, 0.1),
+                         y_length=rh, dot_radius=0.05, show_x_labels=False, show_y_labels=False)
+        rp_post = ratio_panel(dax_h, EDGES12, RATIO12_POST, ones, center=A["g_ratio"], y_range=(0.9, 1.1, 0.1),
+                              y_length=rh, dot_radius=0.05, show_x_labels=False, show_y_labels=False)
         r_t = VGroup(axis_titles(rp.dax, r"m_{\ell\ell}", None, h=0.24, buff=0.22),
                      tex(r"\mathrm{data}/\mathrm{pred}", h=0.22).rotate(np.pi / 2).next_to(rp.dax.frame, LEFT, buff=0.3))
         frame = VGroup(pp.band, pp.zero, pp.baseline, pp.ticks)
         detail = VGroup(sl, mu, frame, rp.dax, rp.ref, rp.dots, r_t)
         self.zoom_in(detail, z, about, to, zoomed_spine(self.st["spine"], z, about, to))
         self.play(LaggedStart(*[FadeIn(r) for r in pp.rows], lag_ratio=0.3, group=pp.rows), run_time=0.8)
-        self.wait(0.15)
+        clip_cut(self, "pipe_g2_fit")
         self.play(Transform(sl.marker, sl.marker_at(0.97, 0.03)), Transform(pp.rows, post.rows),
                   Transform(rp.dots, rp_post.dots), run_time=1.8, rate_func=EASE)
-        self.wait(0.15)
+        clip_cut(self, "pipe_g3_cross_section")
         s1 = tex(r"\sigma = \mu_{Z} \, \sigma_{\mathrm{pred}}", h=0.40).move_to(P(A["g_sig1"]))
         self.play(FadeIn(s1, shift=UP * 0.2), run_time=0.6, rate_func=EASE)
         s2 = sigma_formula().move_to(P(A["g_sig2"]))
@@ -896,7 +953,7 @@ class PipeFit(PipeScene):
             part = s2.get_part_by_tex(t)
             self.play(*[g.animate.set_color(col(DETECTOR_ACCENT)) for g in part.family_members_with_points()],
                       run_time=0.3)
-        self.wait(0.2)
+        clip_cut(self, "pipe_h_three")
         self.zoom_out(DONE["g"], z, about, to)
         self.close_chain()
 
@@ -916,7 +973,7 @@ class PipeThree(Scene):
         white_background(self)
         st = spine_state(DONE["g"])
         add_state(self, st, ORDER_SPINE)
-        self.wait(0.3)
+        clip_open(self, "pipe_h_three")
         sp, rv = st["spine"], st["river"]
         shrink = (A["h_scale"], (0.0, SPINE_Y), (A["h_x"], A["h_ys"]["ee"]))
         self.play(Transform(sp, strip(None, "ee")), Transform(rv, camera(rv.copy(), *shrink).set_opacity(0.0),

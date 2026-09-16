@@ -47,7 +47,13 @@ Render serially (two renders compiling the same `MathTex` race on the cache).
 python tools/render.py 1 drell_yan scenes/s1_drell_yan.py DrellYan            # -q l, into work/
 python tools/render.py 1 drell_yan scenes/s1_drell_yan.py DrellYan -q h       # deliver to clips/
 python tools/framediff.py work/ee_process/ee_process_final.png work/ee_detector/ee_detector_t0.png  # chain seam
+# a chain cut into one-idea clips (clip_open / clip_cut = manim sections): renders the scenes in
+# order, joins equal section names across scenes, numbers + delivers each clip, prints all seams
+python tools/deliver_chain.py 4 scenes/s4_zmumu_story.py MumuEvent MumuRain ... -q h \
+    --seam-before clips/4_zmumu/4-02_mumu_detector_v1.mp4
 ```
+Seams at 480p fail on mean |d| alone (blob 0) from H.264 noise even between two cuts of
+the same rendered frame; judge seams at 1080p.
 
 Scenes: `s1_drell_yan.py`, `s2_cms_logo.py` (logo → slice), `s2_cms_slice.py`,
 `s3_zee.py`, `s4_zmumu.py`, `s5_ztautau.py` (process clip → detector clip

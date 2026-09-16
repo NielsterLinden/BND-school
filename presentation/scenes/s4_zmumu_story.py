@@ -28,6 +28,13 @@ frame: pure builders ``state_a() ... state_h()`` + ``ORDER_*`` tuples,
     MumuFit          mumu_h_fit          rebin 60 -> 12, pulls, post-fit; mu_Z, sigma_fid,
                                          sigma(60-120) beside the prediction
 
+Delivered clips (manim sections via clip_open / clip_cut, tools/deliver_chain.py):
+    mumu_a1_event  mumu_a2_mass  mumu_a3_first_entry | mumu_b1_more_events  mumu_b2_rain |
+    mumu_c1_simulation  mumu_c2_ratio | mumu_d1_control_region  mumu_d2_same_sign_pair |
+    mumu_e1_ten_pairs  mumu_e2_fake_factor  mumu_e3_ff_map | mumu_f1_apply  mumu_f2_fake_template |
+    mumu_g1_pileup  mumu_g2_prefiring  mumu_g3_lepton_sf |
+    mumu_h1_rebin  mumu_h2_fit  mumu_h3_sigma_fid  mumu_h4_sigma_total
+
 Physics honesty: the data points never move, only the prediction and the
 ratio do. The log axis starts at 10^1.5 (31.6 events / GeV) so the ~65 / GeV
 fake template is a thin wedge at the bottom of the stack, not a band that
@@ -733,7 +740,7 @@ class MumuEvent(Scene):
         white_background(self)
         prev = detector_end_state()
         add_state(self, prev, ORDER_402)
-        self.wait(0.3)
+        clip_open(self, "mumu_a1_event")
         end = state_a()
         rec = SR_EVENTS[0]
 
@@ -755,12 +762,12 @@ class MumuEvent(Scene):
         adopt(self, grp, "event 1")
         self.play(*[FadeIn(p, shift=0.25 * (RIGHT if p.get_center()[0] > 0 else LEFT)) for p in pts],
                   run_time=0.5)
-        self.wait(0.8)
+        clip_cut(self, "mumu_a2_mass")
         m_tex = mass_tex(rec).move_to(np.array([4.95, 0.2, 0.0]))
         self.remove(*pts)
         self.add(pts)
         self.play(ReplacementTransform(pts, m_tex), run_time=0.9, rate_func=EASE)
-        self.wait(0.8)
+        clip_cut(self, "mumu_a3_first_entry")
 
         m_spot = end["dax"].c2p(float(rec["mass"]), 10 ** 6.7)      # MAIN placement = natural
         self.play(ReplacementTransform(prev["det"], end["det"]), ReplacementTransform(grp, end["ev"]),
@@ -782,7 +789,7 @@ class MumuRain(Scene):
         white_background(self)
         prev = state_a()
         add_state(self, prev, ORDER_A)
-        self.wait(0.3)
+        clip_open(self, "mumu_b1_more_events")
         end = state_b()
         det, dax, stamp, entries = prev["det"], prev["dax"], prev["stamp"], prev["data"]
 
@@ -799,7 +806,9 @@ class MumuRain(Scene):
                       run_time=0.6, rate_func=rate_functions.linear)
             self.remove(dot)
             entries.add(dot)
-            self.wait(0.1)
+            if rec is not SR_EVENTS[3]:
+                self.wait(0.1)
+        clip_cut(self, "mumu_b2_rain")
 
         bars = end["data"].copy()
         bars0 = data_bars(dax, visible=False)
@@ -837,7 +846,7 @@ class MumuStack(Scene):
         white_background(self)
         prev = state_b()
         add_state(self, prev, ORDER_B)
-        self.wait(0.3)
+        clip_open(self, "mumu_c1_simulation")
         end = state_c()
 
         self.play(ReplacementTransform(prev["data"], end["data"]), run_time=1.0, rate_func=EASE)
@@ -851,7 +860,8 @@ class MumuStack(Scene):
         self.play(LaggedStart(*[Transform(stack[i], end["stack"][i]) for i in range(len(stack))],
                               lag_ratio=0.15, group=stack), run_time=2.6, rate_func=EASE)
         settle(self, stack, end["stack"], "stack")
-        self.wait(0.5)
+        self.play(FadeIn(end["key"]), run_time=0.6)
+        clip_cut(self, "mumu_c2_ratio")
         ratio = end["ratio"]
         self.play(FadeIn(ratio.dax), FadeIn(ratio.ref), dax.x_labels.animate.set_opacity(0.0),
                   dax.x_title.animate.set_opacity(0.0), run_time=0.6)
@@ -860,8 +870,7 @@ class MumuStack(Scene):
         adopt(self, ratio, "ratio")
         self.wait(0.3)
         self.play(FadeIn(end["rlabel"], shift=LEFT * 0.2), run_time=0.5)
-        self.wait(0.4)
-        self.play(FadeIn(end["key"]), run_time=0.6)
+        self.bring_to_front(end["key"])
         settle_same(self, prev, end, ("det", "dax", "counter"))
         check_order(self, end, ORDER_C)
         self.wait(0.2)
@@ -875,7 +884,7 @@ class MumuControl(Scene):
         white_background(self)
         prev = state_c()
         add_state(self, prev, ORDER_C)
-        self.wait(0.3)
+        clip_open(self, "mumu_d1_control_region")
         end = state_d()
 
         self.play(*[ReplacementTransform(prev[k], end[k]) for k in ("det", *PLOT_KEYS)],
@@ -884,6 +893,7 @@ class MumuControl(Scene):
         box = end["box"]
         self.play(Create(box.rect), FadeIn(box.sym), run_time=0.8)
         adopt(self, box, "box")
+        clip_cut(self, "mumu_d2_same_sign_pair")
         tag, probe = end["tag"], end["probe"]
         self.play(Create(tag.trk, lag_ratio=0.0), run_time=0.9, rate_func=EASE)
         self.play(FadeIn(tag.hits), run_time=0.3)
@@ -897,7 +907,6 @@ class MumuControl(Scene):
         adopt(self, probe, "probe")
         self.wait(0.3)
         self.play(FadeIn(end["labs"]), run_time=0.4)
-        self.wait(0.4)
         check_order(self, end, ORDER_D)
         self.wait(0.2)
 
@@ -910,7 +919,7 @@ class MumuTenPairs(Scene):
         white_background(self)
         prev = state_d()
         add_state(self, prev, ORDER_D)
-        self.wait(0.3)
+        clip_open(self, "mumu_e1_ten_pairs")
         end = state_e()
 
         tally = tally_boxes(False)
@@ -928,10 +937,10 @@ class MumuTenPairs(Scene):
             self.play(tally[i].animate.set_fill(col(tally_colour(SS_PAIRS[i])), opacity=1.0), run_time=0.22)
             self.play(FadeOut(lines), FadeOut(rest), run_time=0.22)
         settle(self, tally, end["tally"], "tally")
-        self.wait(0.3)
-        self.play(FadeIn(end["ff_tex"], shift=UP * 0.15), run_time=0.6)
-        self.wait(0.6)
-        self.play(FadeIn(end["ffmap"]), run_time=0.8)
+        clip_cut(self, "mumu_e2_fake_factor")
+        self.play(FadeIn(end["ff_tex"], shift=UP * 0.15), run_time=0.9)
+        clip_cut(self, "mumu_e3_ff_map")
+        self.play(FadeIn(end["ffmap"]), run_time=1.1)
         settle_same(self, prev, end, ("det", *PLOT_KEYS, "box"))
         check_order(self, end, ORDER_E)
         self.wait(0.2)
@@ -946,7 +955,7 @@ class MumuTransfer(Scene):
         white_background(self)
         prev = state_e()
         add_state(self, prev, ORDER_E)
-        self.wait(0.3)
+        clip_open(self, "mumu_f1_apply")
         end = state_f()
         mid = plot_parts(stage="raw", fakes=False, key_rows=3)
 
@@ -956,15 +965,14 @@ class MumuTransfer(Scene):
         self.play(*[ReplacementTransform(prev[k], mid[k]) for k in PLOT_KEYS], run_time=1.5, rate_func=EASE)
         formula = tex_h(r"N_{\mathrm{fake}} = f \times N_{\mathrm{anti}}", 0.26).move_to(np.array([-4.75, 1.2, 0.0]))
         self.play(ReplacementTransform(f_tex, formula), run_time=0.7, rate_func=EASE)
+        clip_cut(self, "mumu_f2_fake_template")
         tmpl = step_hist(mid["dax"], EDGES, FAKES, color=darken(SAMPLE["Fakes"], 0.55), stroke_width=4.0)
         self.play(Create(tmpl), run_time=1.1, rate_func=rate_functions.linear)
         self.wait(0.2)
         self.play(Transform(mid["stack"], end["stack"]), Transform(mid["ratio"].dots, end["ratio"].dots),
-                  Transform(mid["rlabel"], end["rlabel"]), FadeOut(tmpl), run_time=1.5, rate_func=EASE)
+                  Transform(mid["rlabel"], end["rlabel"]), ReplacementTransform(mid["key"], end["key"]),
+                  FadeOut(tmpl), run_time=1.5, rate_func=EASE)
         self.play(ReplacementTransform(formula, end["n_fakes"]), run_time=0.9, rate_func=EASE)
-        self.wait(0.6)
-        self.play(ReplacementTransform(mid["key"], end["key"]), run_time=0.8, rate_func=EASE)
-        self.wait(0.4)
         settle_same(self, mid, end, ("dax", "stack", "data", "counter", "ratio", "rlabel"))
         check_order(self, end, ORDER_F)
         self.wait(0.2)
@@ -979,22 +987,26 @@ class MumuCorrections(Scene):
         white_background(self)
         prev = state_f()
         add_state(self, prev, ORDER_F)
-        self.wait(0.3)
+        clip_open(self, "mumu_g1_pileup")
         end = state_g()
         corr = end["corr"]
         stack, ratio, rlabel = prev["stack"], prev["ratio"], prev["rlabel"]
         self.play(ReplacementTransform(prev["n_fakes"], end["n_fakes"]), run_time=0.9, rate_func=EASE)
         self.wait(0.2)
 
-        beats = (((0,), "pileup"), ((1,), "prefiring"), ((2, 3, 4), "nominal"), ((5,), None))
-        for idxs, stage in beats:
+        beats = (((0,), "pileup", None), ((1,), "prefiring", "mumu_g2_prefiring"),
+                 ((2, 3, 4), "nominal", "mumu_g3_lepton_sf"), ((5,), None, None))
+        for b, (idxs, stage, clip) in enumerate(beats):
+            if clip:
+                clip_cut(self, clip)
+            elif b:
+                self.wait(0.3)
             for j in idxs:
                 self.play(FadeIn(corr[j], shift=RIGHT * 0.25), run_time=0.5, rate_func=EASE)
             if stage is not None:
                 S = plot_parts(stage=stage, fakes=True, key_rows=0, counter=False)
                 self.play(Transform(stack, S["stack"]), Transform(ratio.dots, S["ratio"].dots),
                           Transform(rlabel, S["rlabel"]), run_time=1.6, rate_func=EASE)
-            self.wait(0.7)
         adopt(self, corr, "corr")
         settle_same(self, prev, end, PLOT_KEYS)
         check_order(self, end, ORDER_G)
@@ -1010,7 +1022,7 @@ class MumuFit(Scene):
         white_background(self)
         prev = state_g()
         add_state(self, prev, ORDER_G)
-        self.wait(0.3)
+        clip_open(self, "mumu_h1_rebin")
         end = state_h()
 
         self.play(FadeOut(prev["corr"]), FadeOut(prev["counter"]), FadeOut(prev["rlabel"]),
@@ -1024,7 +1036,7 @@ class MumuFit(Scene):
         self.play(*anims, run_time=1.7, rate_func=EASE)
         for k in ("dax", "stack", "data", "ratio", "key"):
             settle(self, prev[k], pre12[k], k)
-        self.wait(0.5)
+        clip_cut(self, "mumu_h2_fit")
 
         pp0, pp1 = pulls(False), pulls(True)
         sl = mu_slider(False)
@@ -1040,7 +1052,7 @@ class MumuFit(Scene):
         v, e = mu_strings()
         seed = tex_h(rf"\mu_{{Z}} = {v} {e}", 0.18).next_to(sl.marker, UP, buff=0.62)
         self.play(FadeIn(seed, shift=UP * 0.15), run_time=0.5)
-        self.wait(1.0)
+        clip_cut(self, "mumu_h3_sigma_fid")
 
         sig = end["sig_tot"]
         self.play(*[ReplacementTransform(post12[k], end[k]) for k in ("dax", "stack", "data", "ratio", "key")],
@@ -1049,6 +1061,7 @@ class MumuFit(Scene):
                   ReplacementTransform(seed.copy(), end["sig_fid"]),
                   ReplacementTransform(seed.copy(), sig.label),
                   run_time=2.0, rate_func=EASE)
+        clip_cut(self, "mumu_h4_sigma_total")
         self.play(FadeIn(sig.frame), run_time=0.5)
         self.play(Create(sig.theory), FadeIn(sig.th_lab), run_time=0.6)
         self.play(GrowFromCenter(sig.bar), GrowFromCenter(sig.dot), run_time=0.6)

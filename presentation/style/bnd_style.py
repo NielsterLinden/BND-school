@@ -267,6 +267,12 @@ BEAMPIPE_FRAC = 0.010
 N_ECAL, N_HCAL, N_SECTORS = 60, 36, 12
 R_DET = 2.95                          # delivered outer radius (scene units)
 DET_CENTER = np.array([0.0, -0.25, 0.0])   # top edge at y = 2.70, under the title band
+# Reserved areas of the slide, covered by the user's PowerPoint overlays: nothing is drawn there
+# (06-chapter-anchors.md A1; checked on the rendered MP4s by tools/zonecheck.py). Scene frame
+# 14.22 x 8 units = the 33.867 x 19.05 cm 16:9 slide, 1 cm = 0.42 units.
+TITLE_BAND_Y = 2.7                    # y > 2.7: the slide title (top ~15 %)
+CHAPTER_ID_X = -5.85                  # x < -5.85 and y > 0.22: the chapter identifier, the top-left
+CHAPTER_ID_Y = 0.22                   #   3 cm (horizontal) x 9 cm (vertical) of the slide
 _C15 = math.cos(math.radians(15.0))   # apothem / circumradius of a dodecagon
 
 # the four muons of the logo: TikZ ``to[out,in,looseness]`` segments, endpoints
@@ -1533,7 +1539,7 @@ __all__ = [
     "unit", "fline", "fermion", "arrow_tip_on", "dashed", "wavy", "gluon", "vertex_dot",
     "shower_tree", "hadron_blob", "pion_lines",
     "LOGO_R", "LOGO_RINGS", "STATION_FRAC", "YOKE_FRAC", "N_ECAL", "N_HCAL", "N_SECTORS",
-    "R_DET", "DET_CENTER", "logo_muon_paths", "logo_rings", "logo_muons", "CMSLogo", "CMSSlice",
+    "R_DET", "DET_CENTER", "TITLE_BAND_Y", "CHAPTER_ID_X", "CHAPTER_ID_Y", "logo_muon_paths", "logo_rings", "logo_muons", "CMSLogo", "CMSSlice",
     "field_kappa", "curved_track", "track", "neutral_track", "calo_hit", "muon_hits",
     "tracker_hits", "signature",
     "DataAxes", "data_bar", "data_trace", "step_hist", "data_band", "data_dot",

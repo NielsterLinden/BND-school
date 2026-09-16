@@ -27,10 +27,23 @@ WORK = PRESENTATION / "work" / "extract"                        # part files (gi
 LUMI_PB = 16393.381            # normtag, CMS Open Data record 1059 (fitting/CONVENTIONS.md)
 DATASET = "CMS 2016 Open Data, SingleMuon Run2016G+H, NanoAODv9 (records 30530, 30563)"
 
+# ---- Z -> tautau (z-tautau v3: DeepTau Tight on both legs, MC-subtracted fake factor) -----------------------
+ZTAUTAU = REPO / "z-tautau"
+TAUTAU_NTUPLES = Path("/data/atlas/users/sjankovy/BND-school-cache/ztautau/ntuples_v1")   # flat TTree 'ntuple', one file per sample
+DATASET_TAUTAU = "CMS 2016 Open Data, Tau Run2016G+H, NanoAODv9 (records 30532, 30565)"
+VERSION_TAUTAU = "v3 DeepTau Tight, MC-subtracted FF"
+
 
 def add_zmumu_path() -> None:
     """Make `import zmumu` and the v2 scripts importable (read-only use of the channel code)."""
     for p in (str(ZMUMU), str(ZMUMU / "scripts")):
+        if p not in sys.path:
+            sys.path.insert(0, p)
+
+
+def add_ztautau_path() -> None:
+    """Make `import ztautau` (z-tautau/ztautau: config, mass, fakes, analysis, corrections) importable, read-only."""
+    for p in (str(ZTAUTAU), str(ZTAUTAU / "scripts")):
         if p not in sys.path:
             sys.path.insert(0, p)
 
@@ -46,9 +59,22 @@ def git_commit() -> dict:
 
 def provenance(extractor: str, sources, **extra) -> dict:
     """Provenance block: extractor, date, git commit, luminosity, dataset, source files (+ anything else)."""
-    srcs = [str(Path(s).resolve().relative_to(REPO)) if str(s).startswith(str(REPO)) else str(s) for s in sources]
-    return {"extractor": f"presentation/data/{extractor}", "generated": _dt.datetime.now().isoformat(timespec="seconds"),
-            "git": git_commit(), "lumi_pb": LUMI_PB, "dataset": DATASET, "sources": srcs, **extra}
+    srcs, links = [], {}
+    for s in sources:
+        if not str(s).startswith(str(REPO)):
+            srcs.append(str(s))
+            continue
+        try:
+            srcs.append(str(Path(s).resolve().relative_to(REPO)))
+        except ValueError:                      # a git-ignored link inside the worktree that points to the main checkout
+            rel = str(Path(s).relative_to(REPO))
+            srcs.append(rel)
+            links[rel] = str(Path(s).resolve())
+    out = {"extractor": f"presentation/data/{extractor}", "generated": _dt.datetime.now().isoformat(timespec="seconds"),
+           "git": git_commit(), "lumi_pb": LUMI_PB, "dataset": DATASET, "sources": srcs, **extra}
+    if links:
+        out["source_links"] = links
+    return out
 
 
 class Checker:
@@ -58,8 +84,10 @@ class Checker:
         self.label = label
         self.rows: list[dict] = []
 
-    def check(self, name, got, want, tol=0.0, source="", rel=False):
-        """Scalar or array comparison. `tol` absolute (or relative with `rel=True`); arrays use allclose."""
+    def check(self, name, got, want, tol=0.0, source="", rel=False, soft=False):
+        """Scalar or array comparison. `tol` absolute (or relative with `rel=True`); arrays use allclose.
+        `soft=True`: a documentation-level comparison -- a mismatch is printed as SOFT-FAIL and stored, but does
+        not make `finish()` raise (used for numbers quoted in docs from an earlier pass / rounded tables)."""
         g, w = np.asarray(got, dtype=float), np.asarray(want, dtype=float)
         if g.shape != w.shape:
             ok, maxdiff = False, float("nan")
@@ -69,6 +97,8 @@ class Checker:
             ok = bool(np.all(diff <= tol * scale)) if g.size else True
             maxdiff = float(np.max(diff / scale)) if g.size else 0.0
         row = {"name": name, "ok": ok, "tol": float(tol), "rel": bool(rel), "max_diff": maxdiff, "source": source}
+        if soft:
+            row["soft"] = True
         if g.ndim == 0:
             row["got"], row["want"] = float(g), float(w)
         else:
@@ -86,8 +116,8 @@ class Checker:
     def finish(self, log=print) -> list[dict]:
         n_bad = 0
         for r in self.rows:
-            flag = "PASS" if r["ok"] else "FAIL"
-            n_bad += not r["ok"]
+            flag = "PASS" if r["ok"] else ("SOFT-FAIL" if r.get("soft") else "FAIL")
+            n_bad += (not r["ok"]) and not r.get("soft")
             if "got" in r:
                 extra = f"got {r['got']:.10g}  want {r['want']:.10g}  tol {r['tol']:g}{' rel' if r['rel'] else ''}"
             elif "shape" in r:
@@ -95,7 +125,9 @@ class Checker:
             else:
                 extra = r.get("detail", "")
             log(f"  [{flag}] {r['name']}: {extra}" + (f"   ({r['source']})" if r["source"] else ""))
-        log(f"[{self.label}] {len(self.rows) - n_bad}/{len(self.rows)} checks passed")
+        n_soft = sum(1 for r in self.rows if (not r["ok"]) and r.get("soft"))
+        log(f"[{self.label}] {len(self.rows) - n_bad - n_soft}/{len(self.rows)} checks passed"
+            + (f", {n_soft} soft check(s) reported (not raised)" if n_soft else ""))
         if n_bad:
             raise AssertionError(f"{self.label}: {n_bad} check(s) failed -- numbers are NOT adjusted; see the list above")
         return self.rows

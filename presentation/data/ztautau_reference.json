@@ -1,0 +1,257 @@
+{
+ "provenance": {
+  "extractor": "presentation/data/extract_ztautau_reference.py",
+  "generated": "2026-09-16T15:35:56",
+  "git": {
+   "commit": "45710ea2b56b15346291450cf85bd5bcce432813",
+   "short": "45710ea2",
+   "dirty_worktree": true
+  },
+  "lumi_pb": 16393.381,
+  "dataset": "CMS 2016 Open Data, Tau Run2016G+H, NanoAODv9 (records 30532, 30565)",
+  "sources": [
+   "presentation/data/ztautau_fit.json",
+   "combination/result.md"
+  ],
+  "published_lines": {
+   "CMS": "| CMS, 13 TeV, 206 pb^-1, 60 < m < 120 GeV | 1952 +- 4 (stat) +- 18 (syst) +- 45 (lumi) pb | [CMS-SMP-20-004, arXiv:2408.03744](https://arxiv.org/abs/2408.03744) |",
+   "ATLAS": "| ATLAS, 13 TeV, 81 pb^-1, 66 < m < 116 GeV | 1981 +- 7 (stat) +- 38 (syst) +- 42 (lumi) pb | [arXiv:1603.09222](https://arxiv.org/abs/1603.09222) |"
+  },
+  "published_note": "cms / atlas copied verbatim from combination/result.md, 'Comparison with published measurements'; total = sqrt(stat^2 + syst^2 + lumi^2) computed here",
+  "this_work_note": "this_work = ztautau_fit.json sigma_60_120 (value = mu_Z x pred; err_up/down = MINOS syst (+) stat; acc = acceptance uncertainty 3.7 %, quoted separately)",
+  "theory_searched": [
+   "combination/result.md",
+   "combination/docs/00-overview.md",
+   "combination/docs/01-inputs.md",
+   "combination/docs/02-correlation-model.md",
+   "combination/docs/03-method.md",
+   "combination/docs/04-results.md",
+   "fitting/CONVENTIONS.md",
+   "z-tautau/docs/06-cross-section.md",
+   "z-tautau/handoff.md",
+   "z-mumu/docs/06-cross-section.md",
+   "z-mumu/docs/15-combination-inputs.md",
+   "z-mumu/handoff.md"
+  ],
+  "anchors": [
+   "presentation/data/ztautau_fit.json",
+   "combination/result.md",
+   "z-tautau/handoff.md (2082 +222/-194 +- 76 (acc) pb, NNLO 1945 pb)"
+  ]
+ },
+ "unit": "pb",
+ "this_work": {
+  "value": 2082.463654736072,
+  "err_up": 221.91694566033772,
+  "err_down": 194.40094033613158,
+  "acc": 76.29586364032507,
+  "stat": 40.863346013563685,
+  "syst": 204.1086291726003,
+  "window": "60-120",
+  "sqrt_s_TeV": 13,
+  "lumi_pb": 16393.381,
+  "label": "this work",
+  "source": "ztautau_fit.json sigma_60_120"
+ },
+ "cms": {
+  "value": 1952,
+  "stat": 4,
+  "syst": 18,
+  "lumi": 45,
+  "window": "60-120",
+  "sqrt_s_TeV": 13,
+  "lumi_pb": 206,
+  "label": "CMS",
+  "reference": "CMS-SMP-20-004, arXiv:2408.03744",
+  "total": 48.63126566315131
+ },
+ "atlas": {
+  "value": 1981,
+  "stat": 7,
+  "syst": 38,
+  "lumi": 42,
+  "window": "66-116",
+  "sqrt_s_TeV": 13,
+  "lumi_pb": 81,
+  "label": "ATLAS",
+  "reference": "arXiv:1603.09222",
+  "note": "narrower mass window, not directly comparable",
+  "total": 57.0701322935211
+ },
+ "theory": {
+  "value": 1944.8826556737133,
+  "unc_up": 15.037752492322525,
+  "unc_down": 21.052853489251536,
+  "unc_rel_up": 0.007731958762886598,
+  "unc_rel_down": 0.010824742268041237,
+  "unc_source": "relative uncertainty of the published NNLO+NNLL QCD (DYturbo v1.3.2) NNPDF3.1 prediction 1940 +15 -21 pb (statistical, PDF, alpha_s, renormalisation and factorisation scale), CMS-SMP-20-004, arXiv:2408.03744, Table 5",
+  "published_prediction": {
+   "value": 1940.0,
+   "up": 15.0,
+   "down": 21.0,
+   "pdf": "NNPDF3.1",
+   "order": "NNLO+NNLL QCD (DYturbo v1.3.2)",
+   "window": "60-120",
+   "sqrt_s_TeV": 13,
+   "reference": "CMS-SMP-20-004, arXiv:2408.03744, Table 5",
+   "components": "statistical, PDF, alpha_s, renormalisation and factorisation scale"
+  },
+  "label": "aMC@NLO / NNLO",
+  "note": "sigma^pred(Z/gamma* -> tautau, 60 < m_LHE < 120) = 6077.22 pb (FEWZ NNLO, all flavours) x sumw(LHE tautau, 60-120) / sumw of the aMC@NLO DYJetsToLL_M-50 sample (z-tautau/docs/06, fitting/CONVENTIONS.md section 6). The repository documents no PDF + scale + alpha_s uncertainty on this number (only on the acceptance A: 3.7 %, and on the mumu reference 1953.9 pb the 0.47 % definitional spread; the documents searched are listed in provenance.theory_searched), so unc_up / unc_down carry the relative uncertainty of the published NNLO+NNLL prediction of the same quantity with the same PDF family (unc_source); the two central values agree to 0.25 %",
+  "sigma_m50_pb": 2019.6751428185198,
+  "reference_mumu_pb": 1953.9
+ },
+ "checks": [
+  {
+   "name": "CMS value / stat / syst / lumi == result.md line",
+   "ok": true,
+   "tol": 0.0,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "combination/result.md",
+   "shape": [
+    4
+   ]
+  },
+  {
+   "name": "CMS window and luminosity == result.md line",
+   "ok": true,
+   "source": "combination/result.md",
+   "detail": "60-120 GeV, 206 pb^-1"
+  },
+  {
+   "name": "CMS total == sqrt(stat^2 + syst^2 + lumi^2)",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "consistency",
+   "got": 48.63126566315131,
+   "want": 48.63126566315131
+  },
+  {
+   "name": "ATLAS value / stat / syst / lumi == result.md line",
+   "ok": true,
+   "tol": 0.0,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "combination/result.md",
+   "shape": [
+    4
+   ]
+  },
+  {
+   "name": "ATLAS window and luminosity == result.md line",
+   "ok": true,
+   "source": "combination/result.md",
+   "detail": "66-116 GeV, 81 pb^-1"
+  },
+  {
+   "name": "ATLAS total == sqrt(stat^2 + syst^2 + lumi^2)",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "consistency",
+   "got": 57.0701322935211,
+   "want": 57.0701322935211
+  },
+  {
+   "name": "CMS 1952 +- 4 +- 18 +- 45 (arXiv:2408.03744)",
+   "ok": true,
+   "tol": 0.0,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "combination/result.md",
+   "shape": [
+    4
+   ]
+  },
+  {
+   "name": "ATLAS 1981 +- 7 +- 38 +- 42 (arXiv:1603.09222)",
+   "ok": true,
+   "tol": 0.0,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "combination/result.md",
+   "shape": [
+    4
+   ]
+  },
+  {
+   "name": "ATLAS window 66-116 flagged as not comparable",
+   "ok": true,
+   "source": "combination/result.md"
+  },
+  {
+   "name": "this_work == ztautau_fit.json sigma_60_120 (value, err_up, err_down, acc)",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "ztautau_fit.json",
+   "shape": [
+    4
+   ]
+  },
+  {
+   "name": "this_work 2082 +222 -194 +- 76 (acc) pb",
+   "ok": true,
+   "tol": 0.5,
+   "rel": false,
+   "max_diff": 0.46365473607193053,
+   "source": "z-tautau/handoff.md",
+   "shape": [
+    4
+   ]
+  },
+  {
+   "name": "theory value == ztautau_fit.json sigma_60_120.pred (1944.9 pb)",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "ztautau_fit.json",
+   "got": 1944.8826556737133,
+   "want": 1944.8826556737133
+  },
+  {
+   "name": "theory value 1944.9 pb (docs/06, CONVENTIONS section 6)",
+   "ok": true,
+   "tol": 0.05,
+   "rel": false,
+   "max_diff": 0.017344326286774958,
+   "source": "z-tautau/docs/06-cross-section.md",
+   "got": 1944.8826556737133,
+   "want": 1944.9
+  },
+  {
+   "name": "theory uncertainty either documented with a source or null",
+   "ok": true,
+   "source": "",
+   "detail": "relative uncertainty of the published NNLO+NNLL QCD (DYturbo v1.3.2) NNPDF3.1 prediction 1940 +15 -21 pb (statistical, PDF, alpha_s, renormalisation and factorisation scale), CMS-SMP-20-004, arXiv:2408.03744, Table 5"
+  },
+  {
+   "name": "theory band +15 -21 pb (1944.9 x 15/1940, x 21/1940; arXiv:2408.03744 Table 5)",
+   "ok": true,
+   "tol": 0.5,
+   "rel": false,
+   "max_diff": 0.05285348925153599,
+   "source": "arXiv:2408.03744",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "published prediction within 0.5 % of the aMC@NLO/FEWZ reference",
+   "ok": true,
+   "source": "arXiv:2408.03744",
+   "detail": "1940 vs 1944.9 pb"
+  },
+  {
+   "name": "this work within 1 sigma of CMS",
+   "ok": true,
+   "source": "sanity"
+  }
+ ]
+}

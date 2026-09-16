@@ -94,11 +94,13 @@ def show_signature(scene, det, kind, phi, charge, tex, tex_color, hits=True, r_l
     return added
 
 
-def zoom_in(scene: MovingCameraScene, det: CMSSlice, scale: float, run_time: float = 1.4, fade=()):
+def zoom_in(scene: MovingCameraScene, det: CMSSlice, scale: float, run_time: float = 1.4, fade=(), at=None):
     """End of an event-display clip: the camera closes in on the inner
     detector (the logo geometry keeps the tracker small, so the tracks and
     calorimeter clusters deserve a closer look on the last frame). ``fade``:
-    mobjects (outer labels) that would be cut by the new frame."""
-    anims = [scene.camera.frame.animate.scale(scale).move_to(det.c)]
+    mobjects (outer labels) that would be cut by the new frame. ``at``: the
+    new frame centre (default the detector centre)."""
+    centre = det.c if at is None else np.array([at[0], at[1], 0.0])
+    anims = [scene.camera.frame.animate.scale(scale).move_to(centre)]
     anims += [FadeOut(m) for m in fade]
     scene.play(*anims, run_time=run_time, rate_func=EASE)

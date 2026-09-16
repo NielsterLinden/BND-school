@@ -30,7 +30,8 @@ Cairo renderer only (never `--renderer=opengl`). Never `source setup.sh` here.
 1. `python tools/render.py <section> <name> scenes/<file>.py <Class> -q l --frames <t1,t2,end>`
 2. **Read the PNG frames** it writes to `work/<name>/`. Judge: clipping at the
    16:9 border, overlaps, z-order, motion legibility, timing, the held final frame,
-   the top ~15 % (y > 2.7) free for the user's title.
+   the top ~15 % (y > 2.7) free for the user's title, the top-left corner (x < −5.85,
+   y > 0.22) free for the chapter identifier (`python tools/zonecheck.py work/<name>/<name>.mp4`).
 3. Fix the scene; re-render only that scene. Render serially.
 4. Chained clips: `python tools/framediff.py <prev_final.png> <this_t0.png>` must say OK.
 

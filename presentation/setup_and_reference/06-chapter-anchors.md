@@ -22,6 +22,16 @@ Three levels:
 ### A1. Frame and format
 - 1920×1080, 60 fps, white background (`white_background(self)`), MP4 only, delivered by `tools/render.py`.
 - **y > 2.7 stays empty**: that is the user's PowerPoint title band.
+- **The top-left corner stays empty: x < −5.85 and y > 0.22** (the top-left 3 cm × 9 cm of the
+  33.867 × 19.05 cm slide, 1 cm = 0.42 scene units): the deck's chapter identifier sits there
+  (deck owner, 16 Sep 2026). Same status as the title band — every clip, every frame, including
+  labels, parked plots, lists and keys. Constants `TITLE_BAND_Y`, `CHAPTER_ID_X`, `CHAPTER_ID_Y`
+  in `style/bnd_style.py`; `python tools/zonecheck.py clips/<S>_<section>` checks the rendered
+  MP4s (sampled frames, ink pixels per zone) and saves the worst frame with the zones outlined.
+  Layout recipe: long left-hand columns (value lists, corrections, pulls, impact names) start
+  at x ≥ −5.8 above y = 0.22 or live entirely below it; a camera zoom picks its centre so the
+  corner stays white. Known exception: a zoomed event display (3-02, 5-03 and the clip opening
+  on it) fills the title band; it was accepted before this rule and is listed by `zonecheck`.
 - **No narrative text** in a clip. Allowed: physics symbols (`e^\pm`, `\tau_h`, `p_T`,
   `m_{\ell\ell}`, `\mu_Z`), axis ticks, numbers that *are* the data.
 - A clip ends on its last change (`self.wait(0.1)`); PowerPoint rests on the last frame.
@@ -123,6 +133,34 @@ fit → σ**. The audience knows this map. A chapter:
 - **Slider** with a `THEORY` reference (`slider`) for μ_Z or a scale factor.
 - **Pull plot** (`pull_plot`) for nuisance parameters.
 - **Value grid** (`value_grid`) for a fake-factor or scale-factor map.
+
+### B5. Rules from the deck owner's critique of the ττ chapter (2026-09-16; apply to every chapter)
+- **Shapes that explain a method show one process only.** A "before / after" of a reconstruction (m_vis → m_ττ, a
+  calibration, a resolution) is drawn from the signal simulation of one sample with one clean peak; never a stitched
+  or mixed template whose sub-samples add shoulders the audience cannot place.
+- **Physics objects are named, never coded.** τ_h decay modes are `1-prong`, `1-prong+π⁰`, `3-prong`, `3-prong+π⁰`
+  (not DM0/DM1/DM10/DM11); the same for any working point, era or category that has a code in the analysis, and for
+  nuisance-parameter labels in a pull plot (`\tau_h\ \mathrm{ID}\ (1\text{-}\mathrm{prong})`, not `TauID_DM0`;
+  a category by its cut, `D_{\mathrm{BDT}} > 0.90`, not `c2`).
+- **A correction is shown after its disagreement.** Before a scale factor, closure correction or reweighting appears
+  (`f(|η|)`, `g(p_T)`, `SF`), show the data-vs-prediction plot it fixes (prediction filled, data points, a ratio strip);
+  then the ratio becomes the correction and the bars slide to 1.
+- **Multi-dimensional dependences are written, not tabulated.** One representative map (`value_grid`) at most; the full
+  dependence as a schematic function, `f = f(\mathrm{period}, \mathrm{DM}, N_{\mathrm{jets}}, p_T)`,
+  `C = C(\mathrm{period}, N_{\mathrm{jets}}, D_{\mathrm{BDT}})`. Ranges as `x \in [a;\ b]`, not `a \ldots b`.
+- **A classifier gets its own scene, from a blank frame**: the list of inputs (mass variables visibly absent when the
+  score must be mass-agnostic) → unit-normalised distributions of the dominant background vs the signal, input by
+  input → a schematic of the classifier → its output `D_{\mathrm{BDT}}` with data, a ratio panel and a y floor high
+  enough that the shapes fill the panel → the categories it defines.
+- **Uncertainty groups are descriptive.** No fit-internal jargon in the impact ranking: "Gammas" is
+  "Template stat. (γ)", and any group name a non-expert cannot read is spelled out.
+- **The result frame is a comparison.** The σ axis is large, the result label sits above it, and it carries the
+  prediction with its uncertainty band and the value printed with that uncertainty, and the published CMS and ATLAS
+  values of the same quantity (`combination/result.md` has them with references) as slate points under the
+  chapter's red/gold/green point. The repository documents no uncertainty on the aMC@NLO/FEWZ σ(60–120) reference;
+  the band is the relative uncertainty of the published NNLO+NNLL NNPDF3.1 prediction of the same quantity,
+  1940 +15 −21 pb (CMS-SMP-20-004, arXiv:2408.03744, Table 5), frozen with its source by the extractor
+  (`extract_ztautau_reference.py` → `theory.unc_up/unc_down`) — reuse it, never type a band into a scene.
 
 ---
 

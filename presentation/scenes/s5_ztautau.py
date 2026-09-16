@@ -41,13 +41,19 @@ _TD = {
     "pi_len": 1.9,
 }
 SW = 4.5
+TD_SHIFT = (0.8, 0.0)       # clears the chapter-identifier corner (x < -5.85, y > 0.22) for the tau label
+# 5-03 ends zoomed (scale 0.5) on this centre, a little left of the detector centre so the outer ring
+# stays out of the chapter-identifier corner; s5_ztautau_story.A["zoom_503"] opens on it
+ZOOM_503 = (-0.2, -0.25)
 
 
 def _pt(k):
-    return np.array([*_TD[k], 0.0])
+    return np.array([_TD[k][0] + TD_SHIFT[0], _TD[k][1] + TD_SHIFT[1], 0.0])
 
 
 class TauDecay(Scene):
+    """(5-01) The diagram sits TD_SHIFT to the right of its original place so the tau label,
+    sliding in from the left, stays out of the chapter-identifier corner."""
 
     def build_parts(self) -> dict:
         tau = fline(_pt("tau_in"), _pt("v1"), color=TAU_COL, sw=SW)
@@ -193,5 +199,5 @@ class ZtautauDetector(TauJet, MovingCameraScene):
         met_lab = mathtex(r"p_T^{\,\mathrm{miss}}", color=PARTICLE["met"]).scale(0.9).move_to(
             det.point_at(det.radii["solenoid"][1] + 0.42, phi_met))
         self.play(FadeIn(met_lab), run_time=0.3)
-        zoom_in(self, det, 0.5, fade=(g1[-1], g2[-1], labs, met_lab))
+        zoom_in(self, det, 0.5, fade=(g1[-1], g2[-1], labs, met_lab), at=ZOOM_503)
         self.wait(0.1)

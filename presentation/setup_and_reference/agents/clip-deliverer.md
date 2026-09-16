@@ -33,6 +33,10 @@ python tools/render.py <section 1-6> <name> scenes/<file>.py <Class> -q h
 
 - Before delivering, Read the `work/<name>/<name>_final.png` frame the tool writes
   and confirm it is the intended held state at 1920×1080.
+- Run `python tools/zonecheck.py work/<name>/<name>.mp4` (all clips of a chain: pass each
+  `work/<clip>/<clip>.mp4`): nothing in the title band (y > 2.7) or the chapter-identifier
+  corner (x < −5.85, y > 0.22). Report a FAIL instead of delivering, unless the brief lists
+  the clip as a known exception.
 - Never name a delivered file by hand, never renumber, never delete an older
   version (the user's PowerPoint may link it). Pass `-v N` only when the user
   asks for a specific version number.

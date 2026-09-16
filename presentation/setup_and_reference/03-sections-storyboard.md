@@ -95,10 +95,34 @@ by the `mumu_*` chain, 15 Sep 2026; cut into one-idea clips on 16 Sep.)
 |---|-----------|-----------|--------|
 | ✔ 5-01 | `tau_decay` | τ⁻ → ν_τ W*⁻, W*⁻ → d ū, hadronisation blob, π⁻ π⁰ (decay mode 1); the only neutrino is the ν_τ | z-tautau/docs/02-selection.md |
 | ✔ 5-02 | `tau_jet` | chained: the boosted τ: pions collimate into a narrow cone, π⁰ → γγ | — |
-| ✔ 5-03 | `tautau_detector` | chained: dissolves to the slice; a 1-prong τ_h (track, γγ in the ECAL, HCAL) and a 3-prong τ_h, two ν_τ leave unseen, the p_T^miss arrow recoils; camera zooms in | `signature("tau_h", prongs=...)`, `"met"` |
-| | `visible_mass` | why m_vis sits below m_Z: the missing neutrinos, then the likelihood mass | docs/04-ditau-mass.md |
-| | `fake_factor_tautau` | same-sign measurement → application region (81 % of the SR are jet→τ_h fakes) | docs/05-fake-factors.md |
-| | `tautau_stack` / `tautau_result` | frozen m_ττ stack and σ = 2343 pb result | z-tautau docs/08, handoff |
+| ✔ 5-03 | `tautau_detector` | chained: dissolves to the slice; a 1-prong τ_h (track, γγ in the ECAL, HCAL) and a 3-prong τ_h, two ν_τ leave unseen, the p_T^miss arrow recoils; camera zooms in (centre (−0.2, −0.25): the chapter-identifier corner stays white) | `signature("tau_h", prongs=...)`, `"met"` |
+| ✔ 5-04 | `tautau_a1_event` | chained on 5-03 (**real data from here on**, `data/ztautau_*.json`; brief `briefs/ztautau.md`): camera zooms out, the schematic τ_h / ν / MET fade, a real SR event (τ_h tracks from φ, charge, DM, p_T; the real p_T^miss arrow), p_T values | data/ztautau_events.json |
+| ✔ 5-05 | `tautau_a2_visible_mass` | chained: the p_T values converge to m_vis, below the dashed m_Z | data/ztautau_events.json |
+| ✔ 5-06 | `tautau_b1_neutrinos` | chained: dashed ν arrows along each τ_h; their vector sum lands on the p_T^miss arrow | docs/04-ditau-mass.md |
+| ✔ 5-07 | `tautau_b2_likelihood` | chained: the (x₁, x₂) posterior grid of the event lights up; m_ττ = m_vis/√(x₁x₂), the median cell; m_ττ replaces m_vis | data/ztautau_events.json |
+| ✔ 5-08 | `tautau_b3_shapes` | chained: the Z→ττ signal simulation only (inclusive sample, one peak): m_vis (grey ghost, 0.80 m_Z) vs m_ττ (red, 0.99 m_Z); 13 % → 11 % | data/ztautau_mass.json, docs/04 |
+| ✔ 5-09 | `tautau_c1_first_entry` | chained: slice parks left, linear m_ττ axes (14 fit bins, 0–350 GeV), first entry | data/ztautau_sr_stack.json |
+| ✔ 5-10 | `tautau_c2_rain` | chained: clock, rain, the 14 data bins grow; N = 21,160 | data/ztautau_sr_stack.json |
+| ✔ 5-11 | `tautau_d1_simulation` | chained: bars → points; the simulation stack (rest / non-fid Z→ττ / fid Z→ττ) reaches a third of the data; key | data/ztautau_sr_stack.json |
+| ✔ 5-12 | `tautau_d2_gap` | chained: ratio panel opens at data/pred = 2.97 | data/ztautau_sr_stack.json |
+| ✔ 5-13 | `tautau_e1_same_sign` | chained: plot parks; the slice in the dashed τ_h^±τ_h^± box with a real same-sign pair (τ₁ a jet) | data/ztautau_events.json, docs/05 |
+| ✔ 5-14 | `tautau_e2_tally` | chained: ten real same-sign pairs, 2 of 10 pass → f = N_T/N_L = 2/8 | data/ztautau_events.json |
+| ✔ 5-15 | `tautau_e3_ff_map` | chained: the real 4 × 5 fake-factor map (period G, 0 jets), rows 1-prong / 1-prong+π⁰ / 3-prong / 3-prong+π⁰; f = f(period, DM, N_jets, p_T) written, no more tables | data/ztautau_fakes.json |
+| ✔ 5-16 | `tautau_e4_eta_closure` | chained: first the same-sign data vs FF prediction in \|η(τ₁)\| with its ratio (0.93 … 1.14 … 0.84), then the ratio becomes f(\|η\|) and slides to 1; the same for p_T(τ₂) | data/ztautau_fakes.json, docs/05 |
+| ✔ 5-17 | `tautau_e5_osss` | chained: C_OS/SS = C(period, N_jets, D_BDT) ∈ [0.96; 1.305] (no tables); the box turns opposite-sign | data/ztautau_fakes.json |
+| ✔ 5-18 | `tautau_f1_apply` | chained: N_fake = C_OS/SS · f × N_AR; the plot returns | docs/05 |
+| ✔ 5-19 | `tautau_f2_template` | chained: the fake template fills the gap; ratio 2.97 → 1.02; N_fake = 13592 (64 %) | data/ztautau_fakes.json |
+| ✔ 5-20 | `tautau_g1_tau_sf` | chained: SF_ID per DM, TES per DM, ⟨SF_trig⟩; the signal layer breathes to the corrected height | data/ztautau_corrections.json, docs/07 |
+| ✔ 5-21 | `tautau_g2_event_weights` | chained: ⟨w_PU⟩, ⟨w_L1⟩ = 0.990, the MC subtraction (2.5 % of the AR), the fiducial split (38 %) | data/ztautau_corrections.json |
+| ✔ 5-22 | `tautau_h1_inputs` | own scene from a blank frame: the 16 BDT input symbols by importance (no mass variable) | data/ztautau_bdt_inputs.json |
+| ✔ 5-23 | `tautau_h2_shapes` | chained: unit-normalised fakes (pale slate) vs Z→ττ (red) distributions of the leading inputs, one panel after the other | data/ztautau_bdt_inputs.json |
+| ✔ 5-24 | `tautau_h3_sketch` | chained: schematic decision trees summing into D_BDT | docs/09-bdt.md |
+| ✔ 5-25 | `tautau_h4_score` | chained: the real D_BDT output (log y from 10^1.5, ratio panel): fakes, Z→ττ, non-fid, rest, data; cuts at 0.55 / 0.90; AUC 0.966 | data/ztautau_bdt.json |
+| ✔ 5-26 | `tautau_h5_categories` | chained: the plot splits into SR0 / SR1 / SR2 panels; SR0 < 110 GeV greyed; 486/12351, 1131/1044, 2141/197 | data/ztautau_bdt.json, data/ztautau_fit.json |
+| ✔ 5-27 | `tautau_i1_fit` | chained: μ_Z slider + pulls labelled by name (τ_h ID (1-prong), C_OS/SS (D_BDT < 0.55), …); post-fit; μ_Z = 1.071 +0.114 −0.100 | data/ztautau_fit.json |
+| ✔ 5-28 | `tautau_i2_impacts` | chained: grouped impacts as bars (Tau ID 8.4 % … stat 2.1 %; "Gammas" printed as "Template stat. (γ)") | data/ztautau_fit.json |
+| ✔ 5-29 | `tautau_i3_sigma_fid` | chained: σ_fid = 4.82 ± 0.09 ± 0.47 pb | data/ztautau_fit.json |
+| ✔ 5-30 | `tautau_i4_sigma_total` | chained: a large σ axis: σ(60–120) = 2082 +222 −194 pb (label above) vs the prediction 1944.9 +15 −21 pb with its band (NNLO+NNLL NNPDF3.1 uncertainty, CMS-SMP-20-004 Table 5) and the published CMS (1952 ± 49) and ATLAS (1981 ± 57, 66–116 GeV) points | data/ztautau_fit.json, data/ztautau_reference.json, combination/result.md |
 
 ## 6 — combination and conclusion (`6_combination`)
 

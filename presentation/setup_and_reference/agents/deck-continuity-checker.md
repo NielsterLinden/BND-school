@@ -22,6 +22,9 @@ deviation the brief records is fine. Only the fixed anchors (06 §A) are absolut
 ## Checklist
 
 - [ ] **Title band**: nothing drawn above y = 2.7 in any `_t0`/`_final` frame or anchor dict. → MAJOR
+- [ ] **Chapter-identifier corner**: nothing drawn at x < −5.85 with y > 0.22 (06 §A1) in any
+      frame or anchor dict; a label, parked list or plot edge there is a MAJOR (the result of
+      `tools/zonecheck.py`, if the caller ran it, is the evidence). → MAJOR
 - [ ] **No narrative text**: only physics symbols, ticks, data values. → MAJOR
 - [ ] **Colour roles** (06 §A2): signal and the channel's objects in its own chapter colour;
       no other channel's colour except where the three channels appear together; theory

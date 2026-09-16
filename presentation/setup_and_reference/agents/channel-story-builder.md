@@ -45,7 +45,8 @@ the pace were decided with the team. You implement it; you do not redesign it.
 - Frozen data at the top: `load_data("<chapter>_…")`, then `assert` every number the clips
   print against the value in the brief. A mismatch stops the render; never "fix" it here.
 - One module-level anchor dict (or named constants) for every position, scale and size;
-  start from the §B3 defaults of 06 unless the brief says otherwise. Nothing above y = 2.7.
+  start from the §B3 defaults of 06 unless the brief says otherwise. Nothing above y = 2.7,
+  nothing at x < −5.85 with y > 0.22 (chapter identifier, 06 §A1; `tools/zonecheck.py`).
 - One **pure builder per end state** (`state_a() -> dict`), no scene side effects, and an
   `ORDER_A` tuple (z-order). Clip N+1 starts with `add_state(self, state_<N>(), ORDER_<N>)`
   and ends with `check_order(self, state_<N+1>(), ORDER_<N+1>)` and `self.wait(0.1)`.

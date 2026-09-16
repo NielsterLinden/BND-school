@@ -3,6 +3,9 @@
 Read the repository `CLAUDE.md` first, then this. Full findings, conventions and
 agent definitions: `presentation/setup_and_reference/` (start at its `README.md`).
 Drawing know-how: `presentation/MANIM_PHYSICS_RECIPES.md`.
+A channel team building its own chapter starts from `prompts/presentation_chapter_animations.md`
+(agent `channel-animation-director`); what all chapters share and what is free:
+`setup_and_reference/06-chapter-anchors.md`.
 
 ## What this directory produces
 

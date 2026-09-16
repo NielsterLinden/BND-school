@@ -613,8 +613,8 @@ def eff_plot() -> dict:
     """eps_ID vs p_T in the barrel (|eta| < 0.9) for data and simulation (nominal fits), bins as
     horizontal bars; a two-row key."""
     E, pt = TNP["id"], TNP["pt_edges"]
-    dax = DataAxes([20, 200, 30], [0.94, 0.98, 0.02], EFF_WH[0], EFF_WH[1], x_ticks=[20, 50, 100, 150, 200],
-                   y_ticks=[0.94, 0.96, 0.98], y_fmt="{:.2f}", tick_label_h=0.16, title_h=0.2, title_buff=0.14,
+    dax = DataAxes([20, 200, 30], [0.92, 0.98, 0.02], EFF_WH[0], EFF_WH[1], x_ticks=[20, 50, 100, 150, 200],
+                   y_ticks=[0.92, 0.94, 0.96, 0.98], y_fmt="{:.2f}", tick_label_h=0.16, title_h=0.2, title_buff=0.14,
                    x_title=r"p_T\ [\mathrm{GeV}]", y_title=r"\varepsilon_{\mathrm{ID}}")
     dax.move_frame_to(EFF_C)
     pts = {}
@@ -629,7 +629,7 @@ def eff_plot() -> dict:
                      label_h=0.16)
     eta = tex_h(r"|\eta| < 0.9", 0.17)
     VGroup(eta, key).arrange(DOWN, aligned_edge=LEFT, buff=0.12).next_to(dax.frame.get_corner(DOWN + LEFT), UP + RIGHT,
-                                                                           buff=0.12)   # empty: below 0.955 left of 120 GeV
+                                                                           buff=0.12)   # empty: below 0.945 (every point >= 0.948)
     return {"eff_ax": dax, "eff_key": VGroup(eta, key), "eff_data": pts["data"], "eff_mc": pts["mc"]}
 
 

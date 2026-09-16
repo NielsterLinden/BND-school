@@ -81,3 +81,8 @@ number	section	name	scene_file	scene_class
 28	5_ztautau	tautau_i2_impacts	scenes/s5_ztautau_story.py	TautauFit
 29	5_ztautau	tautau_i3_sigma_fid	scenes/s5_ztautau_story.py	TautauFit
 30	5_ztautau	tautau_i4_sigma_total	scenes/s5_ztautau_story.py	TautauFit
+24	4_zmumu	mumu_t1_tag_probe	scenes/s4_zmumu_story.py	MumuTagProbe
+25	4_zmumu	mumu_t2_pass_fail	scenes/s4_zmumu_story.py	MumuTagProbe
+26	4_zmumu	mumu_t3_data_vs_sim	scenes/s4_zmumu_story.py	MumuTagProbe
+27	4_zmumu	mumu_t4_sf_map	scenes/s4_zmumu_story.py	MumuTagProbe
+28	4_zmumu	mumu_t5_apply	scenes/s4_zmumu_story.py	MumuTagProbe

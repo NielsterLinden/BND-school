@@ -1,4 +1,4 @@
-"""The correlation model: which uncertainty is shared between the two channels, and how much.
+"""The correlation model: which uncertainty is shared between the channels, and how much.
 
 This is the only place in the combination where a *judgement* is made rather than a number read
 from a file, so it is deliberately small, explicit and auditable. Every entry of `CORRELATION` is
@@ -10,7 +10,7 @@ silent zero: a channel that adds a systematic must state how it correlates.
 
     from comb import inputs, model
     spec = model.build(inputs.load_channels())
-    spec.covariance()            # 2x2 numpy array, pb^2
+    spec.covariance()            # n x n numpy array, pb^2
 """
 
 from __future__ import annotations
@@ -21,7 +21,7 @@ import numpy as np
 
 from .inputs import ChannelResult
 
-#: rho between the two channels for each in-fit systematic category.
+#: rho between the channels for each in-fit systematic category.
 #: "split" marks a category that is broken up before the correlation is applied.
 CORRELATION: dict[str, float | str] = {
     # --- shared inputs, derived once and used by both channels: fully correlated
@@ -31,10 +31,11 @@ CORRELATION: dict[str, float | str] = {
     "Background normalisation": 1.0,    # identical XS_* nuisance parameters on shared MC samples
     # --- theory: correlated except the generator comparison, which is a different pair per channel
     "Signal modelling": "split",
-    # --- object calibrations: different objects, independently derived -> uncorrelated
+    # --- object calibrations: different objects, independently derived -> uncorrelated.
+    # Only one channel uses each of them, so the value is a statement, not an effect.
     "Muon efficiency": 0.0,
     "Muon momentum": 0.0,
-    "Electron efficiency": 0.0,
+    "Electron efficiency": 0.0,     # ee only: EGM POG reco + Medium-ID scale factors
     "Tau ID": 0.0,
     "Tau trigger": 0.0,
     "Tau energy scale": 0.0,
@@ -56,6 +57,12 @@ ACC_CORRELATION: dict[str, float] = {
 
 ACC_LABEL = {"pdf": "Acceptance: PDF", "alphas": r"Acceptance: $\alpha_s$", "scale": "Acceptance: QCD scale",
              "isr": "Acceptance: ISR", "fsr": "Acceptance: FSR", "mcstat": "Acceptance: MC stat."}
+
+
+#: rho of the two sources that are not `Category` strings of a grouped-impact table.
+#: Both are properties of one channel's own dataset or likelihood, so both are 0 by fact rather
+#: than by choice, and `rho_override` does not touch them (see `build`).
+STRUCTURAL_RHO = {"Data statistics": 0.0, "Fit residual": 0.0}
 
 
 @dataclass
@@ -144,9 +151,18 @@ def build(channels: dict[str, ChannelResult] | list[ChannelResult], *,
     def rho_of(default: float) -> float:
         return default if rho_override is None else rho_override
 
-    # --- statistical: disjoint datasets (SingleMuon and Tau primary datasets, orthogonal triggers)
+    # --- statistical: disjoint datasets (SingleMuon, Tau and Electron primary datasets; the only
+    # process that can enter two of the three selections is ZZ -> 4l, 61 of 10.4 M mu mu events,
+    # checked by z-mumu -- fitting/CONVENTIONS.md section 6)
     sources.append(Source("Data statistics", "statistical", 0.0,
                           {c.name: c.sigma_stat for c in chans}))
+
+    # --- the part of a channel's published total that its own grouped impacts do not add up to.
+    # Non-zero only for z-ee (1.03 % of mu_Z); a property of that fit's correlation matrix, so
+    # uncorrelated with anything else by construction. See comb/inputs.ChannelResult.residual_pb.
+    if any(c.residual_pb > 0 for c in chans):
+        sources.append(Source("Fit residual", "statistical", 0.0,
+                              {c.name: c.residual_pb for c in chans}))
 
     # --- in-fit systematics, category by category
     categories = sorted({k for c in chans for k in c.groups})

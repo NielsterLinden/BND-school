@@ -96,24 +96,28 @@ trex-fitter mi  comb.config      # grouped impacts
 Stat-only: run every channel with `"StatOnly=TRUE:Suffix=_statOnly"` first, then the same option
 string on the MultiFit.
 
-## 6. Decisions taken by the combination (15 Sep 2026)
+## 6. Decisions taken by the combination (15 Sep 2026, updated 16 Sep 2026)
 
 §2 and §5 left two conventions "to be agreed" and the channels have since diverged in one place.
-The combination (`combination/`, μμ ⊕ ττ; z-ee not yet available) settled them as follows.
+The combination (`combination/`, now μμ ⊕ ττ ⊕ ee) settled them as follows.
 
 - **Acceptance denominator: 60 < m < 120 GeV, NLO (aMC@NLO).** The recommendation of §2, and what
   both finished channels already quote. The μμ fiducial volume is defined with *dressed* leptons
   (ΔR < 0.1), the ττ one with LHE (Born-like) mass and `GenVisTau` momenta; the two definitions
   are not mixed because each channel's A is used only to convert its own σ_fid.
-- **σ^pred(60–120) is not the same number in the two channels.** μμ builds it as
-  σ_fid^pred / A(60–120) = 799.566 / 0.409209 = **1953.9 pb**; ττ uses the LHE-ττ subset of the
-  same sample with 60 < m_LHE < 120 GeV, **1944.9 pb**. The two differ by **0.47 %** — a
-  definitional difference, not a statistical one. Until the channels agree on one construction:
+- **σ^pred(60–120) is not the same number in the three channels.** All three now build it the
+  same way — 6077.22 pb × Σw(LHE flavour, 60 < m_LHE < 120) / Σw of `DYJetsToLL_M-50` aMC@NLO —
+  but the generator's LHE flavour shares are not exactly 1/3: ee **1954.1 pb**, μμ **1953.9 pb**,
+  ττ **1944.9 pb**. ee and μμ agree to 0.01 %; ττ is 0.44 % lower because the τ mass is in the
+  matrix element. (μμ reaches its number by the equivalent route σ_fid^pred / A(60–120) =
+  799.566 / 0.409209; z-ee computes its own since 16 Sep 2026, agreeing with the combination's
+  independent value to 4 × 10⁻⁶.) The 0.47 % between the extremes is **physical**, not a
+  definitional difference. Therefore:
   - the combination multiplies each μ̂ by *its own* reference and combines the **cross sections**,
     never `mu_Z`;
-  - a TRExFitter MultiFit with one shared `mu_Z` (§5) would fit one parameter against two
-    references. At the current precision the bias is ~0.002 % on the combination, but a channel
-    adding a third measurement of comparable weight should fix this first.
+  - a TRExFitter MultiFit with one shared `mu_Z` (§5) would fit one parameter against three
+    references. At the current precision the bias is ~0.002 % on the combination, but it should be
+    fixed before a joint fit is quoted.
 - **`SigModel` must be decorrelated between channels.** Both channels use the name, but μμ
   compares powheg with aMC@NLO (0.2 % on C) and ττ compares madgraph LO with aMC@NLO (7.3 %).
   §3 correlates by name, so a MultiFit needs `DecorrSysts: "SigModel"` + `DecorrSuff: "_<channel>"`
@@ -121,9 +125,19 @@ The combination (`combination/`, μμ ⊕ ττ; z-ee not yet available) settled 
   *Since z-tautau v2 (15 Sep 2026) this is moot: the ττ parameter is `SigModel_tautau` and is not in the
   workspace by default; the ττ signal is the fiducial `DYtautau` only, the fit has three regions
   `tautau_SR0/1/2` (SR0 above 110 GeV only), the ττ working point is DeepTau Tight (v3), and the ττ reference
-  σ^pred(60–120) = 1944.9 pb is unchanged.*
-- **Data statistics are uncorrelated between channels** — `SingleMuon` and `Tau` are disjoint
-  primary datasets selected by orthogonal triggers. Worth stating because a future eτh/μτh channel
+  σ^pred(60–120) = 1944.9 pb is unchanged. z-ee fits no generator systematic either, so only μμ has one.*
+
+- **§3's "renormalised to a constant fiducial yield" is not optional, and z-ee does not yet do it
+  (16 Sep 2026).** Its `PDF`/`QCDScale` templates are raw LHE weight envelopes, so `QCDScale` acts
+  as a ±5.87 % *normalisation* of the signal — exactly degenerate with the POI. The fit pulls it to
+  −1.88σ, rescaling the prediction by κ = 0.893, and `mu_signal` = 1.0509 is therefore measured
+  against a prediction the fit itself moved; the data-over-prediction ratio is 0.9700. The
+  combination carries the channel's own number as its baseline and the corrected one
+  (σ = μ̂ · κ · σ^pred) as the `ee_normfix` variation, worth −99 pb — the largest entry in its
+  cross-check table and the reason its χ²/ndf is 9.67/2. Full diagnosis and the list of changes:
+  `combination/docs/01-inputs.md`.
+- **Data statistics are uncorrelated between channels** — `SingleMuon`, `Tau` and `Electron` are
+  disjoint primary datasets selected by orthogonal triggers. Worth stating because a future eτh/μτh channel
   would *not* be orthogonal to μμ and would need an overlap treatment.
   *Checked by z-mumu (15 Sep 2026):* the ττ selection vetoes muons and electrons, so it is disjoint
   from μμ and ee by construction; the μμ SR (exactly two tight muons, no electron veto) and an
@@ -133,9 +147,10 @@ The combination (`combination/`, μμ ⊕ ττ; z-ee not yet available) settled 
   the same sample — but the generator's flavour shares: ee 0.33386, μμ 0.33380, ττ 0.33234
   (the same formula gives 1954.1 pb for ee). The truth mass of the 60–120 denominator is the LHE
   (Born-level) mass in both finished channels.
-- **Z/γ*→ττ as a background in the μμ signal region** carries its own `XS_DYtautau` (5 %) rather
-  than scaling with `mu_Z`, although under lepton universality it is the same process. 11.1k of
-  10.4M events: 0.005 % on the combination, documented rather than fixed.
+- **Z/γ*→ττ as a background in the μμ and ee signal regions** carries its own `XS_DYtautau` (5 %)
+  rather than scaling with `mu_Z`, although under lepton universality it is the same process.
+  11.1k of 10.4M μμ events and 6.7k of 6.32M ee events: 0.005 % on the combination, documented
+  rather than fixed.
 
 The rationale for each is in `combination/docs/02-correlation-model.md`; the resulting numbers in
 `combination/result.md`.

@@ -1,0 +1,217 @@
+{
+ "channel": "Z -> e+ e-",
+ "dataset": "CMS Open Data 2016 Electron Run2016G+H (UL NanoAODv9)",
+ "generated_by": "combination/tools/extract_zee.py",
+ "source": {
+  "tarball": "z-ee/Zee_fit.tar.gz",
+  "config": "z-ee/fit.config",
+  "histograms": "datasets/z-ee",
+  "gensums": "z-mumu/output/v2/gensums.json"
+ },
+ "lumi_pb": 16393.381,
+ "lumi_rel_unc": 0.012,
+ "fit_variable": "m_ee",
+ "regions": [
+  "SR"
+ ],
+ "poi": "mu_signal",
+ "nominal_variant": "published",
+ "variants": {
+  "published": "TRExFitter fit as published by z-ee (mu_signal against the un-renormalised signal template)",
+  "normfix": "the same fit with the normalisation of the un-renormalised PDF and QCDScale templates put back into the prediction (fitting/CONVENTIONS.md section 3)"
+ },
+ "prediction": {
+  "sumw": 1220934619655.4375,
+  "dy_xsec_pb": 6077.22,
+  "construction": "6077.22 pb x sumw(LHE flavour, 60 < m_LHE < 120) / sumw of DYJetsToLL_M-50 aMC@NLO (recid 35669)",
+  "source": "z-mumu/output/v2/gensums.json",
+  "sumw_lhe_ee_60_120": 392587694592.9082,
+  "sigma_ee_60_120_pb": 1954.1110153852685,
+  "sigma_ee_m50_pb": 2028.9451192916288,
+  "sumw_lhe_mumu_60_120": 392551598519.0078,
+  "sigma_mumu_60_120_pb": 1953.931346647322,
+  "sigma_mumu_m50_pb": 2028.5997378898514,
+  "sumw_lhe_tautau_60_120": 390733685053.2715,
+  "sigma_tautau_60_120_pb": 1944.8826556737133,
+  "sigma_tautau_m50_pb": 2019.6751428185198
+ },
+ "sigma_pred_60_120_pb": 1954.1110153852685,
+ "fit": {
+  "published": {
+   "mu_err_up": 0.0202394,
+   "mu_err_down": 0.0202394,
+   "mu_stat": 0.00042100219005565396,
+   "grouped_impact": {
+    "Background normalisation": 0.0035549673395056515,
+    "Electron efficiency": 0.0036645305199015732,
+    "L1 prefiring": 0.006359650953387986,
+    "Luminosity": 0.009641059240734598,
+    "Pileup": 0.001348216855953823,
+    "Signal modelling": 0.0039237288833005955,
+    "Gammas": 0.01216436384411993
+   },
+   "fit_residual": 0.009209281967991225,
+   "ranking": {
+    "LUMI": 0.009641059240734598,
+    "L1Prefiring": 0.006359650953387986,
+    "gamma_stat_SR_bin_7": 0.0039307986528265,
+    "gamma_stat_SR_bin_3": 0.0037782740861369386,
+    "ElectronRECO": 0.003658160430002787,
+    "gamma_stat_SR_bin_0": 0.0036028784770048873,
+    "QCDScale": 0.0035693493126753473,
+    "gamma_stat_SR_bin_2": 0.0033981612465854875,
+    "gamma_stat_SR_bin_8": 0.003156747115892682,
+    "XS_DYtautau": 0.0030688126831619174
+   },
+   "mu": 1.05087,
+   "label": "TRExFitter fit as published by z-ee (mu_signal against the un-renormalised signal template)"
+  },
+  "normfix": {
+   "mu_err_up": 0.01806398290810103,
+   "mu_err_down": 0.01806398290810103,
+   "mu_stat": 0.00037575107786982,
+   "grouped_impact": {
+    "Background normalisation": 0.003172864277581721,
+    "Electron efficiency": 0.0032706511397431054,
+    "L1 prefiring": 0.0056760885265121006,
+    "Luminosity": 0.008604797046385726,
+    "Pileup": 0.0012033047542102813,
+    "Signal modelling": 0.0035019897568092087,
+    "Gammas": 0.010856886101767075
+   },
+   "fit_residual": 0.008219429037702527,
+   "ranking": {
+    "LUMI": 0.009641059240734598,
+    "L1Prefiring": 0.006359650953387986,
+    "gamma_stat_SR_bin_7": 0.0039307986528265,
+    "gamma_stat_SR_bin_3": 0.0037782740861369386,
+    "ElectronRECO": 0.003658160430002787,
+    "gamma_stat_SR_bin_0": 0.0036028784770048873,
+    "QCDScale": 0.0035693493126753473,
+    "gamma_stat_SR_bin_2": 0.0033981612465854875,
+    "gamma_stat_SR_bin_8": 0.003156747115892682,
+    "XS_DYtautau": 0.0030688126831619174
+   },
+   "mu": 0.9379180073834269,
+   "label": "the same fit with the normalisation of the un-renormalised PDF and QCDScale templates put back into the prediction (fitting/CONVENTIONS.md section 3)"
+  }
+ },
+ "error_decomposition": {
+  "TOT_ERROR": 0.0202394,
+  "STAT_ERROR": 0.0092189,
+  "SYST_ERROR": 0.0132919,
+  "MCSTAT_ERROR": 0.0121644,
+  "TOTSYST_ERROR": 0.018018,
+  "NF_ERROR": 0.0
+ },
+ "grouped_impact_summary": {
+  "Total syst.": 0.01801795895824447,
+  "Stat unc.": 0.00921890021229075
+ },
+ "nuisance_parameters": {
+  "ElectronID": {
+   "pull": 0.665217,
+   "err_up": 0.0780412,
+   "err_down": 0.0780412,
+   "norm_up": 0.058339155978077706,
+   "norm_down": -0.05833915597807793
+  },
+  "ElectronRECO": {
+   "pull": 0.162811,
+   "err_up": 0.981949,
+   "err_down": 0.981949,
+   "norm_up": 0.0062004526079171285,
+   "norm_down": -0.0062004526079174616
+  },
+  "L1Prefiring": {
+   "pull": 3.57772,
+   "err_up": 0.919888,
+   "err_down": 0.919888,
+   "norm_up": -0.004667646147906379,
+   "norm_down": 0.004667646147906268
+  },
+  "LUMI": {
+   "pull": -0.873744,
+   "err_up": 0.950294,
+   "err_down": 0.950294,
+   "norm_up": 0.01200000000000001,
+   "norm_down": -0.012000000000000122
+  },
+  "PDF": {
+   "pull": -0.0852552,
+   "err_up": 0.99011,
+   "err_down": 0.99011,
+   "norm_up": 0.002597773867944131,
+   "norm_down": -0.002597773867944242
+  },
+  "Pileup": {
+   "pull": -2.89484,
+   "err_up": 0.515702,
+   "err_down": 0.515702,
+   "norm_up": -0.00790150846316695,
+   "norm_down": 0.00790150846316684
+  },
+  "QCDScale": {
+   "pull": -1.87751,
+   "err_up": 0.273233,
+   "err_down": 0.273233,
+   "norm_up": 0.05865622667641124,
+   "norm_down": -0.05865622667641124
+  },
+  "XS_DYtautau": {
+   "pull": -1.57757,
+   "err_up": 0.934285,
+   "err_down": 0.934285
+  },
+  "XS_TTbar": {
+   "pull": -1.55833,
+   "err_up": 0.859543,
+   "err_down": 0.859543
+  },
+  "XS_VV": {
+   "pull": -0.430814,
+   "err_up": 0.980313,
+   "err_down": 0.980313
+  },
+  "XS_WJets": {
+   "pull": -1.30382,
+   "err_up": 0.914475,
+   "err_down": 0.914475
+  }
+ },
+ "theory_normalisation": {
+  "kappa": 0.8925157320919114,
+  "nps": {
+   "PDF": {
+    "pull": -0.0852552,
+    "norm_up": 0.002597773867944131,
+    "norm_down": -0.002597773867944242,
+    "kappa": 0.9997785048162918
+   },
+   "QCDScale": {
+    "pull": -1.87751,
+    "norm_up": 0.05865622667641124,
+    "norm_down": -0.05865622667641124,
+    "kappa": 0.89271346382458
+   }
+  },
+  "what": "product of the response of the un-renormalised PDF and QCDScale templates at the best fit; sigma = mu_hat x kappa x sigma^pred is the cross section the measured yield corresponds to"
+ },
+ "yields_prefit": {
+  "DY_ee": 6468985.883033825,
+  "Data": 6320097.0,
+  "DY_tautau": 6688.689516297612,
+  "Diboson": 13232.358322321932,
+  "ttbar": 21616.646999344142,
+  "Wjets": 3374.636371316361,
+  "background_total": 44912.33120928005
+ },
+ "for_combination": {
+  "n_obs": 6320097.0,
+  "n_bkg_prefit": 44912.33120928005,
+  "n_sig_prefit": 6468985.883033825,
+  "mu_counting": 0.9700414844386372,
+  "acc_eff": 0.20193818012168196,
+  "acc_eff_definition": "N_SR(DY -> ee, prefit, all corrections) / (sigma^pred(Z/gamma*->ee, 60<m_LHE<120) x L)"
+ }
+}

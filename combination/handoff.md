@@ -7,78 +7,122 @@
 
 ## What we did
 
-We combined the two finished channels — `z-mumu` (Z → μ⁺μ⁻) and `z-tautau` (Z → τhτh) — into one
-Z cross section. `z-ee` is not included (it has no result yet and was out of scope for this pass).
+We combined all three channels — `z-mumu` (Z → μ⁺μ⁻), `z-tautau` (Z → τhτh) and `z-ee` (Z → e⁺e⁻)
+— into one Z cross section.
 
-> **σ(pp → Z/γ* → ℓℓ, 60 < m_ℓℓ < 120 GeV) = 1931 ± 35 pb**
-> = 1931 ± 0.6 (stat) ± 24 (syst) ± 12 (acc) ± 23 (lumi) pb, per lepton flavour, assuming lepton
-> universality.  χ²/ndf = 1.70/1 (p = 0.19), so the two channels are compatible.
+> **σ(pp → Z/γ* → ℓℓ, 60 < m_ℓℓ < 120 GeV) = 1980 ± 32 pb**
+> = 1980 ± 0.5 (stat) ± 22 (syst) ± 7 (acc) ± 21 (lumi) pb, per lepton flavour, assuming lepton
+> universality.
+> **χ²/ndf = 9.67/2 (p = 0.008)** — the three channels are *not* mutually consistent.
 >
-> **R = σ(Z→ττ)/σ(Z→μμ) = 1.21 ± 0.17** (+1.3σ from 1) — the luminosity cancels exactly here.
+> **R = σ(Z→ττ)/σ(Z→μμ) = 1.08 ± 0.13** (+0.6σ) and
+> **R = σ(Z→ee)/σ(Z→μμ) = 1.064 ± 0.021** (+3.0σ).
 
-Updated on 15 Sep 2026 after both channels re-published: z-mumu fixed the findings of its own
-review and z-tautau moved to v2.1. The previous round gave 1940 ± 35 pb; the −9 pb is almost
-entirely the μμ channel switching from the counting extraction to its repaired shape fit.
+Updated on 16 Sep 2026: z-ee added, z-tautau moved to v3 (DeepTau Tight nominal). The previous
+round (μμ ⊕ ττ) gave 1931 ± 35 pb.
 
 Everything: [`result.md`](result.md) (generated), [`docs/`](docs/), [`README.md`](README.md),
-[`CLAUDE.md`](CLAUDE.md). Presentation covering the whole analysis: [`../presentation/`](../presentation/).
+[`CLAUDE.md`](CLAUDE.md). Deck: [`presentation/`](presentation/). What to ask z-ee for:
+[`../ASK_Z_EE.md`](../ASK_Z_EE.md).
+
+**Checked on 16 Sep 2026** (`docs/05-vs-published.md`): the three selections are orthogonal to
+better than 0.002 % (μμ ∩ ee = 61 ZZ→4ℓ events; ττ vetoes e and μ); each channel is compared with
+the published measurement of the same decay (ATLAS Z→ee and Z→μμ, CMS Z→ττ); and the five
+systematics CMS/ATLAS carry that we do not are listed — four of them in z-ee.
+
+## Read this before quoting the number
+
+**The z-ee input is biased by +12 % and we know exactly why.** Its `PDF` and `QCDScale` templates
+are raw LHE weight envelopes that were never renormalised to a constant yield
+(`fitting/CONVENTIONS.md` §3 requires it), so `QCDScale` enters the fit as a ±5.87 %
+*normalisation* of the signal — degenerate with the POI. The fit pulls it to −1.88σ, rescaling the
+prediction by κ = 0.893, and `mu_signal` = 1.0509 is measured against that rescaled prediction.
+The data-over-prediction ratio is 0.9700; μ̂ × (response of every NP) = 0.9706 closes with it to
+0.05 %, so the diagnosis is arithmetic, not opinion.
+
+* Baseline (the channel's own number): σ(ee) = 2054 ± 40 pb → combination 1980 ± 32 pb.
+* `ee_normfix` (κ divided out): σ(ee) = 1833 pb → combination 1882 ± 30 pb.
+* Without ee at all: 1931 ± 35 pb.
+
+We kept the channel's own number as the baseline — this folder follows the channels, it does not
+re-fit them — and flagged it everywhere. **The honest reading today is 1931 ± 35 pb from μμ ⊕ ττ,
+with an ee channel that does not yet agree with it.**
+
+### What z-ee needs to change — full list in [`../ASK_Z_EE.md`](../ASK_Z_EE.md)
+
+1. **Renormalise the `PDF`/`QCDScale` envelopes to a constant yield** — divide each LHE replica by
+   its own Σw, or rescale each replica histogram to the nominal integral. Only the shape may vary.
+   *This is the whole 99 pb.*
+2. Accumulate the envelopes per LHE flavour, not over the inclusive DY sample.
+3. Conventions §1–§4: POI `mu_Z`, `DY_ee` as `Type: SIGNAL`, region `ee_SR`, the §3 sample and NP
+   names, `z-ee/fit/fitinputs/zee.root`, and a published `z-ee/fit/results/zee_fit_result.json`
+   from `fitting/run_trex.py` — then `tools/extract_zee.py` can be deleted.
+4. Run the saturated-model **goodness of fit**. z-ee is the only channel without one.
+5. Fit in coarser bins than 60 × 1 GeV. `Pileup` −2.9σ, `L1Prefiring` +3.6σ and `ElectronID`
+   constrained to 0.08 are a data/MC shape mismatch being absorbed by calibration parameters;
+   z-mumu hit the same thing (`REVIEW.md` F3/F4) and fixed it with 12 × 5 GeV.
+6. `Wjets` has 24 % MC statistics and ~30 bins that were negative before being floored to +10⁻⁶.
+   Flooring keeps TRExFitter happy; smooth the template or merge W+jets into the other
+   backgrounds.
+7. `HistoPath` in `fit.config` points at `/project/atlas/users/lvdurenw/...` — make it
+   repo-relative so anyone can rerun the fit.
+
+Already fixed by z-ee on 16 Sep 2026: the reference cross section (their 1954.1032 pb agrees with
+our independent 1954.1110 pb to 4 × 10⁻⁶) and the negative bins.
 
 ## Method, in one paragraph
 
-A covariance (BLUE) combination of the two channels' published TRExFitter v1.8.0 results, with
+A covariance (BLUE) combination of the three channels' published TRExFitter v1.8.0 results, with
 the shared systematics correlated through the `Category` strings of `../fitting/CONVENTIONS.md`
-(ρ = 1 for luminosity, pileup, L1 prefiring, background cross sections, PDF/α_s/scale/PS;
-ρ = 0 for the object calibrations, MC statistics, fakes and the generator comparison, which is a
-different comparison in each channel). Cross-checked against an explicit profile likelihood that
-carries the ττ channel's asymmetric uncertainty — same answer. Combination is done on the cross
-sections, **not** on `mu_Z`, because the two channels normalise to references that differ by
-0.47 % (see `docs/01-inputs.md`).
+(ρ = 1 for luminosity, pileup, L1 prefiring, background cross sections, PDF/α_s/scale/PS; ρ = 0
+for the object calibrations, MC statistics, fakes, the generator comparison and the z-ee fit
+residual). Cross-checked against an explicit profile likelihood that carries the ττ channel's
+asymmetric uncertainty — same answer to 0.3 pb. Combination is done on the cross sections, **not**
+on `mu_Z`, because the three channels normalise to references that differ by up to 0.47 %
+(`docs/01-inputs.md`).
 
 ## Inputs we used
 
-| channel | what we took | value |
-|---|---|---|
-| μμ | the **v2 shape fit** (12 × 5 GeV, two-sided `SigModel`, MINOS), i.e. the channel's own baseline after its review fixes | μ_Z = 0.9881 ± 0.0159, σ = 1931 ± 35 pb |
-| ττ | **v2.1**, the variant the channel's `nominal_variant` names (`mcsub`, the MC-subtracted fake factor) | μ_Z = 1.205 ⁺⁰·¹⁴⁵₋₀.₁₂₅, σ = 2343 ± 322 pb |
+| channel | what we took | value | weight |
+|---|---|---|---|
+| μμ | the **v2 shape fit** (12 × 5 GeV, two-sided `SigModel`, MINOS), the channel's baseline after its review fixes | μ_Z = 0.9881 ± 0.0159, σ = 1931 ± 35 pb | +0.596 |
+| ττ | **v3**: DeepTau **Tight** on both legs, MC-subtracted fake factor (its `nominal_variant`) | μ_Z = 1.071 ⁺⁰·¹¹⁴₋₀.₁₀₀, σ = 2082 ± 253 pb | −0.0003 |
+| ee | the published TRExFitter job `z-ee/Zee_fit.tar.gz` (16 Sep 2026), converted by `tools/extract_zee.py` | μ_signal = 1.0509 ± 0.0202, σ = 2054 ± 40 pb | +0.404 |
 
-The ±0.7 % lineshape term the previous round carried is gone: the channel's two-sided `SigModel`
-template now covers it inside the fit, and the fit is stable to ±0.2 % between the binnings that
-describe the data. The counting extraction and the two alternative binnings survive as variations
-(+11.2, +3.8, −4.5 pb).
+z-tautau v3 publishes only its nominal, so the ττ cross-check rows the previous round carried
+(`nosub`, Tight-WP) are gone — Tight *is* the nominal now.
 
-`run_combination.py --check` asserts both against the channels' published files and fails if
-either changes. **If a channel re-publishes, run that first** — it will tell you exactly what moved.
+`run_combination.py --check` asserts all three against the channels' published files and fails if
+anything changes. **If a channel re-publishes, run that first** — it will tell you exactly what
+moved.
 
-## The main message
+## The main messages
 
-The combination gains **0.00 %** on the uncertainty over μμ alone. That is not a failure of the
-method: luminosity is 23 of the 35 pb and is 100 % correlated between channels, so it cannot be
-combined away. The ττ channel is 9× less precise and gets a weight of −0.0004 (a negative weight
-is normal BLUE behaviour when ρ exceeds the ratio of the uncertainties, 0.114 > 0.110 here). What
-the ττ channel really contributes is the lepton-universality test.
+1. **Adding ee finally makes combining worth something**: 35.4 → 31.6 pb, a 10.7 % improvement,
+   where μμ ⊕ ττ gained 0.00 %. It is limited to 10.7 % rather than 29 % because ρ(μμ, ee) = 0.44,
+   almost all of it luminosity.
+2. **But the χ² is 9.67/2.** See above. Fix z-ee before quoting 1980 ± 32 pb anywhere.
+3. **The floor is still the luminosity**: 21 of the 32 pb, fully correlated, irreducible.
+4. Data statistics are 0.5 pb — 0.02 %. The MC statistics (`Gammas`) are 10.6 pb.
 
 ## Not done
 
-- **No TRExFitter MultiFit.** The channel workspaces are not committed and were not rebuilt, so
-  the shared NPs are correlated by hand instead of profiled jointly. The config is generated and
+- **No TRExFitter MultiFit.** The channel workspaces are not all committed and were not rebuilt,
+  so the shared NPs are correlated by hand instead of profiled jointly. The config is generated and
   syntax-checked ([`fit/comb.config`](fit/comb.config)) and
-  [`fit/run_multifit.py`](fit/run_multifit.py) has the full recipe — build the submodule, re-run
-  `z-mumu --from 4` (~40 min) and `z-tautau --from 3` (~25 min), then one command.
-- **No z-ee.** Adding it is a loader in `comb/inputs.py` and a `Fit` block in
-  `fit/run_multifit.CHANNELS`, provided it follows `../fitting/CONVENTIONS.md`.
-- The caveats we inherited and did not fix are listed at the end of `result.md`. All nine findings
-  of `z-mumu/REVIEW.md` were fixed by that channel itself before this round, so what is left is
-  each channel's own open-issue list (the μμ 60–80 GeV lineshape, the pileup profile, the in-house
-  muon/prefiring calibrations, and z-tautau's recommendation to adopt the Tight working point).
+  [`fit/run_multifit.py`](fit/run_multifit.py) has the full recipe. This matters more than it used
+  to: ee now carries 40 % of the weight, and a joint fit would expose its `QCDScale` problem
+  structurally instead of as a variation.
+- **No χ² inflation.** BLUE returns ±32 pb assuming the inputs are consistent. No PDG-style scale
+  factor (√(χ²/ndf) = 2.2) has been applied — we prefer to fix the input.
+- The caveats we inherited and did not fix are listed at the end of `result.md`.
 
 ## Next steps, in order of what they would change
 
-1. Settle the μμ 60–80 GeV lineshape (`z-mumu` open issue 3). It is what makes the result move by
-   8.3 pb between the binnings the channel accepts and by 11.2 pb if you count instead of fit —
-   more than the entire correlation model.
-2. Run the MultiFit and compare. The expected difference is small but it is not measured.
-3. Agree one construction of σ^pred(60–120) between the channels, so a shared `mu_Z` means one
-   thing (0.47 % today).
-4. Take z-tautau's Tight working point once that channel adopts it: it moves the combination by
-   only +0.5 pb but takes R from 1.21 ± 0.17 to 1.08 ± 0.13.
-5. Add z-ee, and add eτh/μτh to ττ so the τh ID is constrained in situ.
+1. **z-ee re-runs with renormalised theory templates** (list above). 99 pb, and it is the
+   difference between a quotable number and one with a p = 0.008 caveat attached.
+2. Run the MultiFit and compare.
+3. Settle the μμ 60–80 GeV lineshape (`z-mumu` open issue 3): 11.1 pb between counting and fitting.
+4. More simulated events: `Gammas` is 10.6 pb on the combination and 23.8 pb inside the ee channel.
+5. Add eτh/μτh to ττ so the τh ID is constrained in situ — that improves the universality test,
+   not the cross section.

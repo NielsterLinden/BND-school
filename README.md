@@ -31,11 +31,20 @@ Keep `handoff.md` up to date so the other groups can pick up where you left off.
 
 ## Result so far
 
-The μμ and ττ channels are finished and combined (z-ee is not yet available):
+All three channels are finished and combined:
 
-> **σ(pp → Z/γ* → ℓℓ, 60 < m_ℓℓ < 120 GeV) = 1940 ± 35 pb** per lepton flavour, assuming lepton
-> universality — [`combination/result.md`](combination/result.md), deck in
-> [`presentation/`](presentation/).
+> **σ(pp → Z/γ* → ℓℓ, 60 < m_ℓℓ < 120 GeV) = 1980 ± 32 pb** per lepton flavour, assuming lepton
+> universality, with **χ²/ndf = 9.67/2 (p = 0.008)** — [`combination/result.md`](combination/result.md),
+> deck in [`combination/presentation/`](combination/presentation/).
+
+The compatibility number is part of the result: σ(ee) = 2054 ± 40 pb sits 3.0σ above
+σ(μμ) = 1931 ± 35 pb because the z-ee fit lets a ±5.9 % theory normalisation of its own signal
+template float against its signal strength (`fitting/CONVENTIONS.md` §3 forbids exactly this).
+Diagnosis: [`combination/docs/01-inputs.md`](combination/docs/01-inputs.md); the list of changes to
+ask for: **[`ASK_Z_EE.md`](ASK_Z_EE.md)**. Without z-ee the combination is 1931 ± 35 pb with
+p = 0.54. Orthogonality of the three selections, the systematics CMS and ATLAS carry that we do
+not, and each channel against the published measurement of the same decay:
+[`combination/docs/05-vs-published.md`](combination/docs/05-vs-published.md).
 
 ## What the combination needs
 

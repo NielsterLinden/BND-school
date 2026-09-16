@@ -1,53 +1,68 @@
 {
  "what": "sigma(pp -> Z/gamma* -> ll, 60 < m < 120 GeV) per lepton flavour, assuming lepton universality",
  "combined": {
-  "sigma_pb": 1930.5919469131898,
-  "total_pb": 35.3622997428068,
-  "relative": 0.018316817181045088,
-  "stat_pb": 0.6071569125230127,
-  "syst_pb": 24.407692741524038,
-  "acc_pb": 11.757711836857306,
-  "lumi_pb": 22.71881050980596,
-  "chi2": 1.6961669431903517,
-  "ndf": 1,
-  "pvalue": 0.1927900212229781,
+  "sigma_pb": 1980.3176802716964,
+  "total_pb": 31.57330294533714,
+  "relative": 0.015943554541716424,
+  "stat_pb": 0.4914759507548133,
+  "syst_pb": 22.306284760192998,
+  "acc_pb": 7.183513202759726,
+  "lumi_pb": 21.153219814742698,
+  "chi2": 9.672093753864736,
+  "ndf": 2,
+  "pvalue": 0.007938373473339911,
   "weights": {
-   "mumu": 1.0003740134274581,
-   "tautau": -0.00037401342745818454
+   "mumu": 0.5961525784896391,
+   "tautau": -0.0003083433419181469,
+   "ee": 0.40415576485227905
   },
-  "iterations": 4,
-  "correlation_mumu_tautau": 0.11440485051875791,
+  "iterations": 5,
+  "order": [
+   "mumu",
+   "tautau",
+   "ee"
+  ],
+  "correlation": {
+   "mumu-tautau": 0.12525963832220555,
+   "mumu-ee": 0.4364550909411519,
+   "tautau-ee": 0.08670954305825031
+  },
+  "most_precise_channel": "mumu",
   "breakdown_pb": {
-   "Luminosity": 22.71881050980596,
-   "Muon efficiency": 16.995396402758825,
-   "Acceptance: PDF": 9.97273586656134,
-   "L1 prefiring": 9.889913227448922,
-   "Signal modelling (generator)": 7.74311065430495,
-   "Gammas": 7.463584687605976,
-   "Muon momentum": 7.170736712220274,
-   "Acceptance: QCD scale": 6.146181464110585,
-   "Signal modelling (PDF, scales, PS)": 5.6521756500628895,
-   "Pileup": 2.6128172915099026,
-   "Background normalisation": 1.570063374659412,
-   "Fakes": 0.8686062022516352,
-   "Acceptance: MC stat.": 0.8640025305592312,
-   "Data statistics": 0.6071569125230127,
-   "Acceptance: $\\alpha_s$": 0.5159763113153257,
-   "Tau ID": 0.08095588909664708,
-   "Tau trigger": 0.030532328119052897,
-   "Tau energy scale": 0.015323884219822415,
-   "MET": 0.007617606334611408,
-   "Acceptance: ISR": 0.006729461496771253,
-   "Acceptance: FSR": 0.0017810939196170252
+   "Luminosity": 21.153219814742698,
+   "L1 prefiring": 10.915979940943272,
+   "Gammas": 10.586646684277147,
+   "Muon efficiency": 10.128061357016568,
+   "Fit residual": 7.27317071027381,
+   "Signal modelling (PDF, scales, PS)": 6.4672036147172385,
+   "Acceptance: PDF": 6.095297658381438,
+   "Signal modelling (generator)": 4.614349553402535,
+   "Muon momentum": 4.273254925939181,
+   "Acceptance: QCD scale": 3.751315821184077,
+   "Background normalisation": 3.735438567253937,
+   "Electron efficiency": 2.894118796328506,
+   "Pileup": 2.6229454831762897,
+   "Acceptance: MC stat.": 0.5281550560863019,
+   "Fakes": 0.5177696225223964,
+   "Data statistics": 0.4914759507548133,
+   "Acceptance: $\\alpha_s$": 0.31441307670647833,
+   "Tau ID": 0.050601079163177465,
+   "Tau trigger": 0.01811524451050445,
+   "Tau energy scale": 0.008790579577895282,
+   "Acceptance: ISR": 0.005690783562820412,
+   "MET": 0.0048406807534053155,
+   "Acceptance: FSR": 0.00150618589711213
   }
  },
  "channels": {
   "mumu": {
    "variant": "shapefit",
+   "label": "$Z\\to\\mu\\mu$",
    "mu": 0.988134,
    "mu_err_up": 0.0158981,
    "mu_err_down": 0.0155715,
    "mu_stat": 0.000310528,
+   "residual": 0.0,
    "sigma_pb": 1930.7459972880047,
    "sigma_err_pb": 35.362810137716245,
    "sigma_pred_pb": 1953.9313466473218,
@@ -89,26 +104,28 @@
   },
   "tautau": {
    "variant": "mcsub",
-   "mu": 1.20451,
-   "mu_err_up": 0.145174,
-   "mu_err_down": 0.125014,
-   "mu_stat": 0.0202997,
-   "sigma_pb": 2342.6306075855446,
-   "sigma_err_pb": 322.0368733786494,
+   "label": "$Z\\to\\tau_h\\tau_h$",
+   "mu": 1.07074,
+   "mu_err_up": 0.114103,
+   "mu_err_down": 0.0999551,
+   "mu_stat": 0.0210107,
+   "residual": 0.0,
+   "sigma_pb": 2082.463654736072,
+   "sigma_err_pb": 253.0559497138575,
    "sigma_pred_pb": 1944.8826556737133,
-   "gof_p": 0.21943,
+   "gof_p": 0.250008,
    "groups": {
-    "Background normalisation": 0.0175033,
-    "Fakes": 0.0855023,
-    "Gammas": 0.0471127,
-    "L1 prefiring": 0.00176401,
-    "Luminosity": 0.0102553,
-    "MET": 0.0104722,
-    "Pileup": 0.0101831,
-    "Signal modelling": 0.017543,
-    "Tau ID": 0.111293,
-    "Tau energy scale": 0.0210663,
-    "Tau trigger": 0.0419739
+    "Background normalisation": 0.0256563,
+    "Fakes": 0.0650152,
+    "Gammas": 0.0388748,
+    "L1 prefiring": 0.00184911,
+    "Luminosity": 0.00702507,
+    "MET": 0.00807195,
+    "Pileup": 0.00550109,
+    "Signal modelling": 0.0125481,
+    "Tau ID": 0.0843785,
+    "Tau energy scale": 0.0146585,
+    "Tau trigger": 0.0302076
    },
    "acceptance": {
     "pdf": 0.004876573295209938,
@@ -118,25 +135,70 @@
     "fsr": 0.0024666591233397815,
     "mcstat": 0.007120722143838773
    },
-   "alone_pb": 2342.6306075855446,
-   "alone_err_pb": 322.0368733786494,
+   "alone_pb": 2082.463654736072,
+   "alone_err_pb": 253.05594971385747,
    "provenance": [
     "z-tautau/output/results.json [fit/mcsub]"
    ],
    "extra": {
-    "sigma_fid_pb": 5.420920835076345,
+    "sigma_fid_pb": 4.818886331329458,
     "sigma_fid_pred_pb": 4.500519576488651,
     "A": 0.0023140314215664886,
-    "C": 0.06542356849711156,
+    "C": 0.05095159714669782,
     "lumi_pb": 16393.381,
-    "n_obs": 47586.0,
-    "n_bkg": 41512.597409521215,
-    "sigmodel_C_LO_over_NLO": 0.8667722795837961,
+    "n_obs": 21160.0,
+    "n_bkg": 16959.231625668577,
+    "tau_wp": "Tight",
+    "sigmodel_C_LO_over_NLO": 0.8412391235759621,
     "mu_expected_asimov": {
      "value": 1.0,
-     "err_up": 0.118425,
-     "err_down": 0.102115
+     "err_up": 0.105789,
+     "err_down": 0.0927585
     }
+   }
+  },
+  "ee": {
+   "variant": "published",
+   "label": "$Z\\to ee$",
+   "mu": 1.05087,
+   "mu_err_up": 0.0202394,
+   "mu_err_down": 0.0202394,
+   "mu_stat": 0.00042100219005565396,
+   "residual": 0.009209281967991225,
+   "sigma_pb": 2053.516642737917,
+   "sigma_err_pb": 39.55011413210557,
+   "sigma_pred_pb": 1954.1110153852685,
+   "gof_p": null,
+   "groups": {
+    "Background normalisation": 0.0035549673395056515,
+    "Electron efficiency": 0.0036645305199015732,
+    "L1 prefiring": 0.006359650953387986,
+    "Luminosity": 0.009641059240734598,
+    "Pileup": 0.001348216855953823,
+    "Signal modelling": 0.0039237288833005955,
+    "Gammas": 0.01216436384411993
+   },
+   "acceptance": {},
+   "alone_pb": 2053.516642737917,
+   "alone_err_pb": 39.55011413210557,
+   "provenance": [
+    "combination/inputs/zee_fit_result.json [fit/published]",
+    "z-ee/Zee_fit.tar.gz",
+    "z-mumu/output/v2/gensums.json"
+   ],
+   "extra": {
+    "lumi_pb": 16393.381,
+    "n_obs": 6320097.0,
+    "n_bkg": 44912.33120928005,
+    "n_sig": 6468985.883033825,
+    "acc_eff": 0.20193818012168196,
+    "mu_counting": 0.9700414844386372,
+    "mu_published": 1.05087,
+    "kappa_theory": 0.8925157320919114,
+    "qcdscale_pull": -1.87751,
+    "qcdscale_norm": 0.05865622667641124,
+    "stat_trex": 0.0092189,
+    "sigma_counting_pb": 1895.5687501222185
    }
   }
  },
@@ -147,7 +209,18 @@
    "rho": 0.0,
    "sizes_pb": {
     "mumu": 0.6067503932116995,
-    "tautau": 39.48053444537968
+    "tautau": 40.863346013563685,
+    "ee": 0.8226850170890757
+   }
+  },
+  {
+   "name": "Fit residual",
+   "kind": "statistical",
+   "rho": 0.0,
+   "sizes_pb": {
+    "mumu": 0.0,
+    "tautau": 0.0,
+    "ee": 17.995959337440578
    }
   },
   {
@@ -156,7 +229,18 @@
    "rho": 1.0,
    "sizes_pb": {
     "mumu": 1.5822037236730553,
-    "tautau": 34.0418645870537
+    "tautau": 49.89849287876149,
+    "ee": 6.946800837462855
+   }
+  },
+  {
+   "name": "Electron efficiency",
+   "kind": "in-fit",
+   "rho": 0.0,
+   "sizes_pb": {
+    "mumu": 0.0,
+    "tautau": 0.0,
+    "ee": 7.160899455155169
    }
   },
   {
@@ -165,7 +249,8 @@
    "rho": 0.0,
    "sizes_pb": {
     "mumu": 0.8660527143625724,
-    "tautau": 166.29194029021053
+    "tautau": 126.44693483515759,
+    "ee": 0.0
    }
   },
   {
@@ -174,7 +259,8 @@
    "rho": 0.0,
    "sizes_pb": {
     "mumu": 7.460715600216935,
-    "tautau": 91.62867309195896
+    "tautau": 75.60692426278447,
+    "ee": 23.770517382949045
    }
   },
   {
@@ -183,7 +269,8 @@
    "rho": 1.0,
    "sizes_pb": {
     "mumu": 9.887498332752909,
-    "tautau": 3.430792453434987
+    "tautau": 3.59630196743282,
+    "ee": 12.427463982020889
    }
   },
   {
@@ -192,7 +279,8 @@
    "rho": 1.0,
    "sizes_pb": {
     "mumu": 22.717773588064418,
-    "tautau": 19.945355098730634
+    "tautau": 13.662936797893732,
+    "ee": 18.83970006230141
    }
   },
   {
@@ -201,7 +289,8 @@
    "rho": 0.0,
    "sizes_pb": {
     "mumu": 0.0,
-    "tautau": 20.36720014674626
+    "tautau": 15.69899555246543,
+    "ee": 0.0
    }
   },
   {
@@ -210,7 +299,8 @@
    "rho": 0.0,
    "sizes_pb": {
     "mumu": 16.989042272829135,
-    "tautau": 0.0
+    "tautau": 0.0,
+    "ee": 0.0
    }
   },
   {
@@ -219,7 +309,8 @@
    "rho": 0.0,
    "sizes_pb": {
     "mumu": 7.1680557631161,
-    "tautau": 0.0
+    "tautau": 0.0,
+    "ee": 0.0
    }
   },
   {
@@ -228,7 +319,8 @@
    "rho": 1.0,
    "sizes_pb": {
     "mumu": 2.6192449701807345,
-    "tautau": 19.80493457099099
+    "tautau": 10.698974528300107,
+    "ee": 2.6345654093474593
    }
   },
   {
@@ -237,7 +329,8 @@
    "rho": 1.0,
    "sizes_pb": {
     "mumu": 5.662818672558816,
-    "tautau": 34.11907642848395
+    "tautau": 24.40458205165932,
+    "ee": 7.667401832243033
    }
   },
   {
@@ -246,7 +339,8 @@
    "rho": 0.0,
    "sizes_pb": {
     "mumu": 7.740215709698101,
-    "tautau": 0.0
+    "tautau": 0.0,
+    "ee": 0.0
    }
   },
   {
@@ -255,7 +349,8 @@
    "rho": 0.0,
    "sizes_pb": {
     "mumu": 0.0,
-    "tautau": 216.4518253978946
+    "tautau": 164.1062811617644,
+    "ee": 0.0
    }
   },
   {
@@ -264,7 +359,8 @@
    "rho": 0.0,
    "sizes_pb": {
     "mumu": 0.0,
-    "tautau": 40.971481489219144
+    "tautau": 28.509062408193127,
+    "ee": 0.0
    }
   },
   {
@@ -273,7 +369,8 @@
    "rho": 0.0,
    "sizes_pb": {
     "mumu": 0.0,
-    "tautau": 81.63431010098287
+    "tautau": 58.75023730952926,
+    "ee": 0.0
    }
   },
   {
@@ -282,7 +379,8 @@
    "rho": 1.0,
    "sizes_pb": {
     "mumu": 0.5200573775579711,
-    "tautau": 13.736737639147345
+    "tautau": 12.211168408515187,
+    "ee": 0.0
    }
   },
   {
@@ -291,7 +389,8 @@
    "rho": 1.0,
    "sizes_pb": {
     "mumu": 0.0,
-    "tautau": 5.778471160815899
+    "tautau": 5.136727972978236,
+    "ee": 0.0
    }
   },
   {
@@ -300,7 +399,8 @@
    "rho": 1.0,
    "sizes_pb": {
     "mumu": 0.0,
-    "tautau": 21.832649451341137
+    "tautau": 19.407967616316185,
+    "ee": 0.0
    }
   },
   {
@@ -309,7 +409,8 @@
    "rho": 0.0,
    "sizes_pb": {
     "mumu": 0.863733125577178,
-    "tautau": 16.681221642268866
+    "tautau": 14.828645060018568,
+    "ee": 0.0
    }
   },
   {
@@ -318,7 +419,8 @@
    "rho": 1.0,
    "sizes_pb": {
     "mumu": 9.973322978487154,
-    "tautau": 11.424009861493097
+    "tautau": 10.155286646931216,
+    "ee": 0.0
    }
   },
   {
@@ -327,61 +429,110 @@
    "rho": 1.0,
    "sizes_pb": {
     "mumu": 6.168751588928798,
-    "tautau": 79.1129972029357
+    "tautau": 70.326896933252,
+    "ee": 0.0
    }
   }
  ],
  "likelihood": {
-  "value_pb": 1929.9196124678133,
-  "err_up_pb": 35.39656143058254,
-  "err_down_pb": 35.78823141352685,
-  "symmetric_pb": 1930.1632094433237,
-  "symmetric_err_pb": 35.359917955348884,
+  "value_pb": 1979.9804198297504,
+  "err_up_pb": 31.40115549352181,
+  "err_down_pb": 31.234529966189516,
+  "symmetric_pb": 1979.9640915678804,
+  "symmetric_err_pb": 31.53243298038089,
   "valid": true
  },
- "ratio": {
-  "value": 1.2133292576424284,
-  "error": 0.165547405609112,
-  "z": 1.2886294222341252,
-  "pvalue": 0.19752694963861284,
-  "breakdown": {
-   "Tau ID": 0.11210787213954121,
-   "Fakes": 0.08613005571006384,
-   "Gammas": 0.04768868677458629,
-   "Tau trigger": 0.042281227160718894,
-   "Acceptance: QCD scale": 0.037098753806855914,
-   "Tau energy scale": 0.021220544570217503,
-   "Data statistics": 0.020451886318386923,
-   "Background normalisation": 0.01663716022858019,
-   "Signal modelling (PDF, scales, PS)": 0.014112790025522935,
-   "Acceptance: ISR": 0.011307882798673707,
-   "Muon efficiency": 0.010676340687952632,
-   "MET": 0.010548876017536622,
-   "Acceptance: MC stat.": 0.008656814079509682,
-   "Pileup": 0.00861165996930343,
-   "Acceptance: $\\alpha_s$": 0.006787913493391805,
-   "Signal modelling (generator)": 0.004864145876377213,
-   "Muon momentum": 0.004504586201404848,
-   "L1 prefiring": 0.004436626345783939,
-   "Luminosity": 0.003946031365527075,
-   "Acceptance: FSR": 0.0029928696829787803,
-   "Acceptance: PDF": 0.0003505974919402636
+ "ratios": {
+  "tautau/mumu": {
+   "numerator": "tautau",
+   "denominator": "mumu",
+   "value": 1.0785798119800198,
+   "error": 0.13005101027745733,
+   "z": 0.6042230030537536,
+   "pvalue": 0.5456953893962431,
+   "breakdown": {
+    "Tau ID": 0.08499630784798931,
+    "Fakes": 0.06549301940822892,
+    "Gammas": 0.03938060491343388,
+    "Acceptance: QCD scale": 0.032978654931177735,
+    "Tau trigger": 0.030428775919800928,
+    "Background normalisation": 0.024960279576733697,
+    "Data statistics": 0.021167251461838864,
+    "Tau energy scale": 0.014765827534143789,
+    "Acceptance: ISR": 0.010052056377989293,
+    "Muon efficiency": 0.009490651823744428,
+    "Signal modelling (PDF, scales, PS)": 0.009476534033080583,
+    "MET": 0.008131051714993481,
+    "Acceptance: MC stat.": 0.0076954090107132335,
+    "Acceptance: $\\alpha_s$": 0.006034064054191614,
+    "Luminosity": 0.005614407686226823,
+    "Signal modelling (generator)": 0.004323945468009512,
+    "Pileup": 0.00407816967736457,
+    "Muon momentum": 0.004004317630648335,
+    "L1 prefiring": 0.0036608410092206617,
+    "Acceptance: FSR": 0.0026604887334706223,
+    "Acceptance: PDF": 0.0003116609729434524
+   }
+  },
+  "ee/mumu": {
+   "numerator": "ee",
+   "denominator": "mumu",
+   "value": 1.0635871552355207,
+   "error": 0.021207570125819763,
+   "z": 2.998323469321208,
+   "pvalue": 0.0027146937491786777,
+   "breakdown": {
+    "Gammas": 0.012979439533219141,
+    "Muon efficiency": 0.009358728266957524,
+    "Fit residual": 0.009320728548819135,
+    "Acceptance: PDF": 0.0054939894889508385,
+    "Signal modelling (generator)": 0.004263841033025891,
+    "Muon momentum": 0.003948656140357649,
+    "Electron efficiency": 0.0037088770170771437,
+    "Acceptance: QCD scale": 0.003398170946897832,
+    "Luminosity": 0.002756774909278086,
+    "Background normalisation": 0.0027264017573478704,
+    "L1 prefiring": 0.000989901188751331,
+    "Signal modelling (PDF, scales, PS)": 0.0008517436431263041,
+    "Data statistics": 0.0005415485118484263,
+    "Fakes": 0.0004770811613991334,
+    "Acceptance: MC stat.": 0.0004758033729997068,
+    "Acceptance: $\\alpha_s$": 0.0002864832285205142,
+    "Pileup": 7.832718418913521e-05
+   }
   }
  },
  "variations": {
   "baseline": {
-   "value": 1930.5919469131898,
-   "error": 35.3622997428068,
+   "value": 1980.3176802716964,
+   "error": 31.57330294533714,
    "why": "the baseline",
    "weights": {
-    "mumu": 1.0003740134274581,
-    "tautau": -0.00037401342745818454
+    "mumu": 0.5961525784896391,
+    "tautau": -0.0003083433419181469,
+    "ee": 0.40415576485227905
    },
-   "chi2": 1.6961669431903517,
-   "pvalue": 0.1927900212229781,
+   "chi2": 9.672093753864736,
+   "ndf": 2,
+   "pvalue": 0.007938373473339911,
    "shift": 0.0,
-   "ratio": 1.2133292576424284,
-   "ratio_error": 0.165547405609112,
+   "channels_used": [
+    "mumu",
+    "tautau",
+    "ee"
+   ],
+   "ratios": {
+    "tautau/mumu": {
+     "value": 1.0785798119800198,
+     "error": 0.13005101027745733,
+     "z": 0.6042230030537536
+    },
+    "ee/mumu": {
+     "value": 1.0635871552355207,
+     "error": 0.021207570125819763,
+     "z": 2.998323469321208
+    }
+   },
    "channels": {
     "mumu": {
      "variant": "shapefit",
@@ -391,25 +542,48 @@
     },
     "tautau": {
      "variant": "mcsub",
-     "sigma_pb": 2342.6306075855446,
-     "sigma_err_pb": 322.0368733786494,
-     "gof_p": 0.21943
+     "sigma_pb": 2082.463654736072,
+     "sigma_err_pb": 253.0559497138575,
+     "gof_p": 0.250008
+    },
+    "ee": {
+     "variant": "published",
+     "sigma_pb": 2053.516642737917,
+     "sigma_err_pb": 39.55011413210557,
+     "gof_p": null
     }
    }
   },
-  "tautau_nosub": {
-   "value": 1930.720506497449,
-   "error": 35.36275076342146,
-   "why": "z-tautau fake factor without the genuine-tau MC subtraction",
+  "ee_normfix": {
+   "value": 1881.7859717098954,
+   "error": 29.926336060367127,
+   "why": "z-ee with the normalisation of its un-renormalised PDF/QCDScale templates put back into the prediction (fitting/CONVENTIONS.md 3)",
    "weights": {
-    "mumu": 1.0000757481269966,
-    "tautau": -7.574812699653303e-05
+    "mumu": 0.5011507768610844,
+    "tautau": -0.00039132210076098966,
+    "ee": 0.49924054523967654
    },
-   "chi2": 1.2007738739998495,
-   "pvalue": 0.2731670606692021,
-   "shift": 0.1285595842591647,
-   "ratio": 1.1742955354370135,
-   "ratio_error": 0.16050724650483664,
+   "chi2": 7.3901608404480905,
+   "ndf": 2,
+   "pvalue": 0.02484545550504665,
+   "shift": -98.531708561801,
+   "channels_used": [
+    "mumu",
+    "tautau",
+    "ee"
+   ],
+   "ratios": {
+    "tautau/mumu": {
+     "value": 1.0785798119800198,
+     "error": 0.13005101027745733,
+     "z": 0.6042230030537536
+    },
+    "ee/mumu": {
+     "value": 0.949268268498584,
+     "error": 0.018928089976736572,
+     "z": -2.680235119537546
+    }
+   },
    "channels": {
     "mumu": {
      "variant": "shapefit",
@@ -418,26 +592,42 @@
      "gof_p": 0.792273
     },
     "tautau": {
-     "variant": "nosub",
-     "sigma_pb": 2267.266404678188,
-     "sigma_err_pb": 312.205151860452,
-     "gof_p": 0.163518
+     "variant": "mcsub",
+     "sigma_pb": 2082.463654736072,
+     "sigma_err_pb": 253.0559497138575,
+     "gof_p": 0.250008
+    },
+    "ee": {
+     "variant": "normfix",
+     "sigma_pb": 1832.795909756156,
+     "sigma_err_pb": 35.29909906893485,
+     "gof_p": null
     }
    }
   },
-  "tautau_tight": {
+  "no_ee": {
    "value": 1931.1290287853883,
    "error": 35.35797388509639,
-   "why": "z-tautau with DeepTau Tight on both legs (its recommended next WP)",
+   "why": "the mu mu + tau tau combination, without z-ee",
    "weights": {
     "mumu": 0.9974753663889473,
     "tautau": 0.0025246336110527246
    },
    "chi2": 0.36955776322495826,
+   "ndf": 1,
    "pvalue": 0.543245423781629,
-   "shift": 0.5370818721985415,
-   "ratio": 1.0785798119800198,
-   "ratio_error": 0.13005101027745733,
+   "shift": -49.18865148630812,
+   "channels_used": [
+    "mumu",
+    "tautau"
+   ],
+   "ratios": {
+    "tautau/mumu": {
+     "value": 1.0785798119800198,
+     "error": 0.13005101027745733,
+     "z": 0.6042230030537536
+    }
+   },
    "channels": {
     "mumu": {
      "variant": "shapefit",
@@ -446,26 +636,81 @@
      "gof_p": 0.792273
     },
     "tautau": {
-     "variant": "tight/mcsub",
+     "variant": "mcsub",
      "sigma_pb": 2082.463654736072,
      "sigma_err_pb": 253.0559497138575,
      "gof_p": 0.250008
     }
    }
   },
+  "no_tautau": {
+   "value": 1980.3554666347254,
+   "error": 31.573428181158434,
+   "why": "the two precise channels only, without z-tautau",
+   "weights": {
+    "mumu": 0.595917499945372,
+    "ee": 0.4040825000546279
+   },
+   "chi2": 9.434643280218298,
+   "ndf": 1,
+   "pvalue": 0.0021292450128571707,
+   "shift": 0.0377863630289994,
+   "channels_used": [
+    "mumu",
+    "ee"
+   ],
+   "ratios": {
+    "ee/mumu": {
+     "value": 1.0635871552355207,
+     "error": 0.021207570125819763,
+     "z": 2.998323469321208
+    }
+   },
+   "channels": {
+    "mumu": {
+     "variant": "shapefit",
+     "sigma_pb": 1930.7459972880047,
+     "sigma_err_pb": 35.362810137716245,
+     "gof_p": 0.792273
+    },
+    "ee": {
+     "variant": "published",
+     "sigma_pb": 2053.516642737917,
+     "sigma_err_pb": 39.55011413210557,
+     "gof_p": null
+    }
+   }
+  },
   "mumu_counting": {
-   "value": 1941.7593436774368,
-   "error": 37.07472275855513,
+   "value": 1991.4462974140442,
+   "error": 32.615558211111626,
    "why": "z-mumu 1-bin counting extraction instead of the 12 x 5 GeV fit",
    "weights": {
-    "mumu": 1.0004949465056872,
-    "tautau": -0.0004949465056872758
+    "mumu": 0.5563974636707097,
+    "tautau": 2.737089471885546e-05,
+    "ee": 0.4435751654345713
    },
-   "chi2": 1.6065304347663227,
-   "pvalue": 0.204980202623413,
-   "shift": 11.167396764247087,
-   "ratio": 1.2063242476609093,
-   "ratio_error": 0.16447562279503514,
+   "chi2": 7.913606131550825,
+   "ndf": 2,
+   "pvalue": 0.019124155334228246,
+   "shift": 11.12861714234782,
+   "channels_used": [
+    "mumu",
+    "tautau",
+    "ee"
+   ],
+   "ratios": {
+    "tautau/mumu": {
+     "value": 1.0723527616544837,
+     "error": 0.12922846906761012,
+     "z": 0.5598825257043782
+    },
+    "ee/mumu": {
+     "value": 1.0574466632036077,
+     "error": 0.021201940142834882,
+     "z": 2.7095003012269885
+    }
+   },
    "channels": {
     "mumu": {
      "variant": "counting",
@@ -475,25 +720,48 @@
     },
     "tautau": {
      "variant": "mcsub",
-     "sigma_pb": 2342.6306075855446,
-     "sigma_err_pb": 322.0368733786494,
-     "gof_p": 0.21943
+     "sigma_pb": 2082.463654736072,
+     "sigma_err_pb": 253.0559497138575,
+     "gof_p": 0.250008
+    },
+    "ee": {
+     "variant": "published",
+     "sigma_pb": 2053.516642737917,
+     "sigma_err_pb": 39.55011413210557,
+     "gof_p": null
     }
    }
   },
   "mumu_bins2gev": {
-   "value": 1934.379035594043,
-   "error": 34.876204354622956,
+   "value": 1981.1959560420783,
+   "error": 31.300840201375923,
    "why": "z-mumu fit in 30 x 2 GeV bins",
    "weights": {
-    "mumu": 1.0006113283484832,
-    "tautau": -0.0006113283484833471
+    "mumu": 0.6081756971909558,
+    "tautau": -0.0005452233380650875,
+    "ee": 0.39236952614710935
    },
-   "chi2": 1.6642365988019872,
-   "pvalue": 0.19703227626804873,
-   "shift": 3.7870886808532305,
-   "ratio": 1.210894317635161,
-   "ratio_error": 0.16519605566545614,
+   "chi2": 9.162592967779126,
+   "ndf": 2,
+   "pvalue": 0.010241609603419395,
+   "shift": 0.8782757703818334,
+   "channels_used": [
+    "mumu",
+    "tautau",
+    "ee"
+   ],
+   "ratios": {
+    "tautau/mumu": {
+     "value": 1.0764152905867717,
+     "error": 0.129766556695045,
+     "z": 0.5888673671626327
+    },
+    "ee/mumu": {
+     "value": 1.0614527214870668,
+     "error": 0.02103164114658706,
+     "z": 2.9219175554941965
+    }
+   },
    "channels": {
     "mumu": {
      "variant": "bins2gev",
@@ -503,25 +771,48 @@
     },
     "tautau": {
      "variant": "mcsub",
-     "sigma_pb": 2342.6306075855446,
-     "sigma_err_pb": 322.0368733786494,
-     "gof_p": 0.21943
+     "sigma_pb": 2082.463654736072,
+     "sigma_err_pb": 253.0559497138575,
+     "gof_p": 0.250008
+    },
+    "ee": {
+     "variant": "published",
+     "sigma_pb": 2053.516642737917,
+     "sigma_err_pb": 39.55011413210557,
+     "gof_p": null
     }
    }
   },
   "mumu_bins10gev": {
-   "value": 1926.112517210779,
-   "error": 35.54517509757184,
+   "value": 1978.2066326185038,
+   "error": 31.675915968236204,
    "why": "z-mumu fit in 6 x 10 GeV bins",
    "weights": {
-    "mumu": 1.0002691674449526,
-    "tautau": -0.0002691674449526881
+    "mumu": 0.5915840652186592,
+    "tautau": -0.00020955863662879275,
+    "ee": 0.40862549341796967
    },
-   "chi2": 1.733873085025469,
-   "pvalue": 0.18791702364696683,
-   "shift": -4.479429702410698,
-   "ratio": 1.2161772865951626,
-   "ratio_error": 0.16594546967635887,
+   "chi2": 10.354736004042524,
+   "ndf": 2,
+   "pvalue": 0.005642838826788289,
+   "shift": -2.1110476531925997,
+   "channels_used": [
+    "mumu",
+    "tautau",
+    "ee"
+   ],
+   "ratios": {
+    "tautau/mumu": {
+     "value": 1.0811115456483587,
+     "error": 0.1303678402626627,
+     "z": 0.6221744985951797
+    },
+    "ee/mumu": {
+     "value": 1.0660836968731573,
+     "error": 0.021322862355259858,
+     "z": 3.099194459549469
+    }
+   },
    "channels": {
     "mumu": {
      "variant": "bins10gev",
@@ -531,25 +822,48 @@
     },
     "tautau": {
      "variant": "mcsub",
-     "sigma_pb": 2342.6306075855446,
-     "sigma_err_pb": 322.0368733786494,
-     "gof_p": 0.21943
+     "sigma_pb": 2082.463654736072,
+     "sigma_err_pb": 253.0559497138575,
+     "gof_p": 0.250008
+    },
+    "ee": {
+     "variant": "published",
+     "sigma_pb": 2053.516642737917,
+     "sigma_err_pb": 39.55011413210557,
+     "gof_p": null
     }
    }
   },
   "sigmodel_correlated": {
-   "value": 1930.5919469131898,
-   "error": 35.3622997428068,
+   "value": 1980.3176802716964,
+   "error": 31.57330294533714,
    "why": "generator comparison treated as correlated between channels",
    "weights": {
-    "mumu": 1.0003740134274581,
-    "tautau": -0.00037401342745818454
+    "mumu": 0.5961525784896391,
+    "tautau": -0.0003083433419181469,
+    "ee": 0.40415576485227905
    },
-   "chi2": 1.6961669431903517,
-   "pvalue": 0.1927900212229781,
+   "chi2": 9.672093753864736,
+   "ndf": 2,
+   "pvalue": 0.007938373473339911,
    "shift": 0.0,
-   "ratio": 1.2133292576424284,
-   "ratio_error": 0.165547405609112,
+   "channels_used": [
+    "mumu",
+    "tautau",
+    "ee"
+   ],
+   "ratios": {
+    "tautau/mumu": {
+     "value": 1.0785798119800198,
+     "error": 0.13005101027745733,
+     "z": 0.6042230030537536
+    },
+    "ee/mumu": {
+     "value": 1.0635871552355207,
+     "error": 0.021207570125819763,
+     "z": 2.998323469321208
+    }
+   },
    "channels": {
     "mumu": {
      "variant": "shapefit",
@@ -559,25 +873,48 @@
     },
     "tautau": {
      "variant": "mcsub",
-     "sigma_pb": 2342.6306075855446,
-     "sigma_err_pb": 322.0368733786494,
-     "gof_p": 0.21943
+     "sigma_pb": 2082.463654736072,
+     "sigma_err_pb": 253.0559497138575,
+     "gof_p": 0.250008
+    },
+    "ee": {
+     "variant": "published",
+     "sigma_pb": 2053.516642737917,
+     "sigma_err_pb": 39.55011413210557,
+     "gof_p": null
     }
    }
   },
   "acc_scale_decorrelated": {
-   "value": 1932.2362232302341,
-   "error": 35.34716893629962,
+   "value": 1980.6878390597703,
+   "error": 31.560050281883083,
    "why": "acceptance QCD-scale term uncorrelated between channels",
    "weights": {
-    "mumu": 0.9963819334226814,
-    "tautau": 0.0036180665773185776
+    "mumu": 0.5940828339699563,
+    "tautau": 0.0037008758992047677,
+    "ee": 0.40221629013083887
    },
-   "chi2": 1.682495255980998,
-   "pvalue": 0.19459322139101656,
-   "shift": 1.6442763170443868,
-   "ratio": 1.2133292576424284,
-   "ratio_error": 0.16650415451521328,
+   "chi2": 9.56079418254505,
+   "ndf": 2,
+   "pvalue": 0.008392665651436511,
+   "shift": 0.37015878807392255,
+   "channels_used": [
+    "mumu",
+    "tautau",
+    "ee"
+   ],
+   "ratios": {
+    "tautau/mumu": {
+     "value": 1.0785798119800198,
+     "error": 0.13101263216679834,
+     "z": 0.5997880561622194
+    },
+    "ee/mumu": {
+     "value": 1.0635871552355207,
+     "error": 0.021207570125819763,
+     "z": 2.998323469321208
+    }
+   },
    "channels": {
     "mumu": {
      "variant": "shapefit",
@@ -587,25 +924,48 @@
     },
     "tautau": {
      "variant": "mcsub",
-     "sigma_pb": 2342.6306075855446,
-     "sigma_err_pb": 322.0368733786494,
-     "gof_p": 0.21943
+     "sigma_pb": 2082.463654736072,
+     "sigma_err_pb": 253.0559497138575,
+     "gof_p": 0.250008
+    },
+    "ee": {
+     "variant": "published",
+     "sigma_pb": 2053.516642737917,
+     "sigma_err_pb": 39.55011413210557,
+     "gof_p": null
     }
    }
   },
   "rho_zero": {
-   "value": 1935.7680041235926,
-   "error": 35.15670331083013,
+   "value": 1986.540013202324,
+   "error": 26.26539915611199,
    "why": "all systematics uncorrelated (naive)",
    "weights": {
-    "mumu": 0.9878072481708893,
-    "tautau": 0.012192751829110724
+    "mumu": 0.5481037145604561,
+    "tautau": 0.010861821403489975,
+    "ee": 0.44103446403605384
    },
-   "chi2": 1.653136768233119,
-   "pvalue": 0.19853253732681103,
-   "shift": 5.17605721040286,
-   "ratio": 1.2133292576424284,
-   "ratio_error": 0.16826793852781594,
+   "chi2": 5.485948429036959,
+   "ndf": 2,
+   "pvalue": 0.06437858614014226,
+   "shift": 6.222332930627545,
+   "channels_used": [
+    "mumu",
+    "tautau",
+    "ee"
+   ],
+   "ratios": {
+    "tautau/mumu": {
+     "value": 1.0785798119800198,
+     "error": 0.13254681695573015,
+     "z": 0.5928457113101783
+    },
+    "ee/mumu": {
+     "value": 1.0635871552355207,
+     "error": 0.028268177321363278,
+     "z": 2.249425370183511
+    }
+   },
    "channels": {
     "mumu": {
      "variant": "shapefit",
@@ -615,25 +975,48 @@
     },
     "tautau": {
      "variant": "mcsub",
-     "sigma_pb": 2342.6306075855446,
-     "sigma_err_pb": 322.0368733786494,
-     "gof_p": 0.21943
+     "sigma_pb": 2082.463654736072,
+     "sigma_err_pb": 253.0559497138575,
+     "gof_p": 0.250008
+    },
+    "ee": {
+     "variant": "published",
+     "sigma_pb": 2053.516642737917,
+     "sigma_err_pb": 39.55011413210557,
+     "gof_p": null
     }
    }
   },
   "rho_one": {
-   "value": 1927.078310378233,
-   "error": 35.244943520262716,
+   "value": 1976.5981973456378,
+   "error": 32.60134481086428,
    "why": "all systematics fully correlated",
    "weights": {
-    "mumu": 1.0089046466366447,
-    "tautau": -0.00890464663664471
+    "mumu": 0.6223936146451428,
+    "tautau": -0.01750714714262399,
+    "ee": 0.39511353249748116
    },
-   "chi2": 1.7253890089908726,
-   "pvalue": 0.18900083650905808,
-   "shift": -3.5136365349567313,
-   "ratio": 1.2133292576424284,
-   "ratio_error": 0.16388350506338809,
+   "chi2": 12.139633690947095,
+   "ndf": 2,
+   "pvalue": 0.002311596551204258,
+   "shift": -3.7194829260586175,
+   "channels_used": [
+    "mumu",
+    "tautau",
+    "ee"
+   ],
+   "ratios": {
+    "tautau/mumu": {
+     "value": 1.0785798119800198,
+     "error": 0.1285148456652535,
+     "z": 0.6114454059626625
+    },
+    "ee/mumu": {
+     "value": 1.0635871552355207,
+     "error": 0.018669842916387507,
+     "z": 3.4058752138566155
+    }
+   },
    "channels": {
     "mumu": {
      "variant": "shapefit",
@@ -643,9 +1026,15 @@
     },
     "tautau": {
      "variant": "mcsub",
-     "sigma_pb": 2342.6306075855446,
-     "sigma_err_pb": 322.0368733786494,
-     "gof_p": 0.21943
+     "sigma_pb": 2082.463654736072,
+     "sigma_err_pb": 253.0559497138575,
+     "gof_p": 0.250008
+    },
+    "ee": {
+     "variant": "published",
+     "sigma_pb": 2053.516642737917,
+     "sigma_err_pb": 39.55011413210557,
+     "gof_p": null
     }
    }
   }
@@ -660,23 +1049,34 @@
   "pass  z-mumu counting mu_Z: 0.993872 (published 0.993872)",
   "pass  z-mumu counting sigma_fid: 794.651 pb (published 794.65 pb)",
   "pass  z-tautau nominal is the MC-subtracted fake factor: 1 (published 1)",
-  "pass  z-tautau mu_Z: 1.20451 (published 1.20451)",
-  "pass  z-tautau sigma_fid: 5.42092 pb (published 5.4209 pb)",
-  "pass  z-tautau sigma(60-120): 2342.63 pb (published 2342.63 pb)",
-  "pass  z-tautau tau ID impact: 0.111293 (published 0.111293)",
-  "pass  z-tautau GoF p: 0.21943 (published 0.21943)",
+  "pass  z-tautau mu_Z: 1.07074 (published 1.07074)",
+  "pass  z-tautau sigma_fid: 4.81889 pb (published 4.8189 pb)",
+  "pass  z-tautau sigma(60-120): 2082.46 pb (published 2082.46 pb)",
+  "pass  z-tautau tau ID impact: 0.0843785 (published 0.0843785)",
+  "pass  z-tautau GoF p: 0.250008 (published 0.250008)",
   "pass  z-tautau has no fitted SigModel: 0 (published 0)",
-  "pass  z-tautau nosub mu_Z: 1.16576 (published 1.16576)",
-  "pass  z-tautau Tight-WP mu_Z: 1.07074 (published 1.07074)",
-  "pass  every category mapped: 21 sources built from 13 categories",
+  "pass  z-ee mu_signal: 1.05087 (published 1.05087)",
+  "pass  z-ee total in-fit uncertainty on mu: 0.0202394 (published 0.0202394)",
+  "pass  z-ee luminosity impact: 0.00964106 (published 0.00964106)",
+  "pass  z-ee gammas (MC stat.) impact: 0.0121644 (published 0.0121644)",
+  "pass  z-ee reference sigma^pred(60-120): 1954.11 pb (published 1954.11 pb)",
+  "pass  z-ee sigma(60-120): 2053.52 pb (published 2053.52 pb)",
+  "pass  z-ee categories + residual reproduce the published total: 0.0202394 (published 0.0202394)",
+  "pass  z-ee has no acceptance term outside the fit: 0 (published 0)",
+  "pass  z-ee kappa_theory: 0.892516 (published 0.892516)",
+  "pass  z-ee normfix mu: 0.937918 (published 0.937918)",
+  "pass  every category mapped: 23 sources built from 14 categories over 3 channels",
   "pass  closure: BLUE(mumu) value: 1930.75 pb (published 1930.75 pb)",
   "pass  closure: BLUE(mumu) error: 35.3628 pb (published 35.3628 pb)",
-  "pass  closure: BLUE(tautau) value: 2342.63 pb (published 2342.63 pb)",
-  "pass  closure: BLUE(tautau) error: 322.037 pb (published 322.037 pb)",
+  "pass  closure: BLUE(tautau) value: 2082.46 pb (published 2082.46 pb)",
+  "pass  closure: BLUE(tautau) error: 253.056 pb (published 253.056 pb)",
+  "pass  closure: BLUE(ee) value: 2053.52 pb (published 2053.52 pb)",
+  "pass  closure: BLUE(ee) error: 39.5501 pb (published 39.5501 pb)",
   "pass  closure: identical inputs, rho=0 -> error/sqrt(2): 25.0053 pb (published 25.0053 pb)",
   "pass  closure: identical inputs, rho=0 -> equal weights: 0.5 (published 0.5)",
   "pass  closure: identical inputs, systematics rho=1 -> only stat averages: 35.3602 pb (published 35.3602 pb)",
-  "pass  closure: likelihood vs BLUE, central value: 1930.16 pb (published 1930.16 pb)",
-  "pass  closure: likelihood vs BLUE, uncertainty: 35.3599 pb (published 35.3599 pb)"
+  "pass  closure: likelihood vs BLUE, central value: 1979.96 pb (published 1979.96 pb)",
+  "pass  closure: likelihood vs BLUE, uncertainty: 31.5324 pb (published 31.5324 pb)",
+  "pass  closure: `only=` selection reproduces the same sub-combination: 1931.13 pb (published 1931.13 pb)"
  ]
 }

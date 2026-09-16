@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Combine the Z -> mu mu and Z -> tau_h tau_h cross sections and write every output.
+"""Combine the Z -> mu mu, Z -> tau_h tau_h and Z -> ee cross sections and write every output.
 
     source ../setup.sh
     python run_combination.py                # checks, baseline, variations, plots, JSON
@@ -55,26 +55,47 @@ def check(verbose: bool = True) -> list[str]:
     ok("z-mumu counting mu_Z", mm_cnt.mu, 0.993872, 1e-6)
     ok("z-mumu counting sigma_fid", mm_cnt.extra["counting_sigma_fid_pb"], 794.65, 0.02, " pb")
 
-    # --- z-tautau v2.1 (per-category OS/SS correction); z-tautau/output/RESULTS.md
+    # --- z-tautau v3 (DeepTau Tight, MC-subtracted fake factor); z-tautau/output/RESULTS.md
     tt = inputs.load_tautau("nominal")
     ok("z-tautau nominal is the MC-subtracted fake factor", float(tt.variant == "mcsub"), 1.0, 0)
-    ok("z-tautau mu_Z", tt.mu, 1.20451, 1e-5)
-    ok("z-tautau sigma_fid", tt.extra["sigma_fid_pb"], 5.4209, 1e-4, " pb")
-    ok("z-tautau sigma(60-120)", tt.sigma, 2342.63, 0.05, " pb")
-    ok("z-tautau tau ID impact", tt.groups["Tau ID"], 0.111293, 1e-6)
-    ok("z-tautau GoF p", tt.gof_p, 0.21943, 1e-5)
+    ok("z-tautau mu_Z", tt.mu, 1.07074, 1e-5)
+    ok("z-tautau sigma_fid", tt.extra["sigma_fid_pb"], 4.8189, 1e-4, " pb")
+    ok("z-tautau sigma(60-120)", tt.sigma, 2082.46, 0.05, " pb")
+    ok("z-tautau tau ID impact", tt.groups["Tau ID"], 0.0843785, 1e-7)
+    ok("z-tautau GoF p", tt.gof_p, 0.250008, 1e-6)
     # SigModel_tautau is reported, not fitted (z-tautau/docs/07): no generator NP on this side
     ok("z-tautau has no fitted SigModel", tt.sigmodel, 0.0, 0)
-    ok("z-tautau nosub mu_Z", inputs.load_tautau("nosub").mu, 1.16576, 1e-5)
-    ok("z-tautau Tight-WP mu_Z", inputs.load_tautau("tight").mu, 1.07074, 1e-5)
+
+    # --- z-ee, from inputs/zee_fit_result.json (tools/extract_zee.py reads z-ee/Zee_fit.tar.gz)
+    ee = inputs.load_ee("published")
+    ok("z-ee mu_signal", ee.mu, 1.05087, 1e-5)
+    ok("z-ee total in-fit uncertainty on mu", ee.mu_err_up, 0.0202394, 1e-7)
+    ok("z-ee luminosity impact", ee.groups["Luminosity"], 0.00964106, 1e-8)
+    ok("z-ee gammas (MC stat.) impact", ee.groups["Gammas"], 0.0121644, 1e-7)
+    # the reference: 6077.22 pb x sumw(LHE ee, 60 < m_LHE < 120) / sumw of the same DY sample,
+    # the construction fitting/CONVENTIONS.md section 6 records for all three flavours
+    # z-ee computes the same number itself since 2026-09-16 (notebook cell 11: 1954.1032 pb)
+    ok("z-ee reference sigma^pred(60-120)", ee.sigma_pred, 1954.11, 0.05, " pb")
+    ok("z-ee sigma(60-120)", ee.sigma, 2053.52, 0.05, " pb")
+    # the seven published categories plus the residual and the analytic data statistics must
+    # reproduce the published MINOS error exactly -- that is what `residual` is for
+    quad = (sum(v * v for v in ee.groups.values()) + ee.mu_stat ** 2 + ee.residual ** 2) ** 0.5
+    ok("z-ee categories + residual reproduce the published total", quad, 0.0202394, 1e-7)
+    ok("z-ee has no acceptance term outside the fit", float(len(ee.acc)), 0.0, 0)
+    # the convention-compliant extraction: mu_hat x kappa(PDF, QCDScale) -- see docs/01-inputs.md
+    ok("z-ee kappa_theory", ee.extra["kappa_theory"], 0.892516, 1e-5)
+    ok("z-ee normfix mu", inputs.load_ee("normfix").mu, 1.05087 * 0.892516, 1e-5)
+
+    chans = {"mumu": mm, "tautau": tt, "ee": ee}
 
     # every grouped-impact category must have a correlation assigned (model.build raises otherwise)
-    spec = model.build({"mumu": mm, "tautau": tt})
+    spec = model.build(chans)
     notes.append(f"pass  every category mapped: {len(spec.sources)} sources built from "
-                 f"{len({k for c in spec.channels for k in c.groups})} categories")
+                 f"{len({k for c in spec.channels for k in c.groups})} categories "
+                 f"over {len(spec.channels)} channels")
 
     # closure 1: one channel through the combination machinery returns that channel
-    for name, ch in (("mumu", mm), ("tautau", tt)):
+    for name, ch in chans.items():
         r1 = blue.single(spec, name)
         ok(f"closure: BLUE({name}) value", r1.value, ch.sigma, 1e-6, " pb")
         ok(f"closure: BLUE({name}) error", r1.error, ch.sigma_err_total, 1e-6, " pb")
@@ -98,6 +119,12 @@ def check(verbose: bool = True) -> list[str]:
     ok("closure: likelihood vs BLUE, central value", rl.value, rb.value, 1e-3, " pb")
     ok("closure: likelihood vs BLUE, uncertainty", rl.error, rb.error, 2e-2 * rb.error, " pb")
 
+    # closure 4: dropping a channel must reproduce the combination of the rest exactly
+    sub = model.build({k: v for k, v in chans.items() if k != "ee"})
+    r4 = blue.combine(sub)
+    r5 = blue.combine(model.build(inputs.load_channels(only=["mumu", "tautau"])))
+    ok("closure: `only=` selection reproduces the same sub-combination", r5.value, r4.value, 1e-9, " pb")
+
     if verbose:
         print("\n".join(notes))
     return notes
@@ -106,10 +133,11 @@ def check(verbose: bool = True) -> list[str]:
 # ------------------------------------------------------------------------------- variations
 VARIATIONS = {
     "baseline": dict(),
-    "tautau_nosub": dict(tautau="nosub",
-                         why="z-tautau fake factor without the genuine-tau MC subtraction"),
-    "tautau_tight": dict(tautau="tight",
-                         why="z-tautau with DeepTau Tight on both legs (its recommended next WP)"),
+    "ee_normfix": dict(ee="normfix",
+                       why="z-ee with the normalisation of its un-renormalised PDF/QCDScale "
+                           "templates put back into the prediction (fitting/CONVENTIONS.md 3)"),
+    "no_ee": dict(only=["mumu", "tautau"], why="the mu mu + tau tau combination, without z-ee"),
+    "no_tautau": dict(only=["mumu", "ee"], why="the two precise channels only, without z-tautau"),
     "mumu_counting": dict(mumu="counting",
                           why="z-mumu 1-bin counting extraction instead of the 12 x 5 GeV fit"),
     "mumu_bins2gev": dict(mumu="bins2gev", why="z-mumu fit in 30 x 2 GeV bins"),
@@ -123,10 +151,19 @@ VARIATIONS = {
 }
 
 
-def run_variation(mumu="shapefit", tautau="nominal", build=None, **_):
-    chans = inputs.load_channels(mumu=mumu, tautau=tautau)
+def run_variation(mumu="shapefit", tautau="nominal", ee="published", only=None, build=None, **_):
+    chans = inputs.load_channels(mumu=mumu, tautau=tautau, ee=ee, only=only)
     spec = model.build(chans, **(build or {}))
     return chans, spec, blue.combine(spec)
+
+
+#: the ratios quoted as the lepton-universality test, numerator -> denominator
+RATIOS = [("tautau", "mumu"), ("ee", "mumu")]
+
+
+def ratios_of(spec):
+    names = set(spec.order)
+    return [ratio.compute(spec, n, d) for n, d in RATIOS if {n, d} <= names]
 
 
 # ------------------------------------------------------------------------------- reporting
@@ -148,11 +185,10 @@ def main():
         return
 
     chans, spec, res = run_variation()
-    mm, tt = chans["mumu"], chans["tautau"]
     solo = {name: blue.single(spec, name) for name in spec.order}
     lik = likelihood.combine(spec, asymmetric=True)
     lik_sym = likelihood.combine(spec, asymmetric=False, scan_points=3)
-    rat = ratio.compute(spec)
+    rats = ratios_of(spec)
 
     print("\n" + "=" * 78)
     print(f"  {REFERENCE}")
@@ -165,10 +201,14 @@ def main():
     print(f"            = {res.value:.0f} +- {g['statistical']:.1f} (stat) +- {g['other systematic']:.1f} "
           f"(syst) +- {g['acceptance']:.1f} (acc) +- {g['luminosity']:.1f} (lumi) pb")
     print(f"  weights   : " + ", ".join(f"{k} {v:+.4f}" for k, v in res.weights.items()))
-    print(f"  chi2/ndf  : {res.chi2:.2f}/{res.ndf}   p = {res.pvalue:.3f}"
-          f"   rho(mumu,tautau) = {res.correlation[0, 1]:.3f}")
-    print(f"  gain over mu mu alone: {solo['mumu'].error:.2f} -> {res.error:.2f} pb "
-          f"({100 * (1 - res.error / solo['mumu'].error):+.2f} %)")
+    print(f"  chi2/ndf  : {res.chi2:.2f}/{res.ndf}   p = {res.pvalue:.3f}")
+    order = res.meta["order"]
+    print("  rho       : " + ", ".join(
+        f"{order[i]}-{order[j]} {res.correlation[i, j]:.3f}"
+        for i in range(len(order)) for j in range(i + 1, len(order))))
+    best = min(solo, key=lambda n: solo[n].error)
+    print(f"  gain over {best} alone: {solo[best].error:.2f} -> {res.error:.2f} pb "
+          f"({100 * (1 - res.error / solo[best].error):+.2f} %)")
     print(f"  profile likelihood (asymmetric): {lik.value:.1f} +{lik.error_up:.1f} -{lik.error_down:.1f} pb")
     print(f"  profile likelihood (symmetric) : {lik_sym.value:.1f} +- {lik_sym.error:.1f} pb  "
           f"(BLUE {res.value:.1f} +- {res.error:.1f})")
@@ -177,8 +217,10 @@ def main():
     for name, value in res.breakdown.items():
         print(f"    {name:<38s} {value:7.2f}   ({100 * value / res.value:5.2f} %)")
 
-    print(f"\n  lepton universality:  R = sigma(tautau)/sigma(mumu) = {rat.value:.3f} +- {rat.error:.3f}"
-          f"   ({rat.z_from_unity:+.2f} sigma from 1, p = {rat.pvalue:.3f})")
+    print("\n  lepton universality:")
+    for r in rats:
+        print(f"    R = sigma({r.numerator})/sigma({r.denominator}) = {r.value:.3f} +- {r.error:.3f}"
+              f"   ({r.z_from_unity:+.2f} sigma from 1, p = {r.pvalue:.3f})")
 
     print("\n  variations:")
     variations = {}
@@ -186,11 +228,13 @@ def main():
         why = cfg.pop("why", "the baseline")
         vchans, vspec, vres = run_variation(**cfg)
         cfg["why"] = why
-        vrat = ratio.compute(vspec)
         variations[key] = {"value": vres.value, "error": vres.error, "why": why,
-                           "weights": vres.weights, "chi2": vres.chi2, "pvalue": vres.pvalue,
-                           "shift": vres.value - res.value,
-                           "ratio": vrat.value, "ratio_error": vrat.error,
+                           "weights": vres.weights, "chi2": vres.chi2, "ndf": vres.ndf,
+                           "pvalue": vres.pvalue, "shift": vres.value - res.value,
+                           "channels_used": list(vspec.order),
+                           "ratios": {f"{r.numerator}/{r.denominator}":
+                                      {"value": r.value, "error": r.error, "z": r.z_from_unity}
+                                      for r in ratios_of(vspec)},
                            "channels": {n: {"variant": ch.variant, "sigma_pb": ch.sigma,
                                             "sigma_err_pb": ch.sigma_err_total, "gof_p": ch.gof_p}
                                         for n, ch in vchans.items()}}
@@ -205,10 +249,14 @@ def main():
                      "acc_pb": g["acceptance"], "lumi_pb": g["luminosity"],
                      "chi2": res.chi2, "ndf": res.ndf, "pvalue": res.pvalue,
                      "weights": res.weights, "iterations": res.iterations,
-                     "correlation_mumu_tautau": float(res.correlation[0, 1]),
+                     "order": order,
+                     "correlation": {f"{order[i]}-{order[j]}": float(res.correlation[i, j])
+                                     for i in range(len(order)) for j in range(i + 1, len(order))},
+                     "most_precise_channel": best,
                      "breakdown_pb": res.breakdown},
-        "channels": {c.name: {"variant": c.variant, "mu": c.mu, "mu_err_up": c.mu_err_up,
-                              "mu_err_down": c.mu_err_down, "mu_stat": c.mu_stat,
+        "channels": {c.name: {"variant": c.variant, "label": c.label, "mu": c.mu,
+                              "mu_err_up": c.mu_err_up, "mu_err_down": c.mu_err_down,
+                              "mu_stat": c.mu_stat, "residual": c.residual,
                               "sigma_pb": c.sigma, "sigma_err_pb": c.sigma_err_total,
                               "sigma_pred_pb": c.sigma_pred, "gof_p": c.gof_p,
                               "groups": c.groups, "acceptance": c.acc,
@@ -219,8 +267,10 @@ def main():
         "likelihood": {"value_pb": lik.value, "err_up_pb": lik.error_up, "err_down_pb": lik.error_down,
                        "symmetric_pb": lik_sym.value, "symmetric_err_pb": lik_sym.error,
                        "valid": lik.valid},
-        "ratio": {"value": rat.value, "error": rat.error, "z": rat.z_from_unity,
-                  "pvalue": rat.pvalue, "breakdown": rat.breakdown},
+        "ratios": {f"{r.numerator}/{r.denominator}":
+                   {"numerator": r.numerator, "denominator": r.denominator, "value": r.value,
+                    "error": r.error, "z": r.z_from_unity, "pvalue": r.pvalue,
+                    "breakdown": r.breakdown} for r in rats},
         "variations": variations,
         "checks": notes,
     }
@@ -232,7 +282,7 @@ def main():
 
     if not args.no_plots:
         from comb import plots
-        made = plots.make_all(spec, res, solo, lik, rat, variations, OUT / "plots")
+        made = plots.make_all(spec, res, solo, lik, rats, variations, OUT / "plots")
         print(f"  wrote {len(made)} figures to {(OUT / 'plots').relative_to(HERE)}")
 
 

@@ -24,7 +24,7 @@ an unhelpful error. `build.sh` exports it; do not call `pdflatex` directly.
    which are transcriptions of `result.md` tables.
 
    This deck lives in `combination/presentation/`, so the combination outputs are `../output/`
-   and the channels are `../../z-mumu/`, `../../z-tautau/`. It was moved here from the repository
+   and the channels are `../../z-mumu/`, `../../z-tautau/`, `../../z-ee/`. It was moved here from the repository
    root in commit 2021f3f without its paths being fixed; they were repaired on 15 Sep 2026.
 2. **Figures are light background.** The channel plots are white CMS-style figures; a dark figure
    would be a black rectangle on the slide. Do **not** pull figures from
@@ -33,6 +33,9 @@ an unhelpful error. `build.sh` exports it; do not call `pdflatex` directly.
    the channel plots are only PNG (their groups do not commit PDFs), so those are used as PNG.
 4. **`\graphicspath` resolves the short names** — write `\fig{forest.pdf}`, not a path. The search
    order is `figures/`, the combination plots, z-mumu plots, z-tautau plots, z-tautau slides.
+   The z-ee plots are *not* committed as PNGs: `figures.py` extracts them from
+   `../../z-ee/Zee_fit.tar.gz` into `figures/zee_*.png`, so run `bash build.sh --figures` after
+   z-ee re-publishes.
 5. **Check the build output.** `build.sh` prints undefined references, missing figures and the
    overfull-box count. A missing figure is a silent hole on a slide.
 

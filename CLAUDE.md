@@ -3,11 +3,19 @@
 Read this first, then the channel `CLAUDE.md` you are working on. Shared workspace of three
 subgroups (Z→ee, Z→μμ, Z→ττ) plus a combination, on CMS 2016 Open Data (NanoAODv9, Run2016G+H).
 
-**State (15 Sep 2026):** μμ and ττ are finished; z-ee has no result. `combination/` combines the
-two (σ(Z/γ*→ℓℓ, 60–120 GeV) = 1940 ± 35 pb — `combination/result.md`) and `presentation/` holds
-the final deck. Both have their own `CLAUDE.md`. The combination is a covariance combination of
-the two channels' TRExFitter results, **not** a MultiFit — see `combination/fit/run_multifit.py`
-for the route to the joint fit. The conventions the combination settled are `fitting/CONVENTIONS.md` §6.
+**State (16 Sep 2026):** all three channels have a result. `combination/` combines them
+(σ(Z/γ*→ℓℓ, 60–120 GeV) = 1980 ± 32 pb, **χ²/ndf = 9.67/2, p = 0.008** — `combination/result.md`)
+and `combination/presentation/` holds the final deck. Both have their own `CLAUDE.md`. The
+combination is a covariance combination of the three channels' TRExFitter results, **not** a
+MultiFit — see `combination/fit/run_multifit.py` for the route to the joint fit. The conventions
+the combination settled are `fitting/CONVENTIONS.md` §6.
+
+> **Open, and blocking a quotable number:** z-ee's `PDF`/`QCDScale` templates are raw LHE weight
+> envelopes rather than C-factor variations renormalised to a constant yield (`CONVENTIONS.md` §3),
+> so `QCDScale` is a ±5.9 % normalisation degenerate with the POI; the fit pulls it −1.88σ and
+> `mu_signal` is measured against a prediction it rescaled by 0.893. Worth −99 pb on the
+> combination and all of its χ². Diagnosis: `combination/docs/01-inputs.md`; the list to hand the
+> z-ee group: `ASK_Z_EE.md`.
 
 ## Environment (one line, every shell)
 

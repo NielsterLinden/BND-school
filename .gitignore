@@ -6,6 +6,8 @@
 *.npy
 *.npz
 data/
+!presentation/data/
+!presentation/data/**
 *.csv.gz
 
 # python / jupyter

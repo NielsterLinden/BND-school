@@ -80,8 +80,9 @@ def next_version(sec_dir: Path, stem: str) -> int:
 
 def grab(mp4: Path, out: Path, t: str) -> None:
     if t == "end":
-        cmd = ["ffmpeg", "-y", "-loglevel", "error", "-sseof", "-0.15", "-i", str(mp4),
-               "-frames:v", "1", "-update", "1", str(out)]
+        # decode the last 0.5 s and keep overwriting one PNG: the file ends as the true last frame
+        cmd = ["ffmpeg", "-y", "-loglevel", "error", "-sseof", "-0.5", "-i", str(mp4),
+               "-update", "1", str(out)]
     else:
         cmd = ["ffmpeg", "-y", "-loglevel", "error", "-ss", t, "-i", str(mp4),
                "-frames:v", "1", "-update", "1", str(out)]

@@ -9,7 +9,7 @@ momentum-calibration decks, adapted to this project. Read in this order:
 | `02-deliverables-and-naming.md` | MP4-only delivery, section folders, numbering, versioning |
 | `03-sections-storyboard.md` | the six sections, candidate clips per section (draft, to be decided with the user) |
 | `04-agents.md` | the subagents, what each may touch, the per-clip workflow |
-| `05-colour-schema.md` | the standard colour schema: NL/BE/DE flag colours, semantic roles, detector tints |
+| `05-colour-schema.md` | the standard colour schema: six chapter colours + CMS logo colours, semantic roles, detector tints |
 | `agents/*.md` | the agent definitions (symlinked into `.claude/agents/`) |
 | `../MANIM_PHYSICS_RECIPES.md` | drawing recipes: Feynman lines, detector, tracks, mass plots, chaining, trap list |
 | `../CLAUDE.md` | the short contract every agent reads first |
@@ -46,8 +46,8 @@ verified with `tools/framediff.py`.
 - No `.pptx` shape handoff and no `_final.png` in the delivery folder: the user
   asked for MP4s only. Frames still get written to `work/` for our own checks.
 - Six fixed sections with numbered clip folders (see `02-…`).
-- Three-channel colour code (ee Dutch blue, μμ Dutch red, ττ German gold; the
-  whole palette is the NL/BE/DE flags, `05-colour-schema.md`) is the one
+- Three-channel colour code (ee green, μμ gold, ττ red; the
+  whole palette is the six chapter colours, `05-colour-schema.md`) is the one
   load-bearing colour convention; the fit-input sample names from
   `fitting/CONVENTIONS.md` each have a colour in the palette.
 - The CMS slice replaces the ATLAS slice (five barrel layers, solenoid between

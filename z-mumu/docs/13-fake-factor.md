@@ -35,13 +35,13 @@ The non-prompt yield is therefore obtained from a **two-template fit**
 peak), `F` = FF-weighted same-sign data minus prompt simulation (the non-prompt shape, which
 the closure test validates). The fitted `a` (0.88) is the prompt normalisation -- the
 same-sign region and the anti-isolation scale factor (0.945) are its cross-checks -- and
-`b F(m)` is the template of the signal region: **3 825 +- 80 events, 0.035% of the data**
-(v1's same-sign estimate: 2 375 x R_OS/SS). `b` = 1.84 is the opposite-/same-sign ratio of the
+`b F(m)` is the template of the signal region: **3 870 +- 80 events, 0.037% of the data**
+(v1's same-sign estimate: 2 375 x R_OS/SS). `b` = 1.85 is the opposite-/same-sign ratio of the
 non-prompt background in this region (charge-asymmetric W+jets fakes).
 
 Closure: the fake factor applied to same-sign tight + anti-tight events reproduces the
-same-sign tight-tight yield after prompt subtraction: predicted 2 077 +- 20, observed
-1 922 +- 85 (`ff_closure_and_template.png`).
+same-sign tight-tight yield after prompt subtraction: predicted 2 094 +- 20, observed
+1 932 +- 79 (`ff_closure_and_template.png`).
 
 The single-muon + jet region gives a fake factor ~ 17 x larger: the IsoMu24 online isolation
 depletes its anti-isolated denominator (the probe *is* the triggering muon). It is kept in

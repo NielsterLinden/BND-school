@@ -12,7 +12,7 @@ You keep the clips one visual system.
 
 - **Edit only** `presentation/scenes/**`, and only to replace a hardcoded
   colour/font with its `style.bnd_style` equivalent or remove stray narrative text.
-- **Never edit** `presentation/style/*.py` (flag palette needs), nor anything outside `presentation/`.
+- **Never edit** `presentation/style/*.py` (palette needs), nor anything outside `presentation/`.
 
 ## Checks
 
@@ -20,8 +20,8 @@ You keep the clips one visual system.
 - [ ] No literal `#RRGGBB`, no bare Manim colour constants (`RED`, `BLUE`) in a scene.
 - [ ] Channel semantics use `CHANNEL["ee"|"mumu"|"tautau"]`; samples use `SAMPLE[...]`;
       detector layers use `DETECTOR[...]` / `DEPOSIT[...]`; the one accent is `HIGHLIGHT`.
-      The palette is the NL/BE/DE flags plus `tint()`/`shade()` of them; a hex that
-      is not derived from those is a violation even if it is in a scene's own table.
+      The palette is the six chapter colours plus `tint()`/`shade()` of them and the
+      CMS logo colours for the detector (`05-colour-schema.md`); a hex that is not derived from those is a violation even if it is in a scene's own table.
 - [ ] Text goes through `text()` / `mathtex()` (deck font); no `Text(...)` without `font=FONT`.
 - [ ] No narrative text (titles, captions, labels that explain) unless the user
       asked. Physics symbols, tick labels, values are fine.

@@ -22,9 +22,10 @@ from pathlib import Path
 import numpy as np
 from manim import (
     DOWN, LEFT, RIGHT, UP, TAU, ORIGIN, BOLD,
-    AnnularSector, Annulus, Axes, Circle, DashedLine, DashedVMobject, Dot, Ellipse, Line,
-    ManimColor, MathTex, ParametricFunction, Polygon, Rectangle, RoundedRectangle, Sector,
-    Text, VGroup, VMobject,
+    AnnularSector, Annulus, Axes, Circle, DashedLine, DashedVMobject, Dot, Ellipse, FadeOut,
+    Line, LogBase, ManimColor, MathTex, ParametricFunction, Polygon, Rectangle,
+    RoundedRectangle, Sector, Succession, Text, ValueTracker, VGroup, VMobject,
+    always_redraw, rate_functions,
 )
 
 from style.palette import (  # noqa: F401  (re-exported)
@@ -711,34 +712,201 @@ def signature(det: CMSSlice, kind: str, phi: float, charge: int = -1, kappa: flo
 
 
 # ---------------------------------------------------------------------------
+# real events on the slice (section 4): the display pieces of the 4-02 reveal
+# ---------------------------------------------------------------------------
+
+def mini_slice(scale: float, center) -> CMSSlice:
+    """A CMSSlice drawn directly at ``scale`` x the delivered size, centred at
+    ``center``: the same points (to 1e-16) as ``place(CMSSlice(), (scale,
+    center), DET_CENTER)``, but with ``.c``, ``.radii``, ``.s`` and
+    ``.point_at`` correct — those are plain attributes that ``scale()`` /
+    ``shift()`` never update. Use it when signatures are built *on* the small
+    slice (section-2 icons, the transient pairs of mumu_e); chained frames
+    keep building on a natural-scale slice and ``place()`` the result."""
+    return CMSSlice(center=center, radius=R_DET * scale)
+
+
+def kappa_from_pt(pt: float, k45: float = 0.28, lo: float = 0.10, hi: float = 0.55) -> float:
+    """Track curvature (1/scene-unit) of a muon with transverse momentum
+    ``pt`` [GeV]: the 1/p_T law of a solenoid (kappa = 0.3 B / p_T),
+    calibrated so that 45 GeV — a typical Z muon — gives ``k45 = 0.28``, the
+    curvature of the two schematic muons of clip 4-02 (``s4_zmumu.py``), and
+    clipped to [lo, hi] so a soft muon never curls up and a hard one still
+    visibly bends. The scale is exaggerated on purpose (a 45 GeV muon in
+    3.8 T has a 40 m radius); only the *relative* curvature of two tracks is
+    honest. Sign = charge * kappa, exactly as ``signature()`` applies it
+    (``track(det, phi, charge * kappa)``)."""
+    return float(min(hi, max(lo, k45 * (45.0 / float(pt)))))
+
+
+def muon_pieces(det: CMSSlice, phi: float, charge: int, kappa: float, sw: float = 3.5) -> VGroup:
+    """One reconstructed muon exactly as the 4-02 reveal draws it
+    (``channel_common.show_signature``): VGroup(track, tracker hits,
+    deposits) with deposits = the MIP cells in both calorimeters + the four
+    station stubs, all from ``signature(det, "mu", ...)``. eta is not drawn
+    (r-phi view). Attributes ``.trk``, ``.hits``, ``.deposits`` for a staged
+    reveal (``Create(trk)``, ``FadeIn(hits)``, ``FadeIn(deposits)``)."""
+    sig = signature(det, "mu", phi, charge=charge, kappa=kappa, sw=sw)
+    trk, deposits = sig[0], VGroup(*sig[1:])
+    hits = tracker_hits(det, trk, color=CHANNEL["mumu"])
+    g = VGroup(trk, hits, deposits)
+    g.trk, g.hits, g.deposits = trk, hits, deposits
+    return g
+
+
+def _muon_records(ev) -> list:
+    if isinstance(ev, (list, tuple)):
+        return list(ev)
+    for key in ("mu", "muons"):
+        if key in ev:
+            return list(ev[key])
+    raise KeyError("event record has neither 'mu' nor 'muons'")
+
+
+def _charge(m) -> int:
+    return int(np.sign(float(m["charge"])))
+
+
+def event_from_json(det: CMSSlice, ev) -> VGroup:
+    """A real event from ``zmumu_events.json`` drawn on ``det``: one
+    ``muon_pieces`` per muon record (``ev["mu"]`` or ``ev["muons"]``, or a
+    plain list of records; each needs ``phi`` [rad], ``charge`` [+-1], ``pt``
+    [GeV]) at the real phi, bending by ``charge * kappa_from_pt(pt)``; every
+    other field (eta, iso, idx, ...) is carried, not drawn. Build it on the
+    slice at natural scale and ``place()`` it together with the detector.
+    Returns VGroup(muon_0, muon_1, ...) in record order (p_T-ordered in the
+    JSON) with ``.muons`` = the records and ``.record`` = ``ev``."""
+    muons = _muon_records(ev)
+    g = VGroup(*[muon_pieces(det, float(m["phi"]), _charge(m), kappa_from_pt(m["pt"]))
+                 for m in muons])
+    g.muons, g.record = muons, ev
+    return g
+
+
+def muon_in_jet(det: CMSSlice, phi: float, charge: int, kappa: float, seed: int = 0) -> VGroup:
+    """A non-prompt muon: ``signature("jet")`` centred where the muon track
+    enters the ECAL (so the jet's calorimeter cluster sits on the muon), then
+    the muon itself (``muon_pieces``) on top, so its MIP cells and station
+    stubs paint over the jet's deposits. Returns VGroup(jet, mu) with
+    ``.jet``, ``.mu``."""
+    mu = muon_pieces(det, phi, charge, kappa)
+    r0 = det.radii["ecal"][0]
+    p_in = next(p for p in mu.trk.pts if np.linalg.norm(p - det.c) >= r0)
+    jet = signature(det, "jet", _phi_of(det, p_in), seed=seed)
+    g = VGroup(jet, mu)
+    g.jet, g.mu = jet, mu
+    return g
+
+
+def pair_from_json(det: CMSSlice, pair, seed: int = 0) -> VGroup:
+    """A real same-sign tag + probe pair from ``zmumu_events.json``
+    (``pair["tag"]`` / ``pair["probe"]`` records with ``phi``, ``charge``,
+    ``pt``; ``pair["passes"]``; ``pair["jets"]`` with ``contains_probe``).
+    The tag is a plain ``muon_pieces``; the probe is a ``muon_in_jet`` when
+    ``pair["passes"]`` is False or a jet with ``contains_probe`` exists
+    (anti-isolated: the muon sits in a jet), else a plain ``muon_pieces``.
+    Both tracks bend the same way (same sign). Returns VGroup(tag, probe)
+    with ``.tag``, ``.probe``, ``.in_jet``, ``.passes``, ``.record``."""
+    tag, probe = pair["tag"], pair["probe"]
+    passes = pair.get("passes")
+    jets = pair.get("jets") or []
+    in_jet = (passes is False) or any(bool(j.get("contains_probe")) for j in jets)
+    t = muon_pieces(det, float(tag["phi"]), _charge(tag), kappa_from_pt(tag["pt"]))
+    if in_jet:
+        p = muon_in_jet(det, float(probe["phi"]), _charge(probe), kappa_from_pt(probe["pt"]), seed=seed)
+    else:
+        p = muon_pieces(det, float(probe["phi"]), _charge(probe), kappa_from_pt(probe["pt"]))
+    g = VGroup(t, p)
+    g.tag, g.probe, g.in_jet, g.passes, g.record = t, p, in_jet, passes, pair
+    return g
+
+
+# ---------------------------------------------------------------------------
 # data plots: axes with our own ticks, and the primitives on top of them
 # ---------------------------------------------------------------------------
 
+_CAP_H: dict = {}     # cache: height of a capital letter / a MathTex digit at scale 1
+
+
+def _cap_scale(kind: str, h: float) -> float:
+    """Scale factor that makes a capital letter (``kind='text'``, deck font) or
+    a MathTex digit (``kind='tex'``) ``h`` high, so labels with and without
+    descenders / superscripts come out at one uniform size."""
+    if kind not in _CAP_H:
+        _CAP_H[kind] = (text("H") if kind == "text" else mathtex("1")).height
+    return h / _CAP_H[kind]
+
+
+def _fmt_exp(k) -> str:
+    return "%d" % round(k) if abs(float(k) - round(k)) < 1e-9 else "%g" % k
+
+
 class DataAxes(VGroup):
     """Plot frame with manual ticks and numeric labels in the deck font.
-    Position it FIRST (``move_to``), then build content through ``.c2p``."""
+    Position it FIRST (``move_to``), then build content through ``.c2p``.
+
+    Linear y (default): ``y_range = [y0, y1, step]`` in data units, ticks every
+    ``step`` unless ``y_ticks`` is given; ``.y_base = y0``, ``.y_top = y1``;
+    ``c2p`` is the plain Axes mapping (no clamping unless ``y_floor`` is set).
+
+    Logarithmic y (``y_log=True``): ``y_range = [e0, e1, 1]`` in **exponents**
+    (the axis spans 10**e0 .. 10**e1) and the Axes get
+    ``y_axis_config={"scaling": LogBase()}``. ``c2p(x, y)`` still takes real
+    values (counts), never exponents, and clamps ``y`` to ``.y_floor``
+    (default ``.y_base = 10**e0``), so zero / empty bins sit on the axis
+    instead of raising ``log(0)``. Ticks default to every decade; ``y_ticks``
+    is then a list of exponents; labels are ``10^{k}`` in MathTex sized so the
+    digits match the x labels (``y_fmt`` is ignored). ``.y_top = 10**e1``.
+
+    ``y_floor`` (both kinds): the value every lower ``y`` is drawn at; ``None``
+    = no clamping on a linear axis, ``y_base`` on a log axis.
+
+    Attributes: ``.ax`` (manim Axes), ``.x_range/.y_range`` (as given),
+    ``.x_ticks/.y_ticks`` (tick values; exponents on log), ``.x_ticks_v``,
+    ``.y_ticks_v``, ``.x_labels``, ``.y_labels``, ``.frame`` (invisible
+    Rectangle over the plot area), ``.x_title/.y_title`` (or None),
+    ``.y_log``, ``.y_base``, ``.y_top``, ``.y_floor``, ``.x_length``,
+    ``.y_length``, ``.x_fmt/.y_fmt``, ``.tick_label_h``, ``.axis_color``,
+    ``.stroke_width``, ``.tick_len`` (so a companion panel can copy the style).
+    ``move_frame_to(center)`` positions the plot area itself (``move_to``
+    positions the bounding box incl. labels and titles)."""
 
     def __init__(self, x_range, y_range, x_length, y_length, x_ticks=None, y_ticks=None,
                  x_fmt="{:.0f}", y_fmt="{:.0f}", tick_label_h=0.22, axis_color=INK,
                  stroke_width=2.5, tick_len=0.09, show_x_labels=True, show_y_labels=True,
                  x_title: str | None = None, y_title: str | None = None, title_h=0.26,
-                 title_buff=0.22, **kw):
+                 title_buff=0.22, y_log: bool = False, y_floor: float | None = None, **kw):
         super().__init__(**kw)
         ink = col(axis_color)
         self.x_range, self.y_range = list(x_range), list(y_range)
+        self.x_length, self.y_length = x_length, y_length
+        self.x_fmt, self.y_fmt, self.tick_label_h = x_fmt, y_fmt, tick_label_h
+        self.axis_color, self.stroke_width, self.tick_len = axis_color, stroke_width, tick_len
+        self.y_log = bool(y_log)
+        if self.y_log:
+            self.y_base, self.y_top = 10.0 ** y_range[0], 10.0 ** y_range[1]
+            self.y_floor = self.y_base if y_floor is None else float(y_floor)
+            axes_kw = {"y_axis_config": {"scaling": LogBase()}}
+        else:
+            self.y_base, self.y_top = y_range[0], y_range[1]
+            self.y_floor = None if y_floor is None else float(y_floor)
+            axes_kw = {}
         self.ax = Axes(x_range=list(x_range), y_range=list(y_range),
                        x_length=x_length, y_length=y_length, tips=False,
                        axis_config={"stroke_color": ink, "stroke_width": stroke_width,
-                                    "include_ticks": False})
+                                    "include_ticks": False}, **axes_kw)
         self.add(self.ax)
         if x_ticks is None:
             x_ticks = list(np.arange(x_range[0], x_range[1] + 1e-9, x_range[2]))
         if y_ticks is None:
             y_ticks = list(np.arange(y_range[0], y_range[1] + 1e-9, y_range[2]))
-        x0, y0 = x_range[0], y_range[0]
+        self.x_ticks, self.y_ticks = list(x_ticks), list(y_ticks)
+        x0 = x_range[0]
+        y_axis_v = self.y_base                               # data value of the x axis line
+        y_mid_v = self._yval((y_range[0] + y_range[1]) / 2)  # data value of the frame centre
         self.x_ticks_v, self.x_labels = VGroup(), VGroup()
         for xv in x_ticks:
-            base = self.ax.c2p(xv, y0)
+            base = self.ax.c2p(xv, y_axis_v)
             self.x_ticks_v.add(Line(base, base + DOWN * tick_len, stroke_color=ink,
                                     stroke_width=stroke_width))
             if show_x_labels:
@@ -747,37 +915,59 @@ class DataAxes(VGroup):
                 self.x_labels.add(lab)
         self.y_ticks_v, self.y_labels = VGroup(), VGroup()
         for yv in y_ticks:
-            base = self.ax.c2p(x0, yv)
+            base = self.ax.c2p(x0, self._yval(yv))
             self.y_ticks_v.add(Line(base, base + LEFT * tick_len, stroke_color=ink,
                                     stroke_width=stroke_width))
             if show_y_labels:
-                lab = text(y_fmt.format(yv), color=ink).scale_to_fit_height(tick_label_h)
-                lab.next_to(base, LEFT, buff=0.16)
+                if self.y_log:      # decade label 10^k, digits as high as the x labels
+                    lab = mathtex(r"10^{%s}" % _fmt_exp(yv), color=ink)
+                    lab.scale(tick_label_h / lab[0][0].height)
+                    lab.next_to(base, LEFT, buff=0.16)
+                    lab.shift(UP * (base[1] - lab[0][0].get_center()[1]))   # centre the "10" on the tick
+                else:
+                    lab = text(y_fmt.format(yv), color=ink).scale_to_fit_height(tick_label_h)
+                    lab.next_to(base, LEFT, buff=0.16)
                 self.y_labels.add(lab)
         self.frame = Rectangle(width=x_length, height=y_length, stroke_width=0,
                                fill_opacity=0.0).move_to(
-            self.ax.c2p((x_range[0] + x_range[1]) / 2, (y_range[0] + y_range[1]) / 2))
+            self.ax.c2p((x_range[0] + x_range[1]) / 2, y_mid_v))
         self.add(self.x_ticks_v, self.y_ticks_v, self.x_labels, self.y_labels, self.frame)
         self.x_title = self.y_title = None
         if x_title is not None:      # axis titles are data labels (allowed)
             xt = mathtex(x_title, color=ink).scale_to_fit_height(title_h)
             xt.next_to(self.x_labels if len(self.x_labels) else self.x_ticks_v, DOWN, buff=title_buff)
-            xt.set_x(self.ax.c2p((x_range[0] + x_range[1]) / 2, y0)[0])
+            xt.set_x(self.ax.c2p((x_range[0] + x_range[1]) / 2, y_axis_v)[0])
             self.add(xt); self.x_title = xt
         if y_title is not None:
             yt = mathtex(y_title, color=ink).scale_to_fit_height(title_h).rotate(np.pi / 2)
             yt.next_to(self.y_labels if len(self.y_labels) else self.y_ticks_v, LEFT, buff=title_buff)
-            yt.set_y(self.ax.c2p(x0, (y_range[0] + y_range[1]) / 2)[1])
+            yt.set_y(self.ax.c2p(x0, y_mid_v)[1])
             self.add(yt); self.y_title = yt
 
+    def _yval(self, e):
+        """Axis coordinate (exponent on log) -> data value."""
+        return 10.0 ** e if self.y_log else e
+
+    def move_frame_to(self, center):
+        """Shift so the *plot area* (``.frame``) is centred at ``center``.
+        ``move_to`` centres the bounding box, which includes labels and
+        titles, so the axes themselves land off-centre; use this when a
+        constant names the frame centre. Returns self."""
+        self.shift(_p3(center) - self.frame.get_center())
+        return self
+
     def c2p(self, x, y):
+        """Data (x, y) -> scene point. ``y`` is a real value on both kinds of
+        axis; it is clamped to ``.y_floor`` when that is set (always on log)."""
+        if self.y_floor is not None:
+            y = np.maximum(y, self.y_floor) if np.ndim(y) else max(float(y), self.y_floor)
         return self.ax.c2p(x, y)
 
 
 def data_bar(dax: DataAxes, x_center, value, half_width, color=INK, base=None,
              fill_opacity=0.85, stroke_width=1.5) -> Rectangle:
     cc = col(color)
-    base = dax.y_range[0] if base is None else base
+    base = dax.y_base if base is None else base
     p_base, p_top = dax.c2p(x_center, base), dax.c2p(x_center, value)
     p_l, p_r = dax.c2p(x_center - half_width, base), dax.c2p(x_center + half_width, base)
     bar = Rectangle(width=abs(p_r[0] - p_l[0]), height=max(abs(p_top[1] - p_base[1]), 1e-3),
@@ -802,7 +992,7 @@ def step_hist(dax: DataAxes, edges, counts, color=INK, stroke_width=3.0, fill_op
         xs += [edges[i], edges[i + 1]]
         ys += [n, n]
     if fill_opacity > 0:
-        y0 = dax.y_range[0]
+        y0 = dax.y_base
         pts = [dax.c2p(xs[0], y0)] + [dax.c2p(x, y) for x, y in zip(xs, ys)] + [dax.c2p(xs[-1], y0)]
         return Polygon(*pts, stroke_color=col(color), stroke_width=stroke_width,
                        fill_color=col(color), fill_opacity=fill_opacity)
@@ -833,9 +1023,318 @@ def data_errorbar(dax: DataAxes, x, mean, err, cap=0.0, color=INK, stroke_width=
 
 def vref_line(dax: DataAxes, x, color=GREY, stroke_width=2.0, num_dashes=28) -> DashedVMobject:
     """Dashed vertical reference line (e.g. m_Z) spanning the axis height."""
-    line = Line(dax.c2p(x, dax.y_range[0]), dax.c2p(x, dax.y_range[1]),
+    line = Line(dax.c2p(x, dax.y_base), dax.c2p(x, dax.y_top),
                 stroke_color=col(color), stroke_width=stroke_width)
     return DashedVMobject(line, num_dashes=num_dashes)
+
+
+def stack_hist(dax: DataAxes, edges, layers, stroke_width: float = 0, fill_opacity: float = 0.95) -> VGroup:
+    """Stacked histogram. ``layers = [(name, counts, colour), ...]`` **bottom-up**
+    (the first tuple is the bottom of the stack; ``counts`` has len(edges)-1
+    entries). Layer i is ONE ``Polygon`` between the cumulative step of the
+    layers below it and the cumulative step including it, every edge twice
+    (the outline IS the binning), built through ``dax.c2p`` so it is log-safe:
+    the bottom of layer 0 and every empty bin are clamped to ``dax.y_floor``.
+    An all-zero layer is a degenerate, invisible polygon at the floor with the
+    same number of points, so two stacks made from the same layer list are
+    always ``Transform``-able 1:1 (8 layers -> 8 layers) whatever the numbers.
+    ``stroke_width`` (default 0: no hairlines) outlines each polygon in its
+    own colour; degenerate layers always get stroke 0.
+    Attributes: ``.names`` (list), ``.cum`` (array (n_layers+1, n_bins): row 0
+    zeros, row i = sum of layers < i, last row = the total), ``.counts``
+    (n_layers, n_bins), ``.edges``, ``.layer`` (name -> polygon), ``.total``
+    (= ``.cum[-1]``). They describe the construction values (a Transform does
+    not update them)."""
+    edges = np.asarray(edges, dtype=float)
+    nb = len(edges) - 1
+    names = [lay[0] for lay in layers]
+    counts = (np.array([np.asarray(lay[1], dtype=float) for lay in layers])
+              if len(layers) else np.zeros((0, nb)))
+    if len(layers) and counts.shape[1] != nb:
+        raise ValueError(f"stack_hist: {counts.shape[1]} counts per layer for {nb} bins")
+    cum = np.vstack([np.zeros(nb), np.cumsum(counts, axis=0)]) if len(layers) else np.zeros((1, nb))
+
+    def step_pts(row):
+        pts = []
+        for i, v in enumerate(row):
+            pts += [dax.c2p(edges[i], v), dax.c2p(edges[i + 1], v)]
+        return pts
+
+    g = VGroup()
+    g.layer = {}
+    for i, (name, _, colour) in enumerate(layers):
+        cc = col(colour)
+        degenerate = not bool(np.any(counts[i] > 0))
+        top, bot = step_pts(cum[i + 1]), step_pts(cum[i])
+        poly = Polygon(*top, *bot[::-1], stroke_color=cc,
+                       stroke_width=0 if degenerate else stroke_width,
+                       fill_color=cc, fill_opacity=fill_opacity)
+        g.add(poly)
+        g.layer[name] = poly
+    g.names, g.cum, g.counts, g.edges = names, cum, counts, edges
+    g.total = cum[-1]
+    return g
+
+
+def ratio_panel(dax_main: DataAxes, edges, num, den, center, y_range=(0.9, 1.1, 0.1),
+                y_length: float = 0.9, num_err=None, dot_radius: float = 0.04,
+                dot_color=SAMPLE["Data"], **axes_kw) -> VGroup:
+    """Data / prediction panel under a main plot. A *linear* ``DataAxes`` with
+    the main plot's ``x_range``, ``x_length``, ``x_ticks`` and tick style
+    (``y_fmt="{:.1f}"``), ``move_to(center)`` FIRST and then shifted in x so
+    its x axis lies exactly under the main plot's (bins line up; the y of
+    ``center`` is kept, its x only approximately). Then a dashed GREY line at
+    y = 1 and one ``data_dot`` per bin at (bin centre, num/den); bins with
+    den == 0 are skipped (``.bins`` lists the drawn ones), so the dot count
+    is the number of populated bins. ``num_err`` (per-bin absolute error on
+    ``num``) adds a ``data_errorbar`` (err/den) under each dot. Extra
+    ``axes_kw`` go to ``DataAxes`` (``x_title``, ``show_x_labels``, ...).
+    Attributes: ``.dax``, ``.ref`` (the y=1 line), ``.dots`` (VGroup: one Dot
+    per drawn bin, so ``Transform(rp.dots, rp2.dots)`` is 60 -> 60), ``.errs``
+    (VGroup, empty without num_err), ``.ratio`` (array, nan where den == 0),
+    ``.bins``."""
+    num, den = np.asarray(num, dtype=float), np.asarray(den, dtype=float)
+    edges = np.asarray(edges, dtype=float)
+    kw = dict(x_ticks=dax_main.x_ticks, x_fmt=dax_main.x_fmt, y_fmt="{:.1f}",
+              tick_label_h=dax_main.tick_label_h, axis_color=dax_main.axis_color,
+              stroke_width=dax_main.stroke_width, tick_len=dax_main.tick_len)
+    kw.update(axes_kw)
+    dax = DataAxes(dax_main.x_range, list(y_range), dax_main.x_length, y_length, **kw)
+    dax.move_to(_p3(center))
+    x0, x1 = dax_main.x_range[0], dax_main.x_range[1]
+    dax.shift(RIGHT * (dax_main.c2p(x0, dax_main.y_base)[0] - dax.c2p(x0, dax.y_base)[0]))
+    ref = DashedVMobject(Line(dax.c2p(x0, 1.0), dax.c2p(x1, 1.0),
+                              stroke_color=col(GREY), stroke_width=2.0), num_dashes=40)
+    ok = den > 0
+    ratio = np.full(len(den), np.nan)
+    ratio[ok] = num[ok] / den[ok]
+    xc = 0.5 * (edges[:-1] + edges[1:])
+    dots, errs, bins = VGroup(), VGroup(), []
+    for i in np.where(ok)[0]:
+        dots.add(data_dot(dax, xc[i], ratio[i], color=dot_color, radius=dot_radius))
+        if num_err is not None:
+            errs.add(data_errorbar(dax, xc[i], ratio[i], float(num_err[i]) / den[i],
+                                   color=dot_color, stroke_width=1.8))
+        bins.append(int(i))
+    g = VGroup(dax, ref, errs, dots)
+    g.dax, g.ref, g.dots, g.errs, g.ratio, g.bins = dax, ref, dots, errs, ratio, bins
+    return g
+
+
+def colour_key(entries, swatch=(0.34, 0.22), label_h: float = 0.24, buff: float = 0.14,
+               row_buff: float = 0.12, tex: bool = True) -> VGroup:
+    """The one colour key a chained story may carry (at most 4 rows).
+    ``entries = [(label, colour[, kind]), ...]`` top to bottom; ``kind`` is
+    ``"fill"`` (square swatch: a stacked sample, the default), ``"dot"`` (data
+    marker: dot with a short vertical bar), ``"line"`` or ``"dashed"`` (a short
+    line: a fit / theory line). Labels are sample or process *symbols*
+    (MathTex when ``tex``, else plain deck-font Text at one uniform size),
+    never narrative. Rows are left-aligned around ORIGIN; move it afterwards.
+    Attributes: ``.rows`` (VGroup of rows, each VGroup(anchor, swatch, label);
+    use ``group=key.rows`` in a LaggedStart over them), ``.swatches``,
+    ``.labels`` (lists)."""
+    if len(entries) > 4:
+        raise ValueError("colour_key: at most 4 rows (CLAUDE.md: one small key)")
+    w, h = swatch
+    rows, swatches, labels = VGroup(), [], []
+    for e in entries:
+        label, colour = e[0], e[1]
+        kind = e[2] if len(e) > 2 else "fill"
+        cc = col(colour)
+        anchor = Rectangle(width=w, height=h, stroke_width=0, fill_opacity=0.0)   # alignment column
+        if kind == "fill":
+            sw_ = Rectangle(width=w, height=h, fill_color=cc, fill_opacity=0.95,
+                            stroke_color=darken(cc, 0.25), stroke_width=1.0)
+        elif kind == "dot":
+            sw_ = VGroup(Line(DOWN * h / 2, UP * h / 2, stroke_color=cc, stroke_width=2.0),
+                         Dot(ORIGIN, radius=0.05, color=cc))
+        elif kind == "line":
+            sw_ = Line(LEFT * w / 2, RIGHT * w / 2, stroke_color=cc, stroke_width=3.0)
+        elif kind == "dashed":
+            sw_ = DashedLine(LEFT * w / 2, RIGHT * w / 2, dash_length=0.07,
+                             stroke_color=cc, stroke_width=3.0)
+        else:
+            raise ValueError(f"colour_key: unknown kind {kind!r}")
+        sw_.move_to(anchor)
+        lab = mathtex(label, color=INK) if tex else text(label, color=INK)
+        lab.scale(_cap_scale("tex" if tex else "text", label_h))
+        lab.next_to(anchor, RIGHT, buff=buff)
+        rows.add(VGroup(anchor, sw_, lab))
+        swatches.append(sw_); labels.append(lab)
+    rows.arrange(DOWN, aligned_edge=LEFT, buff=row_buff).move_to(ORIGIN)
+    g = VGroup(rows)
+    g.rows, g.swatches, g.labels = rows, swatches, labels
+    return g
+
+
+def pull_plot(names, pulls, constraints, x_range=(-2.0, 2.0), x_length: float = 3.2,
+              row_h: float = 0.42, label_h: float = 0.2, label_buff: float = 0.2,
+              tex: bool = False, color=INK, band_color=LIGHT_GREY) -> VGroup:
+    """Nuisance-parameter pulls (theta_hat - theta_0)/Delta theta with their
+    post-fit constraints, one row per NP top to bottom in the order given:
+    the NP name as the fit spells it (plain Text; MathTex when ``tex``, e.g.
+    schematic ``\\theta_1``), a horizontal bar of half-length ``constraint``
+    and a dot at ``pull``. ``constraints`` entries may be None (no bar).
+    Behind the rows: the +-1 band (``band_color``), a dashed line at 0, a
+    baseline with integer ticks and tick labels. Built around ORIGIN.
+    Attributes: ``.rows`` (VGroup of VGroup(label, bar, dot); use
+    ``group=pp.rows`` for a LaggedStart), ``.band``, ``.zero``, ``.baseline``,
+    ``.ticks``, ``.tick_labels``, ``.labels`` (list), ``.x_of(v)`` -> scene x
+    of pull value v (reads the baseline, valid after move / shift / scale)."""
+    x0, x1 = float(x_range[0]), float(x_range[1])
+    n = len(names)
+    H = n * row_h
+    ink = col(color)
+    left, right = -x_length / 2, x_length / 2
+
+    def xs(v):
+        return left + (float(v) - x0) / (x1 - x0) * x_length
+
+    band = Rectangle(width=xs(1.0) - xs(-1.0), height=H, fill_color=col(band_color),
+                     fill_opacity=0.7, stroke_width=0).move_to([xs(0.0), 0.0, 0.0])
+    zero = DashedLine([xs(0.0), -H / 2, 0], [xs(0.0), H / 2, 0], dash_length=0.1,
+                      stroke_color=ink, stroke_width=1.5)
+    baseline = Line([left, -H / 2, 0], [right, -H / 2, 0], stroke_color=ink, stroke_width=2.0)
+    ticks, tick_labels = VGroup(), VGroup()
+    for k in range(math.ceil(x0), math.floor(x1) + 1):
+        p = np.array([xs(k), -H / 2, 0.0])
+        ticks.add(Line(p, p + DOWN * 0.07, stroke_color=ink, stroke_width=2.0))
+        tick_labels.add(text(f"{k:g}", color=ink).scale(_cap_scale("text", 0.16))
+                        .next_to(p + DOWN * 0.07, DOWN, buff=0.08))
+    rows, labels = VGroup(), []
+    for i, (name, p, c) in enumerate(zip(names, pulls, constraints)):
+        y = H / 2 - row_h * (i + 0.5)
+        lab = (mathtex(name, color=ink) if tex else text(name, color=ink))
+        lab.scale(_cap_scale("tex" if tex else "text", label_h))
+        lab.next_to([left, y, 0], LEFT, buff=label_buff)
+        bar = Line([xs(p - c), y, 0], [xs(p + c), y, 0], stroke_color=ink,
+                   stroke_width=2.5 if c else 0) if c is not None else \
+            Line([xs(p), y, 0], [xs(p), y, 0], stroke_color=ink, stroke_width=0)
+        dot = Dot([xs(p), y, 0], radius=0.055, color=ink)
+        rows.add(VGroup(lab, bar, dot))
+        labels.append(lab)
+    g = VGroup(band, zero, baseline, ticks, tick_labels, rows)
+    g.band, g.zero, g.baseline, g.ticks, g.tick_labels, g.rows, g.labels = \
+        band, zero, baseline, ticks, tick_labels, rows, labels
+    g.x_range = (x0, x1)
+
+    def x_of(v):
+        a, b = g.baseline.get_start()[0], g.baseline.get_end()[0]
+        return a + (float(v) - x0) / (x1 - x0) * (b - a)
+
+    g.x_of = x_of
+    return g
+
+
+def value_grid(values, row_labels, col_labels, vmax=None, fmt: str = "{:.2f}",
+               cell=(0.70, 0.36), label_h: float = 0.16, color=SLATE, vmin: float = 0.0,
+               tex: bool = True) -> VGroup:
+    """A table of numbers as a heat map (e.g. the fake-factor map, rows = p_T
+    bins, columns = |eta| bins). Cell (i, j) is filled with a tint of ``color``
+    proportional to (v - vmin)/(vmax - vmin) — ``vmax`` is taken from the data
+    when None, never assumed — and the value is printed with ``fmt`` (Text:
+    ink on light cells, white on dark). Row labels sit left of the first
+    column, column labels above the first row (MathTex when ``tex``: bin
+    ranges / symbols). NaN cells are left blank. Built around ORIGIN.
+    Attributes: ``.cells`` (VGroup, row-major Rectangles), ``.texts`` (VGroup,
+    same order, blank cells skipped), ``.row_labels``, ``.col_labels``
+    (VGroups), ``.values`` (array), ``.vmin``, ``.vmax``."""
+    V = np.asarray(values, dtype=float)
+    nr, nc = V.shape
+    vmax = float(np.nanmax(V)) if vmax is None else float(vmax)
+    span = vmax - vmin if vmax > vmin else 1.0
+    w, h = cell
+    cells, texts = VGroup(), VGroup()
+    for i in range(nr):
+        for j in range(nc):
+            c = np.array([(j - (nc - 1) / 2) * w, ((nr - 1) / 2 - i) * h, 0.0])
+            v = V[i, j]
+            a = 0.0 if np.isnan(v) else float(np.clip((v - vmin) / span, 0.0, 1.0))
+            fill = WHITE if np.isnan(v) else mix(WHITE, col(color).to_hex(), 0.08 + 0.80 * a)
+            cells.add(Rectangle(width=w, height=h, fill_color=col(fill), fill_opacity=1.0,
+                                stroke_color=col(WHITE), stroke_width=1.5).move_to(c))
+            if not np.isnan(v):
+                texts.add(text(fmt.format(v), color=WHITE if a > 0.55 else INK)
+                          .scale(_cap_scale("text", label_h)).move_to(c))
+    rl, cl = VGroup(), VGroup()
+    for i, s in enumerate(row_labels):
+        lab = mathtex(s, color=INK) if tex else text(s, color=INK)
+        lab.scale(_cap_scale("tex" if tex else "text", label_h))
+        lab.next_to(cells[i * nc], LEFT, buff=0.14)
+        rl.add(lab)
+    for j, s in enumerate(col_labels):
+        lab = mathtex(s, color=INK) if tex else text(s, color=INK)
+        lab.scale(_cap_scale("tex" if tex else "text", label_h))
+        lab.next_to(cells[j], UP, buff=0.10)
+        cl.add(lab)
+    g = VGroup(cells, texts, rl, cl)
+    g.cells, g.texts, g.row_labels, g.col_labels = cells, texts, rl, cl
+    g.values, g.vmin, g.vmax = V, vmin, vmax
+    return g
+
+
+class Slider(VGroup):
+    """See ``slider()``."""
+
+    def x_of(self, v) -> float:
+        """Scene x of value ``v`` on the axis (reads the axis line, so it stays
+        valid after move / shift / scale)."""
+        a, b = self.axis.get_start()[0], self.axis.get_end()[0]
+        return a + (float(v) - self.lo) / (self.hi - self.lo) * (b - a)
+
+    def marker_at(self, value, err=None) -> VGroup:
+        """A fresh marker (VGroup(bar, dot)) at ``value`` +- ``err`` on the
+        axis as it is now, for ``Transform(sl.marker, sl.marker_at(v, e))``."""
+        y = self.axis.get_center()[1]
+        cc = col(self.color)
+        e = 0.0 if not err else float(err)
+        bar = Line([self.x_of(value - e), y, 0], [self.x_of(value + e), y, 0],
+                   stroke_color=cc, stroke_width=self.bar_sw if e else 0)
+        dot = Dot([self.x_of(value), y, 0], radius=self.marker_r, color=cc)
+        g = VGroup(bar, dot)
+        g.bar, g.dot = bar, dot
+        return g
+
+
+def slider(lo, hi, value, err=None, ref=None, length: float = 3.2, color=INK, ref_color=THEORY,
+           ticks=None, fmt: str = "{:.2f}", tick_label_h: float = 0.2, marker_r: float = 0.08,
+           bar_sw: float = 4.0, ref_h: float = 0.5) -> Slider:
+    """A one-parameter meter (mu_Z, epsilon_data / epsilon_MC, ...): a
+    horizontal axis from ``lo`` to ``hi`` with ticks at ``ticks`` (default:
+    lo, ref, hi) labelled with the numbers (``fmt``), a dashed vertical line
+    rising ``ref_h`` above the axis at ``ref`` in ``ref_color`` (purple = the
+    expectation / theory; it stays clear of the tick labels below), and ``.marker`` = VGroup(bar, dot) at ``value`` +- ``err`` (bar
+    of stroke 0 when err is None / 0, so markers always Transform 1:1).
+    Built around ORIGIN; move / scale afterwards. ``x_of(v)`` gives the scene
+    x of a value, ``marker_at(v, e)`` a fresh marker for
+    ``Transform(sl.marker, sl.marker_at(...))`` (the marker slides, the bar
+    shrinks). Attributes: ``.axis`` (Line), ``.ticks``, ``.labels``, ``.ref``
+    (or None), ``.marker``, ``.bar``, ``.dot``, ``.lo``, ``.hi``, ``.value``,
+    ``.err``, ``.ref_value``."""
+    sl = Slider()
+    sl.lo, sl.hi, sl.value, sl.err, sl.ref_value = float(lo), float(hi), float(value), err, ref
+    sl.color, sl.marker_r, sl.bar_sw = color, marker_r, bar_sw
+    ink = col(color)
+    sl.axis = Line(LEFT * length / 2, RIGHT * length / 2, stroke_color=ink, stroke_width=2.5)
+    sl.add(sl.axis)
+    if ticks is None:
+        ticks = [lo, hi] if ref is None else sorted({float(lo), float(ref), float(hi)})
+    sl.ticks, sl.labels = VGroup(), VGroup()
+    for tv in ticks:
+        p = np.array([sl.x_of(tv), 0.0, 0.0])
+        sl.ticks.add(Line(p, p + DOWN * 0.09, stroke_color=ink, stroke_width=2.5))
+        sl.labels.add(text(fmt.format(tv), color=ink).scale_to_fit_height(tick_label_h)
+                      .next_to(p + DOWN * 0.09, DOWN, buff=0.1))
+    sl.add(sl.ticks, sl.labels)
+    sl.ref = None
+    if ref is not None:
+        sl.ref = DashedLine([sl.x_of(ref), -0.06, 0], [sl.x_of(ref), ref_h, 0],
+                            dash_length=0.1, stroke_color=col(ref_color), stroke_width=2.5)
+        sl.add(sl.ref)
+    sl.marker = sl.marker_at(value, err)
+    sl.bar, sl.dot = sl.marker.bar, sl.marker.dot
+    sl.add(sl.marker)
+    return sl
 
 
 # ---------------------------------------------------------------------------
@@ -868,15 +1367,144 @@ def schematic_zpeak(edges, peak=91.19, sigma=2.4, tail=(0.9, 3.0), height=1.0,
 
 
 # ---------------------------------------------------------------------------
-# chaining helper
+# story primitives: clock, event rain, the pipeline spine
+# ---------------------------------------------------------------------------
+
+def clock(center, radius: float = 0.32, color=INK, sw: float = 2.5) -> VGroup:
+    """A small clock face whose hand follows ``.turns`` (a ValueTracker in
+    full turns, clockwise from 12): the hand is an ``always_redraw``, so
+    ``clk.turns.animate.set_value(3)`` in a play spins it. That puts the
+    tracker into ``scene.mobjects``: ``scene.remove(clk.turns)`` after the
+    play (recipes trap 7). Attributes: ``.face``, ``.ticks``, ``.hand``,
+    ``.pivot``, ``.turns``."""
+    c = _p3(center)
+    ink = col(color)
+    g = VGroup()
+    g.face = Circle(radius=radius, arc_center=c, stroke_color=ink, stroke_width=sw,
+                    fill_color=col(WHITE), fill_opacity=1.0)
+    g.ticks = VGroup(*[Line(c + 0.82 * radius * _e(a), c + radius * _e(a), stroke_color=ink,
+                            stroke_width=sw * 0.8) for a in (0, TAU / 4, TAU / 2, 3 * TAU / 4)])
+    g.turns = ValueTracker(0.0)
+    g.hand = always_redraw(lambda: Line(
+        c, c + 0.72 * radius * _e(TAU / 4 - TAU * g.turns.get_value()),
+        stroke_color=ink, stroke_width=sw * 1.2))
+    g.pivot = Dot(c, radius=0.035, color=ink)
+    g.add(g.face, g.ticks, g.hand, g.pivot)
+    return g
+
+
+def rain(det: CMSSlice, dax: DataAxes, edges, counts, n: int = 60, seed: int = 3, color=INK,
+         radius: float = 0.045, flight: float = 0.55, fade: float = 0.2,
+         r_max: float | None = None) -> list:
+    """Event dots streaming from the detector into the histogram (recipes
+    section 4): ``n`` dots start at seeded random points inside the tracker of
+    ``det`` *as drawn now* (centre and radius read from the mobject, so a
+    ``place()``d slice works; ``r_max`` defaults to the tracker's outer
+    radius) and fly (``flight`` s, ease-in) to a bin sampled with
+    ``p = counts / counts.sum()``, landing on that bin's final height
+    (``dax.c2p`` clamps empties on log), then fade (``fade`` s). Returns one
+    ``Succession(move, FadeOut)`` per dot for
+    ``LaggedStart(*rain(...), lag_ratio=0.06)``; the dot of animation ``a`` is
+    ``a.animations[0].mobject``. Each Succession leaves an empty Group
+    placeholder in the scene afterwards, which ``check_order`` skips."""
+    rng = np.random.default_rng(seed)
+    counts = np.asarray(counts, dtype=float)
+    edges = np.asarray(edges, dtype=float)
+    p = counts / counts.sum() if counts.sum() > 0 else np.full(len(counts), 1.0 / len(counts))
+    c = det.get_center()
+    R = det.width / 2
+    r_max = R * LOGO_R["tob"] / LOGO_R["muon"] if r_max is None else r_max
+    anims = []
+    for _ in range(n):
+        r, ph = r_max * math.sqrt(rng.uniform()), rng.uniform(0, TAU)
+        j = int(rng.choice(len(counts), p=p))
+        x = rng.uniform(edges[j], edges[j + 1])
+        dot = Dot(c + r * _e(ph), radius=radius, color=col(color))
+        dst = dax.c2p(x, counts[j])
+        anims.append(Succession(
+            dot.animate(run_time=flight, rate_func=rate_functions.ease_in_quad).move_to(dst),
+            FadeOut(dot, run_time=fade)))
+    return anims
+
+
+def spine(node_icons, xs, y: float = 0.0, box=(1.24, 1.24), done=(), accent=DETECTOR_ACCENT,
+          arrow_sw: float = 3.0, box_sw: float = 2.5, fit: float = 0.80) -> VGroup:
+    """The analysis-pipeline strip of section 2: one rounded box per node at
+    (xs[i], y), ``node_icons[i]`` shrunk (never enlarged) to fit ``fit`` x the
+    box and centred in it, and an arrow between consecutive boxes. Nodes whose
+    index is in ``done`` are tinted with ``accent`` (the stages already told);
+    the others are white. Build order = z-order: boxes, arrows, icons.
+    Attributes: ``.boxes`` (VGroup), ``.arrows`` (VGroup of VGroup(line, tip)),
+    ``.icons`` (VGroup: the objects passed in), ``.nodes`` (list of
+    VGroup(box, icon) *views* — not added, for ``about_point`` / ``get_center``),
+    ``.centers`` (array (n, 3)), ``.done`` (tuple)."""
+    w, h = box
+    n = len(node_icons)
+    if len(xs) != n:
+        raise ValueError("spine: one x per icon")
+    acc = col(accent)
+    boxes, icons, arrows, nodes = VGroup(), VGroup(), VGroup(), []
+    centers = np.array([[float(x), float(y), 0.0] for x in xs])
+    for i, (icon, c) in enumerate(zip(node_icons, centers)):
+        fill = lighten(acc, 0.80) if i in done else col(WHITE)
+        b = RoundedRectangle(width=w, height=h, corner_radius=0.12, stroke_color=acc,
+                             stroke_width=box_sw, fill_color=fill, fill_opacity=1.0).move_to(c)
+        f = min(1.0, fit * w / max(icon.width, 1e-6), fit * h / max(icon.height, 1e-6))
+        if f < 1.0:
+            icon.scale(f)
+        icon.move_to(c)
+        boxes.add(b); icons.add(icon); nodes.append(VGroup(b, icon))
+    for i in range(n - 1):
+        a = centers[i] + RIGHT * (w / 2 + 0.08)
+        b = centers[i + 1] + LEFT * (w / 2 + 0.08)
+        ln = Line(a, b, stroke_color=col(INK), stroke_width=arrow_sw)
+        arrows.add(VGroup(ln, arrow_tip_on(ln, color=INK, at=1.0, tip_length=0.2)))
+    g = VGroup(boxes, arrows, icons)
+    g.boxes, g.arrows, g.icons, g.nodes, g.centers, g.done = boxes, arrows, icons, nodes, centers, tuple(done)
+    return g
+
+
+# ---------------------------------------------------------------------------
+# chaining helpers
 # ---------------------------------------------------------------------------
 
 def place(mobj, placement, natural_center=ORIGIN):
-    """Affine placement shared by chained clips: ``placement = (scale, center)``."""
+    """Affine placement shared by chained clips: ``placement = (scale, center)``
+    (scale about ``natural_center``, then move that point to ``center``; both
+    centres may be 2- or 3-vectors). Returns ``mobj``."""
     s, center = placement
+    natural_center = _p3(natural_center)
     mobj.scale(s, about_point=natural_center)
-    mobj.shift(np.asarray(center, dtype=float) - np.asarray(natural_center, dtype=float))
+    mobj.shift(_p3(center) - natural_center)
     return mobj
+
+
+def add_state(scene, state: dict, order) -> None:
+    """Open a chained clip on the previous clip's final frame: add the
+    builder's mobjects ``state[k]`` for ``k in order`` (build order =
+    z-order)."""
+    for k in order:
+        scene.add(state[k])
+
+
+def _is_placeholder(m) -> bool:
+    """Empty Mobject left by ``wait()`` or by a finished Succession/FadeOut."""
+    return len(m.get_family()) == 1 and not m.has_points()
+
+
+def check_order(scene, state: dict, order) -> None:
+    """Z-order guard at the end of a chained clip (recipes section 5, rule 1):
+    the live ``scene.mobjects`` — skipping wait placeholders, empty groups and
+    ValueTrackers — must be exactly ``[state[k] for k in order]``, by identity.
+    Raises AssertionError with the names it found otherwise, so manim exits
+    before combining the partial files."""
+    live = [m for m in scene.mobjects
+            if not _is_placeholder(m) and not isinstance(m, ValueTracker)]
+    want = [state[k] for k in order]
+    if len(live) != len(want) or any(a is not b for a, b in zip(live, want)):
+        by_id = {id(v): k for k, v in state.items()}
+        got = [by_id.get(id(m), f"<{type(m).__name__}>") for m in live]
+        raise AssertionError(f"scene z-order {got} != ORDER {list(order)}")
 
 
 __all__ = [
@@ -894,4 +1522,8 @@ __all__ = [
     "tracker_hits", "signature",
     "DataAxes", "data_bar", "data_trace", "step_hist", "data_band", "data_dot",
     "data_errorbar", "vref_line", "breit_wigner", "dscb", "schematic_zpeak", "place",
+    "mini_slice", "kappa_from_pt", "muon_pieces", "event_from_json", "muon_in_jet",
+    "pair_from_json",
+    "stack_hist", "ratio_panel", "colour_key", "pull_plot", "value_grid", "Slider", "slider",
+    "clock", "rain", "spine", "add_state", "check_order",
 ]

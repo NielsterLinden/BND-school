@@ -35,7 +35,7 @@ cd /project/atlas/Users/nterlind/BND-school/presentation
 - Symbols exactly as the analysis uses them: samples `DYee/DYmumu/DYtautau/TTbar/
   SingleTop/WW/WZ/ZZ/Fakes`, regions `ee_SR/mumu_SR/tautau_SR`, POI `mu_Z`,
   luminosity 16393.381 pb⁻¹, σ(Z/γ*→ℓℓ, m>50) = 6077.22/3 pb per flavour.
-- Channel colour code: ee Dutch blue, μμ Dutch red, ττ German gold (`CHANNEL[...]`
+- Channel colour code: ee green, μμ gold, ττ red (`CHANNEL[...]`
   for fills, `CHANNEL_LINE[...]` / `PARTICLE[...]` for lines and symbols), every time.
 - Detector drawings: `CMSSlice` + `signature(det, kind, phi)` from the style module
   (kinds e, mu, gamma, tau_h, jet, nu); see `scenes/s2_cms_slice.py` for the pattern.

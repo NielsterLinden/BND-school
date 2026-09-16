@@ -1,0 +1,1834 @@
+{
+ "provenance": {
+  "extractor": "presentation/data/extract_zmumu_fit.py",
+  "generated": "2026-09-15T17:22:47",
+  "git": {
+   "commit": "b5ce76b68b5b442953768fc43a8f82f02c34d762",
+   "short": "b5ce76b6",
+   "dirty_worktree": true
+  },
+  "lumi_pb": 16393.381,
+  "dataset": "CMS 2016 Open Data, SingleMuon Run2016G+H, NanoAODv9 (records 30530, 30563)",
+  "sources": [
+   "z-mumu/fit/results/zmumu_fit_result.json",
+   "z-mumu/output/v2/results_v2.json",
+   "z-mumu/fit/results/zmumu/Plots/mumu_SR_prefit.yaml",
+   "z-mumu/fit/results/zmumu/Plots/mumu_SR_postfit.yaml",
+   "z-mumu/output/v2/histograms.pkl",
+   "z-mumu/output/v2/fakes.json"
+  ],
+  "fit_tool": "TRExFitter v1.8.0, profile-likelihood fit of m(mumu) in 12 x 5 GeV bins, MINOS on every parameter",
+  "anchors": [
+   "z-mumu/handoff.md:11-13",
+   "z-mumu/output/v2/RESULTS_v2.md:7-37, 55-70",
+   "fitting/CONVENTIONS.md section 6"
+  ],
+  "units": "cross sections in pb; grouped impacts and uncertainties on mu_Z are relative fractions (not %)",
+  "title_to_sample": {
+   "Z/#gamma* #rightarrow #mu#mu": "DYmumu",
+   "Z/#gamma* #rightarrow #tau#tau": "DYtautau",
+   "Z/#gamma* #rightarrow ee": "DYee",
+   "t#bar{t}": "TTbar",
+   "tW": "SingleTop",
+   "WW": "WW",
+   "WZ": "WZ",
+   "ZZ": "ZZ",
+   "W+jets (jet #rightarrow e)": "WJets",
+   "Non-prompt (fake factor)": "Fakes"
+  }
+ },
+ "poi": {
+  "name": "mu_Z",
+  "value": 0.988134,
+  "err_up": 0.0158981,
+  "err_down": 0.0155715,
+  "err_sym": 0.0157348,
+  "stat_only": 0.000310528,
+  "stat_from_cov": 0.00031232379032017875,
+  "syst_total_incl_lumi": 0.0157317,
+  "syst_excl_lumi": 0.010597463470095098,
+  "lumi_profiled": 0.0116267,
+  "lumi_external": 0.012,
+  "reference": "aMC@NLO DYJetsToLL_M-50, sigma_fid^pred below"
+ },
+ "sigma_fid": {
+  "value": 790.0782175617319,
+  "stat": 0.24828758927737485,
+  "syst": 8.47337005823937,
+  "lumi": 9.594790393550655,
+  "total": 12.581008990370071,
+  "pred": 799.5658661292213,
+  "unit": "pb",
+  "definition": "pp -> Z/gamma* -> mu mu; dressed muons (dR < 0.1), pT > 26/20 GeV, |eta| < 2.4, 60 < m < 120 GeV"
+ },
+ "sigma_60_120": {
+  "value": 1930.7459972880047,
+  "stat": 0.6067503932116997,
+  "syst": 20.706716069168714,
+  "lumi": 23.44717615976786,
+  "acc": 11.770181051594033,
+  "total": 32.920736709560046,
+  "A": 0.40920878182397075,
+  "A_rel_unc": 0.006096183065057161,
+  "pred": 1953.9313466473218,
+  "unit": "pb",
+  "definition": "sigma(Z/gamma* -> mu mu, 60 < m_LHE < 120 GeV) = sigma_fid / A; pred = sigma_fid^pred / A (fitting/CONVENTIONS.md section 6)"
+ },
+ "sigma_m50": {
+  "value": 2001.7025691600002,
+  "total": 34.1306020277801,
+  "A": 0.394703104114655,
+  "pred": 2025.74,
+  "unit": "pb"
+ },
+ "C": 0.7914150044068334,
+ "counting": {
+  "n_obs": 10378567.0,
+  "n_bkg": 68786.52541969114,
+  "sigma_fid_pb": 794.6513137592062
+ },
+ "gof_p": 0.792273,
+ "n_fid_expected": 13107587.87805132,
+ "lumi_pb": 16393.381,
+ "grouped_impacts": {
+  "Background normalisation": 0.000809754,
+  "Electron efficiency": 0.0,
+  "Fakes": 0.000443236,
+  "FullSyst": 0.0157317,
+  "Gammas": 0.00381831,
+  "L1 prefiring": 0.00506031,
+  "Luminosity": 0.0116267,
+  "Muon efficiency": 0.0086948,
+  "Muon momentum": 0.00366853,
+  "Pileup": 0.0013405,
+  "Signal modelling": 0.00490833
+ },
+ "nps": [
+  {
+   "name": "Lumi",
+   "pull": 0.0803771,
+   "constr_up": 0.997757,
+   "constr_down": 0.994967,
+   "constraint": 0.996362,
+   "group": "Luminosity"
+  },
+  {
+   "name": "MuonReco",
+   "pull": 0.0534023,
+   "constr_up": 0.999506,
+   "constr_down": 0.997258,
+   "constraint": 0.998382,
+   "group": "Muon efficiency"
+  },
+  {
+   "name": "MuonID",
+   "pull": 0.0723339,
+   "constr_up": 0.995638,
+   "constr_down": 0.996108,
+   "constraint": 0.995873,
+   "group": "Muon efficiency"
+  },
+  {
+   "name": "MuonIso",
+   "pull": 0.0133836,
+   "constr_up": 0.897751,
+   "constr_down": 0.896194,
+   "constraint": 0.8969725,
+   "group": "Muon efficiency"
+  },
+  {
+   "name": "MuonTrigger",
+   "pull": 0.00967847,
+   "constr_up": 0.973218,
+   "constr_down": 0.97331,
+   "constraint": 0.973264,
+   "group": "Muon efficiency"
+  },
+  {
+   "name": "Pileup",
+   "pull": 0.0586776,
+   "constr_up": 0.820121,
+   "constr_down": 0.821526,
+   "constraint": 0.8208234999999999,
+   "group": "Pileup"
+  },
+  {
+   "name": "L1Prefiring",
+   "pull": -0.0617019,
+   "constr_up": 0.996992,
+   "constr_down": 0.998203,
+   "constraint": 0.9975974999999999,
+   "group": "L1 prefiring"
+  },
+  {
+   "name": "MuonScale",
+   "pull": -0.47646,
+   "constr_up": 0.138982,
+   "constr_down": 0.139019,
+   "constraint": 0.1390005,
+   "group": "Muon momentum"
+  },
+  {
+   "name": "MuonRes",
+   "pull": 0.396278,
+   "constr_up": 0.119005,
+   "constr_down": 0.118983,
+   "constraint": 0.118994,
+   "group": "Muon momentum"
+  },
+  {
+   "name": "PDF",
+   "pull": 0.560404,
+   "constr_up": 0.926382,
+   "constr_down": 0.925969,
+   "constraint": 0.9261755,
+   "group": "Signal modelling"
+  },
+  {
+   "name": "AlphaS",
+   "pull": 0.00471671,
+   "constr_up": 0.998129,
+   "constr_down": 0.998448,
+   "constraint": 0.9982885,
+   "group": "Signal modelling"
+  },
+  {
+   "name": "QCDScale",
+   "pull": 0.761569,
+   "constr_up": 0.793209,
+   "constr_down": 0.791685,
+   "constraint": 0.792447,
+   "group": "Signal modelling"
+  },
+  {
+   "name": "PS_ISR",
+   "pull": 0.444008,
+   "constr_up": 0.951801,
+   "constr_down": 0.951129,
+   "constraint": 0.951465,
+   "group": "Signal modelling"
+  },
+  {
+   "name": "PS_FSR",
+   "pull": 0.108259,
+   "constr_up": 0.741495,
+   "constr_down": 0.74058,
+   "constraint": 0.7410375,
+   "group": "Signal modelling"
+  },
+  {
+   "name": "SigModel",
+   "pull": 0.656505,
+   "constr_up": 0.135659,
+   "constr_down": 0.135844,
+   "constraint": 0.1357515,
+   "group": "Signal modelling"
+  },
+  {
+   "name": "XS_TTbar",
+   "pull": 0.188967,
+   "constr_up": 0.961142,
+   "constr_down": 0.956686,
+   "constraint": 0.958914,
+   "group": "Background normalisation"
+  },
+  {
+   "name": "XS_SingleTop",
+   "pull": 0.0329573,
+   "constr_up": 0.998441,
+   "constr_down": 0.999548,
+   "constraint": 0.9989945,
+   "group": "Background normalisation"
+  },
+  {
+   "name": "XS_WW",
+   "pull": 0.0297008,
+   "constr_up": 0.998586,
+   "constr_down": 0.998608,
+   "constraint": 0.998597,
+   "group": "Background normalisation"
+  },
+  {
+   "name": "XS_WZ",
+   "pull": 0.00557741,
+   "constr_up": 1.00033,
+   "constr_down": 0.999616,
+   "constraint": 0.999973,
+   "group": "Background normalisation"
+  },
+  {
+   "name": "XS_ZZ",
+   "pull": -0.0134598,
+   "constr_up": 0.999939,
+   "constr_down": 1.0,
+   "constraint": 0.9999695,
+   "group": "Background normalisation"
+  },
+  {
+   "name": "XS_DYtautau",
+   "pull": 0.150562,
+   "constr_up": 0.982643,
+   "constr_down": 0.978884,
+   "constraint": 0.9807635,
+   "group": "Background normalisation"
+  },
+  {
+   "name": "FakeStat_mumu",
+   "pull": 0.0417102,
+   "constr_up": 0.996908,
+   "constr_down": 0.996833,
+   "constraint": 0.9968705,
+   "group": "Fakes"
+  },
+  {
+   "name": "FakeMethod_mumu",
+   "pull": 0.0819718,
+   "constr_up": 0.991681,
+   "constr_down": 0.987897,
+   "constraint": 0.989789,
+   "group": "Fakes"
+  }
+ ],
+ "gammas": [
+  {
+   "name": "gamma_stat_mumu_SR_bin_0",
+   "bin": 0,
+   "value": 1.00582,
+   "err_up": 0.00495042,
+   "err_down": 0.00492849
+  },
+  {
+   "name": "gamma_stat_mumu_SR_bin_1",
+   "bin": 1,
+   "value": 0.998595,
+   "err_up": 0.0041966,
+   "err_down": 0.00417433
+  },
+  {
+   "name": "gamma_stat_mumu_SR_bin_2",
+   "bin": 2,
+   "value": 0.997063,
+   "err_up": 0.00338138,
+   "err_down": 0.0033704
+  },
+  {
+   "name": "gamma_stat_mumu_SR_bin_3",
+   "bin": 3,
+   "value": 0.994978,
+   "err_up": 0.00236214,
+   "err_down": 0.00235742
+  },
+  {
+   "name": "gamma_stat_mumu_SR_bin_4",
+   "bin": 4,
+   "value": 1.00147,
+   "err_up": 0.00177827,
+   "err_down": 0.00177621
+  },
+  {
+   "name": "gamma_stat_mumu_SR_bin_5",
+   "bin": 5,
+   "value": 1.00003,
+   "err_up": 0.00104952,
+   "err_down": 0.00104939
+  },
+  {
+   "name": "gamma_stat_mumu_SR_bin_6",
+   "bin": 6,
+   "value": 1.00002,
+   "err_up": 0.000812763,
+   "err_down": 0.000811572
+  },
+  {
+   "name": "gamma_stat_mumu_SR_bin_7",
+   "bin": 7,
+   "value": 0.999934,
+   "err_up": 0.00226434,
+   "err_down": 0.00225982
+  },
+  {
+   "name": "gamma_stat_mumu_SR_bin_8",
+   "bin": 8,
+   "value": 0.998726,
+   "err_up": 0.00250442,
+   "err_down": 0.00250029
+  },
+  {
+   "name": "gamma_stat_mumu_SR_bin_9",
+   "bin": 9,
+   "value": 1.00253,
+   "err_up": 0.00401969,
+   "err_down": 0.00400651
+  },
+  {
+   "name": "gamma_stat_mumu_SR_bin_10",
+   "bin": 10,
+   "value": 1.00169,
+   "err_up": 0.00550102,
+   "err_down": 0.00547312
+  },
+  {
+   "name": "gamma_stat_mumu_SR_bin_11",
+   "bin": 11,
+   "value": 1.00471,
+   "err_up": 0.0072424,
+   "err_down": 0.00718717
+  }
+ ],
+ "ranking": [
+  {
+   "name": "Lumi",
+   "pull": 0.0803771,
+   "err_up": 0.997757,
+   "err_down": 0.994967,
+   "dpoi_up_post": -0.0115075,
+   "dpoi_down_post": 0.011746,
+   "dpoi_up_pre": -0.0115444,
+   "dpoi_down_pre": 0.0118066
+  },
+  {
+   "name": "MuonReco",
+   "pull": 0.0534023,
+   "err_up": 0.999506,
+   "err_down": 0.997258,
+   "dpoi_up_post": -0.00770933,
+   "dpoi_down_post": 0.00777502,
+   "dpoi_up_pre": -0.0077124,
+   "dpoi_down_pre": 0.00781142
+  },
+  {
+   "name": "Pileup",
+   "pull": 0.0586776,
+   "err_up": 0.820121,
+   "err_down": 0.821526,
+   "dpoi_up_post": 0.00128911,
+   "dpoi_down_post": -0.00137092,
+   "dpoi_up_pre": 0.00160901,
+   "dpoi_down_pre": -0.00161204
+  },
+  {
+   "name": "L1Prefiring",
+   "pull": -0.0617019,
+   "err_up": 0.996992,
+   "err_down": 0.998203,
+   "dpoi_up_post": 0.00506529,
+   "dpoi_down_post": -0.00501535,
+   "dpoi_up_pre": 0.00508297,
+   "dpoi_down_pre": -0.0050602
+  },
+  {
+   "name": "MuonID",
+   "pull": 0.0723339,
+   "err_up": 0.995638,
+   "err_down": 0.996108,
+   "dpoi_up_post": -0.0018976,
+   "dpoi_down_post": 0.00185318,
+   "dpoi_up_pre": -0.00190556,
+   "dpoi_down_pre": 0.00184115
+  },
+  {
+   "name": "MuonIso",
+   "pull": 0.0133836,
+   "err_up": 0.897751,
+   "err_down": 0.896194,
+   "dpoi_up_post": -0.00285772,
+   "dpoi_down_post": 0.00288237,
+   "dpoi_up_pre": -0.00322984,
+   "dpoi_down_pre": 0.00320642
+  },
+  {
+   "name": "MuonTrigger",
+   "pull": 0.00967847,
+   "err_up": 0.973218,
+   "err_down": 0.97331,
+   "dpoi_up_post": -0.00150128,
+   "dpoi_down_post": 0.00146649,
+   "dpoi_up_pre": -0.00154297,
+   "dpoi_down_pre": 0.00148073
+  },
+  {
+   "name": "MuonScale",
+   "pull": -0.47646,
+   "err_up": 0.138982,
+   "err_down": 0.139019,
+   "dpoi_up_post": 0.00353227,
+   "dpoi_down_post": -0.00355956,
+   "dpoi_up_pre": 0.0254548,
+   "dpoi_down_pre": -0.025293
+  },
+  {
+   "name": "MuonRes",
+   "pull": 0.396278,
+   "err_up": 0.119005,
+   "err_down": 0.118983,
+   "dpoi_up_post": -0.00152551,
+   "dpoi_down_post": 0.00151259,
+   "dpoi_up_pre": -0.012538,
+   "dpoi_down_pre": 0.012676
+  },
+  {
+   "name": "PDF",
+   "pull": 0.560404,
+   "err_up": 0.926382,
+   "err_down": 0.925969,
+   "dpoi_up_post": 0.000847623,
+   "dpoi_down_post": -0.000878094,
+   "dpoi_up_pre": 0.000891472,
+   "dpoi_down_pre": -0.000901302
+  },
+  {
+   "name": "AlphaS",
+   "pull": 0.00471671,
+   "err_up": 0.998129,
+   "err_down": 0.998448,
+   "dpoi_up_post": 0.000203208,
+   "dpoi_down_post": -0.000250252,
+   "dpoi_up_pre": 0.000203806,
+   "dpoi_down_pre": -0.000255657
+  },
+  {
+   "name": "QCDScale",
+   "pull": 0.761569,
+   "err_up": 0.793209,
+   "err_down": 0.791685,
+   "dpoi_up_post": -0.000841019,
+   "dpoi_down_post": 0.000775934,
+   "dpoi_up_pre": -0.00105448,
+   "dpoi_down_pre": 0.00098829
+  },
+  {
+   "name": "PS_ISR",
+   "pull": 0.444008,
+   "err_up": 0.951801,
+   "err_down": 0.951129,
+   "dpoi_up_post": -0.000920438,
+   "dpoi_down_post": 0.000944129,
+   "dpoi_up_pre": -0.000989368,
+   "dpoi_down_pre": 0.000977849
+  },
+  {
+   "name": "PS_FSR",
+   "pull": 0.108259,
+   "err_up": 0.741495,
+   "err_down": 0.74058,
+   "dpoi_up_post": 0.00164734,
+   "dpoi_down_post": -0.00171468,
+   "dpoi_up_pre": 0.00218153,
+   "dpoi_down_pre": -0.00229262
+  },
+  {
+   "name": "SigModel",
+   "pull": 0.656505,
+   "err_up": 0.135659,
+   "err_down": 0.135844,
+   "dpoi_up_post": -0.00397832,
+   "dpoi_down_post": 0.00394439,
+   "dpoi_up_pre": -0.0289937,
+   "dpoi_down_pre": 0.0292753
+  },
+  {
+   "name": "XS_DYtautau",
+   "pull": 0.150562,
+   "err_up": 0.982643,
+   "err_down": 0.978884,
+   "dpoi_up_post": 0.000516869,
+   "dpoi_down_post": -0.000504102,
+   "dpoi_up_pre": 0.000517668,
+   "dpoi_down_pre": -0.000481081
+  },
+  {
+   "name": "XS_TTbar",
+   "pull": 0.188967,
+   "err_up": 0.961142,
+   "err_down": 0.956686,
+   "dpoi_up_post": 0.000647843,
+   "dpoi_down_post": -0.00063126,
+   "dpoi_up_pre": 0.000682001,
+   "dpoi_down_pre": -0.000675586
+  },
+  {
+   "name": "XS_SingleTop",
+   "pull": 0.0329573,
+   "err_up": 0.998441,
+   "err_down": 0.999548,
+   "dpoi_up_post": 4.39142e-05,
+   "dpoi_down_post": -0.000120426,
+   "dpoi_up_pre": 5.80183e-05,
+   "dpoi_down_pre": -0.000117072
+  },
+  {
+   "name": "XS_WW",
+   "pull": 0.0297008,
+   "err_up": 0.998586,
+   "err_down": 0.998608,
+   "dpoi_up_post": 8.77802e-05,
+   "dpoi_down_post": -0.000175418,
+   "dpoi_up_pre": 7.97596e-05,
+   "dpoi_down_pre": -0.000177159
+  },
+  {
+   "name": "XS_WZ",
+   "pull": 0.00557741,
+   "err_up": 1.00033,
+   "err_down": 0.999616,
+   "dpoi_up_post": -0.000153121,
+   "dpoi_down_post": 1.55926e-05,
+   "dpoi_up_pre": -0.000154453,
+   "dpoi_down_pre": 2.50959e-05
+  },
+  {
+   "name": "XS_ZZ",
+   "pull": -0.0134598,
+   "err_up": 0.999939,
+   "err_down": 1.0,
+   "dpoi_up_post": -7.96493e-05,
+   "dpoi_down_post": -9.84405e-06,
+   "dpoi_up_pre": -7.77414e-05,
+   "dpoi_down_pre": -8.19189e-06
+  },
+  {
+   "name": "FakeStat_mumu",
+   "pull": 0.0417102,
+   "err_up": 0.996908,
+   "err_down": 0.996833,
+   "dpoi_up_post": 0.000184476,
+   "dpoi_down_post": -0.000238026,
+   "dpoi_up_pre": 0.000184282,
+   "dpoi_down_pre": -0.000237595
+  },
+  {
+   "name": "FakeMethod_mumu",
+   "pull": 0.0819718,
+   "err_up": 0.991681,
+   "err_down": 0.987897,
+   "dpoi_up_post": 0.000381688,
+   "dpoi_down_post": -0.000441086,
+   "dpoi_up_pre": 0.000374522,
+   "dpoi_down_pre": -0.000431402
+  },
+  {
+   "name": "gamma_stat_mumu_SR_bin_0",
+   "pull": 0.934792,
+   "err_up": 0.795731,
+   "err_down": 0.792207,
+   "dpoi_up_post": 0.000876013,
+   "dpoi_down_post": -0.000922859,
+   "dpoi_up_pre": 0.00114727,
+   "dpoi_down_pre": -0.00116255
+  },
+  {
+   "name": "gamma_stat_mumu_SR_bin_1",
+   "pull": -0.244753,
+   "err_up": 0.730869,
+   "err_down": 0.726991,
+   "dpoi_up_post": 0.002242,
+   "dpoi_down_post": -0.00230001,
+   "dpoi_up_pre": 0.00309677,
+   "dpoi_down_pre": -0.00316662
+  }
+ ],
+ "sr_12bin": {
+  "edges": [
+   60.0,
+   65.0,
+   70.0,
+   75.0,
+   80.0,
+   85.0,
+   90.0,
+   95.0,
+   100.0,
+   105.0,
+   110.0,
+   115.0,
+   120.0
+  ],
+  "bin_width_gev": 5,
+  "samples": [
+   "DYmumu",
+   "DYtautau",
+   "TTbar",
+   "SingleTop",
+   "WW",
+   "WZ",
+   "ZZ",
+   "Fakes"
+  ],
+  "prefit": {
+   "DYmumu": [
+    75390.16070153852,
+    93138.51242780351,
+    133686.22110601247,
+    226793.96787362595,
+    547133.4584050777,
+    3037961.8935861224,
+    5259525.858480616,
+    653184.7718042878,
+    178090.1503202847,
+    84713.69594069986,
+    50335.33206327561,
+    33587.695561597895
+   ],
+   "DYtautau": [
+    4015.0933202478363,
+    3095.249805965167,
+    1887.8522088451932,
+    1128.2796130777979,
+    453.23578824469155,
+    150.20446863282348,
+    89.39341828069081,
+    59.4417437701184,
+    33.49815655527152,
+    52.33856746119493,
+    33.34056708083901,
+    24.981764222747845
+   ],
+   "TTbar": [
+    2663.7940399627364,
+    2796.830709664703,
+    2850.6978352090773,
+    2874.3135658655337,
+    2833.4488807716457,
+    2807.1046355201884,
+    2723.8778927627873,
+    2631.7854074823226,
+    2531.735511615655,
+    2405.7631495023397,
+    2293.937130917926,
+    2193.9040669085484
+   ],
+   "SingleTop": [
+    244.60415638941882,
+    250.1936568657955,
+    255.36208253958694,
+    255.97301992050262,
+    257.1200996346079,
+    265.593743339095,
+    264.1875452310011,
+    245.9665161942526,
+    242.99059062530176,
+    226.52710710987458,
+    220.8308293775449,
+    206.3170389990864
+   ],
+   "WW": [
+    349.4165331554237,
+    385.33175737368003,
+    376.73773682619924,
+    365.31523566565824,
+    354.37380458791165,
+    344.3160875410615,
+    322.99749170292694,
+    300.39171571587246,
+    287.66285606990976,
+    277.77797830433195,
+    253.1780833670618,
+    229.7614434283038
+   ],
+   "WZ": [
+    58.602649059969174,
+    75.41489073017456,
+    106.4873868639291,
+    178.4567531859007,
+    446.51408102047424,
+    2592.889083562147,
+    4686.78007838713,
+    637.8611609268601,
+    193.442573570923,
+    101.29520500347247,
+    66.87842860085588,
+    50.25666860694038
+   ],
+   "ZZ": [
+    85.77095982944009,
+    122.77392893226137,
+    166.26491717659377,
+    227.53763450753922,
+    374.87429121087894,
+    1666.7399289795685,
+    3006.3859585039672,
+    412.32478499344774,
+    118.59530247325335,
+    61.29946359041423,
+    38.802657760944896,
+    27.29198951899526
+   ],
+   "Fakes": [
+    432.6033641624951,
+    434.86272314916766,
+    415.2784043686312,
+    392.5598779633413,
+    377.852536214299,
+    335.5520591965252,
+    301.85034318632086,
+    286.5850013572667,
+    258.8689673458513,
+    238.10993395328407,
+    202.2690272099007,
+    193.56304605574172
+   ]
+  },
+  "postfit": {
+   "DYmumu": [
+    72226.14115944828,
+    90270.62731184393,
+    128778.33847512983,
+    220668.29734758622,
+    539429.8319160014,
+    3022020.22971809,
+    5234812.359058568,
+    654852.9391610147,
+    177489.69629970074,
+    84358.41114083744,
+    50213.11886815894,
+    33969.36342346636
+   ],
+   "DYtautau": [
+    4042.8837137879145,
+    3127.5561467071757,
+    1899.4549305680925,
+    1123.8322195000367,
+    453.31827714302926,
+    149.97187556047734,
+    91.24564608267407,
+    60.482456280855594,
+    33.36248914949194,
+    53.65741202658662,
+    34.43495424763917,
+    26.105566063010844
+   ],
+   "TTbar": [
+    2712.3713548264104,
+    2832.0358080425167,
+    2879.139213609701,
+    2897.7760489648153,
+    2874.2495110861314,
+    2844.4355639987507,
+    2759.4063468393188,
+    2666.6391627717403,
+    2562.81918208527,
+    2442.245236379667,
+    2329.2570154691866,
+    2232.30359070121
+   ],
+   "SingleTop": [
+    247.14795660976947,
+    251.24609231667318,
+    256.62408362076985,
+    255.57210991760013,
+    258.2236585874478,
+    267.2422630039892,
+    265.54947739778055,
+    247.42702342802605,
+    243.95392109587877,
+    228.43206778608047,
+    222.45889888275997,
+    208.41134046973963
+   ],
+   "WW": [
+    352.2273888499752,
+    386.69411164385673,
+    377.4700440650667,
+    365.48876069196035,
+    356.1158043042479,
+    345.88906508505704,
+    324.4971511096833,
+    301.3373210973961,
+    289.3409922210349,
+    279.0505299889859,
+    255.3407780739656,
+    231.27977706433006
+   ],
+   "WZ": [
+    59.08491154220108,
+    75.67260390025848,
+    106.67439883780213,
+    178.56769324615667,
+    452.8247288039814,
+    2628.3549951228338,
+    4665.506649262075,
+    638.3727329791625,
+    193.42272847607902,
+    101.65879434135829,
+    67.059498211924,
+    50.67196272638675
+   ],
+   "ZZ": [
+    86.35877826410528,
+    122.7833284671226,
+    166.0582805887461,
+    227.0009256493577,
+    377.5349411986412,
+    1686.9257677823314,
+    2986.05593694334,
+    412.1631821455136,
+    118.40275614089451,
+    61.357933573523376,
+    38.807407167709975,
+    27.457179168769095
+   ],
+   "Fakes": [
+    448.4872210956744,
+    447.78174689776233,
+    426.96038093664697,
+    402.81098138268203,
+    390.31090551865714,
+    346.1024521487067,
+    311.4207304876217,
+    295.59762554198403,
+    266.69004473683094,
+    246.31284143365693,
+    209.06217109502182,
+    200.66608200084244
+   ]
+  },
+  "total_prefit": {
+   "yield": [
+    83240.04572434584,
+    100299.16990048443,
+    139744.9016778417,
+    232216.4035738122,
+    552230.8778867621,
+    3046124.2935928935,
+    5270921.331208672,
+    657759.1281347278,
+    181756.94427854093,
+    88076.80734562481,
+    53444.5687875907,
+    36513.77157933827
+   ],
+   "unc_up": [
+    6089.875180501185,
+    4310.023064985905,
+    6989.200953513523,
+    8061.598735809073,
+    18209.20619382836,
+    86439.62373058093,
+    142419.06544869623,
+    23356.685533374894,
+    4107.7864812441985,
+    1745.2626875543945,
+    1231.9199541773883,
+    1012.375946972265
+   ],
+   "unc_down": [
+    -6089.875180501185,
+    -4310.023064985905,
+    -6989.200953513523,
+    -8061.598735809073,
+    -18209.20619382836,
+    -86439.62373058093,
+    -142419.06544869623,
+    -23356.685533374894,
+    -4107.7864812441985,
+    -1745.2626875543945,
+    -1231.9199541773883,
+    -1012.375946972265
+   ]
+  },
+  "total_postfit": {
+   "yield": [
+    80174.70248442434,
+    97514.3971498193,
+    134890.71980735665,
+    226119.34608693884,
+    544592.4097426435,
+    3030289.1517007924,
+    5246216.040996691,
+    659474.9586652595,
+    181197.6884136062,
+    87771.12595636732,
+    53369.53959130714,
+    36946.25892166065
+   ],
+   "unc_up": [
+    262.71940011205453,
+    283.06801960455516,
+    330.96271138759596,
+    424.08195041787496,
+    672.3223765717823,
+    1722.3757962704985,
+    2281.2938606564153,
+    795.569445801725,
+    379.3243131859856,
+    266.2691153224464,
+    209.2704327241124,
+    178.20331864317433
+   ],
+   "unc_down": [
+    -262.71940011205453,
+    -283.06801960455516,
+    -330.96271138759596,
+    -424.08195041787496,
+    -672.3223765717823,
+    -1722.3757962704985,
+    -2281.2938606564153,
+    -795.569445801725,
+    -379.3243131859856,
+    -266.2691153224464,
+    -209.2704327241124,
+    -178.20331864317433
+   ]
+  },
+  "data": [
+   80325,
+   97472,
+   134768,
+   225778,
+   544826,
+   3030320,
+   5246254,
+   659463,
+   181132,
+   87835,
+   53396,
+   36998
+  ],
+  "ratio_prefit": [
+   0.9649802484011221,
+   0.971812629124553,
+   0.9643858085834494,
+   0.9722741224361194,
+   0.9865909745664737,
+   0.9948116714652335,
+   0.9953201101555776,
+   1.0025904191859778,
+   0.9965616484089697,
+   0.9972545854815568,
+   0.9990912306209498,
+   1.0132615284512472
+  ],
+  "ratio_postfit": [
+   1.0018746251737556,
+   0.9995652216384606,
+   0.9990902279450216,
+   0.9984904162653664,
+   1.0004289267591278,
+   1.0000101799853622,
+   1.0000072355013618,
+   0.9999818663846104,
+   0.9996374765363658,
+   1.0007277341259633,
+   1.0004957960832244,
+   1.0014004416103146
+  ],
+  "ratio_err": [
+   0.003404811373529493,
+   0.003112738232302138,
+   0.0026269839489141454,
+   0.0020461992263466114,
+   0.00133662083286302,
+   0.0005714741966984136,
+   0.0004345483670626794,
+   0.0012346058577081128,
+   0.002341566944265144,
+   0.003364900596275529,
+   0.004323652531947275,
+   0.0052678382285453
+  ],
+  "note": "prefit = mu_Z = 1 templates (TRExFitter Plots/mumu_SR_prefit.yaml); postfit = best-fit NPs and mu_Z"
+ },
+ "stability": [
+  {
+   "tag": "zmumu",
+   "label": "nominal: 12 x 5 GeV, SigModel two-sided (LHE window), no smoothing",
+   "mu": 0.988134,
+   "err_up": 0.0158981,
+   "err_down": 0.0155715,
+   "sigma_fid_pb": 790.0782175617319,
+   "gof_p": 0.792273,
+   "syst_total": 0.0157317,
+   "notable": [
+    "MuonRes +0.4 (0.12)",
+    "MuonScale -0.5 (0.14)",
+    "SigModel +0.7 (0.14)"
+   ]
+  },
+  {
+   "tag": "stab_2gev",
+   "label": "30 x 2 GeV",
+   "mu": 0.990121,
+   "err_up": 0.0156747,
+   "err_down": 0.0153003,
+   "sigma_fid_pb": 791.6669549377307,
+   "gof_p": 0.161244,
+   "syst_total": 0.0154845,
+   "notable": [
+    "MuonRes +0.2 (0.07)",
+    "MuonScale -0.5 (0.10)",
+    "PDF +1.4 (0.87)",
+    "PS_FSR -0.6 (0.52)",
+    "Pileup -0.4 (0.67)",
+    "QCDScale +0.6 (0.57)",
+    "SigModel +0.5 (0.10)"
+   ]
+  },
+  {
+   "tag": "stab_10gev",
+   "label": "6 x 10 GeV",
+   "mu": 0.98582,
+   "err_up": 0.0160233,
+   "err_down": 0.0156381,
+   "sigma_fid_pb": 788.2280221475089,
+   "gof_p": 0.502138,
+   "syst_total": 0.0158277,
+   "notable": [
+    "MuonRes +0.6 (0.53)",
+    "MuonScale -0.4 (0.29)",
+    "SigModel +0.7 (0.15)"
+   ]
+  },
+  {
+   "tag": "stab_1bin",
+   "label": "1 bin (counting)",
+   "mu": 0.993872,
+   "err_up": 0.016763,
+   "err_down": 0.0163941,
+   "sigma_fid_pb": 794.6661265015814,
+   "gof_p": 0.0,
+   "syst_total": 0.0165755,
+   "notable": []
+  },
+  {
+   "tag": "stab_nosig",
+   "label": "12 x 5 GeV, no SigModel",
+   "mu": 1.00728,
+   "err_up": 0.0157689,
+   "err_down": 0.0153751,
+   "sigma_fid_pb": 805.386705634642,
+   "gof_p": 0.00136417,
+   "syst_total": 0.0155691,
+   "notable": [
+    "MuonIso -2.3 (0.76)",
+    "MuonRes +0.2 (0.11)",
+    "MuonScale +0.1 (0.06)",
+    "MuonTrigger -1.2 (0.94)",
+    "PS_FSR +1.0 (0.72)",
+    "QCDScale -1.5 (0.63)"
+   ]
+  },
+  {
+   "tag": "stab_smooth",
+   "label": "12 x 5 GeV, MuonScale/MuonRes smoothed",
+   "mu": 1.00119,
+   "err_up": 0.0159758,
+   "err_down": 0.0155611,
+   "sigma_fid_pb": 800.5173495099151,
+   "gof_p": 0.014019,
+   "syst_total": 0.0157644,
+   "notable": [
+    "MuonIso -1.5 (0.85)",
+    "MuonRes +1.3 (0.77)",
+    "MuonScale +0.2 (0.33)",
+    "PS_FSR +1.1 (0.71)",
+    "QCDScale -1.0 (0.68)",
+    "SigModel +0.0 (0.13)"
+   ]
+  },
+  {
+   "tag": "stab_2gev_nosig",
+   "label": "30 x 2 GeV, no SigModel",
+   "mu": 1.00558,
+   "err_up": 0.0156751,
+   "err_down": 0.0152797,
+   "sigma_fid_pb": 804.0274436622223,
+   "gof_p": 0.000209046,
+   "syst_total": 0.0154742,
+   "notable": [
+    "MuonIso -3.0 (0.73)",
+    "MuonRes +0.1 (0.07)",
+    "MuonScale -0.0 (0.05)",
+    "MuonTrigger -1.5 (0.94)",
+    "PDF +1.2 (0.87)",
+    "PS_FSR +0.2 (0.49)",
+    "PS_ISR +1.0 (0.87)",
+    "Pileup -1.0 (0.66)",
+    "QCDScale -1.0 (0.48)"
+   ]
+  }
+ ],
+ "np_count_note": "23 nuisance parameters are constrained in the signal-region fit (+ 12 gammas); fit/zmumu.config declares 25 Systematic blocks, of which XS_WJets and ElectronEff_mumu act on the validation region mumu_CRemu only; handoff.md:18 quotes 24.",
+ "checks": [
+  {
+   "name": "mu_Z",
+   "ok": true,
+   "tol": 5e-07,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:9 / fit result",
+   "got": 0.988134,
+   "want": 0.988134
+  },
+  {
+   "name": "mu_Z err_up",
+   "ok": true,
+   "tol": 5e-08,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:9",
+   "got": 0.0158981,
+   "want": 0.0158981
+  },
+  {
+   "name": "mu_Z err_down",
+   "ok": true,
+   "tol": 5e-08,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:9",
+   "got": 0.0155715,
+   "want": 0.0155715
+  },
+  {
+   "name": "mu_Z rounded 0.988 +- 0.016",
+   "ok": true,
+   "tol": 0.0005,
+   "rel": false,
+   "max_diff": 0.00026520000000000016,
+   "source": "z-mumu/handoff.md:11-13",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "mu_Z stat-only 0.031%",
+   "ok": true,
+   "tol": 0.0005,
+   "rel": false,
+   "max_diff": 5.280000000000215e-05,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:37",
+   "got": 0.031052800000000002,
+   "want": 0.031
+  },
+  {
+   "name": "sigma_fid 790.1 pb",
+   "ok": true,
+   "tol": 0.05,
+   "rel": false,
+   "max_diff": 0.021782438268132864,
+   "source": "z-mumu/handoff.md:11-13",
+   "got": 790.0782175617319,
+   "want": 790.1
+  },
+  {
+   "name": "sigma_fid stat 0.2",
+   "ok": true,
+   "tol": 0.05,
+   "rel": false,
+   "max_diff": 0.04828758927737484,
+   "source": "z-mumu/handoff.md:11-13",
+   "got": 0.24828758927737485,
+   "want": 0.2
+  },
+  {
+   "name": "sigma_fid syst 8.5",
+   "ok": true,
+   "tol": 0.05,
+   "rel": false,
+   "max_diff": 0.02662994176063016,
+   "source": "z-mumu/handoff.md:11-13",
+   "got": 8.47337005823937,
+   "want": 8.5
+  },
+  {
+   "name": "sigma_fid lumi 9.6",
+   "ok": true,
+   "tol": 0.05,
+   "rel": false,
+   "max_diff": 0.005209606449344761,
+   "source": "z-mumu/handoff.md:11-13",
+   "got": 9.594790393550655,
+   "want": 9.6
+  },
+  {
+   "name": "sigma_fid exact 790.078 +- 0.248 +- 8.473 +- 9.595",
+   "ok": true,
+   "tol": 0.0005,
+   "rel": false,
+   "max_diff": 0.00037005823936908655,
+   "source": "fit/results/zmumu_fit_result.json",
+   "shape": [
+    4
+   ]
+  },
+  {
+   "name": "sigma_fid^pred 799.566 pb",
+   "ok": true,
+   "tol": 0.0005,
+   "rel": false,
+   "max_diff": 0.00013387077876814146,
+   "source": "z-mumu/handoff.md:77",
+   "got": 799.5658661292213,
+   "want": 799.566
+  },
+  {
+   "name": "sigma(60-120) 1931 +- 33 pb",
+   "ok": true,
+   "tol": 0.5,
+   "rel": false,
+   "max_diff": 0.25400271199532654,
+   "source": "z-mumu/handoff.md:11-13",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "sigma(60-120) exact 1930.746 +- 32.921",
+   "ok": true,
+   "tol": 0.0005,
+   "rel": false,
+   "max_diff": 0.00026329043995332313,
+   "source": "fit result",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "A_60_120 0.409209",
+   "ok": true,
+   "tol": 5e-07,
+   "rel": false,
+   "max_diff": 2.1817602924301127e-07,
+   "source": "z-mumu/handoff.md:78",
+   "got": 0.40920878182397075,
+   "want": 0.409209
+  },
+  {
+   "name": "sigma^pred(60-120) 1953.9 pb",
+   "ok": true,
+   "tol": 0.05,
+   "rel": false,
+   "max_diff": 0.031346647321697674,
+   "source": "fitting/CONVENTIONS.md section 6 / handoff.md:79",
+   "got": 1953.9313466473218,
+   "want": 1953.9
+  },
+  {
+   "name": "C factor 0.7914",
+   "ok": true,
+   "tol": 5e-05,
+   "rel": false,
+   "max_diff": 1.5004406833440953e-05,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:17",
+   "got": 0.7914150044068334,
+   "want": 0.7914
+  },
+  {
+   "name": "C factor exact 0.791415",
+   "ok": true,
+   "tol": 5e-07,
+   "rel": false,
+   "max_diff": 4.406833453707293e-09,
+   "source": "fit result meta",
+   "got": 0.7914150044068334,
+   "want": 0.791415
+  },
+  {
+   "name": "counting cross-check 794.7 pb",
+   "ok": true,
+   "tol": 0.05,
+   "rel": false,
+   "max_diff": 0.04868624079381334,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:19",
+   "got": 794.6513137592062,
+   "want": 794.7
+  },
+  {
+   "name": "counting n_obs",
+   "ok": true,
+   "tol": 0.0,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "z-mumu/handoff.md:35",
+   "got": 10378567.0,
+   "want": 10378567.0
+  },
+  {
+   "name": "GoF p 0.792273",
+   "ok": true,
+   "tol": 5e-07,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:9",
+   "got": 0.792273,
+   "want": 0.792273
+  },
+  {
+   "name": "lumi_pb",
+   "ok": true,
+   "tol": 1e-06,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "fitting/CONVENTIONS.md",
+   "got": 16393.381,
+   "want": 16393.381
+  },
+  {
+   "name": "grouped impact FullSyst 1.573%",
+   "ok": true,
+   "tol": 0.0005,
+   "rel": false,
+   "max_diff": 0.00017000000000022553,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:26-37",
+   "got": 1.5731700000000002,
+   "want": 1.573
+  },
+  {
+   "name": "grouped impact Luminosity 1.163%",
+   "ok": true,
+   "tol": 0.0005,
+   "rel": false,
+   "max_diff": 0.00032999999999994145,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:26-37",
+   "got": 1.16267,
+   "want": 1.163
+  },
+  {
+   "name": "grouped impact Muon efficiency 0.869%",
+   "ok": true,
+   "tol": 0.0005,
+   "rel": false,
+   "max_diff": 0.00048000000000003595,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:26-37",
+   "got": 0.86948,
+   "want": 0.869
+  },
+  {
+   "name": "grouped impact L1 prefiring 0.506%",
+   "ok": true,
+   "tol": 0.0005,
+   "rel": false,
+   "max_diff": 3.100000000000325e-05,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:26-37",
+   "got": 0.506031,
+   "want": 0.506
+  },
+  {
+   "name": "grouped impact Signal modelling 0.491%",
+   "ok": true,
+   "tol": 0.0005,
+   "rel": false,
+   "max_diff": 0.00016700000000002824,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:26-37",
+   "got": 0.49083299999999996,
+   "want": 0.491
+  },
+  {
+   "name": "grouped impact Gammas 0.382%",
+   "ok": true,
+   "tol": 0.0005,
+   "rel": false,
+   "max_diff": 0.00016899999999997473,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:26-37",
+   "got": 0.38183100000000003,
+   "want": 0.382
+  },
+  {
+   "name": "grouped impact Muon momentum 0.367%",
+   "ok": true,
+   "tol": 0.0005,
+   "rel": false,
+   "max_diff": 0.00014699999999995272,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:26-37",
+   "got": 0.36685300000000004,
+   "want": 0.367
+  },
+  {
+   "name": "grouped impact Pileup 0.134%",
+   "ok": true,
+   "tol": 0.0005,
+   "rel": false,
+   "max_diff": 4.999999999999449e-05,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:26-37",
+   "got": 0.13405,
+   "want": 0.134
+  },
+  {
+   "name": "grouped impact Background normalisation 0.081%",
+   "ok": true,
+   "tol": 0.0005,
+   "rel": false,
+   "max_diff": 2.4599999999999622e-05,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:26-37",
+   "got": 0.0809754,
+   "want": 0.081
+  },
+  {
+   "name": "grouped impact Fakes 0.044%",
+   "ok": true,
+   "tol": 0.0005,
+   "rel": false,
+   "max_diff": 0.0003236000000000003,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:26-37",
+   "got": 0.0443236,
+   "want": 0.044
+  },
+  {
+   "name": "grouped impact Electron efficiency 0.0%",
+   "ok": true,
+   "tol": 0.0005,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:26-37",
+   "got": 0.0,
+   "want": 0.0
+  },
+  {
+   "name": "pull SigModel +0.66 (0.14)",
+   "ok": true,
+   "tol": 0.005,
+   "rel": false,
+   "max_diff": 0.004248500000000016,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:55-70",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "pull MuonScale -0.48 (0.14)",
+   "ok": true,
+   "tol": 0.005,
+   "rel": false,
+   "max_diff": 0.0035399999999999876,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:55-70",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "pull MuonRes +0.40 (0.12)",
+   "ok": true,
+   "tol": 0.005,
+   "rel": false,
+   "max_diff": 0.003722000000000003,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:55-70",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "pull PDF +0.56 (0.93)",
+   "ok": true,
+   "tol": 0.005,
+   "rel": false,
+   "max_diff": 0.0038245000000000084,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:55-70",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "pull QCDScale +0.76 (0.79)",
+   "ok": true,
+   "tol": 0.005,
+   "rel": false,
+   "max_diff": 0.002446999999999977,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:55-70",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "pull Lumi +0.08 (1.00)",
+   "ok": true,
+   "tol": 0.005,
+   "rel": false,
+   "max_diff": 0.00363800000000003,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:55-70",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "pull Pileup +0.06 (0.82)",
+   "ok": true,
+   "tol": 0.005,
+   "rel": false,
+   "max_diff": 0.0013223999999999944,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:55-70",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "pull L1Prefiring -0.06 (1.00)",
+   "ok": true,
+   "tol": 0.005,
+   "rel": false,
+   "max_diff": 0.002402500000000085,
+   "source": "z-mumu/output/v2/RESULTS_v2.md:55-70",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "every NP has a group",
+   "ok": true,
+   "source": "",
+   "detail": "[]"
+  },
+  {
+   "name": "23 constrained NPs in the fit result + 12 gammas",
+   "ok": true,
+   "source": "fit/results/zmumu_fit_result.json nps",
+   "detail": "23 NPs, 12 gammas"
+  },
+  {
+   "name": "25 Systematic blocks in fit/zmumu.config (23 in the SR + XS_WJets, ElectronEff_mumu on the validation region)",
+   "ok": true,
+   "tol": 0.0,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "z-mumu/fit/zmumu.config",
+   "got": 25.0,
+   "want": 25.0
+  },
+  {
+   "name": "YAML prefit sum == table_prefit DYmumu",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 1.7955730066138127e-16,
+   "source": "results_v2.json /fit/table_prefit",
+   "got": 10373541.718270943,
+   "want": 10373541.71827094
+  },
+  {
+   "name": "YAML prefit sum == table_prefit DYtautau",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 0.0,
+   "source": "results_v2.json /fit/table_prefit",
+   "got": 11022.909422384371,
+   "want": 11022.909422384371
+  },
+  {
+   "name": "YAML prefit sum == table_prefit TTbar",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 0.0,
+   "source": "results_v2.json /fit/table_prefit",
+   "got": 31607.192826183462,
+   "want": 31607.192826183462
+  },
+  {
+   "name": "YAML prefit sum == table_prefit SingleTop",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 0.0,
+   "source": "results_v2.json /fit/table_prefit",
+   "got": 2935.666386226068,
+   "want": 2935.666386226068
+  },
+  {
+   "name": "YAML prefit sum == table_prefit WW",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 0.0,
+   "source": "results_v2.json /fit/table_prefit",
+   "got": 3847.260723738341,
+   "want": 3847.260723738341
+  },
+  {
+   "name": "YAML prefit sum == table_prefit WZ",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 0.0,
+   "source": "results_v2.json /fit/table_prefit",
+   "got": 9194.878959518775,
+   "want": 9194.878959518775
+  },
+  {
+   "name": "YAML prefit sum == table_prefit ZZ",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 0.0,
+   "source": "results_v2.json /fit/table_prefit",
+   "got": 6308.661817477305,
+   "want": 6308.661817477305
+  },
+  {
+   "name": "YAML prefit sum == table_prefit Fakes",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 0.0,
+   "source": "results_v2.json /fit/table_prefit",
+   "got": 3869.9552841628247,
+   "want": 3869.9552841628247
+  },
+  {
+   "name": "YAML prefit total == table_prefit Total",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 0.0,
+   "source": "results_v2.json",
+   "got": 10442328.243690634,
+   "want": 10442328.243690634
+  },
+  {
+   "name": "data 12 bins sum",
+   "ok": true,
+   "tol": 0.0,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "z-mumu/handoff.md:35",
+   "got": 10378567.0,
+   "want": 10378567.0
+  },
+  {
+   "name": "ratio_prefit == lineshape/data_over_pred_prefit_5gev",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 5.57721587907843e-16,
+   "source": "results_v2.json /lineshape",
+   "shape": [
+    12
+   ]
+  },
+  {
+   "name": "ratio_prefit range 0.9644 .. 1.0133 (plan table quotes 0.965 .. 1.013)",
+   "ok": true,
+   "tol": 5e-05,
+   "rel": false,
+   "max_diff": 3.847154875291636e-05,
+   "source": "results_v2.json /lineshape/data_over_pred_prefit_5gev",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "YAML prefit DYmumu == 5 GeV rebin of histograms.pkl",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 2.17702544181083e-16,
+   "source": "output/v2/histograms.pkl",
+   "shape": [
+    12
+   ]
+  },
+  {
+   "name": "YAML prefit DYtautau == 5 GeV rebin of histograms.pkl",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 1.4691781904325616e-16,
+   "source": "output/v2/histograms.pkl",
+   "shape": [
+    12
+   ]
+  },
+  {
+   "name": "YAML prefit TTbar == 5 GeV rebin of histograms.pkl",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 1.8902415683793895e-16,
+   "source": "output/v2/histograms.pkl",
+   "shape": [
+    12
+   ]
+  },
+  {
+   "name": "YAML prefit SingleTop == 5 GeV rebin of histograms.pkl",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 2.1516312894729806e-16,
+   "source": "output/v2/histograms.pkl",
+   "shape": [
+    12
+   ]
+  },
+  {
+   "name": "YAML prefit WW == 5 GeV rebin of histograms.pkl",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 1.2370095263295513e-16,
+   "source": "output/v2/histograms.pkl",
+   "shape": [
+    12
+   ]
+  },
+  {
+   "name": "YAML prefit WZ == 5 GeV rebin of histograms.pkl",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 1.46925823544131e-16,
+   "source": "output/v2/histograms.pkl",
+   "shape": [
+    12
+   ]
+  },
+  {
+   "name": "YAML prefit ZZ == 5 GeV rebin of histograms.pkl",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 1.5163328132531702e-16,
+   "source": "output/v2/histograms.pkl",
+   "shape": [
+    12
+   ]
+  },
+  {
+   "name": "YAML prefit Data == 5 GeV rebin of histograms.pkl",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 0.0,
+   "source": "output/v2/histograms.pkl",
+   "shape": [
+    12
+   ]
+  },
+  {
+   "name": "YAML prefit Fakes == 5 GeV rebin of fakes.json template",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 1.9834750106110774e-16,
+   "source": "output/v2/fakes.json",
+   "shape": [
+    12
+   ]
+  },
+  {
+   "name": "postfit DYmumu total / prefit == mu_Z (within NP shifts)",
+   "ok": true,
+   "tol": 0.01,
+   "rel": false,
+   "max_diff": 0.005652850610763371,
+   "source": "consistency",
+   "got": 0.9937868506107633,
+   "want": 0.988134
+  },
+  {
+   "name": "ratio_postfit within 0.3% of 1",
+   "ok": true,
+   "source": "",
+   "detail": "max |r-1| = 0.0019"
+  },
+  {
+   "name": "stability nominal mu",
+   "ok": true,
+   "tol": 5e-07,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "fit/results/stability.json",
+   "got": 0.988134,
+   "want": 0.988134
+  }
+ ]
+}

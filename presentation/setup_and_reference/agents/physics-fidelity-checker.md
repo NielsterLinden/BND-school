@@ -26,14 +26,14 @@ structured findings.
       CMS layer order tracker/ECAL/HCAL/solenoid/muon. → MAJOR
 - [ ] **Numbers on screen** trace to a handoff / docs page and match it:
       L = 16393.381 pb⁻¹ (not 16290.713), σ(Z/γ*→ℓℓ, m>50) = 6077.22 pb total,
-      6077.22/3 per flavour, mass window 60–120 GeV, z-mumu σ_fid = 776.9 ± 0.2 ± 14.8 pb. → BLOCK
+      6077.22/3 per flavour, mass window 60–120 GeV, z-mumu σ_fid = 790.1 ± 0.2 (stat) ± 8.5 (syst) ± 9.6 (lumi) pb, σ(60–120) = 1931 ± 33 pb. → BLOCK
 - [ ] **Selection depicted** matches the channel: triggers (`HLT_Ele27_WPTight_Gsf`,
       `HLT_IsoMu24 || HLT_IsoTkMu24`), p_T/η/ID/iso cuts, exactly two OS leptons. → MAJOR
 - [ ] **Names**: samples `DYee, DYmumu, DYtautau, TTbar, SingleTop, WW, WZ, ZZ, Fakes`;
       regions `ee_SR, mumu_SR, tautau_SR`; POI `mu_Z`; correlated NP names as in
       CONVENTIONS.md. → MAJOR
-- [ ] **Channel colours** consistent: ee Dutch blue, μμ Dutch red, ττ German gold;
-      every colour a flag colour or a tint/shade of one. → MINOR
+- [ ] **Channel colours** consistent: ee green, μμ gold, ττ red;
+      every colour a chapter colour, a tint/shade of one, or a CMS logo colour (detector only). → MINOR
 - [ ] **Method depictions** (tag-and-probe, fake factor, profile likelihood,
       BLUE/MultiFit) match `z-mumu/docs/12, 13, 14` and `combination/handoff.md`. → MAJOR
 

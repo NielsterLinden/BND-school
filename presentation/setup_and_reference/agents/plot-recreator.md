@@ -40,7 +40,7 @@ A scene only ever calls `load_data("<name>")`; it never imports uproot/ROOT.
   luminosity, date. Bin edges and counts verbatim; no rebinning at render time
   unless stated in the provenance.
 - **Assert** the frozen numbers against the anchors in the channel `handoff.md`
-  (e.g. z-mumu σ_fid = 776.9 ± 0.2 ± 14.8 pb, L = 16393.381 pb⁻¹). A mismatch is
+  (e.g. z-mumu σ_fid = 790.1 ± 0.2 (stat) ± 8.5 (syst) ± 9.6 (lumi) pb, σ(60–120) = 1931 ± 33 pb, L = 16393.381 pb⁻¹). A mismatch is
   reported, never silently adjusted.
 - Sample names and colours from `fitting/CONVENTIONS.md` / `SAMPLE[...]`.
 

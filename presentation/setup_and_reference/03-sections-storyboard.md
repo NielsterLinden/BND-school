@@ -21,13 +21,17 @@ one clip = one idea. Sources named so the fidelity checker can verify.
 | archived (2-02) | `cms_slice_build` | inside-out build of the slice, superseded by the logo build (`00_archive/`) | `CMSSlice` |
 | archived (2-03) | `cms_signatures` | e, μ, τ_h, jet, γ signature legend on the slice, not used in the talk (`00_archive/`) | `signature()` |
 | ✔ 2-01 | `cms_logo_to_slice` | **the detector build**: CMS logo appears, expands to the top right, the quarter layers round up into the full slice, the detail fades in | `CMSLogo`, `logo_rings` |
-| | `open_data_pipeline` | Run2016G+H boxes → NanoAOD → skim (259 GB → 31.5 GB) → histograms | z-mumu handoff, docs/10-skims.md |
-| | `selection_funnel` | event count shrinking through trigger → object ID → two leptons → OS → mass window | channel handoffs |
-| | `xsec_formula` | σ = (N − B) / (A · ε · L) with each term lighting up while its measurement icon appears | docs/06-cross-section.md |
-| | `tag_and_probe` | Z → μμ: tag passes, probe tested; pass/fail histograms; ε = pass/(pass+fail) | docs/04, 12 |
-| | `fake_factor` | control region → fake factor → transfer to SR | docs/13-fake-factor.md |
-| | `profile_likelihood` | the fit: templates, nuisance parameters pulled, μ_Z read off | fitting/, docs/14 |
-| | `luminosity` | brilcalc lumi sections summing to 16393.381 pb⁻¹ (G + H) | CLAUDE.md, recid 1059 |
+| | `pipe_a_map` | **the analysis spine** (schematic, no numbers): nodes appear left→right — collisions/detector → recorded & simulated events (two rivers merging into one file stack) → selection funnel → corrections (tag & probe) → backgrounds (control region) → comparison (stack + ratio) → fit (μ) → σ | all channel docs |
+| | `pipe_b_data` | chained: zoom on nodes 1–2; events flash in the slice and stream into a file stack that shrinks (skim); the simulated river (mini Drell-Yan → the same slice → the same files) merges in | z-mumu docs/10-skims.md |
+| | `pipe_c_selection` | chained: the funnel — a bar shrinks through trigger → ℓ ID/isolation → exactly two leptons → opposite sign → mass window (proportions only) | channel handoffs |
+| | `pipe_d_tnp` | chained: tag-and-probe — the tag is clean, the probe is tested; pass/fail histograms; ε = pass/(pass+fail); ε_data vs ε_MC → scale-factor slider | z-mumu docs/12 |
+| | `pipe_e_backgrounds` | chained: the stack of simulated processes; the one the simulation cannot give (fakes) comes from a control-region box (same-sign) → sliver at the bottom of the stack | docs/13-fake-factor.md, z-tautau docs/05 |
+| | `pipe_f_compare` | chained: data points over the stack, the ratio panel opens, the systematic band breathes | docs/14 |
+| | `pipe_g_fit` | chained: μ slider, nuisance-parameter pulls, ratio flattens; σ = μ·σ_pred and σ = (N − B)/(A·ε·L) lit term by term | fitting/CONVENTIONS.md §2 |
+| | `pipe_h_three` | chained: the spine shrinks to a strip and triplicates in ee green / μμ gold / ττ red → hand-off to section 3 | palette `CHANNEL` |
+
+(The earlier candidates `open_data_pipeline`, `selection_funnel`, `xsec_formula`, `tag_and_probe`, `fake_factor`,
+`profile_likelihood`, `luminosity` are superseded by the `pipe_*` chain, 15 Sep 2026.)
 
 ## 3 — Z → ee (`3_zee`)
 
@@ -45,10 +49,17 @@ one clip = one idea. Sources named so the fidelity checker can verify.
 |---|-----------|-----------|--------|
 | ✔ 4-01 | `mumu_process` | Drell-Yan diagram in the μμ flavour; the muon legs simply continue, straight and clean | — |
 | ✔ 4-02 | `mumu_detector` | chained: dissolves to the slice; two outlined gold tracks through everything, MIP dots in both calorimeters, stubs in the four muon stations | `signature("mu")` |
-| | `tnp_efficiency` | efficiency vs p_T / η map fading in from pass/fail fits | docs/12 |
-| | `momentum_calibration` | peak shifts before/after calibration (two step histograms, mean marker slides) | docs on momentum calibration |
-| | `mumu_stack` | frozen data/MC stack in mumu_SR | z-mumu fit inputs |
-| | `mumu_result` | σ_fid = 776.9 ± 0.2 ± 14.8 pb and the m>50 extrapolation | handoff.md |
+| | `mumu_a_event` | chained on 4-02 (**real data from here on**, `data/zmumu_*.json`): the schematic tracks fade, a real SR event (φ, charge, p_T from data) is drawn; p_T values peel off and converge to m_μμ; the slice parks left, log-y axes appear right, first entry | data/zmumu_events.json |
+| | `mumu_b_rain` | chained: three more real events, a clock spins, dots rain into the plot, the 60 data bins grow to the real counts (10,378,567) | data/zmumu_sr_stack.json |
+| | `mumu_c_stack` | chained: the **uncorrected** simulation stack slides in under the data; the ratio panel opens at ≈ 0.94 (raw simulation ~6 % high) | data/zmumu_sr_stack.json (stage `raw`) |
+| | `mumu_d_control` | chained: the plot parks; the slice returns with a real same-sign pair (probe inside a jet): the control region | docs/13-fake-factor.md |
+| | `mumu_e_tenpairs` | chained: ten real same-sign pairs, a 10-box tally (9 anti-isolated probes, 1 isolated) → f = N_tight/N_anti ≈ 1/9; the real 6×4 fake-factor map | data/zmumu_fakes.json |
+| | `mumu_f_transfer` | chained: OS events with one anti-isolated muon × f → the real fake template slides into the stack; 3 870 ± 80 | RESULTS_v2.md |
+| | `mumu_g_corrections` | chained: pileup, L1 prefiring 0.980, ID SF 0.980, iso SF 1.006, trigger ε 0.907/0.923, κ — the stack steps through the frozen stages, the ratio ends at the pre-fit 0.965 … 1.01 | data/zmumu_corrections.json, docs/11-12 |
+| | `mumu_h_fit` | chained: rebin 60 → 12, pull plot, post-fit; μ_Z = 0.988 ± 0.016 → σ_fid = 790.1 ± 0.2 (stat) ± 8.5 (syst) ± 9.6 (lumi) pb, σ(60–120) = 1931 ± 33 pb beside the prediction 1953.9 pb | data/zmumu_fit.json, handoff.md |
+
+(The earlier candidates `tnp_efficiency`, `momentum_calibration`, `mumu_stack`, `mumu_result` are superseded
+by the `mumu_*` chain, 15 Sep 2026.)
 
 ## 5 — Z → ττ (`5_ztautau`)
 

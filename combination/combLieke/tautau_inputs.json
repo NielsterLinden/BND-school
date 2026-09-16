@@ -1,0 +1,387 @@
+{
+  "source": "z-tautau/output/results.json",
+  "nominal_variant": "mcsub",
+  "regions": [
+    "tautau_SR0",
+    "tautau_SR1",
+    "tautau_SR2"
+  ],
+  "prediction": {
+    "sigma_tautau_pb": 2019.6751428185198,
+    "sigma_tautau_60_120_pb": 1944.8826556737133,
+    "sigma_fid_pb": 4.500519576488651,
+    "A": 0.0023140314215664886,
+    "A_mc_stat": 0.007120722143838773,
+    "A_unc": {
+      "A_scale": 0.0337710080909744,
+      "A_pdf": 0.004876573295209938,
+      "A_alphas": 0.005863808657953654,
+      "A_isr": 0.009319714931003644,
+      "A_fsr": 0.0024666591233397815
+    }
+  },
+  "for_combination": {
+    "n_obs": 47586.0,
+    "n_bkg_prefit": 41512.597409521215,
+    "n_sig_prefit": 4826.8679341778015,
+    "acc_eff": 0.00015139219321332363,
+    "acc_eff_definition": "N_SR(Z->tautau fiducial, prefit, all corrections, all categories) / (sigma_pred(Z/gamma*->tautau, 60<m_LHE<120) x L)",
+    "sigma_counting_pb": 2447.1469947432965,
+    "A_fid": 0.0023140314215664886,
+    "C": 0.06542356849711156
+  },
+  "nominal_fit": {
+    "mu": 1.20451,
+    "mu_err_up": 0.145174,
+    "mu_err_down": 0.125014,
+    "mu_stat": 0.0202997,
+    "mu_syst": 0.13356014007146744,
+    "mu_expected_asimov": {
+      "value": 1.0,
+      "err_up": 0.118425,
+      "err_down": 0.102115
+    },
+    "gof_probability": 0.21943,
+    "grouped_impact": {
+      "Background normalisation": 0.0175033,
+      "Fakes": 0.0855023,
+      "FullSyst": 0.133412,
+      "Gammas": 0.0471127,
+      "L1 prefiring": 0.00176401,
+      "Luminosity": 0.0102553,
+      "MET": 0.0104722,
+      "Pileup": 0.0101831,
+      "Signal modelling": 0.017543,
+      "Tau ID": 0.111293,
+      "Tau energy scale": 0.0210663,
+      "Tau trigger": 0.0419739
+    },
+    "sigma_fid_pb": {
+      "value": 5.420920835076345,
+      "stat": 0.09135919724684667,
+      "syst": 0.6010900250302056,
+      "err_up": 0.6533584289971635,
+      "err_down": 0.5626279543351522,
+      "prediction": 4.500519576488651
+    },
+    "sigma_60_120_pb": {
+      "value": 2342.6306075855446,
+      "stat": 39.48053444537968,
+      "syst": 259.75879991434874,
+      "err_up": 282.3463946547757,
+      "err_down": 243.13756031639358,
+      "prediction": 1944.8826556737133,
+      "acceptance": 85.82768058857235
+    },
+    "ranking": [
+      {
+        "name": "TauID_DM0",
+        "pull": -0.171196,
+        "constraint": 0.822517,
+        "impact_up": -0.0706675,
+        "impact_down": 0.084803
+      },
+      {
+        "name": "FakeOSSS_tautau_c0",
+        "pull": 0.582358,
+        "constraint": 0.452986,
+        "impact_up": 0.0683272,
+        "impact_down": -0.0636897
+      },
+      {
+        "name": "TauID_DM1",
+        "pull": -0.0653927,
+        "constraint": 0.952029,
+        "impact_up": -0.0512328,
+        "impact_down": 0.0579423
+      },
+      {
+        "name": "TauID_DM10",
+        "pull": -0.370697,
+        "constraint": 0.979856,
+        "impact_up": -0.0319927,
+        "impact_down": 0.0343634
+      },
+      {
+        "name": "TauTrigger_DM1",
+        "pull": -0.0593542,
+        "constraint": 0.98055,
+        "impact_up": -0.028414,
+        "impact_down": 0.0305309
+      },
+      {
+        "name": "FakeClosure_tautau_c2_hi",
+        "pull": 1.43751,
+        "constraint": 0.551576,
+        "impact_up": 0.0258623,
+        "impact_down": -0.0252372
+      },
+      {
+        "name": "TauID_DM11",
+        "pull": -0.231039,
+        "constraint": 0.975896,
+        "impact_up": -0.0230249,
+        "impact_down": 0.0241644
+      },
+      {
+        "name": "FakeClosure_tautau_c1_hi",
+        "pull": 0.409993,
+        "constraint": 0.697064,
+        "impact_up": 0.0217894,
+        "impact_down": -0.0212514
+      },
+      {
+        "name": "TauES_DM1",
+        "pull": -0.374071,
+        "constraint": 0.927228,
+        "impact_up": -0.0184174,
+        "impact_down": 0.0193183
+      },
+      {
+        "name": "TauTrigger_DM0",
+        "pull": -0.0323247,
+        "constraint": 0.979074,
+        "impact_up": -0.0179509,
+        "impact_down": 0.0191976
+      },
+      {
+        "name": "TauTrigger_DM10",
+        "pull": -0.233678,
+        "constraint": 0.990418,
+        "impact_up": -0.0180213,
+        "impact_down": 0.0188611
+      },
+      {
+        "name": "gamma_stat_tautau_SR0_bin_6",
+        "pull": -0.3463,
+        "constraint": 0.908713,
+        "impact_up": 0.0186473,
+        "impact_down": -0.01847
+      },
+      {
+        "name": "PS_FSR",
+        "pull": 0.167383,
+        "constraint": 0.591942,
+        "impact_up": -0.0163495,
+        "impact_down": 0.0175549
+      },
+      {
+        "name": "gamma_stat_tautau_SR2_bin_4",
+        "pull": -0.461146,
+        "constraint": 0.854877,
+        "impact_up": -0.0164875,
+        "impact_down": 0.0171035
+      },
+      {
+        "name": "gamma_stat_tautau_SR2_bin_10",
+        "pull": -0.0358461,
+        "constraint": 0.79058,
+        "impact_up": 0.0134203,
+        "impact_down": -0.0155427
+      }
+    ],
+    "pulls": {
+      "FakeClosure_tautau_c0_hi": [
+        0.160554,
+        0.963237,
+        0.963237
+      ],
+      "FakeClosure_tautau_c1_hi": [
+        0.409993,
+        0.697064,
+        0.697064
+      ],
+      "FakeClosure_tautau_c1_lo": [
+        0.114083,
+        0.78598,
+        0.78598
+      ],
+      "FakeClosure_tautau_c2_hi": [
+        1.43751,
+        0.551576,
+        0.551576
+      ],
+      "FakeClosure_tautau_c2_lo": [
+        0.0463134,
+        0.956687,
+        0.956687
+      ],
+      "FakeOSSS_tautau_c0": [
+        0.582358,
+        0.452986,
+        0.452986
+      ],
+      "FakeOSSS_tautau_c1": [
+        0.337572,
+        0.822946,
+        0.822946
+      ],
+      "FakeOSSS_tautau_c2": [
+        0.175175,
+        0.971348,
+        0.971348
+      ],
+      "L1Prefiring": [
+        0.0682623,
+        0.992148,
+        0.992148
+      ],
+      "Lumi": [
+        -0.052768,
+        0.992327,
+        0.992327
+      ],
+      "MCStatNorm_WJets_tautau": [
+        -0.365137,
+        0.773241,
+        0.773241
+      ],
+      "MET_Unclustered": [
+        0.236917,
+        0.881641,
+        0.881641
+      ],
+      "PDF": [
+        -0.0484523,
+        0.986262,
+        0.986262
+      ],
+      "PS_FSR": [
+        0.167383,
+        0.591942,
+        0.591942
+      ],
+      "PS_ISR": [
+        0.568254,
+        0.936063,
+        0.936063
+      ],
+      "Pileup": [
+        0.655724,
+        0.884091,
+        0.884091
+      ],
+      "QCDScale": [
+        0.358203,
+        0.807253,
+        0.807253
+      ],
+      "TauES_DM0": [
+        -0.337444,
+        0.955936,
+        0.955936
+      ],
+      "TauES_DM1": [
+        -0.374071,
+        0.927228,
+        0.927228
+      ],
+      "TauES_DM10": [
+        -0.110812,
+        0.986571,
+        0.986571
+      ],
+      "TauES_DM11": [
+        0.00470666,
+        0.989144,
+        0.989144
+      ],
+      "TauFakeEle": [
+        -0.0359558,
+        0.991543,
+        0.991543
+      ],
+      "TauFakeMu": [
+        0.000149239,
+        0.993347,
+        0.993347
+      ],
+      "TauID_DM0": [
+        -0.171196,
+        0.822517,
+        0.822517
+      ],
+      "TauID_DM1": [
+        -0.0653927,
+        0.952029,
+        0.952029
+      ],
+      "TauID_DM10": [
+        -0.370697,
+        0.979856,
+        0.979856
+      ],
+      "TauID_DM11": [
+        -0.231039,
+        0.975896,
+        0.975896
+      ],
+      "TauTrigger_DM0": [
+        -0.0323247,
+        0.979074,
+        0.979074
+      ],
+      "TauTrigger_DM1": [
+        -0.0593542,
+        0.98055,
+        0.98055
+      ],
+      "TauTrigger_DM10": [
+        -0.233678,
+        0.990418,
+        0.990418
+      ],
+      "TauTrigger_DM11": [
+        -0.0545261,
+        0.990137,
+        0.990137
+      ],
+      "XS_DYll": [
+        0.0060227,
+        0.992728,
+        0.992728
+      ],
+      "XS_DYlowmass": [
+        -0.00695502,
+        0.993628,
+        0.993628
+      ],
+      "XS_DYtautau_nonfid": [
+        -0.122684,
+        0.985516,
+        0.985516
+      ],
+      "XS_SingleTop": [
+        -0.0290694,
+        0.994481,
+        0.994481
+      ],
+      "XS_TTbar": [
+        -0.0810551,
+        0.991641,
+        0.991641
+      ],
+      "XS_WJets": [
+        -0.0526225,
+        0.993986,
+        0.993986
+      ],
+      "XS_WW": [
+        -0.0132941,
+        0.993798,
+        0.993798
+      ],
+      "XS_WZ": [
+        0.00870249,
+        0.99293,
+        0.99293
+      ],
+      "XS_ZZ": [
+        0.0174252,
+        0.992545,
+        0.992545
+      ]
+    }
+  },
+  "acceptance_input_status": "A_unc and A_mc_stat are unsigned relative magnitudes; not activated as signed external refit sources. Cross-channel correlations remain unspecified."
+}

@@ -1,0 +1,180 @@
+{
+  "archive": "/project/atlas/Users/lgijsen/BND-school/z-ee/Zee_fit.tar.gz",
+  "sha256": "4e2e9fa6a0d6a07606205ea467657a8982843a2359aed1fd10fcd142662f3ca8",
+  "poi": "mu_signal",
+  "poi_value": 1.05087,
+  "poi_error_up": 0.0202394,
+  "poi_error_down": 0.0202394,
+  "error_decomposition": {
+    "TOT_ERROR": {
+      "symmetric": 0.0202394,
+      "up": 0.0202394,
+      "down": -0.0202394
+    },
+    "STAT_ERROR": {
+      "symmetric": 0.0092189,
+      "up": 0.0092189,
+      "down": -0.0092189
+    },
+    "SYST_ERROR": {
+      "symmetric": 0.0132919,
+      "up": 0.0132919,
+      "down": -0.0132919
+    },
+    "MCSTAT_ERROR": {
+      "symmetric": 0.0121644,
+      "up": 0.0121644,
+      "down": -0.0121644
+    }
+  },
+  "region": "SR",
+  "samples": [
+    {
+      "name": "DY_ee",
+      "mc_stat": true,
+      "normfactors": [
+        {
+          "Name": "mu_signal",
+          "Val": "1",
+          "High": "100",
+          "Low": "-100"
+        }
+      ]
+    },
+    {
+      "name": "DY_tautau",
+      "mc_stat": true,
+      "normfactors": []
+    },
+    {
+      "name": "Diboson",
+      "mc_stat": true,
+      "normfactors": []
+    },
+    {
+      "name": "ttbar",
+      "mc_stat": true,
+      "normfactors": []
+    },
+    {
+      "name": "Wjets",
+      "mc_stat": true,
+      "normfactors": []
+    }
+  ],
+  "luminosity_model": {
+    "Name": "Zee_fit",
+    "Lumi": "1",
+    "LumiRelErr": "0",
+    "ExportOnly": "True"
+  },
+  "systematic_nodes": [
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "HistoSys",
+    "HistoSys",
+    "HistoSys",
+    "HistoSys",
+    "HistoSys",
+    "HistoSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "HistoSys",
+    "HistoSys",
+    "HistoSys",
+    "HistoSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "HistoSys",
+    "HistoSys",
+    "HistoSys",
+    "HistoSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "HistoSys",
+    "HistoSys",
+    "HistoSys",
+    "HistoSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "OverallSys",
+    "HistoSys",
+    "HistoSys",
+    "HistoSys",
+    "HistoSys"
+  ],
+  "workspace_available": true,
+  "uncertainty_scope": "Inspect archived model",
+  "use": "Reference result only; rebuild from nominal datasets/z-ee histograms for common POI and external refits",
+  "sigma_reference_60_120_pb": 1954.1032472811223,
+  "reference_definition": {
+    "level": "LHE outgoing leptons",
+    "channel": "ee",
+    "mass_min_gev": 60.0,
+    "mass_max_gev": 120.0,
+    "window": "60 <= m_LHE(ee) < 120 GeV",
+    "formula": "XSEC_PB[DY_inclusive_NLO] * sum_genWeight_ee_in_window / sum_genweight_Runs",
+    "source": "z-ee/z-ee.ipynb: truth_window_sumgenweight cell, saved reference_xsec_ee output",
+    "source_commit": "85c3a525cad56e8de31297c8d3c29c32b891dace"
+  },
+  "reference_origin": "Notebook saved output, not archive",
+  "nominal_histograms": [
+    {
+      "path": "datasets/z-ee/DY_ee.root",
+      "size_bytes": 42604,
+      "sha256": "dcaf57111f7bc5c9bb3f3063a36dadfd9856e3dad6ed7db784f4d1d503faca10"
+    },
+    {
+      "path": "datasets/z-ee/DY_tautau.root",
+      "size_bytes": 35468,
+      "sha256": "3b5512aefabe73e08e4e6a93afd789a4fb6e872a9c05708884d87e3b78b061cd"
+    },
+    {
+      "path": "datasets/z-ee/Data.root",
+      "size_bytes": 13509,
+      "sha256": "70b20e5de6b4d4ae84975a0f1215f436b554d45d62ea5bcb7c1d46f58be4c975"
+    },
+    {
+      "path": "datasets/z-ee/Diboson.root",
+      "size_bytes": 35161,
+      "sha256": "80719b6afc658fb1b83361010cf293a6db40eac3c13f203049fab0a0fea47f67"
+    },
+    {
+      "path": "datasets/z-ee/Wjets.root",
+      "size_bytes": 28750,
+      "sha256": "e33985e0e0c8210f770200d231a0d294b5f40b1777c27f1060a39853f16a7160"
+    },
+    {
+      "path": "datasets/z-ee/ttbar.root",
+      "size_bytes": 34753,
+      "sha256": "9227976ca0461778c95b9102d25739921039b84ab95655e9f49535c225f61c4b"
+    }
+  ],
+  "histogram_audit": {
+    "checked": true,
+    "nominal_histograms": 6,
+    "variation_histograms": 44,
+    "problems": [],
+    "warnings": []
+  }
+}

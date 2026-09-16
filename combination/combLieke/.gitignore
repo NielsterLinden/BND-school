@@ -1,0 +1,8 @@
+__pycache__/
+results/
+logs/
+generated/
+status.json
+result.json
+variations/
+fit_result.json

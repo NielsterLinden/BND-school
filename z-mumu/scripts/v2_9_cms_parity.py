@@ -267,7 +267,7 @@ def plot_estimate_inputs(ptz, theory, fsr, dA, path):
     e = np.array(ptz["reco_edges"])
     c = 0.5 * (e[1:] + e[:-1])
     ax = axes[0]
-    ax.step(e[:-1], ptz["ratio_data_mc"], where="post", color="#1f1f1f", label="data / aMC@NLO (+ bkg), normalised")
+    ax.step(e[:-1], ptz["ratio_data_mc"], where="post", color=up.INK, label="data / aMC@NLO (+ bkg), normalised")
     ax.step(e[:-1], ptz["ratio_powheg_amcnlo"], where="post", color="#eb6834", label="powheg / aMC@NLO (signal)")
     ax.axhline(1, color="#9a9a9a", lw=0.8)
     ax.set_xlim(0, 100)
@@ -292,7 +292,7 @@ def plot_estimate_inputs(ptz, theory, fsr, dA, path):
     ax = axes[2]
     nd, nm = np.array(fsr["n_data"]), np.array(fsr["n_mc"])
     x = np.arange(len(nd))
-    ax.bar(x - 0.2, nd / nd.sum(), width=0.38, color="#1f1f1f", label="data")
+    ax.bar(x - 0.2, nd / nd.sum(), width=0.38, color=up.INK, label="data")
     ax.bar(x + 0.2, nm / nm.sum(), width=0.38, color="#2a78d6", label="simulation")
     ax.set_yscale("log")
     ax.set_xticks(x)
@@ -305,7 +305,7 @@ def plot_estimate_inputs(ptz, theory, fsr, dA, path):
             ax.spines[side].set_visible(False)
     fig.suptitle("Inputs of the resummation measurement and of the QED FSR estimate (docs/16)", fontsize=14, x=0.01, ha="left")
     fig.tight_layout()
-    fig.savefig(path, dpi=130, bbox_inches="tight", facecolor="white")
+    fig.savefig(path, dpi=130, bbox_inches="tight", facecolor=up.BG)
     plt.close(fig)
 
 

@@ -50,7 +50,14 @@ import numpy as np
 OPTIONS = {"a": "3a: published value", "b": "3b: set to zero", "c": "3c: our estimate"}
 STATUS_TEXT = {"similar": "similar", "better": "ours better", "partial": "partial / eyeballed",
                "missing": "missing", "not-applicable": "n/a", "ours-only": "ours only", "measured-now": "measured now"}
-INK, INK_2, GRID, REF = "#1f1f1f", "#5c5c5c", "#e6e6e6", "#6b6b6b"
+INK, INK_2, GRID, REF, BG = "#1f1f1f", "#5c5c5c", "#e6e6e6", "#6b6b6b", "white"
+THEMES = {"light": dict(INK="#1f1f1f", INK_2="#5c5c5c", GRID="#e6e6e6", REF="#6b6b6b", BG="white"),
+          "dark": dict(INK="#E6E6E6", INK_2="#99999E", GRID="#3a3a40", REF="#8C8C94", BG="#222222")}
+
+
+def set_theme(name):
+    """'light' (docs, default) or 'dark' (the house slide style: #222222 ground, like the deck)."""
+    globals().update(THEMES[name])
 
 
 # ----------------------------------------------------------------------------- numbers
@@ -172,7 +179,10 @@ def _default_style(fn):
     def wrapper(*args, **kwargs):
         import matplotlib.pyplot as plt
         with plt.style.context("default"):
-            plt.rcParams.update({"font.size": 10.5, "axes.titlesize": 13})
+            plt.rcParams.update({"font.size": 10.5, "axes.titlesize": 13, "figure.facecolor": BG, "axes.facecolor": BG,
+                                 "savefig.facecolor": BG, "text.color": INK, "axes.labelcolor": INK,
+                                 "xtick.color": INK_2, "ytick.color": INK_2, "axes.edgecolor": INK_2,
+                                 "legend.labelcolor": INK, "hatch.color": INK_2})
             return fn(*args, **kwargs)
     return wrapper
 
@@ -195,7 +205,7 @@ def plot_option(p, option, path):
     ax.barh(y + h / 2 + 0.02, ref_vals, height=h, color=REF, label=p["reference"]["label"])
     for yi, v, r in zip(y, our_vals, rows):
         est = r.get("treatment") == "estimate"
-        ax.barh(yi - h / 2 - 0.02, v, height=h, color=colour if not est else "white",
+        ax.barh(yi - h / 2 - 0.02, v, height=h, color=colour if not est else BG,
                 edgecolor=colour, hatch="///" if est else None, linewidth=1.2)
     xmax = max(max(ref_vals), max(our_vals)) * 1.28 + 0.05
     for yi, rv, ov, r in zip(y, ref_vals, our_vals, rows):
@@ -211,7 +221,7 @@ def plot_option(p, option, path):
     ax.set_xlabel("uncertainty [% of the cross section]", color=INK)
     _style(ax)
     handles = [Patch(color=REF, label=p["reference"]["label"]), Patch(color=colour, label=p.get("channel_label", "ours")),
-               Patch(facecolor="white", edgecolor=colour, hatch="///", label="ours, not measurable: option " + option)]
+               Patch(facecolor=BG, edgecolor=colour, hatch="///", label="ours, not measurable: option " + option)]
     ax.legend(handles=handles, loc="lower right", bbox_to_anchor=(0.86, 0.0), fontsize=10, frameon=False)
     ax.set_title(f"Uncertainty budget — {OPTIONS[option]}", loc="left", fontsize=14, color=INK)
 
@@ -229,7 +239,7 @@ def plot_option(p, option, path):
     for yy, v, inner, outer, col, lab in pts:
         ax2.errorbar(v, yy, xerr=outer, fmt="none", ecolor=col, elinewidth=1.4, capsize=5)
         ax2.errorbar(v, yy, xerr=inner, fmt="o", color=col, ecolor=col, elinewidth=4.0, capsize=0, markersize=9,
-                     markeredgecolor="white", markeredgewidth=1.5)
+                     markeredgecolor=BG, markeredgewidth=1.5)
         ax2.text(v, yy + 0.2, f"{lab}\n{v:.0f} ± {outer:.0f} {p.get('unit', '')}", ha="center", va="bottom", fontsize=10.5,
                  color=INK)
     lo = min(ref["value"] - 1.6 * ref_tot, m - 1.6 * s["total_abs"])
@@ -247,7 +257,7 @@ def plot_option(p, option, path):
              transform=ax2.transAxes, fontsize=10, color=INK_2, va="bottom")
     ax2.set_title(f"total: ours {s['total_pct']:.2f} %, reference {reference_total_pct(p):.2f} %", loc="left",
                   fontsize=12, color=INK)
-    fig.savefig(path, dpi=130, bbox_inches="tight", facecolor="white")
+    fig.savefig(path, dpi=130, bbox_inches="tight", facecolor=BG)
     plt.close(fig)
     return path
 
@@ -272,7 +282,7 @@ def plot_overview(p, path):
         nolumi = np.hypot(d["stat_pct"], d["syst_pct"])
         ax.errorbar(m, yy, xerr=d["total_abs"], fmt="none", ecolor=colour, elinewidth=1.4, capsize=6)
         ax.errorbar(m, yy, xerr=m * nolumi / 100, fmt="o", color=colour, ecolor=colour, elinewidth=4.0, capsize=0,
-                    markersize=9, markeredgecolor="white", markeredgewidth=1.5)
+                    markersize=9, markeredgecolor=BG, markeredgewidth=1.5)
         labels.append(OPTIONS[o])
         axt.text(0.0, yy, f"± {d['total_abs']:.1f} {p.get('unit', '')} ({d['total_pct']:.2f} %)    "
                           f"{nolumi:.3f} %    "
@@ -291,7 +301,7 @@ def plot_overview(p, path):
     est = [r["source"] for r in p["rows"] if r.get("treatment") == "estimate"]
     fig.suptitle(f"{p.get('channel_label', '')} vs {ref['label']}: the options for the sources we cannot measure "
                  f"({', '.join(est)})", fontsize=13.5, color=INK, x=0.02, ha="left")
-    fig.savefig(path, dpi=130, bbox_inches="tight", facecolor="white")
+    fig.savefig(path, dpi=130, bbox_inches="tight", facecolor=BG)
     plt.close(fig)
     return path
 

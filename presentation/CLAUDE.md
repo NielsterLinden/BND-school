@@ -85,5 +85,5 @@ PNG) before delivering. Iterate at `-q l`; deliver at `-q h`.
 - **End on the last change.** `self.wait(0.1)` at the end, no long held frame;
   PowerPoint rests on the last frame.
 - Keep the top ~15 % of the frame (y > 2.7) clear: the user's title band.
-- Never commit `work/`, `media/`, or the MP4s (see `.gitignore`); commit scenes,
-  style, tools, data JSON and docs.
+- Never commit `work/` or `media/` (see `.gitignore`); commit scenes, style,
+  tools, data JSON, docs and the delivered MP4s in `clips/`.

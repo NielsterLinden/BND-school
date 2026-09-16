@@ -34,8 +34,8 @@ The inspection frames live in `work/<name>/` and are git-ignored.
 
 ## Transfer to the laptop
 
-`clips/` is git-ignored (video). Copy with `rsync`/`scp` from `stbc-i*`, or
-extend the existing laptop-bundle script the z-mumu channel uses.
+`clips/` is committed (MP4s included, ~43 MB on 16 Sep 2026): `git pull` on the
+laptop, or copy with `rsync`/`scp` from `stbc-i*`.
 
 ## Chained clips
 

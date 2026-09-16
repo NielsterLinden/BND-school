@@ -2,10 +2,9 @@
 
 Every number printed here is read from ``presentation/data/zmumu_*.json`` and
 formatted in code (module-level anchor asserts stop the render on schema
-drift). Eight plain ``Scene``s, each opening on the previous clip's final
-frame: pure builders ``state_a() ... state_h()`` + ``ORDER_*`` tuples,
-``check_order`` at the end of every clip, seams checked with
-``tools/framediff.py``.
+drift). Plain ``Scene``s, each opening on the previous clip's final frame: pure
+builders ``state_*()`` + ``ORDER_*`` tuples, ``check_order`` at the end of
+every clip, seams checked with ``tools/framediff.py``.
 
     MumuEvent        mumu_a_event        the schematic tracks of 4-02 fade; real SR event
                                          (run 278969) drawn from its muons' phi, charge, p_T;
@@ -15,32 +14,34 @@ frame: pure builders ``state_a() ... state_h()`` + ``ORDER_*`` tuples,
                                          the 60 data bins growing to their real counts
     MumuStack        mumu_c_stack        the *uncorrected* simulation stack slides in under the
                                          data; the ratio panel opens at data/pred = 0.944
-    MumuControl      mumu_d_control      the plot parks; the slice returns inside the dashed
-                                         control-region box with a real same-sign pair, the
-                                         probe inside a jet
-    MumuTenPairs     mumu_e_tenpairs     ten real same-sign pairs: nine anti-isolated probes,
-                                         one isolated -> f = N_tight/N_anti = 1/9; the real
-                                         6 x 4 fake-factor map
-    MumuTransfer     mumu_f_transfer     the fake template enters the bottom of the stack as a
-                                         thin wedge; the ratio does not move; 3870 +- 80
-    MumuCorrections  mumu_g_corrections  pileup, L1 prefiring, ID / iso scale factors, trigger,
-                                         kappa: the prediction walks down, the data never moves
+    MumuCorrections  mumu_g_corrections  the slice leaves; the data-driven fake template enters as
+                                         a thin wedge (3870 +- 80, the ratio does not move);
+                                         pileup 0.950, L1 prefiring 0.969: the prediction walks down
+    MumuTagProbe     mumu_t_tagprobe     the plot parks as a ghost; real tag + probe pairs (the probe
+                                         passes / fails tight ID); probes rain into the real pass and
+                                         fail m_mumu spectra of the 40-45 GeV barrel cell with the
+                                         fitted signal + background; eps_data, then eps_sim; eps vs
+                                         p_T (data 1-2 % below simulation); SF = eps_data/eps_sim ->
+                                         the real 10 x 4 map; applied: the ratio climbs to 0.994
     MumuFit          mumu_h_fit          rebin 60 -> 12, pulls, post-fit; mu_Z, sigma_fid,
-                                         sigma(60-120) beside the prediction
+                                         sigma(60-120) beside the labelled prediction
 
-Delivered clips (manim sections via clip_open / clip_cut, tools/deliver_chain.py):
+Delivered clips (manim sections via clip_open / clip_cut, tools/deliver_chain.py), in play order:
     mumu_a1_event  mumu_a2_mass  mumu_a3_first_entry | mumu_b1_more_events  mumu_b2_rain |
-    mumu_c1_simulation  mumu_c2_ratio | mumu_d1_control_region  mumu_d2_same_sign_pair |
-    mumu_e1_ten_pairs  mumu_e2_fake_factor  mumu_e3_ff_map | mumu_f1_apply  mumu_f2_fake_template |
-    mumu_g1_pileup  mumu_g2_prefiring  mumu_g3_lepton_sf |
+    mumu_c1_simulation  mumu_c2_ratio | mumu_g1_pileup  mumu_g2_prefiring |
+    mumu_t1_tag_probe  mumu_t2_pass_fail  mumu_t3_data_vs_sim  mumu_t4_sf_map  mumu_t5_apply |
     mumu_h1_rebin  mumu_h2_fit  mumu_h3_sigma_fid  mumu_h4_sigma_total
+(retired with the fake-factor block, 16 Sep 2026: mumu_d*, mumu_e*, mumu_f*, mumu_g3_lepton_sf.)
 
 Physics honesty: the data points never move, only the prediction and the
 ratio do. The log axis starts at 10^1.5 (31.6 events / GeV) so the ~65 / GeV
-fake template is a thin wedge at the bottom of the stack, not a band that
-would dominate the frame. Track curvature follows kappa_from_pt (exaggerated
-scale, honest relative curvature); eta is not drawn (r-phi view). The 12-bin
-counts of the fit are per 5 GeV (they sit log10(5) higher; the y title says so).
+fake template is a thin wedge at the bottom of the stack. Track curvature
+follows kappa_from_pt (exaggerated scale, honest relative curvature); eta is
+not drawn (r-phi view). The 12-bin counts of the fit are per 5 GeV (they sit
+log10(5) higher; the y title says so). The pass / fail spectra are the 0.5 GeV
+fit inputs summed to 1 GeV (the fit curves summed the same way); the simulation
+outline in them is scaled by N_data / N_sim of the cell fit. Layout keeps the
+title band (y > 2.7) and the top-left block (x < -5.85, y > 0.22) empty.
 """
 from __future__ import annotations
 
@@ -54,8 +55,8 @@ sys.path.insert(0, str(HERE))
 
 import numpy as np  # noqa: E402
 from manim import (  # noqa: E402
-    DOWN, LEFT, RIGHT, UP, Create, DashedLine, DashedVMobject, DecimalNumber, Dot, FadeIn,
-    FadeOut, GrowFromCenter, LaggedStart, Line, Rectangle, ReplacementTransform, RoundedRectangle,
+    DOWN, LEFT, RIGHT, UP, Circle, Create, DashedLine, DecimalNumber, Dot, FadeIn,
+    FadeOut, GrowFromCenter, LaggedStart, Line, Rectangle, ReplacementTransform,
     Scene, Succession, SurroundingRectangle, Transform, ValueTracker, VGroup, VMobject, rate_functions,
 )
 from style.bnd_style import *  # noqa: E402,F401,F403
@@ -70,6 +71,7 @@ EV = load_data("zmumu_events")
 FK = load_data("zmumu_fakes")
 CO = load_data("zmumu_corrections")
 FIT = load_data("zmumu_fit")
+TNP = load_data("zmumu_tnp")
 
 assert SR["data"]["total"] == 10378567
 assert len(SR["data"]["counts"]) == 60
@@ -78,9 +80,17 @@ assert abs(FK["yields"]["sr_fakes"] - 3869.955) < 0.01
 assert abs(FIT["sigma_fid"]["value"] - 790.078) < 0.01
 assert tuple(SR["stack_order"]) == ("Fakes", "WW", "WZ", "ZZ", "SingleTop", "TTbar", "DYtautau", "DYmumu")
 assert abs(SR["fakes"]["total"] - FK["yields"]["sr_fakes"]) < 1e-6
-assert len(EV["sr"]["chosen"]) == 4 and len(EV["ss_tp"]["chosen"]) == 10
-assert sum(bool(p["passes"]) for p in EV["ss_tp"]["chosen"]) == 1
+assert len(EV["sr"]["chosen"]) == 4
 assert len(FIT["sr_12bin"]["data"]) == 12 and len(FIT["sr_12bin"]["edges"]) == 13
+STAGE_RATIO = {k: float(SR["totals"][k]["data_over_pred"]) for k in ("raw", "pileup", "prefiring", "nominal")}
+assert [round(STAGE_RATIO[k], 3) for k in STAGE_RATIO] == [0.944, 0.950, 0.969, 0.994]
+assert TNP["n_pairs_data"] == 20050129
+assert TNP["cell"]["pt_range"] == [40.0, 45.0] and TNP["cell"]["eta_range"] == [0.0, 0.9]
+assert abs(TNP["cell"]["data"]["eps"] - 0.958508) < 1e-6 and abs(TNP["cell"]["mc"]["eps"] - 0.971125) < 1e-6
+assert TNP["events"]["pass"]["probe"]["passes_id"] and not TNP["events"]["fail"]["probe"]["passes_id"]
+assert round(CO["scale_factors"]["map_mean"]["id"], 3) == 0.980
+assert (round(CO["trigger"]["plateau_data"], 3), round(CO["trigger"]["plateau_mc"], 3)) == (0.907, 0.923)
+assert abs(FIT["sigma_60_120"]["pred"] - 1953.9) < 0.05
 
 EDGES = np.asarray(SR["edges"], dtype=float)
 XC = 0.5 * (EDGES[:-1] + EDGES[1:])
@@ -93,10 +103,11 @@ XC12 = 0.5 * (EDGES12[:-1] + EDGES12[1:])
 DATA12 = np.asarray(B12["data"], dtype=float)
 LAYERS = tuple(SR["stack_order"])                  # bottom-up
 SR_EVENTS = EV["sr"]["chosen"]                     # textbook, FSR, forward, boosted
-SS_PAIRS = EV["ss_tp"]["chosen"]                   # #0 = the mumu_d display pair, #9 passes
+CELL = TNP["cell"]
+TP_EVENTS = TNP["events"]                          # "pass": probe passes tight ID, "fail": it does not
 
 # ---------------------------------------------------------------------------
-# one coordinate dictionary
+# one coordinate dictionary (title band y > 2.7 and top-left block x < -5.85, y > 0.22 stay empty)
 # ---------------------------------------------------------------------------
 
 EASE = rate_functions.ease_in_out_sine
@@ -104,24 +115,30 @@ PHI_M, PHI_P, KAPPA_402 = math.radians(35), math.radians(212), 0.28   # 4-02 (s4
 R_LABEL = R_DET + 0.42                             # channel_common.show_signature
 Y_SAFE = 2.42                                      # a label centre above this would enter the title band
 DET_PARK = (0.42, (-4.6, -0.7))                    # slice parked left of the plot
-DET_CR = (0.84, (-1.2, -0.45))                     # slice inside the control-region box (d, e)
-CR_BOX = dict(center=(-1.2, -0.45), width=6.2, height=6.2)
 PLOT_MAIN_C = (1.85, 0.85)                         # main plot area centre (natural)
 RATIO_C = (1.85, -1.55)
 PLOT_C = np.array([1.85, -0.25, 0.0])              # natural centre every plot placement scales about
 PLOT_MAIN = (1.0, PLOT_C)
-PLOT_GHOST = (0.44, (4.75, 1.24))
-PLOT_LEFT = (0.58, (-4.35, -0.35))
+PLOT_GHOST = (0.30, (5.55, 1.72))                  # the plot parked top right during the tag-and-probe clips
+PLOT_LEFT = (0.58, (-3.0, -0.45))
 Y_EXP = (1.5, 7)                                   # log axis 10^1.5 .. 10^7
-RATIO_RANGE = (0.86, 1.06, 0.1)
+RATIO_RANGE = (0.88, 1.12, 0.1)                    # one symmetric range for every stage (raw min 0.900, max 1.035)
+RATIO_TICKS = (0.9, 1.0, 1.1)
 KEY_LEFT = (-1.25, -2.92)                          # left end of the one-row colour key
 COUNTER_AT = (-0.2, 2.12)                          # bottom-left of "N" (natural)
 CLOCK_AT = (-0.72, 2.24)
 STAMP_AT = (-4.6, -2.3)
-LEFT_COL_X = -6.75                                 # left edge of the correction labels (g)
-TALLY_C = (4.7, -0.62)
-FF_TEX_C = (4.7, -1.28)
-FFMAP_C = (4.85, -2.85)
+LEFT_COL_X = -5.7                                  # left edge of the correction rows (right of the top-left block)
+ROW_Y0, ROW_DY = 2.05, 0.82
+DET_TP = (0.80, (-3.25, -0.5))                     # the slice of the tag-and-probe events
+DET_TP_PARK = (0.34, (-4.85, -2.62))               # small, while the spectra are fitted
+TP_PANEL = dict(width=2.75, height=1.8, pass_c=(1.95, -1.55), fail_c=(5.15, -1.55))
+CELL_LAB_C = (3.55, 0.35)
+EPS_DATA_C = (-3.35, 1.05)
+EPS_SIM_C = (-3.35, -0.05)
+EFF_C, EFF_WH = (3.75, -1.2), (4.9, 2.2)
+SF_TEX_C = (-3.6, 1.2)
+SFMAP_C = (3.75, -1.35)
 DOT_R, RDOT_R = 0.036, 0.034
 
 
@@ -149,6 +166,10 @@ def charge_tex(q: int) -> str:
 def _p3(p):
     p = np.asarray(p, dtype=float)
     return p if p.shape == (3,) else np.array([p[0], p[1], 0.0])
+
+
+def tex_int(n) -> str:
+    return f"{int(round(float(n))):,}".replace(",", "{,}")
 
 
 def phi_end(trk) -> float:
@@ -379,7 +400,7 @@ def plot_parts(placement=PLOT_MAIN, *, stage=None, fakes=False, data="dots", bin
                counter=True, ratio=True, rlabel=True, key_rows=3, entries=(), x_labels=False) -> dict:
     """The plot family of the chain, built at the natural position and then placed
     about PLOT_C: dax, stack (8 layers bottom-up), data (bars / dots / entry dots),
-    counter, ratio (panel), rlabel (total data/pred), key."""
+    counter, ratio (panel with the data stat error bars), rlabel (total data/pred), key."""
     P = {}
     dax = main_axes(per5=bins == 12, x_labels=x_labels)
     P["dax"] = dax
@@ -398,13 +419,14 @@ def plot_parts(placement=PLOT_MAIN, *, stage=None, fakes=False, data="dots", bin
     if counter:
         P["counter"] = make_counter(TOTAL)
     if ratio:
-        kw = dict(y_range=RATIO_RANGE, y_length=0.9, y_ticks=[0.9, 1.0], dot_radius=RDOT_R,
+        kw = dict(y_range=RATIO_RANGE, y_length=0.9, y_ticks=list(RATIO_TICKS), dot_radius=RDOT_R,
                   x_title=r"m_{\mu\mu}\ [\mathrm{GeV}]", y_title=r"\mathrm{data/pred.}",
                   title_h=0.2, title_buff=0.16)
         if bins == 60:
-            P["ratio"] = ratio_panel(dax, EDGES, DATA, P["stack"].total, RATIO_C, **kw)
+            P["ratio"] = ratio_panel(dax, EDGES, DATA, P["stack"].total, RATIO_C, num_err=np.sqrt(DATA), **kw)
         else:
-            P["ratio"] = ratio_panel(dax, EDGES12, np.asarray(B12[f"ratio_{fit}"]), np.ones(12), RATIO_C, **kw)
+            r12 = np.asarray(B12[f"ratio_{fit}"], dtype=float)
+            P["ratio"] = ratio_panel(dax, EDGES12, r12, np.ones(12), RATIO_C, num_err=r12 / np.sqrt(DATA12), **kw)
         if rlabel and bins == 60:
             v = ratio_value(stage, fakes)
             lab = tex_h(f"{v:.3f}", 0.2)
@@ -418,6 +440,13 @@ def plot_parts(placement=PLOT_MAIN, *, stage=None, fakes=False, data="dots", bin
 
 
 PLOT_KEYS = ("dax", "stack", "data", "counter", "ratio", "rlabel", "key")
+
+
+def move_ratio(scene, live, S, run_time=1.6):
+    """The prediction steps to plot parts ``S``: stack, ratio dots + error bars and the label."""
+    scene.play(Transform(live["stack"], S["stack"]), Transform(live["ratio"].dots, S["ratio"].dots),
+               Transform(live["ratio"].errs, S["ratio"].errs), Transform(live["rlabel"], S["rlabel"]),
+               run_time=run_time, rate_func=EASE)
 
 
 # ---------------------------------------------------------------------------
@@ -448,90 +477,179 @@ def mass_tex(rec):
     return tex_h(rf"m_{{\mu\mu}} = {float(rec['mass']):.1f}\ \mathrm{{GeV}}", 0.28)
 
 
-def cr_box() -> VGroup:
-    rect = RoundedRectangle(width=CR_BOX["width"], height=CR_BOX["height"], corner_radius=0.25,
-                            stroke_color=col(DETECTOR_ACCENT), stroke_width=3.0, fill_opacity=0.0)
-    rect.move_to(_p3(CR_BOX["center"]))
-    dashed_rect = DashedVMobject(rect, num_dashes=70)
-    sym = tex_h(r"\mu^{\pm}\mu^{\pm}", 0.24, color=DETECTOR_ACCENT)
-    sym.move_to(rect.get_corner(UP + LEFT) + np.array([0.62, -0.36, 0.0]))
-    g = VGroup(dashed_rect, sym)
-    g.rect, g.sym = dashed_rect, sym
-    return g
+# -- the correction rows (g walk, t5) -----------------------------------------------
 
-
-def ss_pair(i: int) -> VGroup:
-    """Real same-sign tag + probe pair i on a natural slice, placed into the box."""
-    pair = pair_from_json(CMSSlice(), SS_PAIRS[i], seed=i)
-    tag_phi, probe_trk = phi_end(pair.tag.trk), (pair.probe.mu.trk if pair.in_jet else pair.probe.trk)
-    place(pair, DET_CR, DET_CENTER)
-    pair.tag_phi, pair.probe_phi = tag_phi, phi_end(probe_trk)
-    return pair
-
-
-def pair_labels(pair) -> VGroup:
-    rec = pair.record
-    labs = VGroup()
-    for who, phi in (("tag", pair.tag_phi), ("probe", pair.probe_phi)):
-        lab = mathtex(charge_tex(_q(rec[who])), color=CHANNEL_LINE["mumu"])
-        labs.add(lab.move_to(label_spot(phi, DET_CR)))
-    return labs
-
-
-def tally_boxes(filled: bool) -> VGroup:
-    g = VGroup()
-    for p in SS_PAIRS:
-        box = Rectangle(width=0.34, height=0.34, stroke_color=col(INK), stroke_width=1.6,
-                        fill_color=col(tally_colour(p)), fill_opacity=1.0 if filled else 0.0)
-        g.add(box)
-    g.arrange(RIGHT, buff=0.08).move_to(_p3(TALLY_C))
-    return g
-
-
-def tally_colour(p):
-    return CHANNEL["mumu"] if p["passes"] else SAMPLE["Fakes"]
-
-
-def ff_formula():
-    n_tight = sum(bool(p["passes"]) for p in SS_PAIRS)
-    n_anti = len(SS_PAIRS) - n_tight
-    return tex_h(rf"f = N_{{\mathrm{{tight}}}} / N_{{\mathrm{{anti}}}} = {n_tight}/{n_anti}", 0.22).move_to(_p3(FF_TEX_C))
-
-
-def ff_map() -> VGroup:
-    pt, eta = FK["pt_edges"], FK["eta_edges"]
-    rows = [rf"{pt[i]:g}\!-\!{pt[i + 1]:g}" for i in range(len(pt) - 1)]
-    cols = [rf"{eta[j]:g}\!-\!{eta[j + 1]:g}" for j in range(len(eta) - 1)]
-    vg = value_grid(FK["ff"]["nominal"], rows, cols, fmt="{:.2f}", cell=(0.80, 0.28), label_h=0.13)
-    head = tex_h(r"p_T \,\backslash\, |\eta|", 0.13)
-    head.next_to(vg.row_labels, UP, buff=0.10).align_to(vg.col_labels, DOWN)
-    n_col = len(cols)
-    barrel = VGroup(*[vg.cells[i * n_col] for i in range(4)])      # |eta| < 0.9, pT < 50: the pairs' cells
-    hl = SurroundingRectangle(barrel, color=col(DETECTOR_ACCENT), buff=0.0, stroke_width=3.0)
-    g = VGroup(vg, head, hl)
-    g.move_to(_p3(FFMAP_C))
-    return g
-
-
-def corr_labels() -> VGroup:
+def corr_row(i: int) -> VGroup:
     mf = SR["mean_factors"]["all_mc"]
     sf = CO["scale_factors"]["map_mean"]
     tr = CO["trigger"]
-    kap = CO["momentum"]["kappa"]
-    exprs = [
+    y = FK["yields"]
+    expr = [
+        rf"N_{{\mathrm{{fake}}}} = {y['sr_fakes']:.0f} \pm {y['sr_fakes_stat']:.0f}",
         rf"\langle w_{{\mathrm{{PU}}}} \rangle = {mf['pileup']:.3f}",
         rf"\langle w_{{\mathrm{{L1}}}} \rangle = {mf['prefiring']:.3f}",
         rf"\mathrm{{SF}}_{{\mathrm{{ID}}}} = {sf['id']:.3f}",
         rf"\mathrm{{SF}}_{{\mathrm{{iso}}}} = {sf['iso']:.3f}",
-        rf"\varepsilon^{{\mathrm{{data}}}}_{{\mathrm{{trig}}}} / \varepsilon^{{\mathrm{{MC}}}}_{{\mathrm{{trig}}}}"
-        rf" = {tr['plateau_data']:.3f} / {tr['plateau_mc']:.3f}",
-        rf"\kappa_{{|\eta|}} = {min(kap):.3f} \ldots {max(kap):.3f}",
-    ]
-    g = VGroup()
-    for i, e in enumerate(exprs):
-        lab = tex_h(e, 0.22)
-        lab.shift(np.array([LEFT_COL_X, 2.05 - 0.82 * i, 0.0]) - lab.get_left())
-        g.add(lab)
+        rf"\varepsilon_{{\mathrm{{trig}}}} = {tr['plateau_data']:.3f}\,/\,{tr['plateau_mc']:.3f}",
+    ][i]
+    lab = tex_h(expr, 0.22)
+    lab.shift(np.array([LEFT_COL_X, ROW_Y0 - ROW_DY * i, 0.0]) - lab.get_left())
+    return lab
+
+
+def rows(*idx) -> dict:
+    return {f"row{i}": corr_row(i) for i in idx}
+
+
+ROW_KEYS = tuple(f"row{i}" for i in range(6))
+
+
+# -- tag and probe --------------------------------------------------------------------
+
+def tp_slice(placement=DET_TP) -> CMSSlice:
+    return place(CMSSlice(), placement, DET_CENTER)
+
+
+def tp_pair(rec, placement=DET_TP) -> VGroup:
+    """A real opposite-sign tag + probe pair (zmumu_tnp.json events) on a slice: two
+    ``muon_pieces``; a probe that fails tight ID keeps only the muon stations it was
+    matched in (``nStations``: the tracker-only probe has one). ``.tag``, ``.probe``,
+    ``.tag_phi``, ``.probe_phi`` (natural), ``.record``."""
+    det0 = CMSSlice()
+    tag, probe = rec["tag"], rec["probe"]
+    t = muon_pieces(det0, float(tag["phi"]), _q(tag), kappa_from_pt(tag["pt"]))
+    p = muon_pieces(det0, float(probe["phi"]), _q(probe), kappa_from_pt(probe["pt"]))
+    if not probe["passes_id"]:
+        stubs = p.deposits[1]
+        stubs.submobjects = stubs.submobjects[:max(0, int(probe["nStations"]))]
+    g = VGroup(t, p)
+    g.tag, g.probe, g.record = t, p, rec
+    g.tag_phi, g.probe_phi = phi_end(t.trk), phi_end(p.trk)
+    place(g, placement, DET_CENTER)
+    return g
+
+
+def tp_labels(pair, placement=DET_TP) -> VGroup:
+    labs = VGroup()
+    for name, phi in (("tag", pair.tag_phi), ("probe", pair.probe_phi)):
+        lab = tex_h(rf"\mu_{{\mathrm{{{name}}}}}", 0.24, color=CHANNEL_LINE["mumu"])
+        spot = label_spot(phi, placement)
+        c = _p3(placement[1])
+        u = (spot - c) / max(np.linalg.norm(spot - c), 1e-9)
+        lab.move_to(spot + u * 0.5 * max(lab.width - 0.3, 0.0))
+        labs.add(lab)
+    return labs
+
+
+def trigger_ring(tag) -> Circle:
+    """The tag fired the trigger: a cyan ring on its outermost muon-station stub."""
+    stub = tag.deposits[1][-1]
+    return Circle(radius=0.16, stroke_color=col(DETECTOR_ACCENT), stroke_width=4.0).move_to(stub.get_center())
+
+
+def _rebin2(v):
+    return np.asarray(v, dtype=float).reshape(-1, 2).sum(axis=1)
+
+
+SIM_SCALE = float(CELL["data"]["N"]) / float(CELL["mc"]["N"])
+
+
+def tp_axes(which: str) -> DataAxes:
+    d, m = CELL["data"], CELL["mc"]
+    ymax = 1.12 * max(_rebin2(d[which]).max(), SIM_SCALE * _rebin2(m[which]).max())
+    dax = DataAxes([60, 120, 30], [0.0, ymax, ymax], TP_PANEL["width"], TP_PANEL["height"], y_ticks=[],
+                   show_y_labels=False, tick_label_h=0.16, title_h=0.17, title_buff=0.12,
+                   x_title=r"m_{\mu\mu}\ [\mathrm{GeV}]")
+    dax.move_frame_to(TP_PANEL[f"{which}_c"])
+    return dax
+
+
+def tp_bars(dax, which: str, visible=True) -> VGroup:
+    n = _rebin2(CELL["data"][which])
+    g = VGroup(*[data_bar(dax, XC[i], n[i] if visible else 0.0, 0.5, color=SAMPLE["Data"], fill_opacity=0.55,
+                          stroke_width=1.0) for i in range(60)])
+    return g if visible else g.set_opacity(0.0)
+
+
+def tp_fit(dax, which: str) -> VGroup:
+    """The nominal fit of the cell summed to 1 GeV: signal + background (method cyan) and the
+    background alone (dashed grey)."""
+    d = CELL["data"]
+    tot = _rebin2(d[f"model_{which}"])
+    bkg = _rebin2(d[f"bkg_{which}"])
+    line = data_trace(dax, XC, tot, color=DETECTOR_ACCENT, stroke_width=3.0)
+    dash = data_trace(dax, XC, bkg, color=GREY, stroke_width=2.5, dashed_=True)
+    g = VGroup(dash, line)
+    g.line, g.dash = line, dash
+    return g
+
+
+def tp_sim(dax, which: str):
+    return step_hist(dax, EDGES, SIM_SCALE * _rebin2(CELL["mc"][which]), color=CHANNEL_LINE["mumu"], stroke_width=3.0)
+
+
+def tp_count(dax, which: str):
+    d = CELL["data"]
+    n = d["n_pass_signal"] if which == "pass" else d["n_fail_signal"]
+    sub = r"\mathrm{pass}" if which == "pass" else r"\mathrm{fail}"
+    return tex_h(rf"N_{{{sub}}} = {tex_int(n)}", 0.2).next_to(dax.frame, UP, buff=0.14)
+
+
+def cell_label():
+    pt0, pt1 = CELL["pt_range"]
+    eta1 = CELL["eta_range"][1]
+    return tex_h(rf"{pt0:g} < p_T < {pt1:g}\ \mathrm{{GeV}},\quad |\eta| < {eta1:g}", 0.19).move_to(_p3(CELL_LAB_C))
+
+
+def eps_line(sample: str):
+    d = CELL["data" if sample == "data" else "mc"]
+    sub = r"\mathrm{data}" if sample == "data" else r"\mathrm{sim}"
+    expr = (rf"\varepsilon_{{{sub}}} = \frac{{N_{{\mathrm{{pass}}}}}}{{N_{{\mathrm{{pass}}}} + N_{{\mathrm{{fail}}}}}}"
+            rf" = {d['eps']:.4f}")
+    return tex_h(expr, 0.22).move_to(_p3(EPS_DATA_C if sample == "data" else EPS_SIM_C))
+
+
+def eff_plot() -> dict:
+    """eps_ID vs p_T in the barrel (|eta| < 0.9) for data and simulation (nominal fits), bins as
+    horizontal bars; a two-row key."""
+    E, pt = TNP["id"], TNP["pt_edges"]
+    dax = DataAxes([20, 200, 30], [0.94, 0.98, 0.02], EFF_WH[0], EFF_WH[1], x_ticks=[20, 50, 100, 150, 200],
+                   y_ticks=[0.94, 0.96, 0.98], y_fmt="{:.2f}", tick_label_h=0.16, title_h=0.2, title_buff=0.14,
+                   x_title=r"p_T\ [\mathrm{GeV}]", y_title=r"\varepsilon_{\mathrm{ID}}")
+    dax.move_frame_to(EFF_C)
+    pts = {}
+    for s, key, colour in (("data", "eff_data", SAMPLE["Data"]), ("mc", "eff_mc", CHANNEL_LINE["mumu"])):
+        g = VGroup()
+        for i in range(len(pt) - 1):
+            e = float(E[key][i][0])
+            g.add(VGroup(Line(dax.c2p(pt[i], e), dax.c2p(pt[i + 1], e), stroke_color=col(colour), stroke_width=2.5),
+                         Dot(dax.c2p(0.5 * (pt[i] + pt[i + 1]), e), radius=0.045, color=col(colour))))
+        pts[s] = g
+    key = colour_key([(r"\mathrm{data}", SAMPLE["Data"], "dot"), (r"\mathrm{simulation}", CHANNEL_LINE["mumu"], "dot")],
+                     label_h=0.16)
+    eta = tex_h(r"|\eta| < 0.9", 0.17)
+    VGroup(eta, key).arrange(DOWN, aligned_edge=LEFT, buff=0.12).next_to(dax.frame.get_corner(DOWN + LEFT), UP + RIGHT,
+                                                                           buff=0.12)   # empty: below 0.955 left of 120 GeV
+    return {"eff_ax": dax, "eff_key": VGroup(eta, key), "eff_data": pts["data"], "eff_mc": pts["mc"]}
+
+
+def sf_tex():
+    return tex_h(r"\mathrm{SF} = \varepsilon_{\mathrm{data}} \,/\, \varepsilon_{\mathrm{sim}}", 0.26).move_to(_p3(SF_TEX_C))
+
+
+def sf_map() -> VGroup:
+    pt, eta = TNP["pt_edges"], TNP["eta_edges"]
+    rws = [rf"{pt[i]:g}\!-\!{pt[i + 1]:g}" for i in range(len(pt) - 1)]
+    cls = [rf"{eta[j]:g}\!-\!{eta[j + 1]:g}" for j in range(len(eta) - 1)]
+    vg = value_grid(TNP["id"]["sf"], rws, cls, fmt="{:.3f}", cell=(0.82, 0.29), label_h=0.145, vmin=0.93, vmax=1.0)
+    head = tex_h(r"p_T \,\backslash\, |\eta|", 0.145)
+    head.next_to(vg.row_labels, UP, buff=0.10).align_to(vg.col_labels, DOWN)
+    n_col = len(cls)
+    barrel = VGroup(*[vg.cells[i * n_col] for i in range(len(rws))])       # |eta| < 0.9: the plotted column
+    hl = SurroundingRectangle(barrel, color=col(DETECTOR_ACCENT), buff=0.0, stroke_width=3.0)
+    g = VGroup(vg, head, hl)
+    g.move_to(_p3(SFMAP_C))
+    g.vg, g.head, g.hl, g.n_col = vg, head, hl, n_col
     return g
 
 
@@ -539,8 +657,8 @@ def corr_labels() -> VGroup:
 
 NP_SHOWN = ("SigModel", "MuonScale", "MuonRes", "PDF", "QCDScale", "Lumi")
 NP = {n["name"]: n for n in FIT["nps"]}
-PULLS_AT = (-4.35, 0.95)
-SLIDER_AT = (-4.35, -1.75)
+PULLS_AT = (-4.35, -1.3)
+SLIDER_AT = (-4.1, 1.35)
 
 
 def pulls(post: bool) -> VGroup:
@@ -583,6 +701,9 @@ SIG_AX = dict(lo=1850.0, hi=2050.0, x0=0.25, length=5.4, y=-1.95)
 
 
 def sigma_panel() -> VGroup:
+    """sigma(60-120) on its axis: the measurement (dot + total error bar, labelled "this
+    analysis") beside the dashed prediction it is normalised to (aMC@NLO lineshape, NNLO
+    sigma(m > 50) = 6077.22 pb; z-mumu/handoff.md:79), labelled with what it is."""
     s = FIT["sigma_60_120"]
     lo, hi, x0, L, y0 = SIG_AX["lo"], SIG_AX["hi"], SIG_AX["x0"], SIG_AX["length"], SIG_AX["y"]
     ink = col(INK)
@@ -600,16 +721,21 @@ def sigma_panel() -> VGroup:
     pred = float(s["pred"])
     theory = DashedLine([xs(pred), y0, 0], [xs(pred), y0 + 0.95, 0], dash_length=0.1,
                         stroke_color=col(THEORY), stroke_width=3.0)
-    th_lab = tex_h(f"{pred:.1f}", 0.17, color=THEORY).next_to(theory.get_end(), UP, buff=0.08)
+    th_lab = tex_h(rf"{pred:.1f}\ \mathrm{{pb}}", 0.17, color=THEORY).next_to(theory.get_end(), UP, buff=0.08)
+    th_name = VGroup(text_h("prediction", 0.15, color=THEORY),
+                     text_h("aMC@NLO, NNLO norm.", 0.12, color=THEORY)).arrange(DOWN, aligned_edge=LEFT, buff=0.08)
+    th_name.next_to(th_lab, RIGHT, buff=0.22).align_to(th_lab, UP)
     ypt = y0 + 0.45
     cc = col(CHANNEL_LINE["mumu"])
     bar = Line([xs(s["value"] - s["total"]), ypt, 0], [xs(s["value"] + s["total"]), ypt, 0],
                stroke_color=cc, stroke_width=5.0)
     dot = Dot([xs(s["value"]), ypt, 0], radius=0.1, color=cc)
+    me_name = text_h("this analysis", 0.15).next_to(bar, LEFT, buff=0.22)
     label = tex_h(rf"\sigma_{{60\text{{--}}120}} = {s['value']:.0f} \pm {s['total']:.0f}\ \mathrm{{pb}}", 0.27)
     label.move_to(np.array([2.95, -0.45, 0.0]))
-    g = VGroup(axis, ticks, tick_labels, unit, theory, th_lab, bar, dot, label)
-    g.axis, g.theory, g.th_lab, g.bar, g.dot, g.label = axis, theory, th_lab, bar, dot, label
+    g = VGroup(axis, ticks, tick_labels, unit, theory, th_lab, th_name, bar, dot, me_name, label)
+    g.axis, g.theory, g.th_lab, g.th_name, g.bar, g.dot, g.me_name, g.label = (
+        axis, theory, th_lab, th_name, bar, dot, me_name, label)
     g.frame = VGroup(axis, ticks, tick_labels, unit)
     return g
 
@@ -662,56 +788,64 @@ def state_c() -> dict:
 ORDER_C = ("det", *PLOT_KEYS)
 
 
-def state_d() -> dict:
-    st = {"det": parked_slice(DET_CR), **plot_parts(PLOT_GHOST, stage="raw", fakes=False, key_rows=3)}
-    pair = ss_pair(0)
-    st.update({"box": cr_box(), "tag": pair.tag, "probe": pair.probe, "labs": pair_labels(pair)})
-    return st
+def state_g1() -> dict:
+    return {**plot_parts(stage="pileup", fakes=True, key_rows=4), **rows(0, 1)}
 
 
-ORDER_D = ("det", *PLOT_KEYS, "box", "tag", "probe", "labs")
+ORDER_G1 = (*PLOT_KEYS, "row0", "row1")
 
 
-def state_e() -> dict:
-    st = {"det": parked_slice(DET_CR), **plot_parts(PLOT_GHOST, stage="raw", fakes=False, key_rows=3)}
-    st.update({"box": cr_box(), "tally": tally_boxes(True), "ff_tex": ff_formula(), "ffmap": ff_map()})
-    return st
+def state_g2() -> dict:
+    return {**plot_parts(stage="prefiring", fakes=True, key_rows=4), **rows(0, 1, 2)}
 
 
-ORDER_E = ("det", *PLOT_KEYS, "box", "tally", "ff_tex", "ffmap")
+ORDER_G2 = (*PLOT_KEYS, "row0", "row1", "row2")
 
 
-N_FAKE_AT = (-4.75, 0.35)
+def state_t1() -> dict:
+    pair = tp_pair(TP_EVENTS["pass"])
+    labs = tp_labels(pair)
+    return {**plot_parts(PLOT_GHOST, stage="prefiring", fakes=True, key_rows=4), "det": tp_slice(),
+            "tp_tag": pair.tag, "tp_tag_lab": labs[0], "tp_probe": pair.probe, "tp_probe_lab": labs[1]}
 
 
-def n_fakes_big():
-    y = FK["yields"]
-    return tex_h(rf"N_{{\mathrm{{fake}}}} = {y['sr_fakes']:.0f} \pm {y['sr_fakes_stat']:.0f}", 0.32).move_to(
-        _p3(N_FAKE_AT))
+ORDER_T1 = (*PLOT_KEYS, "det", "tp_tag", "tp_tag_lab", "tp_probe", "tp_probe_lab")
 
 
-def n_fakes_small() -> VGroup:
-    y = FK["yields"]
-    lab = tex_h(rf"{y['sr_fakes']:.0f} \pm {y['sr_fakes_stat']:.0f}", 0.2)
-    dax = main_axes()            # natural axes: the label sits right of the wedge's end
-    lab.next_to(dax.c2p(120, 45.0), RIGHT, buff=0.22)
-    return lab
+def state_t2() -> dict:
+    pa, fa = tp_axes("pass"), tp_axes("fail")
+    return {**plot_parts(PLOT_GHOST, stage="prefiring", fakes=True, key_rows=4), "det": tp_slice(DET_TP_PARK),
+            "pass_ax": pa, "fail_ax": fa, "cell_lab": cell_label(),
+            "pass_bars": tp_bars(pa, "pass"), "fail_bars": tp_bars(fa, "fail"),
+            "pass_n": tp_count(pa, "pass"), "fail_n": tp_count(fa, "fail"),
+            "pass_fit": tp_fit(pa, "pass"), "fail_fit": tp_fit(fa, "fail"), "eps_data": eps_line("data")}
 
 
-def state_f() -> dict:
-    P = plot_parts(stage="raw", fakes=True, key_rows=4)
-    return {**P, "n_fakes": n_fakes_big()}
+ORDER_T2 = (*PLOT_KEYS, "det", "pass_ax", "fail_ax", "cell_lab", "pass_bars", "fail_bars", "pass_n", "fail_n",
+            "pass_fit", "fail_fit", "eps_data")
 
 
-ORDER_F = (*PLOT_KEYS, "n_fakes")
+def state_t3() -> dict:
+    return {**plot_parts(PLOT_GHOST, stage="prefiring", fakes=True, key_rows=4), "det": tp_slice(DET_TP_PARK),
+            "eps_data": eps_line("data"), "eps_sim": eps_line("sim"), **eff_plot()}
 
 
-def state_g() -> dict:
-    P = plot_parts(stage="nominal", fakes=True, key_rows=4)
-    return {**P, "n_fakes": n_fakes_small(), "corr": corr_labels()}
+ORDER_T3 = (*PLOT_KEYS, "det", "eps_data", "eps_sim", "eff_ax", "eff_key", "eff_data", "eff_mc")
 
 
-ORDER_G = (*PLOT_KEYS, "n_fakes", "corr")
+def state_t4() -> dict:
+    return {**plot_parts(PLOT_GHOST, stage="prefiring", fakes=True, key_rows=4), "sf_tex": sf_tex(),
+            "sfmap": sf_map(), **rows(3, 4, 5)}
+
+
+ORDER_T4 = (*PLOT_KEYS, "sf_tex", "sfmap", "row3", "row4", "row5")
+
+
+def state_t5() -> dict:
+    return {**plot_parts(stage="nominal", fakes=True, key_rows=4), **rows(0, 1, 2, 3, 4, 5)}
+
+
+ORDER_T5 = (*PLOT_KEYS, *ROW_KEYS)
 
 
 def state_h() -> dict:
@@ -722,6 +856,9 @@ def state_h() -> dict:
 
 ORDER_H = ("dax", "stack", "data", "ratio", "key", "mu_line", "sig_fid", "sig_tot")
 
+ALL_STATES = {"a": state_a, "b": state_b, "c": state_c, "g1": state_g1, "g2": state_g2, "t1": state_t1,
+              "t2": state_t2, "t3": state_t3, "t4": state_t4, "t5": state_t5, "h": state_h}
+
 
 def settle_same(scene, prev, end, keys):
     for k in keys:
@@ -729,7 +866,7 @@ def settle_same(scene, prev, end, keys):
 
 
 # ---------------------------------------------------------------------------
-# the eight clips
+# the clips
 # ---------------------------------------------------------------------------
 
 class MumuEvent(Scene):
@@ -855,8 +992,8 @@ class MumuStack(Scene):
         dax = prev["dax"]
         base = sr_layers("raw", False)
         for i, poly in enumerate(stack):            # each (invisible) layer waits at its own base
-            rows = [(n, c if j < i else np.zeros(60), cc) for j, (n, c, cc) in enumerate(base)]
-            poly.become(stack_hist(dax, EDGES, rows)[i])
+            rows_ = [(n, c if j < i else np.zeros(60), cc) for j, (n, c, cc) in enumerate(base)]
+            poly.become(stack_hist(dax, EDGES, rows_)[i])
         self.play(LaggedStart(*[Transform(stack[i], end["stack"][i]) for i in range(len(stack))],
                               lag_ratio=0.15, group=stack), run_time=2.6, rate_func=EASE)
         settle(self, stack, end["stack"], "stack")
@@ -866,7 +1003,7 @@ class MumuStack(Scene):
         self.play(FadeIn(ratio.dax), FadeIn(ratio.ref), dax.x_labels.animate.set_opacity(0.0),
                   dax.x_title.animate.set_opacity(0.0), run_time=0.6)
         self.play(LaggedStart(*[GrowFromCenter(d) for d in ratio.dots], lag_ratio=0.03, group=ratio.dots),
-                  run_time=1.3)
+                  FadeIn(ratio.errs), run_time=1.3)
         adopt(self, ratio, "ratio")
         self.wait(0.3)
         self.play(FadeIn(end["rlabel"], shift=LEFT * 0.2), run_time=0.5)
@@ -876,163 +1013,204 @@ class MumuStack(Scene):
         self.wait(0.2)
 
 
-class MumuControl(Scene):
-    """mumu_d_control: the plot parks top right; the slice returns into the dashed
-    control-region box with a real same-sign pair, the probe inside a jet."""
+class MumuCorrections(Scene):
+    """mumu_g_corrections: the slice leaves; the data-driven fake template enters the bottom
+    of the stack as a thin wedge (the ratio does not move); pileup and L1 prefiring step the
+    prediction down: 0.944 -> 0.950 -> 0.969. The data never move."""
 
     def construct(self):
         white_background(self)
         prev = state_c()
         add_state(self, prev, ORDER_C)
-        clip_open(self, "mumu_d1_control_region")
-        end = state_d()
+        clip_open(self, "mumu_g1_pileup")
+        end1 = state_g1()
 
-        self.play(*[ReplacementTransform(prev[k], end[k]) for k in ("det", *PLOT_KEYS)],
+        self.play(FadeOut(prev["det"]), ReplacementTransform(prev["key"], end1["key"]), run_time=0.8, rate_func=EASE)
+        tmpl = step_hist(prev["dax"], EDGES, FAKES, color=darken(SAMPLE["Fakes"], 0.55), stroke_width=4.0)
+        self.play(Create(tmpl), FadeIn(end1["row0"], shift=RIGHT * 0.25), run_time=1.1,
+                  rate_func=rate_functions.linear)
+        move_ratio(self, prev, plot_parts(stage="raw", fakes=True, key_rows=0, counter=False), run_time=1.0)
+        self.play(FadeOut(tmpl), run_time=0.3)
+        self.wait(0.2)
+        self.play(FadeIn(end1["row1"], shift=RIGHT * 0.25), run_time=0.5, rate_func=EASE)
+        move_ratio(self, prev, plot_parts(stage="pileup", fakes=True, key_rows=0, counter=False))
+        settle_same(self, prev, end1, ("dax", "stack", "data", "counter", "ratio", "rlabel"))
+        check_order(self, end1, ORDER_G1)
+        clip_cut(self, "mumu_g2_prefiring")
+
+        end2 = state_g2()
+        self.play(FadeIn(end2["row2"], shift=RIGHT * 0.25), run_time=0.5, rate_func=EASE)
+        move_ratio(self, end1, plot_parts(stage="prefiring", fakes=True, key_rows=0, counter=False))
+        settle_same(self, {**end1, "row2": end2["row2"]}, end2, [k for k in ORDER_G2 if k != "row2"])
+        check_order(self, end2, ORDER_G2)
+        self.wait(0.2)
+
+
+class MumuTagProbe(Scene):
+    """mumu_t_tagprobe: tag and probe with real data. The plot parks top right; a real Z
+    pair: the tag (tight, isolated, fired the trigger) and the probe, which passes tight ID;
+    a second pair whose tracker-only probe fails it; every probe of the 40-45 GeV barrel
+    cell rains into the real pass / fail spectra and the fit separates signal from
+    background -> eps_data; simulation -> eps_sim; eps vs p_T; SF = eps_data / eps_sim ->
+    the real 10 x 4 map; applied, the prediction steps to the nominal: 0.969 -> 0.994."""
+
+    def construct(self):
+        white_background(self)
+        prev = state_g2()
+        add_state(self, prev, ORDER_G2)
+        clip_open(self, "mumu_t1_tag_probe")
+
+        # -- t1: the plot parks; a real pair, tag and probe ------------------------------
+        e1 = state_t1()
+        self.play(*[FadeOut(prev[k]) for k in ("row0", "row1", "row2")], run_time=0.5)
+        self.play(*[ReplacementTransform(prev[k], e1[k]) for k in PLOT_KEYS], FadeIn(e1["det"]),
                   run_time=1.6, rate_func=EASE)
         self.wait(0.2)
-        box = end["box"]
-        self.play(Create(box.rect), FadeIn(box.sym), run_time=0.8)
-        adopt(self, box, "box")
-        clip_cut(self, "mumu_d2_same_sign_pair")
-        tag, probe = end["tag"], end["probe"]
+        tag, probe = e1["tp_tag"], e1["tp_probe"]
         self.play(Create(tag.trk, lag_ratio=0.0), run_time=0.9, rate_func=EASE)
         self.play(FadeIn(tag.hits), run_time=0.3)
         self.play(FadeIn(tag.deposits), run_time=0.45)
         adopt(self, tag, "tag")
-        self.wait(0.2)
-        self.play(Create(probe.jet[0], lag_ratio=0.0), run_time=0.7, rate_func=EASE)
-        self.play(FadeIn(VGroup(*probe.jet[1:])), run_time=0.4)
-        self.play(Create(probe.mu.trk, lag_ratio=0.0), run_time=0.9, rate_func=EASE)
-        self.play(FadeIn(VGroup(probe.mu.hits, probe.mu.deposits)), run_time=0.45)
+        ring = trigger_ring(tag)
+        self.play(GrowFromCenter(ring), run_time=0.35)
+        self.play(ring.animate.scale(2.2).set_stroke(opacity=0.0), run_time=0.5)
+        self.remove(ring)
+        self.play(FadeIn(e1["tp_tag_lab"]), run_time=0.4)
+        self.play(Create(probe.trk, lag_ratio=0.0), run_time=0.9, rate_func=EASE)
+        self.play(FadeIn(probe.hits), run_time=0.3)
+        self.play(FadeIn(probe.deposits), run_time=0.45)
         adopt(self, probe, "probe")
+        self.play(FadeIn(e1["tp_probe_lab"]), run_time=0.4)
+        check_order(self, e1, ORDER_T1)
+        clip_cut(self, "mumu_t2_pass_fail")
+
+        # -- t2: pass / fail, the rain, the fit, eps_data -------------------------------
+        e2 = state_t2()
+        settle_same(self, e1, e2, PLOT_KEYS)
+        pa, fa = e2["pass_ax"], e2["fail_ax"]
+        self.play(FadeIn(pa), FadeIn(fa), FadeIn(e2["cell_lab"]), run_time=0.6)
+        det = e1["det"]
+
+        def fly(trk, dax, mass):
+            src = trk[-1].get_end()                  # the track core (VGroup(rim, core))
+            d = Dot(src, radius=0.06, color=col(SAMPLE["Data"]))
+            self.play(GrowFromCenter(d), run_time=0.2)
+            self.play(d.animate.move_to(dax.c2p(float(mass), 0.0)), run_time=0.7, rate_func=rate_functions.ease_in_quad)
+            self.play(FadeOut(d), run_time=0.2)
+
+        fly(probe.trk, pa, TP_EVENTS["pass"]["mass_bare"])
+        self.play(*[FadeOut(e1[k]) for k in ("tp_tag", "tp_tag_lab", "tp_probe", "tp_probe_lab")], run_time=0.4)
+        fail = tp_pair(TP_EVENTS["fail"])
+        flabs = tp_labels(fail)
+        lines = VGroup(fail.tag.trk, fail.probe.trk)
+        rest = VGroup(fail.tag.hits, fail.tag.deposits, fail.probe.hits, fail.probe.deposits)
+        self.play(Create(lines, lag_ratio=0.0), run_time=0.8, rate_func=EASE)
+        self.play(FadeIn(rest), FadeIn(flabs), run_time=0.5)
         self.wait(0.3)
-        self.play(FadeIn(end["labs"]), run_time=0.4)
-        check_order(self, end, ORDER_D)
+        fly(fail.probe.trk, fa, TP_EVENTS["fail"]["mass_bare"])
+        self.play(FadeOut(lines), FadeOut(rest), FadeOut(flabs), run_time=0.4)
+
+        pb0, fb0 = tp_bars(pa, "pass", visible=False), tp_bars(fa, "fail", visible=False)
+        pb, fb = e2["pass_bars"].copy(), e2["fail_bars"].copy()
+        self.add(pb0, fb0)
+        order = np.random.default_rng(20260916).permutation(60)
+        drops = (hidden_rain(det, pa, EDGES, _rebin2(CELL["data"]["pass"]), n=45, seed=5, color=SAMPLE["Data"])
+                 + hidden_rain(det, fa, EDGES, _rebin2(CELL["data"]["fail"]), n=25, seed=6, color=SAMPLE["Data"]))
+        np.random.default_rng(7).shuffle(drops)
+        self.play(LaggedStart(*[Transform(pb0[i], pb[i]) for i in order], lag_ratio=0.02, group=pb0),
+                  LaggedStart(*[Transform(fb0[i], fb[i]) for i in order], lag_ratio=0.02, group=fb0),
+                  LaggedStart(*drops, lag_ratio=0.05), run_time=3.2)
+        settle(self, pb0, e2["pass_bars"], "pass bars")
+        settle(self, fb0, e2["fail_bars"], "fail bars")
+        self.play(FadeIn(e2["pass_n"], shift=UP * 0.1), FadeIn(e2["fail_n"], shift=UP * 0.1), run_time=0.5)
+        self.play(Create(e2["pass_fit"].dash), Create(e2["pass_fit"].line), Create(e2["fail_fit"].dash),
+                  Create(e2["fail_fit"].line), run_time=1.4, rate_func=rate_functions.linear)
+        adopt(self, e2["pass_fit"], "pass fit")
+        adopt(self, e2["fail_fit"], "fail fit")
+        self.play(ReplacementTransform(det, e2["det"]), run_time=0.9, rate_func=EASE)
+        self.play(FadeIn(e2["eps_data"], shift=UP * 0.15), run_time=0.8)
+        check_order(self, e2, ORDER_T2)
+        clip_cut(self, "mumu_t3_data_vs_sim")
+
+        # -- t3: simulation, eps_sim, eps vs p_T ---------------------------------------
+        e3 = state_t3()
+        settle_same(self, e2, e3, (*PLOT_KEYS, "det", "eps_data"))
+        sims = VGroup(tp_sim(pa, "pass"), tp_sim(fa, "fail"))
+        self.play(Create(sims[0]), Create(sims[1]), run_time=1.2, rate_func=rate_functions.linear)
+        self.wait(0.3)
+        self.play(FadeIn(e3["eps_sim"], shift=UP * 0.15), run_time=0.8)
+        self.wait(0.3)
+        panel_keys = ("pass_ax", "fail_ax", "cell_lab", "pass_bars", "fail_bars", "pass_n", "fail_n", "pass_fit", "fail_fit")
+        self.play(*[FadeOut(e2[k]) for k in panel_keys], FadeOut(sims[0]), FadeOut(sims[1]), run_time=0.6)
+        self.play(FadeIn(e3["eff_ax"]), FadeIn(e3["eff_key"]), run_time=0.6)
+        self.play(LaggedStart(*[GrowFromCenter(p) for p in e3["eff_data"]], lag_ratio=0.1, group=e3["eff_data"]),
+                  run_time=1.0)
+        self.play(LaggedStart(*[GrowFromCenter(p) for p in e3["eff_mc"]], lag_ratio=0.1, group=e3["eff_mc"]),
+                  run_time=1.0)
+        adopt(self, e3["eff_data"], "eff data")
+        adopt(self, e3["eff_mc"], "eff mc")
+        check_order(self, e3, ORDER_T3)
+        clip_cut(self, "mumu_t4_sf_map")
+
+        # -- t4: SF = eps_data / eps_sim -> the map; the three scale-factor numbers ----------
+        e4 = state_t4()
+        settle_same(self, e3, e4, PLOT_KEYS)
+        self.play(FadeOut(e3["det"]), ReplacementTransform(e3["eps_data"], e4["sf_tex"]), FadeOut(e3["eps_sim"]),
+                  run_time=0.9, rate_func=EASE)
         self.wait(0.2)
+        self.play(*[FadeOut(e3[k]) for k in ("eff_ax", "eff_key", "eff_data", "eff_mc")], run_time=0.5)
+        m = e4["sfmap"]
+        vg = m.vg
+        self.play(FadeIn(m.head), FadeIn(vg.row_labels), FadeIn(vg.col_labels), run_time=0.4)
+        nr = len(vg.row_labels)
+        cells = [VGroup(vg.cells[i * m.n_col + j], vg.texts[i * m.n_col + j]) for j in range(m.n_col) for i in range(nr)]
+        self.play(LaggedStart(*[FadeIn(c) for c in cells], lag_ratio=0.03), run_time=1.6)
+        self.play(Create(m.hl), run_time=0.5)
+        adopt(self, m, "sf map")
+        self.wait(0.3)
+        for k in ("row3", "row4", "row5"):
+            self.play(FadeIn(e4[k], shift=RIGHT * 0.25), run_time=0.45, rate_func=EASE)
+        check_order(self, e4, ORDER_T4)
+        clip_cut(self, "mumu_t5_apply")
 
-
-class MumuTenPairs(Scene):
-    """mumu_e_tenpairs: ten real same-sign pairs, a ten-box tally (anti-isolated
-    grey, isolated gold) -> f = N_tight/N_anti = 1/9; the real fake-factor map."""
-
-    def construct(self):
-        white_background(self)
-        prev = state_d()
-        add_state(self, prev, ORDER_D)
-        clip_open(self, "mumu_e1_ten_pairs")
-        end = state_e()
-
-        tally = tally_boxes(False)
-        self.play(FadeIn(tally), run_time=0.4)
-        self.play(tally[0].animate.set_fill(col(tally_colour(SS_PAIRS[0])), opacity=1.0), run_time=0.3)
-        self.play(FadeOut(prev["tag"]), FadeOut(prev["probe"]), FadeOut(prev["labs"]), run_time=0.25)
-        for i in range(1, len(SS_PAIRS)):
-            pair = ss_pair(i)
-            tag = pair.tag
-            probe_mu = pair.probe.mu if pair.in_jet else pair.probe
-            jet = pair.probe.jet if pair.in_jet else VGroup()
-            lines = VGroup(*jet[:1], tag.trk, probe_mu.trk)          # jet under the muons (muon_in_jet order)
-            rest = VGroup(*jet[1:], tag.hits, tag.deposits, probe_mu.hits, probe_mu.deposits)
-            self.play(Create(lines, lag_ratio=0.0), FadeIn(rest), run_time=0.45, rate_func=EASE)
-            self.play(tally[i].animate.set_fill(col(tally_colour(SS_PAIRS[i])), opacity=1.0), run_time=0.22)
-            self.play(FadeOut(lines), FadeOut(rest), run_time=0.22)
-        settle(self, tally, end["tally"], "tally")
-        clip_cut(self, "mumu_e2_fake_factor")
-        self.play(FadeIn(end["ff_tex"], shift=UP * 0.15), run_time=0.9)
-        clip_cut(self, "mumu_e3_ff_map")
-        self.play(FadeIn(end["ffmap"]), run_time=1.1)
-        settle_same(self, prev, end, ("det", *PLOT_KEYS, "box"))
-        check_order(self, end, ORDER_E)
+        # -- t5: applied: the prediction steps to the nominal ------------------------------
+        e5 = state_t5()
+        pref = plot_parts(stage="prefiring", fakes=True, key_rows=4)
+        self.play(FadeOut(e4["sf_tex"]), FadeOut(m, scale=0.3, target_position=_p3(PLOT_MAIN_C)), run_time=0.8)
+        self.play(*[ReplacementTransform(e4[k], pref[k]) for k in PLOT_KEYS], run_time=1.5, rate_func=EASE)
+        self.play(*[FadeIn(e5[k], shift=RIGHT * 0.25) for k in ("row0", "row1", "row2")], run_time=0.5)
+        for k in ("row3", "row4", "row5"):
+            settle(self, e4[k], e5[k], k)
+            self.remove(e5[k])
+            self.add(e5[k])
         self.wait(0.2)
-
-
-class MumuTransfer(Scene):
-    """mumu_f_transfer: the plot returns; f applied to the anti-isolated events gives
-    the fake template, which enters the bottom of the stack as a thin wedge; the
-    ratio does not move; N_fake = 3870 +- 80."""
-
-    def construct(self):
-        white_background(self)
-        prev = state_e()
-        add_state(self, prev, ORDER_E)
-        clip_open(self, "mumu_f1_apply")
-        end = state_f()
-        mid = plot_parts(stage="raw", fakes=False, key_rows=3)
-
-        f_tex = prev["ff_tex"]
-        self.play(FadeOut(prev["det"]), FadeOut(prev["box"]), FadeOut(prev["tally"]), FadeOut(prev["ffmap"]),
-                  f_tex.animate.move_to(np.array([-4.75, 1.2, 0.0])), run_time=0.8, rate_func=EASE)
-        self.play(*[ReplacementTransform(prev[k], mid[k]) for k in PLOT_KEYS], run_time=1.5, rate_func=EASE)
-        formula = tex_h(r"N_{\mathrm{fake}} = f \times N_{\mathrm{anti}}", 0.26).move_to(np.array([-4.75, 1.2, 0.0]))
-        self.play(ReplacementTransform(f_tex, formula), run_time=0.7, rate_func=EASE)
-        clip_cut(self, "mumu_f2_fake_template")
-        tmpl = step_hist(mid["dax"], EDGES, FAKES, color=darken(SAMPLE["Fakes"], 0.55), stroke_width=4.0)
-        self.play(Create(tmpl), run_time=1.1, rate_func=rate_functions.linear)
-        self.wait(0.2)
-        self.play(Transform(mid["stack"], end["stack"]), Transform(mid["ratio"].dots, end["ratio"].dots),
-                  Transform(mid["rlabel"], end["rlabel"]), ReplacementTransform(mid["key"], end["key"]),
-                  FadeOut(tmpl), run_time=1.5, rate_func=EASE)
-        self.play(ReplacementTransform(formula, end["n_fakes"]), run_time=0.9, rate_func=EASE)
-        settle_same(self, mid, end, ("dax", "stack", "data", "counter", "ratio", "rlabel"))
-        check_order(self, end, ORDER_F)
-        self.wait(0.2)
-
-
-class MumuCorrections(Scene):
-    """mumu_g_corrections: each correction appears with its real value and the
-    prediction steps through the frozen stages raw -> pileup -> prefiring ->
-    nominal; the data never move, the ratio climbs from 0.944 to 0.994."""
-
-    def construct(self):
-        white_background(self)
-        prev = state_f()
-        add_state(self, prev, ORDER_F)
-        clip_open(self, "mumu_g1_pileup")
-        end = state_g()
-        corr = end["corr"]
-        stack, ratio, rlabel = prev["stack"], prev["ratio"], prev["rlabel"]
-        self.play(ReplacementTransform(prev["n_fakes"], end["n_fakes"]), run_time=0.9, rate_func=EASE)
-        self.wait(0.2)
-
-        beats = (((0,), "pileup", None), ((1,), "prefiring", "mumu_g2_prefiring"),
-                 ((2, 3, 4), "nominal", "mumu_g3_lepton_sf"), ((5,), None, None))
-        for b, (idxs, stage, clip) in enumerate(beats):
-            if clip:
-                clip_cut(self, clip)
-            elif b:
-                self.wait(0.3)
-            for j in idxs:
-                self.play(FadeIn(corr[j], shift=RIGHT * 0.25), run_time=0.5, rate_func=EASE)
-            if stage is not None:
-                S = plot_parts(stage=stage, fakes=True, key_rows=0, counter=False)
-                self.play(Transform(stack, S["stack"]), Transform(ratio.dots, S["ratio"].dots),
-                          Transform(rlabel, S["rlabel"]), run_time=1.6, rate_func=EASE)
-        adopt(self, corr, "corr")
-        settle_same(self, prev, end, PLOT_KEYS)
-        check_order(self, end, ORDER_G)
+        move_ratio(self, pref, plot_parts(stage="nominal", fakes=True, key_rows=0, counter=False), run_time=2.0)
+        settle_same(self, pref, e5, PLOT_KEYS)
+        check_order(self, e5, ORDER_T5)
         self.wait(0.2)
 
 
 class MumuFit(Scene):
     """mumu_h_fit: rebin 60 -> 12 (5 GeV); the pulls and mu_Z move as the fit goes
     post-fit and the ratio flattens; mu_Z, sigma_fid and sigma(60-120) end up owning
-    the frame beside the prediction."""
+    the frame beside the labelled prediction."""
 
     def construct(self):
         white_background(self)
-        prev = state_g()
-        add_state(self, prev, ORDER_G)
+        prev = state_t5()
+        add_state(self, prev, ORDER_T5)
         clip_open(self, "mumu_h1_rebin")
         end = state_h()
 
-        self.play(FadeOut(prev["corr"]), FadeOut(prev["counter"]), FadeOut(prev["rlabel"]),
-                  FadeOut(prev["n_fakes"]), run_time=0.5)
+        self.play(*[FadeOut(prev[k]) for k in ROW_KEYS], FadeOut(prev["counter"]), FadeOut(prev["rlabel"]),
+                  run_time=0.5)
         pre12 = plot_parts(bins=12, fit="prefit", counter=False, rlabel=False, key_rows=4)
         anims = [Transform(prev["dax"], pre12["dax"]), Transform(prev["stack"], pre12["stack"])]
         for j in range(12):
             for k in range(5):
                 anims.append(Transform(prev["data"][5 * j + k], pre12["data"][j].copy()))
                 anims.append(Transform(prev["ratio"].dots[5 * j + k], pre12["ratio"].dots[j].copy()))
+                anims.append(Transform(prev["ratio"].errs[5 * j + k], pre12["ratio"].errs[j].copy()))
         self.play(*anims, run_time=1.7, rate_func=EASE)
         for k in ("dax", "stack", "data", "ratio", "key"):
             settle(self, prev[k], pre12[k], k)
@@ -1044,6 +1222,7 @@ class MumuFit(Scene):
         post12 = plot_parts(bins=12, fit="postfit", counter=False, rlabel=False, key_rows=4)
         poi = FIT["poi"]
         self.play(Transform(pre12["stack"], post12["stack"]), Transform(pre12["ratio"].dots, post12["ratio"].dots),
+                  Transform(pre12["ratio"].errs, post12["ratio"].errs),
                   Transform(pp0.rows, pp1.rows),
                   Transform(sl.marker, sl.marker_at(poi["value"], max(poi["err_up"], poi["err_down"]))),
                   run_time=2.6, rate_func=EASE)
@@ -1064,7 +1243,9 @@ class MumuFit(Scene):
         clip_cut(self, "mumu_h4_sigma_total")
         self.play(FadeIn(sig.frame), run_time=0.5)
         self.play(Create(sig.theory), FadeIn(sig.th_lab), run_time=0.6)
+        self.play(FadeIn(sig.th_name, shift=LEFT * 0.15), run_time=0.5)
         self.play(GrowFromCenter(sig.bar), GrowFromCenter(sig.dot), run_time=0.6)
+        self.play(FadeIn(sig.me_name, shift=RIGHT * 0.15), run_time=0.5)
         self.remove(sig.label)
         self.add(sig.label)
         adopt(self, sig, "sig_tot")

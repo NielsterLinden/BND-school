@@ -47,7 +47,7 @@ Render serially (two renders compiling the same `MathTex` race on the cache).
 python tools/render.py 1 drell_yan scenes/s1_drell_yan.py DrellYan            # -q l, into work/
 python tools/render.py 1 drell_yan scenes/s1_drell_yan.py DrellYan -q h       # deliver to clips/
 python tools/framediff.py work/ee_process/ee_process_final.png work/ee_detector/ee_detector_t0.png  # chain seam
-python tools/zonecheck.py clips/5_ztautau               # nothing in the title band / chapter-identifier corner
+python tools/keepout.py clips/5_ztautau/*.mp4          # nothing in the title band / top-left block
 # a chain cut into one-idea clips (clip_open / clip_cut = manim sections): renders the scenes in
 # order, joins equal section names across scenes, numbers + delivers each clip, prints all seams
 python tools/deliver_chain.py 4 scenes/s4_zmumu_story.py MumuEvent MumuRain ... -q h \
@@ -86,8 +86,11 @@ PNG) before delivering. Iterate at `-q l`; deliver at `-q h`.
 - **End on the last change.** `self.wait(0.1)` at the end, no long held frame;
   PowerPoint rests on the last frame.
 - Keep the top ~15 % of the frame (y > 2.7) clear: the user's title band.
-- Keep the top-left corner (x < −5.85 and y > 0.22, the slide's top-left 3 cm × 9 cm) clear:
-  the deck's chapter identifier. Same status as the title band (06-chapter-anchors.md A1);
-  `python tools/zonecheck.py work/<name>/<name>.mp4` (or `clips/<S>_<section>`) checks both.
+- Keep the **top-left block** clear too: 3 cm wide × 9 cm tall on the slide
+  (x < −5.85 and y > 0.22; `CORNER_X_MAX`, `CORNER_Y_MIN`, `in_keepout` in
+  `style/bnd_style.py`): the deck's chapter identifier. `tools/keepout.py` scans an MP4 for
+  both regions; `render.py` / `deliver_chain.py` print its line after every render. Exempt
+  (full-frame by design): the zoom endings of `ee_detector`, `tautau_detector` (and
+  `tautau_a1_event`, which opens on it), the outro rays.
 - Never commit `work/` or `media/` (see `.gitignore`); commit scenes, style,
   tools, data JSON, docs and the delivered MP4s in `clips/`.

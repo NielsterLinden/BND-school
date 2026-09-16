@@ -22,7 +22,8 @@ from manim import (  # noqa: E402
 from style.bnd_style import *  # noqa: E402,F401,F403
 from s1_drell_yan import DrellYan  # noqa: E402
 
-DIAGRAM_SHIFT = (-1.6, -0.3)    # the Drell-Yan diagram sits left and a bit low: room for the legs
+DIAGRAM_SHIFT = (-0.6, -0.3)    # a bit low, left of centre (room for the legs); x > -1.0 keeps the
+                                # q label out of the top-left block (x < -5.85, y > 0.22)
 EASE = rate_functions.ease_in_out_sine
 
 

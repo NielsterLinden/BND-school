@@ -52,7 +52,9 @@ Zoom mechanics: a zoom is a camera map F(p) = to + z (p - about) applied to the
 whole spine (``Transform`` to a mapped copy of the same builder output, strokes
 scaled per family member) while the clip's detail group arrives through the
 inverse map; the zoom-out maps the detail back onto the node and ``Transform``s
-the spine to ``spine_state(done)``, so every clip ends exactly on the builder.
+the spine to ``spine_state(done)``, so every clip ends exactly on the builder. The
+camera moves run under ``keepout_mask()`` (the zoom sweeps the neighbours through the
+title band and the top-left block); every held state keeps both clear by its anchors.
 ManimCE 0.20.1 trap: ``VMobject.scale(..., scale_stroke=True)`` on a group sets
 *every* member to the group's own width x factor, so ``scale_strokes`` below
 rescales each member instead.
@@ -71,7 +73,7 @@ from manim import (  # noqa: E402
     DOWN, LEFT, ORIGIN, RIGHT, UP, AnimationGroup, ArcBetweenPoints, Create, CurvedArrow,
     DashedLine, DashedVMobject, Dot, FadeIn, FadeOut, Flash, GrowFromCenter, LaggedStart, Line,
     Polygon, Rectangle, ReplacementTransform, RoundedRectangle, Scene, Sector, Succession, Transform,
-    VGroup, VMobject, ValueTracker, always_redraw, rate_functions,
+    VGroup, VMobject, ValueTracker, always_redraw, config, rate_functions,
 )
 from manim.utils.rate_functions import squish_rate_func  # noqa: E402
 
@@ -81,7 +83,8 @@ from s1_drell_yan import _FEY  # noqa: E402  (the section-1 diagram vertices: th
 EASE = rate_functions.ease_in_out_sine
 
 # ---------------------------------------------------------------------------
-# every anchor in one place (scene units; keep y > 2.7 empty)
+# every anchor in one place (scene units; keep the title band y > 2.7 and the top-left
+# block x < -5.85, y > 0.22 empty: TITLE_BAND_Y, CORNER_X_MAX, CORNER_Y_MIN)
 # ---------------------------------------------------------------------------
 NODE_X = (-6.2, -4.13, -2.07, 0.0, 2.07, 4.13, 6.2)
 SPINE_Y = -0.55                                  # centres the map in the usable area (y < 2.7)
@@ -109,18 +112,18 @@ A = {
     "c_rim": (3.55, 2.25), "c_neck": (0.95, -0.55), "c_spout_y": -2.75,   # (half-width, y) of the funnel
     "c_lab_x": -2.55, "c_lab_h": 0.30,
     # pipe_d: tag and probe ----------------------------------------------
-    "d_slice": (-4.55, -0.50), "d_slice_s": 0.80, "d_tag_phi": 2.45, "d_probe_phi": -0.40,
+    "d_slice": (-4.10, -1.20), "d_slice_s": 0.75, "d_tag_phi": 2.45, "d_probe_phi": -0.40,
     "d_kappa": 0.75, "d_lab_r": 0.62, "d_pass": (0.55, 1.05), "d_fail": (4.25, 1.05), "d_hist_wh": (3.0, 1.8),
     "d_eps": (2.4, -1.05), "d_slider": (3.05, -2.80), "d_slider_len": 4.0,
     # pipe_e: backgrounds ------------------------------------------------
-    "e_box": (-4.75, -0.50), "e_box_wh": (2.95, 3.05), "e_slice_s": 0.43, "e_tag_phi": 2.55,
+    "e_box": (-4.25, -0.50), "e_box_wh": (2.95, 3.05), "e_slice_s": 0.43, "e_tag_phi": 2.55,
     "e_fake_phi": 0.25, "e_kappa": 0.8, "e_jet_half": 0.32, "e_plot": (2.35, -0.25), "e_plot_wh": (5.5, 3.3),
-    "e_key": (4.20, 1.10), "e_arrow": ((-3.15, -1.62), 65.0),    # start (scene), end mass: into the Fakes sliver
+    "e_key": (4.20, 1.10), "e_arrow": ((-2.65, -1.62), 65.0),    # start (scene), end mass: into the Fakes sliver
     # pipe_f: comparison -------------------------------------------------
     "f_plot": (1.35, 0.95), "f_plot_wh": (7.0, 2.8), "f_ratio": (1.35, -1.40), "f_ratio_h": 1.15,
-    "f_key": (-5.25, 1.30), "f_band": 0.02,
+    "f_key": (-4.80, 1.30), "f_band": 0.02,
     # pipe_g: fit ---------------------------------------------------------
-    "g_slider": (-3.35, 1.75), "g_slider_len": 4.4, "g_pulls": (-3.0, -0.75), "g_pull_len": 3.4,
+    "g_slider": (-2.60, 1.75), "g_slider_len": 4.4, "g_pulls": (-3.0, -0.75), "g_pull_len": 3.4,
     "g_ratio": (3.45, 1.50), "g_ratio_wh": (5.0, 1.5), "g_sig1": (3.45, -0.50), "g_sig2": (3.45, -2.20),
     # pipe_h: three strips ----------------------------------------------
     "h_scale": 0.55, "h_x": 0.75, "h_ys": {"ee": 1.25, "mumu": -0.25, "tautau": -1.75}, "h_lab_x": -3.2,
@@ -206,6 +209,29 @@ def camera(mob, z: float, about, to):
     mob.scale(z, about_point=P(about))
     mob.shift(P(to) - P(about))
     return scale_strokes(mob, z)
+
+
+def keepout_mask(pad: float = 0.02) -> VGroup:
+    """Background-coloured cover of the user's PowerPoint overlays (title band y > TITLE_BAND_Y,
+    top-left block x < CORNER_X_MAX, y > CORNER_Y_MIN), held in the foreground during the camera
+    moves only (``masked_play``). A zoom about a node sweeps its neighbours and the river
+    up and left through the overlays; they now pass under the overlay edge instead of being drawn
+    there. Every held frame is clear on its own (the anchors in ``A``); the cover is white on white."""
+    out = 0.3
+    x0, x1 = -config.frame_width / 2 - out, config.frame_width / 2 + out
+    y1 = config.frame_height / 2 + out
+    band = Polygon(P((x0, TITLE_BAND_Y - pad)), P((x1, TITLE_BAND_Y - pad)), P((x1, y1)), P((x0, y1)))
+    corner = Polygon(P((x0, CORNER_Y_MIN - pad)), P((CORNER_X_MAX + pad, CORNER_Y_MIN - pad)),
+                     P((CORNER_X_MAX + pad, y1)), P((x0, y1)))
+    return VGroup(band, corner).set_fill(col(BG), opacity=1.0).set_stroke(width=0)
+
+
+def masked_play(scene, *anims, **kw):
+    """``scene.play`` with ``keepout_mask()`` on top of everything for that play only."""
+    mask = keepout_mask()
+    scene.add_foreground_mobject(mask)
+    scene.play(*anims, **kw)
+    scene.remove(mask)
 
 
 def win(t0: float, dur: float, total: float, func=EASE):
@@ -462,7 +488,7 @@ class PipeScene(Scene):
         if detail is not None:
             start = camera(detail.copy(), 1.0 / z, to, about).set_opacity(0.0)
             anims.append(ReplacementTransform(start, detail))
-        self.play(*anims, *extra, run_time=run_time, rate_func=EASE)
+        masked_play(self, *anims, *extra, run_time=run_time, rate_func=EASE)
 
     def detail_mobjects(self) -> list:
         keep = {id(self.st["spine"]), id(self.st["river"])}
@@ -488,7 +514,7 @@ class PipeScene(Scene):
         anims = [Transform(self.st["spine"], end["spine"]), Transform(self.st["river"], end["river"])]
         if len(det):
             anims.append(Transform(det, camera(det.copy(), 1.0 / z, to, about).set_opacity(0.0), remover=True))
-        self.play(*anims, run_time=run_time, rate_func=EASE)
+        masked_play(self, *anims, run_time=run_time, rate_func=EASE)
         # empty Group wrappers left behind by LaggedStart / Succession (no points in their family)
         keep = {id(self.st["spine"]), id(self.st["river"])}
         stray = [m for m in self.mobjects if id(m) not in keep and not m.family_members_with_points()]
@@ -976,8 +1002,9 @@ class PipeThree(Scene):
         clip_open(self, "pipe_h_three")
         sp, rv = st["spine"], st["river"]
         shrink = (A["h_scale"], (0.0, SPINE_Y), (A["h_x"], A["h_ys"]["ee"]))
-        self.play(Transform(sp, strip(None, "ee")), Transform(rv, camera(rv.copy(), *shrink).set_opacity(0.0),
-                                                             remover=True), run_time=1.6, rate_func=EASE)
+        masked_play(self, Transform(sp, strip(None, "ee")),       # node 0 grazes the top-left block
+                    Transform(rv, camera(rv.copy(), *shrink).set_opacity(0.0), remover=True),
+                    run_time=1.6, rate_func=EASE)
         mm, tt = sp.copy(), sp.copy()
         self.add(mm, tt)
         self.play(Transform(mm, strip(None, "mumu")), Transform(tt, strip(None, "tautau")), run_time=1.4,

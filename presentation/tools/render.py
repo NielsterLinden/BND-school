@@ -126,6 +126,11 @@ def main() -> None:
         grab(out, png, t)
         print("frame:", png)
     print("work clip:", out)
+    try:
+        from keepout import report as keepout_report
+        print(keepout_report(out, step=5 if a.quality == "l" else 15)[1])
+    except Exception as e:                                   # the scan never blocks a render
+        print("keepout scan skipped:", e)
 
     if a.quality == "h" and not a.no_deliver:
         n = clip_number(sec, a.name, scene_file, a.scene_class)

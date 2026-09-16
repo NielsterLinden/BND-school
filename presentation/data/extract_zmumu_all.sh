@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Freeze every Z -> mumu number the presentation prints: runs the five extractors in dependency order.
+# Freeze every Z -> mumu number the presentation prints: runs the six extractors in dependency order.
 #
 #   cd /project/atlas/Users/nterlind/BND-school && source setup.sh && bash presentation/data/extract_zmumu_all.sh [--check-only]
 #
@@ -27,4 +27,5 @@ else
 fi
 python "$HERE/extract_zmumu_corrections.py" $MODE                          # needs zmumu_sr_stack.json
 python "$HERE/extract_zmumu_events.py" --files 6 --seed 20260915 $MODE
+python "$HERE/extract_zmumu_tnp.py" $MODE                                  # tag-and-probe cell, maps, two T&P events
 echo "[extract_zmumu_all] done in $(( $(date +%s) - t0 )) s: $(ls -1 "$HERE"/zmumu_*.json | xargs -n1 basename | tr '\n' ' ')"

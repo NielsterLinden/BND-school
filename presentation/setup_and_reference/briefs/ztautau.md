@@ -184,7 +184,7 @@ The general form of these rules is in `../06-chapter-anchors.md` §B5 so every c
 
 ## 8c. Critique round 1, follow-up (deck owner, 2026-09-16) — applied
 1. **Chapter-identifier corner**: the slide deck carries a chapter identifier in its top-left 3 cm × 9 cm; like the
-   title band nothing is drawn at x < −5.85, y > 0.22 (fixed anchor, `06` §A1, checked with `tools/zonecheck.py`).
+   title band nothing is drawn at x < −5.85, y > 0.22 (fixed anchor, `06` §A1, checked with `tools/keepout.py`).
    Moved for it: the τ decay diagram of 5-01 (+0.6 in x), the 5-03 zoom centre, the corrections column (g, now
    below y = 0.22), the parked BDT input list (x = −5.75, the shape panels +0.7), N_fake / the recipe (f, below the
    corner), the impact bars (i2), the μ_Z slider (top) and the pulls (below) of i1, the post-fit panels of i3/i4.

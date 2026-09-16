@@ -18,7 +18,7 @@ Checks (assert, exit 1 on the first failure):
   kappa_from_pt     kappa_from_pt(45) == 0.28 exactly, clipping
   event_from_json / pair_from_json / muon_in_jet on hand-made records
   colour_key, pull_plot, value_grid(6x4), slider, spine(7), clock, rain
-                    build and stay inside x in [-7, 7], y in [-4, 2.7]
+                    build and stay inside x in [-7, 7], y in [-4, 2.7], outside the top-left block
   add_state / check_order on a fake scene (placeholders and trackers skipped)
 """
 from __future__ import annotations
@@ -35,7 +35,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(ROOT))
 
-from manim import Group, Mobject, Square, VGroup, ValueTracker  # noqa: E402
+from manim import DOWN, Group, Mobject, Square, VGroup, ValueTracker  # noqa: E402
 from style.bnd_style import *  # noqa: E402,F401,F403
 from style.bnd_style import _CAP_H  # noqa: E402
 
@@ -57,6 +57,8 @@ def inside(m, label):
     y0, y1 = m.get_bottom()[1], m.get_top()[1]
     ok(f"{label} bbox inside frame", X_MIN <= x0 and x1 <= X_MAX and Y_MIN <= y0 and y1 <= Y_MAX,
        f"x [{x0:.2f}, {x1:.2f}] y [{y0:.2f}, {y1:.2f}]")
+    ok(f"{label} bbox outside the top-left block", not (x0 < CORNER_X_MAX and y1 > CORNER_Y_MIN),
+       f"x0 {x0:.2f} y1 {y1:.2f}")
 
 
 # --- 1. log DataAxes ---------------------------------------------------------
@@ -226,7 +228,7 @@ sp = spine(icons, NODE_X, done=(0, 1))
 ok("spine: 7 boxes, 6 arrows, icons shrunk", len(sp.boxes) == 7 and len(sp.arrows) == 6
    and all(abs(i.width - 0.8 * 1.24) < 1e-9 for i in sp.icons) and len(sp.nodes) == 7)
 ok("spine: node centres", np.allclose(sp.centers[:, 0], NODE_X) and np.allclose(sp.nodes[3].get_center(), [0, 0, 0]))
-inside(sp, "spine(7)")
+inside(sp.copy().shift(DOWN * 0.55), "spine(7) at SPINE_Y = -0.55 (s2_pipeline)")
 
 clk = clock((-1.4, 2.3))
 ok("clock: hand follows turns", abs(clk.hand.get_end()[1] - (2.3 + 0.72 * 0.32)) < 1e-9)

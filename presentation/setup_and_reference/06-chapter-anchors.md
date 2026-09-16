@@ -22,16 +22,17 @@ Three levels:
 ### A1. Frame and format
 - 1920×1080, 60 fps, white background (`white_background(self)`), MP4 only, delivered by `tools/render.py`.
 - **y > 2.7 stays empty**: that is the user's PowerPoint title band.
-- **The top-left corner stays empty: x < −5.85 and y > 0.22** (the top-left 3 cm × 9 cm of the
-  33.867 × 19.05 cm slide, 1 cm = 0.42 scene units): the deck's chapter identifier sits there
-  (deck owner, 16 Sep 2026). Same status as the title band — every clip, every frame, including
-  labels, parked plots, lists and keys. Constants `TITLE_BAND_Y`, `CHAPTER_ID_X`, `CHAPTER_ID_Y`
-  in `style/bnd_style.py`; `python tools/zonecheck.py clips/<S>_<section>` checks the rendered
-  MP4s (sampled frames, ink pixels per zone) and saves the worst frame with the zones outlined.
+- **The top-left block stays empty**: 3 cm wide × 9 cm tall on the slide, x < −5.85 and
+  y > 0.22 (the 33.867 × 19.05 cm slide, 1 cm = 0.42 scene units): the deck's chapter identifier
+  sits there (deck owner, 16 Sep 2026). Same status as the title band — every clip, every frame,
+  including labels, parked plots, lists and keys. Constants `TITLE_BAND_Y`, `CORNER_X_MAX`,
+  `CORNER_Y_MIN` and `in_keepout(mobject)` in `style/bnd_style.py`; check the rendered MP4 with
+  `python tools/keepout.py <mp4>` (`render.py` / `deliver_chain.py` print it after every render).
   Layout recipe: long left-hand columns (value lists, corrections, pulls, impact names) start
   at x ≥ −5.8 above y = 0.22 or live entirely below it; a camera zoom picks its centre so the
-  corner stays white. Known exception: a zoomed event display (3-02, 5-03 and the clip opening
-  on it) fills the title band; it was accepted before this rule and is listed by `zonecheck`.
+  block stays white. Known exceptions (`keepout.EXEMPT`): a zoomed event display fills the title
+  band (3-02 `ee_detector`, 5-03 `tautau_detector` and 5-04 `tautau_a1_event`, which opens on it;
+  accepted before this rule) and the outro rays.
 - **No narrative text** in a clip. Allowed: physics symbols (`e^\pm`, `\tau_h`, `p_T`,
   `m_{\ell\ell}`, `\mu_Z`), axis ticks, numbers that *are* the data.
 - A clip ends on its last change (`self.wait(0.1)`); PowerPoint rests on the last frame.

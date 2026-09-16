@@ -27,6 +27,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from render import ROOT, clip_number, grab, next_version, section_dir  # noqa: E402
+from keepout import report as keepout_report  # noqa: E402
 
 QDIR = {"l": "480p15", "m": "720p30", "h": "1080p60"}
 
@@ -117,6 +118,7 @@ def main() -> None:
         grab(out, c["t0"], "0")
         grab(out, c["final"], "end")
         c["dur"] = duration(out)
+        c["keepout"] = keepout_report(out, step=5 if a.quality == "l" else 15)[1]
         dst = ""
         if a.quality == "h" and not a.no_deliver and (not only or c["name"] in only):
             n = clip_number(sec, c["name"], scene_file, "+".join(c["classes"]))
@@ -132,6 +134,10 @@ def main() -> None:
     for name, cls, dur, dst in rows:
         print(f"  {name:28s} {dur:5.2f} s  {cls:28s} {dst}")
     print(f"  total {sum(r[2] for r in rows):.1f} s in {len(rows)} clips")
+
+    print("\nkeep-out (title band y > 2.7, top-left 3 x 9 cm):")
+    for c in clips:
+        print("  " + c["keepout"])
 
     print("\nseams (final of k vs t0 of k+1):")
     if a.seam_before:

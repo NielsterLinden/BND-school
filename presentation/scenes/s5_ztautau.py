@@ -28,32 +28,32 @@ from manim import Polygon, Transform  # noqa: E402
 from channel_common import *  # noqa: E402,F401,F403
 
 TAU_COL = CHANNEL_LINE["tautau"]
-# vertices of the tau decay diagram (scene units); tune here only
+# vertices of the tau decay diagram (scene units); tune here only. The whole diagram sits
+# 0.8 right of its first cut so the tau label clears the top-left block (x < -5.85, y > 0.22).
 _TD = {
-    "tau_in": (-5.6, 0.7),
-    "v1":     (-2.8, 0.7),      # tau -> nu W*
-    "nu_out": (-0.9, 2.3),
-    "v2":     (-0.7, -0.5),     # W* -> d ubar
-    "d_out":  ( 1.1,  0.4),
-    "u_out":  ( 1.1, -1.4),
-    "blob":   ( 1.7, -0.5),
+    "tau_in": (-4.8, 0.7),
+    "v1":     (-2.0, 0.7),      # tau -> nu W*
+    "nu_out": (-0.1, 2.3),
+    "v2":     ( 0.1, -0.5),     # W* -> d ubar
+    "d_out":  ( 1.9,  0.4),
+    "u_out":  ( 1.9, -1.4),
+    "blob":   ( 2.5, -0.5),
     "pi_ang": (0.28, -0.32),    # pi-, pi0 directions (rad)
     "pi_len": 1.9,
 }
 SW = 4.5
-TD_SHIFT = (0.8, 0.0)       # clears the chapter-identifier corner (x < -5.85, y > 0.22) for the tau label
 # 5-03 ends zoomed (scale 0.5) on this centre, a little left of the detector centre so the outer ring
-# stays out of the chapter-identifier corner; s5_ztautau_story.A["zoom_503"] opens on it
+# stays out of the top-left block; s5_ztautau_story.A["zoom_503"] opens on it
 ZOOM_503 = (-0.2, -0.25)
 
 
 def _pt(k):
-    return np.array([_TD[k][0] + TD_SHIFT[0], _TD[k][1] + TD_SHIFT[1], 0.0])
+    return np.array([*_TD[k], 0.0])
 
 
 class TauDecay(Scene):
-    """(5-01) The diagram sits TD_SHIFT to the right of its original place so the tau label,
-    sliding in from the left, stays out of the chapter-identifier corner."""
+    """(5-01) The diagram sits 0.8 right of its first cut (_TD) so the tau label, sliding in
+    from the left, stays out of the top-left block."""
 
     def build_parts(self) -> dict:
         tau = fline(_pt("tau_in"), _pt("v1"), color=TAU_COL, sw=SW)

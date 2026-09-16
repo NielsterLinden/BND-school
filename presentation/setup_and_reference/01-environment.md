@@ -45,7 +45,8 @@ Under the hood: `manim render --quality l|h --media_dir work/<name>/media -o <na
 
 Look at every frame the render script writes (Read the PNG). Check: nothing
 clipped at the 16:9 border, no overlaps, motion reads, the last frame is the
-intended held state, the top ~15 % of the frame is free for the user's title.
+intended held state, the top ~15 % of the frame is free for the user's title and the
+top-left block (3 × 9 cm: x < −5.85, y > 0.22) is empty (`tools/keepout.py` prints it).
 
 ## Known traps (full list: MANIM_PHYSICS_RECIPES.md §6)
 

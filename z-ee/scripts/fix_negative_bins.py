@@ -60,7 +60,7 @@ def process_file(path, floor, dry_run):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("folder", help="Folder containing ROOT histogram files")
+    parser.add_argument("--folder", help="Folder containing ROOT histogram files")
     parser.add_argument("--floor", type=float, default=1e-6, help="Replacement value for negative bins (default: 1e-6)")
     parser.add_argument("--pattern", default="*.root", help="Glob pattern for files to process (default: *.root)")
     parser.add_argument("--dry-run", action="store_true", help="Report negative bins without modifying any file")

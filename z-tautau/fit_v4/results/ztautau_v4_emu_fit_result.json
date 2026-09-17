@@ -1,0 +1,667 @@
+{
+ "job": "ztautau_v4_emu",
+ "poi": "mu_Z",
+ "poi_value": 0.977873,
+ "poi_err_up": 0.0555849,
+ "poi_err_down": 0.0527021,
+ "poi_err": 0.0541435,
+ "nps": {
+  "BTag": [
+   -0.0661205,
+   0.759999,
+   0.759999
+  ],
+  "ElectronID": [
+   -0.132494,
+   0.990154,
+   0.990154
+  ],
+  "ElectronReco": [
+   0.605446,
+   0.920176,
+   0.920176
+  ],
+  "ElectronScale": [
+   -0.148852,
+   0.894371,
+   0.894371
+  ],
+  "EmuTrigger": [
+   -0.597924,
+   0.867066,
+   0.867066
+  ],
+  "JES": [
+   -0.690124,
+   0.836774,
+   0.836774
+  ],
+  "L1Prefiring": [
+   0.165479,
+   0.989444,
+   0.989444
+  ],
+  "Lumi": [
+   -0.135138,
+   0.988394,
+   0.988394
+  ],
+  "MET_Unclustered": [
+   1.08179,
+   0.393753,
+   0.393753
+  ],
+  "MuonID": [
+   -0.0462446,
+   0.992703,
+   0.992703
+  ],
+  "MuonIso": [
+   0.293106,
+   0.984328,
+   0.984328
+  ],
+  "MuonScale": [
+   0.0236936,
+   0.989162,
+   0.989162
+  ],
+  "PDF": [
+   -0.0270309,
+   0.99178,
+   0.99178
+  ],
+  "PS_FSR": [
+   0.45722,
+   0.929125,
+   0.929125
+  ],
+  "PS_ISR": [
+   -0.0580895,
+   0.983162,
+   0.983162
+  ],
+  "Pileup": [
+   -0.817798,
+   0.779849,
+   0.779849
+  ],
+  "QCDOSSS_emu": [
+   -0.92019,
+   0.81436,
+   0.81436
+  ],
+  "QCDScale": [
+   -0.00153185,
+   0.941658,
+   0.941658
+  ],
+  "TopPt": [
+   1.13601,
+   0.30425,
+   0.30425
+  ],
+  "XS_DYll": [
+   -0.0244131,
+   0.993032,
+   0.993032
+  ],
+  "XS_DYlowmass": [
+   -0.11176,
+   0.985961,
+   0.985961
+  ],
+  "XS_DYtautau_out": [
+   -0.22481,
+   0.98785,
+   0.98785
+  ],
+  "XS_SingleTop": [
+   0.0880278,
+   0.983915,
+   0.983915
+  ],
+  "XS_WJets": [
+   -0.501681,
+   0.95742,
+   0.95742
+  ],
+  "XS_WW": [
+   -0.142543,
+   0.860038,
+   0.860038
+  ],
+  "XS_WZ": [
+   -0.00534446,
+   0.993371,
+   0.993371
+  ],
+  "XS_ZZ": [
+   -0.000807152,
+   0.993367,
+   0.993367
+  ],
+  "gamma_stat_emu_CRtt_bin_0": [
+   1.00405,
+   0.0043188,
+   0.0043188
+  ],
+  "gamma_stat_emu_CRtt_bin_1": [
+   0.999052,
+   0.00485713,
+   0.00485713
+  ],
+  "gamma_stat_emu_CRtt_bin_2": [
+   0.995512,
+   0.00559171,
+   0.00559171
+  ],
+  "gamma_stat_emu_CRtt_bin_3": [
+   0.996439,
+   0.00545441,
+   0.00545441
+  ],
+  "gamma_stat_emu_CRtt_bin_4": [
+   1.00278,
+   0.00651503,
+   0.00651503
+  ],
+  "gamma_stat_emu_SR_bin_0": [
+   0.984975,
+   0.0395474,
+   0.0395474
+  ],
+  "gamma_stat_emu_SR_bin_1": [
+   0.951171,
+   0.0475635,
+   0.0475635
+  ],
+  "gamma_stat_emu_SR_bin_10": [
+   1.0187,
+   0.0151282,
+   0.0151282
+  ],
+  "gamma_stat_emu_SR_bin_11": [
+   0.98285,
+   0.0178403,
+   0.0178403
+  ],
+  "gamma_stat_emu_SR_bin_12": [
+   0.99857,
+   0.0201279,
+   0.0201279
+  ],
+  "gamma_stat_emu_SR_bin_13": [
+   0.963502,
+   0.0170296,
+   0.0170296
+  ],
+  "gamma_stat_emu_SR_bin_14": [
+   1.01036,
+   0.0117516,
+   0.0117516
+  ],
+  "gamma_stat_emu_SR_bin_2": [
+   0.975102,
+   0.03153,
+   0.03153
+  ],
+  "gamma_stat_emu_SR_bin_3": [
+   1.00724,
+   0.0174536,
+   0.0174536
+  ],
+  "gamma_stat_emu_SR_bin_4": [
+   1.00468,
+   0.0104124,
+   0.0104124
+  ],
+  "gamma_stat_emu_SR_bin_5": [
+   0.995244,
+   0.00854582,
+   0.00854582
+  ],
+  "gamma_stat_emu_SR_bin_6": [
+   0.994545,
+   0.0081041,
+   0.0081041
+  ],
+  "gamma_stat_emu_SR_bin_7": [
+   1.00409,
+   0.00860955,
+   0.00860955
+  ],
+  "gamma_stat_emu_SR_bin_8": [
+   1.01102,
+   0.0103299,
+   0.0103299
+  ],
+  "gamma_stat_emu_SR_bin_9": [
+   0.98138,
+   0.012417,
+   0.012417
+  ],
+  "mu_ttbar": [
+   1.08794,
+   0.0568407,
+   0.0568407
+  ]
+ },
+ "nll": 87047.4711,
+ "err_decomp": {
+  "TOT_ERROR": 0.0543891,
+  "STAT_ERROR": 0.0169386,
+  "SYST_ERROR": 0.048772,
+  "MCSTAT_ERROR": 0.017104,
+  "TOTSYST_ERROR": 0.0516842,
+  "STAT_ERR_NO_NF": 0.0167035,
+  "NF_ERROR": 0.00281268,
+  "alpha_BTag": -0.0102638,
+  "alpha_ElectronID": -0.00860615,
+  "alpha_ElectronReco": -0.00623661,
+  "alpha_ElectronScale": -0.0102316,
+  "alpha_EmuTrigger": -0.0399271,
+  "alpha_JES": -0.00186756,
+  "alpha_L1Prefiring": 0.00193779,
+  "alpha_Lumi": -0.00872749,
+  "alpha_MET_Unclustered": 0.004328,
+  "alpha_MuonID": -0.00302119,
+  "alpha_MuonIso": -0.00393068,
+  "alpha_MuonScale": -0.0033914,
+  "alpha_PDF": -0.00431515,
+  "alpha_PS_FSR": -0.00315138,
+  "alpha_PS_ISR": -0.00265307,
+  "alpha_Pileup": 0.00752999,
+  "alpha_QCDOSSS_emu": 0.00398013,
+  "alpha_QCDScale": -0.0054615,
+  "alpha_TopPt": -0.00094558,
+  "alpha_XS_DYll": 0.000202655,
+  "alpha_XS_DYlowmass": 0.00189892,
+  "alpha_XS_DYtautau_out": 0.00262771,
+  "alpha_XS_SingleTop": 0.00175397,
+  "alpha_XS_WJets": 0.00418398,
+  "alpha_XS_WW": 0.0123762,
+  "alpha_XS_WZ": 0.000397085,
+  "alpha_XS_ZZ": -8.56078e-07,
+  "gamma_stat_emu_CRtt_bin_0": 0.00169632,
+  "gamma_stat_emu_CRtt_bin_1": -0.00197207,
+  "gamma_stat_emu_CRtt_bin_2": -0.00143844,
+  "gamma_stat_emu_CRtt_bin_3": -0.00113511,
+  "gamma_stat_emu_CRtt_bin_4": 0.00115062,
+  "gamma_stat_emu_SR_bin_0": 0.0066537,
+  "gamma_stat_emu_SR_bin_1": 0.00124031,
+  "gamma_stat_emu_SR_bin_10": -0.00165286,
+  "gamma_stat_emu_SR_bin_11": 0.0071323,
+  "gamma_stat_emu_SR_bin_12": 0.00612431,
+  "gamma_stat_emu_SR_bin_13": 0.00482626,
+  "gamma_stat_emu_SR_bin_14": 0.0019832,
+  "gamma_stat_emu_SR_bin_2": -0.000437919,
+  "gamma_stat_emu_SR_bin_3": -0.00431711,
+  "gamma_stat_emu_SR_bin_4": -0.000414776,
+  "gamma_stat_emu_SR_bin_5": 0.00150204,
+  "gamma_stat_emu_SR_bin_6": 0.00050619,
+  "gamma_stat_emu_SR_bin_7": -0.00467219,
+  "gamma_stat_emu_SR_bin_8": -0.00695496,
+  "gamma_stat_emu_SR_bin_9": -0.00502379,
+  "mu_ttbar": 0.00281268
+ },
+ "grouped_impact": {
+  "Background modelling": 0.00304977,
+  "Background normalisation": 0.0156261,
+  "Electron efficiency": 0.048227,
+  "Electron energy": 0.0114265,
+  "Fakes": 0.00475927,
+  "FullSyst": 0.0539125,
+  "Gammas": 0.02192,
+  "Jets": 0.00225715,
+  "L1 prefiring": 0.00199894,
+  "Luminosity": 0.00890621,
+  "MET": 0.0108879,
+  "Muon efficiency": 0.0050738,
+  "Muon momentum": 0.0034212,
+  "NormFactors": 0.049197,
+  "Pileup": 0.00968538,
+  "Signal modelling": 0.0084898,
+  "b tagging": 0.013409
+ },
+ "grouped_impact_file": "GroupedImpact_mu_Z.txt",
+ "poi_stat_only": {
+  "value": 0.93929,
+  "err_up": 0.00485201,
+  "err_down": 0.00483723,
+  "err": 0.00484462
+ },
+ "table_prefit": [
+  {
+   "Region": "e#mu",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 52984.83529663167,
+     "Error": 3351.5643373104367
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 189.14325138053877,
+     "Error": 14.608874084509226
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [none]",
+     "Yield": 275.490128239282,
+     "Error": 58.751827160126076
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [none]",
+     "Yield": 498.59626462884995,
+     "Error": 39.181061378868385
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
+     "Yield": 2040.4103179203942,
+     "Error": 164.54643771254524
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 848.8181128633819,
+     "Error": 100.14359540728398
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 5341.562517528089,
+     "Error": 383.8832074431711
+    },
+    {
+     "Sample": "W+jets [none]",
+     "Yield": 1400.6749358941681,
+     "Error": 203.38343365123137
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 3447.0226096340325,
+     "Error": 392.4200281659667
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 194.20811154121557,
+     "Error": 22.358931901021563
+    },
+    {
+     "Sample": "ZZ [none]",
+     "Yield": 56.677678846817976,
+     "Error": 6.7302570268889506
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 15240.600290937811,
+     "Error": 423.0358216510992
+    },
+    {
+     "Sample": "Total",
+     "Yield": 82518.03951604625,
+     "Error": 4114.653875796069
+    },
+    {
+     "Data": "Data",
+     "Yield": 79300
+    }
+   ]
+  },
+  {
+   "Region": "e#mu t#bar{t} CR",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 116.41235537334323,
+     "Error": 25.858200997242946
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 0.860776359578295,
+     "Error": 0.3516008970314963
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [none]",
+     "Yield": 4.9999999999999996e-06,
+     "Error": 5.037509007366503e-07
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [none]",
+     "Yield": 15.785341984848106,
+     "Error": 1.61481559341164
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
+     "Yield": 9.375030847470391,
+     "Error": 3.0744458603209113
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 3420.563354277215,
+     "Error": 389.6896508206306
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 37650.31282889225,
+     "Error": 2046.9009376816457
+    },
+    {
+     "Sample": "W+jets [none]",
+     "Yield": 352.15295305054883,
+     "Error": 58.23256776085599
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 1989.3220335101562,
+     "Error": 247.37317805696537
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 82.0538843622922,
+     "Error": 10.12859904129534
+    },
+    {
+     "Sample": "ZZ [none]",
+     "Yield": 4.9093389141948345,
+     "Error": 0.6788627128594532
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 424.27340675100226,
+     "Error": 13.325392571299412
+    },
+    {
+     "Sample": "Total",
+     "Yield": 44066.021309322896,
+     "Error": 2428.971986670265
+    },
+    {
+     "Data": "Data",
+     "Yield": 45931
+    }
+   ]
+  }
+ ],
+ "table_postfit": [
+  {
+   "Region": "e#mu",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 50341.198046183126,
+     "Error": 380.65390974693986
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 180.75737843004356,
+     "Error": 12.49606437280669
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [none]",
+     "Yield": 269.745511454747,
+     "Error": 43.272068878342694
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [none]",
+     "Yield": 480.54392266523877,
+     "Error": 34.01736821001294
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
+     "Yield": 1943.2137275672535,
+     "Error": 135.9019364775646
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 834.7741431518475,
+     "Error": 87.45552891209253
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 5616.684004684432,
+     "Error": 234.71758068453798
+    },
+    {
+     "Sample": "W+jets [none]",
+     "Yield": 1297.6387357202132,
+     "Error": 141.09920343065102
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 3324.321823757404,
+     "Error": 274.3125036774924
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 186.4943259560559,
+     "Error": 20.52361241942768
+    },
+    {
+     "Sample": "ZZ [none]",
+     "Yield": 54.693631809451084,
+     "Error": 6.17819781597234
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 14806.952279422125,
+     "Error": 311.0332354491727
+    },
+    {
+     "Sample": "Total",
+     "Yield": 79337.01753080194,
+     "Error": 281.14010758636806
+    },
+    {
+     "Data": "Data",
+     "Yield": 79300
+    }
+   ]
+  },
+  {
+   "Region": "e#mu t#bar{t} CR",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 124.05097182049049,
+     "Error": 11.482069308650782
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 0.6818194405012378,
+     "Error": 0.2157531807656678
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [none]",
+     "Yield": 4.9335996853377935e-06,
+     "Error": 4.959885302123406e-07
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [none]",
+     "Yield": 15.621740284620676,
+     "Error": 1.2972331248859152
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
+     "Yield": 9.843015598079099,
+     "Error": 1.8186067479505037
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 3373.63142437428,
+     "Error": 362.1905201383319
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 39663.87574366614,
+     "Error": 478.4116380131596
+    },
+    {
+     "Sample": "W+jets [none]",
+     "Yield": 283.3105018286705,
+     "Error": 39.68772319681694
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 1958.9907640715005,
+     "Error": 166.10673375298092
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 80.1770864171792,
+     "Error": 8.93417686956346
+    },
+    {
+     "Sample": "ZZ [none]",
+     "Yield": 5.3171126489726115,
+     "Error": 0.6502093329992669
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 412.61257103102434,
+     "Error": 10.817039838839957
+    },
+    {
+     "Sample": "Total",
+     "Yield": 45928.11275611505,
+     "Error": 216.31377417566756
+    },
+    {
+     "Data": "Data",
+     "Yield": 45931
+    }
+   ]
+  }
+ ],
+ "gof": {
+  "gof_probability": 0.0363299,
+  "gof_chi2_ndf": null
+ },
+ "poi_asimov": {
+  "value": 1.0,
+  "err_up": 0.0564956,
+  "err_down": 0.0520573
+ },
+ "tau_id_sf": {},
+ "tau_es": {},
+ "mu_ttbar": [
+  1.08794,
+  0.0568407,
+  0.0568407
+ ],
+ "prediction": {
+  "sigma_fid_tautau_pb": 4.500519576488651,
+  "sigma_tautau_60_120_pb": 1944.8826556737133,
+  "sigma_tautau_pb": 2019.6751428185198
+ },
+ "sigma_60_120_pb": {
+  "value": 1901.848237151621,
+  "up": 108.10610792735778,
+  "down": 102.49940020758162,
+  "stat": 9.422217411329985,
+  "note": "sigma(pp -> Z/gamma* -> tautau, 60 < m_LHE < 120 GeV) = mu_Z x aMC@NLO prediction normalised to 6077.22 pb (m > 50)"
+ },
+ "lumi_pb": 16393.381,
+ "channels": [
+  "emu"
+ ],
+ "tau_id_fixed": true
+}

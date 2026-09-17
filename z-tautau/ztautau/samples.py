@@ -26,7 +26,8 @@ from . import config
 API = "https://opendata.cern.ch/api/records/{recid}?format=json"
 MANIFEST = Path("/dcache/atlas/sjankovy/BND/_manifest/manifest.json")
 DCACHE_MC = Path("/dcache/atlas/sjankovy/BND/mc")
-DCACHE_TAU = Path("/dcache/atlas/sjankovy/BND/collision_data/Tau")
+DCACHE_DATA = Path("/dcache/atlas/sjankovy/BND/collision_data")
+DCACHE_TAU = DCACHE_DATA / "Tau"
 
 # Cross-section references (pb, 13 TeV):
 #   [SMP]  CMS StandardModelCrossSectionsat13TeV TWiki (NNLO where available)
@@ -40,6 +41,23 @@ SAMPLES = {
     "data_2016H": dict(recid=30565, is_mc=False, group="data", fit_sample="Data",
                        dataset="/Tau/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD",
                        dcache=DCACHE_TAU / "Run2016H__30565"),
+    # ---- v4 lepton channels: SingleMuon (mu tau_h), SingleElectron (e tau_h, EOS only), MuonEG (e mu) ----
+    "data_mu_2016G": dict(recid=30530, is_mc=False, group="data_mu", fit_sample="Data", stream="SingleMuon", v4=True,
+                          dataset="/SingleMuon/Run2016G-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD",
+                          dcache=DCACHE_DATA / "SingleMuon/Run2016G__30530"),
+    "data_mu_2016H": dict(recid=30563, is_mc=False, group="data_mu", fit_sample="Data", stream="SingleMuon", v4=True,
+                          dataset="/SingleMuon/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD",
+                          dcache=DCACHE_DATA / "SingleMuon/Run2016H__30563"),
+    "data_el_2016G": dict(recid=30529, is_mc=False, group="data_el", fit_sample="Data", stream="SingleElectron", v4=True,
+                          dataset="/SingleElectron/Run2016G-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD", dcache=None),
+    "data_el_2016H": dict(recid=30562, is_mc=False, group="data_el", fit_sample="Data", stream="SingleElectron", v4=True,
+                          dataset="/SingleElectron/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD", dcache=None),
+    "data_emu_2016G": dict(recid=30528, is_mc=False, group="data_emu", fit_sample="Data", stream="MuonEG", v4=True,
+                           dataset="/MuonEG/Run2016G-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD",
+                           dcache=DCACHE_DATA / "MuonEG/Run2016G__30528"),
+    "data_emu_2016H": dict(recid=30561, is_mc=False, group="data_emu", fit_sample="Data", stream="MuonEG", v4=True,
+                           dataset="/MuonEG/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD",
+                           dcache=DCACHE_DATA / "MuonEG/Run2016H__30561"),
     # ---- Drell-Yan: signal (LHE tau tau) and Z -> ee / mumu with lepton -> tau_h fakes ----------
     "DY_NLO": dict(recid=35669, is_mc=True, group="DY", split_lhe=True, keep_pdf=True,
                    dataset="DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8",
@@ -75,6 +93,13 @@ SAMPLES = {
                   dataset="WJetsToLNu_TuneCP5_13TeV-amcatnloFXFX-pythia8",
                   dcache=DCACHE_MC / "WJetsToLNu_TuneCP5_13TeV-amcatnloFXFX-pythia8__69745",
                   xsec_pb=61526.7, xsec_ref="[SMP] NNLO 3 x 20508.9"),
+    # W+jets for the lepton channels (v4): the madgraph MLM sample has unit weights and 81M events, which the
+    # fake-factor determination regions (m_T > 70 GeV) and the AR fractions need; the tau_h tau_h channel keeps
+    # the aMC@NLO sample above (v1-v3 chain unchanged).
+    "WJets_LO": dict(recid=69747, is_mc=True, group="wjets_lo", fit_sample="WJets", v4_only=True,
+                     dataset="WJetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8",
+                     dcache=DCACHE_MC / "WJetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8__69747",
+                     xsec_pb=61526.7, xsec_ref="[SMP] NNLO 3 x 20508.9"),
     # ---- top (EOS only) ----------------------------------------------------------------------------
     "TTTo2L2Nu": dict(recid=67801, is_mc=True, group="top", fit_sample="TTbar", max_files=20,
                       dataset="TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8", dcache=None,
@@ -103,6 +128,9 @@ SAMPLES = {
                xsec_pb=16.523, xsec_ref="[XSDB] MCFM NLO"),
 }
 for _k, _s in SAMPLES.items():
+    _s.setdefault("stream", "Tau" if not _s["is_mc"] else None)
+    _s.setdefault("v4", True)            # part of the v4 (four-channel) skim / ntuple production
+    _s.setdefault("v4_only", False)      # not part of the v1-v3 tau_h tau_h chain
     _s.setdefault("split_lhe", False)
     _s.setdefault("keep_pdf", False)
     _s.setdefault("max_files", None)
@@ -110,9 +138,17 @@ for _k, _s in SAMPLES.items():
     _s.setdefault("optional", False)
     _s["key"] = _k
 
-DATA_KEYS = [k for k, s in SAMPLES.items() if not s["is_mc"]]
-MC_KEYS = [k for k, s in SAMPLES.items() if s["is_mc"]]
+# the tau_h tau_h chain (v1-v3): Tau stream data and the simulation registered before v4
+DATA_KEYS = [k for k, s in SAMPLES.items() if not s["is_mc"] and s["stream"] == "Tau"]
+MC_KEYS = [k for k, s in SAMPLES.items() if s["is_mc"] and not s["v4_only"]]
 NOMINAL_MC_KEYS = [k for k in MC_KEYS if SAMPLES[k]["group"] != "DY_alt"]
+# v4: the three lepton-channel data streams and every simulation sample (skims_v4)
+DATA_KEYS_V4 = {stream: [k for k, s in SAMPLES.items() if not s["is_mc"] and s["stream"] == stream]
+                for stream in ("SingleMuon", "SingleElectron", "MuonEG")}
+V4_SKIM_KEYS = [k for k, s in SAMPLES.items() if s["v4"] and (s["is_mc"] or s["stream"] != "Tau")]
+MC_KEYS_V4 = [k for k, s in SAMPLES.items() if s["is_mc"] and s["v4"]]
+# W+jets: NLO sample in tau_h tau_h, madgraph in the lepton channels
+MC_KEYS_LEPTON = [k for k in MC_KEYS_V4 if k != "WJets" and SAMPLES[k]["group"] != "DY_alt"]
 # the Drell-Yan signal group: inclusive sample (normalisation, acceptance) + jet-binned samples (statistics)
 DY_INCLUSIVE = "DY_NLO"
 DY_STITCHED = ["DY_NLO", "DY_0J", "DY_1J", "DY_2J"]

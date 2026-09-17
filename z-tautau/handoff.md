@@ -1,3 +1,37 @@
+# Handoff – Z → τ⁺τ⁻: v4 (τhτh + μτh + eτh + eμ) on top of v3 (τhτh)
+
+## v4 in short (17 September 2026)
+
+- Four channels fitted together (`run_v4.py`, `docs/10-v4-plan.md`): the v3 τhτh categories plus μτh (SingleMuon,
+  IsoMu24), eτh (SingleElectron, Ele27_WPTight; EOS only) and eμ (MuonEG cross triggers) with an eμ tt̄ control region.
+  **No μμ channel**; second-muon / second-electron vetoes make every channel orthogonal to the z-mumu and z-ee
+  selections (the eμ channel shares events with z-mumu's tt̄ *control* region `mumu_CRemu`, which a joint fit must drop).
+- Signal: Z/γ*→ττ with 60 < m_LHE < 120 GeV in every decay (one μ_Z); the rest of the DY ττ simulation is a background.
+- τh ID scale factors free per decay mode (TRExFitter NormFactors, products on the τhτh templates), τh energy scale with a
+  3 % prior: both measured in situ as in CMS arXiv:1801.03535. Every source of the paper's Table 2 is implemented from an
+  official correction, measured in situ, or replaced by a stated estimate (`docs/10-v4-plan.md` section 9).
+- Lepton-channel fakes: per-process fake factors (multijet / W+jets / tt̄) with AR fractions, OS/SS and m_T corrections,
+  same-sign validation (0.97 ± 0.01 μτh, 1.03 ± 0.02 eτh). Two things learned: the isolated-lepton same-sign region is ~50 %
+  W+jets, and the W+jets fake factor is charge-correlated (OS 0.08, SS 0.04).
+- Outputs: `output_v4/RESULTS.md`, `output_v4/results.json`, `output_v4/plots/`, `fit_v4/ztautau_v4.config`,
+  `fit_v4/fitinputs/ztautau_v4.root`, `fit_v4/results/ztautau_v4_fit_result.json`, `external/trigger_insitu_v4.json`.
+- Caches: `skims_v4/` (17 GB), `ntuples_v4/` (2.9 GB) under `/data/atlas/users/sjankovy/BND-school-cache/ztautau/`.
+
+**Result (v4, four channels, τh ID scale factors and energy scale fitted in situ)**
+
+```
+σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 2057 +90 −86 pb   (stat ±9;  prediction 1945 pb: aMC@NLO acceptance, NNLO normalisation)
+μ_Z = 1.058 +0.046 −0.044   (stat ±0.005, syst ±0.045),   goodness of fit p = 0.09,   μ_tt̄ = 1.16 ± 0.05
+τh ID SF (Tight):  DM0 0.959 ± 0.043 (POG 0.90 ± 0.13)  DM1 0.934 ± 0.038 (POG 0.89 ± 0.05)  DM10 0.866 ± 0.038 (POG 0.94 ± 0.15)  DM11 0.768 ± 0.051 (POG 0.81 ± 0.15)
+τh energy scale:   DM0 -0.7 ± 0.9 %  DM1 -0.2 ± 0.6 %  DM10 +0.5 ± 1.0 %  DM11 +3.4 ± 2.2 %
+per channel alone (POG SFs fixed):  tautau 1.043 +0.079 −0.072  mutau 1.049 +0.056 −0.051  etau 1.017 +0.068 −0.063  emu 0.978 +0.056 −0.053
+v3 (τhτh alone):  μ_Z = 1.071 +0.114 −0.100,  σ = 2082 +222 −194 pb
+```
+
+Largest impacts on μ_Z: NormFactors 4.1 %, Electron efficiency 3.9 %, Tau trigger 2.0 %, Gammas 1.8 %, Fakes 1.7 %, MET 1.5 %; data statistics 0.5 %.
+
+---
+
 # Handoff – Z → τ⁺τ⁻ (τhτh), v3
 
 ## Team

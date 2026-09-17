@@ -51,8 +51,17 @@ def collinear_mass(t1, t2, metx, mety):
     return m, x1, x2, valid
 
 
-def likelihood_mass(t1, t2, metx, mety, covxx, covxy, covyy, n=None, chunk=None):
-    """Posterior-median di-tau mass on an n x n grid of visible-energy fractions (see module doc)."""
+def _leptonic_weight(x):
+    """Visible-energy-fraction spectrum of tau -> l nu nu (unpolarised, massless): (5 - 9x^2 + 4x^3) / 3."""
+    return (5.0 - 9.0 * x ** 2 + 4.0 * x ** 3) / 3.0
+
+
+def likelihood_mass(t1, t2, metx, mety, covxx, covxy, covyy, n=None, chunk=None, leptonic=(False, False)):
+    """Posterior-median di-tau mass on an n x n grid of visible-energy fractions (see module doc).
+
+    `leptonic[i]`: leg i is an electron/muon from tau -> l nu nu: x_i runs over (0, 1] with the three-body
+    spectrum (5 - 9x^2 + 4x^3)/3 instead of the flat two-body phase space of tau -> tau_h nu.
+    """
     n = n or config.MASS_GRID_N
     chunk = chunk or config.MASS_CHUNK
     n_ev = len(metx)
@@ -65,6 +74,10 @@ def likelihood_mass(t1, t2, metx, mety, covxx, covxy, covyy, n=None, chunk=None)
         pt2, phi2, m2 = t2[0][s], t2[2][s], t2[3][s]
         xmin1 = np.clip((m1 / config.M_TAU) ** 2, 1e-4, 0.99)
         xmin2 = np.clip((m2 / config.M_TAU) ** 2, 1e-4, 0.99)
+        if leptonic[0]:
+            xmin1 = np.full_like(xmin1, 1e-3)
+        if leptonic[1]:
+            xmin2 = np.full_like(xmin2, 1e-3)
         x1 = xmin1[:, None] + (1 - xmin1)[:, None] * u[None, :]           # (ev, n)
         x2 = xmin2[:, None] + (1 - xmin2)[:, None] * u[None, :]
         a1 = 1.0 / x1 - 1.0
@@ -85,6 +98,10 @@ def likelihood_mass(t1, t2, metx, mety, covxx, covxy, covyy, n=None, chunk=None)
         chi2 -= chi2.min(axis=(1, 2), keepdims=True)                      # numerical safety
         mgrid = mvis[s][:, None, None] / np.sqrt(x1[:, :, None] * x2[:, None, :])
         like = np.exp(-0.5 * chi2) * mgrid ** (-config.MASS_PRIOR_POW)
+        if leptonic[0]:
+            like = like * _leptonic_weight(x1)[:, :, None]
+        if leptonic[1]:
+            like = like * _leptonic_weight(x2)[:, None, :]
         # posterior median of m over the grid
         lf = like.reshape(len(like), -1)
         mf = mgrid.reshape(len(mgrid), -1)
@@ -96,8 +113,8 @@ def likelihood_mass(t1, t2, metx, mety, covxx, covxy, covyy, n=None, chunk=None)
     return out
 
 
-def all_masses(t1, t2, metx, mety, covxx, covxy, covyy):
-    """dict(m_vis, m_col, m_tt, pt_tt, mt_tot) for numpy inputs t = (pt, eta, phi, mass)."""
+def all_masses(t1, t2, metx, mety, covxx, covxy, covyy, leptonic=(False, False)):
+    """dict(m_vis, m_col, m_tt, pt_tt, mt_tot, met) for numpy inputs t = (pt, eta, phi, mass)."""
     m_col, _, _, _ = collinear_mass(t1, t2, metx, mety)
     p1x, p1y = t1[0] * np.cos(t1[2]), t1[0] * np.sin(t1[2])
     p2x, p2y = t2[0] * np.cos(t2[2]), t2[0] * np.sin(t2[2])
@@ -108,6 +125,23 @@ def all_masses(t1, t2, metx, mety, covxx, covxy, covyy):
         return np.sqrt(np.maximum(2 * (pt * qt - ptx * qx - pty * qy), 0.0))
 
     mt_tot = np.sqrt(mt(p1x, p1y, metx, mety) ** 2 + mt(p2x, p2y, metx, mety) ** 2 + mt(p1x, p1y, p2x, p2y) ** 2)
-    return {"m_vis": visible_mass(t1, t2), "m_col": m_col,
-            "m_tt": likelihood_mass(t1, t2, metx, mety, covxx, covxy, covyy),
+    return {"m_vis": visible_mass(t1, t2), "m_col": m_col, "mt_1": mt(p1x, p1y, metx, mety), "mt_2": mt(p2x, p2y, metx, mety),
+            "m_tt": likelihood_mass(t1, t2, metx, mety, covxx, covxy, covyy, leptonic=leptonic),
             "pt_tt": np.hypot(p1x + p2x + metx, p1y + p2y + mety), "mt_tot": mt_tot, "met": met}
+
+
+def dzeta(pt1, phi1, pt2, phi2, metx, mety, k: float = 0.85):
+    """Topological ttbar discriminant of the e mu channel: D_zeta = P_zeta^miss - k P_zeta^vis, with zeta the
+    bisector of the two visible transverse momenta (CMS, arXiv:1801.03535 eq. 4)."""
+    ux = np.cos(phi1) + np.cos(phi2)
+    uy = np.sin(phi1) + np.sin(phi2)
+    norm = np.maximum(np.hypot(ux, uy), 1e-9)
+    ux, uy = ux / norm, uy / norm
+    p_vis = (pt1 * np.cos(phi1) + pt2 * np.cos(phi2)) * ux + (pt1 * np.sin(phi1) + pt2 * np.sin(phi2)) * uy
+    p_miss = metx * ux + mety * uy
+    return p_miss - k * p_vis
+
+
+def transverse_mass(pt, phi, metx, mety):
+    met = np.hypot(metx, mety)
+    return np.sqrt(np.maximum(2.0 * (pt * met - pt * np.cos(phi) * metx - pt * np.sin(phi) * mety), 0.0))

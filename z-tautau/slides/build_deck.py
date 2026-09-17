@@ -73,7 +73,19 @@ class ZDeck(Deck):
             out.append(cur)
         return out
 
+    GREEK = {"τh": "tau_h", "τ": "tau", "μ": "mu", "γ": "gamma", "ζ": "zeta", "η": "eta", "Δ": "Delta", "σ": "sigma", "→": "->",
+             "×": "x", "−": "-", "±": "+-", "≤": "<=", "≥": ">=", "≈": "~", "⁻¹": "^-1", "√": "sqrt", "ε": "eps"}
+
+    @classmethod
+    def _ascii(cls, txt):
+        parts = txt.split("$")
+        for i in range(0, len(parts), 2):          # even parts are outside $...$
+            for k, v in cls.GREEK.items():
+                parts[i] = parts[i].replace(k, v)
+        return "$".join(parts)
+
     def _lines(self, p, lines, x, y, size, max_w):
+        lines = [self._ascii(t) if isinstance(t, str) else t for t in lines]
         k = self.k
         expanded = []
         for ln in lines:                       # "**Heading**: rest" -> a green heading line + a normal line
@@ -129,20 +141,91 @@ def pdf(name):
     return str(F / f"{name}.pdf")
 
 
-d = ZDeck(str(HERE / "ztautau_slides.pdf"), author="Samuel Jankovych", date="15 September 2026")
+d = ZDeck(str(HERE / "ztautau_slides.pdf"), author="Samuel Jankovych", date="17 September 2026")
+R4 = json.loads((HERE.parent / "output_v4/results.json").read_text()) if (HERE.parent / "output_v4/results.json").exists() else None
 
 # ---------------------------------------------------------------- cover
-d.cover(r"$Z\rightarrow\tau_h\tau_h$ cross section with CMS Open Data",
-        f"v3: DeepTau {WP} on both legs, MC-subtracted closure-corrected fake factor, fiducial signal, k-fold BDT categories.",
+F4 = R4["fit"]["combined"] if R4 else None
+S4 = F4["sigma_60_120_pb"] if F4 else None
+d.cover(r"$Z\rightarrow\tau\tau$ cross section with CMS Open Data: $\tau_h\tau_h$, $\mu\tau_h$, $e\tau_h$, $e\mu$",
+        f"v4: four channels fitted together, tau ID scale factors and energy scale measured in situ; v3 (tau_h tau_h alone, DeepTau {WP}) kept for reference.",
+        ([rf"v4: $\sigma(pp\rightarrow Z/\gamma^*\rightarrow\tau\tau,\ 60<m<120\ \mathrm{{GeV}}) = {S4['value']:.0f}\,^{{+{S4['err_up']:.0f}}}_{{-{S4['err_down']:.0f}}}$ pb (stat. $\pm{S4['stat']:.0f}$; NLO {S4['prediction']:.0f} pb),   $\mu_Z = {F4['mu']:.3f}\,^{{+{F4['mu_err_up']:.3f}}}_{{-{F4['mu_err_down']:.3f}}}$,   GoF p = {F4['gof_probability']}",
+          "v4 tau ID SF per decay mode: " + ", ".join(f"{k} {v['value']:.2f}±{0.5*(v['err_up']+v['err_down']):.2f} (POG {v['pog'][0]:.2f}±{v['pog'][1]:.2f})" for k, v in (F4.get('tau_id_sf') or {}).items())] if F4 else []) +
         [rf"$\sigma(pp\rightarrow Z/\gamma^*\rightarrow\tau\tau,\ 60<m<120\ \mathrm{{GeV}}) = {s60['value']:.0f} \pm {s60['stat']:.0f}\ (\mathrm{{stat}})\ ^{{+{s60['err_up']:.0f}}}_{{-{s60['err_down']:.0f}}}\ (\mathrm{{syst}})\ \pm {s60['acceptance']:.0f}\ (\mathrm{{acc}})$ pb    (NNLO 1945 pb)",
          rf"$\sigma_\mathrm{{fid}}(\tau_h\tau_h) = {sf['value']:.2f} \pm {sf['stat']:.2f} \pm {sf['syst']:.2f}$ pb  (pred. 4.50 pb),   $\mu_Z = {FIT['mu']:.3f}\,^{{+{FIT['mu_err_up']:.3f}}}_{{-{FIT['mu_err_down']:.3f}}}$   (v2.1 Medium: {MED['mu']:.3f} +{MED['up']:.3f} -{MED['down']:.3f}; v1: {H['v1']['mu']:.3f} +{H['v1']['up']:.3f} -{H['v1']['down']:.3f})",
          f"CMS 2016 Tau dataset, Run2016G+H, 16.4 fb-1; both taus hadronic, DeepTau {WP}; fakes from data (same-sign fake factor); TRExFitter v1.8.0.",
          f"Precision +{100*FIT['mu_err_up']:.0f}/-{100*FIT['mu_err_down']:.0f} % (v2.1 Medium: +{100*MED['up']:.0f}/-{100*MED['down']:.0f} %, v1: +19/-16 %): tau ID SFs {100*GI['Tau ID']:.0f} %, fakes {100*GI['Fakes']:.0f} %, MC stat {100*GI['Gammas']:.0f} %, trigger {100*GI['Tau trigger']:.0f} %; data statistics {100*FIT['mu_stat']:.1f} %; GoF p = {FIT['gof_probability']:.2f}.",
-         "Sections: 1 result   2 what changed (v1 -> v2 -> v2.1 -> v3)   3 fit   4 BDT categories   5 fakes   6 signal definition and selection   7 findings, next steps",
-         "z-tautau/: README.md, CLAUDE.md, REVIEW.md, docs/00-09, review/  (code, documentation, review studies)"])
+         "Sections: 1 v4: four channels (this update)   2 v3 result   3 what changed (v1 -> v3)   4 fit   5 BDT categories   6 fakes   7 signal definition and selection   8 findings, next steps",
+         "z-tautau/: README.md, CLAUDE.md, REVIEW.md, docs/00-10, review/  (code, documentation, review studies)"])
+
+# ---------------------------------------------------------------- 1. v4: four channels
+if R4:
+    d.divider(r"1.  v4: $\tau_h\tau_h + \mu\tau_h + e\tau_h + e\mu$")
+    Y4 = R4["yields_prefit"]["regions"]
+    tid = F4.get("tau_id_sf") or {}
+    tes = F4.get("tau_es") or {}
+    GI4 = F4["grouped_impact"]
+    per = {ch: R4["fit"][ch] for ch in ("tautau", "mutau", "etau", "emu") if ch in R4["fit"]}
+    d.text_figure(r"v4 result: $\sigma(Z/\gamma^*\rightarrow\tau\tau)$ from four channels",
+                  [rf"$\mu_Z = {F4['mu']:.3f}\,^{{+{F4['mu_err_up']:.3f}}}_{{-{F4['mu_err_down']:.3f}}}$   (stat. $\pm{F4['mu_stat']:.3f}$" + (rf", expected $^{{+{F4['mu_expected_asimov']['err_up']:.3f}}}_{{-{F4['mu_expected_asimov']['err_down']:.3f}}}$)" if F4.get("mu_expected_asimov") else ")"),
+                   rf"$\sigma(60$-$120) = {S4['value']:.0f}\,^{{+{S4['err_up']:.0f}}}_{{-{S4['err_down']:.0f}}}$ pb   (NLO {S4['prediction']:.0f} pb, NNLO 1945 pb)",
+                   f"goodness of fit p = {F4['gof_probability']};  $\\mu_{{t\\bar{{t}}}}$ = {F4['mu_ttbar'][0]:.3f} ± {0.5*(F4['mu_ttbar'][1]+F4['mu_ttbar'][2]):.3f}" if F4.get("mu_ttbar") else f"goodness of fit p = {F4['gof_probability']}",
+                   "",
+                   "**Signal**: Z/γ*→ττ with 60 < m_LHE < 120 GeV, every decay; the rest of the DY ττ simulation is a background. Theory variations move only A×ε.",
+                   "**Channels**: the v3 τhτh categories (Tau stream), μτh (SingleMuon, IsoMu24, m_T < 40), eτh (SingleElectron, Ele27, m_T < 40), eμ (MuonEG cross triggers, D_ζ > −20, b veto) + an eμ tt̄ control region. No μμ: every channel vetoes a second muon or electron, so v4 is orthogonal to the Z→μμ and Z→ee selections.",
+                   "**Per channel alone** (same model, tau_h ID SFs fixed to the POG values)"]
+                  + [rf"{ch}:  $\mu_Z = {f['mu']:.3f}\,^{{+{f['mu_err_up']:.3f}}}_{{-{f['mu_err_down']:.3f}}}$,  $\sigma = {f['sigma_60_120_pb']['value']:.0f}$ pb" for ch, f in per.items()]
+                  + [
+                   "",
+                   f"v3 (τhτh alone, POG τ ID SF): σ = {R4['v3_reference']['value']:.0f} +{R4['v3_reference']['err_up']:.0f} −{R4['v3_reference']['err_down']:.0f} pb" if R4.get("v3_reference") else ""],
+                  pdf("v4_summary"), size=13)
+    d.text_figure(r"$\tau_h$ identification and energy scale measured in situ",
+                  ["**τh ID scale factors** are free parameters of the fit (one per decay mode; products on the τhτh templates via TRExFitter expressions). The eμ channel fixes μ_Z without any τh, μτh/eτh carry one SF, τhτh two: the fit separates them.", ""]
+                  + [f"{k}:  {v['value']:.3f} +{v['err_up']:.3f} −{v['err_down']:.3f}   (TauPOG {v['pog'][0]:.3f} ± {v['pog'][1]:.3f})" for k, v in tid.items()]
+                  + ["", "**τh energy scale**: 3 % prior per decay mode (the paper's choice), constrained by the m_ττ shapes:"]
+                  + [f"{k}: pull {v['pull']:+.2f}, constraint {v['constraint']:.2f} → {v['constraint']*v['prior_pct']:.1f} %" for k, v in tes.items()]
+                  + ["", "CMS (2.3 fb⁻¹, five channels): τh ID to 2.2 %, τh ES to 0.9 %."],
+                  pdf("v4_tauid"), size=13)
+    d.text_figure("Uncertainty budget of the four-channel fit",
+                  ["**Grouped impacts on** $\mu_Z$"] + [f"{k}:  {100*v:.2f} %" for k, v in sorted(GI4.items(), key=lambda kv: -kv[1]) if k != "FullSyst"]
+                  + [f"data statistics:  {100*F4['mu_stat']:.2f} %", "", f"Total $^{{+{100*F4['mu_err_up']:.1f}}}_{{-{100*F4['mu_err_down']:.1f}}}$ % (v3: +{100*FIT['mu_err_up']:.0f}/−{100*FIT['mu_err_down']:.0f} %)."],
+                  pdf("v4_impacts"), split=0.42)
+    d.panels(r"Post-fit $m_{\tau\tau}$: $\mu\tau_h$ per decay mode (each region measures SF(DM) $\times$ $\mu_Z$)",
+             [pdf(f"v4_postfit_mutau_SR_dm{k}") for k in (0, 1, 10, 11)], [f"DM {k}" for k in (0, 1, 10, 11)], ncols=2)
+    d.panels(r"Post-fit $m_{\tau\tau}$: $e\tau_h$ per decay mode",
+             [pdf(f"v4_postfit_etau_SR_dm{k}") for k in (0, 1, 10, 11)], [f"DM {k}" for k in (0, 1, 10, 11)], ncols=2)
+    d.panels(r"Post-fit $m_{\tau\tau}$: $e\mu$ signal region and $t\bar{t}$ control region (no $\tau_h$: fixes $\mu_Z$ and $\mu_{t\bar{t}}$)",
+             [pdf("v4_postfit_emu_SR"), pdf("v4_postfit_emu_CRtt")], [r"$e\mu$", r"$e\mu$ $t\bar{t}$ CR"], ncols=2)
+    d.panels(r"Post-fit $m_{\tau\tau}$: the $\tau_h\tau_h$ categories in the four-channel fit",
+             [pdf(f"v4_postfit_tautau_SR{k}") for k in range(3)], ["BDT < 0.55 (m > 110 GeV)", "0.55 < BDT < 0.90", "BDT > 0.90"], ncols=3)
+    d.panels("Ranking and pulls (four-channel fit)", [pdf("v4_ranking"), pdf("v4_pulls")], ["ranking", "pulls and constraints"])
+    d.tables("Prefit yields per region (v4)", [{"title": "events, prefit; Fakes = jet->tau_h (mu tau_h, e tau_h, tau_h tau_h) or multijet (e mu)",
+             "headers": ["region"] + [k for k in ("Data", "DYtautau", "DYtautau_out", "Fakes", "TTbar", "DYee", "DYmumu", "WW", "WJets")],
+             "rows": [[r] + [f"{Y4[r].get(k, 0):.0f}" for k in ("Data", "DYtautau", "DYtautau_out", "Fakes", "TTbar", "DYee", "DYmumu", "WW", "WJets")] for r in Y4],
+             "best_cols": []}])
+    fk = R4.get("fakes", {})
+    d.text_figures(r"Jet$\rightarrow\tau_h$ fakes in $\mu\tau_h$ / $e\tau_h$: the paper's method",
+                   ["FF per process: multijet (same-sign DR, W/top jet fakes subtracted → pure), W+jets (m_T > 70, no b jet), tt̄ (simulation); applied in the AR with the fractions R_p(N_jets, m_T) from simulation (multijet = data − simulation).",
+                    "Corrections: multijet OS/SS from the anti-isolated-lepton sidebands; W m_T extrapolation r_W from the W simulation.",
+                    "**Found on the way**: the same-sign region with an isolated lepton is ~50 % W+jets, and the W FF is charge-correlated (OS quark-like ≈ 0.08, SS gluon-like ≈ 0.04): the same-sign validation needs the same-sign W FF.", ""]
+                   + [f"{ch}: C(OS/SS) = {v['osss']['C']:.2f} ± {v['osss']['stat']:.2f}, r_W = " + ", ".join(f"{g} {w['r']:.2f}" for g, w in v['w_mt'].items()) + f", same-sign closure {v['closure_ss']['ratio']:.3f} ± {v['closure_ss']['stat']:.3f}, {v['sr_fakes']:.0f} fakes in the SR" for ch, v in fk.items() if ch != "emu"],
+                   [pdf("v4_ff_mutau"), pdf("v4_ff_etau")], [r"$\mu\tau_h$", r"$e\tau_h$"], size=12)
+    d.text_figures("Trigger efficiencies in situ and the eμ multijet estimate",
+                   ["**Triggers**: Ele27 and the eμ cross-trigger legs measured on eμ events of the other single-lepton stream (tt̄ and Z→ττ→eμ), data and simulation, SF = ratio ± stat ⊕ 2 %. IsoMu24, muon ID/iso, electron reco/ID from the Muon / EGM POG json files.",
+                    "**eμ multijet**: same-sign data − simulation × OS/SS from the isolation sidebands (0.15–0.5) in bins of ΔR(e,μ); the second sideband (> 0.3) gives the systematic.", ""]
+                   + ([f"eμ: {fk['emu']['ss_region']['data']} same-sign data, {fk['emu']['ss_region']['mc']:.0f} simulated → {fk['emu']['sr_multijet']:.0f} multijet events in the SR ({100*fk['emu']['sr_multijet']/max(Y4['emu_SR']['Data'],1):.0f} % of the data)"] if "emu" in fk else []),
+                   [pdf("v4_trigger"), pdf("v4_emu_osss")], ["in-situ trigger SFs", r"$e\mu$ OS/SS"], size=12)
+    d.bullets("v4: systematic uncertainties vs the CMS paper (arXiv:1801.03535, Table 2)",
+              ["**From official corrections**: muon ID / iso / IsoMu24 (Muon POG), electron reco / ID (EGM), e→τh and μ→τh rates at the channel working points (TAU), b-tagging (BTV + efficiencies from tt̄), JES total (JME), pileup, L1 prefiring, MET unclustered energy.",
+               "**Measured in situ**: τh ID SF per decay mode (free), τh energy scale (3 % prior), Ele27 and eμ cross-trigger efficiencies, tt̄ normalisation (μ_tt̄ from the eμ control region), multijet OS/SS, fake factors and their closure.",
+               "**Estimates (stated)**: muon momentum scale ±0.2 %, electron energy scale ±0.5 % / 1 % (barrel / endcap), W+jets/single-top/diboson normalisations 10 % (shared conventions; paper 15 %), 30 % on the W/tt̄ part of the τhτh fakes (paper).",
+               "**Not included**: SM H→ττ (≤ 0.2 % of the signal), EWK Z (0.3 %). Luminosity 1.2 % (record 1059).",
+               "",
+               "Orthogonality: no μμ channel; every channel vetoes a second muon (loose, pT > 10, iso < 0.3) or electron (WP90, pT > 10, iso < 0.3). Known overlap with z-mumu's tt̄ *control* region (eμ events of the SingleMuon stream): drop it in a joint fit.",
+               "Everything reproducible: python run_v4.py --from 3 (docs/10-v4-plan.md)."], size=13)
 
 # ---------------------------------------------------------------- 1. result
-d.divider("1.  Result")
+d.divider("2.  Result")
 d.image(r"Method in one picture", pdf("flow"))
 d.text_figure(r"$\sigma(Z/\gamma^*\rightarrow\tau\tau)$ and $\mu_Z$",
               [f"**Nominal (v3, DeepTau {WP})**",
@@ -170,7 +253,7 @@ d.text_figure("Uncertainty budget",
               pdf("impacts"), split=0.42)
 
 # ---------------------------------------------------------------- 2. what changed
-d.divider("2.  What changed: v1 -> v2 -> v2.1 -> v3")
+d.divider("3.  What changed: v1 -> v2 -> v2.1 -> v3")
 d.tables("Review findings and the v2 answers", [{
     "title": "REVIEW.md findings (v1) and what v2 does",
     "headers": ["finding", "v2", "effect"],
@@ -249,7 +332,7 @@ d.bullets("How the issues were addressed, in one list",
            f"Tight working point run through the same chain (v2.1 cross-check), then made the nominal (v3): +{100*FIT['mu_err_up']:.0f}/-{100*FIT['mu_err_down']:.0f} % instead of +{100*MED['up']:.0f}/-{100*MED['down']:.0f} %, closer to NNLO"], size=13)
 
 # ---------------------------------------------------------------- 3. the fit
-d.divider("3.  The fit: three BDT categories")
+d.divider("4.  The fit: three BDT categories")
 d.panels(r"Prefit $m_{\tau\tau}$ per category", [pdf(f"prefit_tautau_SR{k}") for k in range(3)],
          ["SR0: BDT < 0.55 (fake dominated; fitted above 110 GeV)", "SR1: 0.55 < BDT < 0.90", "SR2: BDT > 0.90 (signal dominated)"], ncols=3)
 d.panels(r"Post-fit $m_{\tau\tau}$ per category", [pdf(f"postfit_tautau_SR{k}") for k in range(3)],
@@ -266,7 +349,7 @@ d.tables("Prefit yields per category", [{"title": "events, prefit (MC-subtracted
                                          "col_w": [220, 170, 170, 170, 170], "rows": rows}])
 
 # ---------------------------------------------------------------- 4. BDT
-d.divider("4.  The k-fold BDT")
+d.divider("5.  The k-fold BDT")
 d.text_figures("Why a classifier, and what goes in",
                [f"**Why**: {100*Y['Fakes']['value']/Y['Data']['value']:.0f} % fakes even at Tight (80 % at Medium); every fake uncertainty scales with B/S.",
                 "A classifier keeps the signal and sorts the events by topology.",
@@ -294,7 +377,7 @@ d.panels("Does the fake factor survive the score?  (validation)",
           r"SR2: $p_T(\tau_1)$ data vs prediction (the trend behind section 7)"], ncols=3, accent=d.s.accent2)
 
 # ---------------------------------------------------------------- 5. fakes
-d.divider(r"5.  Jet$\rightarrow\tau_h$ fakes")
+d.divider(r"6.  Jet$\rightarrow\tau_h$ fakes")
 d.text_figures("The fake factor, MC subtracted and closure corrected",
                [rf"FF = [N(SS, $\tau_1$ {WPL}, $\tau_2$ {WPL}) - MC] / [N(SS, $\tau_1$ VVVL$\wedge\neg${WPL}, $\tau_2$ {WPL}) - MC]",
                 rf"$\times\ f(|\eta_1|)\,g(p_{{T,2}})$;  applied to OS events with $\tau_1$ failing {WP},",
@@ -317,7 +400,7 @@ d.panels(r"Same-sign closure in $N_{jets}$ and $m_{\tau\tau}$", [pdf("closure_nj
          [r"$N_{jets}$ (binned in the FF)", r"$m_{\tau\tau}$ (the fit variable, all categories)"], ncols=2, accent=d.s.accent2)
 
 # ---------------------------------------------------------------- 6. signal definition and selection
-d.divider("6.  Signal definition, mass, selection")
+d.divider("7.  Signal definition, mass, selection")
 d.text_figure("Fiducial vs non-fiducial Drell-Yan",
               ["**Fiducial volume**: 60 < m_LHE < 120 GeV, both taus hadronic, both visible taus",
                "pT > 40 GeV, |eta| < 2.1.  A = 0.231 % (+-3.7 %), sigma_fid(pred) = 4.50 pb.",
@@ -360,7 +443,7 @@ d.tables("Selection and cutflow", [
               [f"signal region (OS, both {WP})", f"{R['cutflow']['data_2016G'].get('SR', '-')}", f"{R['cutflow']['data_2016H'].get('SR', '-')}"]]}])
 
 # ---------------------------------------------------------------- 7. findings
-d.divider("7.  Findings and next steps")
+d.divider("8.  Findings and next steps")
 d.bullets("Findings",
           [rf"1. $\sigma(60$-$120) = {s60['value']:.0f}\,^{{+{s60['err_up']:.0f}}}_{{-{s60['err_down']:.0f}}} \pm {s60['acceptance']:.0f}$ pb, $\mu_Z = {FIT['mu']:.2f}$: ${(FIT['mu']-1)/FIT['mu_err_down']:.1f}\sigma$ above NNLO and $Z\rightarrow\mu\mu$ ($\mu_Z = 0.99$). Total $^{{+{100*FIT['mu_err_up']:.0f}}}_{{-{100*FIT['mu_err_down']:.0f}}}$ % (v2.1 Medium: +{100*MED['up']:.0f}/-{100*MED['down']:.0f} %, v1: +19/-16 %), data statistics {100*FIT['mu_stat']:.1f} %.",
            "2. The limit is external: the TauPOG tau ID scale factors (%.0f %%); Z->tautau is how those SFs are measured, and the two POG prescriptions (DM- vs pT-binned) differ by 14 %% on the yield." % (100 * GI["Tau ID"]),

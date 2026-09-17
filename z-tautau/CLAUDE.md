@@ -1,4 +1,4 @@
-# CLAUDE.md — z-tautau (Z → τhτh)
+# CLAUDE.md — z-tautau (Z → ττ: τhτh, and since v4 also μτh, eτh, eμ)
 
 Guidance for agents working in this folder. Read `README.md` for what the analysis is, `docs/00-overview.md`
 for the physics, and `REVIEW.md` for the review that led to the current (v2) set-up; this file is about
@@ -16,7 +16,25 @@ working on the code without breaking it.
   `ntuples_v1/` (the laptop bundle, ~330 MB), `bdt/` (the five fold models), `logs/`.
   `/data/atlas` is ~98 % full and `/project` is over quota: do not duplicate skims, keep plots small.
 
-## Running
+## v4 (four channels) in one paragraph
+
+`docs/10-v4-plan.md` is the design record. v4 adds μτh (SingleMuon), eτh (SingleElectron, EOS only) and eμ (MuonEG)
+to the τhτh chain and fits all four together; there is no μμ channel and every channel vetoes a second muon or
+electron (orthogonal to z-mumu / z-ee). The τhτh part **reuses the v1 skims, the v1 ntuples, the v3 fake factors, BDT
+and `fit/fitinputs/ztautau.root`** (Data and Fakes templates are copied from there); only its simulation templates are
+rebuilt. Everything v4-specific lives next to the v3 files with a `_v4` suffix: `ztautau/{analysis_v4,fakes_v4,leptons,pog}.py`,
+`scripts/step{2,3,3c,4,5,6}_*_v4.py`, `run_v4.py`, `fit_v4/`, `output_v4/`, and the caches `skims_v4/`, `ntuples_v4/`.
+The v3 chain (`run_all.py`, `fit/`, `output/`) is untouched and must stay runnable. The signal of the v4 fit is
+Z/γ*→ττ with 60 < m_LHE < 120 GeV (all decays; `DYtautau_out` is the rest); the τh ID scale factors are free
+NormFactors per decay mode (`TauIDSF_DM*`, products via TRExFitter `Expression` on the τhτh templates) and the τ
+energy scale has a 3 % prior, both constrained in situ.
+
+```bash
+python run_v4.py --from 3        # trigger efficiencies + fakes -> templates -> fit -> report (~1.5 h; needs v3 steps 3-4 outputs)
+python scripts/step5_fit_v4.py --channels mutau --job ztautau_v4_mutau --skip-ranking     # one channel alone (cross-check)
+```
+
+## Running (v3 τhτh chain)
 
 ```bash
 python run_all.py --from 3                  # normal iteration loop (~25 min): FF -> BDT -> histograms -> fits -> report
@@ -103,6 +121,16 @@ BND_TAUTAU_WP=Medium python run_all.py --from 3        # the same chain with ano
     stitching with a warning. The bin variable is `LHE_NpNLO` (partons of the NLO matrix element), **not**
     `LHE_Njets` (which also counts the real-emission parton: the 0J/1J/2J samples overlap in it and the
     stitched yield came out 7 % high).
+14. **v4 fake factors:** the same-sign region with an isolated lepton is ~50 % W+jets, and the W+jets FF is
+    charge-correlated (OS quark-like 0.08, SS gluon-like 0.04): subtract the simulated W/top *jet fakes* from the
+    multijet DR, and validate in same-sign events with the same-sign W FF (`docs/10-v4-plan.md` 5.1). Without both,
+    the same-sign closure was off by 16–19 %.
+15. **TRExFitter config strings:** `Expression:` values and `HistoChecks: NOCRASH` must be unquoted (the reader splits
+    on `:` / compares before removing quotes); `fitting/trexconfig.py` knows `NOCRASH`, `step5_fit_v4.py` strips the
+    quotes of `Expression`. With per-decay-mode templates some tiny systematic variations have "weird" bins:
+    `NOCRASH` is required, not cosmetic.
+16. **The skims keep leptons with I_rel < 0.5**: every isolation sideband must live below 0.5 (the eμ SB2 of the
+    paper, I_rel > 0.6, is not available).
 
 ## Where numbers come from
 
@@ -114,6 +142,10 @@ BND_TAUTAU_WP=Medium python run_all.py --from 3        # the same chain with ano
 | prefit yields per category, closure NPs, C_OS/SS per category | `output/data/yields.json` (step 4) |
 | μ, impacts, pulls, ranking | `fit/results/ztautau_fit_result.json` (step 5) |
 | everything collected | `output/results.json`, `output/RESULTS.md` (step 6) |
+| v4: in-situ trigger SFs, b-tag efficiencies | `external/trigger_insitu_v4.json`, `output_v4/data/btag_eff.json` (step 3c) |
+| v4: lepton-channel fake factors, fractions, OS/SS, r_W, same-sign closure | `output_v4/data/fakes_<channel>.json` (step 3) |
+| v4: yields, template and systematic registry | `output_v4/data/yields_v4.json`, `fit_v4/fitinputs/ztautau_v4.root.meta.json` (step 4) |
+| v4: μ, τh ID SFs, τES constraints, impacts | `fit_v4/results/ztautau_v4_fit_result.json` (step 5), `output_v4/RESULTS.md` (step 6) |
 
 ## Open issues (good next tasks)
 

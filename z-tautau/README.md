@@ -1,4 +1,41 @@
-# Z → τhτh cross section
+# Z → ττ cross section (τhτh; and since v4 also μτh, eτh, eμ)
+
+**v4 (17 September 2026): four channels.** μτh (SingleMuon), eτh (SingleElectron) and eμ (MuonEG) were added
+to the τhτh measurement below and the four are fitted together, following the CMS 13 TeV measurement
+(arXiv:1801.03535): the τh identification scale factors and the τh energy scale are measured in situ, jet→τh
+fakes in the lepton channels come from a per-process fake-factor method (multijet / W+jets / tt̄ fractions),
+the eμ multijet from same-sign data, tt̄ from an eμ control region, lepton efficiencies from the official POG
+corrections and in-situ trigger measurements. There is deliberately **no μμ channel** and every channel vetoes a
+second muon or electron, so v4 is orthogonal to the Z→μμ and Z→ee selections of the other groups.
+Design, selections, the systematics map against the paper's Table 2 and the findings:
+[`docs/10-v4-plan.md`](docs/10-v4-plan.md); numbers: [`output_v4/RESULTS.md`](output_v4/RESULTS.md).
+
+**Result (v4, four channels, τh ID scale factors and energy scale fitted in situ)**
+
+```
+σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 2057 +90 −86 pb   (stat ±9;  prediction 1945 pb: aMC@NLO acceptance, NNLO normalisation)
+μ_Z = 1.058 +0.046 −0.044   (stat ±0.005, syst ±0.045),   goodness of fit p = 0.09,   μ_tt̄ = 1.16 ± 0.05
+τh ID SF (Tight):  DM0 0.959 ± 0.043 (POG 0.90 ± 0.13)  DM1 0.934 ± 0.038 (POG 0.89 ± 0.05)  DM10 0.866 ± 0.038 (POG 0.94 ± 0.15)  DM11 0.768 ± 0.051 (POG 0.81 ± 0.15)
+τh energy scale:   DM0 -0.7 ± 0.9 %  DM1 -0.2 ± 0.6 %  DM10 +0.5 ± 1.0 %  DM11 +3.4 ± 2.2 %
+per channel alone (POG SFs fixed):  tautau 1.043 +0.079 −0.072  mutau 1.049 +0.056 −0.051  etau 1.017 +0.068 −0.063  emu 0.978 +0.056 −0.053
+v3 (τhτh alone):  μ_Z = 1.071 +0.114 −0.100,  σ = 2082 +222 −194 pb
+```
+
+Largest impacts on μ_Z: NormFactors 4.1 %, Electron efficiency 3.9 %, Tau trigger 2.0 %, Gammas 1.8 %, Fakes 1.7 %, MET 1.5 %; data statistics 0.5 %.
+
+```bash
+source ../setup.sh
+python run_v4.py --from 3           # trigger efficiencies + fakes, templates, four-channel fit, report (~1.5 h; needs the v3 outputs of steps 3-4)
+python run_v4.py                    # everything incl. the v4 skims (SingleMuon, SingleElectron from EOS, MuonEG, all simulation: ~1 h) and ntuples
+```
+
+v4 files sit next to the v3 ones with a `_v4` suffix (`ztautau/analysis_v4.py`, `fakes_v4.py`, `leptons.py`, `pog.py`;
+`scripts/step*_v4.py`; `fit_v4/`, `output_v4/`; caches `skims_v4/`, `ntuples_v4/`). The v3 τhτh chain below is unchanged
+and still runs on its own (`run_all.py`); v4 reuses its skims, ntuples, fake factors, BDT and `fit/fitinputs/ztautau.root`.
+
+---
+
+## The τhτh measurement (v3)
 
 CMS 2016 Open Data (Tau dataset, Run2016G+H, 13 TeV, 16.4 fb⁻¹). Both τ decay hadronically. Fakes from a
 data-driven fake factor (MC-subtracted, closure-corrected), Z→ττ and the small backgrounds from UL16
@@ -73,6 +110,7 @@ slides/                   the review deck: make_figures.py (dark vector figures 
 | [07-corrections-and-systematics](docs/07-corrections-and-systematics.md) | TauPOG corrections, every nuisance parameter |
 | [08-fit-and-results](docs/08-fit-and-results.md) | fit set-up, result, impacts, pulls, input for the combination |
 | [09-bdt](docs/09-bdt.md) | **the k-fold BDT**: inputs, training, validation, categories |
+| [10-v4-plan](docs/10-v4-plan.md) | **v4**: the four-channel measurement — channels, objects, orthogonality, fakes per channel, in-situ τh ID / ES, systematics vs the CMS paper, findings |
 | [REVIEW.md](REVIEW.md) | the review of v1 and what v2 did about it |
 
 ## What changed (v1 → v2 → v2.1 → v3)
@@ -103,3 +141,6 @@ the high-mass DY sample for the non-fiducial template, EWK Z.
 | skims | `/data/atlas/users/sjankovy/BND-school-cache/ztautau/skims_v1/` (DY re-skimmed; the rest links to the v1 skims of N. ter Linden) | 1.7 GB |
 | **ntuples (laptop)** | `/data/atlas/users/sjankovy/BND-school-cache/ztautau/ntuples_v1/` | **330 MB** |
 | BDT models | `/data/atlas/users/sjankovy/BND-school-cache/ztautau/bdt/` (Tight nominal; `bdt_medium/` the v2.1 models; recreated by step 3b in ~2 min) | 5 MB |
+| v4 skims | `/data/atlas/users/sjankovy/BND-school-cache/ztautau/skims_v4/` (SingleMuon, SingleElectron, MuonEG G+H, all simulation; `skim_cat` bitmask) | 17 GB |
+| **v4 ntuples** | `/data/atlas/users/sjankovy/BND-school-cache/ztautau/ntuples_v4/` (`<sample>_<channel>.root`, channels mutau / etau / emu / emu_mu / emu_el) | 2.9 GB |
+| SingleElectron NanoAOD | CERN EOS only (`root://eospublic.cern.ch//eos/opendata/cms/Run2016{G,H}/SingleElectron/...`, 151 files, 257 GB; no dCache copy) | |

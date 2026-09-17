@@ -17,7 +17,7 @@ from __future__ import annotations
 _KEYWORDS = {"TRUE", "FALSE", "HIST", "NTUP", "SPLUSB", "BONLY", "CRSR", "CRONLY", "SIGNAL",
              "BACKGROUND", "DATA", "GHOST", "CONTROL", "VALIDATION", "HISTO", "OVERALL",
              "SHAPE", "STAT", "ONESIDED", "TWOSIDED", "ABSMEAN", "MAXIMUM", "NONE", "ALL",
-             "MERGE", "SYSTS", "GAMMAS", "ASIMOV", "STANDARD", "POISSON", "GAUSSIAN"}
+             "MERGE", "SYSTS", "GAMMAS", "ASIMOV", "STANDARD", "POISSON", "GAUSSIAN", "NOCRASH"}
 
 
 def _fmt(value):

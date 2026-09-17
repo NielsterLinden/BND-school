@@ -1,294 +1,181 @@
-## Latest ee intake — reference and repaired templates integrated
+# Z → ee ⊕ Z → μμ ⊕ Z → τhτh: TRExFitter MultiFit
 
-The combination manifest now uses sigma_reference_pb = 1954.1032472811223 from
-z-ee/z-ee.ipynb at commit 85c3a52: inclusive DY cross section times the generator-weighted
-LHE ee fraction in 60 <= m < 120 GeV, divided by the full Runs-tree weight sum.
-The generated ee config includes constant reference_ee = 2000 / 1954.1032472811223.
-All six current datasets/z-ee ROOT paths are used directly; sizes and SHA256 hashes
-are recorded in inputs.json. All 6 nominal and 44 variation histograms pass the audit,
-with no negative-bin warnings. The delivery floors nonpositive contents to 1e-6 by
-default and preserves variances; its effect remains part of the measurement review.
-The updated archive reports mu_signal = 1.05087 +/- 0.0202394.
+One profile-likelihood fit (TRExFitter v1.8.0 MultiFit) of the three BND-school channels on CMS Open
+Data 2016 G+H (16.4 fb⁻¹, √s = 13 TeV). Shared nuisance parameters are fitted jointly, and the μμ and ττ
+acceptance uncertainties are inside the likelihood.
 
-The missing-reference and negative-bin-presence blockers are resolved. ee measurement
-review (trigger treatment, inclusive-DY theory envelopes, flooring effects) and common
-observable/event orthogonality remain pending. Acceptance uncertainty stays deferred
-until after nominal MultiFit. No fit has been run. Earlier intake statements below
-are historical and superseded by this update.
+> **σ(pp → Z/γ\* → ℓℓ, 60 < m_ℓℓ < 120 GeV) = 1948 ⁺³³₋₃₂ pb**
+> = 1948 ± 0.5 (stat) ⁺³³₋₃₂ (syst, including 20.7 pb luminosity and 10.6 pb acceptance) pb,
+> per lepton flavour, assuming lepton universality.
+>
+> aMC@NLO (NNLO-normalised): 1954 ⁺⁵⁶₋₈₂ pb. CMS (2024): 1952 ± 49 pb.
 
-## Acceptance workflow decision — 16 September 2026
+All numbers: `output/result.json`. All figures: `output/plots/` (PDF and PNG).
 
-User instruction supersedes the earlier requirement for external acceptance refits:
-first make the nominal MultiFit work, then evaluate acceptance following the channel analyses.
-`inputs.json` now selects `acceptance.method: postfit_deferred`. `combine.py --run`
-runs the nominal fit without requiring signed acceptance modes. Its `fit_result.json`
-records `acceptance_status: pending_postfit`, with in-fit errors only. It does not
-claim a final acceptance-inclusive result or assign a zero acceptance error.
+| | figure |
+|---|---|
+| each channel and the combination against the prediction | `summary` |
+| each channel against the published ATLAS/CMS measurement of the same decay | `channels_vs_published` |
+| the combination against the published combined measurements | `combined_vs_published` |
+| uncertainty by source | `breakdown` |
+| the 20 nuisance parameters with the largest impact, with their pulls | `impacts` |
+| every nuisance parameter | `pulls` |
+| profile likelihood of the combined cross section | `nll_scan` |
+| the combination under alternative likelihood models | `variations` |
 
-μμ (`scripts/v2_5_fit.py`) extrapolates sigma_fid/A and assigns sigma × A_rel_unc
-outside TRExFitter. ττ (`scripts/step6_report.py`) reports sigma × sqrt(sum(A_unc²)
-+ A_mc_stat²) separately; this report includes MC stat omitted from its step5 theory-only
-total. ee has not supplied a corresponding truth-window acceptance prescription.
-The combination's nominal reference normalization already incorporates the nominal
-acceptance conversion: do not divide the common cross section by acceptance again.
-Propagating channel acceptance errors to the combined result is deferred until the
-MultiFit is working; channel sensitivities and correlations must then be accounted for.
+![summary](output/plots/summary.png)
 
-The existing `external_refits` implementation remains optional, not the default or a
-prerequisite for nominal fitting. The sections below describing mandatory signed
-acceptance inputs apply only if that optional mode is explicitly selected.
-Nominal normalization and other fit-input requirements still apply.
+## Results
 
-# Three-channel TRExFitter combination (Lieke)
+| | σ(60–120) [pb] | from |
+|---|---|---|
+| **combined** | **1947.8 ⁺³³·¹₋₃₂.₄** | common POI, all three channels |
+| Z → ee | 2093.8 ⁺¹²¹·⁹₋₁₁₄.₄ | standalone fit, same model |
+| Z → μμ | 1930.8 ⁺³³·²₋₃₂.₆ | standalone fit, same model |
+| Z → τhτh | 2082.5 ⁺²³⁶·⁸₋₂₀₆.₈ | standalone fit, same model |
+| aMC@NLO | 1953.9 ⁺⁵⁶·¹₋₈₁.₇ | scale +2.5/−3.9 %, PDF 0.74 %, α_s 1.3 % |
 
-This directory prepares a simultaneous **μμ + ee + ττ MultiFit** using the existing channel
-likelihoods. It keeps generated configs, workspaces, logs and results here. The older
-`../run_combination.py` is a separate two-channel covariance combination.
+* **Channel compatibility.** The three-POI fit (one σ per channel, every shared NP profiled together)
+  gives ee 2097.5, μμ 1939.8, ττ 2082.2 pb. Against the common POI,
+  −2 ln(L_common/L_split) = **2.41 for 2 degrees of freedom, p = 0.30**.
+* **Weights.** The result is carried by μμ. Without ee it is 1932.3 ⁺³³·²₋₃₂.₄ pb; without ττ it is
+  1945.4 pb (`variations`).
+* **Goodness of fit.** Saturated model: μμ p = 0.79, ττ p = 0.21, **ee p = 4 × 10⁻⁴²**. The combined
+  p = 8 × 10⁻³³ is entirely the ee peak shape (next section).
+* **Fit quality.** Every fit (combined, three-POI, standalone, stat-only, variations) ends with MIGRAD 0,
+  HESSE 0, MINOS 0 and no forced positive-definite covariance.
+* **The channels' own numbers.** ee 1840.8 ± 29.9 pb (`z-ee/Zee_fit.tar.gz`), μμ 1930.7 pb, ττ 2082.5 pb.
+  μμ and ττ are reproduced exactly; their errors are now slightly larger because acceptance is in the fit.
+  ee differs, as explained below.
 
-**Status (16 September 2026):** μμ ROOT templates/metadata and the ee systematic
-histograms/config have arrived and are integrated. All referenced nominal/variation
-histograms pass presence, binning, finiteness and MC Sumw2 checks in LCG_110.
-The ee truth 60–120 GeV reference/acceptance is still missing; review its trigger treatment,
-inclusive-DY theory envelopes and negative DY_tautau/Wjets bins surviving Rebin=2.
-Common-observable/overlap validation remains pending. Acceptance uncertainties are deferred until after the nominal fit.
-No combined fit has been run; the local TRExFitter executable is not built.
+## The likelihood
+
+Every channel enters with **its own TRExFitter config and fit inputs**:
+
+| channel | config | inputs | signal | σ_ref(60–120) |
+|---|---|---|---|---|
+| ee | `z-ee/fit.config` | `z-ee/Zee_fit.tar.gz` → `Histograms/Zee_fit_histos.root` (bin by bin identical to `datasets/z-ee/zee.root`, checked on every run) | `DYee` | 1954.10 pb (the tarball's `reference_cross_section.txt`) |
+| μμ | `z-mumu/fit/zmumu.config` | `z-mumu/fit/fitinputs/zmumu.root` | `DYmumu` | 1953.93 pb |
+| ττ | `z-tautau/fit/ztautau.config` | `z-tautau/fit/fitinputs/ztautau.root` | fiducial `DYtautau` | 1944.88 pb |
+
+The only changes, made by `mf/trexcfg.adapt_channel`:
+
+1. **One POI.** Each channel's signal NormFactor is renamed `mu_Z`, and a constant NormFactor
+   `xsref_<channel>` = 1953.93 pb / σ_ref(channel) is added on the same samples. So
+   σ = μ_Z × 1953.93 pb in every channel, even though the three aMC@NLO references differ (by 0.46 % for ττ).
+2. **Acceptance inside the fit.** μμ and ττ quote σ(60–120) = σ_fid / A, with A from aMC@NLO. Their
+   δA/A enter as OVERALL parameters on the signal: `Acc_PDF`, `Acc_AlphaS`, `Acc_QCDScale`,
+   `Acc_PS_ISR`, `Acc_PS_FSR` (shared μμ/ττ) and `AccStat_<channel>`. The values are read from
+   `zmumu.root.meta.json` (total 0.61 %) and `ztautau.root.meta.json` (3.7 %). ee has no acceptance
+   term: its template is already normalised to the 60–120 GeV LHE cross section.
+3. **Correlations by name,** as `fitting/CONVENTIONS.md` §3 prescribes. Shared are `Lumi`, `Pileup`,
+   `L1Prefiring`, `PDF`, `QCDScale`, `PS_FSR`, `PS_ISR`, `XS_TTbar`, `XS_DYtautau`, `XS_WJets`,
+   `XS_SingleTop/WW/WZ/ZZ` and the `Acc_*` parameters. Electron, muon, τ, MET, fake-factor and MC-statistics
+   parameters are channel-specific. `SigModel` → `SigModel_mumu`.
+4. **ee: shape and normalisation as separate parameters.** Every template (HISTO) systematic of ee
+   enters twice. Its normalisation keeps the shared name, and its shape gets an ee-only parameter
+   `<NP>_eeShape` (TRExFitter `DropShapeIn` / `DropNorm` on the same templates).
+5. **ττ: one empty bin dropped.** `tautau_SR2`, 0–40 GeV, has 0 data and 0 predicted events, so its
+   MC-statistics γ is unconstrained and sits at 0, which broke HESSE and MINOS. The adapter checks that
+   data and every sample are exactly zero before dropping it.
+
+Nothing else is touched: binning, samples, smoothing, symmetrisation, DropBins, MC statistics.
+
+## The ee channel, and why point 4 is needed
+
+With all three channels correlated as delivered, the fit has **no positive-definite minimum**
+(TRExFitter retries up to strategy 3 and crashes). This is also what stopped the earlier three-channel
+attempt. The cause is in the ee inputs:
+
+* **The ee model does not describe its own peak shape:** saturated-model p = 7 × 10⁻⁴³ with 6.3 M events
+  in 30 × 2 GeV bins. The fit absorbs the mismatch by pulling template parameters (`Pileup` −1.6σ,
+  `L1Prefiring` +2.0σ, `QCDScale` −2.0σ, `ElectronID` +0.6σ) and constraining them far below their priors.
+  Shared with μμ, those pulls move the μμ normalisation. In the three-POI fit without the split,
+  μ(μμ) shifts by +2 %.
+* **The ee electron-ID uncertainty, ±5.9 %, is an artefact.** The official UL2016postVFP Medium-ID
+  scale-factor map gives about 1.2 % per Z → ee event. In the ECAL barrel–endcap gap
+  (1.444 < |η_SC| < 1.566) it returns the placeholder sf = 1 ± 1, and z-ee does not veto the gap. The
+  shape of this ±100 % variation on ~5 % of events pins the whole 5.9 % normalisation at 0.08σ.
+  That is where the channel's quoted ±1.6 % precision comes from (details in `docs/systematics.md`).
+
+Splitting shape from normalisation keeps the correlated normalisations physical. Meanwhile ee's shape
+mismodelling stays in ee-only parameters. The price is honest: once the peak shape no longer pins it,
+ee's normalisation is limited by the ±5.9 % it was delivered with. Its standalone result becomes
+2094 ⁺¹²²₋₁₁₄ pb. The central value sits along an almost flat ElectronID–μ direction, pulled there by the
+small backgrounds. ee therefore contributes little to the combined value, and its channel point should
+be read with that ±6 % in mind.
+
+How much this matters (`variations`, all converged):
+
+| likelihood | σ [pb] | Δ |
+|---|---|---|
+| baseline | 1947.8 ⁺³³·¹₋₃₂.₄ | |
+| without ee | 1932.3 ⁺³³·²₋₃₂.₄ | −15.6 |
+| without ττ | 1945.4 ⁺³³·³₋₃₂.₅ | −2.4 |
+| shape/normalisation split in all three channels | 1954.7 ⁺³⁴·⁴₋₃₃.₇ | +6.9 |
+| ee: split only the shared parameters (the gap-driven `ElectronID` shape constraint trusted) | 1873.2 ⁺²⁷·³₋₂₆.₈ | −74.6 |
+| ee: `ElectronID` normalisation ±1.2 % (official map outside the gap) — *diagnostic* | 1933.5 ⁺³⁰·⁴₋₂₉.₉ | −14.3 |
+
+The last row is not a result: it uses an uncertainty z-ee did not deliver. It shows what to expect
+once the gap is vetoed. In that fit ee alone gives 1918 ± 39 pb, in agreement with μμ. The
+"shared only" row shows the opposite: if the artefact constraint is trusted, the μμ `MuonReco`
+parameter is pulled to +2.5σ.
+
+**For z-ee** (in order of impact): veto the ECAL gap; apply an `HLT_Ele27_WPTight_Gsf` scale factor
+with its uncertainty (no trigger correction is applied at all now, which alone could explain the ee
+deficit in its own fit); add charge-misidentification and multijet uncertainties; re-check the goodness
+of fit, and consider coarser bins if it is still poor.
+
+## Checks
+
+* **Orthogonality** (`docs/orthogonality.md`, measured on data event by event): μμ ∩ ee ≤ 97 events
+  (1.5 × 10⁻⁵ of ee), ττ ∩ μμ = 0, ττ ∩ ee ≤ 4 events (2 × 10⁻⁴ of the ττ signal region). The channels
+  are statistically independent to this precision.
+* **Systematics against ATLAS and CMS** (`docs/systematics.md`): μμ carries the same list as the
+  published measurements, with comparable sizes. ττ is complete but lacks CMS's in-situ τh-ID constraint.
+  ee lacks trigger, charge-misID and multijet uncertainties, and has the gap artefact above.
+* **Published comparisons** (`config/references.json`, each value with paper and table): ATLAS 13 TeV
+  ee and μμ (arXiv:1603.09222, moved from 66–116 to 60–120 GeV with the aMC@NLO ratio 1.01425), CMS
+  PAS SMP-15-004 ee and μμ, CMS Z → ττ (all five final states, and τhτh alone; arXiv:1801.03535), and the
+  combined CMS (arXiv:2408.03744) and ATLAS values. CMS SMP-20-004 publishes no per-channel cross section.
+
+## Uncertainties
+
+The breakdown (`breakdown`) is TRExFitter's covariance decomposition of the combined fit, per Category.
+The groups do not add to the total in quadrature, because the post-fit parameters are correlated.
+Largest: luminosity 20.7 pb, muon efficiency 14.8, acceptance 10.6, L1 prefiring 9.1, MC statistics 5.3,
+electron ID 3.3, signal modelling 3.3 pb. Data statistics, 0.47 pb, come from a separate stat-only fit.
+TRExFitter's refit-based grouped impacts (`trex-fitter mi`) fail HESSE in this likelihood and are not
+used. The ranking (`impacts`) is refit-based: one `trex-fitter mr Ranking=<NP>` per parameter.
+
+The theory band is the aMC@NLO sample's own uncertainty on σ(60 < m_LHE < 120): 7-point μ_R/μ_F envelope
+⊕ NNPDF3.1 Hessian ⊕ α_s ± 0.0015, from `z-mumu/output/v2/gensums.json` (`mf/prediction.py`). The
+uncertainty of the NNLO normalisation (6077.22 pb) is not public and not included.
 
 ## Run
 
-From the repository root:
-
 ```bash
-source setup.sh  # provides uproot for histogram content validation
-python3 combination/combLieke/combine.py
-python3 -m unittest discover -s combination/combLieke -p 'test_*.py'
+source ../../setup.sh
+python run.py all                 # ~10 min on stbc-i*; TRExFitter output in work/ (git-ignored)
+python tests/test_trexcfg.py      # the adapter
+python checks/systematics.py      # -> checks/systematics.json
+python checks/orthogonality.py    # -> checks/orthogonality.json (~3 min, reads the data skims)
 ```
 
-Preparation writes the following files. Without uproot it still generates configs, but records
-unvalidated histogram contents as a readiness blocker:
+`python run.py <step>` runs one step: `prepare`, `workspaces`, `fits`, `variations`, `impacts`,
+`results` or `plots`.
 
-- `generated/{mumu,ee,tautau}.config`: adapted copies of the channel configs;
-- `generated/multifit.config`: all three Fit blocks, `Combine: TRUE`, `POIName: mu_comb`;
-- `status.json`: paths, reference cross sections and outstanding requirements.
+## Files
 
-Edit `inputs.json` when the groups deliver their inputs. Config and histogram directory paths
-are relative to the repository root (absolute paths also work). `measurement_ready` records
-that the channel's corrections and extraction have been reviewed;
-`acceptance_in_likelihood` must be **false** for this external-acceptance workflow; true
-blocks the run to prevent double counting. These are scientific declarations, not automatic validation switches:
-changing them does not add corrections or uncertainties. Confirm the common observable and
-check event overlap before setting `common_observable_and_overlap_validated`.
-
-Once the input requirements are satisfied:
-
-```bash
-source setup.sh
-python3 combination/combLieke/combine.py --run
-```
-
-This requires the repository's TRExFitter **v1.8.0** build. It runs `hw` separately for each
-adapted channel, then `mwf` for the nominal MultiFit. The default stops there and marks acceptance as pending.
-Only optional `external_refits` mode repeats these steps for each acceptance source/direction
-in isolated `variations/<source>/<up|down>/` directories. Channel fits need not be performed first.
-Workspaces are always rebuilt so old normalization/correlation settings cannot survive.
-A missing or incomplete channel stops the run; the code never silently substitutes a
-2-channel result. Each command's full output goes to `logs/`.
-
-`fit_result.json` reports the nominal cross section and asymmetric **in-fit-only** errors in pb.
-After all acceptance refits succeed, `result.json` reports the nominal result, signed source
-shifts, separate acceptance errors and (if enabled) an explicitly approximate quadrature total. Review the
-fit log, convergence/covariance quality, nuisance pulls and POI boundaries before quoting it;
-a successful process exit or parsed text file alone is not proof of a valid fit.
-The parser supports the simple HIST configurations currently in this repository; elaborate
-include/replacement/multiple-file configurations need an explicit adapter.
-
-## What the analyses currently measure
-
-| Channel | Implementation and extraction | Combination issue |
-|---|---|---|
-| μμ | `z-mumu/scripts/v2_5_fit.py`, `fit/zmumu.config`: fit the 60–120 GeV mass shape with a `mu_Z` NormFactor on `DYmumu`; efficiencies, backgrounds, detector and theory variations. `sigma_fid = mu_Z * sigma_fid_pred`, then divide by `A_60_120`. The eμ region is VALIDATION and is not a fitted control region. | The final summary slide and `z-mumu/REVIEW.md` §0 confirm that the shape-fit issues were fixed (12 × 5 GeV, two-sided SigModel, MINOS on all parameters). Use the updated shape fit; the older counting recommendation and extra 0.7% lineshape term are superseded. Matching ROOT templates are still required. |
-| ee | `fit.config` now includes 11 systematics; corrected templates use luminosity 16393.381 pb⁻¹ and PU/electron SFs. Updated archive: mu_signal=1.04882 ± 0.0189931. | Adapter uses new DY_tautau/Wjets filenames, maps LUMI to shared Lumi, retains all variations and renames SR/POI. Truth-window reference, trigger/theory review and negative-background-bin treatment remain pending. |
-| ττ | `z-tautau/scripts/step5_fit.py`, `fit/ztautau.config`: fit reconstructed ditau mass in three BDT categories, using genuine-tau-subtracted fake factors as nominal; only fiducial DYtautau is scaled by the POI and DYtautau_nonfid is background. `mu_Z` scales `DYtautau`; `sigma_60_120 = mu_Z * 1944.8826556737133 pb`. | Acceptance includes hadronic τ branching and visible-τ cuts. The shape is essential for separating fakes. Acceptance errors are currently quoted outside the fit. |
-
-Source normalization metadata: `z-mumu/fit/results/zmumu_fit_result.json`
-(`sigma_fid_pred_pb / A_60_120`) and `z-tautau/output/results.json`
-(the nominal `sigma_60_120_pb.prediction`). Treat metadata as belonging to a specific set of
-templates: recheck it when templates change. Older overview files saying ee has no result
-are less current than its handoff; its result remains preliminary.
-
-## What to request from each channel
-
-1. **Nominal binned data and every signal/background template**, including fitted control
-   regions, with bin edges and MC/fake sum of squared weights. Supply ROOT files and their
-   complete TRExFitter config. Different observables and binning between channels are fine;
-   within each region they must match. Do not send only fitted cross sections/error bars:
-   MultiFit needs likelihood workspaces, built here from templates.
-2. **Systematic model:** up/down histograms or signed relative normalization shifts, sample
-   and region scope, constraint type, nuisance name and definition. Explain one-sided
-   variations, smoothing, pruning, fake-factor correlations and MC-stat treatment. Preserve
-   Sumw2 and inspect TRExFitter's histogram validation output; no missing templates or
-   invalid bins should be accepted because a source config uses `HistoChecks: NOCRASH`.
-3. **Normalization metadata:** luminosity, MC cross sections, generator sum of weights,
-   per-flavour `sigma_reference_pb` for the agreed truth mass window, acceptance A,
-   correction/migration factor C, fiducial definition and branching conventions. The nominal
-   selected signal must satisfy `N_sig = L * sigma_reference * A * C` with the channel's
-   stated definitions (C may include out-of-fiducial migrations).
-4. **External acceptance variations:** signed relative `A_up/A_nom - 1` and
-   `A_down/A_nom - 1` for each independent source/mode and each channel. Record signs and
-   cross-channel correlations. Keep the current C-only theory templates inside the likelihood.
-   Do not insert acceptance nuisances into those workspaces as well. The external procedure
-   approximates the relationship between acceptance and in-fit theory errors; see below.
-5. **Data/selection overlap check:** runs, certification, triggers, vetoes and event identifiers
-   `(run, lumi, event)` or a demonstrated orthogonal assignment across all fitted regions.
-   Different primary dataset names alone do not prove disjoint events. Check MC statistical
-   correlations too if the same generated events contribute to multiple selections.
-6. **Channel validation:** nominal yields, independent fit result, uncertainties, goodness of
-   fit and known issues. Already-built workspaces can be useful cross-checks, but this runner
-   rebuilds them after applying the common POI and nuisance mapping.
-
-For ee specifically, provide corrected templates at **16393.381 pb⁻¹** (if the same certified
-G+H data are used), electron ID/reconstruction/trigger corrections and uncertainties, pileup,
-L1 prefiring, luminosity, background and signal-modelling systematics, acceptance and truth
-mass definition. Updating `LumiLabel` does not renormalize events. Histograms are already in
-events: do not add Job `Lumi` and scale them a second time.
-
-## Meaning of the common cross section
-
-Assume lepton universality and define one per-flavour
-`σ(pp → Z/γ* → ℓℓ, 60 < m_truth(ℓℓ) < 120 GeV)` at 13 TeV. Agree exactly on Born/dressed
-truth definitions first. This is not the sum of three fiducial cross sections (their cuts
-differ), nor the total Z production cross section before branching fractions.
-
-For channel i and bin b the model is
-
-```
-E[n_ib] = mu_comb * (sigma0 / sigma_ref_i) * s_ib(theta) + backgrounds_ib(theta)
-sigma_comb = mu_comb * sigma0,  sigma0 = 2000 pb
-L_comb = product of channel Poisson likelihoods, with shared nuisance constraints
-```
-
-The fixed NormFactor `reference_<channel>` supplies `sigma0/sigma_ref_i` on the signal;
-`mu_comb` has range [0,3] in all channels. This also scales systematic templates through the
-sample normalization. 2000 pb is just a parameter scale, not a theory constraint. A different
-positive scale leaves the physical result unchanged, provided the POI range still contains it.
-At `mu_comb = sigma_ref_i/sigma0`, each channel recovers its original nominal signal.
-
-The existing references differ (about 1953.93 and 1944.88 pb); simply giving both a shared
-`mu_Z` would combine different cross sections. The fixed factors solve the numerical
-parameterization mismatch; they do **not** fix incompatible physical definitions. For ee,
-6077.22/3 refers to M>50 GeV, not automatically 60–120 GeV: obtain its weighted truth-window
-fraction/acceptance before filling `sigma_reference_pb`.
-
-DY feed-through backgrounds currently retain the channel treatment: e.g. DYtautau in μμ has
-its own background uncertainty rather than the shared POI. Review that approximation under
-universality, especially for ee. A fully universal model can tie the matching-mass DY
-components to the common cross section after separating other mass ranges and avoiding a
-duplicate background cross-section nuisance. It cannot safely be inferred from sample names.
-
-## External acceptance workflow (option 2)
-
-Nominal fitting no longer requires acceptance variations inside the likelihood. To run only
-that first stage when nominal inputs are available, even before acceptance responses arrive:
-
-```bash
-python3 combination/combLieke/combine.py --run --nominal-only
-```
-
-This writes `fit_result.json` labelled **in-fit only; acceptance fixed**. It does not produce
-an acceptance-inclusive `result.json`. The full `--run` requires complete external inputs.
-Preparation without `--run` lists nominal and external-acceptance requirements separately.
-
-Fill the `acceptance` section in `inputs.json`. This **synthetic example** shows the format;
-the 1% values are illustrative, not measured channel inputs:
-
-```json
-{
-  "method": "external_refits",
-  "inputs_complete": true,
-  "combine_with_infit_quadrature": true,
-  "sources": [{
-    "name": "ExampleSharedSource",
-    "description": "Illustration only: one mode with fully correlated channel responses",
-    "relative_shifts": {
-      "mumu": {"up": 0.01, "down": -0.01},
-      "ee": {"up": 0.01, "down": -0.01},
-      "tautau": {"up": 0.01, "down": -0.01}
-    }
-  }]
-}
-```
-
-Every source must explicitly list all three channels: use zeros for unaffected channels.
-`up` and `down` label the underlying variation, not the direction of the cross-section shift.
-An up variation can decrease acceptance in one channel while increasing it in another.
-
-- **Correlated across channels:** put all signed responses in one source; vary them together.
-- **Uncorrelated:** use separate sources, each affecting just one channel.
-- **Partially correlated:** supply independent modes from a documented covariance
-  decomposition, with signed responses in each channel. The code does not infer correlations.
-- Different entries in `sources` are treated as independent. Do not also add a total acceptance
-  uncertainty when its components are already supplied. A total such as ττ's approximately
-  3.7% is insufficient to define a source-by-source correlated model on its own.
-
-For a variation, the fixed signal factor becomes
-
-```
-(sigma0 / sigma_ref_i) * (1 + relative_acceptance_shift_i)
-```
-
-The reference cross section and nominal templates stay unchanged. All signal variations get
-this same sample factor; original in-fit nuisances remain free and are profiled again. With
-one channel and fixed yield, +10% acceptance gives `sigma_var = sigma_nom / 1.1`.
-This implements a scalar acceptance-only response, holding C's model fixed; it does not
-represent acceptance-induced bin-shape changes.
-
-The two refits produce signed shifts `delta_up` and `delta_down` relative to the nominal
-combined cross section. For each source:
-
-```
-positive_error = max(0, delta_up, delta_down)
-negative_error = max(0, -delta_up, -delta_down)
-```
-
-Square and sum these errors separately over independent sources. The output retains both
-signed shifts, each varied fit result, and the correlation descriptions. If
-`combine_with_infit_quadrature` is true, `approximate_total` combines this external error and
-the **nominal** in-fit error in quadrature. The varying fits' error bars are diagnostic and
-are not added as extra uncertainties. Set the flag false to report only the separate errors.
-
-**Approximation:** A and C may share PDF/scale/shower origins. Reprofiling C-only nuisances
-while changing A does not implement their joint physical correlation. The approximate total
-assumes external acceptance and in-fit errors are independent, as recorded in `result.json`.
-Assess that approximation before quoting a precision result. Luminosity and detector errors
-already inside the likelihood must not be supplied again as acceptance errors.
-
-## Correlations
-
-- Equal nuisance names are shared. Start from `fitting/CONVENTIONS.md` §6 and review physical
-  definitions, not only spelling: luminosity, pileup, prefiring and matching background/theory
-  sources can be common. `Category` only groups reports; it does not establish correlations.
-- For any source named `SigModel`, the adapter sets `NuisanceParameter: SigModel_<channel>`
-  while retaining histogram suffixes. The current ττ config does not fit its generator
-  comparison (`SigModel_tautau` is reported only); the adapter does not add it.
-- Electron, muon and tau efficiencies apply only where the corresponding objects are used.
-  Fake and MC statistical parameters remain channel/region-specific.
-- Shared envelope names (PDF or QCDScale) are a modelling assumption. Confirm the variation
-  construction before using full correlation; partial correlations require an explicit
-  nuisance decomposition, not renaming a whole source.
-
-## Validation and limitations
-
-Unit checks exercise quoted labels, normalization closure, all-three-channel generation,
-SigModel decorrelation, external response validation, inverse acceptance scaling, correlated
-and anticorrelated channel responses, isolated refits, asymmetric error aggregation and
-refusal to run incomplete inputs. Controlled refits in tests are simulated, not TRExFitter runs. The local TRExFitter submodule
-is empty and the required μμ ROOT input is absent: **TRExFitter runtime/schema validation
-and a real fit have not been performed**. Generated files are reviewable preparation artifacts.
-The repository's v1.8.0 conventions and helpers are the implementation reference. Framework
-background: [TRExFitter tutorial](https://indico.cern.ch/event/1283925/contributions/5394308/attachments/2643277/4574715/TrexFitter.pdf).
-
-## Channel inputs received
-
-- [Muon summary intake](mumu_inputs.md).
-- [Updated tau results intake](tautau_inputs.md), with exact metadata in `tautau_inputs.json`.
-
-- [Electron histogram and archive intake](ee_inputs.md), with exact fit metadata in `ee_inputs.json`.
+| path | what |
+|---|---|
+| `run.py` | the pipeline, step by step |
+| `config/channels.json` | the channels, POI, acceptance terms, ee treatment, variations |
+| `config/references.json` | published measurements |
+| `mf/trexcfg.py` | reads, adapts and writes TRExFitter configs |
+| `mf/ee_input.py` | ee histograms from the tarball |
+| `mf/prediction.py` | aMC@NLO prediction and uncertainty |
+| `mf/results.py`, `mf/plots.py` | `output/result.json`, `output/plots/` |
+| `checks/` | orthogonality and systematic-size checks, with their JSON outputs |
+| `docs/` | `orthogonality.md`, `systematics.md` |
+| `tests/` | adapter tests |

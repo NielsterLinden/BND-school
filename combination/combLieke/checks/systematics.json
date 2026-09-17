@@ -1,0 +1,362 @@
+{
+ "ee": {
+  "signal": "DYee",
+  "nominal_yield": 6468985.883034412,
+  "systematics": {
+   "Lumi": {
+    "category": "Luminosity",
+    "up_pct": 1.2,
+    "down_pct": -1.2,
+    "sym_pct": 1.2
+   },
+   "Pileup": {
+    "category": "Pileup",
+    "up_pct": -0.7943899132147658,
+    "down_pct": 0.7859117794243531,
+    "sym_pct": 0.7901508463195595
+   },
+   "L1Prefiring": {
+    "category": "L1 prefiring",
+    "up_pct": -0.46817552328656253,
+    "down_pct": 0.46535370629592343,
+    "sym_pct": 0.466764614791243
+   },
+   "ElectronRECO": {
+    "category": "Electron",
+    "up_pct": 0.6210198766879671,
+    "down_pct": -0.6190706449014538,
+    "sym_pct": 0.6200452607947105
+   },
+   "ElectronID": {
+    "category": "Electron",
+    "up_pct": 5.918341800448501,
+    "down_pct": -5.749489395184659,
+    "sym_pct": 5.83391559781658
+   },
+   "PDF": {
+    "category": "Signal modelling",
+    "up_pct": 0.10929569352793322,
+    "down_pct": 0.0972632971271814,
+    "sym_pct": 0.10327949532755731
+   },
+   "QCDScale": {
+    "category": "Signal modelling",
+    "up_pct": 0.3062169408652782,
+    "down_pct": -0.09965795021018575,
+    "sym_pct": 0.20293744553773196
+   },
+   "PS_FSR": {
+    "category": "Signal modelling",
+    "up_pct": 0.0973444608857843,
+    "down_pct": -0.16954934563025992,
+    "sym_pct": 0.1334469032580221
+   },
+   "ElectronES": {
+    "category": "Electron",
+    "up_pct": 0.0,
+    "down_pct": 0.0,
+    "sym_pct": 0.0
+   },
+   "ElectronER": {
+    "category": "Electron",
+    "up_pct": -1.3776921536923226e-05,
+    "down_pct": -1.929874198225434e-05,
+    "sym_pct": 1.6537831759588784e-05
+   }
+  }
+ },
+ "mumu": {
+  "signal": "DYmumu",
+  "nominal_yield": 10373541.718270943,
+  "systematics": {
+   "Lumi": {
+    "category": "Luminosity",
+    "up_pct": 1.2,
+    "down_pct": -1.2,
+    "sym_pct": 1.2
+   },
+   "MuonReco": {
+    "category": "Muon efficiency",
+    "up_pct": 0.8,
+    "down_pct": -0.8,
+    "sym_pct": 0.8
+   },
+   "Pileup": {
+    "category": "Pileup",
+    "up_pct": -0.2606296062944269,
+    "down_pct": 0.2553418963182841,
+    "sym_pct": 0.2579857513063555
+   },
+   "L1Prefiring": {
+    "category": "L1 prefiring",
+    "up_pct": -0.5268328170471515,
+    "down_pct": 0.526653822251455,
+    "sym_pct": 0.5267433196493032
+   },
+   "MuonID": {
+    "category": "Muon efficiency",
+    "up_pct": 0.2106420232373063,
+    "down_pct": -0.21039844107784145,
+    "sym_pct": 0.21052023215757387
+   },
+   "MuonIso": {
+    "category": "Muon efficiency",
+    "up_pct": 0.35680353128817455,
+    "down_pct": -0.35601715033338754,
+    "sym_pct": 0.35641034081078105
+   },
+   "MuonTrigger": {
+    "category": "Muon efficiency",
+    "up_pct": 0.18084056591127773,
+    "down_pct": -0.19023980133708873,
+    "sym_pct": 0.18554018362418323
+   },
+   "MuonScale": {
+    "category": "Muon momentum",
+    "up_pct": 0.016518837219847704,
+    "down_pct": -0.017453855495674908,
+    "sym_pct": 0.016986346357761306
+   },
+   "MuonRes": {
+    "category": "Muon momentum",
+    "up_pct": -0.03161288298587639,
+    "down_pct": 0.026544335302003397,
+    "sym_pct": 0.029078609143939893
+   },
+   "PDF": {
+    "category": "Signal modelling",
+    "up_pct": 0.06173685764829795,
+    "down_pct": -0.061736857648331256,
+    "sym_pct": 0.0617368576483146
+   },
+   "AlphaS": {
+    "category": "Signal modelling",
+    "up_pct": -0.013181094508962765,
+    "down_pct": 0.013181094508962765,
+    "sym_pct": 0.013181094508962765
+   },
+   "QCDScale": {
+    "category": "Signal modelling",
+    "up_pct": 0.16800138397465858,
+    "down_pct": -0.18101956301342925,
+    "sym_pct": 0.17451047349404392
+   },
+   "PS_ISR": {
+    "category": "Signal modelling",
+    "up_pct": 0.1120594817721754,
+    "down_pct": -0.14866183252705278,
+    "sym_pct": 0.1303606571496141
+   },
+   "PS_FSR": {
+    "category": "Signal modelling",
+    "up_pct": 0.030667430921771377,
+    "down_pct": -0.05120026283054191,
+    "sym_pct": 0.04093384687615664
+   },
+   "SigModel_mumu": {
+    "category": "Signal modelling",
+    "up_pct": 0.2779089945424529,
+    "down_pct": -0.2779089945424973,
+    "sym_pct": 0.2779089945424751
+   },
+   "Acc_PDF": {
+    "category": "Acceptance",
+    "up_pct": 0.516552824270828,
+    "down_pct": -0.516552824270828,
+    "sym_pct": 0.516552824270828
+   },
+   "Acc_AlphaS": {
+    "category": "Acceptance",
+    "up_pct": 0.026935566785504794,
+    "down_pct": -0.026935566785504794,
+    "sym_pct": 0.026935566785504794
+   },
+   "Acc_QCDScale": {
+    "category": "Acceptance",
+    "up_pct": 0.3195009388906489,
+    "down_pct": -0.3195009388906489,
+    "sym_pct": 0.3195009388906489
+   },
+   "AccStat_mumu": {
+    "category": "Acceptance",
+    "up_pct": 0.044735720120119817,
+    "down_pct": -0.044735720120119817,
+    "sym_pct": 0.044735720120119817
+   }
+  }
+ },
+ "tautau": {
+  "signal": "DYtautau",
+  "nominal_yield": 3708.6488204172783,
+  "systematics": {
+   "Lumi": {
+    "category": "Luminosity",
+    "up_pct": 1.2,
+    "down_pct": -1.2,
+    "sym_pct": 1.2
+   },
+   "Pileup": {
+    "category": "Pileup",
+    "up_pct": -0.9501628889294178,
+    "down_pct": 1.1328471118231098,
+    "sym_pct": 1.0415050003762638
+   },
+   "L1Prefiring": {
+    "category": "L1 prefiring",
+    "up_pct": -0.2953815626798417,
+    "down_pct": 0.2929142733724799,
+    "sym_pct": 0.2941479180261608
+   },
+   "TauID_DM0": {
+    "category": "Tau",
+    "up_pct": 7.975598835599329,
+    "down_pct": -7.646110533207773,
+    "sym_pct": 7.810854684403551
+   },
+   "TauTrigger_DM0": {
+    "category": "Tau",
+    "up_pct": 2.395392083013559,
+    "down_pct": -2.364973992756225,
+    "sym_pct": 2.3801830378848923
+   },
+   "TauES_DM0": {
+    "category": "Tau",
+    "up_pct": 0.989208959562693,
+    "down_pct": -1.1968640829757904,
+    "sym_pct": 1.0930365212692417
+   },
+   "TauID_DM1": {
+    "category": "Tau",
+    "up_pct": 5.71946243104402,
+    "down_pct": -5.559781644896267,
+    "sym_pct": 5.639622037970144
+   },
+   "TauTrigger_DM1": {
+    "category": "Tau",
+    "up_pct": 3.052260677376717,
+    "down_pct": -3.0058243994887546,
+    "sym_pct": 3.0290425384327357
+   },
+   "TauES_DM1": {
+    "category": "Tau",
+    "up_pct": 1.8098491895253366,
+    "down_pct": -1.709419579557514,
+    "sym_pct": 1.7596343845414253
+   },
+   "TauID_DM10": {
+    "category": "Tau",
+    "up_pct": 6.243444158384781,
+    "down_pct": -6.04971764106379,
+    "sym_pct": 6.1465808997242855
+   },
+   "TauTrigger_DM10": {
+    "category": "Tau",
+    "up_pct": 2.132850601261027,
+    "down_pct": -2.1098771633316638,
+    "sym_pct": 2.1213638822963454
+   },
+   "TauES_DM10": {
+    "category": "Tau",
+    "up_pct": 0.24051431587206462,
+    "down_pct": -0.4201911206555886,
+    "sym_pct": 0.3303527182638266
+   },
+   "TauID_DM11": {
+    "category": "Tau",
+    "up_pct": 1.8900698818303585,
+    "down_pct": -1.8715152658194567,
+    "sym_pct": 1.8807925738249076
+   },
+   "TauTrigger_DM11": {
+    "category": "Tau",
+    "up_pct": 0.7659011435224183,
+    "down_pct": -0.7629300203311096,
+    "sym_pct": 0.764415581926764
+   },
+   "TauES_DM11": {
+    "category": "Tau",
+    "up_pct": 0.07153371457151447,
+    "down_pct": -0.20411037701271173,
+    "sym_pct": 0.1378220457921131
+   },
+   "TauFakeEle": {
+    "category": "Tau",
+    "up_pct": 0.0,
+    "down_pct": 0.0,
+    "sym_pct": 0.0
+   },
+   "TauFakeMu": {
+    "category": "Tau",
+    "up_pct": 0.0,
+    "down_pct": 0.0,
+    "sym_pct": 0.0
+   },
+   "MET_Unclustered": {
+    "category": "MET",
+    "up_pct": -0.13946477195733165,
+    "down_pct": 0.11084429967322951,
+    "sym_pct": 0.12515453581528058
+   },
+   "QCDScale": {
+    "category": "Signal modelling",
+    "up_pct": 2.6666188014091263,
+    "down_pct": -2.7121665025688024,
+    "sym_pct": 2.6893926519889644
+   },
+   "PDF": {
+    "category": "Signal modelling",
+    "up_pct": 0.6775928666755471,
+    "down_pct": -0.6775928666755138,
+    "sym_pct": 0.6775928666755304
+   },
+   "PS_ISR": {
+    "category": "Signal modelling",
+    "up_pct": 0.32095376759628813,
+    "down_pct": -0.38133271821880754,
+    "sym_pct": 0.35114324290754784
+   },
+   "PS_FSR": {
+    "category": "Signal modelling",
+    "up_pct": 1.11402006601804,
+    "down_pct": -2.2214141648802865,
+    "sym_pct": 1.6677171154491632
+   },
+   "Acc_PDF": {
+    "category": "Acceptance",
+    "up_pct": 0.4876573295209938,
+    "down_pct": -0.4876573295209938,
+    "sym_pct": 0.4876573295209938
+   },
+   "Acc_AlphaS": {
+    "category": "Acceptance",
+    "up_pct": 0.5863808657953654,
+    "down_pct": -0.5863808657953654,
+    "sym_pct": 0.5863808657953654
+   },
+   "Acc_QCDScale": {
+    "category": "Acceptance",
+    "up_pct": 3.37710080909744,
+    "down_pct": -3.37710080909744,
+    "sym_pct": 3.37710080909744
+   },
+   "Acc_PS_ISR": {
+    "category": "Acceptance",
+    "up_pct": 0.9319714931003644,
+    "down_pct": -0.9319714931003644,
+    "sym_pct": 0.9319714931003644
+   },
+   "Acc_PS_FSR": {
+    "category": "Acceptance",
+    "up_pct": 0.24666591233397814,
+    "down_pct": -0.24666591233397814,
+    "sym_pct": 0.24666591233397814
+   },
+   "AccStat_tautau": {
+    "category": "Acceptance",
+    "up_pct": 0.7120722143838772,
+    "down_pct": -0.7120722143838772,
+    "sym_pct": 0.7120722143838772
+   }
+  }
+ }
+}

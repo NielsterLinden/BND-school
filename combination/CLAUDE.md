@@ -1,118 +1,76 @@
-# CLAUDE.md — combination (Z → μμ ⊕ Z → τhτh ⊕ Z → ee)
+# CLAUDE.md — combination (TRExFitter MultiFit of Z → ee, Z → μμ, Z → τhτh)
 
-For agents working in this folder. Read [`README.md`](README.md) for what it is,
-[`docs/00-overview.md`](docs/00-overview.md) for the physics, and
-[`result.md`](result.md) for the numbers. This file is about not breaking it.
+For agents. `combLieke/README.md` is the physics and the result; this file is about changing the
+combination without breaking it. The combination is **one TRExFitter v1.8.0 MultiFit** over the three
+channel likelihoods. There is no covariance/BLUE combination any more: it and its slide deck were
+removed on 16 Sep 2026 (last present in git commit 9501c41).
 
-## Environment
+## Run
 
 ```bash
-source ../setup.sh          # LCG_110: python 3.13, numpy, scipy, iminuit, matplotlib
-python run_combination.py   # everything, a few seconds
+source ../setup.sh               # LCG_110 + trex-fitter v1.8.0 on PATH
+cd combLieke
+python run.py all                # prepare -> workspaces -> fits -> variations -> impacts -> results -> plots (~10 min)
+python run.py results && python run.py plots   # re-parse and redraw only
+python tests/test_trexcfg.py     # adapter checks, 2 s
+python checks/systematics.py     # input-level systematic sizes -> checks/systematics.json (after prepare)
+python checks/orthogonality.py   # event-level overlap on data -> checks/orthogonality.json (~3 min)
 ```
 
-No ROOT, no uproot, no TRExFitter binary needed: the combination reads JSON and text files that
-the channel groups committed. Do not add a dependency that would change that — the point of this
-folder is that it reproduces from git alone. **The one exception is `tools/extract_zee.py`**,
-which does need uproot: z-ee publishes a TRExFitter job and histogram files rather than a results
-JSON, so that script converts them once into `inputs/zee_fit_result.json` (committed) and
-`run_combination.py` reads only the JSON. Rerun it when z-ee re-publishes; delete it the day z-ee
-ships a `z-ee/fit/results/zee_fit_result.json` like the other two channels.
+Everything TRExFitter writes goes to `combLieke/work/` (git-ignored, rebuilt from scratch by `run.py`).
+What is kept is `combLieke/output/` (`result.json`, `plots/`) and the `checks/*.json`.
 
-## The one rule
+## Where things are decided
 
-**`result.md` is generated.** `comb/report.py` renders it from
-`output/combination_result.json`, which `run_combination.py` writes in the same run. Never edit
-`result.md` by hand; edit the template in `comb/report.py`, or the code that produces the number,
-and rerun. The same goes for the figures.
-
-## Where each number comes from
-
-| number | source |
+| decision | where |
 |---|---|
-| μμ μ_Z, grouped impacts, ranking, A, C, counting yields | `z-mumu/fit/results/zmumu_fit_result.json` |
-| μμ alternative fit configurations (binnings, counting) | `z-mumu/fit/results/stability.json` |
-| ττ everything | `z-tautau/output/results.json` (the variant its own `nominal_variant` names) |
-| ee everything | `combination/inputs/zee_fit_result.json` ← `tools/extract_zee.py` ← `z-ee/Zee_fit.tar.gz` |
-| σ^pred(60–120) per flavour | `z-mumu/output/v2/gensums.json`: 6077.22 pb × Σw(LHE flavour, 60–120)/Σw |
-| correlations | `comb/model.CORRELATION`, `comb/model.ACC_CORRELATION` — *asserted*, justified in `docs/02` |
-| published CMS/ATLAS comparisons | `comb/plots.REFERENCES` and `comb/report.REFERENCES`, with arXiv links |
-
-Every `ChannelResult` carries a `provenance` list of the files it was built from; it is written
-into the JSON.
+| which channel configs / inputs, references, signal samples | `combLieke/config/channels.json` |
+| every change made to a channel config | `mf/trexcfg.adapt_channel` (docstring lists all of them) |
+| the ee inputs (histograms from `z-ee/Zee_fit.tar.gz`) | `mf/ee_input.py` |
+| acceptance uncertainties of μμ and ττ | `channels.json` → `acceptance`, read from the channels' `*.meta.json` |
+| correlations | **by nuisance-parameter name only** (TRExFitter). Renames in `rename_systematics`; ee shape parts get `<NP>_eeShape` |
+| alternative likelihoods | `channels.json` → `variations` |
+| published ATLAS/CMS numbers | `combLieke/config/references.json` (with paper and table) |
+| theory prediction and its uncertainty | `mf/prediction.py` |
 
 ## Things that will bite you
 
-1. **The z-ee input is known to be biased, and the baseline uses it anyway.** Its `PDF`/`QCDScale`
-   templates are un-renormalised LHE envelopes, so `QCDScale` is a ±5.9 % *normalisation* on the
-   signal that the fit pulls to −1.88σ; `mu_signal` is measured against a prediction the fit
-   rescaled by κ = 0.893. `inputs.load_ee("normfix")` divides that out (−99 pb on the
-   combination) and is carried as the `ee_normfix` variation. The baseline follows the channel
-   (rule 6 below) and says so loudly in `result.md`, `docs/01` and the deck. **If z-ee re-publishes
-   with renormalised templates, κ will go to ~1 and `normfix` becomes a no-op — check that before
-   assuming the number moved for a physics reason.**
-2. **Do not combine `mu_Z`.** The three channels normalise to different aMC@NLO references for the
-   same quantity — 1953.9 pb (μμ), 1944.9 pb (ττ), 1954.1 pb (ee) — because the generator's LHE
-   flavour shares are not exactly 1/3. Averaging the μ's would average three different things.
-   `comb/inputs.ChannelResult.sigma` multiplies each μ̂ by *its own* reference; work in pb from
-   there on.
-3. **In-fit uncertainties scale with σ^pred, acceptance with σ^measured.** `group_pb()` and
-   `acc_pb()` encode this; it is not a detail. It matches the channels' own bookkeeping.
-   z-ee has **no** acceptance term at all — it fits against the 60–120 GeV prediction directly, so
-   `acc` is empty by design and `--check` asserts that.
-4. **A new `Category` must be given a ρ.** `model.build` raises `KeyError` rather than defaulting
-   to zero. If a channel re-runs and adds a systematic group, the combination fails loudly. That
-   is deliberate — do not "fix" it with a `.get(cat, 0.0)`. The same applies to the z-ee
-   `Category`→convention mapping in `tools/extract_zee.CATEGORY_MAP`, which raises on an
-   unmapped category.
-5. **`rho_override` does not touch `Data statistics` or `Fit residual`.** The three channels read
-   disjoint primary datasets (`SingleMuon`, `Tau`, `Electron`; the ZZ→4ℓ overlap is 0.0006 %), and
-   `Fit residual` is a property of one fit's own correlation matrix. Both ρ's are facts, not
-   modelling choices.
-6. **Each channel decides its own baseline; this folder follows it.** `load_tautau("nominal")`
-   reads `nominal_variant` out of the ττ results file rather than hard-coding a variant name, and
-   `load_ee` reads `nominal_variant` the same way. On the μμ side the baseline is `"shapefit"`,
-   the fit the channel rebuilt after its own review. When a channel re-publishes,
-   `run_combination.check()` asserts the published values and fails first; fix it there, not by
-   loosening the assertion.
-7. **μμ variants rescale, the μμ baseline does not.** `z-mumu/fit/results/stability.json` gives
-   μ_Z and the *total* systematic per fit configuration but no per-category breakdown, so
-   `load_mumu` gives a variant the nominal category composition scaled to its own total. That is
-   fine for `VARIATIONS`; never quote a variant as a result. `load_ee("normfix")` makes the same
-   approximation for the uncertainty (it rescales every impact by κ rather than refitting).
-8. **`Fit residual` is not a fudge factor.** TRExFitter's grouped impacts are quadrature
-   differences and do not add up to the total MINOS error. μμ and ττ *over*-shoot (their
-   categories sum to more than their published totals, which this folder keeps, conservatively);
-   z-ee *under*-shoots by 0.92 % of μ_Z, which its results file carries as `fit_residual` so that
-   the published total is reproduced exactly. Do not fold it into `Data statistics`: the analytic
-   Poisson number for z-ee is 0.040 %, 23× smaller, and mislabelling it would put ~7 pb of
-   "statistics" in the headline of a 6 M-event measurement.
-9. **Figures are light-background on purpose.** The deck is beamer/metropolis and the channel
-   plots are white; a dark figure would be a black rectangle on the slide. (The `z-mumu/review`
-   deck is the dark house style — different deck, do not mix the two figure sets.)
-   Channel colours are `comb/plots.COLOUR`: μμ blue, ττ orange, ee purple, combination dark.
+1. **Do not correlate the full ee templates with the other channels.** Without `split_shape_norm` for ee,
+   the fully correlated three-channel fit has no positive-definite minimum (TRExFitter segfaults after
+   strategy 2). The reason is physics, not numerics: the ee peak shape pins its ±5.9 % `ElectronID`
+   normalisation at 0.08σ and drags `Pileup`/`L1Prefiring`/`QCDScale` into μμ. If z-ee re-delivers
+   with the ECAL gap vetoed (`ElectronID` ≈ ±1 %), re-test whether the split is still needed. The
+   `ee_split_shared_only` and `ee_electron_id_1p2` variations exist for exactly that.
+2. **`NLLOffset: bin` does not work** here: ROOT 6.40 returns NaN for bins with zero observed events,
+   which ττ has. The default offset converges once the empty ττ bin is dropped.
+3. **`drop_empty_bins` refuses non-empty bins.** Only `tautau_SR2` bin 1 (0 data, 0 prediction) is
+   dropped, because its free MC-statistics γ sits at 0 and breaks HESSE/MINOS.
+4. **TRExFitter reserves `shape_`, `alpha`, `gamma` in NP names**, so the ee shape parts are `<NP>_eeShape`.
+5. **The refit-based grouped impacts (`trex-fitter mi`) return NaN** in this likelihood (HESSE fails
+   with groups fixed). The uncertainty groups are TRExFitter's covariance decomposition from `mwf`;
+   data statistics come from the separate stat-only fit (`StatOnly=TRUE:Suffix=_statOnly`, using
+   `multifit_statonly.config`, which has no likelihood scan so the full scan is not overwritten).
+6. **The ranking runs one `trex-fitter mr ... Ranking=<NP>` per NP in parallel** (`--workers`, default 6).
+   TRExFitter matches by substring; `run.py impacts` keeps each NP's own row.
+7. **σ = μ_Z × 1953.93 pb for every channel.** The constant `xsref_<channel>` NormFactor rescales each
+   signal from its own aMC@NLO reference (ee 1954.10, μμ 1953.93, ττ 1944.88 pb) to the POI's. Never
+   give two channels one `mu_Z` without it.
+8. **The theory band is the generator's own uncertainty** (aMC@NLO weights on σ(60 < m_LHE < 120):
+   7-point scale ⊕ NNPDF3.1 Hessian ⊕ α_s). The uncertainty of the NNLO normalisation 6077.22 pb is not
+   public and not included.
 
-## Changing something
+## Figures
 
-* new variation → add to `run_combination.VARIATIONS`; it is one dict entry and it lands in the
-  JSON, `result.md` and `output/plots/variations.pdf` automatically. `only=[...]` drops channels;
-  `mumu=`/`tautau=`/`ee=` pick a variant; `build=dict(...)` changes the correlation model;
-* changed correlation → `comb/model.py` **and** the justification table in `docs/02`. A ρ with no
-  written reason is the one thing this folder should not contain;
-* a fourth channel → add a loader in `comb/inputs.py`, an entry in `load_channels.loaders`, a
-  `Fit` block in `fit/run_multifit.CHANNELS`, a colour in `comb/plots.COLOUR`, names in
-  `comb/report.NAMES`/`SHORT`, and make sure its `Category` strings are in `model.CORRELATION`.
-  Nothing else in `comb/` is channel-count-specific.
+`mf/plots.py`, from `output/result.json` only. Light background and the channel colours μμ `#2B6CB0`,
+ττ `#EB811B`, ee `#8E44AD`, combination `#23373B`, prediction `#14B03D`. Header "CMS *Open Data*" and
+"16.4 fb⁻¹ (13 TeV)"; keep text inside the axes to a minimum (values in a right-hand column, no titles).
 
 ## Verify after any change
 
 ```bash
-python run_combination.py --check     # published values + 8 closure tests, all must pass
-python fit/run_multifit.py --dry-run  # MultiFit config still generates and validates
+python tests/test_trexcfg.py
+python run.py all && grep -E "status|probability" work/common/logs/multifit_mwf.log
 ```
 
-The closure tests are the safety net: single-channel BLUE reproduces that channel exactly,
-identical inputs with ρ = 0 give error/√2 and equal weights, identical inputs with all
-systematics correlated leave only the statistical part to average, the profile likelihood
-reproduces BLUE to 10⁻³ pb, `only=` reproduces the same sub-combination, and the z-ee grouped
-impacts plus `Fit residual` plus the analytic statistics reproduce its published MINOS error.
+Every fit in `run.py` must end with MIGRAD status 0, HESSE status 0 and MINOS status 0. `result.json`
+records these per fit (`minuit_status`, `hesse_status`, `minos_status`, `pos_def_forced`).

@@ -1,0 +1,40 @@
+{
+  "_doc": "Published 13 TeV measurements used in the comparison figures, verified against the papers on 16 Sep 2026 (arXiv PDF/LaTeX and HEPData). Values in pb, uncertainties as quoted. 'window' is the Born-level mass window; ATLAS 66-116 GeV values are moved to 60-120 GeV with window_scale.",
+  "window_scale_66_116_to_60_120": {
+    "value": 1.01425,
+    "source": "sigma(60 < m_LHE < 120) / sigma(66 < m_LHE < 116) in the aMC@NLO DY sample, z-mumu/output/v2/gensums.json h_lhe_mll; no uncertainty assigned"
+  },
+  "channel": {
+    "ee": [
+      {"label": "ATLAS", "detail": "81 pb$^{-1}$", "value": 1987.0, "errors": {"stat": 11.0, "syst": 41.0, "lumi": 42.0}, "window": [66, 116],
+       "citation": "ATLAS, PLB 759 (2016) 601, arXiv:1603.09222, Table 2 (total cross section)"},
+      {"label": "CMS (PAS)", "detail": "43 pb$^{-1}$", "value": 1920.0, "errors": {"stat": 20.0, "syst": 60.0, "lumi": 90.0}, "window": [60, 120],
+       "citation": "CMS-PAS-SMP-15-004 (2015, preliminary), Table 4"}
+    ],
+    "mumu": [
+      {"label": "ATLAS", "detail": "81 pb$^{-1}$", "value": 1977.0, "errors": {"stat": 9.0, "syst": 41.0, "lumi": 42.0}, "window": [66, 116],
+       "citation": "ATLAS, PLB 759 (2016) 601, arXiv:1603.09222, Table 2 (total cross section)"},
+      {"label": "CMS (PAS)", "detail": "43 pb$^{-1}$", "value": 1900.0, "errors": {"stat": 10.0, "syst": 50.0, "lumi": 90.0}, "window": [60, 120],
+       "citation": "CMS-PAS-SMP-15-004 (2015, preliminary), Table 4"}
+    ],
+    "tautau": [
+      {"label": "CMS", "detail": "2.3 fb$^{-1}$, five $\\tau\\tau$ final states", "value": 1848.0, "errors": {"stat": 12.0, "syst": 57.0, "lumi": 35.0}, "window": [60, 120],
+       "citation": "CMS, EPJC 78 (2018) 708, arXiv:1801.03535, Sec. 9 Eq. (10)"},
+      {"label": "CMS", "detail": "2.3 fb$^{-1}$, $\\tau_h\\tau_h$ only", "value": 1477.0, "errors": {"stat": 137.0, "syst": 270.0, "lumi": 30.0}, "window": [60, 120],
+       "citation": "CMS, EPJC 78 (2018) 708, arXiv:1801.03535, Table 4"}
+    ]
+  },
+  "combined": [
+    {"label": "CMS", "detail": "206 pb$^{-1}$, ee + $\\mu\\mu$", "value": 1952.0, "errors": {"stat": 4.0, "syst": 18.0, "lumi": 45.0}, "window": [60, 120],
+     "citation": "CMS-SMP-20-004, JHEP 04 (2025) 162, arXiv:2408.03744, Table 13"},
+    {"label": "ATLAS", "detail": "81 pb$^{-1}$, ee + $\\mu\\mu$", "value": 1981.0, "errors": {"stat": 7.0, "syst": 38.0, "lumi": 42.0}, "window": [66, 116],
+     "citation": "ATLAS, PLB 759 (2016) 601, arXiv:1603.09222, Table 3"}
+  ],
+  "not_used": [
+    "CMS-SMP-20-004 publishes no separate ee / mumu cross section (combined fit only; Sec. 6, Table 2 yields only).",
+    "ATLAS arXiv:1612.03636 (3.2 fb-1): per-channel fiducial only, total for ee+mumu combined.",
+    "CMS-SMP-17-010 (arXiv:1909.04133) and ATLAS arXiv:1912.02844: fiducial cross sections only.",
+    "ATLAS arXiv:2403.12902 and CMS-SMP-22-017 (arXiv:2503.09742): 13.6 TeV.",
+    "LHCb arXiv:1607.06495, 2112.07458: forward fiducial region."
+  ]
+}

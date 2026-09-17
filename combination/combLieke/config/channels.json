@@ -1,0 +1,189 @@
+{
+  "_doc": "The combined likelihood. Read by mf/trexcfg.adapt_channel; every entry is explained in README.md.",
+  "observable": "sigma(pp -> Z/gamma* -> ll), 60 < m_ll(LHE) < 120 GeV, sqrt(s) = 13 TeV, per lepton flavour, lepton universality",
+  "lumi_pb": 16393.381,
+  "poi": {
+    "name": "mu_Z",
+    "title": "#mu_{Z}",
+    "reference_pb": 1953.9313466473218,
+    "reference_note": "aMC@NLO (NNLO-normalised) sigma(60 < m_LHE(mumu) < 120) of z-mumu; sigma = mu_Z x reference_pb",
+    "range": [
+      0.5,
+      1.5
+    ],
+    "scan_range": [
+      0.9,
+      1.05
+    ]
+  },
+  "channels": {
+    "ee": {
+      "label": "ee",
+      "config": "z-ee/fit.config",
+      "inputs": {
+        "tarball": "z-ee/Zee_fit.tar.gz",
+        "config": "z-ee/fit.config",
+        "check_against": "datasets/z-ee/zee.root"
+      },
+      "signal": [
+        "DYee"
+      ],
+      "sigma_reference_pb": 1954.1032472811223,
+      "sigma_reference_source": "z-ee/Zee_fit.tar.gz: Zee_fit/reference_cross_section.txt (6077.22 pb x sum w(LHE ee, 60-120) / sum w)",
+      "rename_systematics": {},
+      "acceptance": null,
+      "acceptance_note": "none outside the fit: the DYee template is normalised to the 60-120 GeV LHE cross section and its PDF / QCDScale / PS_FSR templates carry the extrapolation",
+      "split_shape_norm": "all",
+      "split_shape_norm_note": "every HISTO systematic of ee enters twice: its normalisation keeps the shared name (correlated with mumu/tautau), its shape gets an ee-only parameter <NP>_eeShape. Without it the ee peak shape (6.3M events in 2 GeV bins, saturated-model p = 7e-43) pins the +-5.9% ElectronID normalisation at 0.08 sigma and drags Pileup/L1Prefiring/QCDScale into mumu; the fully correlated three-channel fit then has no positive-definite minimum. See README.md, 'The ee channel'.",
+      "published": {
+        "source": "z-ee/Zee_fit.tar.gz: Zee_fit/Fits/Zee_fit.txt"
+      }
+    },
+    "mumu": {
+      "label": "#mu#mu",
+      "config": "z-mumu/fit/zmumu.config",
+      "histo_path": "z-mumu/fit/fitinputs",
+      "signal": [
+        "DYmumu"
+      ],
+      "sigma_reference_pb": 1953.9313466473218,
+      "sigma_reference_source": "z-mumu/fit/fitinputs/zmumu.root.meta.json: sigma_fid_pred_pb / A_60_120",
+      "rename_systematics": {
+        "SigModel": "SigModel_mumu"
+      },
+      "acceptance": {
+        "source": "z-mumu/fit/fitinputs/zmumu.root.meta.json",
+        "nps": [
+          {
+            "name": "Acc_PDF",
+            "key": "acceptance.A_pdf_rel",
+            "title": "Acceptance: PDF"
+          },
+          {
+            "name": "Acc_AlphaS",
+            "key": "acceptance.A_alphas_rel",
+            "title": "Acceptance: #alpha_{s}"
+          },
+          {
+            "name": "Acc_QCDScale",
+            "key": "acceptance.A_scale_rel",
+            "title": "Acceptance: QCD scales"
+          },
+          {
+            "name": "AccStat_mumu",
+            "key": "acceptance.A_stat",
+            "divide_by": "acceptance.A",
+            "title": "Acceptance: MC stat. (#mu#mu)"
+          }
+        ]
+      },
+      "published": {
+        "source": "z-mumu/fit/results/zmumu_fit_result.json"
+      }
+    },
+    "tautau": {
+      "label": "#tau_{h}#tau_{h}",
+      "config": "z-tautau/fit/ztautau.config",
+      "histo_path": "z-tautau/fit/fitinputs",
+      "signal": [
+        "DYtautau"
+      ],
+      "sigma_reference_pb": 1944.8826556737133,
+      "sigma_reference_source": "z-tautau/fit/fitinputs/ztautau.root.meta.json: signal_prediction.sigma_tautau_60_120_pb",
+      "rename_systematics": {},
+      "acceptance": {
+        "source": "z-tautau/fit/fitinputs/ztautau.root.meta.json",
+        "nps": [
+          {
+            "name": "Acc_PDF",
+            "key": "signal_prediction.A_unc.A_pdf",
+            "title": "Acceptance: PDF"
+          },
+          {
+            "name": "Acc_AlphaS",
+            "key": "signal_prediction.A_unc.A_alphas",
+            "title": "Acceptance: #alpha_{s}"
+          },
+          {
+            "name": "Acc_QCDScale",
+            "key": "signal_prediction.A_unc.A_scale",
+            "title": "Acceptance: QCD scales"
+          },
+          {
+            "name": "Acc_PS_ISR",
+            "key": "signal_prediction.A_unc.A_isr",
+            "title": "Acceptance: PS ISR"
+          },
+          {
+            "name": "Acc_PS_FSR",
+            "key": "signal_prediction.A_unc.A_fsr",
+            "title": "Acceptance: PS FSR"
+          },
+          {
+            "name": "AccStat_tautau",
+            "key": "signal_prediction.A_mc_stat",
+            "title": "Acceptance: MC stat. (#tau#tau)"
+          }
+        ]
+      },
+      "drop_empty_bins": {
+        "tautau_SR2": [
+          1
+        ]
+      },
+      "drop_empty_bins_note": "0 < m_tt < 40 GeV of the BDT > 0.90 category: 0 data events and 0 predicted events. It carries no information, but its MC-statistics gamma is unconstrained and sits at 0, which breaks HESSE/MINOS and makes the per-bin offset log(0)",
+      "published": {
+        "source": "z-tautau/fit/results/ztautau_fit_result.json"
+      }
+    }
+  },
+  "fit": {
+    "_doc": "extra Fit/MultiFit options for every likelihood. Deliberately empty: NLLOffset 'bin' would help the precision of the 2M-event bins but ROOT 6.40 returns NaN for bins with zero observed events (RooFit::Detail::MathFuncs::nll, 0 x log 0), which tautau has; the default 'initial' offset converges once the empty tautau bin is dropped and the ee shape is split off."
+  },
+  "variations": {
+    "_doc": "Alternative likelihoods, each fitted with the common POI only (run.py variations). 'channels' restricts the fit; 'split' overrides split_shape_norm per channel; 'overall' replaces the normalisation part of a split systematic by a symmetric OVERALL of that size.",
+    "without_ee": {
+      "label": "without Z#rightarrowee",
+      "channels": [
+        "mumu",
+        "tautau"
+      ]
+    },
+    "without_tautau": {
+      "label": "without Z#rightarrow#tau#tau",
+      "channels": [
+        "ee",
+        "mumu"
+      ]
+    },
+    "split_all_channels": {
+      "label": "shape/norm split in all channels",
+      "split": {
+        "ee": "all",
+        "mumu": "all",
+        "tautau": "all"
+      }
+    },
+    "ee_split_shared_only": {
+      "label": "ee: split only shared NPs",
+      "split": {
+        "ee": [
+          "Pileup",
+          "L1Prefiring",
+          "PDF",
+          "QCDScale",
+          "PS_FSR"
+        ]
+      }
+    },
+    "ee_electron_id_1p2": {
+      "label": "ee: ElectronID norm. #pm1.2%",
+      "overall": {
+        "ee": {
+          "ElectronID": 0.012
+        }
+      },
+      "note": "diagnostic: the UL2016postVFP Medium-ID SF map (datasets/corrections, POG/EGM) gives +-0.3-1.6% per electron outside the ECAL gap, 1.2% per Z->ee event; inside 1.444 < |eta_SC| < 1.566, which z-ee does not veto, it is sf = 1 +- 1. Not a result: it uses a number z-ee did not deliver."
+    }
+  }
+}

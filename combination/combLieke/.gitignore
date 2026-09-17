@@ -1,8 +1,5 @@
+# TRExFitter jobs, workspaces and logs: rebuilt by `python run.py all`
+work/
+work_all.log
 __pycache__/
-results/
-logs/
-generated/
-status.json
-result.json
-variations/
-fit_result.json
+*.pyc

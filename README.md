@@ -10,7 +10,7 @@ We analyse CMS 2016 open data (NanoAOD, 13 TeV) and split into three subgroups b
 | `z-ee/` | Z → e⁺e⁻ | `z-ee/handoff.md` |
 | `z-mumu/` | Z → μ⁺μ⁻ | `z-mumu/handoff.md` |
 | `z-tautau/` | Z → τ⁺τ⁻ | `z-tautau/handoff.md` |
-| `combination/` | Combination of the channels — **[`combination/result.md`](combination/result.md)** | `combination/handoff.md` |
+| `combination/` | TRExFitter MultiFit of the three channels — **[`combination/combLieke/README.md`](combination/combLieke/README.md)** | `combination/handoff.md` |
 | `presentation/` | Final slide deck covering strategy and results | – |
 | `reference/` | Shared material (intro slides, links) | – |
 | `TRExFitter-v1.8.0/` | TRExFitter source (profile likelihood fits) | – |
@@ -31,20 +31,17 @@ Keep `handoff.md` up to date so the other groups can pick up where you left off.
 
 ## Result so far
 
-All three channels are finished and combined:
+All three channels are finished and combined in one TRExFitter v1.8.0 MultiFit:
 
-> **σ(pp → Z/γ* → ℓℓ, 60 < m_ℓℓ < 120 GeV) = 1980 ± 32 pb** per lepton flavour, assuming lepton
-> universality, with **χ²/ndf = 9.67/2 (p = 0.008)** — [`combination/result.md`](combination/result.md),
-> deck in [`combination/presentation/`](combination/presentation/).
+> **σ(pp → Z/γ* → ℓℓ, 60 < m_ℓℓ < 120 GeV) = 1948 ⁺³³₋₃₂ pb** per lepton flavour, assuming lepton
+> universality (aMC@NLO: 1954 ⁺⁵⁶₋₈₂ pb). The channels are compatible (−2Δln L = 2.4 for 2 dof,
+> p = 0.30). Result, method, figures: [`combination/combLieke/README.md`](combination/combLieke/README.md).
 
-The compatibility number is part of the result: σ(ee) = 2054 ± 40 pb sits 3.0σ above
-σ(μμ) = 1931 ± 35 pb because the z-ee fit lets a ±5.9 % theory normalisation of its own signal
-template float against its signal strength (`fitting/CONVENTIONS.md` §3 forbids exactly this).
-Diagnosis: [`combination/docs/01-inputs.md`](combination/docs/01-inputs.md); the list of changes to
-ask for: **[`ASK_Z_EE.md`](ASK_Z_EE.md)**. Without z-ee the combination is 1931 ± 35 pb with
-p = 0.54. Orthogonality of the three selections, the systematics CMS and ATLAS carry that we do
-not, and each channel against the published measurement of the same decay:
-[`combination/docs/05-vs-published.md`](combination/docs/05-vs-published.md).
+The value is carried by μμ. The ee inputs have two problems. The ±5.9 % electron-ID uncertainty comes
+from not vetoing the ECAL barrel–endcap gap; the official scale-factor map gives ~1.2 %. And no electron
+trigger scale factor is applied. The combination therefore separates the ee template shapes from their
+normalisations. Orthogonality of the three selections (measured on data) and the systematics compared
+with ATLAS and CMS are in [`combination/combLieke/docs/`](combination/combLieke/docs/).
 
 ## What the combination needs
 

@@ -10,8 +10,9 @@ Steps (each a standalone script in scripts/, documented in docs/10-v4-plan.md):
     1 v4 skims (SingleMuon, SingleElectron, MuonEG, all simulation)            step1_skim.py --v4
     2 flat ntuples of the lepton channels                                        step2_ntuples_v4.py
     3 in-situ trigger efficiencies + b-tag efficiencies; lepton-channel fakes    step3c_trigger_v4.py, step3_fakes_v4.py
-    4 templates of all channels (tau_h tau_h from the v3 ntuples / fit inputs)   step4_histograms_v4.py
-    5 TRExFitter fit                                                             step5_fit_v4.py
+    4 templates of all channels (tau_h tau_h from the v3 ntuples / fit inputs)   step4_histograms_v4.py, step4b_export_channels_v4.py
+    5 TRExFitter fits: combined (with ranking), per channel (workspaces for the MultiFit, tau ID free)
+      and per channel with the POG tau ID SFs fixed (cross-checks)               step5_fit_v4.py
     6 report                                                                     step6_report_v4.py
 The tau_h tau_h inputs (steps 3-4 of run_all.py: fake factors, BDT, fit/fitinputs/ztautau.root) must exist.
 """
@@ -29,8 +30,9 @@ STEPS = {
     1: [["scripts/step1_skim.py", "--v4"]],
     2: [["scripts/step2_ntuples_v4.py"]],
     3: [["scripts/step3c_trigger_v4.py"], ["scripts/step3_fakes_v4.py"]],
-    4: [["scripts/step4_histograms_v4.py"]],
-    5: [["scripts/step5_fit_v4.py"]],
+    4: [["scripts/step4_histograms_v4.py"], ["scripts/step4b_export_channels_v4.py"]],
+    5: [["scripts/step5_fit_v4.py"]] + [["scripts/step5_fit_v4.py", "--channels", ch, "--job", f"ztautau_v4_{ch}", "--skip-ranking"] for ch in ("tautau", "mutau", "etau", "emu")]
+       + [["scripts/step5_fit_v4.py", "--channels", ch, "--job", f"ztautau_v4_{ch}_fixedid", "--skip-ranking", "--fix-tauid"] for ch in ("tautau", "mutau", "etau", "emu")],
     6: [["scripts/step6_report_v4.py"]],
 }
 

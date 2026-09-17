@@ -64,6 +64,17 @@ Grouped impacts on mu_Z:
 | etau | fixed (POG) | 1.017 +0.068 -0.063 | 1978 +133 -123 |
 | emu | fixed (POG) | 0.978 +0.056 -0.053 | 1902 +108 -102 |
 
+## Per-channel exports for the combination
+
+| channel | fit inputs | config | workspace | mu_Z alone (tau ID free) |
+|---|---|---|---|---|
+| tautau | `fit_v4/fitinputs/ztautau_v4_tautau.root` | `fit_v4/ztautau_v4_tautau.config` | present | 1.002 +0.326 -0.200 |
+| mutau | `fit_v4/fitinputs/ztautau_v4_mutau.root` | `fit_v4/ztautau_v4_mutau.config` | present | 0.915 +0.266 -0.164 |
+| etau | `fit_v4/fitinputs/ztautau_v4_etau.root` | `fit_v4/ztautau_v4_etau.config` | present | 1.160 +0.544 -0.313 |
+| emu | `fit_v4/fitinputs/ztautau_v4_emu.root` | `fit_v4/ztautau_v4_emu.config` | present | 0.978 +0.056 -0.053 |
+
+MultiFit of the four workspaces (`fit_v4/comb_v4.config`): mu_Z = 1.055 +0.046 -0.044 (single-file fit: 1.055 +0.046 -0.044)
+
 v3 reference (tau_h tau_h only, fiducial signal): mu_Z = 1.071 +0.114 -0.100, sigma(60-120) = 2082 +222 -194 pb
 
 ## Prefit yields per region

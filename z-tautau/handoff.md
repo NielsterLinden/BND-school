@@ -16,6 +16,9 @@
 - Outputs: `output_v4/RESULTS.md`, `output_v4/results.json`, `output_v4/plots/`, `fit_v4/ztautau_v4.config`,
   `fit_v4/fitinputs/ztautau_v4.root`, `fit_v4/results/ztautau_v4_fit_result.json`, `external/trigger_insitu_v4.json`.
 - Caches: `skims_v4/` (17 GB), `ntuples_v4/` (2.9 GB) under `/data/atlas/users/sjankovy/BND-school-cache/ztautau/`.
+- **Per-channel exports for a combination** (all four channels ready): `fit_v4/fitinputs/ztautau_v4_<ch>.root`,
+  `fit_v4/ztautau_v4_<ch>.config`, workspaces `fit_v4/results/ztautau_v4_<ch>/RooStats/*_model.root` (τh ID SFs free,
+  shared NP names), MultiFit `fit_v4/comb_v4.config` (reproduces the single-file fit); `docs/10-v4-plan.md` section 13.
 
 **Result (v4, four channels, τh ID scale factors and energy scale fitted in situ)**
 

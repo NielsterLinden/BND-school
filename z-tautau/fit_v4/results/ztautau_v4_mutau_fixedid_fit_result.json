@@ -1,656 +1,632 @@
 {
- "job": "ztautau_v4_etau",
+ "job": "ztautau_v4_mutau_fixedid",
  "poi": "mu_Z",
- "poi_value": 1.15987,
- "poi_err_up": 0.543624,
- "poi_err_down": 0.313148,
- "poi_err": 0.428386,
+ "poi_value": 1.04916,
+ "poi_err_up": 0.0555964,
+ "poi_err_down": 0.0514095,
+ "poi_err": 0.053502949999999994,
  "nps": {
-  "TauIDSF_DM0": [
-   0.806883,
-   0.279397,
-   0.279397
-  ],
-  "TauIDSF_DM1": [
-   0.830523,
-   0.299083,
-   0.299083
-  ],
-  "TauIDSF_DM10": [
-   0.766063,
-   0.273814,
-   0.273814
-  ],
-  "TauIDSF_DM11": [
-   0.706564,
-   0.260251,
-   0.260251
-  ],
   "BTag": [
-   0.080558,
-   0.990794,
-   0.990794
+   0.195887,
+   0.974017,
+   0.974017
   ],
-  "ElectronID": [
-   -0.0244163,
-   0.993075,
-   0.993075
+  "FakeClosure_mutau": [
+   -0.0568871,
+   0.939498,
+   0.939498
   ],
-  "ElectronReco": [
-   -0.0163803,
-   0.993263,
-   0.993263
+  "FakeFrac_mutau": [
+   1.57958,
+   0.692623,
+   0.692623
   ],
-  "ElectronScale": [
-   -0.060003,
-   0.982053,
-   0.982053
+  "FakeMCSub_mutau": [
+   -0.225028,
+   0.991265,
+   0.991265
   ],
-  "ElectronTrigger": [
-   0.0649461,
-   0.978388,
-   0.978388
+  "FakeOSSS_mutau": [
+   -0.25136,
+   0.974074,
+   0.974074
   ],
-  "FakeClosure_etau": [
-   0.272222,
-   0.97762,
-   0.97762
+  "FakeTT_mutau": [
+   -0.107894,
+   0.948219,
+   0.948219
   ],
-  "FakeFrac_etau": [
-   2.61597,
-   0.649417,
-   0.649417
-  ],
-  "FakeMCSub_etau": [
-   -0.122851,
-   0.990389,
-   0.990389
-  ],
-  "FakeOSSS_etau": [
-   -0.175418,
-   0.97091,
-   0.97091
-  ],
-  "FakeTT_etau": [
-   -0.0196124,
-   0.981303,
-   0.981303
-  ],
-  "FakeWmT_etau": [
-   1.47727,
-   0.773808,
-   0.773808
+  "FakeWmT_mutau": [
+   -0.809756,
+   0.694362,
+   0.694362
   ],
   "JES": [
-   -0.465099,
-   0.892045,
-   0.892045
+   -0.408691,
+   0.786799,
+   0.786799
   ],
   "L1Prefiring": [
-   -0.0291533,
-   0.992432,
-   0.992432
+   -0.17923,
+   0.989314,
+   0.989314
   ],
   "Lumi": [
-   0.0263212,
-   0.990752,
-   0.990752
+   0.130051,
+   0.989231,
+   0.989231
   ],
   "MET_Unclustered": [
-   1.40347,
-   0.811123,
-   0.811123
+   -0.0257167,
+   0.630362,
+   0.630362
+  ],
+  "MuonID": [
+   0.0449209,
+   0.992924,
+   0.992924
+  ],
+  "MuonIso": [
+   0.039055,
+   0.992779,
+   0.992779
+  ],
+  "MuonScale": [
+   -0.0992544,
+   0.969752,
+   0.969752
+  ],
+  "MuonTrigger": [
+   0.0110852,
+   0.993308,
+   0.993308
   ],
   "PDF": [
-   0.0634655,
-   0.986403,
-   0.986403
+   -0.0685858,
+   0.988877,
+   0.988877
   ],
   "PS_FSR": [
-   0.23359,
-   0.57088,
-   0.57088
+   0.62108,
+   0.594656,
+   0.594656
   ],
   "PS_ISR": [
-   -0.0815322,
-   0.934489,
-   0.934489
+   0.0589009,
+   0.900661,
+   0.900661
   ],
   "Pileup": [
-   -0.059182,
-   0.724194,
-   0.724194
+   1.46763,
+   0.706667,
+   0.706667
   ],
   "QCDScale": [
-   -0.138917,
-   0.782545,
-   0.782545
+   0.845401,
+   0.864026,
+   0.864026
   ],
   "TauES_DM0": [
-   -0.00730998,
-   0.779412,
-   0.779412
+   0.358052,
+   0.339348,
+   0.339348
   ],
   "TauES_DM1": [
-   -0.0289969,
-   0.466112,
-   0.466112
+   0.261637,
+   0.31277,
+   0.31277
   ],
   "TauES_DM10": [
-   0.219003,
-   0.602473,
-   0.602473
+   -0.564607,
+   0.357107,
+   0.357107
   ],
   "TauES_DM11": [
-   0.305856,
-   0.940673,
-   0.940673
+   0.715796,
+   0.607028,
+   0.607028
   ],
   "TauFakeEle": [
-   0.260906,
-   0.609825,
-   0.609825
+   0.178668,
+   0.9853,
+   0.9853
   ],
   "TauFakeMu": [
-   0.00345697,
-   0.993101,
-   0.993101
+   0.818597,
+   0.526607,
+   0.526607
   ],
   "TopPt": [
-   0.24667,
-   0.964821,
-   0.964821
+   0.452843,
+   0.962221,
+   0.962221
   ],
   "XS_DYll": [
-   0.119417,
-   0.948854,
-   0.948854
+   0.225514,
+   0.961212,
+   0.961212
   ],
   "XS_DYlowmass": [
-   -0.101819,
-   0.997092,
-   0.997092
+   -3.78524e-05,
+   0.979239,
+   0.979239
   ],
   "XS_DYtautau_out": [
-   0.0507365,
-   0.990151,
-   0.990151
+   0.29212,
+   0.970529,
+   0.970529
   ],
   "XS_SingleTop": [
-   -0.0130112,
-   0.993839,
-   0.993839
+   -0.0219606,
+   0.994054,
+   0.994054
   ],
   "XS_WJets": [
-   -0.025713,
-   0.993206,
-   0.993206
+   -0.00433943,
+   0.993505,
+   0.993505
   ],
   "XS_WW": [
-   0.00379029,
-   0.992939,
-   0.992939
+   0.015448,
+   0.991755,
+   0.991755
   ],
   "XS_WZ": [
-   0.0196633,
-   0.992484,
-   0.992484
+   0.0244752,
+   0.992211,
+   0.992211
   ],
   "XS_ZZ": [
-   -0.00107853,
-   0.993381,
-   0.993381
+   0.0147034,
+   0.992667,
+   0.992667
   ],
-  "gamma_stat_etau_SR_dm0_bin_0": [
-   1.29469,
-   0.29446,
-   0.29446
+  "gamma_stat_mutau_SR_dm0_bin_0": [
+   0.947445,
+   0.136808,
+   0.136808
   ],
-  "gamma_stat_etau_SR_dm0_bin_1": [
-   0.958372,
-   0.162708,
-   0.162708
+  "gamma_stat_mutau_SR_dm0_bin_1": [
+   0.999777,
+   0.0903619,
+   0.0903619
   ],
-  "gamma_stat_etau_SR_dm0_bin_10": [
-   0.990406,
-   0.0422329,
-   0.0422329
+  "gamma_stat_mutau_SR_dm0_bin_10": [
+   1.02082,
+   0.0276936,
+   0.0276936
   ],
-  "gamma_stat_etau_SR_dm0_bin_11": [
-   0.975896,
-   0.0473871,
-   0.0473871
+  "gamma_stat_mutau_SR_dm0_bin_11": [
+   1.00439,
+   0.0261026,
+   0.0261026
   ],
-  "gamma_stat_etau_SR_dm0_bin_12": [
-   0.951874,
-   0.0554285,
-   0.0554285
+  "gamma_stat_mutau_SR_dm0_bin_12": [
+   1.03238,
+   0.0298526,
+   0.0298526
   ],
-  "gamma_stat_etau_SR_dm0_bin_13": [
-   1.01874,
-   0.0511541,
-   0.0511541
+  "gamma_stat_mutau_SR_dm0_bin_13": [
+   1.0212,
+   0.0273336,
+   0.0273336
   ],
-  "gamma_stat_etau_SR_dm0_bin_14": [
-   0.955713,
-   0.0475007,
-   0.0475007
+  "gamma_stat_mutau_SR_dm0_bin_14": [
+   0.997536,
+   0.0219558,
+   0.0219558
   ],
-  "gamma_stat_etau_SR_dm0_bin_2": [
-   0.866618,
-   0.174665,
-   0.174665
+  "gamma_stat_mutau_SR_dm0_bin_2": [
+   1.12167,
+   0.0871857,
+   0.0871857
   ],
-  "gamma_stat_etau_SR_dm0_bin_3": [
-   0.959597,
-   0.115307,
-   0.115307
+  "gamma_stat_mutau_SR_dm0_bin_3": [
+   0.945014,
+   0.0531476,
+   0.0531476
   ],
-  "gamma_stat_etau_SR_dm0_bin_4": [
-   1.12353,
-   0.0874691,
-   0.0874691
+  "gamma_stat_mutau_SR_dm0_bin_4": [
+   1.02458,
+   0.0399613,
+   0.0399613
   ],
-  "gamma_stat_etau_SR_dm0_bin_5": [
-   0.968694,
-   0.0609575,
-   0.0609575
+  "gamma_stat_mutau_SR_dm0_bin_5": [
+   1.01741,
+   0.0270398,
+   0.0270398
   ],
-  "gamma_stat_etau_SR_dm0_bin_6": [
-   1.01058,
-   0.0590103,
-   0.0590103
+  "gamma_stat_mutau_SR_dm0_bin_6": [
+   1.03404,
+   0.0207352,
+   0.0207352
   ],
-  "gamma_stat_etau_SR_dm0_bin_7": [
-   1.03443,
-   0.0452381,
-   0.0452381
+  "gamma_stat_mutau_SR_dm0_bin_7": [
+   0.987624,
+   0.0192149,
+   0.0192149
   ],
-  "gamma_stat_etau_SR_dm0_bin_8": [
-   0.989989,
-   0.0455934,
-   0.0455934
+  "gamma_stat_mutau_SR_dm0_bin_8": [
+   1.00984,
+   0.0237962,
+   0.0237962
   ],
-  "gamma_stat_etau_SR_dm0_bin_9": [
-   0.991305,
-   0.0457735,
-   0.0457735
+  "gamma_stat_mutau_SR_dm0_bin_9": [
+   0.961075,
+   0.0268588,
+   0.0268588
   ],
-  "gamma_stat_etau_SR_dm10_bin_0": [
-   0.92239,
-   0.200118,
-   0.200118
+  "gamma_stat_mutau_SR_dm10_bin_0": [
+   1.02109,
+   0.0560923,
+   0.0560923
   ],
-  "gamma_stat_etau_SR_dm10_bin_1": [
-   1.84431,
-   0.334057,
-   0.334057
+  "gamma_stat_mutau_SR_dm10_bin_1": [
+   1.02366,
+   0.159985,
+   0.159985
   ],
-  "gamma_stat_etau_SR_dm10_bin_10": [
-   1.03501,
-   0.0325573,
-   0.0325573
+  "gamma_stat_mutau_SR_dm10_bin_10": [
+   1.04406,
+   0.0244086,
+   0.0244086
   ],
-  "gamma_stat_etau_SR_dm10_bin_11": [
-   1.00345,
-   0.0322155,
-   0.0322155
+  "gamma_stat_mutau_SR_dm10_bin_11": [
+   1.0072,
+   0.0221872,
+   0.0221872
   ],
-  "gamma_stat_etau_SR_dm10_bin_12": [
-   1.02076,
-   0.040785,
-   0.040785
+  "gamma_stat_mutau_SR_dm10_bin_12": [
+   0.98555,
+   0.0205981,
+   0.0205981
   ],
-  "gamma_stat_etau_SR_dm10_bin_13": [
-   0.985687,
-   0.0341878,
-   0.0341878
+  "gamma_stat_mutau_SR_dm10_bin_13": [
+   0.988607,
+   0.0182488,
+   0.0182488
   ],
-  "gamma_stat_etau_SR_dm10_bin_14": [
-   0.993648,
-   0.0312664,
-   0.0312664
+  "gamma_stat_mutau_SR_dm10_bin_14": [
+   0.988965,
+   0.0170984,
+   0.0170984
   ],
-  "gamma_stat_etau_SR_dm10_bin_2": [
-   0.816975,
-   0.130677,
-   0.130677
+  "gamma_stat_mutau_SR_dm10_bin_2": [
+   0.955653,
+   0.0630508,
+   0.0630508
   ],
-  "gamma_stat_etau_SR_dm10_bin_3": [
-   0.882531,
-   0.107015,
-   0.107015
+  "gamma_stat_mutau_SR_dm10_bin_3": [
+   1.05953,
+   0.0635241,
+   0.0635241
   ],
-  "gamma_stat_etau_SR_dm10_bin_4": [
-   0.980834,
-   0.0682905,
-   0.0682905
+  "gamma_stat_mutau_SR_dm10_bin_4": [
+   1.01126,
+   0.0448214,
+   0.0448214
   ],
-  "gamma_stat_etau_SR_dm10_bin_5": [
-   1.0615,
-   0.0551447,
-   0.0551447
+  "gamma_stat_mutau_SR_dm10_bin_5": [
+   0.975656,
+   0.0272313,
+   0.0272313
   ],
-  "gamma_stat_etau_SR_dm10_bin_6": [
-   0.970668,
-   0.0322715,
-   0.0322715
+  "gamma_stat_mutau_SR_dm10_bin_6": [
+   0.984023,
+   0.0192061,
+   0.0192061
   ],
-  "gamma_stat_etau_SR_dm10_bin_7": [
-   1.01302,
-   0.0288327,
-   0.0288327
+  "gamma_stat_mutau_SR_dm10_bin_7": [
+   0.971286,
+   0.0165846,
+   0.0165846
   ],
-  "gamma_stat_etau_SR_dm10_bin_8": [
-   1.00674,
-   0.0308462,
-   0.0308462
+  "gamma_stat_mutau_SR_dm10_bin_8": [
+   0.992931,
+   0.0203251,
+   0.0203251
   ],
-  "gamma_stat_etau_SR_dm10_bin_9": [
-   0.968748,
-   0.0364571,
-   0.0364571
+  "gamma_stat_mutau_SR_dm10_bin_9": [
+   1.00091,
+   0.0266444,
+   0.0266444
   ],
-  "gamma_stat_etau_SR_dm11_bin_0": [
-   0.697732,
-   0.283006,
-   0.283006
+  "gamma_stat_mutau_SR_dm11_bin_0": [
+   1.3408,
+   0.235649,
+   0.235649
   ],
-  "gamma_stat_etau_SR_dm11_bin_1": [
-   1.47006,
-   0.488473,
-   0.488473
+  "gamma_stat_mutau_SR_dm11_bin_1": [
+   0.835306,
+   0.195652,
+   0.195652
   ],
-  "gamma_stat_etau_SR_dm11_bin_10": [
-   1.06887,
-   0.0598865,
-   0.0598865
+  "gamma_stat_mutau_SR_dm11_bin_10": [
+   0.979976,
+   0.0449291,
+   0.0449291
   ],
-  "gamma_stat_etau_SR_dm11_bin_11": [
-   1.00158,
-   0.065707,
-   0.065707
+  "gamma_stat_mutau_SR_dm11_bin_11": [
+   1.03663,
+   0.0487288,
+   0.0487288
   ],
-  "gamma_stat_etau_SR_dm11_bin_12": [
-   1.02106,
-   0.0738335,
-   0.0738335
+  "gamma_stat_mutau_SR_dm11_bin_12": [
+   1.00326,
+   0.0527254,
+   0.0527254
   ],
-  "gamma_stat_etau_SR_dm11_bin_13": [
-   0.965869,
-   0.0598016,
-   0.0598016
+  "gamma_stat_mutau_SR_dm11_bin_13": [
+   0.970605,
+   0.0398711,
+   0.0398711
   ],
-  "gamma_stat_etau_SR_dm11_bin_14": [
-   0.963187,
-   0.0396941,
-   0.0396941
+  "gamma_stat_mutau_SR_dm11_bin_14": [
+   0.971255,
+   0.0384873,
+   0.0384873
   ],
-  "gamma_stat_etau_SR_dm11_bin_2": [
-   0.829948,
-   0.28064,
-   0.28064
+  "gamma_stat_mutau_SR_dm11_bin_2": [
+   1.05059,
+   0.191957,
+   0.191957
   ],
-  "gamma_stat_etau_SR_dm11_bin_3": [
-   0.901896,
-   0.205996,
-   0.205996
+  "gamma_stat_mutau_SR_dm11_bin_3": [
+   0.926211,
+   0.118327,
+   0.118327
   ],
-  "gamma_stat_etau_SR_dm11_bin_4": [
-   0.985924,
-   0.124745,
-   0.124745
+  "gamma_stat_mutau_SR_dm11_bin_4": [
+   0.908709,
+   0.0749495,
+   0.0749495
   ],
-  "gamma_stat_etau_SR_dm11_bin_5": [
-   1.06179,
-   0.0891257,
-   0.0891257
+  "gamma_stat_mutau_SR_dm11_bin_5": [
+   0.990464,
+   0.0481351,
+   0.0481351
   ],
-  "gamma_stat_etau_SR_dm11_bin_6": [
-   0.962645,
-   0.0640149,
-   0.0640149
+  "gamma_stat_mutau_SR_dm11_bin_6": [
+   0.965742,
+   0.03659,
+   0.03659
   ],
-  "gamma_stat_etau_SR_dm11_bin_7": [
-   1.02209,
-   0.0589555,
-   0.0589555
+  "gamma_stat_mutau_SR_dm11_bin_7": [
+   0.994565,
+   0.0360239,
+   0.0360239
   ],
-  "gamma_stat_etau_SR_dm11_bin_8": [
-   0.997448,
-   0.0620991,
-   0.0620991
+  "gamma_stat_mutau_SR_dm11_bin_8": [
+   1.03091,
+   0.0426181,
+   0.0426181
   ],
-  "gamma_stat_etau_SR_dm11_bin_9": [
-   1.03417,
-   0.0722281,
-   0.0722281
+  "gamma_stat_mutau_SR_dm11_bin_9": [
+   1.05881,
+   0.0547635,
+   0.0547635
   ],
-  "gamma_stat_etau_SR_dm1_bin_0": [
-   1.10962,
-   0.191381,
-   0.191381
+  "gamma_stat_mutau_SR_dm1_bin_0": [
+   0.963795,
+   0.0923503,
+   0.0923503
   ],
-  "gamma_stat_etau_SR_dm1_bin_1": [
-   0.999278,
-   0.0652337,
-   0.0652337
+  "gamma_stat_mutau_SR_dm1_bin_1": [
+   0.966498,
+   0.0992546,
+   0.0992546
   ],
-  "gamma_stat_etau_SR_dm1_bin_10": [
-   0.999711,
-   0.0231206,
-   0.0231206
+  "gamma_stat_mutau_SR_dm1_bin_10": [
+   1.00888,
+   0.0164311,
+   0.0164311
   ],
-  "gamma_stat_etau_SR_dm1_bin_11": [
-   1.01398,
-   0.0236853,
-   0.0236853
+  "gamma_stat_mutau_SR_dm1_bin_11": [
+   0.993505,
+   0.0169868,
+   0.0169868
   ],
-  "gamma_stat_etau_SR_dm1_bin_12": [
-   1.03902,
-   0.0257829,
-   0.0257829
+  "gamma_stat_mutau_SR_dm1_bin_12": [
+   1.01149,
+   0.0204603,
+   0.0204603
   ],
-  "gamma_stat_etau_SR_dm1_bin_13": [
-   0.980032,
-   0.0207312,
-   0.0207312
+  "gamma_stat_mutau_SR_dm1_bin_13": [
+   0.985727,
+   0.0173679,
+   0.0173679
   ],
-  "gamma_stat_etau_SR_dm1_bin_14": [
-   1.00956,
-   0.019303,
-   0.019303
+  "gamma_stat_mutau_SR_dm1_bin_14": [
+   1.00814,
+   0.0160245,
+   0.0160245
   ],
-  "gamma_stat_etau_SR_dm1_bin_2": [
-   0.948506,
-   0.0756164,
-   0.0756164
+  "gamma_stat_mutau_SR_dm1_bin_2": [
+   1.07169,
+   0.0856934,
+   0.0856934
   ],
-  "gamma_stat_etau_SR_dm1_bin_3": [
-   1.04745,
-   0.0660581,
-   0.0660581
+  "gamma_stat_mutau_SR_dm1_bin_3": [
+   1.01496,
+   0.0484964,
+   0.0484964
   ],
-  "gamma_stat_etau_SR_dm1_bin_4": [
-   1.04377,
-   0.0475237,
-   0.0475237
+  "gamma_stat_mutau_SR_dm1_bin_4": [
+   1.01125,
+   0.0312738,
+   0.0312738
   ],
-  "gamma_stat_etau_SR_dm1_bin_5": [
-   0.989393,
-   0.0327643,
-   0.0327643
+  "gamma_stat_mutau_SR_dm1_bin_5": [
+   1.02143,
+   0.0196395,
+   0.0196395
   ],
-  "gamma_stat_etau_SR_dm1_bin_6": [
-   0.987849,
-   0.0244388,
-   0.0244388
+  "gamma_stat_mutau_SR_dm1_bin_6": [
+   0.990925,
+   0.013259,
+   0.013259
   ],
-  "gamma_stat_etau_SR_dm1_bin_7": [
-   0.988683,
-   0.0209644,
-   0.0209644
+  "gamma_stat_mutau_SR_dm1_bin_7": [
+   1.01708,
+   0.0125698,
+   0.0125698
   ],
-  "gamma_stat_etau_SR_dm1_bin_8": [
-   0.997674,
-   0.0228331,
-   0.0228331
+  "gamma_stat_mutau_SR_dm1_bin_8": [
+   0.99455,
+   0.0149027,
+   0.0149027
   ],
-  "gamma_stat_etau_SR_dm1_bin_9": [
-   1.00625,
-   0.0264845,
-   0.0264845
+  "gamma_stat_mutau_SR_dm1_bin_9": [
+   0.987994,
+   0.0185027,
+   0.0185027
   ],
   "mu_ttbar": [
-   1.54038,
-   0.774779,
-   0.774779
+   1.13619,
+   0.160007,
+   0.160007
   ]
  },
- "nll": 26666.94671,
+ "nll": 67793.73106,
  "err_decomp": {
-  "TOT_ERROR": 0.428521,
-  "STAT_ERROR": 0.269326,
-  "SYST_ERROR": 0.228713,
-  "MCSTAT_ERROR": 0.242454,
-  "TOTSYST_ERROR": 0.333307,
-  "STAT_ERR_NO_NF": NaN,
-  "NF_ERROR": 0.391469,
-  "TauIDSF_DM0": -0.115931,
-  "TauIDSF_DM1": -0.125773,
-  "TauIDSF_DM10": -0.115132,
-  "TauIDSF_DM11": -0.107697,
-  "alpha_BTag": -0.00281839,
-  "alpha_ElectronID": 0.00502907,
-  "alpha_ElectronReco": 0.00811716,
-  "alpha_ElectronScale": 0.00720548,
-  "alpha_ElectronTrigger": 0.00725009,
-  "alpha_FakeClosure_etau": 0.0606341,
-  "alpha_FakeFrac_etau": -0.0133612,
-  "alpha_FakeMCSub_etau": 0.00113273,
-  "alpha_FakeOSSS_etau": 0.125277,
-  "alpha_FakeTT_etau": -0.0186996,
-  "alpha_FakeWmT_etau": 0.133514,
-  "alpha_JES": 0.026275,
-  "alpha_L1Prefiring": 0.00293754,
-  "alpha_Lumi": 0.00455461,
-  "alpha_MET_Unclustered": -0.0159144,
-  "alpha_PDF": -0.000249909,
-  "alpha_PS_FSR": 0.0309226,
-  "alpha_PS_ISR": 0.0168023,
-  "alpha_Pileup": 0.0650951,
-  "alpha_QCDScale": -0.0452701,
-  "alpha_TauES_DM0": -0.0194621,
-  "alpha_TauES_DM1": 0.0312955,
-  "alpha_TauES_DM10": 0.00450812,
-  "alpha_TauES_DM11": 0.00035856,
-  "alpha_TauFakeEle": 0.0362065,
-  "alpha_TauFakeMu": 0.00107563,
-  "alpha_TopPt": -0.0270801,
-  "alpha_XS_DYll": 0.0173875,
-  "alpha_XS_DYlowmass": 0.0224085,
-  "alpha_XS_DYtautau_out": 0.0349734,
-  "alpha_XS_SingleTop": 0.00382074,
-  "alpha_XS_WJets": 0.0197365,
-  "alpha_XS_WW": 0.00397418,
-  "alpha_XS_WZ": -0.00311353,
-  "alpha_XS_ZZ": 0.000317039,
-  "gamma_stat_etau_SR_dm0_bin_0": -0.0276325,
-  "gamma_stat_etau_SR_dm0_bin_1": -0.0211865,
-  "gamma_stat_etau_SR_dm0_bin_10": -0.0156636,
-  "gamma_stat_etau_SR_dm0_bin_11": 0.0186797,
-  "gamma_stat_etau_SR_dm0_bin_12": 0.0391024,
-  "gamma_stat_etau_SR_dm0_bin_13": 0.0443272,
-  "gamma_stat_etau_SR_dm0_bin_14": 0.117155,
-  "gamma_stat_etau_SR_dm0_bin_2": -0.0386419,
-  "gamma_stat_etau_SR_dm0_bin_3": -0.0416369,
-  "gamma_stat_etau_SR_dm0_bin_4": -0.0389078,
-  "gamma_stat_etau_SR_dm0_bin_5": -0.0291771,
-  "gamma_stat_etau_SR_dm0_bin_6": -0.0303078,
-  "gamma_stat_etau_SR_dm0_bin_7": -0.0407967,
-  "gamma_stat_etau_SR_dm0_bin_8": -0.0260274,
-  "gamma_stat_etau_SR_dm0_bin_9": 0.00020649,
-  "gamma_stat_etau_SR_dm10_bin_0": -0.0454714,
-  "gamma_stat_etau_SR_dm10_bin_1": -0.0513741,
-  "gamma_stat_etau_SR_dm10_bin_10": 0.00248649,
-  "gamma_stat_etau_SR_dm10_bin_11": 0.0247112,
-  "gamma_stat_etau_SR_dm10_bin_12": 0.0138106,
-  "gamma_stat_etau_SR_dm10_bin_13": -0.0128588,
-  "gamma_stat_etau_SR_dm10_bin_14": -0.0111099,
-  "gamma_stat_etau_SR_dm10_bin_2": 0.0406809,
-  "gamma_stat_etau_SR_dm10_bin_3": -0.0418681,
-  "gamma_stat_etau_SR_dm10_bin_4": -0.0211343,
-  "gamma_stat_etau_SR_dm10_bin_5": 0.0168945,
-  "gamma_stat_etau_SR_dm10_bin_6": 0.00442994,
-  "gamma_stat_etau_SR_dm10_bin_7": 0.00816579,
-  "gamma_stat_etau_SR_dm10_bin_8": 0.000887117,
-  "gamma_stat_etau_SR_dm10_bin_9": -0.00450271,
-  "gamma_stat_etau_SR_dm11_bin_0": 0.0649144,
-  "gamma_stat_etau_SR_dm11_bin_1": -0.015625,
-  "gamma_stat_etau_SR_dm11_bin_10": -0.0196101,
-  "gamma_stat_etau_SR_dm11_bin_11": -0.032886,
-  "gamma_stat_etau_SR_dm11_bin_12": 0.02256,
-  "gamma_stat_etau_SR_dm11_bin_13": -0.0156355,
-  "gamma_stat_etau_SR_dm11_bin_14": -0.0205645,
-  "gamma_stat_etau_SR_dm11_bin_2": -0.0117147,
-  "gamma_stat_etau_SR_dm11_bin_3": -0.0011351,
-  "gamma_stat_etau_SR_dm11_bin_4": -0.00200675,
-  "gamma_stat_etau_SR_dm11_bin_5": 0.00317131,
-  "gamma_stat_etau_SR_dm11_bin_6": 0.00691157,
-  "gamma_stat_etau_SR_dm11_bin_7": 0.0105626,
-  "gamma_stat_etau_SR_dm11_bin_8": 0.015875,
-  "gamma_stat_etau_SR_dm11_bin_9": -0.019138,
-  "gamma_stat_etau_SR_dm1_bin_0": -0.0392802,
-  "gamma_stat_etau_SR_dm1_bin_1": -0.0501718,
-  "gamma_stat_etau_SR_dm1_bin_10": 0.017323,
-  "gamma_stat_etau_SR_dm1_bin_11": 0.0586216,
-  "gamma_stat_etau_SR_dm1_bin_12": 0.0347444,
-  "gamma_stat_etau_SR_dm1_bin_13": -0.0159111,
-  "gamma_stat_etau_SR_dm1_bin_14": -0.0031974,
-  "gamma_stat_etau_SR_dm1_bin_2": -0.0348015,
-  "gamma_stat_etau_SR_dm1_bin_3": -0.0224527,
-  "gamma_stat_etau_SR_dm1_bin_4": -0.0236449,
-  "gamma_stat_etau_SR_dm1_bin_5": 0.0170524,
-  "gamma_stat_etau_SR_dm1_bin_6": 0.0302936,
-  "gamma_stat_etau_SR_dm1_bin_7": -0.00421102,
-  "gamma_stat_etau_SR_dm1_bin_8": -0.00461678,
-  "gamma_stat_etau_SR_dm1_bin_9": -0.00593777,
-  "mu_ttbar": 0.314857
+  "TOT_ERROR": 0.0535129,
+  "STAT_ERROR": 0.0191618,
+  "SYST_ERROR": 0.0453,
+  "MCSTAT_ERROR": 0.0210799,
+  "TOTSYST_ERROR": 0.0499645,
+  "STAT_ERR_NO_NF": 0.019037,
+  "NF_ERROR": 0.00218333,
+  "alpha_BTag": -8.13016e-05,
+  "alpha_FakeClosure_mutau": 0.00171465,
+  "alpha_FakeFrac_mutau": -0.00079324,
+  "alpha_FakeMCSub_mutau": 0.00399835,
+  "alpha_FakeOSSS_mutau": 0.00119636,
+  "alpha_FakeTT_mutau": 0.00105356,
+  "alpha_FakeWmT_mutau": -0.0019169,
+  "alpha_JES": 0.013013,
+  "alpha_L1Prefiring": 0.00443165,
+  "alpha_Lumi": -0.0119124,
+  "alpha_MET_Unclustered": 0.0239506,
+  "alpha_MuonID": -0.00362206,
+  "alpha_MuonIso": -0.00279877,
+  "alpha_MuonScale": -0.00531196,
+  "alpha_MuonTrigger": -0.00100867,
+  "alpha_PDF": -0.00566496,
+  "alpha_PS_FSR": 0.000654159,
+  "alpha_PS_ISR": -0.00787876,
+  "alpha_Pileup": 0.0169049,
+  "alpha_QCDScale": -0.0140816,
+  "alpha_TauES_DM0": -0.00883572,
+  "alpha_TauES_DM1": -0.0131618,
+  "alpha_TauES_DM10": -0.011997,
+  "alpha_TauES_DM11": -0.00950128,
+  "alpha_TauFakeEle": 4.66759e-05,
+  "alpha_TauFakeMu": -0.000269863,
+  "alpha_TopPt": -0.00167023,
+  "alpha_XS_DYll": -0.000111081,
+  "alpha_XS_DYlowmass": 0.00124592,
+  "alpha_XS_DYtautau_out": 0.00161587,
+  "alpha_XS_SingleTop": 0.00024152,
+  "alpha_XS_WJets": 6.66297e-05,
+  "alpha_XS_WW": 0.000432144,
+  "alpha_XS_WZ": -0.000372484,
+  "alpha_XS_ZZ": -0.000122402,
+  "gamma_stat_mutau_SR_dm0_bin_0": -0.0025558,
+  "gamma_stat_mutau_SR_dm0_bin_1": -0.000155609,
+  "gamma_stat_mutau_SR_dm0_bin_10": -0.00128983,
+  "gamma_stat_mutau_SR_dm0_bin_11": 0.00190116,
+  "gamma_stat_mutau_SR_dm0_bin_12": 0.000364703,
+  "gamma_stat_mutau_SR_dm0_bin_13": 0.00118779,
+  "gamma_stat_mutau_SR_dm0_bin_14": -0.000892559,
+  "gamma_stat_mutau_SR_dm0_bin_2": -0.00399553,
+  "gamma_stat_mutau_SR_dm0_bin_3": -0.00173088,
+  "gamma_stat_mutau_SR_dm0_bin_4": -0.00205762,
+  "gamma_stat_mutau_SR_dm0_bin_5": -0.00237954,
+  "gamma_stat_mutau_SR_dm0_bin_6": -0.000369902,
+  "gamma_stat_mutau_SR_dm0_bin_7": -0.00203982,
+  "gamma_stat_mutau_SR_dm0_bin_8": 0.00162167,
+  "gamma_stat_mutau_SR_dm0_bin_9": 0.000101484,
+  "gamma_stat_mutau_SR_dm10_bin_0": -0.000607224,
+  "gamma_stat_mutau_SR_dm10_bin_1": -0.00158316,
+  "gamma_stat_mutau_SR_dm10_bin_10": -0.000130544,
+  "gamma_stat_mutau_SR_dm10_bin_11": 0.000122672,
+  "gamma_stat_mutau_SR_dm10_bin_12": 0.00126607,
+  "gamma_stat_mutau_SR_dm10_bin_13": -0.000584515,
+  "gamma_stat_mutau_SR_dm10_bin_14": -0.000336505,
+  "gamma_stat_mutau_SR_dm10_bin_2": -0.00195503,
+  "gamma_stat_mutau_SR_dm10_bin_3": -0.00611248,
+  "gamma_stat_mutau_SR_dm10_bin_4": -0.00612657,
+  "gamma_stat_mutau_SR_dm10_bin_5": -0.00823261,
+  "gamma_stat_mutau_SR_dm10_bin_6": -0.00755565,
+  "gamma_stat_mutau_SR_dm10_bin_7": -0.00224055,
+  "gamma_stat_mutau_SR_dm10_bin_8": 0.00106296,
+  "gamma_stat_mutau_SR_dm10_bin_9": -0.0022419,
+  "gamma_stat_mutau_SR_dm11_bin_0": -0.000628018,
+  "gamma_stat_mutau_SR_dm11_bin_1": 0.00283311,
+  "gamma_stat_mutau_SR_dm11_bin_10": -0.00355648,
+  "gamma_stat_mutau_SR_dm11_bin_11": 0.00108453,
+  "gamma_stat_mutau_SR_dm11_bin_12": 0.000733209,
+  "gamma_stat_mutau_SR_dm11_bin_13": 6.02278e-05,
+  "gamma_stat_mutau_SR_dm11_bin_14": 0.0009862,
+  "gamma_stat_mutau_SR_dm11_bin_2": -2.64179e-05,
+  "gamma_stat_mutau_SR_dm11_bin_3": 0.00176528,
+  "gamma_stat_mutau_SR_dm11_bin_4": -0.00228379,
+  "gamma_stat_mutau_SR_dm11_bin_5": 0.00136503,
+  "gamma_stat_mutau_SR_dm11_bin_6": -0.00155806,
+  "gamma_stat_mutau_SR_dm11_bin_7": -0.00143678,
+  "gamma_stat_mutau_SR_dm11_bin_8": 0.000229769,
+  "gamma_stat_mutau_SR_dm11_bin_9": -0.00371237,
+  "gamma_stat_mutau_SR_dm1_bin_0": 0.00668927,
+  "gamma_stat_mutau_SR_dm1_bin_1": 0.000469375,
+  "gamma_stat_mutau_SR_dm1_bin_10": 0.00110225,
+  "gamma_stat_mutau_SR_dm1_bin_11": 0.00254184,
+  "gamma_stat_mutau_SR_dm1_bin_12": 0.00291406,
+  "gamma_stat_mutau_SR_dm1_bin_13": 0.00134312,
+  "gamma_stat_mutau_SR_dm1_bin_14": 0.000941012,
+  "gamma_stat_mutau_SR_dm1_bin_2": -0.00448163,
+  "gamma_stat_mutau_SR_dm1_bin_3": -0.00198147,
+  "gamma_stat_mutau_SR_dm1_bin_4": -0.00109011,
+  "gamma_stat_mutau_SR_dm1_bin_5": -0.00187116,
+  "gamma_stat_mutau_SR_dm1_bin_6": 0.000330738,
+  "gamma_stat_mutau_SR_dm1_bin_7": 0.00275395,
+  "gamma_stat_mutau_SR_dm1_bin_8": -0.00175054,
+  "gamma_stat_mutau_SR_dm1_bin_9": -0.00437074,
+  "mu_ttbar": 0.00218333
  },
  "grouped_impact": {
-  "Background modelling": 0.0,
-  "Background normalisation": NaN,
-  "Electron efficiency": NaN,
-  "Electron energy": 0.0,
-  "Fakes": NaN,
-  "FullSyst": NaN,
-  "Gammas": NaN,
-  "Jets": 0.0,
-  "L1 prefiring": 0.0,
-  "Luminosity": NaN,
-  "MET": 0.0,
-  "NormFactors": NaN,
-  "Pileup": 0.0,
-  "Signal modelling": NaN,
-  "Tau ID": 0.0,
-  "Tau energy scale": NaN,
-  "b tagging": 0.0
+  "Background modelling": 0.00175132,
+  "Background normalisation": 0.00217466,
+  "Fakes": 0.00544874,
+  "FullSyst": 0.053063,
+  "Gammas": 0.0252592,
+  "Jets": 0.0165208,
+  "L1 prefiring": 0.00447961,
+  "Luminosity": 0.0120446,
+  "MET": 0.0379825,
+  "Muon efficiency": 0.00471809,
+  "Muon momentum": 0.00548572,
+  "NormFactors": 0.0136042,
+  "Pileup": 0.0238257,
+  "Signal modelling": 0.0193827,
+  "Tau ID": 0.00057341,
+  "Tau energy scale": 0.0423991,
+  "b tagging": 0.000120837
  },
  "grouped_impact_file": "GroupedImpact_mu_Z.txt",
  "poi_stat_only": {
-  "value": 1.05428,
-  "err_up": 0.215654,
-  "err_down": 0.154316,
-  "err": 0.184985
+  "value": 1.05328,
+  "err_up": 0.00713125,
+  "err_down": 0.00710363,
+  "err": 0.007117439999999999
  },
  "table_prefit": [
   {
-   "Region": "e#tau_{h}, DM 0",
+   "Region": "#mu#tau_{h}, DM 0",
    "Samples": [
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
-     "Yield": 1001.7213874072798,
-     "Error": 119.69060323352186
+     "Yield": 5645.742138197918,
+     "Error": 596.7762264540836
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
@@ -669,18 +645,18 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
-     "Yield": 2.54152655252152,
-     "Error": 0.670010531185227
-    },
-    {
-     "Sample": "Z#rightarrowee [0]",
-     "Yield": 0.18604137247920677,
-     "Error": 0.13427723701756736
+     "Yield": 51.32320969180176,
+     "Error": 7.520182319892693
     },
     {
      "Sample": "Z#rightarrowee [none]",
-     "Yield": 615.3515421164876,
-     "Error": 105.65835387634328
+     "Yield": 0.4974176824955863,
+     "Error": 0.17858609567341735
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0]",
+     "Yield": 9.320699877777537,
+     "Error": 7.425705394565329
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [1]",
@@ -698,9 +674,29 @@
      "Error": 0
     },
     {
+     "Sample": "Z#rightarrow#mu#mu [0]",
+     "Yield": 0.25024512029532453,
+     "Error": 0.040344374425335096
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [none]",
+     "Yield": 974.9291225507989,
+     "Error": 207.5713123334212
+    },
+    {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
-     "Yield": 201.18092817263366,
-     "Error": 22.978778746623128
+     "Yield": 659.5605573456244,
+     "Error": 51.13239437902593
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
@@ -719,13 +715,13 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
-     "Yield": 0.38928295443884586,
-     "Error": 0.15046995092556856
+     "Yield": 4.119330232494443,
+     "Error": 1.3799704197033504
     },
     {
      "Sample": "single t [0]",
-     "Yield": 14.649554070764333,
-     "Error": 1.9098334455528843
+     "Yield": 50.095656148250164,
+     "Error": 5.508943389951079
     },
     {
      "Sample": "single t [1]",
@@ -744,13 +740,13 @@
     },
     {
      "Sample": "single t [none]",
-     "Yield": 0.10861886395830839,
-     "Error": 0.018475086335890612
+     "Yield": 16.47467602946115,
+     "Error": 1.8240139738076446
     },
     {
      "Sample": "t#bar{t} [0]",
-     "Yield": 163.80313095962168,
-     "Error": 10.12473264457011
+     "Yield": 456.5424511811788,
+     "Error": 25.51906642655587
     },
     {
      "Sample": "t#bar{t} [1]",
@@ -769,13 +765,8 @@
     },
     {
      "Sample": "t#bar{t} [none]",
-     "Yield": 3.0695105885804974,
-     "Error": 0.4124475232144107
-    },
-    {
-     "Sample": "W+jets [0]",
-     "Yield": 13.815338385777938,
-     "Error": 1.7555943992277874
+     "Yield": 166.9702072429826,
+     "Error": 8.28586471374995
     },
     {
      "Sample": "W+jets [1]",
@@ -784,8 +775,8 @@
     },
     {
      "Sample": "WW [0]",
-     "Yield": 12.772269861379966,
-     "Error": 2.004126181453996
+     "Yield": 44.62126766709307,
+     "Error": 5.452561786952207
     },
     {
      "Sample": "WW [1]",
@@ -804,13 +795,13 @@
     },
     {
      "Sample": "WW [none]",
-     "Yield": 0,
-     "Error": 0
+     "Yield": 24.772335699856427,
+     "Error": 3.0333849388714023
     },
     {
      "Sample": "WZ [0]",
-     "Yield": 4.083891591122125,
-     "Error": 0.524368836514879
+     "Yield": 14.59484566562844,
+     "Error": 1.7188816145713168
     },
     {
      "Sample": "WZ [1]",
@@ -829,13 +820,13 @@
     },
     {
      "Sample": "WZ [none]",
-     "Yield": 0.32713660944527384,
-     "Error": 0.09507267258204194
+     "Yield": 1.9776962180707476,
+     "Error": 0.3829150410296228
     },
     {
      "Sample": "ZZ [0]",
-     "Yield": 1.0580726268744187,
-     "Error": 0.16517766510878895
+     "Yield": 8.94494780878279,
+     "Error": 1.155457110090152
     },
     {
      "Sample": "ZZ [1]",
@@ -854,27 +845,27 @@
     },
     {
      "Sample": "ZZ [none]",
-     "Yield": 0.3286309908124379,
-     "Error": 0.17851559466187078
+     "Yield": 0.10490010161347199,
+     "Error": 0.054582205893118116
     },
     {
      "Sample": "jet#rightarrow#tau_{h} / multijet",
-     "Yield": 586.4773342553491,
-     "Error": 57.25696774605934
+     "Yield": 2230.7325777133456,
+     "Error": 161.22404001943426
     },
     {
      "Sample": "Total",
-     "Yield": 2621.864197379527,
-     "Error": 203.4883172152799
+     "Yield": 10361.57428217547,
+     "Error": 727.7137141426778
     },
     {
      "Data": "Data",
-     "Yield": 2639
+     "Yield": 11244
     }
    ]
   },
   {
-   "Region": "e#tau_{h}, DM 1",
+   "Region": "#mu#tau_{h}, DM 1",
    "Samples": [
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
@@ -883,8 +874,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
-     "Yield": 4641.9319666780875,
-     "Error": 507.2079112073896
+     "Yield": 13844.20990186648,
+     "Error": 1410.049349115747
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
@@ -898,23 +889,23 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
-     "Yield": 1.390283870079363,
-     "Error": 0.43490114284620196
+     "Yield": 24.321880902651877,
+     "Error": 4.175640740641656
     },
     {
-     "Sample": "Z#rightarrowee [0]",
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 1.4366852754484702,
+     "Error": 0.14484156522845498
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0]",
      "Yield": 0,
      "Error": 0
     },
     {
-     "Sample": "Z#rightarrowee [none]",
-     "Yield": 959.1477789666183,
-     "Error": 151.45204534445176
-    },
-    {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [1]",
-     "Yield": 1.3378499999999999e-05,
-     "Error": 1.4707308495523624e-06
+     "Yield": 17.663315356328802,
+     "Error": 8.402028265917162
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [10]",
@@ -927,14 +918,34 @@
      "Error": 0
     },
     {
+     "Sample": "Z#rightarrow#mu#mu [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [1]",
+     "Yield": 0.7935715532824587,
+     "Error": 0.21668571736211303
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [none]",
+     "Yield": 322.69294641022293,
+     "Error": 71.50519037049219
+    },
+    {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
      "Yield": 0,
      "Error": 0
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
-     "Yield": 509.2347860416794,
-     "Error": 50.958543658904226
+     "Yield": 1153.951754586979,
+     "Error": 87.72931054146132
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
@@ -948,8 +959,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
-     "Yield": 0,
-     "Error": 0
+     "Yield": 2.0983966899732502,
+     "Error": 0.6992516125692839
     },
     {
      "Sample": "single t [0]",
@@ -958,8 +969,8 @@
     },
     {
      "Sample": "single t [1]",
-     "Yield": 70.41086197113694,
-     "Error": 7.965973872405536
+     "Yield": 138.87145773366447,
+     "Error": 15.488873434629406
     },
     {
      "Sample": "single t [10]",
@@ -973,8 +984,8 @@
     },
     {
      "Sample": "single t [none]",
-     "Yield": 0.36637080350734574,
-     "Error": 0.07282121071645481
+     "Yield": 7.644056393462763,
+     "Error": 0.9470248188448064
     },
     {
      "Sample": "t#bar{t} [0]",
@@ -983,8 +994,8 @@
     },
     {
      "Sample": "t#bar{t} [1]",
-     "Yield": 728.8101581936978,
-     "Error": 41.270060447798116
+     "Yield": 1312.643171130103,
+     "Error": 64.0058627115843
     },
     {
      "Sample": "t#bar{t} [10]",
@@ -998,18 +1009,13 @@
     },
     {
      "Sample": "t#bar{t} [none]",
-     "Yield": 2.382979132179214,
-     "Error": 0.40273929071214604
-    },
-    {
-     "Sample": "W+jets [0]",
-     "Yield": 0,
-     "Error": 0
+     "Yield": 78.17461951697703,
+     "Error": 3.465335917987178
     },
     {
      "Sample": "W+jets [1]",
-     "Yield": 8.673408192964837,
-     "Error": 1.8920497975169008
+     "Yield": 6.887410030686656,
+     "Error": 2.515469462543821
     },
     {
      "Sample": "WW [0]",
@@ -1018,8 +1024,8 @@
     },
     {
      "Sample": "WW [1]",
-     "Yield": 66.19671085438458,
-     "Error": 8.687958598405777
+     "Yield": 134.95556827301604,
+     "Error": 16.33387067955317
     },
     {
      "Sample": "WW [10]",
@@ -1033,8 +1039,8 @@
     },
     {
      "Sample": "WW [none]",
-     "Yield": 0.2266297747469541,
-     "Error": 0.03949749730135559
+     "Yield": 10.462949337619975,
+     "Error": 1.1937075043525815
     },
     {
      "Sample": "WZ [0]",
@@ -1043,8 +1049,8 @@
     },
     {
      "Sample": "WZ [1]",
-     "Yield": 14.422245817662468,
-     "Error": 1.7698666017039386
+     "Yield": 31.10934572064573,
+     "Error": 3.6361789200528096
     },
     {
      "Sample": "WZ [10]",
@@ -1058,8 +1064,8 @@
     },
     {
      "Sample": "WZ [none]",
-     "Yield": 0.9572509338541189,
-     "Error": 0.20014362444646897
+     "Yield": 0.5057410460367125,
+     "Error": 0.13175253039356033
     },
     {
      "Sample": "ZZ [0]",
@@ -1068,8 +1074,8 @@
     },
     {
      "Sample": "ZZ [1]",
-     "Yield": 8.91446784697392,
-     "Error": 1.096104126682188
+     "Yield": 19.370909928190077,
+     "Error": 2.2779077351070423
     },
     {
      "Sample": "ZZ [10]",
@@ -1083,27 +1089,27 @@
     },
     {
      "Sample": "ZZ [none]",
-     "Yield": 0.796296594331465,
-     "Error": 0.24713264955973682
+     "Yield": 0,
+     "Error": 0
     },
     {
      "Sample": "jet#rightarrow#tau_{h} / multijet",
-     "Yield": 2503.919598886045,
-     "Error": 237.11613375821398
+     "Yield": 5309.079557033249,
+     "Error": 363.938637564146
     },
     {
      "Sample": "Total",
-     "Yield": 9517.78180793645,
-     "Error": 662.0307512869473
+     "Yield": 22416.873238785018,
+     "Error": 1600.640832398955
     },
     {
      "Data": "Data",
-     "Yield": 10106
+     "Yield": 23866
     }
    ]
   },
   {
-   "Region": "e#tau_{h}, DM 10",
+   "Region": "#mu#tau_{h}, DM 10",
    "Samples": [
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
@@ -1117,8 +1123,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
-     "Yield": 2701.408329342766,
-     "Error": 245.5297486431105
+     "Yield": 6866.928510180762,
+     "Error": 562.9833178573135
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
@@ -1127,18 +1133,18 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
-     "Yield": 0,
-     "Error": 0
-    },
-    {
-     "Sample": "Z#rightarrowee [0]",
-     "Yield": 0,
-     "Error": 0
+     "Yield": 0.20600060106131762,
+     "Error": 0.0952179236957775
     },
     {
      "Sample": "Z#rightarrowee [none]",
-     "Yield": 48.7844812509296,
-     "Error": 8.524436721701553
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0]",
+     "Yield": 0,
+     "Error": 0
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [1]",
@@ -1147,13 +1153,33 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [10]",
-     "Yield": 7.615849863850158,
-     "Error": 2.2678172791285514
+     "Yield": 1.4077499999999999e-05,
+     "Error": 1.458873127096808e-06
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [11]",
      "Yield": 0,
      "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [10]",
+     "Yield": 0.3823364076389428,
+     "Error": 0.33194283702007144
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [none]",
+     "Yield": 6.691310233696914,
+     "Error": 1.9505722451012635
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
@@ -1167,8 +1193,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
-     "Yield": 309.8101189212583,
-     "Error": 30.922953336516166
+     "Yield": 548.4711433744512,
+     "Error": 47.72029591711148
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
@@ -1192,8 +1218,8 @@
     },
     {
      "Sample": "single t [10]",
-     "Yield": 38.674921636766896,
-     "Error": 4.572448566315814
+     "Yield": 64.38217163999073,
+     "Error": 6.940115835339717
     },
     {
      "Sample": "single t [11]",
@@ -1202,8 +1228,8 @@
     },
     {
      "Sample": "single t [none]",
-     "Yield": 0,
-     "Error": 0
+     "Yield": 0.4197825102875501,
+     "Error": 0.08391411032298729
     },
     {
      "Sample": "t#bar{t} [0]",
@@ -1217,8 +1243,8 @@
     },
     {
      "Sample": "t#bar{t} [10]",
-     "Yield": 395.6984206707551,
-     "Error": 19.56088131695104
+     "Yield": 643.0905009340281,
+     "Error": 24.5706643825083
     },
     {
      "Sample": "t#bar{t} [11]",
@@ -1227,13 +1253,8 @@
     },
     {
      "Sample": "t#bar{t} [none]",
-     "Yield": 0.21936285551122975,
-     "Error": 0.08999524581175201
-    },
-    {
-     "Sample": "W+jets [0]",
-     "Yield": 0,
-     "Error": 0
+     "Yield": 4.173879732973864,
+     "Error": 0.27939882529879284
     },
     {
      "Sample": "W+jets [1]",
@@ -1252,8 +1273,8 @@
     },
     {
      "Sample": "WW [10]",
-     "Yield": 39.446914236252425,
-     "Error": 4.869386576749226
+     "Yield": 69.52587738343011,
+     "Error": 8.225703439733806
     },
     {
      "Sample": "WW [11]",
@@ -1262,8 +1283,8 @@
     },
     {
      "Sample": "WW [none]",
-     "Yield": 0,
-     "Error": 0
+     "Yield": 0.526366518010932,
+     "Error": 0.10069028271255571
     },
     {
      "Sample": "WZ [0]",
@@ -1277,8 +1298,8 @@
     },
     {
      "Sample": "WZ [10]",
-     "Yield": 8.487392942551931,
-     "Error": 0.9544369199842998
+     "Yield": 15.571451290897187,
+     "Error": 1.8356294083648705
     },
     {
      "Sample": "WZ [11]",
@@ -1287,8 +1308,8 @@
     },
     {
      "Sample": "WZ [none]",
-     "Yield": 0,
-     "Error": 0
+     "Yield": 0.07926322367849865,
+     "Error": 0.03285561056536309
     },
     {
      "Sample": "ZZ [0]",
@@ -1302,8 +1323,8 @@
     },
     {
      "Sample": "ZZ [10]",
-     "Yield": 4.1718988770472345,
-     "Error": 0.612891560407198
+     "Yield": 5.783262879021815,
+     "Error": 1.0156556767569624
     },
     {
      "Sample": "ZZ [11]",
@@ -1317,22 +1338,22 @@
     },
     {
      "Sample": "jet#rightarrow#tau_{h} / multijet",
-     "Yield": 1429.4577116917683,
-     "Error": 182.63392028941774
+     "Yield": 2797.445634496701,
+     "Error": 239.77209794438863
     },
     {
      "Sample": "Total",
-     "Yield": 4983.775402289457,
-     "Error": 341.046761650433
+     "Yield": 11023.677505484131,
+     "Error": 663.0491084784098
     },
     {
      "Data": "Data",
-     "Yield": 4940
+     "Yield": 10795
     }
    ]
   },
   {
-   "Region": "e#tau_{h}, DM 11",
+   "Region": "#mu#tau_{h}, DM 11",
    "Samples": [
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
@@ -1351,8 +1372,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
-     "Yield": 561.6068421075382,
-     "Error": 57.27363723179159
+     "Yield": 1456.6645789978554,
+     "Error": 123.62972487711352
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
@@ -1360,14 +1381,14 @@
      "Error": 0
     },
     {
-     "Sample": "Z#rightarrowee [0]",
+     "Sample": "Z#rightarrowee [none]",
      "Yield": 0,
      "Error": 0
     },
     {
-     "Sample": "Z#rightarrowee [none]",
-     "Yield": 21.883517954189887,
-     "Error": 3.691124172545164
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0]",
+     "Yield": 0,
+     "Error": 0
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [1]",
@@ -1381,8 +1402,28 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [11]",
-     "Yield": 3.8869747872205425,
-     "Error": 2.6633975842743673
+     "Yield": 7.459709453952699,
+     "Error": 2.2775159956476645
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [none]",
+     "Yield": 0,
+     "Error": 0
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
@@ -1401,8 +1442,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
-     "Yield": 48.963597694226905,
-     "Error": 7.086104341548069
+     "Yield": 123.17822111628466,
+     "Error": 11.730352358861442
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
@@ -1426,8 +1467,8 @@
     },
     {
      "Sample": "single t [11]",
-     "Yield": 8.033604419335626,
-     "Error": 0.946951594729723
+     "Yield": 14.57393177792466,
+     "Error": 1.7317714358346656
     },
     {
      "Sample": "single t [none]",
@@ -1451,18 +1492,13 @@
     },
     {
      "Sample": "t#bar{t} [11]",
-     "Yield": 84.0138863027579,
-     "Error": 4.564788748737556
+     "Yield": 141.32450532192226,
+     "Error": 5.647923826397506
     },
     {
      "Sample": "t#bar{t} [none]",
-     "Yield": 0.1758144295172337,
-     "Error": 0.023253881143955817
-    },
-    {
-     "Sample": "W+jets [0]",
-     "Yield": 0,
-     "Error": 0
+     "Yield": 0.6953994073761057,
+     "Error": 0.08415458146132464
     },
     {
      "Sample": "W+jets [1]",
@@ -1486,8 +1522,8 @@
     },
     {
      "Sample": "WW [11]",
-     "Yield": 9.919971584089678,
-     "Error": 1.2513289954578972
+     "Yield": 16.586627474034838,
+     "Error": 1.9468981644730667
     },
     {
      "Sample": "WW [none]",
@@ -1511,8 +1547,8 @@
     },
     {
      "Sample": "WZ [11]",
-     "Yield": 1.9346970382544018,
-     "Error": 0.22451117228121273
+     "Yield": 3.136374520176323,
+     "Error": 0.43344717729662524
     },
     {
      "Sample": "WZ [none]",
@@ -1536,8 +1572,8 @@
     },
     {
      "Sample": "ZZ [11]",
-     "Yield": 0.3020583504373122,
-     "Error": 0.14920683637497753
+     "Yield": 1.159390692826342,
+     "Error": 0.2102218185968665
     },
     {
      "Sample": "ZZ [none]",
@@ -1546,29 +1582,29 @@
     },
     {
      "Sample": "jet#rightarrow#tau_{h} / multijet",
-     "Yield": 492.0258989000415,
-     "Error": 65.79085003361125
+     "Yield": 710.3625730223239,
+     "Error": 84.12261370825884
     },
     {
      "Sample": "Total",
-     "Yield": 1232.7468635676094,
-     "Error": 94.3311838442662
+     "Yield": 2475.141311784678,
+     "Error": 162.01900598576992
     },
     {
      "Data": "Data",
-     "Yield": 1211
+     "Yield": 2611
     }
    ]
   }
  ],
  "table_postfit": [
   {
-   "Region": "e#tau_{h}, DM 0",
+   "Region": "#mu#tau_{h}, DM 0",
    "Samples": [
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
-     "Yield": 1007.2120807768844,
-     "Error": 47.562954247790266
+     "Yield": 6083.98161437617,
+     "Error": 119.4354812653427
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
@@ -1587,18 +1623,18 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
-     "Yield": 3.335421847174978,
-     "Error": 1.345176204681443
-    },
-    {
-     "Sample": "Z#rightarrowee [0]",
-     "Yield": 0.2969379396902691,
-     "Error": 0.2077780242419354
+     "Yield": 59.70232722741053,
+     "Error": 6.268630287525224
     },
     {
      "Sample": "Z#rightarrowee [none]",
-     "Yield": 601.1315322656149,
-     "Error": 47.262818309356156
+     "Yield": 0.2720614612607268,
+     "Error": 0.08711931060908486
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0]",
+     "Yield": 9.896232739678988,
+     "Error": 2.7609728363852857
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [1]",
@@ -1616,9 +1652,29 @@
      "Error": 0
     },
     {
+     "Sample": "Z#rightarrow#mu#mu [0]",
+     "Yield": 0.19333680620499372,
+     "Error": 0.02521114920455771
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [none]",
+     "Yield": 1153.0929525787244,
+     "Error": 95.44329813547995
+    },
+    {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
-     "Yield": 163.84741702554714,
-     "Error": 59.411469496659876
+     "Yield": 690.7827462500331,
+     "Error": 44.92297550445383
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
@@ -1637,13 +1693,13 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
-     "Yield": 0.40608121591096014,
-     "Error": 0.11258301305567292
+     "Yield": 3.9619225008686385,
+     "Error": 1.0123292332719345
     },
     {
      "Sample": "single t [0]",
-     "Yield": 13.509898232946355,
-     "Error": 5.211458866970733
+     "Yield": 50.39559924606795,
+     "Error": 5.171807334253349
     },
     {
      "Sample": "single t [1]",
@@ -1662,13 +1718,13 @@
     },
     {
      "Sample": "single t [none]",
-     "Yield": 0.10814689540069485,
-     "Error": 0.014544771966649717
+     "Yield": 16.572378540470538,
+     "Error": 1.8231665912870263
     },
     {
      "Sample": "t#bar{t} [0]",
-     "Yield": 224.08693425164293,
-     "Error": 46.9215628214588
+     "Yield": 527.8765847213344,
+     "Error": 71.24077602302339
     },
     {
      "Sample": "t#bar{t} [1]",
@@ -1687,13 +1743,8 @@
     },
     {
      "Sample": "t#bar{t} [none]",
-     "Yield": 4.2637168979023246,
-     "Error": 2.398262659736061
-    },
-    {
-     "Sample": "W+jets [0]",
-     "Yield": 12.40671883636711,
-     "Error": 4.8326212661685775
+     "Yield": 196.0618930133231,
+     "Error": 28.283046643649996
     },
     {
      "Sample": "W+jets [1]",
@@ -1702,8 +1753,8 @@
     },
     {
      "Sample": "WW [0]",
-     "Yield": 11.473963647006611,
-     "Error": 4.412401813271046
+     "Yield": 45.86738630854501,
+     "Error": 4.723024115168998
     },
     {
      "Sample": "WW [1]",
@@ -1722,13 +1773,13 @@
     },
     {
      "Sample": "WW [none]",
-     "Yield": 0,
-     "Error": 0
+     "Yield": 27.190199930767655,
+     "Error": 3.160263109445664
     },
     {
      "Sample": "WZ [0]",
-     "Yield": 3.637951257588841,
-     "Error": 1.395398026797987
+     "Yield": 15.226155622223736,
+     "Error": 1.5988154675280914
     },
     {
      "Sample": "WZ [1]",
@@ -1747,13 +1798,13 @@
     },
     {
      "Sample": "WZ [none]",
-     "Yield": 0.2670399263415984,
-     "Error": 0.059861571690684706
+     "Yield": 2.1556042031450247,
+     "Error": 0.3206401782739392
     },
     {
      "Sample": "ZZ [0]",
-     "Yield": 0.8001827966811172,
-     "Error": 0.30602877741178
+     "Yield": 9.663117377666024,
+     "Error": 1.022785955686286
     },
     {
      "Sample": "ZZ [1]",
@@ -1772,27 +1823,27 @@
     },
     {
      "Sample": "ZZ [none]",
-     "Yield": 0.5960654926233705,
-     "Error": 0.2265495129792909
+     "Yield": 0.06179848040760723,
+     "Error": 0.029483029955668316
     },
     {
      "Sample": "jet#rightarrow#tau_{h} / multijet",
-     "Yield": 609.5435177205516,
-     "Error": 46.82004967908818
+     "Yield": 2251.0709371324806,
+     "Error": 110.56435900698861
     },
     {
      "Sample": "Total",
-     "Yield": 2656.9236070258753,
-     "Error": 50.3965523369303
+     "Yield": 11144.024848516783,
+     "Error": 99.3451556167769
     },
     {
      "Data": "Data",
-     "Yield": 2639
+     "Yield": 11244
     }
    ]
   },
   {
-   "Region": "e#tau_{h}, DM 1",
+   "Region": "#mu#tau_{h}, DM 1",
    "Samples": [
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
@@ -1801,8 +1852,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
-     "Yield": 4753.9943848088205,
-     "Error": 108.53646892420592
+     "Yield": 14957.041839438009,
+     "Error": 165.30530199167572
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
@@ -1816,23 +1867,23 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
-     "Yield": 1.682906512847669,
-     "Error": 0.6954382275056107
+     "Yield": 30.558796198647354,
+     "Error": 3.9357959904622555
     },
     {
-     "Sample": "Z#rightarrowee [0]",
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 1.6229907086792679,
+     "Error": 0.1259552466864906
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0]",
      "Yield": 0,
      "Error": 0
     },
     {
-     "Sample": "Z#rightarrowee [none]",
-     "Yield": 977.3843004577759,
-     "Error": 75.77567213752175
-    },
-    {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [1]",
-     "Yield": 1.2466355502356937e-05,
-     "Error": 5.016605287999185e-06
+     "Yield": 20.737799013624667,
+     "Error": 5.2188816267959
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [10]",
@@ -1845,14 +1896,34 @@
      "Error": 0
     },
     {
+     "Sample": "Z#rightarrow#mu#mu [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [1]",
+     "Yield": 0.6150451066651782,
+     "Error": 0.07704480653220785
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [none]",
+     "Yield": 376.1006498368495,
+     "Error": 36.35885153008299
+    },
+    {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
      "Yield": 0,
      "Error": 0
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
-     "Yield": 468.3476030961287,
-     "Error": 183.8860366251235
+     "Yield": 1201.8319541590956,
+     "Error": 76.47358381124799
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
@@ -1866,8 +1937,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
-     "Yield": 0,
-     "Error": 0
+     "Yield": 2.65024753547964,
+     "Error": 0.7104258879085207
     },
     {
      "Sample": "single t [0]",
@@ -1876,8 +1947,8 @@
     },
     {
      "Sample": "single t [1]",
-     "Yield": 65.99634219018382,
-     "Error": 26.194693389998694
+     "Yield": 140.6675767574928,
+     "Error": 14.426042221948817
     },
     {
      "Sample": "single t [10]",
@@ -1891,8 +1962,8 @@
     },
     {
      "Sample": "single t [none]",
-     "Yield": 0.42751022013758244,
-     "Error": 0.06828733805395897
+     "Yield": 7.806205892655636,
+     "Error": 0.8964800033276786
     },
     {
      "Sample": "t#bar{t} [0]",
@@ -1901,8 +1972,8 @@
     },
     {
      "Sample": "t#bar{t} [1]",
-     "Yield": 1044.9172611991848,
-     "Error": 200.85534181187114
+     "Yield": 1509.6513346911038,
+     "Error": 203.98639365550366
     },
     {
      "Sample": "t#bar{t} [10]",
@@ -1916,18 +1987,13 @@
     },
     {
      "Sample": "t#bar{t} [none]",
-     "Yield": 4.181357744942636,
-     "Error": 2.2487551430942743
-    },
-    {
-     "Sample": "W+jets [0]",
-     "Yield": 0,
-     "Error": 0
+     "Yield": 91.64940601534516,
+     "Error": 13.011649117982222
     },
     {
      "Sample": "W+jets [1]",
-     "Yield": 8.157310469124702,
-     "Error": 3.5781104843997293
+     "Yield": 3.657154193902937,
+     "Error": 1.202232989997858
     },
     {
      "Sample": "WW [0]",
@@ -1936,8 +2002,8 @@
     },
     {
      "Sample": "WW [1]",
-     "Yield": 62.98521106120402,
-     "Error": 24.94964276600937
+     "Yield": 137.2145545243279,
+     "Error": 14.148014653531474
     },
     {
      "Sample": "WW [10]",
@@ -1951,8 +2017,8 @@
     },
     {
      "Sample": "WW [none]",
-     "Yield": 0.2311604228609648,
-     "Error": 0.03510108246120527
+     "Yield": 10.846313178151792,
+     "Error": 1.2101279168335566
     },
     {
      "Sample": "WZ [0]",
@@ -1961,8 +2027,8 @@
     },
     {
      "Sample": "WZ [1]",
-     "Yield": 13.396608936791791,
-     "Error": 5.272478921298885
+     "Yield": 31.619410795692048,
+     "Error": 3.2923169451703203
     },
     {
      "Sample": "WZ [10]",
@@ -1976,8 +2042,8 @@
     },
     {
      "Sample": "WZ [none]",
-     "Yield": 1.0047764001583712,
-     "Error": 0.15152575736386228
+     "Yield": 0.48461172414363296,
+     "Error": 0.09056708523889967
     },
     {
      "Sample": "ZZ [0]",
@@ -1986,8 +2052,8 @@
     },
     {
      "Sample": "ZZ [1]",
-     "Yield": 8.738334633262562,
-     "Error": 3.5254874193129786
+     "Yield": 19.260240070986676,
+     "Error": 2.067347916502112
     },
     {
      "Sample": "ZZ [10]",
@@ -2001,27 +2067,27 @@
     },
     {
      "Sample": "ZZ [none]",
-     "Yield": 0.5675923235226201,
-     "Error": 0.15518288346740894
+     "Yield": 0,
+     "Error": 0
     },
     {
      "Sample": "jet#rightarrow#tau_{h} / multijet",
-     "Yield": 2665.693043196295,
-     "Error": 195.2119979671079
+     "Yield": 5263.213245050536,
+     "Error": 245.7508156499329
     },
     {
      "Sample": "Total",
-     "Yield": 10077.705716139599,
-     "Error": 99.71084740163786
+     "Yield": 23807.229374891387,
+     "Error": 148.40607976065388
     },
     {
      "Data": "Data",
-     "Yield": 10106
+     "Yield": 23866
     }
    ]
   },
   {
-   "Region": "e#tau_{h}, DM 10",
+   "Region": "#mu#tau_{h}, DM 10",
    "Samples": [
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
@@ -2035,8 +2101,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
-     "Yield": 2496.9100621222615,
-     "Error": 70.98710946440852
+     "Yield": 6781.946611947431,
+     "Error": 107.33034627423903
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
@@ -2045,18 +2111,18 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
-     "Yield": 0,
-     "Error": 0
-    },
-    {
-     "Sample": "Z#rightarrowee [0]",
-     "Yield": 0,
-     "Error": 0
+     "Yield": 0.3432868379538742,
+     "Error": 0.11710956344333251
     },
     {
      "Sample": "Z#rightarrowee [none]",
-     "Yield": 52.91881084362351,
-     "Error": 4.987480788367813
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0]",
+     "Yield": 0,
+     "Error": 0
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [1]",
@@ -2065,13 +2131,33 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [10]",
-     "Yield": 5.071686509752797,
-     "Error": 2.0154900312975577
+     "Yield": 1.4109163475179892e-05,
+     "Error": 1.4154680076509863e-06
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [11]",
      "Yield": 0,
      "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [10]",
+     "Yield": 0.5961440678106058,
+     "Error": 0.25669067145167523
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [none]",
+     "Yield": 9.376495458454198,
+     "Error": 1.4334602182246992
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
@@ -2085,8 +2171,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
-     "Yield": 249.91994480993714,
-     "Error": 93.47029934038366
+     "Yield": 572.3364204108456,
+     "Error": 43.43780486854699
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
@@ -2110,8 +2196,8 @@
     },
     {
      "Sample": "single t [10]",
-     "Yield": 32.472534120826744,
-     "Error": 12.326957548374
+     "Yield": 62.065792896068864,
+     "Error": 6.445457211167164
     },
     {
      "Sample": "single t [11]",
@@ -2120,8 +2206,8 @@
     },
     {
      "Sample": "single t [none]",
-     "Yield": 0,
-     "Error": 0
+     "Yield": 0.3464511104210623,
+     "Error": 0.05547165537328745
     },
     {
      "Sample": "t#bar{t} [0]",
@@ -2135,8 +2221,8 @@
     },
     {
      "Sample": "t#bar{t} [10]",
-     "Yield": 504.2125716578721,
-     "Error": 107.65806513371128
+     "Yield": 707.0424195059185,
+     "Error": 97.53241763235322
     },
     {
      "Sample": "t#bar{t} [11]",
@@ -2145,13 +2231,8 @@
     },
     {
      "Sample": "t#bar{t} [none]",
-     "Yield": 0.23246055846370092,
-     "Error": 0.15559475491471209
-    },
-    {
-     "Sample": "W+jets [0]",
-     "Yield": 0,
-     "Error": 0
+     "Yield": 4.651794603891532,
+     "Error": 0.6866623222851731
     },
     {
      "Sample": "W+jets [1]",
@@ -2170,8 +2251,8 @@
     },
     {
      "Sample": "WW [10]",
-     "Yield": 32.23198999778021,
-     "Error": 12.197782907603012
+     "Yield": 66.24211962534808,
+     "Error": 6.84228475294036
     },
     {
      "Sample": "WW [11]",
@@ -2180,8 +2261,8 @@
     },
     {
      "Sample": "WW [none]",
-     "Yield": 0,
-     "Error": 0
+     "Yield": 0.4596436077084648,
+     "Error": 0.06995501107965237
     },
     {
      "Sample": "WZ [0]",
@@ -2195,8 +2276,8 @@
     },
     {
      "Sample": "WZ [10]",
-     "Yield": 6.989987685515479,
-     "Error": 2.636388193865715
+     "Yield": 14.243726051185808,
+     "Error": 1.5577389672136173
     },
     {
      "Sample": "WZ [11]",
@@ -2205,8 +2286,8 @@
     },
     {
      "Sample": "WZ [none]",
-     "Yield": 0,
-     "Error": 0
+     "Yield": 0.048232319527037604,
+     "Error": 0.016896210616693462
     },
     {
      "Sample": "ZZ [0]",
@@ -2220,8 +2301,8 @@
     },
     {
      "Sample": "ZZ [10]",
-     "Yield": 3.211645605659572,
-     "Error": 1.2030574627130164
+     "Yield": 5.115797079666033,
+     "Error": 0.6675282705013713
     },
     {
      "Sample": "ZZ [11]",
@@ -2235,22 +2316,22 @@
     },
     {
      "Sample": "jet#rightarrow#tau_{h} / multijet",
-     "Yield": 1549.7672424904613,
-     "Error": 139.62557567886694
+     "Yield": 2693.457004934885,
+     "Error": 141.61913520725437
     },
     {
      "Sample": "Total",
-     "Yield": 4933.9389364021545,
-     "Error": 91.57801080071684
+     "Yield": 10918.271954566277,
+     "Error": 97.43576117167203
     },
     {
      "Data": "Data",
-     "Yield": 4940
+     "Yield": 10795
     }
    ]
   },
   {
-   "Region": "e#tau_{h}, DM 11",
+   "Region": "#mu#tau_{h}, DM 11",
    "Samples": [
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
@@ -2269,8 +2350,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
-     "Yield": 555.5254045554691,
-     "Error": 33.05287756409883
+     "Yield": 1572.7499076370068,
+     "Error": 46.208281206217954
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
@@ -2278,14 +2359,14 @@
      "Error": 0
     },
     {
-     "Sample": "Z#rightarrowee [0]",
+     "Sample": "Z#rightarrowee [none]",
      "Yield": 0,
      "Error": 0
     },
     {
-     "Sample": "Z#rightarrowee [none]",
-     "Yield": 24.646030349023587,
-     "Error": 2.5154911207380386
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0]",
+     "Yield": 0,
+     "Error": 0
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [1]",
@@ -2299,8 +2380,28 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [11]",
-     "Yield": 2.3883539341513895,
-     "Error": 1.1674222486431431
+     "Yield": 6.406895405595306,
+     "Error": 1.284776959406044
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [none]",
+     "Yield": 0,
+     "Error": 0
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
@@ -2319,8 +2420,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
-     "Yield": 42.11046152508712,
-     "Error": 15.445611404609537
+     "Yield": 128.94504908137048,
+     "Error": 10.833431891404084
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
@@ -2344,8 +2445,8 @@
     },
     {
      "Sample": "single t [11]",
-     "Yield": 7.145082780287892,
-     "Error": 2.5763468226777024
+     "Yield": 13.930419052423154,
+     "Error": 1.535851060890249
     },
     {
      "Sample": "single t [none]",
@@ -2369,18 +2470,13 @@
     },
     {
      "Sample": "t#bar{t} [11]",
-     "Yield": 110.62472115962947,
-     "Error": 26.796757180130683
+     "Yield": 159.21077714295402,
+     "Error": 22.55067529855039
     },
     {
      "Sample": "t#bar{t} [none]",
-     "Yield": 0.26640070533113763,
-     "Error": 0.14637096682988657
-    },
-    {
-     "Sample": "W+jets [0]",
-     "Yield": 0,
-     "Error": 0
+     "Yield": 0.6760138274978897,
+     "Error": 0.10739636747891348
     },
     {
      "Sample": "W+jets [1]",
@@ -2404,8 +2500,8 @@
     },
     {
      "Sample": "WW [11]",
-     "Yield": 8.873412256973321,
-     "Error": 3.209757947104354
+     "Yield": 16.764554348021964,
+     "Error": 1.793779064940512
     },
     {
      "Sample": "WW [none]",
@@ -2429,8 +2525,8 @@
     },
     {
      "Sample": "WZ [11]",
-     "Yield": 1.7112953903080945,
-     "Error": 0.6074561216726604
+     "Yield": 3.3335731171042973,
+     "Error": 0.4106100179624894
     },
     {
      "Sample": "WZ [none]",
@@ -2454,8 +2550,8 @@
     },
     {
      "Sample": "ZZ [11]",
-     "Yield": 0.13306787473519635,
-     "Error": 0.07364962360808132
+     "Yield": 1.1054115864570224,
+     "Error": 0.1834291692751252
     },
     {
      "Sample": "ZZ [none]",
@@ -2464,94 +2560,57 @@
     },
     {
      "Sample": "jet#rightarrow#tau_{h} / multijet",
-     "Yield": 462.97256960862074,
-     "Error": 41.08349747239183
+     "Yield": 734.0032065361265,
+     "Error": 49.24218344763873
     },
     {
      "Sample": "Total",
-     "Yield": 1216.3968001396172,
-     "Error": 50.80585440758241
+     "Yield": 2637.1258077345574,
+     "Error": 46.59340452239665
     },
     {
      "Data": "Data",
-     "Yield": 1211
+     "Yield": 2611
     }
    ]
   }
  ],
  "gof": {
-  "gof_probability": 0.262662,
+  "gof_probability": 0.107688,
   "gof_chi2_ndf": null
  },
  "poi_asimov": {
   "value": 1.0,
-  "err_up": 0.397194,
-  "err_down": 0.224632
+  "err_up": 0.0518698,
+  "err_down": 0.048767
  },
- "tau_id_sf": {
-  "DM0": {
-   "value": 0.806883,
-   "err_up": 0.279397,
-   "err_down": 0.279397,
-   "pog": [
-    0.9015691876411438,
-    0.125892
-   ]
-  },
-  "DM1": {
-   "value": 0.830523,
-   "err_up": 0.299083,
-   "err_down": 0.299083,
-   "pog": [
-    0.8919064998626709,
-    0.052963
-   ]
-  },
-  "DM10": {
-   "value": 0.766063,
-   "err_up": 0.273814,
-   "err_down": 0.273814,
-   "pog": [
-    0.9384543895721436,
-    0.148149
-   ]
-  },
-  "DM11": {
-   "value": 0.706564,
-   "err_up": 0.260251,
-   "err_down": 0.260251,
-   "pog": [
-    0.8119813203811646,
-    0.149246
-   ]
-  }
- },
+ "tau_id_sf": {},
  "tau_es": {
   "DM0": {
-   "pull": -0.00730998,
-   "constraint": 0.779412,
+   "pull": 0.358052,
+   "constraint": 0.339348,
    "prior_pct": 3.0
   },
   "DM1": {
-   "pull": -0.0289969,
-   "constraint": 0.466112,
+   "pull": 0.261637,
+   "constraint": 0.31277,
    "prior_pct": 3.0
   },
   "DM10": {
-   "pull": 0.219003,
-   "constraint": 0.602473,
+   "pull": -0.564607,
+   "constraint": 0.357107,
    "prior_pct": 3.0
   },
   "DM11": {
-   "pull": 0.305856,
-   "constraint": 0.940673,
+   "pull": 0.715796,
+   "constraint": 0.607028,
    "prior_pct": 3.0
   }
  },
  "mu_ttbar": [
-  1.54038,
-  0.774779,
-  0.774779
+  1.13619,
+  0.160007,
+  0.160007
  ],
  "prediction": {
   "sigma_fid_tautau_pb": 4.500519576488651,
@@ -2559,15 +2618,15 @@
   "sigma_tautau_pb": 2019.6751428185198
  },
  "sigma_60_120_pb": {
-  "value": 2255.81104583627,
-  "up": 1057.2848888079668,
-  "down": 609.0361138589119,
-  "stat": 359.7741180598019,
+  "value": 2040.4930870266332,
+  "up": 108.12847407789803,
+  "down": 99.98544488685776,
+  "stat": 13.842585608798313,
   "note": "sigma(pp -> Z/gamma* -> tautau, 60 < m_LHE < 120 GeV) = mu_Z x aMC@NLO prediction normalised to 6077.22 pb (m > 50)"
  },
  "lumi_pb": 16393.381,
  "channels": [
-  "etau"
+  "mutau"
  ],
- "tau_id_fixed": false
+ "tau_id_fixed": true
 }

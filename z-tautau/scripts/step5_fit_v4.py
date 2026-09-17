@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import shutil
 import sys
 from pathlib import Path
 
@@ -111,9 +112,14 @@ def main():
     args = ap.parse_args()
     job = args.job
     fitdir = config.FIT_DIR_V4
-    meta = json.loads(Path(f"{fitdir}/fitinputs/{config.JOB_V4}.root.meta.json").read_text())
+    # a single channel reads its own exported file (step 4b) when it exists, so its config, fit inputs and
+    # workspace are self-contained for the MultiFit combination; otherwise the combined file
+    histo_file = config.JOB_V4
+    if len(args.channels) == 1 and (fitdir / "fitinputs" / f"{config.JOB_V4}_{args.channels[0]}.root").exists():
+        histo_file = f"{config.JOB_V4}_{args.channels[0]}"
+    meta = json.loads(Path(f"{fitdir}/fitinputs/{histo_file}.root.meta.json").read_text())
     cfg = fitdir / f"{job}.config"
-    txt = build_config(job, meta, args.channels, args.fix_tauid).replace(f'HistoFile: "{job}"', f'HistoFile: "{config.JOB_V4}"')
+    txt = build_config(job, meta, args.channels, args.fix_tauid).replace(f'HistoFile: "{job}"', f'HistoFile: "{histo_file}"')
     txt = re.sub(r'Expression: "([^"]+)"', r"Expression: \1", txt)       # TRExFitter splits the value on ':' before unquoting
     cfg.write_text(txt)
     print(f"config -> {cfg}  ({len(meta['samples'])} templates, {len(meta['systs'])} systematics)")
@@ -123,6 +129,10 @@ def main():
     logs = f"results/{job}/logs"
     for actions in ("h", "w", "f", "d", "p", "i") + (() if args.skip_ranking else ("r",)):
         run_trex.run(cfg.name, actions, cwd=fitdir, log=f"{logs}/{actions}.log")
+    # keep the workspace under the conventional name as well (TRExFitter adds "allBinsFitRegions" with DropBins)
+    ws = fitdir / "results" / job / "RooStats"
+    for p in ws.glob(f"{job}_allBinsFitRegions_combined_{job}_model.root"):
+        shutil.copy(p, ws / f"{job}_combined_{job}_model.root")
     run_trex.run(cfg.name, "wf", options="StatOnly=TRUE:Suffix=_statOnly", cwd=fitdir, log=f"{logs}/statonly.log")
     run_trex.run(cfg.name, "wf", options="FitBlind=TRUE:Suffix=_asimov", cwd=fitdir, log=f"{logs}/asimov.log")
     res = run_trex.summarise(fitdir / "results" / job, job, poi="mu_Z")

@@ -182,7 +182,7 @@ results, `run_v4.py` the combined one.
   (+ `_trig` side samples), one flat tree with the pair, the region flags, MET, jets, masses and weights.
 * `scripts/step3_fakes_v4.py` (lepton-channel fake factors, fractions, OS/SS, closure; `output_v4/data/fakes_<ch>.json`),
   `scripts/step3c_trigger_v4.py` (in-situ trigger efficiencies; `external/trigger_insitu_v4.json`),
-  `scripts/step4_histograms_v4.py` (all regions, all variations, DM-split templates → `fit_v4/fitinputs/`),
+  `scripts/step4_histograms_v4.py` (all regions, all variations, DM-split templates → `fit_v4/fitinputs/`), `step4b_export_channels_v4.py` (one file per channel),
   `scripts/step5_fit_v4.py` (TRExFitter), `scripts/step6_report_v4.py`, `run_v4.py`.
 
 ## 11. Limitations (v4)
@@ -226,3 +226,34 @@ Prefit yields (data / Z→ττ signal / fakes): tautau_SR0 15742 / 795 / 12351; 
 Fake estimates: mutau: C_OS/SS 1.05 ± 0.03, same-sign closure 0.966 ± 0.014, 11048 fakes in the SR; etau: C_OS/SS 1.14 ± 0.14, same-sign closure 1.025 ± 0.021, 5012 fakes in the SR; eμ multijet 15241 events (OS/SS 1.7–2.9 vs ΔR, SB1/SB2 within 2 %).
 
 Things to look at in a review: the top of the ranking is μ_tt̄ and the τh ID scale factors (as intended: they are the parameters the data determine) followed by `EmuTrigger` (pulled −1.6σ; the in-situ cross-trigger SF carries a conservative 2 % per leg), `MET_Unclustered` (+1.0σ, constrained to 0.3), `TauFakeMu` (+1.0σ); the eμ-alone μ_Z (0.98) versus the τ channels (1.02–1.05); the τES of DM11 (+1.1σ); the 130–150 GeV m_ττ bin of the lepton channels (the leptonic likelihood mass sits ~10 % above m_LHE).
+
+## 13. Channel readiness and the per-channel exports for a combination
+
+All four channels are fitted and exported; nothing of the v4 chain is pending. What "ready" means per channel:
+
+| channel | regions | data stream | fake estimate | status |
+|---|---|---|---|---|
+| τhτh | `tautau_SR0/1/2` | Tau | v3 same-sign fake factor | ready (v3 chain, templates rebuilt with the v4 signal definition and free τh ID SFs) |
+| μτh | `mutau_SR_dm0/1/10/11` | SingleMuon | per-process FF (multijet / W / tt̄) | ready |
+| eτh | `etau_SR_dm0/1/10/11` | SingleElectron | per-process FF | ready |
+| eμ | `emu_SR`, `emu_CRtt` | MuonEG | same-sign × OS/SS | ready |
+| μμ, ee | — | — | — | deliberately absent (the other groups' channels; v4 is orthogonal to them) |
+
+`scripts/step4b_export_channels_v4.py` splits the combined fit inputs into **one file per channel**
+(`fit_v4/fitinputs/ztautau_v4_<channel>.root` + `.meta.json`, histograms copied bit for bit, the systematic
+registry restricted to the channel), `step5_fit_v4.py --channels <ch> --job ztautau_v4_<ch>` builds the channel's
+config, workspace (`fit_v4/results/ztautau_v4_<ch>/RooStats/ztautau_v4_<ch>_combined_ztautau_v4_<ch>_model.root`)
+and fit result from that file with the τh ID scale factors **free**, and `fit_v4/comb_v4.config` is the TRExFitter
+MultiFit of the four workspaces (`trex-fitter mwf comb_v4.config` from `fit_v4/`). Nuisance parameters are
+correlated by name across the channel workspaces (`TauIDSF_DM*`, `TauES_DM*`, `TauFakeEle/Mu`, `Lumi`, `Pileup`,
+`L1Prefiring`, `Muon*`, `Electron*`, `EmuTrigger`, `BTag`, `JES`, `MET_Unclustered`, `TopPt`, `QCDScale`, `PDF`,
+`PS_*`, `XS_*`, `mu_ttbar`); channel-specific ones carry the channel suffix (`Fake*_<ch>`, `QCDOSSS_emu`,
+`MCStatNorm_WJets_tautau`). The MultiFit of the four workspaces therefore reproduces the single-file fit of step 5
+(checked, section 12 / `output_v4/RESULTS.md`). The `_fixedid` jobs are the per-channel cross-checks with the
+POG scale factors held fixed (a single ℓτh channel alone cannot separate μ_Z from its scale factors).
+
+Adding the other groups' channels: append `Fit:` blocks to `comb_v4.config` pointing at `../../z-mumu/fit/zmumu.config`
+and the z-ee config once it follows `fitting/CONVENTIONS.md`; drop z-mumu's `mumu_CRemu` (it shares events with
+`emu_SR`); the shared names above then correlate automatically, and every channel's σ^pred(60–120) must be its own
+(`CONVENTIONS.md` §6). The per-channel signal templates are split by τh decay mode (`DYtautau_tDM<key>`), so a
+combination must scale all `DYtautau_*` templates with `mu_Z` (the exported configs do).

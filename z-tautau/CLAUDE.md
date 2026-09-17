@@ -23,7 +23,7 @@ to the τhτh chain and fits all four together; there is no μμ channel and eve
 electron (orthogonal to z-mumu / z-ee). The τhτh part **reuses the v1 skims, the v1 ntuples, the v3 fake factors, BDT
 and `fit/fitinputs/ztautau.root`** (Data and Fakes templates are copied from there); only its simulation templates are
 rebuilt. Everything v4-specific lives next to the v3 files with a `_v4` suffix: `ztautau/{analysis_v4,fakes_v4,leptons,pog}.py`,
-`scripts/step{2,3,3c,4,5,6}_*_v4.py`, `run_v4.py`, `fit_v4/`, `output_v4/`, and the caches `skims_v4/`, `ntuples_v4/`.
+`scripts/step{2,3,3c,4,4b,5,6}_*_v4.py`, `run_v4.py`, `fit_v4/`, `output_v4/`, and the caches `skims_v4/`, `ntuples_v4/`. Step 4b exports one fit-input file per channel and step 5 builds per-channel workspaces (τh ID free) for the MultiFit `fit_v4/comb_v4.config`; the `_fixedid` jobs are the per-channel cross-checks with the POG scale factors fixed.
 The v3 chain (`run_all.py`, `fit/`, `output/`) is untouched and must stay runnable. The signal of the v4 fit is
 Z/γ*→ττ with 60 < m_LHE < 120 GeV (all decays; `DYtautau_out` is the rest); the τh ID scale factors are free
 NormFactors per decay mode (`TauIDSF_DM*`, products via TRExFitter `Expression` on the τhτh templates) and the τ

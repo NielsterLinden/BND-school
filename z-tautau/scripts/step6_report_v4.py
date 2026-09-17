@@ -71,7 +71,11 @@ def copy_trex_plots(job, tag):
 
 def main():
     config.PLOT_DIR_V4.mkdir(parents=True, exist_ok=True)
-    jobs = {"combined": config.JOB_V4, **{ch: f"{config.JOB_V4}_{ch}" for ch in config.CHANNELS}}
+    # per channel: the cross-check with the POG tau ID scale factors fixed (<job>_<ch>_fixedid) is what the
+    # per-channel table shows; <job>_<ch> (tau ID free) are the workspaces of the MultiFit combination
+    jobs = {"combined": config.JOB_V4, **{ch: f"{config.JOB_V4}_{ch}_fixedid" for ch in config.CHANNELS}}
+    free = {ch: load_json(config.FIT_DIR_V4 / "results" / f"{config.JOB_V4}_{ch}_fit_result.json") for ch in config.CHANNELS}
+    comb_mf = load_json(config.FIT_DIR_V4 / "results" / "comb_v4_fit_result.json")
     res = {k: load_json(config.FIT_DIR_V4 / "results" / f"{j}_fit_result.json") for k, j in jobs.items()}
     fits = {k: summarise(r) for k, r in res.items() if r}
     yields = load_json(config.DATA_DIR_V4 / "yields_v4.json")
@@ -84,6 +88,11 @@ def main():
                "fit": fits, "yields_prefit": yields, "fakes": {ch: ({k: v for k, v in f.items() if k in ("osss", "w_mt", "closure_ss", "sr_fakes", "sr_subtracted_mc", "n_data", "SB1", "SB2", "sr_multijet", "ss_region")}) for ch, f in fakes.items() if f},
                "trigger_insitu": {k: {"sf_plateau": np.asarray(v["sf"])[-3:, :].tolist(), "err_plateau": np.asarray(v["err"])[-3:, :].tolist()} for k, v in (trig or {}).items()},
                "v3_reference": (v3 or {}).get("fit", {}).get("mcsub", {}).get("sigma_60_120_pb"), "n_templates": meta and len(meta["samples"]), "n_systs": meta and len(meta["systs"]),
+               "per_channel_workspaces": {ch: {"fitinputs": f"fit_v4/fitinputs/{config.JOB_V4}_{ch}.root", "config": f"fit_v4/{config.JOB_V4}_{ch}.config",
+                                               "workspace": f"fit_v4/results/{config.JOB_V4}_{ch}/RooStats/{config.JOB_V4}_{ch}_combined_{config.JOB_V4}_{ch}_model.root",
+                                               "mu_Z_alone_tauid_free": (r["poi_value"], r["poi_err_up"], r["poi_err_down"]) if r else None}
+                                          for ch, r in free.items()},
+               "multifit_check": comb_mf,
                "tau_id_sf_pog": meta and meta["tau_id_sf_pog"]}
     config.OUTPUT_DIR_V4.mkdir(parents=True, exist_ok=True)
     (config.OUTPUT_DIR_V4 / "results.json").write_text(json.dumps(results, indent=1, default=float))
@@ -125,6 +134,17 @@ def main():
             s = fc["sigma_60_120_pb"]
             lines.append(f"| {ch} | {'fixed (POG)' if fc.get('tau_id_fixed') else 'free'} | {fc['mu']:.3f} +{fc['mu_err_up']:.3f} -{fc['mu_err_down']:.3f} | {s['value']:.0f} +{s['err_up']:.0f} -{s['err_down']:.0f} |")
         lines.append("")
+    lines += ["## Per-channel exports for the combination", "",
+              "| channel | fit inputs | config | workspace | mu_Z alone (tau ID free) |", "|---|---|---|---|---|"]
+    for ch, r in free.items():
+        w = f"fit_v4/results/{config.JOB_V4}_{ch}/RooStats/{config.JOB_V4}_{ch}_combined_{config.JOB_V4}_{ch}_model.root"
+        ok = (config.FIT_DIR_V4.parent / w).exists()
+        mu = f"{r['poi_value']:.3f} +{r['poi_err_up']:.3f} -{r['poi_err_down']:.3f}" if r else "n/a"
+        lines.append(f"| {ch} | `fit_v4/fitinputs/{config.JOB_V4}_{ch}.root` | `fit_v4/{config.JOB_V4}_{ch}.config` | {'present' if ok else 'missing'} | {mu} |")
+    if comb_mf:
+        lines += ["", f"MultiFit of the four workspaces (`fit_v4/comb_v4.config`): mu_Z = {comb_mf['poi_value']:.3f} +{comb_mf['poi_err_up']:.3f} -{comb_mf['poi_err_down']:.3f}"
+                  f" (single-file fit: {f['mu']:.3f} +{f['mu_err_up']:.3f} -{f['mu_err_down']:.3f})" if f else ""]
+    lines.append("")
     if v3:
         r3 = v3["fit"]["mcsub"]
         lines += [f"v3 reference (tau_h tau_h only, fiducial signal): mu_Z = {r3['mu']:.3f} +{r3['mu_err_up']:.3f} -{r3['mu_err_down']:.3f}, "

@@ -1,0 +1,1531 @@
+{
+ "job": "comb_v4",
+ "poi": "mu_Z",
+ "poi_value": 1.05547,
+ "poi_err_up": 0.0462799,
+ "poi_err_down": 0.044134,
+ "poi_err": 0.045206949999999996,
+ "nps": {
+  "TauIDSF_DM0": [
+   0.961529,
+   0.0434239,
+   0.0434239
+  ],
+  "TauIDSF_DM1": [
+   0.935501,
+   0.0377727,
+   0.0377727
+  ],
+  "TauIDSF_DM10": [
+   0.866591,
+   0.0384236,
+   0.0384236
+  ],
+  "TauIDSF_DM11": [
+   0.770771,
+   0.0507304,
+   0.0507304
+  ],
+  "BTag": [
+   -0.165931,
+   0.721165,
+   0.721165
+  ],
+  "ElectronID": [
+   -0.557981,
+   0.962941,
+   0.962941
+  ],
+  "ElectronReco": [
+   0.558391,
+   0.892056,
+   0.892056
+  ],
+  "ElectronScale": [
+   -0.783091,
+   0.817997,
+   0.817997
+  ],
+  "ElectronTrigger": [
+   -0.781777,
+   0.641004,
+   0.641004
+  ],
+  "EmuTrigger": [
+   -1.62371,
+   0.713082,
+   0.713082
+  ],
+  "FakeClosure_etau": [
+   0.468871,
+   0.944501,
+   0.944501
+  ],
+  "FakeClosure_mutau": [
+   -0.153374,
+   0.858326,
+   0.858326
+  ],
+  "FakeClosure_tautau_c0_hi": [
+   0.0676269,
+   0.945973,
+   0.945973
+  ],
+  "FakeClosure_tautau_c1_hi": [
+   -0.254567,
+   0.471838,
+   0.471838
+  ],
+  "FakeClosure_tautau_c1_lo": [
+   0.493861,
+   0.830646,
+   0.830646
+  ],
+  "FakeClosure_tautau_c2_hi": [
+   1.07763,
+   0.869298,
+   0.869298
+  ],
+  "FakeClosure_tautau_c2_lo": [
+   -0.189675,
+   0.98935,
+   0.98935
+  ],
+  "FakeFrac_etau": [
+   2.60015,
+   0.622804,
+   0.622804
+  ],
+  "FakeFrac_mutau": [
+   1.47968,
+   0.679226,
+   0.679226
+  ],
+  "FakeMCSub_etau": [
+   0.0315243,
+   0.982699,
+   0.982699
+  ],
+  "FakeMCSub_mutau": [
+   -0.489812,
+   0.984405,
+   0.984405
+  ],
+  "FakeOSSS_etau": [
+   0.141396,
+   0.86045,
+   0.86045
+  ],
+  "FakeOSSS_mutau": [
+   -0.292504,
+   0.942796,
+   0.942796
+  ],
+  "FakeOSSS_tautau_c0": [
+   -0.0125903,
+   0.624794,
+   0.624794
+  ],
+  "FakeOSSS_tautau_c1": [
+   0.261265,
+   0.923906,
+   0.923906
+  ],
+  "FakeOSSS_tautau_c2": [
+   0.0852286,
+   0.983035,
+   0.983035
+  ],
+  "FakeTT_etau": [
+   0.30007,
+   0.917634,
+   0.917634
+  ],
+  "FakeTT_mutau": [
+   -0.223427,
+   0.866695,
+   0.866695
+  ],
+  "FakeWTT_tautau": [
+   0.0940151,
+   0.933176,
+   0.933176
+  ],
+  "FakeWmT_etau": [
+   1.56458,
+   0.618351,
+   0.618351
+  ],
+  "FakeWmT_mutau": [
+   -0.408586,
+   0.668039,
+   0.668039
+  ],
+  "JES": [
+   -0.529532,
+   0.633022,
+   0.633022
+  ],
+  "L1Prefiring": [
+   0.0771442,
+   0.981606,
+   0.981606
+  ],
+  "Lumi": [
+   -0.0174537,
+   0.979712,
+   0.979712
+  ],
+  "MCStatNorm_WJets_tautau": [
+   -0.832999,
+   0.641601,
+   0.641601
+  ],
+  "MET_Unclustered": [
+   1.04686,
+   0.31875,
+   0.31875
+  ],
+  "MuonID": [
+   0.166236,
+   0.986687,
+   0.986687
+  ],
+  "MuonIso": [
+   0.459314,
+   0.979646,
+   0.979646
+  ],
+  "MuonScale": [
+   0.381975,
+   0.94591,
+   0.94591
+  ],
+  "MuonTrigger": [
+   0.0720506,
+   0.992663,
+   0.992663
+  ],
+  "PDF": [
+   -0.19095,
+   0.957701,
+   0.957701
+  ],
+  "PS_FSR": [
+   0.388797,
+   0.389952,
+   0.389952
+  ],
+  "PS_ISR": [
+   0.349985,
+   0.802856,
+   0.802856
+  ],
+  "Pileup": [
+   0.252205,
+   0.465449,
+   0.465449
+  ],
+  "QCDOSSS_emu": [
+   -0.75577,
+   0.796348,
+   0.796348
+  ],
+  "QCDScale": [
+   0.49811,
+   0.577706,
+   0.577706
+  ],
+  "TauES_DM0": [
+   -0.245037,
+   0.300513,
+   0.300513
+  ],
+  "TauES_DM1": [
+   -0.0877135,
+   0.195038,
+   0.195038
+  ],
+  "TauES_DM10": [
+   0.175052,
+   0.333059,
+   0.333059
+  ],
+  "TauES_DM11": [
+   1.08812,
+   0.732987,
+   0.732987
+  ],
+  "TauFakeEle": [
+   0.100118,
+   0.545121,
+   0.545121
+  ],
+  "TauFakeMu": [
+   1.02206,
+   0.491504,
+   0.491504
+  ],
+  "TauTrigger_DM0": [
+   -0.384272,
+   0.943228,
+   0.943228
+  ],
+  "TauTrigger_DM1": [
+   -0.500813,
+   0.899783,
+   0.899783
+  ],
+  "TauTrigger_DM10": [
+   -0.551704,
+   0.950557,
+   0.950557
+  ],
+  "TauTrigger_DM11": [
+   -0.149336,
+   0.987788,
+   0.987788
+  ],
+  "TopPt": [
+   1.16765,
+   0.296875,
+   0.296875
+  ],
+  "XS_DYll": [
+   0.28189,
+   0.923729,
+   0.923729
+  ],
+  "XS_DYlowmass": [
+   -0.109902,
+   0.974595,
+   0.974595
+  ],
+  "XS_DYtautau_out": [
+   -0.153242,
+   0.925373,
+   0.925373
+  ],
+  "XS_SingleTop": [
+   0.129212,
+   0.981928,
+   0.981928
+  ],
+  "XS_WJets": [
+   -0.730079,
+   0.910906,
+   0.910906
+  ],
+  "XS_WW": [
+   0.164641,
+   0.842661,
+   0.842661
+  ],
+  "XS_WZ": [
+   0.0487146,
+   0.990878,
+   0.990878
+  ],
+  "XS_ZZ": [
+   0.0202638,
+   0.992332,
+   0.992332
+  ],
+  "gamma_stat_emu_CRtt_bin_0": [
+   1.00449,
+   0.00430724,
+   0.00430724
+  ],
+  "gamma_stat_emu_CRtt_bin_1": [
+   0.998414,
+   0.00484692,
+   0.00484692
+  ],
+  "gamma_stat_emu_CRtt_bin_2": [
+   0.995032,
+   0.00558504,
+   0.00558504
+  ],
+  "gamma_stat_emu_CRtt_bin_3": [
+   0.996079,
+   0.00544749,
+   0.00544749
+  ],
+  "gamma_stat_emu_CRtt_bin_4": [
+   1.00345,
+   0.00650697,
+   0.00650697
+  ],
+  "gamma_stat_emu_SR_bin_0": [
+   1.01128,
+   0.0379515,
+   0.0379515
+  ],
+  "gamma_stat_emu_SR_bin_1": [
+   0.957207,
+   0.0474612,
+   0.0474612
+  ],
+  "gamma_stat_emu_SR_bin_10": [
+   1.01755,
+   0.0145709,
+   0.0145709
+  ],
+  "gamma_stat_emu_SR_bin_11": [
+   0.983999,
+   0.0173524,
+   0.0173524
+  ],
+  "gamma_stat_emu_SR_bin_12": [
+   1.00259,
+   0.0199837,
+   0.0199837
+  ],
+  "gamma_stat_emu_SR_bin_13": [
+   0.963032,
+   0.0167318,
+   0.0167318
+  ],
+  "gamma_stat_emu_SR_bin_14": [
+   1.01268,
+   0.0117041,
+   0.0117041
+  ],
+  "gamma_stat_emu_SR_bin_2": [
+   0.974156,
+   0.030713,
+   0.030713
+  ],
+  "gamma_stat_emu_SR_bin_3": [
+   1.00737,
+   0.0165573,
+   0.0165573
+  ],
+  "gamma_stat_emu_SR_bin_4": [
+   1.00525,
+   0.0103048,
+   0.0103048
+  ],
+  "gamma_stat_emu_SR_bin_5": [
+   0.996552,
+   0.00843077,
+   0.00843077
+  ],
+  "gamma_stat_emu_SR_bin_6": [
+   0.99452,
+   0.00794738,
+   0.00794738
+  ],
+  "gamma_stat_emu_SR_bin_7": [
+   1.00361,
+   0.00832854,
+   0.00832854
+  ],
+  "gamma_stat_emu_SR_bin_8": [
+   1.00423,
+   0.00983371,
+   0.00983371
+  ],
+  "gamma_stat_emu_SR_bin_9": [
+   0.981837,
+   0.0120685,
+   0.0120685
+  ],
+  "gamma_stat_etau_SR_dm0_bin_0": [
+   1.30311,
+   0.295292,
+   0.295292
+  ],
+  "gamma_stat_etau_SR_dm0_bin_1": [
+   0.96482,
+   0.163005,
+   0.163005
+  ],
+  "gamma_stat_etau_SR_dm0_bin_10": [
+   0.986228,
+   0.0404127,
+   0.0404127
+  ],
+  "gamma_stat_etau_SR_dm0_bin_11": [
+   0.968265,
+   0.0464301,
+   0.0464301
+  ],
+  "gamma_stat_etau_SR_dm0_bin_12": [
+   0.944601,
+   0.0543055,
+   0.0543055
+  ],
+  "gamma_stat_etau_SR_dm0_bin_13": [
+   1.01399,
+   0.0498657,
+   0.0498657
+  ],
+  "gamma_stat_etau_SR_dm0_bin_14": [
+   0.948545,
+   0.0441205,
+   0.0441205
+  ],
+  "gamma_stat_etau_SR_dm0_bin_2": [
+   0.870468,
+   0.172141,
+   0.172141
+  ],
+  "gamma_stat_etau_SR_dm0_bin_3": [
+   0.934776,
+   0.109123,
+   0.109123
+  ],
+  "gamma_stat_etau_SR_dm0_bin_4": [
+   1.08107,
+   0.078876,
+   0.078876
+  ],
+  "gamma_stat_etau_SR_dm0_bin_5": [
+   0.950024,
+   0.055595,
+   0.055595
+  ],
+  "gamma_stat_etau_SR_dm0_bin_6": [
+   0.992594,
+   0.0528636,
+   0.0528636
+  ],
+  "gamma_stat_etau_SR_dm0_bin_7": [
+   1.02545,
+   0.0400957,
+   0.0400957
+  ],
+  "gamma_stat_etau_SR_dm0_bin_8": [
+   0.985449,
+   0.0415494,
+   0.0415494
+  ],
+  "gamma_stat_etau_SR_dm0_bin_9": [
+   0.988482,
+   0.0438478,
+   0.0438478
+  ],
+  "gamma_stat_etau_SR_dm10_bin_0": [
+   0.941182,
+   0.20053,
+   0.20053
+  ],
+  "gamma_stat_etau_SR_dm10_bin_1": [
+   1.91898,
+   0.324723,
+   0.324723
+  ],
+  "gamma_stat_etau_SR_dm10_bin_10": [
+   1.02946,
+   0.0314683,
+   0.0314683
+  ],
+  "gamma_stat_etau_SR_dm10_bin_11": [
+   1.0002,
+   0.0316089,
+   0.0316089
+  ],
+  "gamma_stat_etau_SR_dm10_bin_12": [
+   1.01697,
+   0.0404221,
+   0.0404221
+  ],
+  "gamma_stat_etau_SR_dm10_bin_13": [
+   0.98795,
+   0.0341074,
+   0.0341074
+  ],
+  "gamma_stat_etau_SR_dm10_bin_14": [
+   0.996869,
+   0.0309535,
+   0.0309535
+  ],
+  "gamma_stat_etau_SR_dm10_bin_2": [
+   0.823487,
+   0.127856,
+   0.127856
+  ],
+  "gamma_stat_etau_SR_dm10_bin_3": [
+   0.858444,
+   0.0988711,
+   0.0988711
+  ],
+  "gamma_stat_etau_SR_dm10_bin_4": [
+   0.958019,
+   0.0631964,
+   0.0631964
+  ],
+  "gamma_stat_etau_SR_dm10_bin_5": [
+   1.05615,
+   0.0510693,
+   0.0510693
+  ],
+  "gamma_stat_etau_SR_dm10_bin_6": [
+   0.968093,
+   0.0298868,
+   0.0298868
+  ],
+  "gamma_stat_etau_SR_dm10_bin_7": [
+   1.01239,
+   0.026746,
+   0.026746
+  ],
+  "gamma_stat_etau_SR_dm10_bin_8": [
+   1.00996,
+   0.0285083,
+   0.0285083
+  ],
+  "gamma_stat_etau_SR_dm10_bin_9": [
+   0.963593,
+   0.0331702,
+   0.0331702
+  ],
+  "gamma_stat_etau_SR_dm11_bin_0": [
+   0.711179,
+   0.272162,
+   0.272162
+  ],
+  "gamma_stat_etau_SR_dm11_bin_1": [
+   1.47044,
+   0.486308,
+   0.486308
+  ],
+  "gamma_stat_etau_SR_dm11_bin_10": [
+   1.06077,
+   0.0586438,
+   0.0586438
+  ],
+  "gamma_stat_etau_SR_dm11_bin_11": [
+   0.998155,
+   0.0647007,
+   0.0647007
+  ],
+  "gamma_stat_etau_SR_dm11_bin_12": [
+   1.00816,
+   0.0721539,
+   0.0721539
+  ],
+  "gamma_stat_etau_SR_dm11_bin_13": [
+   0.966376,
+   0.0596016,
+   0.0596016
+  ],
+  "gamma_stat_etau_SR_dm11_bin_14": [
+   0.963141,
+   0.0396516,
+   0.0396516
+  ],
+  "gamma_stat_etau_SR_dm11_bin_2": [
+   0.840746,
+   0.280813,
+   0.280813
+  ],
+  "gamma_stat_etau_SR_dm11_bin_3": [
+   0.888292,
+   0.1983,
+   0.1983
+  ],
+  "gamma_stat_etau_SR_dm11_bin_4": [
+   0.971804,
+   0.119946,
+   0.119946
+  ],
+  "gamma_stat_etau_SR_dm11_bin_5": [
+   1.06344,
+   0.0861141,
+   0.0861141
+  ],
+  "gamma_stat_etau_SR_dm11_bin_6": [
+   0.95828,
+   0.0597896,
+   0.0597896
+  ],
+  "gamma_stat_etau_SR_dm11_bin_7": [
+   1.00909,
+   0.0536562,
+   0.0536562
+  ],
+  "gamma_stat_etau_SR_dm11_bin_8": [
+   0.978867,
+   0.0572227,
+   0.0572227
+  ],
+  "gamma_stat_etau_SR_dm11_bin_9": [
+   1.01778,
+   0.0692992,
+   0.0692992
+  ],
+  "gamma_stat_etau_SR_dm1_bin_0": [
+   1.14891,
+   0.184874,
+   0.184874
+  ],
+  "gamma_stat_etau_SR_dm1_bin_1": [
+   1.00803,
+   0.0646272,
+   0.0646272
+  ],
+  "gamma_stat_etau_SR_dm1_bin_10": [
+   0.999371,
+   0.0222992,
+   0.0222992
+  ],
+  "gamma_stat_etau_SR_dm1_bin_11": [
+   1.01649,
+   0.023134,
+   0.023134
+  ],
+  "gamma_stat_etau_SR_dm1_bin_12": [
+   1.0422,
+   0.025615,
+   0.025615
+  ],
+  "gamma_stat_etau_SR_dm1_bin_13": [
+   0.983896,
+   0.0206053,
+   0.0206053
+  ],
+  "gamma_stat_etau_SR_dm1_bin_14": [
+   1.01663,
+   0.0189723,
+   0.0189723
+  ],
+  "gamma_stat_etau_SR_dm1_bin_2": [
+   0.963992,
+   0.0749953,
+   0.0749953
+  ],
+  "gamma_stat_etau_SR_dm1_bin_3": [
+   1.05376,
+   0.0648912,
+   0.0648912
+  ],
+  "gamma_stat_etau_SR_dm1_bin_4": [
+   1.04325,
+   0.0454544,
+   0.0454544
+  ],
+  "gamma_stat_etau_SR_dm1_bin_5": [
+   0.981446,
+   0.0304175,
+   0.0304175
+  ],
+  "gamma_stat_etau_SR_dm1_bin_6": [
+   0.984595,
+   0.0224082,
+   0.0224082
+  ],
+  "gamma_stat_etau_SR_dm1_bin_7": [
+   0.98534,
+   0.0194262,
+   0.0194262
+  ],
+  "gamma_stat_etau_SR_dm1_bin_8": [
+   0.998029,
+   0.0205432,
+   0.0205432
+  ],
+  "gamma_stat_etau_SR_dm1_bin_9": [
+   1.01246,
+   0.0240709,
+   0.0240709
+  ],
+  "gamma_stat_mutau_SR_dm0_bin_0": [
+   0.950888,
+   0.135193,
+   0.135193
+  ],
+  "gamma_stat_mutau_SR_dm0_bin_1": [
+   0.985983,
+   0.088318,
+   0.088318
+  ],
+  "gamma_stat_mutau_SR_dm0_bin_10": [
+   1.02271,
+   0.0273627,
+   0.0273627
+  ],
+  "gamma_stat_mutau_SR_dm0_bin_11": [
+   0.996988,
+   0.0258937,
+   0.0258937
+  ],
+  "gamma_stat_mutau_SR_dm0_bin_12": [
+   1.02649,
+   0.0296067,
+   0.0296067
+  ],
+  "gamma_stat_mutau_SR_dm0_bin_13": [
+   1.01527,
+   0.0269444,
+   0.0269444
+  ],
+  "gamma_stat_mutau_SR_dm0_bin_14": [
+   0.996911,
+   0.0216,
+   0.0216
+  ],
+  "gamma_stat_mutau_SR_dm0_bin_2": [
+   1.12612,
+   0.0865894,
+   0.0865894
+  ],
+  "gamma_stat_mutau_SR_dm0_bin_3": [
+   0.921967,
+   0.0519839,
+   0.0519839
+  ],
+  "gamma_stat_mutau_SR_dm0_bin_4": [
+   0.991266,
+   0.0398422,
+   0.0398422
+  ],
+  "gamma_stat_mutau_SR_dm0_bin_5": [
+   0.994297,
+   0.0283944,
+   0.0283944
+  ],
+  "gamma_stat_mutau_SR_dm0_bin_6": [
+   1.0261,
+   0.0218452,
+   0.0218452
+  ],
+  "gamma_stat_mutau_SR_dm0_bin_7": [
+   0.99411,
+   0.0189358,
+   0.0189358
+  ],
+  "gamma_stat_mutau_SR_dm0_bin_8": [
+   1.01716,
+   0.0232126,
+   0.0232126
+  ],
+  "gamma_stat_mutau_SR_dm0_bin_9": [
+   0.96202,
+   0.0267213,
+   0.0267213
+  ],
+  "gamma_stat_mutau_SR_dm10_bin_0": [
+   1.02054,
+   0.0560095,
+   0.0560095
+  ],
+  "gamma_stat_mutau_SR_dm10_bin_1": [
+   1.06045,
+   0.16454,
+   0.16454
+  ],
+  "gamma_stat_mutau_SR_dm10_bin_10": [
+   1.03375,
+   0.0236425,
+   0.0236425
+  ],
+  "gamma_stat_mutau_SR_dm10_bin_11": [
+   1.01084,
+   0.0221718,
+   0.0221718
+  ],
+  "gamma_stat_mutau_SR_dm10_bin_12": [
+   0.984108,
+   0.0205128,
+   0.0205128
+  ],
+  "gamma_stat_mutau_SR_dm10_bin_13": [
+   0.991033,
+   0.0182855,
+   0.0182855
+  ],
+  "gamma_stat_mutau_SR_dm10_bin_14": [
+   0.99153,
+   0.0171222,
+   0.0171222
+  ],
+  "gamma_stat_mutau_SR_dm10_bin_2": [
+   0.965159,
+   0.0633937,
+   0.0633937
+  ],
+  "gamma_stat_mutau_SR_dm10_bin_3": [
+   1.08036,
+   0.0635674,
+   0.0635674
+  ],
+  "gamma_stat_mutau_SR_dm10_bin_4": [
+   1.01712,
+   0.044105,
+   0.044105
+  ],
+  "gamma_stat_mutau_SR_dm10_bin_5": [
+   1.00067,
+   0.0277894,
+   0.0277894
+  ],
+  "gamma_stat_mutau_SR_dm10_bin_6": [
+   1.01308,
+   0.0205005,
+   0.0205005
+  ],
+  "gamma_stat_mutau_SR_dm10_bin_7": [
+   0.998983,
+   0.0175772,
+   0.0175772
+  ],
+  "gamma_stat_mutau_SR_dm10_bin_8": [
+   0.999513,
+   0.0198365,
+   0.0198365
+  ],
+  "gamma_stat_mutau_SR_dm10_bin_9": [
+   0.986113,
+   0.0255323,
+   0.0255323
+  ],
+  "gamma_stat_mutau_SR_dm11_bin_0": [
+   1.3687,
+   0.240472,
+   0.240472
+  ],
+  "gamma_stat_mutau_SR_dm11_bin_1": [
+   0.794176,
+   0.184906,
+   0.184906
+  ],
+  "gamma_stat_mutau_SR_dm11_bin_10": [
+   0.973672,
+   0.0440752,
+   0.0440752
+  ],
+  "gamma_stat_mutau_SR_dm11_bin_11": [
+   1.04063,
+   0.0485713,
+   0.0485713
+  ],
+  "gamma_stat_mutau_SR_dm11_bin_12": [
+   1.00677,
+   0.0528377,
+   0.0528377
+  ],
+  "gamma_stat_mutau_SR_dm11_bin_13": [
+   0.970536,
+   0.0398333,
+   0.0398333
+  ],
+  "gamma_stat_mutau_SR_dm11_bin_14": [
+   0.970907,
+   0.0384421,
+   0.0384421
+  ],
+  "gamma_stat_mutau_SR_dm11_bin_2": [
+   1.04731,
+   0.19132,
+   0.19132
+  ],
+  "gamma_stat_mutau_SR_dm11_bin_3": [
+   0.935906,
+   0.118787,
+   0.118787
+  ],
+  "gamma_stat_mutau_SR_dm11_bin_4": [
+   0.949782,
+   0.0780363,
+   0.0780363
+  ],
+  "gamma_stat_mutau_SR_dm11_bin_5": [
+   1.00757,
+   0.0503185,
+   0.0503185
+  ],
+  "gamma_stat_mutau_SR_dm11_bin_6": [
+   0.988443,
+   0.0391828,
+   0.0391828
+  ],
+  "gamma_stat_mutau_SR_dm11_bin_7": [
+   1.01857,
+   0.0375779,
+   0.0375779
+  ],
+  "gamma_stat_mutau_SR_dm11_bin_8": [
+   1.03276,
+   0.041504,
+   0.041504
+  ],
+  "gamma_stat_mutau_SR_dm11_bin_9": [
+   1.05527,
+   0.0534869,
+   0.0534869
+  ],
+  "gamma_stat_mutau_SR_dm1_bin_0": [
+   0.995105,
+   0.0903474,
+   0.0903474
+  ],
+  "gamma_stat_mutau_SR_dm1_bin_1": [
+   0.942594,
+   0.0946326,
+   0.0946326
+  ],
+  "gamma_stat_mutau_SR_dm1_bin_10": [
+   1.01158,
+   0.0161535,
+   0.0161535
+  ],
+  "gamma_stat_mutau_SR_dm1_bin_11": [
+   0.993117,
+   0.016948,
+   0.016948
+  ],
+  "gamma_stat_mutau_SR_dm1_bin_12": [
+   1.00785,
+   0.0203528,
+   0.0203528
+  ],
+  "gamma_stat_mutau_SR_dm1_bin_13": [
+   0.983605,
+   0.0172296,
+   0.0172296
+  ],
+  "gamma_stat_mutau_SR_dm1_bin_14": [
+   1.00722,
+   0.0157363,
+   0.0157363
+  ],
+  "gamma_stat_mutau_SR_dm1_bin_2": [
+   1.09063,
+   0.0830772,
+   0.0830772
+  ],
+  "gamma_stat_mutau_SR_dm1_bin_3": [
+   1.01328,
+   0.047825,
+   0.047825
+  ],
+  "gamma_stat_mutau_SR_dm1_bin_4": [
+   1.00086,
+   0.0308205,
+   0.0308205
+  ],
+  "gamma_stat_mutau_SR_dm1_bin_5": [
+   1.00661,
+   0.0198399,
+   0.0198399
+  ],
+  "gamma_stat_mutau_SR_dm1_bin_6": [
+   0.981284,
+   0.0135696,
+   0.0135696
+  ],
+  "gamma_stat_mutau_SR_dm1_bin_7": [
+   1.01756,
+   0.0123276,
+   0.0123276
+  ],
+  "gamma_stat_mutau_SR_dm1_bin_8": [
+   0.998392,
+   0.0142939,
+   0.0142939
+  ],
+  "gamma_stat_mutau_SR_dm1_bin_9": [
+   0.992395,
+   0.0180001,
+   0.0180001
+  ],
+  "gamma_stat_tautau_SR0_bin_0": [
+   1.06609,
+   0.100602,
+   0.100602
+  ],
+  "gamma_stat_tautau_SR0_bin_1": [
+   1.00375,
+   0.0622036,
+   0.0622036
+  ],
+  "gamma_stat_tautau_SR0_bin_10": [
+   1.00669,
+   0.0101123,
+   0.0101123
+  ],
+  "gamma_stat_tautau_SR0_bin_11": [
+   0.995822,
+   0.0121598,
+   0.0121598
+  ],
+  "gamma_stat_tautau_SR0_bin_12": [
+   1.00521,
+   0.0113519,
+   0.0113519
+  ],
+  "gamma_stat_tautau_SR0_bin_13": [
+   0.987254,
+   0.0108516,
+   0.0108516
+  ],
+  "gamma_stat_tautau_SR0_bin_2": [
+   2.1286,
+   0.496059,
+   0.496059
+  ],
+  "gamma_stat_tautau_SR0_bin_3": [
+   1.03069,
+   0.454636,
+   0.454636
+  ],
+  "gamma_stat_tautau_SR0_bin_4": [
+   1.07964,
+   0.480535,
+   0.480535
+  ],
+  "gamma_stat_tautau_SR0_bin_5": [
+   0.499146,
+   0.166315,
+   0.166315
+  ],
+  "gamma_stat_tautau_SR0_bin_6": [
+   0.958341,
+   0.0465891,
+   0.0465891
+  ],
+  "gamma_stat_tautau_SR0_bin_7": [
+   0.973168,
+   0.0214891,
+   0.0214891
+  ],
+  "gamma_stat_tautau_SR0_bin_8": [
+   0.998775,
+   0.0159982,
+   0.0159982
+  ],
+  "gamma_stat_tautau_SR0_bin_9": [
+   1.00724,
+   0.00999991,
+   0.00999991
+  ],
+  "gamma_stat_tautau_SR1_bin_0": [
+   0.399352,
+   0.524761,
+   0.524761
+  ],
+  "gamma_stat_tautau_SR1_bin_1": [
+   0.973874,
+   0.0864948,
+   0.0864948
+  ],
+  "gamma_stat_tautau_SR1_bin_10": [
+   1.0528,
+   0.173371,
+   0.173371
+  ],
+  "gamma_stat_tautau_SR1_bin_11": [
+   0.789074,
+   0.333522,
+   0.333522
+  ],
+  "gamma_stat_tautau_SR1_bin_12": [
+   0.735106,
+   0.291544,
+   0.291544
+  ],
+  "gamma_stat_tautau_SR1_bin_13": [
+   1.43591,
+   0.629186,
+   0.629186
+  ],
+  "gamma_stat_tautau_SR1_bin_2": [
+   1.0482,
+   0.0581942,
+   0.0581942
+  ],
+  "gamma_stat_tautau_SR1_bin_3": [
+   1.02829,
+   0.0513048,
+   0.0513048
+  ],
+  "gamma_stat_tautau_SR1_bin_4": [
+   1.04699,
+   0.0422949,
+   0.0422949
+  ],
+  "gamma_stat_tautau_SR1_bin_5": [
+   0.999102,
+   0.0346216,
+   0.0346216
+  ],
+  "gamma_stat_tautau_SR1_bin_6": [
+   0.981354,
+   0.030085,
+   0.030085
+  ],
+  "gamma_stat_tautau_SR1_bin_7": [
+   0.995788,
+   0.0291091,
+   0.0291091
+  ],
+  "gamma_stat_tautau_SR1_bin_8": [
+   1.00569,
+   0.0484717,
+   0.0484717
+  ],
+  "gamma_stat_tautau_SR1_bin_9": [
+   0.997448,
+   0.0669033,
+   0.0669033
+  ],
+  "gamma_stat_tautau_SR2_bin_0": [
+   9.95792e-08,
+   2347.72,
+   2347.72
+  ],
+  "gamma_stat_tautau_SR2_bin_1": [
+   0.961145,
+   0.120135,
+   0.120135
+  ],
+  "gamma_stat_tautau_SR2_bin_10": [
+   1.37202,
+   0.364341,
+   0.364341
+  ],
+  "gamma_stat_tautau_SR2_bin_11": [
+   0.882853,
+   0.277967,
+   0.277967
+  ],
+  "gamma_stat_tautau_SR2_bin_12": [
+   0.365523,
+   0.351948,
+   0.351948
+  ],
+  "gamma_stat_tautau_SR2_bin_13": [
+   0.899089,
+   0.403262,
+   0.403262
+  ],
+  "gamma_stat_tautau_SR2_bin_2": [
+   0.99397,
+   0.0550737,
+   0.0550737
+  ],
+  "gamma_stat_tautau_SR2_bin_3": [
+   1.02946,
+   0.0334337,
+   0.0334337
+  ],
+  "gamma_stat_tautau_SR2_bin_4": [
+   0.993127,
+   0.0255694,
+   0.0255694
+  ],
+  "gamma_stat_tautau_SR2_bin_5": [
+   0.957652,
+   0.0279714,
+   0.0279714
+  ],
+  "gamma_stat_tautau_SR2_bin_6": [
+   0.986337,
+   0.041999,
+   0.041999
+  ],
+  "gamma_stat_tautau_SR2_bin_7": [
+   1.17524,
+   0.0949228,
+   0.0949228
+  ],
+  "gamma_stat_tautau_SR2_bin_8": [
+   1.14122,
+   0.148073,
+   0.148073
+  ],
+  "gamma_stat_tautau_SR2_bin_9": [
+   0.751682,
+   0.134718,
+   0.134718
+  ],
+  "mu_ttbar": [
+   1.15342,
+   0.0481827,
+   0.0481827
+  ]
+ },
+ "nll": 549885.44949,
+ "err_decomp": {
+  "TOT_ERROR": 0.0455549,
+  "STAT_ERROR": 0.0157271,
+  "SYST_ERROR": 0.0396386,
+  "MCSTAT_ERROR": 0.0160215,
+  "TOTSYST_ERROR": 0.042754,
+  "STAT_ERR_NO_NF": 0.0154262,
+  "NF_ERROR": 0.00306176,
+  "TauIDSF_DM0": -0.00126157,
+  "TauIDSF_DM1": -0.00119881,
+  "TauIDSF_DM10": -0.00117104,
+  "TauIDSF_DM11": -0.00106898,
+  "alpha_BTag": -0.00635766,
+  "alpha_ElectronID": -0.00474782,
+  "alpha_ElectronReco": -0.00178582,
+  "alpha_ElectronScale": -0.0112152,
+  "alpha_ElectronTrigger": 0.000236693,
+  "alpha_EmuTrigger": -0.0258174,
+  "alpha_FakeClosure_etau": 0.000982066,
+  "alpha_FakeClosure_mutau": 0.00215581,
+  "alpha_FakeClosure_tautau_c0_hi": 0.00227141,
+  "alpha_FakeClosure_tautau_c1_hi": 0.00144694,
+  "alpha_FakeClosure_tautau_c1_lo": 0.0023328,
+  "alpha_FakeClosure_tautau_c2_hi": 0.00186099,
+  "alpha_FakeClosure_tautau_c2_lo": 0.00236885,
+  "alpha_FakeFrac_etau": -0.000249279,
+  "alpha_FakeFrac_mutau": -0.000537271,
+  "alpha_FakeMCSub_etau": 1.19416e-06,
+  "alpha_FakeMCSub_mutau": 0.00318848,
+  "alpha_FakeOSSS_etau": 0.00186704,
+  "alpha_FakeOSSS_mutau": 0.0014417,
+  "alpha_FakeOSSS_tautau_c0": 0.00614366,
+  "alpha_FakeOSSS_tautau_c1": 0.00172906,
+  "alpha_FakeOSSS_tautau_c2": 0.00131465,
+  "alpha_FakeTT_etau": 0.000143192,
+  "alpha_FakeTT_mutau": 0.0015497,
+  "alpha_FakeWTT_tautau": 0.00342485,
+  "alpha_FakeWmT_etau": 0.00177941,
+  "alpha_FakeWmT_mutau": 0.00165339,
+  "alpha_JES": 0.0017682,
+  "alpha_L1Prefiring": 0.00350131,
+  "alpha_Lumi": -0.00962331,
+  "alpha_MCStatNorm_WJets_tautau": 0.00234203,
+  "alpha_MET_Unclustered": 0.00482787,
+  "alpha_MuonID": -0.00441755,
+  "alpha_MuonIso": -0.00376524,
+  "alpha_MuonScale": -0.0062873,
+  "alpha_MuonTrigger": -0.000713225,
+  "alpha_PDF": -0.00177498,
+  "alpha_PS_FSR": 0.00112493,
+  "alpha_PS_ISR": -0.00233112,
+  "alpha_Pileup": 0.00353498,
+  "alpha_QCDOSSS_emu": 0.00213746,
+  "alpha_QCDScale": 0.000845584,
+  "alpha_TauES_DM0": -0.000418646,
+  "alpha_TauES_DM1": -0.00185024,
+  "alpha_TauES_DM10": -0.00189385,
+  "alpha_TauES_DM11": -0.00106761,
+  "alpha_TauFakeEle": 0.00139369,
+  "alpha_TauFakeMu": 1.75087e-06,
+  "alpha_TauTrigger_DM0": 0.0088027,
+  "alpha_TauTrigger_DM1": 0.0114499,
+  "alpha_TauTrigger_DM10": 0.00672686,
+  "alpha_TauTrigger_DM11": 0.00277968,
+  "alpha_TopPt": -0.00136765,
+  "alpha_XS_DYll": 0.000272751,
+  "alpha_XS_DYlowmass": 0.0011857,
+  "alpha_XS_DYtautau_out": 0.00657991,
+  "alpha_XS_SingleTop": 0.00111977,
+  "alpha_XS_WJets": 0.00293686,
+  "alpha_XS_WW": 0.00633935,
+  "alpha_XS_WZ": 0.000150728,
+  "alpha_XS_ZZ": -3.71998e-05,
+  "gamma_stat_emu_CRtt_bin_0": 0.00100552,
+  "gamma_stat_emu_CRtt_bin_1": -0.00113194,
+  "gamma_stat_emu_CRtt_bin_2": -0.00100119,
+  "gamma_stat_emu_CRtt_bin_3": -0.000835676,
+  "gamma_stat_emu_CRtt_bin_4": 0.000458098,
+  "gamma_stat_emu_SR_bin_0": 0.00386392,
+  "gamma_stat_emu_SR_bin_1": 0.000507554,
+  "gamma_stat_emu_SR_bin_10": -0.00466178,
+  "gamma_stat_emu_SR_bin_11": 0.00335927,
+  "gamma_stat_emu_SR_bin_12": 0.00358617,
+  "gamma_stat_emu_SR_bin_13": 0.00329577,
+  "gamma_stat_emu_SR_bin_14": 0.0016281,
+  "gamma_stat_emu_SR_bin_2": 0.000132419,
+  "gamma_stat_emu_SR_bin_3": -0.0022276,
+  "gamma_stat_emu_SR_bin_4": 0.000142169,
+  "gamma_stat_emu_SR_bin_5": 0.00258259,
+  "gamma_stat_emu_SR_bin_6": 0.00051056,
+  "gamma_stat_emu_SR_bin_7": -0.00212321,
+  "gamma_stat_emu_SR_bin_8": -0.00403349,
+  "gamma_stat_emu_SR_bin_9": -0.0040393,
+  "gamma_stat_etau_SR_dm0_bin_0": -2.1763e-05,
+  "gamma_stat_etau_SR_dm0_bin_1": 9.16204e-05,
+  "gamma_stat_etau_SR_dm0_bin_10": -0.00031893,
+  "gamma_stat_etau_SR_dm0_bin_11": 0.00046279,
+  "gamma_stat_etau_SR_dm0_bin_12": 0.000675457,
+  "gamma_stat_etau_SR_dm0_bin_13": 0.000854693,
+  "gamma_stat_etau_SR_dm0_bin_14": 0.00136736,
+  "gamma_stat_etau_SR_dm0_bin_2": -0.000375032,
+  "gamma_stat_etau_SR_dm0_bin_3": -0.000843146,
+  "gamma_stat_etau_SR_dm0_bin_4": -0.00136245,
+  "gamma_stat_etau_SR_dm0_bin_5": -0.000469815,
+  "gamma_stat_etau_SR_dm0_bin_6": -0.000732282,
+  "gamma_stat_etau_SR_dm0_bin_7": -0.000658414,
+  "gamma_stat_etau_SR_dm0_bin_8": 0.000104377,
+  "gamma_stat_etau_SR_dm0_bin_9": 0.00086835,
+  "gamma_stat_etau_SR_dm10_bin_0": -0.000273235,
+  "gamma_stat_etau_SR_dm10_bin_1": -7.62995e-05,
+  "gamma_stat_etau_SR_dm10_bin_10": -0.000454325,
+  "gamma_stat_etau_SR_dm10_bin_11": 0.000110412,
+  "gamma_stat_etau_SR_dm10_bin_12": 2.18671e-05,
+  "gamma_stat_etau_SR_dm10_bin_13": 7.78192e-05,
+  "gamma_stat_etau_SR_dm10_bin_14": 0.000148703,
+  "gamma_stat_etau_SR_dm10_bin_2": 0.000709751,
+  "gamma_stat_etau_SR_dm10_bin_3": -0.000979777,
+  "gamma_stat_etau_SR_dm10_bin_4": -0.000922377,
+  "gamma_stat_etau_SR_dm10_bin_5": 0.000134141,
+  "gamma_stat_etau_SR_dm10_bin_6": -0.000269396,
+  "gamma_stat_etau_SR_dm10_bin_7": 1.58612e-05,
+  "gamma_stat_etau_SR_dm10_bin_8": 0.00129764,
+  "gamma_stat_etau_SR_dm10_bin_9": 0.000201303,
+  "gamma_stat_etau_SR_dm11_bin_0": 0.00101844,
+  "gamma_stat_etau_SR_dm11_bin_1": -4.50731e-05,
+  "gamma_stat_etau_SR_dm11_bin_10": -0.000459625,
+  "gamma_stat_etau_SR_dm11_bin_11": -0.000576554,
+  "gamma_stat_etau_SR_dm11_bin_12": -6.97218e-05,
+  "gamma_stat_etau_SR_dm11_bin_13": -0.000142343,
+  "gamma_stat_etau_SR_dm11_bin_14": -0.000231836,
+  "gamma_stat_etau_SR_dm11_bin_2": -4.0312e-05,
+  "gamma_stat_etau_SR_dm11_bin_3": 5.4734e-05,
+  "gamma_stat_etau_SR_dm11_bin_4": -9.59391e-05,
+  "gamma_stat_etau_SR_dm11_bin_5": -0.000127156,
+  "gamma_stat_etau_SR_dm11_bin_6": -0.000198003,
+  "gamma_stat_etau_SR_dm11_bin_7": -4.85446e-06,
+  "gamma_stat_etau_SR_dm11_bin_8": 1.81877e-06,
+  "gamma_stat_etau_SR_dm11_bin_9": -0.000588841,
+  "gamma_stat_etau_SR_dm1_bin_0": -0.000340528,
+  "gamma_stat_etau_SR_dm1_bin_1": -0.000148736,
+  "gamma_stat_etau_SR_dm1_bin_10": -0.000432734,
+  "gamma_stat_etau_SR_dm1_bin_11": -9.68914e-05,
+  "gamma_stat_etau_SR_dm1_bin_12": 0.000175367,
+  "gamma_stat_etau_SR_dm1_bin_13": -5.4629e-05,
+  "gamma_stat_etau_SR_dm1_bin_14": 0.000582299,
+  "gamma_stat_etau_SR_dm1_bin_2": -5.77255e-05,
+  "gamma_stat_etau_SR_dm1_bin_3": -0.000496951,
+  "gamma_stat_etau_SR_dm1_bin_4": -0.00148976,
+  "gamma_stat_etau_SR_dm1_bin_5": -0.00147332,
+  "gamma_stat_etau_SR_dm1_bin_6": -0.000505877,
+  "gamma_stat_etau_SR_dm1_bin_7": 0.000713542,
+  "gamma_stat_etau_SR_dm1_bin_8": 0.0015104,
+  "gamma_stat_etau_SR_dm1_bin_9": 0.000695187,
+  "gamma_stat_mutau_SR_dm0_bin_0": 1.43116e-05,
+  "gamma_stat_mutau_SR_dm0_bin_1": 1.88266e-05,
+  "gamma_stat_mutau_SR_dm0_bin_10": 0.00055363,
+  "gamma_stat_mutau_SR_dm0_bin_11": 0.0014019,
+  "gamma_stat_mutau_SR_dm0_bin_12": 0.000367673,
+  "gamma_stat_mutau_SR_dm0_bin_13": 0.000748183,
+  "gamma_stat_mutau_SR_dm0_bin_14": -0.000194435,
+  "gamma_stat_mutau_SR_dm0_bin_2": -0.00109538,
+  "gamma_stat_mutau_SR_dm0_bin_3": -0.00100642,
+  "gamma_stat_mutau_SR_dm0_bin_4": -0.00116389,
+  "gamma_stat_mutau_SR_dm0_bin_5": -0.00123124,
+  "gamma_stat_mutau_SR_dm0_bin_6": -0.00153407,
+  "gamma_stat_mutau_SR_dm0_bin_7": -0.00132209,
+  "gamma_stat_mutau_SR_dm0_bin_8": -0.00141981,
+  "gamma_stat_mutau_SR_dm0_bin_9": -0.00118622,
+  "gamma_stat_mutau_SR_dm10_bin_0": -0.000171071,
+  "gamma_stat_mutau_SR_dm10_bin_1": -0.000336737,
+  "gamma_stat_mutau_SR_dm10_bin_10": -0.000307715,
+  "gamma_stat_mutau_SR_dm10_bin_11": 8.84709e-05,
+  "gamma_stat_mutau_SR_dm10_bin_12": 0.000618783,
+  "gamma_stat_mutau_SR_dm10_bin_13": 0.000380706,
+  "gamma_stat_mutau_SR_dm10_bin_14": 0.000300161,
+  "gamma_stat_mutau_SR_dm10_bin_2": -0.000578011,
+  "gamma_stat_mutau_SR_dm10_bin_3": -0.00148717,
+  "gamma_stat_mutau_SR_dm10_bin_4": -0.00115259,
+  "gamma_stat_mutau_SR_dm10_bin_5": -0.00149448,
+  "gamma_stat_mutau_SR_dm10_bin_6": -0.000342144,
+  "gamma_stat_mutau_SR_dm10_bin_7": -0.000382229,
+  "gamma_stat_mutau_SR_dm10_bin_8": -0.000493617,
+  "gamma_stat_mutau_SR_dm10_bin_9": -0.00197509,
+  "gamma_stat_mutau_SR_dm11_bin_0": 0.000906065,
+  "gamma_stat_mutau_SR_dm11_bin_1": 0.00110889,
+  "gamma_stat_mutau_SR_dm11_bin_10": -0.00044417,
+  "gamma_stat_mutau_SR_dm11_bin_11": 0.000116004,
+  "gamma_stat_mutau_SR_dm11_bin_12": 0.000468863,
+  "gamma_stat_mutau_SR_dm11_bin_13": 2.41172e-05,
+  "gamma_stat_mutau_SR_dm11_bin_14": 9.91049e-05,
+  "gamma_stat_mutau_SR_dm11_bin_2": -0.000110558,
+  "gamma_stat_mutau_SR_dm11_bin_3": -0.000148268,
+  "gamma_stat_mutau_SR_dm11_bin_4": -0.00127044,
+  "gamma_stat_mutau_SR_dm11_bin_5": -0.000265209,
+  "gamma_stat_mutau_SR_dm11_bin_6": -0.000220313,
+  "gamma_stat_mutau_SR_dm11_bin_7": -0.000252546,
+  "gamma_stat_mutau_SR_dm11_bin_8": -0.000167586,
+  "gamma_stat_mutau_SR_dm11_bin_9": -0.000695788,
+  "gamma_stat_mutau_SR_dm1_bin_0": 0.000912153,
+  "gamma_stat_mutau_SR_dm1_bin_1": -3.06387e-05,
+  "gamma_stat_mutau_SR_dm1_bin_10": 0.000149636,
+  "gamma_stat_mutau_SR_dm1_bin_11": 0.00175022,
+  "gamma_stat_mutau_SR_dm1_bin_12": 0.0012394,
+  "gamma_stat_mutau_SR_dm1_bin_13": 0.00101331,
+  "gamma_stat_mutau_SR_dm1_bin_14": 0.000638321,
+  "gamma_stat_mutau_SR_dm1_bin_2": -0.00120243,
+  "gamma_stat_mutau_SR_dm1_bin_3": -0.000888598,
+  "gamma_stat_mutau_SR_dm1_bin_4": -0.00124318,
+  "gamma_stat_mutau_SR_dm1_bin_5": -0.00147216,
+  "gamma_stat_mutau_SR_dm1_bin_6": -0.00127092,
+  "gamma_stat_mutau_SR_dm1_bin_7": -0.00171176,
+  "gamma_stat_mutau_SR_dm1_bin_8": -0.0023544,
+  "gamma_stat_mutau_SR_dm1_bin_9": -0.00215057,
+  "gamma_stat_tautau_SR0_bin_0": -0.00105269,
+  "gamma_stat_tautau_SR0_bin_1": 0.000446562,
+  "gamma_stat_tautau_SR0_bin_10": -0.000775028,
+  "gamma_stat_tautau_SR0_bin_11": 0.000409995,
+  "gamma_stat_tautau_SR0_bin_12": 0.00102109,
+  "gamma_stat_tautau_SR0_bin_13": 0.00278538,
+  "gamma_stat_tautau_SR0_bin_2": 3.98971e-05,
+  "gamma_stat_tautau_SR0_bin_3": 5.09085e-05,
+  "gamma_stat_tautau_SR0_bin_4": 7.65759e-05,
+  "gamma_stat_tautau_SR0_bin_5": -0.000382272,
+  "gamma_stat_tautau_SR0_bin_6": 0.000288477,
+  "gamma_stat_tautau_SR0_bin_7": 0.000104766,
+  "gamma_stat_tautau_SR0_bin_8": 0.000525507,
+  "gamma_stat_tautau_SR0_bin_9": -0.000247225,
+  "gamma_stat_tautau_SR1_bin_0": -3.12587e-06,
+  "gamma_stat_tautau_SR1_bin_1": -6.42449e-05,
+  "gamma_stat_tautau_SR1_bin_10": 0.000862489,
+  "gamma_stat_tautau_SR1_bin_11": 0.000415129,
+  "gamma_stat_tautau_SR1_bin_12": 0.000694534,
+  "gamma_stat_tautau_SR1_bin_13": 0.000475258,
+  "gamma_stat_tautau_SR1_bin_2": -0.000979861,
+  "gamma_stat_tautau_SR1_bin_3": 0.000747745,
+  "gamma_stat_tautau_SR1_bin_4": 0.000738761,
+  "gamma_stat_tautau_SR1_bin_5": 0.00158532,
+  "gamma_stat_tautau_SR1_bin_6": 0.00183645,
+  "gamma_stat_tautau_SR1_bin_7": 0.000317648,
+  "gamma_stat_tautau_SR1_bin_8": 0.000251367,
+  "gamma_stat_tautau_SR1_bin_9": -0.000107564,
+  "gamma_stat_tautau_SR2_bin_0": -3.20556e-06,
+  "gamma_stat_tautau_SR2_bin_1": 0.000342029,
+  "gamma_stat_tautau_SR2_bin_10": 0.00221884,
+  "gamma_stat_tautau_SR2_bin_11": 0.00102691,
+  "gamma_stat_tautau_SR2_bin_12": 0.000393467,
+  "gamma_stat_tautau_SR2_bin_13": 0.000682902,
+  "gamma_stat_tautau_SR2_bin_2": -2.19035e-05,
+  "gamma_stat_tautau_SR2_bin_3": 0.00215339,
+  "gamma_stat_tautau_SR2_bin_4": 0.00277741,
+  "gamma_stat_tautau_SR2_bin_5": 0.00178778,
+  "gamma_stat_tautau_SR2_bin_6": 0.000853224,
+  "gamma_stat_tautau_SR2_bin_7": -5.62584e-06,
+  "gamma_stat_tautau_SR2_bin_8": 0.00075506,
+  "gamma_stat_tautau_SR2_bin_9": 0.00112578,
+  "mu_ttbar": 0.00195745
+ },
+ "grouped_impact": {
+  "Background modelling": 0.00136765,
+  "Background normalisation": 0.0100175,
+  "Electron efficiency": 0.0263121,
+  "Electron energy": 0.0112152,
+  "Fakes": 0.0105141,
+  "Jets": 0.0017682,
+  "L1 prefiring": 0.00350131,
+  "Luminosity": 0.00962331,
+  "MET": 0.00482787,
+  "Muon efficiency": 0.00584812,
+  "Muon momentum": 0.0062873,
+  "Pileup": 0.00353498,
+  "Signal modelling": 0.00325041,
+  "Tau ID": 0.00139369,
+  "Tau energy scale": 0.00288532,
+  "Tau trigger": 0.016173,
+  "b tagging": 0.00635766,
+  "Gammas": 0.0160215,
+  "FullSyst": 0.042754
+ },
+ "grouped_impact_file": "comb_v4_group_errDecomp_mu_Z.txt",
+ "note": "TRExFitter MultiFit (Combine: TRUE) of the four per-channel workspaces ztautau_v4_{tautau,mutau,etau,emu} (fit_v4/comb_v4.config)"
+}

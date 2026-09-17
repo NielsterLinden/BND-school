@@ -1,5 +1,5 @@
 {
- "job": "ztautau_v4_emu",
+ "job": "ztautau_v4_emu_fixedid",
  "poi": "mu_Z",
  "poi_value": 0.977873,
  "poi_err_up": 0.0555849,
@@ -663,5 +663,5 @@
  "channels": [
   "emu"
  ],
- "tau_id_fixed": false
+ "tau_id_fixed": true
 }

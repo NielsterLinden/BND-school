@@ -1,623 +1,647 @@
 {
  "job": "ztautau_v4_mutau",
  "poi": "mu_Z",
- "poi_value": 1.04916,
- "poi_err_up": 0.0555964,
- "poi_err_down": 0.0514095,
- "poi_err": 0.053502949999999994,
+ "poi_value": 0.915316,
+ "poi_err_up": 0.265788,
+ "poi_err_down": 0.164059,
+ "poi_err": 0.21492350000000002,
  "nps": {
+  "TauIDSF_DM0": [
+   1.16622,
+   0.2599,
+   0.2599
+  ],
+  "TauIDSF_DM1": [
+   1.1133,
+   0.246569,
+   0.246569
+  ],
+  "TauIDSF_DM10": [
+   1.05444,
+   0.237533,
+   0.237533
+  ],
+  "TauIDSF_DM11": [
+   0.931715,
+   0.21843,
+   0.21843
+  ],
   "BTag": [
-   0.195887,
-   0.974017,
-   0.974017
+   0.199634,
+   0.970761,
+   0.970761
   ],
   "FakeClosure_mutau": [
-   -0.0568871,
-   0.939498,
-   0.939498
+   -0.325851,
+   0.981979,
+   0.981979
   ],
   "FakeFrac_mutau": [
-   1.57958,
-   0.692623,
-   0.692623
+   1.26993,
+   0.734172,
+   0.734172
   ],
   "FakeMCSub_mutau": [
-   -0.225028,
-   0.991265,
-   0.991265
+   -0.127933,
+   0.992858,
+   0.992858
   ],
   "FakeOSSS_mutau": [
-   -0.25136,
-   0.974074,
-   0.974074
+   -0.386915,
+   0.9843,
+   0.9843
   ],
   "FakeTT_mutau": [
-   -0.107894,
-   0.948219,
-   0.948219
+   -0.0575594,
+   0.954954,
+   0.954954
   ],
   "FakeWmT_mutau": [
-   -0.809756,
-   0.694362,
-   0.694362
+   -0.750827,
+   0.78486,
+   0.78486
   ],
   "JES": [
-   -0.408691,
-   0.786799,
-   0.786799
+   0.142601,
+   0.80673,
+   0.80673
   ],
   "L1Prefiring": [
-   -0.17923,
-   0.989314,
-   0.989314
+   -0.111839,
+   0.989093,
+   0.989093
   ],
   "Lumi": [
-   0.130051,
-   0.989231,
-   0.989231
+   0.0785371,
+   0.990933,
+   0.990933
   ],
   "MET_Unclustered": [
-   -0.0257167,
-   0.630362,
-   0.630362
+   0.880369,
+   0.688593,
+   0.688593
   ],
   "MuonID": [
-   0.0449209,
-   0.992924,
-   0.992924
+   0.0254343,
+   0.993113,
+   0.993113
   ],
   "MuonIso": [
-   0.039055,
-   0.992779,
-   0.992779
+   0.0211784,
+   0.992932,
+   0.992932
   ],
   "MuonScale": [
-   -0.0992544,
-   0.969752,
-   0.969752
+   0.0144406,
+   0.966037,
+   0.966037
   ],
   "MuonTrigger": [
-   0.0110852,
-   0.993308,
-   0.993308
+   0.00189518,
+   0.993322,
+   0.993322
   ],
   "PDF": [
-   -0.0685858,
-   0.988877,
-   0.988877
+   -0.120162,
+   0.988972,
+   0.988972
   ],
   "PS_FSR": [
-   0.62108,
-   0.594656,
-   0.594656
+   0.523685,
+   0.586915,
+   0.586915
   ],
   "PS_ISR": [
-   0.0589009,
-   0.900661,
-   0.900661
+   0.0777463,
+   0.904656,
+   0.904656
   ],
   "Pileup": [
-   1.46763,
-   0.706667,
-   0.706667
+   1.11495,
+   0.69665,
+   0.69665
   ],
   "QCDScale": [
-   0.845401,
-   0.864026,
-   0.864026
+   0.761487,
+   0.872827,
+   0.872827
   ],
   "TauES_DM0": [
-   0.358052,
-   0.339348,
-   0.339348
+   -0.399934,
+   0.357503,
+   0.357503
   ],
   "TauES_DM1": [
-   0.261637,
-   0.31277,
-   0.31277
+   -0.268399,
+   0.330307,
+   0.330307
   ],
   "TauES_DM10": [
-   -0.564607,
-   0.357107,
-   0.357107
+   -0.2405,
+   0.406978,
+   0.406978
   ],
   "TauES_DM11": [
-   0.715796,
-   0.607028,
-   0.607028
+   0.95117,
+   0.783005,
+   0.783005
   ],
   "TauFakeEle": [
-   0.178668,
-   0.9853,
-   0.9853
+   0.0761049,
+   0.989202,
+   0.989202
   ],
   "TauFakeMu": [
-   0.818597,
-   0.526607,
-   0.526607
+   0.83228,
+   0.564516,
+   0.564516
   ],
   "TopPt": [
-   0.452843,
-   0.962221,
-   0.962221
+   0.372243,
+   0.969849,
+   0.969849
   ],
   "XS_DYll": [
-   0.225514,
-   0.961212,
-   0.961212
+   0.229716,
+   0.962397,
+   0.962397
   ],
   "XS_DYlowmass": [
-   -3.78524e-05,
-   0.979239,
-   0.979239
+   0.0649947,
+   0.976489,
+   0.976489
   ],
   "XS_DYtautau_out": [
-   0.29212,
-   0.970529,
-   0.970529
+   0.0800744,
+   0.98707,
+   0.98707
   ],
   "XS_SingleTop": [
-   -0.0219606,
-   0.994054,
-   0.994054
+   -0.0229166,
+   0.994029,
+   0.994029
   ],
   "XS_WJets": [
-   -0.00433943,
-   0.993505,
-   0.993505
+   -0.0100768,
+   0.993748,
+   0.993748
   ],
   "XS_WW": [
-   0.015448,
-   0.991755,
-   0.991755
+   -0.0250127,
+   0.993961,
+   0.993961
   ],
   "XS_WZ": [
-   0.0244752,
-   0.992211,
-   0.992211
+   0.0177167,
+   0.992491,
+   0.992491
   ],
   "XS_ZZ": [
-   0.0147034,
-   0.992667,
-   0.992667
+   -2.37847e-05,
+   0.993296,
+   0.993296
   ],
   "gamma_stat_mutau_SR_dm0_bin_0": [
-   0.947445,
-   0.136808,
-   0.136808
+   0.964511,
+   0.141463,
+   0.141463
   ],
   "gamma_stat_mutau_SR_dm0_bin_1": [
-   0.999777,
-   0.0903619,
-   0.0903619
+   1.00396,
+   0.0915061,
+   0.0915061
   ],
   "gamma_stat_mutau_SR_dm0_bin_10": [
-   1.02082,
-   0.0276936,
-   0.0276936
+   1.02042,
+   0.0276227,
+   0.0276227
   ],
   "gamma_stat_mutau_SR_dm0_bin_11": [
-   1.00439,
-   0.0261026,
-   0.0261026
+   0.9956,
+   0.0265955,
+   0.0265955
   ],
   "gamma_stat_mutau_SR_dm0_bin_12": [
-   1.03238,
-   0.0298526,
-   0.0298526
+   1.02912,
+   0.0298021,
+   0.0298021
   ],
   "gamma_stat_mutau_SR_dm0_bin_13": [
-   1.0212,
-   0.0273336,
-   0.0273336
+   1.018,
+   0.0274371,
+   0.0274371
   ],
   "gamma_stat_mutau_SR_dm0_bin_14": [
-   0.997536,
-   0.0219558,
-   0.0219558
+   0.997712,
+   0.0219857,
+   0.0219857
   ],
   "gamma_stat_mutau_SR_dm0_bin_2": [
-   1.12167,
-   0.0871857,
-   0.0871857
+   1.12596,
+   0.0884817,
+   0.0884817
   ],
   "gamma_stat_mutau_SR_dm0_bin_3": [
-   0.945014,
-   0.0531476,
-   0.0531476
+   0.925895,
+   0.0530309,
+   0.0530309
   ],
   "gamma_stat_mutau_SR_dm0_bin_4": [
-   1.02458,
-   0.0399613,
-   0.0399613
+   0.996785,
+   0.0409677,
+   0.0409677
   ],
   "gamma_stat_mutau_SR_dm0_bin_5": [
-   1.01741,
-   0.0270398,
-   0.0270398
+   0.990468,
+   0.0288777,
+   0.0288777
   ],
   "gamma_stat_mutau_SR_dm0_bin_6": [
-   1.03404,
-   0.0207352,
-   0.0207352
+   1.01508,
+   0.0223398,
+   0.0223398
   ],
   "gamma_stat_mutau_SR_dm0_bin_7": [
-   0.987624,
-   0.0192149,
-   0.0192149
+   0.982065,
+   0.0195202,
+   0.0195202
   ],
   "gamma_stat_mutau_SR_dm0_bin_8": [
-   1.00984,
-   0.0237962,
-   0.0237962
+   1.01335,
+   0.0241268,
+   0.0241268
   ],
   "gamma_stat_mutau_SR_dm0_bin_9": [
-   0.961075,
-   0.0268588,
-   0.0268588
+   0.969542,
+   0.028025,
+   0.028025
   ],
   "gamma_stat_mutau_SR_dm10_bin_0": [
-   1.02109,
-   0.0560923,
-   0.0560923
+   1.02527,
+   0.0564722,
+   0.0564722
   ],
   "gamma_stat_mutau_SR_dm10_bin_1": [
-   1.02366,
-   0.159985,
-   0.159985
+   1.06046,
+   0.1672,
+   0.1672
   ],
   "gamma_stat_mutau_SR_dm10_bin_10": [
-   1.04406,
-   0.0244086,
-   0.0244086
+   1.03189,
+   0.0246393,
+   0.0246393
   ],
   "gamma_stat_mutau_SR_dm10_bin_11": [
-   1.0072,
-   0.0221872,
-   0.0221872
+   1.00773,
+   0.0224028,
+   0.0224028
   ],
   "gamma_stat_mutau_SR_dm10_bin_12": [
-   0.98555,
-   0.0205981,
-   0.0205981
+   0.987345,
+   0.0206914,
+   0.0206914
   ],
   "gamma_stat_mutau_SR_dm10_bin_13": [
-   0.988607,
-   0.0182488,
-   0.0182488
+   0.990413,
+   0.0183078,
+   0.0183078
   ],
   "gamma_stat_mutau_SR_dm10_bin_14": [
-   0.988965,
-   0.0170984,
-   0.0170984
+   0.990888,
+   0.0171315,
+   0.0171315
   ],
   "gamma_stat_mutau_SR_dm10_bin_2": [
-   0.955653,
-   0.0630508,
-   0.0630508
+   0.966544,
+   0.0639954,
+   0.0639954
   ],
   "gamma_stat_mutau_SR_dm10_bin_3": [
-   1.05953,
-   0.0635241,
-   0.0635241
+   1.07733,
+   0.0651579,
+   0.0651579
   ],
   "gamma_stat_mutau_SR_dm10_bin_4": [
-   1.01126,
-   0.0448214,
-   0.0448214
+   1.02432,
+   0.04569,
+   0.04569
   ],
   "gamma_stat_mutau_SR_dm10_bin_5": [
-   0.975656,
-   0.0272313,
-   0.0272313
+   0.996959,
+   0.0286395,
+   0.0286395
   ],
   "gamma_stat_mutau_SR_dm10_bin_6": [
-   0.984023,
-   0.0192061,
-   0.0192061
+   1.00993,
+   0.0212517,
+   0.0212517
   ],
   "gamma_stat_mutau_SR_dm10_bin_7": [
-   0.971286,
-   0.0165846,
-   0.0165846
+   0.992166,
+   0.0182161,
+   0.0182161
   ],
   "gamma_stat_mutau_SR_dm10_bin_8": [
-   0.992931,
-   0.0203251,
-   0.0203251
+   0.997874,
+   0.0205089,
+   0.0205089
   ],
   "gamma_stat_mutau_SR_dm10_bin_9": [
-   1.00091,
-   0.0266444,
-   0.0266444
+   0.987749,
+   0.0268665,
+   0.0268665
   ],
   "gamma_stat_mutau_SR_dm11_bin_0": [
-   1.3408,
-   0.235649,
-   0.235649
+   1.33816,
+   0.237015,
+   0.237015
   ],
   "gamma_stat_mutau_SR_dm11_bin_1": [
-   0.835306,
-   0.195652,
-   0.195652
+   0.810807,
+   0.193003,
+   0.193003
   ],
   "gamma_stat_mutau_SR_dm11_bin_10": [
-   0.979976,
-   0.0449291,
-   0.0449291
+   0.971254,
+   0.0446486,
+   0.0446486
   ],
   "gamma_stat_mutau_SR_dm11_bin_11": [
-   1.03663,
-   0.0487288,
-   0.0487288
+   1.03939,
+   0.0489105,
+   0.0489105
   ],
   "gamma_stat_mutau_SR_dm11_bin_12": [
-   1.00326,
-   0.0527254,
-   0.0527254
+   1.00621,
+   0.0530128,
+   0.0530128
   ],
   "gamma_stat_mutau_SR_dm11_bin_13": [
-   0.970605,
-   0.0398711,
-   0.0398711
+   0.974454,
+   0.0402001,
+   0.0402001
   ],
   "gamma_stat_mutau_SR_dm11_bin_14": [
-   0.971255,
-   0.0384873,
-   0.0384873
+   0.97614,
+   0.039046,
+   0.039046
   ],
   "gamma_stat_mutau_SR_dm11_bin_2": [
-   1.05059,
-   0.191957,
-   0.191957
+   1.07367,
+   0.197761,
+   0.197761
   ],
   "gamma_stat_mutau_SR_dm11_bin_3": [
-   0.926211,
-   0.118327,
-   0.118327
+   0.938371,
+   0.120125,
+   0.120125
   ],
   "gamma_stat_mutau_SR_dm11_bin_4": [
-   0.908709,
-   0.0749495,
-   0.0749495
+   0.9297,
+   0.077597,
+   0.077597
   ],
   "gamma_stat_mutau_SR_dm11_bin_5": [
-   0.990464,
-   0.0481351,
-   0.0481351
+   1.00559,
+   0.0511177,
+   0.0511177
   ],
   "gamma_stat_mutau_SR_dm11_bin_6": [
-   0.965742,
-   0.03659,
-   0.03659
+   0.982218,
+   0.0401147,
+   0.0401147
   ],
   "gamma_stat_mutau_SR_dm11_bin_7": [
-   0.994565,
-   0.0360239,
-   0.0360239
+   1.00862,
+   0.0384894,
+   0.0384894
   ],
   "gamma_stat_mutau_SR_dm11_bin_8": [
-   1.03091,
-   0.0426181,
-   0.0426181
+   1.02973,
+   0.0426337,
+   0.0426337
   ],
   "gamma_stat_mutau_SR_dm11_bin_9": [
-   1.05881,
-   0.0547635,
-   0.0547635
+   1.04726,
+   0.0544088,
+   0.0544088
   ],
   "gamma_stat_mutau_SR_dm1_bin_0": [
-   0.963795,
-   0.0923503,
-   0.0923503
+   1.00604,
+   0.0966875,
+   0.0966875
   ],
   "gamma_stat_mutau_SR_dm1_bin_1": [
-   0.966498,
-   0.0992546,
-   0.0992546
+   0.971748,
+   0.10212,
+   0.10212
   ],
   "gamma_stat_mutau_SR_dm1_bin_10": [
-   1.00888,
-   0.0164311,
-   0.0164311
+   1.00894,
+   0.0165874,
+   0.0165874
   ],
   "gamma_stat_mutau_SR_dm1_bin_11": [
-   0.993505,
-   0.0169868,
-   0.0169868
+   0.989561,
+   0.0177538,
+   0.0177538
   ],
   "gamma_stat_mutau_SR_dm1_bin_12": [
-   1.01149,
-   0.0204603,
-   0.0204603
+   1.00909,
+   0.0205231,
+   0.0205231
   ],
   "gamma_stat_mutau_SR_dm1_bin_13": [
-   0.985727,
-   0.0173679,
-   0.0173679
+   0.984919,
+   0.017388,
+   0.017388
   ],
   "gamma_stat_mutau_SR_dm1_bin_14": [
-   1.00814,
-   0.0160245,
-   0.0160245
+   1.00826,
+   0.016065,
+   0.016065
   ],
   "gamma_stat_mutau_SR_dm1_bin_2": [
-   1.07169,
-   0.0856934,
-   0.0856934
+   1.09127,
+   0.0898034,
+   0.0898034
   ],
   "gamma_stat_mutau_SR_dm1_bin_3": [
-   1.01496,
-   0.0484964,
-   0.0484964
+   1.01563,
+   0.0490306,
+   0.0490306
   ],
   "gamma_stat_mutau_SR_dm1_bin_4": [
-   1.01125,
-   0.0312738,
-   0.0312738
+   1.00733,
+   0.0318511,
+   0.0318511
   ],
   "gamma_stat_mutau_SR_dm1_bin_5": [
-   1.02143,
-   0.0196395,
-   0.0196395
+   1.01188,
+   0.0204987,
+   0.0204987
   ],
   "gamma_stat_mutau_SR_dm1_bin_6": [
-   0.990925,
-   0.013259,
-   0.013259
+   0.981895,
+   0.0141381,
+   0.0141381
   ],
   "gamma_stat_mutau_SR_dm1_bin_7": [
-   1.01708,
-   0.0125698,
-   0.0125698
+   1.01405,
+   0.0128126,
+   0.0128126
   ],
   "gamma_stat_mutau_SR_dm1_bin_8": [
-   0.99455,
-   0.0149027,
-   0.0149027
+   0.995913,
+   0.0149676,
+   0.0149676
   ],
   "gamma_stat_mutau_SR_dm1_bin_9": [
-   0.987994,
-   0.0185027,
-   0.0185027
+   0.991789,
+   0.0188483,
+   0.0188483
   ],
   "mu_ttbar": [
-   1.13619,
-   0.160007,
-   0.160007
+   0.853924,
+   0.336099,
+   0.336099
   ]
  },
- "nll": 67793.73106,
+ "nll": 67786.88234,
  "err_decomp": {
-  "TOT_ERROR": 0.0535129,
-  "STAT_ERROR": 0.0191618,
-  "SYST_ERROR": 0.0453,
-  "MCSTAT_ERROR": 0.0210799,
-  "TOTSYST_ERROR": 0.0499645,
-  "STAT_ERR_NO_NF": 0.019037,
-  "NF_ERROR": 0.00218333,
-  "alpha_BTag": -8.13016e-05,
-  "alpha_FakeClosure_mutau": 0.00171465,
-  "alpha_FakeFrac_mutau": -0.00079324,
-  "alpha_FakeMCSub_mutau": 0.00399835,
-  "alpha_FakeOSSS_mutau": 0.00119636,
-  "alpha_FakeTT_mutau": 0.00105356,
-  "alpha_FakeWmT_mutau": -0.0019169,
-  "alpha_JES": 0.013013,
-  "alpha_L1Prefiring": 0.00443165,
-  "alpha_Lumi": -0.0119124,
-  "alpha_MET_Unclustered": 0.0239506,
-  "alpha_MuonID": -0.00362206,
-  "alpha_MuonIso": -0.00279877,
-  "alpha_MuonScale": -0.00531196,
-  "alpha_MuonTrigger": -0.00100867,
-  "alpha_PDF": -0.00566496,
-  "alpha_PS_FSR": 0.000654159,
-  "alpha_PS_ISR": -0.00787876,
-  "alpha_Pileup": 0.0169049,
-  "alpha_QCDScale": -0.0140816,
-  "alpha_TauES_DM0": -0.00883572,
-  "alpha_TauES_DM1": -0.0131618,
-  "alpha_TauES_DM10": -0.011997,
-  "alpha_TauES_DM11": -0.00950128,
-  "alpha_TauFakeEle": 4.66759e-05,
-  "alpha_TauFakeMu": -0.000269863,
-  "alpha_TopPt": -0.00167023,
-  "alpha_XS_DYll": -0.000111081,
-  "alpha_XS_DYlowmass": 0.00124592,
-  "alpha_XS_DYtautau_out": 0.00161587,
-  "alpha_XS_SingleTop": 0.00024152,
-  "alpha_XS_WJets": 6.66297e-05,
-  "alpha_XS_WW": 0.000432144,
-  "alpha_XS_WZ": -0.000372484,
-  "alpha_XS_ZZ": -0.000122402,
-  "gamma_stat_mutau_SR_dm0_bin_0": -0.0025558,
-  "gamma_stat_mutau_SR_dm0_bin_1": -0.000155609,
-  "gamma_stat_mutau_SR_dm0_bin_10": -0.00128983,
-  "gamma_stat_mutau_SR_dm0_bin_11": 0.00190116,
-  "gamma_stat_mutau_SR_dm0_bin_12": 0.000364703,
-  "gamma_stat_mutau_SR_dm0_bin_13": 0.00118779,
-  "gamma_stat_mutau_SR_dm0_bin_14": -0.000892559,
-  "gamma_stat_mutau_SR_dm0_bin_2": -0.00399553,
-  "gamma_stat_mutau_SR_dm0_bin_3": -0.00173088,
-  "gamma_stat_mutau_SR_dm0_bin_4": -0.00205762,
-  "gamma_stat_mutau_SR_dm0_bin_5": -0.00237954,
-  "gamma_stat_mutau_SR_dm0_bin_6": -0.000369902,
-  "gamma_stat_mutau_SR_dm0_bin_7": -0.00203982,
-  "gamma_stat_mutau_SR_dm0_bin_8": 0.00162167,
-  "gamma_stat_mutau_SR_dm0_bin_9": 0.000101484,
-  "gamma_stat_mutau_SR_dm10_bin_0": -0.000607224,
-  "gamma_stat_mutau_SR_dm10_bin_1": -0.00158316,
-  "gamma_stat_mutau_SR_dm10_bin_10": -0.000130544,
-  "gamma_stat_mutau_SR_dm10_bin_11": 0.000122672,
-  "gamma_stat_mutau_SR_dm10_bin_12": 0.00126607,
-  "gamma_stat_mutau_SR_dm10_bin_13": -0.000584515,
-  "gamma_stat_mutau_SR_dm10_bin_14": -0.000336505,
-  "gamma_stat_mutau_SR_dm10_bin_2": -0.00195503,
-  "gamma_stat_mutau_SR_dm10_bin_3": -0.00611248,
-  "gamma_stat_mutau_SR_dm10_bin_4": -0.00612657,
-  "gamma_stat_mutau_SR_dm10_bin_5": -0.00823261,
-  "gamma_stat_mutau_SR_dm10_bin_6": -0.00755565,
-  "gamma_stat_mutau_SR_dm10_bin_7": -0.00224055,
-  "gamma_stat_mutau_SR_dm10_bin_8": 0.00106296,
-  "gamma_stat_mutau_SR_dm10_bin_9": -0.0022419,
-  "gamma_stat_mutau_SR_dm11_bin_0": -0.000628018,
-  "gamma_stat_mutau_SR_dm11_bin_1": 0.00283311,
-  "gamma_stat_mutau_SR_dm11_bin_10": -0.00355648,
-  "gamma_stat_mutau_SR_dm11_bin_11": 0.00108453,
-  "gamma_stat_mutau_SR_dm11_bin_12": 0.000733209,
-  "gamma_stat_mutau_SR_dm11_bin_13": 6.02278e-05,
-  "gamma_stat_mutau_SR_dm11_bin_14": 0.0009862,
-  "gamma_stat_mutau_SR_dm11_bin_2": -2.64179e-05,
-  "gamma_stat_mutau_SR_dm11_bin_3": 0.00176528,
-  "gamma_stat_mutau_SR_dm11_bin_4": -0.00228379,
-  "gamma_stat_mutau_SR_dm11_bin_5": 0.00136503,
-  "gamma_stat_mutau_SR_dm11_bin_6": -0.00155806,
-  "gamma_stat_mutau_SR_dm11_bin_7": -0.00143678,
-  "gamma_stat_mutau_SR_dm11_bin_8": 0.000229769,
-  "gamma_stat_mutau_SR_dm11_bin_9": -0.00371237,
-  "gamma_stat_mutau_SR_dm1_bin_0": 0.00668927,
-  "gamma_stat_mutau_SR_dm1_bin_1": 0.000469375,
-  "gamma_stat_mutau_SR_dm1_bin_10": 0.00110225,
-  "gamma_stat_mutau_SR_dm1_bin_11": 0.00254184,
-  "gamma_stat_mutau_SR_dm1_bin_12": 0.00291406,
-  "gamma_stat_mutau_SR_dm1_bin_13": 0.00134312,
-  "gamma_stat_mutau_SR_dm1_bin_14": 0.000941012,
-  "gamma_stat_mutau_SR_dm1_bin_2": -0.00448163,
-  "gamma_stat_mutau_SR_dm1_bin_3": -0.00198147,
-  "gamma_stat_mutau_SR_dm1_bin_4": -0.00109011,
-  "gamma_stat_mutau_SR_dm1_bin_5": -0.00187116,
-  "gamma_stat_mutau_SR_dm1_bin_6": 0.000330738,
-  "gamma_stat_mutau_SR_dm1_bin_7": 0.00275395,
-  "gamma_stat_mutau_SR_dm1_bin_8": -0.00175054,
-  "gamma_stat_mutau_SR_dm1_bin_9": -0.00437074,
-  "mu_ttbar": 0.00218333
+  "TOT_ERROR": 0.205735,
+  "STAT_ERROR": 0.111973,
+  "SYST_ERROR": 0.122663,
+  "MCSTAT_ERROR": 0.121419,
+  "TOTSYST_ERROR": 0.172594,
+  "STAT_ERR_NO_NF": NaN,
+  "NF_ERROR": 0.114737,
+  "TauIDSF_DM0": -0.0516916,
+  "TauIDSF_DM1": -0.0490648,
+  "TauIDSF_DM10": -0.0475823,
+  "TauIDSF_DM11": -0.0425337,
+  "alpha_BTag": -0.00738168,
+  "alpha_FakeClosure_mutau": 0.0585194,
+  "alpha_FakeFrac_mutau": 0.0403673,
+  "alpha_FakeMCSub_mutau": -0.00186724,
+  "alpha_FakeOSSS_mutau": 0.0334894,
+  "alpha_FakeTT_mutau": -0.00913983,
+  "alpha_FakeWmT_mutau": 0.0673917,
+  "alpha_JES": 0.0194901,
+  "alpha_L1Prefiring": 0.00581251,
+  "alpha_Lumi": 0.00265293,
+  "alpha_MET_Unclustered": 0.0115272,
+  "alpha_MuonID": 0.000752453,
+  "alpha_MuonIso": 0.000140154,
+  "alpha_MuonScale": 0.000746236,
+  "alpha_MuonTrigger": -0.00011466,
+  "alpha_PDF": -0.000731627,
+  "alpha_PS_FSR": 0.00325181,
+  "alpha_PS_ISR": -0.00490205,
+  "alpha_Pileup": 0.000186047,
+  "alpha_QCDScale": -0.0115561,
+  "alpha_TauES_DM0": 0.00378191,
+  "alpha_TauES_DM1": 0.00392963,
+  "alpha_TauES_DM10": 0.00882268,
+  "alpha_TauES_DM11": 0.00420973,
+  "alpha_TauFakeEle": 0.00336129,
+  "alpha_TauFakeMu": 0.0319091,
+  "alpha_TopPt": 0.00664254,
+  "alpha_XS_DYll": 0.00727643,
+  "alpha_XS_DYlowmass": 0.000489576,
+  "alpha_XS_DYtautau_out": 0.0462069,
+  "alpha_XS_SingleTop": 0.000970206,
+  "alpha_XS_WJets": 0.00149418,
+  "alpha_XS_WW": 0.0084762,
+  "alpha_XS_WZ": -0.0013887,
+  "alpha_XS_ZZ": -6.16728e-05,
+  "gamma_stat_mutau_SR_dm0_bin_0": 0.00535382,
+  "gamma_stat_mutau_SR_dm0_bin_1": -0.0213379,
+  "gamma_stat_mutau_SR_dm0_bin_10": 0.00362415,
+  "gamma_stat_mutau_SR_dm0_bin_11": 0.0359547,
+  "gamma_stat_mutau_SR_dm0_bin_12": 0.00080233,
+  "gamma_stat_mutau_SR_dm0_bin_13": 0.00128725,
+  "gamma_stat_mutau_SR_dm0_bin_14": -0.0114462,
+  "gamma_stat_mutau_SR_dm0_bin_2": -0.0268422,
+  "gamma_stat_mutau_SR_dm0_bin_3": -0.00847292,
+  "gamma_stat_mutau_SR_dm0_bin_4": -0.00953258,
+  "gamma_stat_mutau_SR_dm0_bin_5": 0.000758082,
+  "gamma_stat_mutau_SR_dm0_bin_6": 0.00528393,
+  "gamma_stat_mutau_SR_dm0_bin_7": 0.011658,
+  "gamma_stat_mutau_SR_dm0_bin_8": 0.010064,
+  "gamma_stat_mutau_SR_dm0_bin_9": -0.0288125,
+  "gamma_stat_mutau_SR_dm10_bin_0": -0.0151063,
+  "gamma_stat_mutau_SR_dm10_bin_1": -0.0116896,
+  "gamma_stat_mutau_SR_dm10_bin_10": 0.0275656,
+  "gamma_stat_mutau_SR_dm10_bin_11": 0.0194357,
+  "gamma_stat_mutau_SR_dm10_bin_12": -0.0109069,
+  "gamma_stat_mutau_SR_dm10_bin_13": 0.00573829,
+  "gamma_stat_mutau_SR_dm10_bin_14": 0.000940367,
+  "gamma_stat_mutau_SR_dm10_bin_2": -0.0157274,
+  "gamma_stat_mutau_SR_dm10_bin_3": -0.0208797,
+  "gamma_stat_mutau_SR_dm10_bin_4": -0.00902586,
+  "gamma_stat_mutau_SR_dm10_bin_5": 0.00230425,
+  "gamma_stat_mutau_SR_dm10_bin_6": 0.00421002,
+  "gamma_stat_mutau_SR_dm10_bin_7": 0.00963344,
+  "gamma_stat_mutau_SR_dm10_bin_8": -0.0125166,
+  "gamma_stat_mutau_SR_dm10_bin_9": -0.0208051,
+  "gamma_stat_mutau_SR_dm11_bin_0": 0.0139407,
+  "gamma_stat_mutau_SR_dm11_bin_1": 0.0183094,
+  "gamma_stat_mutau_SR_dm11_bin_10": 0.00236734,
+  "gamma_stat_mutau_SR_dm11_bin_11": 0.00245149,
+  "gamma_stat_mutau_SR_dm11_bin_12": 0.00426789,
+  "gamma_stat_mutau_SR_dm11_bin_13": -0.015557,
+  "gamma_stat_mutau_SR_dm11_bin_14": -0.0220982,
+  "gamma_stat_mutau_SR_dm11_bin_2": -0.0187393,
+  "gamma_stat_mutau_SR_dm11_bin_3": -0.00293518,
+  "gamma_stat_mutau_SR_dm11_bin_4": -0.00161939,
+  "gamma_stat_mutau_SR_dm11_bin_5": 0.00243072,
+  "gamma_stat_mutau_SR_dm11_bin_6": 0.00511998,
+  "gamma_stat_mutau_SR_dm11_bin_7": 0.00504935,
+  "gamma_stat_mutau_SR_dm11_bin_8": 0.00057831,
+  "gamma_stat_mutau_SR_dm11_bin_9": 0.00122336,
+  "gamma_stat_mutau_SR_dm1_bin_0": 0.00887775,
+  "gamma_stat_mutau_SR_dm1_bin_1": -0.0205639,
+  "gamma_stat_mutau_SR_dm1_bin_10": 0.0215397,
+  "gamma_stat_mutau_SR_dm1_bin_11": 0.0531577,
+  "gamma_stat_mutau_SR_dm1_bin_12": 0.017066,
+  "gamma_stat_mutau_SR_dm1_bin_13": 0.00591321,
+  "gamma_stat_mutau_SR_dm1_bin_14": -0.00710843,
+  "gamma_stat_mutau_SR_dm1_bin_2": -0.0326025,
+  "gamma_stat_mutau_SR_dm1_bin_3": -0.0116425,
+  "gamma_stat_mutau_SR_dm1_bin_4": -0.0109167,
+  "gamma_stat_mutau_SR_dm1_bin_5": -0.00300666,
+  "gamma_stat_mutau_SR_dm1_bin_6": 0.00053935,
+  "gamma_stat_mutau_SR_dm1_bin_7": -0.00329647,
+  "gamma_stat_mutau_SR_dm1_bin_8": -0.0136502,
+  "gamma_stat_mutau_SR_dm1_bin_9": -0.0176378,
+  "mu_ttbar": 0.0633402
  },
  "grouped_impact": {
-  "Background modelling": 0.00175132,
-  "Background normalisation": 0.00217466,
-  "Fakes": 0.00544874,
-  "FullSyst": 0.053063,
-  "Gammas": 0.0252592,
-  "Jets": 0.0165208,
-  "L1 prefiring": 0.00447961,
-  "Luminosity": 0.0120446,
-  "MET": 0.0379825,
-  "Muon efficiency": 0.00471809,
-  "Muon momentum": 0.00548572,
-  "NormFactors": 0.0136042,
-  "Pileup": 0.0238257,
-  "Signal modelling": 0.0193827,
-  "Tau ID": 0.00057341,
-  "Tau energy scale": 0.0423991,
-  "b tagging": 0.000120837
+  "Background modelling": 0.0,
+  "Background normalisation": NaN,
+  "Fakes": NaN,
+  "FullSyst": NaN,
+  "Gammas": NaN,
+  "Jets": 0.0,
+  "L1 prefiring": 0.0,
+  "Luminosity": NaN,
+  "MET": NaN,
+  "Muon efficiency": 0.0,
+  "Muon momentum": 0.0,
+  "NormFactors": NaN,
+  "Pileup": 0.0,
+  "Signal modelling": NaN,
+  "Tau ID": 0.0,
+  "Tau energy scale": NaN,
+  "b tagging": 0.0
  },
  "grouped_impact_file": "GroupedImpact_mu_Z.txt",
  "poi_stat_only": {
-  "value": 1.05328,
-  "err_up": 0.00713125,
-  "err_down": 0.00710363,
-  "err": 0.007117439999999999
+  "value": 0.717696,
+  "err_up": 0.0616055,
+  "err_down": 0.0519409,
+  "err": 0.056773199999999996
  },
  "table_prefit": [
   {
@@ -1603,8 +1627,8 @@
    "Samples": [
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
-     "Yield": 6083.98161437617,
-     "Error": 119.4354812653427
+     "Yield": 6154.799206506193,
+     "Error": 123.60450874088781
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
@@ -1623,18 +1647,18 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
-     "Yield": 59.70232722741053,
-     "Error": 6.268630287525224
+     "Yield": 49.46740326313755,
+     "Error": 12.390585515217886
     },
     {
      "Sample": "Z#rightarrowee [none]",
-     "Yield": 0.2720614612607268,
-     "Error": 0.08711931060908486
+     "Yield": 0.31624500515228615,
+     "Error": 0.10193844094514826
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [0]",
-     "Yield": 9.896232739678988,
-     "Error": 2.7609728363852857
+     "Yield": 9.992623561862606,
+     "Error": 3.7376150354697235
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [1]",
@@ -1653,8 +1677,8 @@
     },
     {
      "Sample": "Z#rightarrow#mu#mu [0]",
-     "Yield": 0.19333680620499372,
-     "Error": 0.02521114920455771
+     "Yield": 0.25767947634781946,
+     "Error": 0.06730119076863211
     },
     {
      "Sample": "Z#rightarrow#mu#mu [1]",
@@ -1668,13 +1692,13 @@
     },
     {
      "Sample": "Z#rightarrow#mu#mu [none]",
-     "Yield": 1153.0929525787244,
-     "Error": 95.44329813547995
+     "Yield": 1127.8856405058027,
+     "Error": 105.09982570982478
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
-     "Yield": 690.7827462500331,
-     "Error": 44.92297550445383
+     "Yield": 837.8379922876865,
+     "Error": 190.1796158710076
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
@@ -1693,13 +1717,13 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
-     "Yield": 3.9619225008686385,
-     "Error": 1.0123292332719345
+     "Yield": 3.126246221827568,
+     "Error": 0.8934452174415733
     },
     {
      "Sample": "single t [0]",
-     "Yield": 50.39559924606795,
-     "Error": 5.171807334253349
+     "Yield": 63.28862480709363,
+     "Error": 16.00788268320758
     },
     {
      "Sample": "single t [1]",
@@ -1718,13 +1742,13 @@
     },
     {
      "Sample": "single t [none]",
-     "Yield": 16.572378540470538,
-     "Error": 1.8231665912870263
+     "Yield": 16.612449319697866,
+     "Error": 1.8307576257133211
     },
     {
      "Sample": "t#bar{t} [0]",
-     "Yield": 527.8765847213344,
-     "Error": 71.24077602302339
+     "Yield": 493.0151439833223,
+     "Error": 100.17514222756849
     },
     {
      "Sample": "t#bar{t} [1]",
@@ -1743,8 +1767,8 @@
     },
     {
      "Sample": "t#bar{t} [none]",
-     "Yield": 196.0618930133231,
-     "Error": 28.283046643649996
+     "Yield": 146.985285723911,
+     "Error": 58.74579128777051
     },
     {
      "Sample": "W+jets [1]",
@@ -1753,8 +1777,8 @@
     },
     {
      "Sample": "WW [0]",
-     "Yield": 45.86738630854501,
-     "Error": 4.723024115168998
+     "Yield": 56.17279381233748,
+     "Error": 13.90914476861453
     },
     {
      "Sample": "WW [1]",
@@ -1773,13 +1797,13 @@
     },
     {
      "Sample": "WW [none]",
-     "Yield": 27.190199930767655,
-     "Error": 3.160263109445664
+     "Yield": 26.316373381421702,
+     "Error": 3.0694791667466332
     },
     {
      "Sample": "WZ [0]",
-     "Yield": 15.226155622223736,
-     "Error": 1.5988154675280914
+     "Yield": 18.168175697828072,
+     "Error": 4.604778979723463
     },
     {
      "Sample": "WZ [1]",
@@ -1798,13 +1822,13 @@
     },
     {
      "Sample": "WZ [none]",
-     "Yield": 2.1556042031450247,
-     "Error": 0.3206401782739392
+     "Yield": 2.074115501882943,
+     "Error": 0.3155466588867945
     },
     {
      "Sample": "ZZ [0]",
-     "Yield": 9.663117377666024,
-     "Error": 1.022785955686286
+     "Yield": 11.354730572832791,
+     "Error": 2.8713435045128066
     },
     {
      "Sample": "ZZ [1]",
@@ -1823,18 +1847,18 @@
     },
     {
      "Sample": "ZZ [none]",
-     "Yield": 0.06179848040760723,
-     "Error": 0.029483029955668316
+     "Yield": 0.05884527330033781,
+     "Error": 0.022083752533988053
     },
     {
      "Sample": "jet#rightarrow#tau_{h} / multijet",
-     "Yield": 2251.0709371324806,
-     "Error": 110.56435900698861
+     "Yield": 2199.2351362953486,
+     "Error": 133.22754208110857
     },
     {
      "Sample": "Total",
-     "Yield": 11144.024848516783,
-     "Error": 99.3451556167769
+     "Yield": 11216.964711196984,
+     "Error": 104.88739721283422
     },
     {
      "Data": "Data",
@@ -1852,8 +1876,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
-     "Yield": 14957.041839438009,
-     "Error": 165.30530199167572
+     "Yield": 14988.335020387603,
+     "Error": 165.6831649713488
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
@@ -1867,13 +1891,13 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
-     "Yield": 30.558796198647354,
-     "Error": 3.9357959904622555
+     "Yield": 25.05805755140388,
+     "Error": 6.505555673389568
     },
     {
      "Sample": "Z#rightarrowee [none]",
-     "Yield": 1.6229907086792679,
-     "Error": 0.1259552466864906
+     "Yield": 1.561659684471155,
+     "Error": 0.12047851364222104
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [0]",
@@ -1882,8 +1906,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [1]",
-     "Yield": 20.737799013624667,
-     "Error": 5.2188816267959
+     "Yield": 17.795466886977074,
+     "Error": 6.317855864235971
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [10]",
@@ -1902,8 +1926,8 @@
     },
     {
      "Sample": "Z#rightarrow#mu#mu [1]",
-     "Yield": 0.6150451066651782,
-     "Error": 0.07704480653220785
+     "Yield": 0.9171842847809322,
+     "Error": 0.25453844358250555
     },
     {
      "Sample": "Z#rightarrow#mu#mu [10]",
@@ -1912,8 +1936,8 @@
     },
     {
      "Sample": "Z#rightarrow#mu#mu [none]",
-     "Yield": 376.1006498368495,
-     "Error": 36.35885153008299
+     "Yield": 370.47733116876503,
+     "Error": 39.60211297629558
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
@@ -1922,8 +1946,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
-     "Yield": 1201.8319541590956,
-     "Error": 76.47358381124799
+     "Yield": 1423.3823736807303,
+     "Error": 317.41847541987937
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
@@ -1937,8 +1961,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
-     "Yield": 2.65024753547964,
-     "Error": 0.7104258879085207
+     "Yield": 2.6733659049653338,
+     "Error": 0.6935771787975714
     },
     {
      "Sample": "single t [0]",
@@ -1947,8 +1971,8 @@
     },
     {
      "Sample": "single t [1]",
-     "Yield": 140.6675767574928,
-     "Error": 14.426042221948817
+     "Yield": 170.2095942580211,
+     "Error": 42.285400334221386
     },
     {
      "Sample": "single t [10]",
@@ -1962,8 +1986,8 @@
     },
     {
      "Sample": "single t [none]",
-     "Yield": 7.806205892655636,
-     "Error": 0.8964800033276786
+     "Yield": 7.310963149823359,
+     "Error": 0.8564539694476273
     },
     {
      "Sample": "t#bar{t} [0]",
@@ -1972,8 +1996,8 @@
     },
     {
      "Sample": "t#bar{t} [1]",
-     "Yield": 1509.6513346911038,
-     "Error": 203.98639365550366
+     "Yield": 1381.3653617986374,
+     "Error": 284.27894363261026
     },
     {
      "Sample": "t#bar{t} [10]",
@@ -1987,13 +2011,13 @@
     },
     {
      "Sample": "t#bar{t} [none]",
-     "Yield": 91.64940601534516,
-     "Error": 13.011649117982222
+     "Yield": 67.7505293393256,
+     "Error": 27.061999217911158
     },
     {
      "Sample": "W+jets [1]",
-     "Yield": 3.657154193902937,
-     "Error": 1.202232989997858
+     "Yield": 5.309649538445616,
+     "Error": 2.06334477402878
     },
     {
      "Sample": "WW [0]",
@@ -2002,8 +2026,8 @@
     },
     {
      "Sample": "WW [1]",
-     "Yield": 137.2145545243279,
-     "Error": 14.148014653531474
+     "Yield": 163.74192361092352,
+     "Error": 39.79963876106643
     },
     {
      "Sample": "WW [10]",
@@ -2017,8 +2041,8 @@
     },
     {
      "Sample": "WW [none]",
-     "Yield": 10.846313178151792,
-     "Error": 1.2101279168335566
+     "Yield": 10.375908213291002,
+     "Error": 1.1703762719692756
     },
     {
      "Sample": "WZ [0]",
@@ -2027,8 +2051,8 @@
     },
     {
      "Sample": "WZ [1]",
-     "Yield": 31.619410795692048,
-     "Error": 3.2923169451703203
+     "Yield": 37.91233761078458,
+     "Error": 9.447206763426474
     },
     {
      "Sample": "WZ [10]",
@@ -2042,8 +2066,8 @@
     },
     {
      "Sample": "WZ [none]",
-     "Yield": 0.48461172414363296,
-     "Error": 0.09056708523889967
+     "Yield": 0.4457194151464302,
+     "Error": 0.08697099756222908
     },
     {
      "Sample": "ZZ [0]",
@@ -2052,8 +2076,8 @@
     },
     {
      "Sample": "ZZ [1]",
-     "Yield": 19.260240070986676,
-     "Error": 2.067347916502112
+     "Yield": 22.862494860236097,
+     "Error": 5.690147591027863
     },
     {
      "Sample": "ZZ [10]",
@@ -2072,13 +2096,13 @@
     },
     {
      "Sample": "jet#rightarrow#tau_{h} / multijet",
-     "Yield": 5263.213245050536,
-     "Error": 245.7508156499329
+     "Yield": 5170.081744739081,
+     "Error": 296.6086191709721
     },
     {
      "Sample": "Total",
-     "Yield": 23807.229374891387,
-     "Error": 148.40607976065388
+     "Yield": 23867.566686083414,
+     "Error": 153.42115147501195
     },
     {
      "Data": "Data",
@@ -2101,8 +2125,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
-     "Yield": 6781.946611947431,
-     "Error": 107.33034627423903
+     "Yield": 6740.67019745306,
+     "Error": 111.46544032160597
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
@@ -2111,8 +2135,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
-     "Yield": 0.3432868379538742,
-     "Error": 0.11710956344333251
+     "Yield": 0.28604263181646566,
+     "Error": 0.11592398637747765
     },
     {
      "Sample": "Z#rightarrowee [none]",
@@ -2131,8 +2155,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [10]",
-     "Yield": 1.4109163475179892e-05,
-     "Error": 1.4154680076509863e-06
+     "Yield": 1.6090211457658716e-05,
+     "Error": 4.122334320341402e-06
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [11]",
@@ -2151,13 +2175,13 @@
     },
     {
      "Sample": "Z#rightarrow#mu#mu [10]",
-     "Yield": 0.5961440678106058,
-     "Error": 0.25669067145167523
+     "Yield": 0.2415129933926886,
+     "Error": 0.1772016364551342
     },
     {
      "Sample": "Z#rightarrow#mu#mu [none]",
-     "Yield": 9.376495458454198,
-     "Error": 1.4334602182246992
+     "Yield": 8.109077246818117,
+     "Error": 1.3647904673073834
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
@@ -2171,8 +2195,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
-     "Yield": 572.3364204108456,
-     "Error": 43.43780486854699
+     "Yield": 625.4100061982786,
+     "Error": 144.71542157692457
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
@@ -2196,8 +2220,8 @@
     },
     {
      "Sample": "single t [10]",
-     "Yield": 62.065792896068864,
-     "Error": 6.445457211167164
+     "Yield": 69.62569418860737,
+     "Error": 17.51357763126427
     },
     {
      "Sample": "single t [11]",
@@ -2206,8 +2230,8 @@
     },
     {
      "Sample": "single t [none]",
-     "Yield": 0.3464511104210623,
-     "Error": 0.05547165537328745
+     "Yield": 0.3245762439793196,
+     "Error": 0.05285235624239909
     },
     {
      "Sample": "t#bar{t} [0]",
@@ -2221,8 +2245,8 @@
     },
     {
      "Sample": "t#bar{t} [10]",
-     "Yield": 707.0424195059185,
-     "Error": 97.53241763235322
+     "Yield": 607.215500205086,
+     "Error": 125.48320223579087
     },
     {
      "Sample": "t#bar{t} [11]",
@@ -2231,8 +2255,8 @@
     },
     {
      "Sample": "t#bar{t} [none]",
-     "Yield": 4.651794603891532,
-     "Error": 0.6866623222851731
+     "Yield": 3.5105478325519677,
+     "Error": 1.4124853301864573
     },
     {
      "Sample": "W+jets [1]",
@@ -2251,8 +2275,8 @@
     },
     {
      "Sample": "WW [10]",
-     "Yield": 66.24211962534808,
-     "Error": 6.84228475294036
+     "Yield": 76.73060914442632,
+     "Error": 18.890355896946627
     },
     {
      "Sample": "WW [11]",
@@ -2261,8 +2285,8 @@
     },
     {
      "Sample": "WW [none]",
-     "Yield": 0.4596436077084648,
-     "Error": 0.06995501107965237
+     "Yield": 0.41991146969083687,
+     "Error": 0.06618659194753182
     },
     {
      "Sample": "WZ [0]",
@@ -2276,8 +2300,8 @@
     },
     {
      "Sample": "WZ [10]",
-     "Yield": 14.243726051185808,
-     "Error": 1.5577389672136173
+     "Yield": 16.532684975828126,
+     "Error": 4.162013567891201
     },
     {
      "Sample": "WZ [11]",
@@ -2286,8 +2310,8 @@
     },
     {
      "Sample": "WZ [none]",
-     "Yield": 0.048232319527037604,
-     "Error": 0.016896210616693462
+     "Yield": 0.056300034809656126,
+     "Error": 0.02007500707436038
     },
     {
      "Sample": "ZZ [0]",
@@ -2301,8 +2325,8 @@
     },
     {
      "Sample": "ZZ [10]",
-     "Yield": 5.115797079666033,
-     "Error": 0.6675282705013713
+     "Yield": 5.827702868999066,
+     "Error": 1.4726291861419103
     },
     {
      "Sample": "ZZ [11]",
@@ -2316,13 +2340,13 @@
     },
     {
      "Sample": "jet#rightarrow#tau_{h} / multijet",
-     "Yield": 2693.457004934885,
-     "Error": 141.61913520725437
+     "Yield": 2660.8907750188914,
+     "Error": 181.1425765374674
     },
     {
      "Sample": "Total",
-     "Yield": 10918.271954566277,
-     "Error": 97.43576117167203
+     "Yield": 10815.851154596448,
+     "Error": 102.68273227585935
     },
     {
      "Data": "Data",
@@ -2350,8 +2374,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
-     "Yield": 1572.7499076370068,
-     "Error": 46.208281206217954
+     "Yield": 1568.3892120770013,
+     "Error": 49.76247089744647
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
@@ -2380,8 +2404,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrowll (m<50) [11]",
-     "Yield": 6.406895405595306,
-     "Error": 1.284776959406044
+     "Yield": 7.641221685091492,
+     "Error": 2.211265184670804
     },
     {
      "Sample": "Z#rightarrow#mu#mu [0]",
@@ -2420,8 +2444,8 @@
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
-     "Yield": 128.94504908137048,
-     "Error": 10.833431891404084
+     "Yield": 145.55539340622107,
+     "Error": 34.52371960673955
     },
     {
      "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
@@ -2445,8 +2469,8 @@
     },
     {
      "Sample": "single t [11]",
-     "Yield": 13.930419052423154,
-     "Error": 1.535851060890249
+     "Yield": 15.8281239345799,
+     "Error": 4.078997369319056
     },
     {
      "Sample": "single t [none]",
@@ -2470,13 +2494,13 @@
     },
     {
      "Sample": "t#bar{t} [11]",
-     "Yield": 159.21077714295402,
-     "Error": 22.55067529855039
+     "Yield": 138.9209181125678,
+     "Error": 29.67434276020328
     },
     {
      "Sample": "t#bar{t} [none]",
-     "Yield": 0.6760138274978897,
-     "Error": 0.10739636747891348
+     "Yield": 0.5296404279994337,
+     "Error": 0.213483668882189
     },
     {
      "Sample": "W+jets [1]",
@@ -2500,8 +2524,8 @@
     },
     {
      "Sample": "WW [11]",
-     "Yield": 16.764554348021964,
-     "Error": 1.793779064940512
+     "Yield": 19.389438465694504,
+     "Error": 4.900650491147014
     },
     {
      "Sample": "WW [none]",
@@ -2525,8 +2549,8 @@
     },
     {
      "Sample": "WZ [11]",
-     "Yield": 3.3335731171042973,
-     "Error": 0.4106100179624894
+     "Yield": 3.8324888003474373,
+     "Error": 1.0220343201951985
     },
     {
      "Sample": "WZ [none]",
@@ -2550,8 +2574,8 @@
     },
     {
      "Sample": "ZZ [11]",
-     "Yield": 1.1054115864570224,
-     "Error": 0.1834291692751252
+     "Yield": 1.3058352230241794,
+     "Error": 0.3613816377217984
     },
     {
      "Sample": "ZZ [none]",
@@ -2560,13 +2584,13 @@
     },
     {
      "Sample": "jet#rightarrow#tau_{h} / multijet",
-     "Yield": 734.0032065361265,
-     "Error": 49.24218344763873
+     "Yield": 716.2425658477083,
+     "Error": 62.531024008862694
     },
     {
      "Sample": "Total",
-     "Yield": 2637.1258077345574,
-     "Error": 46.59340452239665
+     "Yield": 2617.634837980235,
+     "Error": 50.331839063676675
     },
     {
      "Data": "Data",
@@ -2576,41 +2600,78 @@
   }
  ],
  "gof": {
-  "gof_probability": 0.107688,
+  "gof_probability": 0.332349,
   "gof_chi2_ndf": null
  },
  "poi_asimov": {
   "value": 1.0,
-  "err_up": 0.0518698,
-  "err_down": 0.048767
+  "err_up": 0.290317,
+  "err_down": 0.190945
  },
- "tau_id_sf": {},
+ "tau_id_sf": {
+  "DM0": {
+   "value": 1.16622,
+   "err_up": 0.2599,
+   "err_down": 0.2599,
+   "pog": [
+    0.9015691876411438,
+    0.125892
+   ]
+  },
+  "DM1": {
+   "value": 1.1133,
+   "err_up": 0.246569,
+   "err_down": 0.246569,
+   "pog": [
+    0.8919064998626709,
+    0.052963
+   ]
+  },
+  "DM10": {
+   "value": 1.05444,
+   "err_up": 0.237533,
+   "err_down": 0.237533,
+   "pog": [
+    0.9384543895721436,
+    0.148149
+   ]
+  },
+  "DM11": {
+   "value": 0.931715,
+   "err_up": 0.21843,
+   "err_down": 0.21843,
+   "pog": [
+    0.8119813203811646,
+    0.149246
+   ]
+  }
+ },
  "tau_es": {
   "DM0": {
-   "pull": 0.358052,
-   "constraint": 0.339348,
+   "pull": -0.399934,
+   "constraint": 0.357503,
    "prior_pct": 3.0
   },
   "DM1": {
-   "pull": 0.261637,
-   "constraint": 0.31277,
+   "pull": -0.268399,
+   "constraint": 0.330307,
    "prior_pct": 3.0
   },
   "DM10": {
-   "pull": -0.564607,
-   "constraint": 0.357107,
+   "pull": -0.2405,
+   "constraint": 0.406978,
    "prior_pct": 3.0
   },
   "DM11": {
-   "pull": 0.715796,
-   "constraint": 0.607028,
+   "pull": 0.95117,
+   "constraint": 0.783005,
    "prior_pct": 3.0
   }
  },
  "mu_ttbar": [
-  1.13619,
-  0.160007,
-  0.160007
+  0.853924,
+  0.336099,
+  0.336099
  ],
  "prediction": {
   "sigma_fid_tautau_pb": 4.500519576488651,
@@ -2618,15 +2679,15 @@
   "sigma_tautau_pb": 2019.6751428185198
  },
  "sigma_60_120_pb": {
-  "value": 2040.4930870266332,
-  "up": 108.12847407789803,
-  "down": 99.98544488685776,
-  "stat": 13.842585608798313,
+  "value": 1780.1822128606407,
+  "up": 516.926471286205,
+  "down": 319.07550360717374,
+  "stat": 110.41721198709486,
   "note": "sigma(pp -> Z/gamma* -> tautau, 60 < m_LHE < 120 GeV) = mu_Z x aMC@NLO prediction normalised to 6077.22 pb (m > 50)"
  },
  "lumi_pb": 16393.381,
  "channels": [
   "mutau"
  ],
- "tau_id_fixed": true
+ "tau_id_fixed": false
 }

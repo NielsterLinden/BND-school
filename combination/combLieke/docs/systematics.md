@@ -19,6 +19,24 @@ denominator (`z-mumu/zmumu/acceptance.py`, `z-mumu/docs/16`).
 * **CMS ττ:** arXiv:1801.03535 (EPJC 78 (2018) 708), 2.3 fb⁻¹, 60–120 GeV, Table 2. The first number
   is the change in yield or acceptance, the number in brackets the impact on σ.
 
+> **17 Sep 2026 — the ττ column below is the frozen τhτh-only channel (v3).** The combination now uses the
+> four-channel ττ (τhτh + μτh + eτh + eμ). What that changes in this comparison:
+> * **Point 4 of "What is missing" is resolved.** Like CMS, z-tautau now fits several final states together and
+>   measures the τh ID scale factors in situ (0.99 ± 0.04, 0.96 ± 0.03, 0.89 ± 0.03, 0.79 ± 0.05 for DM0/1/10/11 in
+>   the combined fit; TauPOG: ± 0.05–0.15) and the τh energy scales to 0.6–2.2 %. Its own uncertainty went from
+>   ~11 % to 3.6 %; CMS quotes 3.1 %.
+> * **Point 5 no longer applies to ττ:** its theory templates are renormalised to a constant σ(60–120), so
+>   `PDF`/`QCDScale`/`PS_*` move A × ε together inside the fit and there is no separate ττ `Acc_*` block.
+> * **New, and the largest ττ term: `TauIDpT_tautau`, ± 6.3 %** — the p_T dependence of the τh ID scale factor that
+>   z-tautau measured with a p_T-split fit and that its nominal model does not cover (`../README.md`). CMS covers
+>   the same physics with p_T-binned tag-and-probe scale factors.
+> * Input-level sizes on the ττ signal yield, summed over the 13 regions (`../checks/systematics.json`, in %):
+>   `TauIDpT_tautau` 6.3, `TauES_DM1` 2.5, `MET_Unclustered` 2.1, `EmuTrigger` 1.8, `Pileup` 1.6, `QCDScale` 1.3,
+>   `Lumi` 1.2, `TauES_DM0` 1.0, `TauES_DM10` 0.8, electron reco / ID 0.8 / 0.7, `PDF` 0.6, `PS_ISR` 0.6,
+>   muon isolation / ID 0.4 / 0.3. The τh ID itself is a free factor per decay mode, not a prior.
+> * New in ττ with no analogue in ee/μμ: `BTag`, `JES`, `TopPt` (the eμ tt̄ control region and b-jet vetoes), the
+>   eμ and single-electron trigger efficiencies measured in situ, fake-factor parameters per final state.
+
 ## Side by side (%)
 
 | source | ATLAS ee | ATLAS μμ | CMS ℓℓ | **ours ee** | **ours μμ** | CMS ττ | **ours τhτh** |

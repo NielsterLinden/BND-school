@@ -31,7 +31,7 @@ def _gof(log: Path):
     return {"gof_probability": float(p[-1]) if p else None, "minuit_status": int(status["minuit"][-1]) if status["minuit"] else None,
             "hesse_status": int(status["hess"][-1]) if status["hess"] else None,
             "minos_status": int(status["minos"][-1]) if status["minos"] else None, "edm": float(edm[-1]) if edm else None,
-            "pos_def_forced": "made pos-def" in text}
+            "pos_def_forced": bool(re.search(r"made pos-def|forced pos-def", text))}
 
 
 def _poi(fit: dict, name: str, ref: float) -> dict:
@@ -138,8 +138,15 @@ def collect(interim: bool = False) -> dict:
         pub = _channel_published(key, m["channels"][key], status)
         if pub is not None:
             pub = {**pub, "sigma_pb": pub["mu"] * m["channels"][key]["sigma_reference_pb"]}
+        sub = {}
+        for label, src in m["channels"][key].get("published_submeasurements", {}).items():
+            if not label.startswith("_"):
+                d = json.loads(repo_path(src).read_text())
+                k = m["channels"][key]["sigma_reference_pb"]
+                sub[label] = {"source": src, "mu": d["poi_value"], "sigma_pb": d["poi_value"] * k,
+                              "err_up_pb": d["poi_err_up"] * k, "err_down_pb": d["poi_err_down"] * k}
         chans[key] = {"standalone": standalone, "joint": joint,
-                      "published_by_channel": pub,
+                      "published_by_channel": pub, "published_submeasurements": sub,
                       "sigma_reference_pb": m["channels"][key]["sigma_reference_pb"]}
     out["channels"] = chans
 

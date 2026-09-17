@@ -15,11 +15,15 @@ the listed file; do not regenerate it.
 > (`git show zmumu-freeze-2026-09-17:z-tautau/fit/...`). `combination/combLieke/run.py` no longer reproduces the freeze
 > on `main` (the ττ acceptance keys `signal_prediction.A_unc.*` and the v3 fit result are missing): check out the tag to rerun it.
 
-> **17 Sep, later: a combination with the four-channel ττ exists, outside the freeze** (requested by the user). ee ⊕ μμ ⊕ ττ(τhτh + μτh + eτh + eμ)
-> = **1951 ⁺³⁰₋₂₉ pb** (interim; ττ alone 1981 ⁺⁷³₋₇₀ pb; p = 0.35), `combination/combLieke/docs/four-channel-tautau.md` and
-> `combination/combLieke/interim/result.json`. `run.py` and `config/channels.json` on `main` build *that* likelihood; `combLieke/output/` below stays the
-> frozen result until z-tautau's own fit results are in the repository and the final `results`/`plots` have been run. `mumu_CRemu` is dropped
-> from the μμ config there (same data as the ττ eμ channel; it is a validation region, so nothing in μμ changes).
+> **17 Sep, later: the combination was reopened by the user for the four-channel ττ, and that result supersedes the
+> frozen one.** ee ⊕ μμ ⊕ ττ(τhτh + μτh + eτh + eμ) = **1949 ⁺³⁰₋₃₀ pb** (1949.3 ± 0.5 (stat) ⁺³⁰·²₋₂₉.₆ (syst); ττ alone
+> 1981 ⁺¹⁵³₋₁₃₆ pb in the combination, 1981 ⁺⁷³₋₇₀ pb as z-tautau quotes it; compatibility p = 0.38):
+> `combination/combLieke/README.md`, `output/result.json`, `output/plots/`. **The combination numbers below are the frozen
+> three-channel ones and are kept as the record of the freeze**; they are reproducible from the tag only
+> (`combLieke/output/` on `main` is the new result). ee and μμ are unchanged by this: their numbers below stand.
+> Two statements of the frozen table need a footnote: `pos_def_forced` looked for the wrong MINUIT message and was
+> always false (the frozen combined fit was fine, the frozen standalone μμ and ee fits had a forced matrix; only
+> their MINOS intervals were used), and `compatibility.correlations` read the wrong matrix elements.
 
 All results: CMS Open Data 2016 G+H, NanoAODv9, √s = 13 TeV, L = 16393.381 pb⁻¹ ± 1.2 %.
 Theory reference: aMC@NLO (NNLO-normalised, 6077.22 pb for m > 50 GeV).

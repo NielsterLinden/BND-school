@@ -92,6 +92,23 @@ def acceptance_nps(spec: dict | None) -> list[dict]:
     return out
 
 
+def modelling_nps(entries: list | None) -> list[dict]:
+    """[{name, rel, title, category, source}] for modelling uncertainties a channel reports but does not fit.
+
+    The size is the relative shift of the channel's own POI between two of its published fits,
+    |alternative - nominal| / nominal, each given as "<json file>:<dotted key>" -- read, never typed in."""
+    out = []
+    for e in entries or []:
+        values = {}
+        for which in ("nominal", "alternative"):
+            path, _, dotted = e["relative_shift"][which].partition(":")
+            values[which] = _dig(json.loads(repo_path(path).read_text()), dotted)
+        rel = abs(values["alternative"] - values["nominal"]) / values["nominal"]
+        out.append({"name": e["name"], "rel": rel, "title": e["title"], "category": e.get("category", "Modelling"),
+                    "source": e["relative_shift"], "values": values})
+    return out
+
+
 #: speed/size settings for the combination's own h/w/f runs; plots are made in python
 QUIET = {"SystControlPlots": "FALSE", "DoSummaryPlot": "FALSE", "DoPieChartPlot": "FALSE", "DoSignalRegionsPlot": "FALSE",
          "DebugLevel": "1", "ImageFormat": "png"}
@@ -170,8 +187,13 @@ def adapt_channel(key: str, spec: dict, poi: dict, poi_name: str, workdir: Path,
         another channel fits; spec["region_types"] {region: Type} overrides a region's Type (checks only);
       * spec["normfactor_to_overall"] {NormFactor: {"name", "rel", ...}}: a free normalisation replaced by a
         constrained OVERALL parameter on the same samples (used only by a variation);
+      * spec["normfactors"] {name: {"samples", ...}}: a free NormFactor added to samples of this channel, to share
+        one that another channel determines (mu_ttbar of the tautau e-mu control region); spec["drop_systematics"]:
+        systematics removed (the XS_TTbar prior such a factor replaces). Used only by a variation;
       * one OVERALL systematic per acceptance source (spec["acceptance"]) on the signal samples, when the
         channel quotes sigma(60-120) = sigma_fid / A outside its own fit;
+      * one OVERALL systematic on the signal samples per spec["modelling"] entry: an uncertainty the channel
+        measured with an alternative fit and asks the combination to carry (modelling_nps above);
       * MINOS on the POI(s) only, plus any extra Fit options given in `fit` (config/channels.json "fit");
       * DropBins for the bins in spec["drop_empty_bins"], after checking that data and every sample are
         exactly zero there;
@@ -202,6 +224,20 @@ def adapt_channel(key: str, spec: dict, poi: dict, poi_name: str, workdir: Path,
         blocks[blocks.index(nf[0])] = Block("Systematic", o["name"], {
             "Title": o.get("title", o["name"]), "Type": "OVERALL", "OverallUp": repr(o["rel"]), "OverallDown": repr(-o["rel"]),
             "Samples": nf[0].opts["Samples"], "Category": o.get("category", "Background normalisation")})
+    for name in spec.get("drop_systematics") or []:
+        found = [b for b in blocks if b.kind == "Systematic" and b.name == name]
+        if len(found) != 1:
+            raise ValueError(f"{key}: drop_systematics names {name}, which the config does not have exactly once")
+        blocks.remove(found[0])
+    samples = {b.name for b in blocks if b.kind == "Sample"}
+    for name, o in (spec.get("normfactors") or {}).items():
+        if any(b.kind == "NormFactor" and b.name == name for b in blocks):
+            raise ValueError(f"{key}: NormFactor {name} already exists")
+        unknown = set(listopt(o["samples"])) - samples
+        if unknown:
+            raise ValueError(f"{key}: normfactors.{name} names unknown samples {sorted(unknown)}")
+        blocks.append(Block("NormFactor", name, {"Title": o.get("title", name), "Nominal": str(o.get("nominal", 1)),
+                                                 "Min": str(o.get("min", 0)), "Max": str(o.get("max", 3)), "Samples": o["samples"]}))
 
     job.name = key
     job.opts.update(POI=poi_name, OutputDir=str(workdir), HistoPath=str(histo_path), **QUIET)
@@ -253,7 +289,13 @@ def adapt_channel(key: str, spec: dict, poi: dict, poi_name: str, workdir: Path,
         blocks.append(Block("Systematic", a["name"], {
             "Title": a["title"], "Type": "OVERALL", "OverallUp": repr(a["rel"]), "OverallDown": repr(-a["rel"]),
             "Samples": signal, "Category": "Acceptance"}))
-    info = {"poi": poi_name, "signal": listopt(signal), "xsref_factor": factor, "acceptance": acc,
+    modelling = modelling_nps(spec.get("modelling"))
+    for a in modelling:
+        blocks.append(Block("Systematic", a["name"], {
+            "Title": a["title"], "Type": "OVERALL", "OverallUp": repr(a["rel"]), "OverallDown": repr(-a["rel"]),
+            "Samples": signal, "Category": a["category"]}))
+    info = {"poi": poi_name, "signal": listopt(signal), "xsref_factor": factor, "acceptance": acc, "modelling": modelling,
+            "added_normfactors": spec.get("normfactors") or {}, "dropped_systematics": spec.get("drop_systematics") or [],
             "renamed": renames, "config": spec["config"], "histo_path": str(histo_path),
             "dropped_empty_bins": spec.get("drop_empty_bins", {}), "dropped_regions": dropped,
             "region_types": spec.get("region_types") or {}, "normfactor_to_overall": spec.get("normfactor_to_overall") or {},

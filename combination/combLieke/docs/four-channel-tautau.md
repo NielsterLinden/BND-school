@@ -1,33 +1,18 @@
-# The combination with the four-channel Z → ττ (after the freeze) — interim, 17 Sep 2026
+# How the combination with the four-channel Z → ττ was built (17 Sep 2026)
 
-The frozen combination (`../README.md`, `../output/`, git tag `zmumu-freeze-2026-09-17`) is ee ⊕ μμ ⊕ τhτh.
-On 17 Sep, after the freeze, z-tautau delivered its four-channel measurement (τhτh + μτh + eτh + eμ, commit
-`b7ec3d9`, `z-tautau/docs/11-combination-inputs.md`) and the combination was redone with it. **The fits are
-done; `output/result.json` and `output/plots/` are not replaced yet**: the figures show each channel next to
-the number its own group published, and z-tautau's fit results are not in the repository yet. Until then:
+**The result and its discussion are in `../README.md` (1949 ⁺³⁰₋₃₀ pb); this file is the record of the two steps
+that led there.** The frozen combination (git tag `zmumu-freeze-2026-09-17`) is ee ⊕ μμ ⊕ τhτh.
 
-* every number of the new fit: `../interim/result.json` (same layout as `output/result.json`);
-* to finish: `python run.py results && python run.py plots` once `z-tautau/fit/results/ztautau_fit_result.json`
-  exists (if z-tautau changes its *inputs* again: `python run.py prepare && python run.py condor --submit` first).
+1. **z-tautau's inputs arrive (b7ec3d9), its fits are not done yet.** The likelihood is rebuilt as described below
+   and fitted: **1951.0 ⁺²⁹·⁹₋₂₉.₃ pb**, ττ alone 1981.3 ⁺⁷²·⁷₋₇₀.₀ pb, compatibility p = 0.35 — with ττ exactly as
+   delivered. `output/` is left untouched. The ττ standalone number predicted z-tautau's own result, which arrived
+   as 1981 ⁺⁷³₋₇₀ pb.
+2. **z-tautau's results arrive (e0b0b1d)** with what a combiner has to decide (`z-tautau/docs/11` §7): the τh ID
+   scale factor is not flat in p_T (−6.3 % on their μ_Z), two sub-measurements 2.6σ apart, the eμ trigger prior.
+   The baseline gains `TauIDpT_tautau`, every item gets a variation, the tt̄ question gets two
+   (`../README.md`): **1949.3 ⁺³⁰·²₋₂₉.₆ pb**, p = 0.38. Step 1 is the variation `tautau_as_delivered`.
 
-> **σ(pp → Z/γ\* → ℓℓ, 60 < m_ℓℓ < 120 GeV) = 1951 ⁺³⁰₋₂₉ pb** (interim)
-> = 1951.0 ± 0.5 (stat) ⁺²⁹·⁹₋₂₉.₃ (syst) pb; μ_Z = 0.9985 ⁺⁰·⁰¹⁵³₋₀.₀₁₅₀ × 1953.93 pb.
-> Frozen three-channel result: 1945.4 ⁺³¹·⁰₋₂₉.₇ pb. aMC@NLO: 1954 ⁺⁵⁶₋₈₂ pb.
-
-| | σ(60–120) [pb] | frozen (τhτh only) |
-|---|---|---|
-| **combined** | **1951.0 ⁺²⁹·⁹₋₂₉.₃** | 1945.4 ⁺³¹·⁰₋₂₉.₇ |
-| Z → ee, standalone in the same likelihood | 2093.8 ⁺¹²¹·⁸₋₁₁₄.₅ | 2093.7 (unchanged inputs) |
-| Z → μμ, standalone | 1931.1 ⁺³⁰·⁸₋₃₀.₁ | 1931.1 (unchanged inputs) |
-| Z → ττ, standalone (four final states) | **1981.3 ⁺⁷²·⁷₋₇₀.₀** (±3.6 %) | 2082.5 ⁺²³⁶·⁸₋₂₀₆.₈ (±11 %) |
-| three-POI joint fit | ee 2098.0, μμ 1943.7, ττ 1978.0 | 2097.4, 1940.3, 2082.2 |
-| compatibility, −2 ln(L_common/L_split) | 2.09 for 2 dof, **p = 0.35** | 2.44, p = 0.30 |
-
-ττ is now a real input: three times more precise than before, and it pulls the combination up by 7 pb
-(without ττ: 1943.9 pb, which is exactly the frozen "without ττ" number — ee and μμ are untouched).
-Uncertainty groups (covariance decomposition, pb): luminosity 21.8, acceptance (μμ) 12.1, L1 prefiring 9.2,
-muon efficiency 7.8, MC statistics 5.7, background normalisation 3.9, signal modelling 2.7, eμ trigger 2.2,
-fakes 2.2, electron ID 2.1, b tagging 2.1, τh ID 1.7; data statistics 0.47.
+The numbers in the tables below are those of **step 1** (no `TauIDpT_tautau`); the final ones are in `../README.md`.
 
 ## What changed in the likelihood
 
@@ -108,7 +93,7 @@ order; `mf/results._corr` read other elements. The POI correlations of the three
 μμ–ττ 0.67 (shared luminosity). The `compatibility.correlations` of the frozen `output/result.json` are affected
 (nothing else used them).
 
-## Still open
+## Still open after step 1 (see `../README.md` for the state now)
 
 * **Final `results` and `plots`**, waiting for z-tautau's published fit result. Expect their own number near
   1981 pb (μ_Z ≈ 1.019 against their 1944.9 pb reference) if their inputs stay as they are.

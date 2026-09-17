@@ -95,6 +95,42 @@ def test_mumu_emu_region_is_dropped():
     assert [b.opts["Type"] for b in delivered if b.kind == "Region" and b.name == "mumu_CRemu"] == ["VALIDATION"]
 
 
+def test_tautau_modelling_uncertainty_is_read_from_the_two_published_fits():
+    blocks, info = _adapt("tautau")
+    (mod,) = info["modelling"]
+    nominal = json.loads(repo_path("z-tautau/fit/results/ztautau_fit_result.json").read_text())["poi_value"]
+    split = json.loads(repo_path("z-tautau/fit/results/ztautau_ptsplit_fit_result.json").read_text())["poi_value"]
+    assert mod["name"] == "TauIDpT_tautau" and abs(mod["rel"] - abs(split - nominal) / nominal) < 1e-12 and 0.05 < mod["rel"] < 0.08
+    (np_,) = [b for b in blocks if b.kind == "Systematic" and b.name == "TauIDpT_tautau"]
+    poi = [b for b in blocks if b.kind == "NormFactor" and b.name == "mu_Z"][0]
+    assert np_.opts["Samples"] == poi.opts["Samples"] and np_.opts["Type"] == "OVERALL"     # the signal, nothing else
+    assert _adapt("tautau", modelling=[])[1]["modelling"] == []
+
+
+def test_ttbar_control_region_factor_can_be_shared():
+    blocks, _ = _adapt("mumu", normfactors={"mu_ttbar": {"samples": "TTbar"}}, drop_systematics=["XS_TTbar"])
+    (nf,) = [b for b in blocks if b.kind == "NormFactor" and b.name == "mu_ttbar"]
+    assert nf.opts["Samples"] == "TTbar" and "Constant" not in nf.opts
+    assert not [b for b in blocks if b.kind == "Systematic" and b.name == "XS_TTbar"]
+    for bad in ({"normfactors": {"mu_ttbar": {"samples": "NoSuchSample"}}}, {"drop_systematics": ["NoSuchSyst"]}):
+        try:
+            _adapt("mumu", **bad)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError(f"{bad} was accepted")
+
+
+def test_every_likelihood_of_the_manifest_adapts():
+    sys.path.insert(0, str(HERE))
+    import run
+    m = manifest()
+    for name, lk in run.likelihoods(m).items():
+        for key, spec in lk["channels"].items():
+            if key != "ee":                                   # the ee histograms are extracted by `run.py prepare`
+                trexcfg.adapt_channel(key, spec, m["poi"], "mu_Z", Path(tempfile.mkdtemp()), repo_path(spec["histo_path"]))
+
+
 def test_ttbar_variation_replaces_the_free_normalisation():
     blocks, _ = _adapt("tautau", normfactor_to_overall={"mu_ttbar": {"name": "XS_TTbar", "rel": 0.06}})
     assert not [b for b in blocks if b.kind == "NormFactor" and b.name == "mu_ttbar"]

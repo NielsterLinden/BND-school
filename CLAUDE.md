@@ -8,18 +8,19 @@ subgroups (Z→ee, Z→μμ, Z→ττ) plus a combination, on CMS 2016 Open Data
 > built on them by the animation agents; `FREEZE.md` lists what there still shows pre-freeze numbers.
 
 **State (17 Sep 2026):** all three channels have a result. `combination/combLieke/` combines them in
-one **TRExFitter MultiFit** (σ(Z/γ*→ℓℓ, 60–120 GeV) = 1945 ⁺³¹₋₃₀ pb, channel compatibility p = 0.30 —
+one **TRExFitter MultiFit** (frozen: σ(Z/γ*→ℓℓ, 60–120 GeV) = 1945 ⁺³¹₋₃₀ pb, p = 0.30; now 1949 ⁺³⁰₋₃₀ pb, see below —
 `combination/combLieke/README.md`, `output/result.json`, `output/plots/`). `combination/CLAUDE.md` is
 the agent guide. The earlier covariance (BLUE) combination and its slide deck were removed; they are in
 the git history. The conventions the combination settled are `fitting/CONVENTIONS.md` §6. Its
 references to `combination/docs/` point to that removed version.
 
-> **After the freeze (17 Sep, on the user's request): a combination with the four-channel Z → ττ** (τhτh + μτh + eτh + eμ,
-> z-tautau b7ec3d9). `combination/combLieke/run.py` + `config/channels.json` on `main` build it; the fits run on HTCondor
-> (`python run.py condor --submit`). Interim: **1951 ⁺³⁰₋₂₉ pb**, ττ alone 1981 ⁺⁷³₋₇₀ pb, p = 0.35
-> (`combLieke/docs/four-channel-tautau.md`, `combLieke/interim/result.json`). `combLieke/output/` stays the frozen result
-> until z-tautau's own fit results are in the repository and the final `results`/`plots` are run. `mumu_CRemu` is dropped
-> there (same data as the ττ eμ channel; a validation region, so μμ does not change).
+> **After the freeze (17 Sep, on the user's request): the combination uses the four-channel Z → ττ** (τhτh + μτh + eτh + eμ,
+> z-tautau inputs b7ec3d9, results e0b0b1d) and **supersedes the frozen one: 1949 ⁺³⁰₋₃₀ pb**, ττ alone 1981 ⁺¹⁵³₋₁₃₆ pb
+> (z-tautau's own 1981 ⁺⁷³₋₇₀ plus their τh ID p_T dependence, ±6.3 %), compatibility p = 0.38 —
+> `combination/combLieke/README.md`, `output/result.json`, `output/plots/`. The fits run on HTCondor
+> (`python run.py prepare && python run.py condor --submit`, then `results`, `plots`). `mumu_CRemu` is dropped there
+> (same data as the ττ eμ channel; a validation region, so μμ does not change). The frozen 1945 ⁺³¹₋₃₀ pb is at the tag;
+> `presentation/` may still quote it.
 
 > **Open, limiting the ee channel:** z-ee (re-delivered 16 Sep 14:44, renormalised PDF/QCDScale) does not
 > veto the ECAL barrel–endcap gap. The official electron-ID SF map is a placeholder (sf = 1 ± 1) there,

@@ -4,6 +4,19 @@
 The measurement is `checks/orthogonality.py`. Its output, including the (run, lumi, event) of every
 overlapping event, is `checks/orthogonality.json`.
 
+> **17 Sep 2026 — three more ττ final states.** The measurement below covers ee, μμ and τhτh. The combination now
+> also fits μτh, eτh and eμ (`z-tautau/docs/11-combination-inputs.md` §5):
+> * every one of them vetoes any additional muon (loose ID, p_T > 10 GeV, I_rel < 0.3) or electron (MVA noIso WP90,
+>   p_T > 10 GeV, I_rel < 0.3), so an event with the two tight muons of μμ cannot pass, and one with the two medium
+>   electrons of ee only if its second electron fails that veto — the mechanism that gave ≤ 4 events for τhτh ∩ ee;
+> * **the one overlap by construction, `mumu_CRemu` (one muon and one electron) against `emu_SR`/`emu_CRtt`, is
+>   removed** from the μμ config (`config/channels.json` → `mumu.drop_regions`); it was a validation region, not part
+>   of the μμ fit.
+>
+> The event-by-event count on data has **not** been repeated for these three final states. The ττ v4 data ntuples
+> carry run/lumi/event and the veto counters (`$BND_TAUTAU_CACHE/ntuples_v4/`, `n_veto_mu`, `n_veto_el`), so
+> `checks/orthogonality.py` can be extended the same way as for τhτh.
+
 ## Why the selections, not the primary datasets, have to be checked
 
 CMS writes an event into every primary dataset whose trigger it fires. `SingleMuon` (μμ),

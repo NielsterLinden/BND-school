@@ -163,14 +163,20 @@ def nll_scan(res):
     _save(fig, "nll_scan")
 
 
+#: free normalisation factors of the tautau channel: fitted values, not pulls of a constrained parameter
+FREE_FACTORS = ("TauIDSF_", "mu_ttbar")
+
+
 def _np_label(name):
+    if name == "mu_ttbar":
+        return r"$\mu_{t\bar{t}}$ ($\tau\tau$, free)"
     return name.replace("_eeShape", " (ee shape)").replace("_", " ")
 
 
 def pulls(res):
     """Post-fit values and constraints of every nuisance parameter of the combined fit (no gammas)."""
     cat = _categories()
-    nps = {k: v for k, v in res["combined"]["pulls"].items() if not k.startswith("gamma") and not k.startswith("xsref")}
+    nps = {k: v for k, v in res["combined"]["pulls"].items() if not k.startswith(("gamma", "xsref") + FREE_FACTORS)}
     names = sorted(nps, key=lambda n: (cat.get(n, "zz"), n))
     n = len(names)
     fig, ax = plt.subplots(figsize=(6.2, 0.2 * n + 1.2))
@@ -224,8 +230,13 @@ def impacts(res, top=20):
     axp.axvspan(-2, 2, color="#FFE066", alpha=0.45, lw=0)
     axp.axvspan(-1, 1, color="#7CCB7C", alpha=0.45, lw=0)
     axp.axvline(0, color="k", lw=0.8)
-    axp.errorbar([r["pull"] for r in rows], y, xerr=[[r["err_down"] for r in rows], [r["err_up"] for r in rows]],
+    con = [i for i, r in enumerate(rows) if not r["name"].startswith(FREE_FACTORS)]
+    axp.errorbar([rows[i]["pull"] for i in con], y[con], xerr=[[rows[i]["err_down"] for i in con], [rows[i]["err_up"] for i in con]],
                  fmt="o", color="k", ms=4, lw=1.2, capsize=0)
+    for i, r in enumerate(rows):          # a free factor has no prior to be pulled from: print what was fitted
+        if r["name"].startswith(FREE_FACTORS):
+            v = res["combined"]["pulls"][r["name"]]
+            axp.text(0, y[i], f"free: {v['value']:.3f} $\\pm$ {v['err']:.3f}", ha="center", va="center", fontsize=8.5, color="#333333")
     axp.set_xlim(-2.6, 2.6)
     axp.set_xlabel(r"$(\hat\theta - \theta_0)/\Delta\theta$")
     axp.set_yticks(y)
@@ -273,6 +284,33 @@ def breakdown(res):
     _save(fig, "breakdown")
 
 
+def tautau_channels(res):
+    """What the tautau line is made of: z-tautau's own fits of its final states, and the line as it enters the combination."""
+    ch = res["channels"]["tautau"]
+    sub = ch.get("published_submeasurements") or {}
+    if not sub:
+        return
+    labels = {"tau_h tau_h": r"$\tau_h\tau_h$ alone (POG $\tau_h$ ID SF)", "mu tau_h": r"$\mu\tau_h$ alone (POG $\tau_h$ ID SF)",
+              "e tau_h": r"$e\tau_h$ alone (POG $\tau_h$ ID SF)", "e mu": r"$e\mu$ alone (no $\tau_h$)",
+              "tau channels, SF free": r"$\tau_h$ channels, free $\tau_h$ ID SF", "four channels": "four channels (z-tautau result)",
+              "four channels, pT-split SF": r"four channels, $p_T$-split $\tau_h$ ID SF",
+              "four channels, e mu trigger prior x2": r"four channels, $e\mu$ trigger prior $\times 2$"}
+    rows = [dict(label=labels.get(k, k), value=v["sigma_pb"], up=v["err_up_pb"], down=v["err_down_pb"],
+                 colour=C_TAUTAU if k == "four channels" else C_GREY) for k, v in sub.items()]
+    s = ch["standalone"]
+    rows.append(dict(label="in the combination\n(with $\\tau_h$ ID $p_T$ uncertainty)", value=s["sigma_pb"], up=s["err_up_pb"], down=s["err_down_pb"],
+                     colour=C_TAUTAU, own=True))
+    fig, ax = plt.subplots(figsize=(7.2, 0.5 * len(rows) + 1.4))
+    pred_centre = res["prediction"]["sigma_pb"] * ch["sigma_reference_pb"] / res["poi_reference_pb"]
+    _rows(ax, rows, pred_centre, res["prediction"], (1600, 2650))
+    ax.axhline(0.5, color="#999999", lw=0.8)
+    ax.axhline(len(rows) - 4.5, color="#999999", lw=0.8, ls=":")
+    ax.set_xlabel(r"$\sigma(\mathrm{pp}\to Z/\gamma^{*}\to\tau\tau)$, $60 < m_{\tau\tau} < 120$ GeV  [pb]")
+    ax.legend(loc="lower right", fontsize=8.5)
+    _header(ax)
+    _save(fig, "tautau_channels")
+
+
 def variations(res):
     """The combined cross section under the alternative likelihoods of config/channels.json."""
     v = res["variations"]
@@ -282,9 +320,15 @@ def variations(res):
               "split_all_channels": "shape/norm. split in all channels",
               "ee_split_shared_only": "ee: split shared NPs only",
               "ee_electron_id_1p2": r"ee: electron ID norm. $\pm$1.2%",
+              "tautau_as_delivered": r"$\tau\tau$ as delivered (no $\tau_h$ ID $p_T$ uncertainty)",
+              "tautau_ptsplit": r"$\tau\tau$: $p_T$-split $\tau_h$ ID SF model",
+              "tautau_emu_only": r"$\tau\tau$: $e\mu$ channel only",
+              "tautau_tauh_only": r"$\tau\tau$: $\tau_h$ channels only",
+              "tautau_emutrig2x": r"$\tau\tau$: $e\mu$ trigger prior $\times 2$",
               "tautau_leptons_correlated": r"$\tau\tau$: $\mu$/e NPs shared with $\mu\mu$/ee",
               "tautau_theory_decorrelated": r"$\tau\tau$: theory NPs not shared",
-              "tautau_ttbar_constrained": r"$\tau\tau$: XS_TTbar instead of free $\mu_{t\bar{t}}$"}
+              "ttbar_cr_for_all_channels": r"$t\bar{t}$: $e\mu$ control region for all channels",
+              "ttbar_xs_constrained": r"$t\bar{t}$: 6% prior everywhere, no free $\mu_{t\bar{t}}$"}
     c = res["combined"]
     rows = [dict(label="Baseline", value=c["sigma_pb"], up=c["err_up_pb"], down=c["err_down_pb"], colour=C_COMB, own=True)]
     for k, x in v.items():
@@ -293,13 +337,13 @@ def variations(res):
     _rows(ax, rows, None, res["prediction"], (1780, 2060))
     ax.axvspan(c["sigma_pb"] - c["err_down_pb"], c["sigma_pb"] + c["err_up_pb"], color=C_COMB, alpha=0.07, lw=0)
     ax.set_xlabel(XLABEL)
-    ax.legend(loc="lower right", fontsize=8.5)
+    ax.legend(loc="upper left", fontsize=8.5)
     _header(ax)
     _save(fig, "variations")
 
 
 def make_all():
     res = json.loads((OUTPUT / "result.json").read_text())
-    for f in (summary, channels_vs_published, combined_vs_published, breakdown, impacts, pulls, nll_scan, variations):
+    for f in (summary, channels_vs_published, combined_vs_published, tautau_channels, breakdown, impacts, pulls, nll_scan, variations):
         f(res)
     print("figures in", PLOTS)

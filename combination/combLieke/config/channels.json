@@ -1,5 +1,5 @@
 {
-  "_doc": "The combined likelihood. Read by mf/trexcfg.adapt_channel; every entry is explained in README.md. Since 17 Sep 2026 (after the freeze) tautau is the four-channel v4 measurement (tau_h tau_h + mu tau_h + e tau_h + e mu, z-tautau commit b7ec3d9, z-tautau/docs/11-combination-inputs.md); the frozen three-channel result is at the git tag zmumu-freeze-2026-09-17.",
+  "_doc": "The combined likelihood. Read by mf/trexcfg.adapt_channel; every entry is explained in README.md. tautau is the four-channel measurement of z-tautau (tau_h tau_h + mu tau_h + e tau_h + e mu, commits b7ec3d9 inputs / e0b0b1d results, z-tautau/docs/11-combination-inputs.md); the frozen three-channel combination is at the git tag zmumu-freeze-2026-09-17.",
   "observable": "sigma(pp -> Z/gamma* -> ll), 60 < m_ll(LHE) < 120 GeV, sqrt(s) = 13 TeV, per lepton flavour, lepton universality",
   "lumi_pb": 16393.381,
   "poi": {
@@ -131,10 +131,32 @@
       "acceptance": null,
       "acceptance_note": "none outside the fit: the theory templates are renormalised to a constant sigma(60-120), so PDF / QCDScale / PS_ISR / PS_FSR vary A x epsilon inside the likelihood (z-tautau/docs/11-combination-inputs.md section 3, metadata acceptance_in_fit). Until the freeze (tau_h tau_h only) this was a 3.7 % block of Acc_* parameters.",
       "drop_empty_bins_note": "none: tautau_SR2 bin 1 (0 data, 0 prediction) is dropped by z-tautau's own config since b7ec3d9 (DropBins). Re-derived on the v4 inputs: it is the only bin of the 13 regions with no prediction; tautau_SR1 bin 1 and tautau_SR2 bin 13 have 0 data but 0.8 and 2.0 predicted events, which is an ordinary Poisson term.",
-      "ttbar_note": "tautau normalises ttbar with a free mu_ttbar (from emu_CRtt) and has no XS_TTbar; mumu and ee constrain it with XS_TTbar (6 %). They stay two parameters: mu_ttbar absorbs the e-mu trigger efficiency (it comes out above 1, z-tautau/docs/11 section 7.4), so it is not the cross section XS_TTbar describes, and no yield is described twice (each parameter acts in its own channel). ttbar is 0.2 % of mumu_SR. variations.tautau_ttbar_constrained replaces mu_ttbar by the shared XS_TTbar.",
+      "ttbar_note": "tautau normalises ttbar with a free mu_ttbar (from emu_CRtt) and has no XS_TTbar; mumu and ee constrain it with XS_TTbar (6 %). All three use the same powheg samples and 831.76 pb. Baseline: two parameters, each in its own channel -- mu_ttbar = 1.10 absorbs what is specific to the e-mu control region (its trigger efficiency, MET > 80 GeV and D_zeta modelling), which the CMS ttbar cross section (data/theory ~ 1.0) says is not sigma(ttbar). variations.ttbar_cr_for_all_channels shares the control-region factor with mumu and ee (no XS_TTbar prior there); variations.ttbar_xs_constrained has one 6 % XS_TTbar everywhere and no free factor, so that emu_CRtt constrains it for every channel.",
       "published": {
-        "source": "z-tautau/fit/results/ztautau_fit_result.json",
-        "optional": true
+        "source": "z-tautau/fit/results/ztautau_fit_result.json"
+      },
+      "modelling": [
+        {
+          "name": "TauIDpT_tautau",
+          "title": "#tau_{h} ID SF p_{T} dependence (#tau#tau)",
+          "category": "Tau ID pT dependence",
+          "relative_shift": {
+            "nominal": "z-tautau/fit/results/ztautau_fit_result.json:poi_value",
+            "alternative": "z-tautau/fit/results/ztautau_ptsplit_fit_result.json:poi_value"
+          }
+        }
+      ],
+      "modelling_note": "z-tautau/docs/11-combination-inputs.md section 7.3: the tautau fit assumes one tau_h ID scale factor per decay mode for every pT. Their cross-check with separate scale factors below 40 GeV in the l tau_h regions moves mu_Z from 1.019 to 0.954 (-6.3 %, 1.8x their total uncertainty), which no parameter of their fit covers; they ask a combination that wants a conservative tautau input to carry it. It enters as one OVERALL parameter on the tautau signal, its size read from their two published fits. variations.tautau_as_delivered is the fit without it, variations.tautau_ptsplit the fit with their pT-split model instead.",
+      "published_submeasurements": {
+        "_doc": "z-tautau's own fits of parts of its data, shown next to the combination's tautau line (figure tautau_channels); mu x sigma_reference_pb",
+        "tau_h tau_h": "z-tautau/fit/results/ztautau_tautau_fixedid_fit_result.json",
+        "mu tau_h": "z-tautau/fit/results/ztautau_mutau_fixedid_fit_result.json",
+        "e tau_h": "z-tautau/fit/results/ztautau_etau_fixedid_fit_result.json",
+        "e mu": "z-tautau/fit/results/ztautau_emu_fit_result.json",
+        "tau channels, SF free": "z-tautau/fit/results/ztautau_taulep_fit_result.json",
+        "four channels": "z-tautau/fit/results/ztautau_fit_result.json",
+        "four channels, pT-split SF": "z-tautau/fit/results/ztautau_ptsplit_fit_result.json",
+        "four channels, e mu trigger prior x2": "z-tautau/fit/results/ztautau_emutrig2x_fit_result.json"
       }
     }
   },
@@ -149,7 +171,7 @@
     "FitStrategy": "-1"
   },
   "variations": {
-    "_doc": "Alternative likelihoods, each fitted with the common POI only (run.py variations). 'channels' restricts the fit; 'split' overrides split_shape_norm per channel; 'overall' replaces the normalisation part of a split systematic by a symmetric OVERALL of that size; 'fit' overrides entries of the top-level 'fit' options for this likelihood.",
+    "_doc": "Alternative likelihoods, each fitted with the common POI only (run.py variations). 'channels' restricts the fit; 'split' overrides split_shape_norm per channel; 'overall' replaces the normalisation part of a split systematic by a symmetric OVERALL of that size; 'fit' overrides entries of the top-level 'fit' options for this likelihood. 'channel_overrides' replaces entries of a channel's specification.",
     "without_ee": {
       "label": "without Z#rightarrowee",
       "channels": [
@@ -170,6 +192,10 @@
         "ee": "all",
         "mumu": "all",
         "tautau": "all"
+      },
+      "fit": {
+        "_doc": "strategy 3 ends in an invalid minimum here (MIGRAD status 3; with ~50 extra tautau shape parameters and the TauIDpT_tautau normalisation). Strategy 2 and strategy 1 both converge with status 0 and agree on the MINOS interval of mu_Z (1.0028 +0.0161 -0.0159), which is the only thing used from a variation; their HESSE matrix is forced positive-definite (pos_def_forced is recorded in result.json).",
+        "FitStrategy": "2"
       }
     },
     "ee_split_shared_only": {
@@ -192,6 +218,65 @@
         }
       },
       "note": "diagnostic: the UL2016postVFP Medium-ID SF map (datasets/corrections, POG/EGM) gives +-0.3-1.6% per electron outside the ECAL gap, 1.2% per Z->ee event; inside 1.444 < |eta_SC| < 1.566, which z-ee does not veto, it is sf = 1 +- 1. Not a result: it uses a number z-ee did not deliver."
+    },
+    "tautau_as_delivered": {
+      "label": "#tau#tau as delivered (no #tau_{h} ID p_{T} uncertainty)",
+      "channel_overrides": {
+        "tautau": {
+          "modelling": []
+        }
+      },
+      "note": "the tautau likelihood exactly as z-tautau publishes it (1981 +73 -70 pb alone)"
+    },
+    "tautau_ptsplit": {
+      "label": "#tau#tau: p_{T}-split #tau_{h} ID SF model",
+      "channel_overrides": {
+        "tautau": {
+          "config": "z-tautau/fit/ztautau_ptsplit.config",
+          "modelling": []
+        }
+      },
+      "note": "z-tautau's cross-check model (l tau_h regions split at pT(tau_h) = 40 GeV, own scale factors below) in place of the nominal one: the effect TauIDpT_tautau stands for, fitted instead of assigned"
+    },
+    "tautau_emu_only": {
+      "label": "#tau#tau: e#mu channel only",
+      "channel_overrides": {
+        "tautau": {
+          "config": "z-tautau/fit/ztautau_emu.config",
+          "modelling": [],
+          "signal": {
+            "meta": "z-tautau/fit/fitinputs/ztautau_emu.root.meta.json",
+            "key": "signal_samples"
+          },
+          "rename_systematics": {
+            "MuonID": "MuonID_tautau",
+            "MuonIso": "MuonIso_tautau",
+            "MuonScale": "MuonScale_tautau",
+            "ElectronID": "ElectronID_tautau",
+            "ElectronReco": "ElectronReco_tautau",
+            "ElectronScale": "ElectronScale_tautau"
+          }
+        }
+      },
+      "note": "the sub-measurement without any tau_h (z-tautau: 0.960 +0.042 -0.040); docs/11 section 7.1"
+    },
+    "tautau_tauh_only": {
+      "label": "#tau#tau: #tau_{h} channels only",
+      "channel_overrides": {
+        "tautau": {
+          "config": "z-tautau/fit/ztautau_taulep.config"
+        }
+      },
+      "note": "tau_h tau_h + mu tau_h + e tau_h with free scale factors, no e mu (z-tautau: 1.203 +0.091 -0.084); docs/11 section 7.1"
+    },
+    "tautau_emutrig2x": {
+      "label": "#tau#tau: e#mu trigger prior #times2",
+      "channel_overrides": {
+        "tautau": {
+          "config": "z-tautau/fit/ztautau_emutrig2x.config"
+        }
+      },
+      "note": "the pre-review e-mu trigger prior (2 % per leg); docs/11 section 7.2"
     },
     "tautau_leptons_correlated": {
       "label": "#tau#tau lepton NPs correlated",
@@ -226,8 +311,36 @@
       },
       "note": "tautau constrains QCDScale through the acceptance ratios of its four final states; here that constraint cannot reach ee and mumu"
     },
-    "tautau_ttbar_constrained": {
-      "label": "#tau#tau: XS_TTbar instead of #mu_{t#bar{t}}",
+    "ttbar_cr_for_all_channels": {
+      "label": "t#bar{t}: e#mu control region for all channels",
+      "channel_overrides": {
+        "mumu": {
+          "normfactors": {
+            "mu_ttbar": {
+              "samples": "TTbar",
+              "title": "#mu_{t#bar{t}}"
+            }
+          },
+          "drop_systematics": [
+            "XS_TTbar"
+          ]
+        },
+        "ee": {
+          "normfactors": {
+            "mu_ttbar": {
+              "samples": "ttbar",
+              "title": "#mu_{t#bar{t}}"
+            }
+          },
+          "drop_systematics": [
+            "XS_TTbar"
+          ]
+        }
+      },
+      "note": "the free mu_ttbar that emu_CRtt determines also scales ttbar in mumu and ee, instead of their 6 % XS_TTbar prior"
+    },
+    "ttbar_xs_constrained": {
+      "label": "t#bar{t}: XS_TTbar (6%) everywhere, no free #mu_{t#bar{t}}",
       "channel_overrides": {
         "tautau": {
           "normfactor_to_overall": {
@@ -239,7 +352,7 @@
           }
         }
       },
-      "note": "the other answer to the ttbar question of z-tautau/docs/11 section 4: one 6 % XS_TTbar for all channels, no free mu_ttbar"
+      "note": "one 6 % XS_TTbar for all channels, constrained by emu_CRtt, no free factor: the control region then measures Lumi x XS_TTbar x e-mu trigger x b-tag, and its 10 % excess is shared out by prior width -- 0.3 sigma of it to Lumi, which moves every channel"
     }
   },
   "checks": {

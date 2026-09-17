@@ -3,17 +3,12 @@
 For agents. `combLieke/README.md` is the physics and the result; this file is about changing the
 combination without breaking it.
 
-> **Two combinations exist.** The **frozen** one (17 Sep 2026, git tag `zmumu-freeze-2026-09-17`, repository `FREEZE.md`)
-> is ee ⊕ μμ ⊕ τhτh: 1945 ⁺³¹₋₃₀ pb. It is what `combLieke/output/` holds and what the talk quotes; its TRExFitter
-> jobs are kept in `combLieke/work_freeze_2026-09-17/` (git-ignored). Do not regenerate it on `main`; check out the tag.
->
-> The **four-channel ττ combination** (started 17 Sep, after the freeze, on the user's request) is what `run.py` and
-> `config/channels.json` on `main` now build: ee ⊕ μμ ⊕ ττ with ττ = τhτh + μτh + eτh + eμ (z-tautau v4, commit b7ec3d9,
-> `z-tautau/docs/11-combination-inputs.md`). Its fits run on HTCondor (`python run.py condor --submit`) and end in
-> `combLieke/interim/result.json` (tracked in git). **`output/result.json` and `output/plots/` are only replaced by
-> `python run.py results && python run.py plots` once z-tautau's own fit results are in the repository**
-> (`z-tautau/fit/results/ztautau_fit_result.json`, the "channel's own" ττ point of the figures) — until then `output/`
-> is the frozen result and other sessions (the talk) read it.
+> **The result is ee ⊕ μμ ⊕ ττ with the four-channel ττ: 1949 ⁺³⁰₋₃₀ pb** (17 Sep 2026, `combLieke/output/`,
+> `combLieke/README.md`). ττ = τhτh + μτh + eτh + eμ of z-tautau (inputs b7ec3d9, results e0b0b1d,
+> `z-tautau/docs/11-combination-inputs.md`). The user reopened the combination for it after the freeze; the **frozen**
+> three-channel result (ee ⊕ μμ ⊕ τhτh, 1945 ⁺³¹₋₃₀ pb, repository `FREEZE.md`) is at the git tag
+> `zmumu-freeze-2026-09-17`, its TRExFitter jobs in `combLieke/work_freeze_2026-09-17/` (git-ignored). The ee and μμ
+> inputs are still the frozen ones: do not regenerate those channels. `presentation/` may still quote 1945.
 
 The combination is **one TRExFitter v1.8.0 MultiFit** over the three
 channel likelihoods. There is no covariance/BLUE combination any more: it and its slide deck were
@@ -52,6 +47,9 @@ What is kept is `combLieke/output/` (`result.json`, `plots/`) and the `checks/*.
 | fit options for every channel fit and MultiFit (`FitStrategy: 2`); ranking refits; per-variation overrides | `channels.json` → `fit`, `ranking_fit`, `variations.<name>.fit` |
 | correlations | **by nuisance-parameter name only** (TRExFitter). Renames in `rename_systematics`; ee shape parts get `<NP>_eeShape` |
 | alternative likelihoods | `channels.json` → `variations` (`channels`, `split`, `overall`, `channel_overrides`, `fit`) |
+| a modelling uncertainty a channel reports but does not fit (`TauIDpT_tautau`) | `channels.json` → `tautau.modelling`: the size is read from two of the channel's published fits (`mf/trexcfg.modelling_nps`), never typed in |
+| sharing a free factor across channels, dropping a prior (the tt̄ variations) | `channel_overrides` with `normfactors`, `drop_systematics`, `normfactor_to_overall` |
+| z-tautau's own sub-measurements shown in `tautau_channels` | `channels.json` → `tautau.published_submeasurements` |
 | published ATLAS/CMS numbers | `combLieke/config/references.json` (with paper and table) |
 | theory prediction and its uncertainty | `mf/prediction.py` |
 
@@ -96,6 +94,12 @@ What is kept is `combLieke/output/` (`result.json`, `plots/`) and the `checks/*.
      escalated to 3 by itself. The four-channel ττ likelihood "converges" at 2, so nothing escalates. Do not go back.
    - `run.py results` records `combined.hesse_over_minos` and `pos_def_forced` per fit and prints a WARNING if
      HESSE/MINOS is off by more than 10 %. Grep the logs for `forced pos-def` after any change of the model.
+     (Until 17 Sep `pos_def_forced` looked for another message and was always false, also in the frozen `result.json`:
+     the frozen standalone μμ and ee fits did have a forced matrix; only their MINOS intervals were used.)
+   - Strategy 3 needs `MaximumNumberFCNcalls` raised (2 × 10⁶): with TRExFitter's default the ee + μμ likelihood
+     exhausts the calls in HESSE (status 300, segfault).
+   - **`split_all_channels` (per-variation `fit`, `FitStrategy 2`):** strategy 3 ends in an invalid minimum there;
+     strategies 1 and 2 converge and agree on the MINOS interval, the only thing a variation provides.
    - **The ranking refits (`ranking_fit`, `FitStrategy -1`)** keep TRExFitter's default (start at 1, retry at 2 and 3):
      only the POI value of each refit is used, and a fixed high strategy leaves no retry. `run.py prepare` writes
      `work/common/multifit_ranking.config` for them.
@@ -107,11 +111,20 @@ What is kept is `combLieke/output/` (`result.json`, `plots/`) and the `checks/*.
     templates carry A × ε), and never let `mumu_CRemu` back in (same data as `emu_SR`/`emu_CRtt`). A per-final-state
     POI is not defined in this model: with free `TauIDSF_DM*` a single ℓτh channel cannot separate `mu_Z` from the
     scale factors, so the three-POI fit stays ee / μμ / ττ.
-12. **HTCondor** (`mf/condor.py`, nikhef-condor skill): one DAG, batch name `zcomb`; watch it with
+12. **`TauIDpT_tautau` is in the baseline, and it is not a free choice of size.** z-tautau's p_T-split cross-check moves
+    their μ_Z by 6.3 %; the combination carries that as one OVERALL parameter on the ττ signal (`tautau.modelling`).
+    Never apply it together with the p_T-split model (`tautau_ptsplit` sets `modelling: []`), and if z-tautau
+    re-delivers, it follows their two result files by itself. tt̄: the baseline keeps the free ττ `mu_ttbar` and the
+    `XS_TTbar` prior of ee/μμ as two parameters; the two alternatives (±5 pb) and the reasons are in
+    `combLieke/README.md`, "tt̄: the eμ control region, and who uses it". Do not share a free factor with μμ or ee
+    without a prior: their standalone fits and `without_tautau` would have nothing to determine it.
+13. **HTCondor** (`mf/condor.py`, nikhef-condor skill): one DAG, batch name `zcomb`; watch it with
     `/user/sjankovy/.claude/skills/nikhef-condor/condor_watch.sh --prefix zcomb` (it stops on held jobs). `condor_rm`
     of the DAG still runs its FINAL node. The list of parameters to rank is written by the `common` job; the ranking
     node waits for it on the schedd (`condor/wait_for_file.sh`). `run.py condor` removes the `NPRanking_*` files of an
     earlier submission; everything else in `work/` is overwritten job by job, so `rm -rf work` first if the model changed.
+    One DAG node per likelihood: DAGMan removes every other job of a cluster when one fails. The FINAL node writes
+    `combLieke/interim/result.json` (git-ignored), never `output/`; `python run.py results && python run.py plots` promotes it.
 
 ## Figures
 
@@ -123,7 +136,8 @@ What is kept is `combLieke/output/` (`result.json`, `plots/`) and the `checks/*.
 
 ```bash
 python tests/test_trexcfg.py
-python run.py all && grep -E "status|probability" work/common/logs/multifit_mwf.log
+python run.py prepare && python run.py condor --submit      # wait for the DAG (batch zcomb), then:
+grep -E "status|probability|forced pos-def" work/common/logs/multifit_mwf.log && python run.py results
 ```
 
 Every fit in `run.py` must end with MIGRAD status 0, HESSE status 0 and MINOS status 0. `result.json`

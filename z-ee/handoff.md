@@ -89,7 +89,7 @@ trex-fitter hwdfp fit.config
 - Data/MC ratio panel with hatched gray band for MC statistical uncertainty and Poisson error bars on the ratio.
 - Peak bin (~91 GeV) reaches roughly 500,000 events per 0.5 GeV bin — consistent with ~6.5M total selected data events concentrated in a narrow window around the Z mass.
 - ttbar and W+jets yields in the selected sample are very small relative to DY and diboson (e.g. `TTToHadronic` returned 19 selected events out of ~107M processed, `WJetsToLNu` returned 216) — expected given the tight two-medium-electron opposite-sign requirement, but worth a sanity check that these are not affected by a selection or branch issue.
-- TRExFitter config written. Current best fit (with systematics) gives a cross-section of **2051.8 pb ± 39.5**.
+- TRExFitter config written. Current best fit (with systematics) gives a cross-section of **1840.8 pb ± 29.9**.
 
 ## Open issues / next steps
 

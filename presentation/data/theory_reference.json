@@ -1,0 +1,532 @@
+{
+ "provenance": {
+  "extractor": "presentation/data/extract_theory_reference.py",
+  "generated": "2026-09-17T16:38:13",
+  "git": {
+   "commit": "5dbaa686cdd4ee519f103c4e7b2d7b6bf603df79",
+   "short": "5dbaa686",
+   "dirty_worktree": true
+  },
+  "lumi_pb": 16393.381,
+  "dataset": "aMC@NLO DYJetsToLL_M-50 generator sums (z-mumu v2 skim); literature values with references",
+  "sources": [
+   "combination/combLieke/output/result.json",
+   "combination/combLieke/config/references.json",
+   "z-mumu/output/v2/gensums.json"
+  ],
+  "note": "section 1 (theory) of the BND-school talk; every number printed there comes from this file"
+ },
+ "unit": "pb",
+ "prediction": {
+  "label": "aMC@NLO",
+  "value": 1953.931346647322,
+  "err_up": 56.05842258438731,
+  "err_down": 81.66364603449847,
+  "components_rel": {
+   "scale_up": 0.024552655045710248,
+   "scale_down": -0.03907039524259359,
+   "pdf": 0.007428095579751296,
+   "alphas": 0.012849533452738517
+  },
+  "band_steps": [
+   {
+    "added": "scale",
+    "rel_up": 0.024552655045710248,
+    "rel_down": 0.03907039524259359,
+    "lo_pb": 1877.590476656918,
+    "hi_pb": 2001.905548984554
+   },
+   {
+    "added": "alphas",
+    "rel_up": 0.027711791348570144,
+    "rel_down": 0.041129141668232345,
+    "lo_pb": 1873.5678274810643,
+    "hi_pb": 2008.078284435043
+   },
+   {
+    "added": "pdf",
+    "rel_up": 0.028690067683583596,
+    "rel_down": 0.04179453191875041,
+    "lo_pb": 1872.2677006128235,
+    "hi_pb": 2009.9897692317093
+   }
+  ],
+  "source": "combination/combLieke/output/result.json prediction (z-mumu/output/v2/gensums.json (DY_NLO); normalisation 6077.22 pb (NNLO), weights: see mf/prediction.py)"
+ },
+ "pdf_sets": {
+  "sets": [
+   {
+    "label": "CT18",
+    "value": 1921.0,
+    "up": 30.0,
+    "down": 33.0
+   },
+   {
+    "label": "MSHT20",
+    "value": 1935.0,
+    "up": 23.0,
+    "down": 27.0
+   },
+   {
+    "label": "NNPDF3.1",
+    "value": 1940.0,
+    "up": 15.0,
+    "down": 21.0
+   },
+   {
+    "label": "NNPDF4.0",
+    "value": 1970.0,
+    "up": 11.0,
+    "down": 14.0
+   }
+  ],
+  "reference": "CMS-SMP-20-004, JHEP 04 (2025) 162, arXiv:2408.03744, Table 5 (NNLO+NNLL, DYturbo; stat, PDF, alpha_s, muR/muF)",
+  "spread_pb": 49.0
+ },
+ "cms_2024": {
+  "value": 1952.0,
+  "stat": 4.0,
+  "syst": 18.0,
+  "lumi": 45.0,
+  "total": 48.63126566315131,
+  "window": [
+   60,
+   120
+  ],
+  "detail": "206 pb$^{-1}$, ee + $\\mu\\mu$",
+  "citation": "CMS-SMP-20-004, JHEP 04 (2025) 162, arXiv:2408.03744, Table 13"
+ },
+ "orders": [
+  {
+   "order": "LO",
+   "year": 1970,
+   "reference": "S. D. Drell, T.-M. Yan, PRL 25 (1970) 316"
+  },
+  {
+   "order": "NLO",
+   "year": 1979,
+   "reference": "G. Altarelli, R. K. Ellis, G. Martinelli, NPB 157 (1979) 461"
+  },
+  {
+   "order": "NNLO",
+   "year": 1991,
+   "reference": "R. Hamberg, W. L. van Neerven, T. Matsuura, NPB 359 (1991) 343"
+  },
+  {
+   "order": "N3LO",
+   "year": 2022,
+   "reference": "C. Duhr, B. Mistlberger, JHEP 03 (2022) 116 (neutral current, gamma* + Z)"
+  }
+ ],
+ "x_range": {
+  "m_Z_GeV": 91.1876,
+  "sqrt_s_GeV": 13000.0,
+  "y_max": 2.4,
+  "x_central": 0.00701443076923077,
+  "x_min": 0.0006363348028748948,
+  "x_max": 0.07732130757903032,
+  "tau": 4.9202239016331366e-05,
+  "note": "leading order: x_{1,2} = (m_Z / sqrt(s)) exp(+-y), x1 x2 = m_Z^2 / s"
+ },
+ "leptons": {
+  "mass_MeV": {
+   "e": 0.51099895,
+   "mu": 105.6583755,
+   "tau": 1776.93
+  },
+  "mass_reference": "PDG 2024",
+  "ratio_mu_e": 206.76828298766566,
+  "ratio_tau_mu": 16.817691844978253,
+  "ratio_tau_e": 3477.36526660182,
+  "br_ll": {
+   "value": 3.3658,
+   "err": 0.0023,
+   "unit": "%",
+   "reference": "PDG 2024, Z boson, Gamma(l+ l-)/Gamma_total (lepton universality)"
+  },
+  "lep_ratios": {
+   "mumu_over_ee": {
+    "value": 1.0009,
+    "err": 0.0028
+   },
+   "tautau_over_ee": {
+    "value": 1.0019,
+    "err": 0.0032
+   },
+   "correlation": 0.63,
+   "reference": "ALEPH, DELPHI, L3, OPAL, SLD, Phys. Rept. 427 (2006) 257 (hep-ex/0509008); PDG Z boson review"
+  },
+  "sin2_eff": {
+   "value": 0.23153,
+   "err": 0.00016,
+   "reference": "Phys. Rept. 427 (2006) 257, LEP + SLD average"
+  },
+  "couplings": {
+   "nu": {
+    "T3": 0.5,
+    "Q": 0.0,
+    "g_V": 0.5,
+    "g_A": 0.5
+   },
+   "l": {
+    "T3": -0.5,
+    "Q": -1.0,
+    "g_V": -0.03693999999999997,
+    "g_A": -0.5
+   },
+   "u": {
+    "T3": 0.5,
+    "Q": 0.6666666666666666,
+    "g_V": 0.19129333333333332,
+    "g_A": 0.5
+   },
+   "d": {
+    "T3": -0.5,
+    "Q": -0.3333333333333333,
+    "g_V": -0.34564666666666666,
+    "g_A": -0.5
+   }
+  },
+  "tau_phase_space_axial": 0.997722516007785
+ },
+ "spectrum": {
+  "edges_GeV": [
+   50,
+   52,
+   54,
+   56,
+   58,
+   60,
+   62,
+   64,
+   66,
+   68,
+   70,
+   72,
+   74,
+   76,
+   78,
+   80,
+   82,
+   84,
+   86,
+   88,
+   90,
+   92,
+   94,
+   96,
+   98,
+   100,
+   102,
+   104,
+   106,
+   108,
+   110,
+   112,
+   114,
+   116,
+   118,
+   120,
+   122,
+   124,
+   126,
+   128,
+   130,
+   132,
+   134,
+   136,
+   138,
+   140,
+   142,
+   144,
+   146,
+   148,
+   150,
+   152,
+   154,
+   156,
+   158,
+   160,
+   162,
+   164,
+   166,
+   168,
+   170,
+   172,
+   174,
+   176,
+   178,
+   180,
+   182,
+   184,
+   186,
+   188,
+   190,
+   192,
+   194,
+   196,
+   198,
+   200
+  ],
+  "dsigma_dm_pb_per_GeV": [
+   6.299595833507119,
+   5.627063937582052,
+   5.106791552961014,
+   4.628575986284814,
+   4.28973256517469,
+   4.019349345472529,
+   3.855396907206257,
+   3.687106770228186,
+   3.662400747130546,
+   3.7360787600324135,
+   3.9279433465311335,
+   4.170037226808516,
+   4.723753897149513,
+   5.509443150773695,
+   6.881727573670339,
+   9.059189461794901,
+   13.141341140790438,
+   21.833712168044045,
+   45.0893722659749,
+   140.78874995407085,
+   416.68512185372987,
+   173.54252433127175,
+   49.15165854217437,
+   21.67730355362438,
+   12.123239247492021,
+   7.783340253737391,
+   5.400057704997884,
+   3.9616390930459806,
+   3.054054219100365,
+   2.402582164747077,
+   1.9300873311545543,
+   1.628900164078746,
+   1.3715300405119832,
+   1.1772765764618376,
+   0.9907555318544647,
+   0.8980922289386347,
+   0.7913471215091372,
+   0.6797613937780664,
+   0.6107982707803287,
+   0.5628949893543703,
+   0.48808540287551166,
+   0.4499890924501433,
+   0.4143445247749224,
+   0.37084180725948523,
+   0.3565085419509308,
+   0.3210525698718751,
+   0.2813217642797417,
+   0.27377794043313414,
+   0.25322102045112843,
+   0.2269433673854453,
+   0.21870802635289865,
+   0.19947127554404928,
+   0.17872575996587836,
+   0.1769026692029482,
+   0.1632609210803328,
+   0.15515131044522962,
+   0.15427119766312541,
+   0.13987506715584924,
+   0.13063388294375494,
+   0.12516461065496443,
+   0.11378600968633129,
+   0.11114567134001863,
+   0.10649364663461061,
+   0.09505218046725575,
+   0.08939431258230006,
+   0.08889139099252621,
+   0.0809075107548665,
+   0.07663267724178886,
+   0.06996896617728549,
+   0.07770138562005827,
+   0.06512834587571227,
+   0.06330525511278211,
+   0.0626766031255648,
+   0.06148216434985194,
+   0.05488131848407028
+  ],
+  "flavour": "one lepton flavour (h_lhe_mll)",
+  "sigma_60_120_pb": 1953.9313466473218,
+  "sigma_m50_pb": 2025.5148168581788,
+  "fraction_60_120": 0.9646591228980039,
+  "source": "z-mumu/output/v2/gensums.json DY_NLO.h_lhe_mll x 6077.22 pb / sumw"
+ },
+ "higgs": {
+  "xs_pb": {
+   "ggF": 48.58,
+   "VBF": 3.782,
+   "WH": 1.373,
+   "ZH": 0.8839,
+   "ttH": 0.5071,
+   "bbH": 0.488,
+   "tHq": 0.07425,
+   "tHW": 0.01517
+  },
+  "xs_total_pb": 55.70342,
+  "br_tautau": 0.06272,
+  "xs_br_pb": 3.4937185024,
+  "z_over_h_tautau": 559.269828208848,
+  "reference": "LHC Higgs Cross Section WG, Yellow Report 4 (CERN-2017-002-M), m_H = 125.09 GeV, 13 TeV",
+  "note": "same final state: sigma(Z/gamma* -> tautau, 60-120) = the prediction value (lepton universality) vs sigma(pp -> H) x BR(H -> tautau)"
+ },
+ "checks": [
+  {
+   "name": "prediction 1953.93 +56.06 -81.66 pb",
+   "ok": true,
+   "tol": 0.01,
+   "rel": false,
+   "max_diff": 0.0036460344984732274,
+   "source": "combination/combLieke/output/result.json",
+   "shape": [
+    3
+   ]
+  },
+  {
+   "name": "band after the last step == the quoted band",
+   "ok": true,
+   "tol": 1e-06,
+   "rel": false,
+   "max_diff": 6.394884621840902e-14,
+   "source": "consistency",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "scale +2.46 / -3.91 %, alpha_s 1.28 %, PDF 0.74 %",
+   "ok": true,
+   "tol": 0.0001,
+   "rel": false,
+   "max_diff": 4.953345273851599e-05,
+   "source": "combination/combLieke/output/result.json",
+   "shape": [
+    4
+   ]
+  },
+  {
+   "name": "PDF sets 1921 / 1935 / 1940 / 1970 pb",
+   "ok": true,
+   "tol": 0.0,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "arXiv:2408.03744 Table 5",
+   "shape": [
+    4
+   ]
+  },
+  {
+   "name": "PDF-set spread 49 pb",
+   "ok": true,
+   "tol": 0.0,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "consistency",
+   "got": 49.0,
+   "want": 49.0
+  },
+  {
+   "name": "CMS 1952 +- 4 +- 18 +- 45 pb",
+   "ok": true,
+   "tol": 0.0,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "combination/combLieke/config/references.json",
+   "shape": [
+    4
+   ]
+  },
+  {
+   "name": "m_ll spectrum: sigma(60-120) == the prediction",
+   "ok": true,
+   "tol": 1e-09,
+   "rel": true,
+   "max_diff": 1.1636727965564097e-16,
+   "source": "same generator sums",
+   "got": 1953.9313466473218,
+   "want": 1953.931346647322
+  },
+  {
+   "name": "sigma(m > 50) per flavour ~ 6077.22 / 3 pb",
+   "ok": true,
+   "tol": 0.002,
+   "rel": true,
+   "max_diff": 0.000111160929744766,
+   "source": "repository CLAUDE.md",
+   "got": 2025.5148168581788,
+   "want": 2025.74
+  },
+  {
+   "name": "fraction 60-120 = 0.965",
+   "ok": true,
+   "tol": 0.0005,
+   "rel": false,
+   "max_diff": 0.00034087710199603993,
+   "source": "gensums.json",
+   "got": 0.9646591228980039,
+   "want": 0.965
+  },
+  {
+   "name": "spectrum bins x width over 60-120 == sigma(60-120)",
+   "ok": true,
+   "tol": 1e-06,
+   "rel": true,
+   "max_diff": 0.0,
+   "source": "consistency",
+   "got": 1953.9313466473218,
+   "want": 1953.9313466473218
+  },
+  {
+   "name": "x range 6.4e-4 ... 0.077 at 13 TeV, |y| < 2.4",
+   "ok": true,
+   "tol": 0.002,
+   "rel": true,
+   "max_diff": 0.0005264196146145872,
+   "source": "computed",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "m_mu/m_e = 206.77, m_tau/m_e = 3477",
+   "ok": true,
+   "tol": 0.001,
+   "rel": true,
+   "max_diff": 9.988324086939617e-06,
+   "source": "PDG",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "g_V(l) = -0.037",
+   "ok": true,
+   "tol": 1e-05,
+   "rel": false,
+   "max_diff": 2.7755575615628914e-17,
+   "source": "computed",
+   "got": -0.03693999999999997,
+   "want": -0.03694
+  },
+  {
+   "name": "tau phase space (axial) -0.23 %",
+   "ok": true,
+   "tol": 0.0001,
+   "rel": false,
+   "max_diff": 2.5160077850028273e-06,
+   "source": "computed",
+   "got": 0.997722516007785,
+   "want": 0.99772
+  },
+  {
+   "name": "H -> tautau 3.49 pb, Z/H ~ 560",
+   "ok": true,
+   "tol": 0.01,
+   "rel": true,
+   "max_diff": 0.00012487161811155223,
+   "source": "YR4",
+   "shape": [
+    2
+   ]
+  }
+ ]
+}

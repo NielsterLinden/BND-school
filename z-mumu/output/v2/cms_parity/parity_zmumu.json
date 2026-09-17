@@ -17,11 +17,11 @@
  "measurement": {
   "value": 1931.042994852695,
   "stat_pct": 0.03141489406912573,
-  "fit": "z-mumu/fit/results/zmumu_recosf_fit_result.json",
+  "fit": "z-mumu/fit/results/zmumu_fit_result.json",
   "syst_pct_measured": 1.039391492909452,
   "syst_pct_fit": 0.7741945041121696,
   "syst_pct_acceptance": 0.6935110275511498,
-  "label": "\u03c3_fid / A(60-120), measured reconstruction SF applied"
+  "label": "\u03c3_fid / A(60-120), the frozen result (17 Sep 2026)"
  },
  "rows": [
   {

@@ -6,16 +6,23 @@ this folder; **v2 is the result**, v1 is kept as the documented first iteration.
 ## v2 result (MC-based, TRExFitter binned-likelihood fit) -- `run_v2.py`
 
 ```
-sigma_fid(pp -> Z/gamma* -> mu+ mu-) = 790.1 +/- 0.2 (stat) +/- 8.5 (syst) +/- 9.6 (lumi) pb
+sigma_fid(pp -> Z/gamma* -> mu+ mu-) = 790.2 +/- 0.2 (stat) +/- 6.1 (syst) +/- 9.6 (lumi) pb      (frozen, 17 Sep 2026)
 ```
 
 in the fiducial volume: two opposite-sign muons, `pT > 26/20 GeV`, `|eta| < 2.4`,
-`60 < m(mu mu) < 120 GeV`, dressed leptons (dR < 0.1). Signal strength `mu_Z = 0.988 +/- 0.016`
+`60 < m(mu mu) < 120 GeV`, dressed leptons (dR < 0.1). Signal strength `mu_Z = 0.988 +/- 0.014`
 against the aMC@NLO prediction of 799.6 pb; goodness of fit p = 0.79 (12 bins of 5 GeV);
-counting cross-check `(N_obs - N_bkg)/(C L)` = 794.7 pb; the result moves by +/- 0.2% between
-the binnings that describe the data. Inclusive: `sigma(60 < m < 120 GeV) = 1931 +/- 33 pb`
-(A = 0.4092), `sigma(m > 50 GeV) = 2002 +/- 34 pb` (A = 0.3947). Reviewer's independent
-number for the same volume: 797.2 pb; v1: 773.2 pb.
+counting cross-check `(N_obs - N_bkg)/(C L)` = 794.5 pb; the result moves by +/- 0.2% between
+the binnings that describe the data. Inclusive: `sigma(60 < m < 120 GeV) = 1931 +/- 0.6 (stat)
++/- 15.0 (syst) +/- 13.5 (acceptance) +/- 23.4 (lumi) = 1931 +/- 30 pb` (A = 0.4092),
+`sigma(m > 50 GeV) = 2002 +/- 32 pb` (A = 0.3947). CMS (2024, arXiv:2408.03744): 1952 +/- 49 pb,
+-0.36 sigma ([`docs/16`](docs/16-uncertainties-vs-cms.md)). Reviewer's independent number for the
+fiducial volume: 797.2 pb; v1: 773.2 pb.
+
+The analysis is frozen (git tag `zmumu-freeze-2026-09-17`): the v2 fit of 15 Sep with the muon
+reconstruction scale factor measured by tag-and-probe (1.0001 +/- 0.0013 per muon, was 1 +/- 0.004
+assigned) and the acceptance uncertainties evaluated for the 60-120 GeV denominator, including the
+boson-pT, generator, PS FSR and QED FSR (estimate) rows that the comparison with CMS showed missing.
 
 What v2 does that v1 could not (details in [`docs/09-v2-overview.md`](docs/09-v2-overview.md)):
 own skims of the unskimmed NanoAOD (trigger objects, prefiring weights, 1-muon e-mu events),
@@ -25,13 +32,14 @@ a data-driven **fake-factor** estimate of non-prompt muons (no QCD simulation), 
 momentum calibration, and a **TRExFitter v1.8.0** fit of the mass spectrum with 24 nuisance
 parameters. Full numbers: [`output/v2/RESULTS_v2.md`](output/v2/RESULTS_v2.md); machine-readable:
 `output/v2/results_v2.json`, `fit/results/zmumu_fit_result.json`; plots: `output/v2/plots/`;
-fit outputs: `fit/results/zmumu/`. Review (15 Sep 2026): [`REVIEW.md`](REVIEW.md), slides `review/deck/zmumu_review.pdf`; its findings (e-mu non-prompt electrons, pileup profile, fit binning and `SigModel` template, `MuonReco`, lepton-cleaned jets) are fixed in the numbers above -- the review's "status after the fixes" section says what changed. Twelve-slide summary deck (pre-review numbers): <https://claude.ai/code/artifact/8072b961-01d5-47ed-9804-ee21f70ac985>. Agents: read [`CLAUDE.md`](CLAUDE.md).
+fit outputs: `fit/results/zmumu/`; comparison with CMS: `output/v2/cms_parity/`, slides <https://claude.ai/artifact/VCnvdCpXACmRdkXe9UrJ6A>. Review (15 Sep 2026): [`REVIEW.md`](REVIEW.md), slides `review/deck/zmumu_review.pdf`; its findings (e-mu non-prompt electrons, pileup profile, fit binning and `SigModel` template, `MuonReco`, lepton-cleaned jets) are fixed in the numbers above -- the review's "status after the fixes" section says what changed. Twelve-slide summary deck (pre-review numbers): <https://claude.ai/code/artifact/8072b961-01d5-47ed-9804-ee21f70ac985>. Agents: read [`CLAUDE.md`](CLAUDE.md).
 
-Uncertainty budget (impact on the cross section): luminosity 1.2% (external), muon
-efficiencies 0.87% (of which the external 0.4%/muon reconstruction term 0.77%), L1 prefiring
-0.51%, signal modelling (PDF, scales, parton shower, generator) 0.49%, MC statistics 0.38%,
-muon momentum 0.37%, pileup 0.13%, backgrounds 0.08%, fakes 0.04%, statistics 0.03%.
-Total 1.6% (1.06% without the luminosity).
+Uncertainty budget (impact on the fiducial cross section): luminosity 1.2% (external), L1 prefiring
+0.51%, muon efficiencies 0.48% (of which the measured reconstruction term 0.27%), signal modelling
+(PDF, scales, parton shower, generator) 0.46%, MC statistics 0.36%, muon momentum 0.35%, pileup
+0.15%, backgrounds 0.07%, fakes 0.04%, statistics 0.03%. Total 1.41% (0.77% without the
+luminosity). The inclusive cross sections add the acceptance: 0.70% for 60-120 GeV (PDF 0.50%,
+boson pT 0.38%, scales 0.29%, QED FSR 0.10%, the rest < 0.05% each).
 
 ## v1 result (data-only counting) -- `run_all.py`
 
@@ -52,7 +60,7 @@ are addressed in v2.
 ```bash
 # v2 (LCG_110 environment + TRExFitter; see ../CLAUDE.md for the one-time build)
 source ../setup.sh
-python run_v2.py --from 2                 # T&P -> control -> histograms -> fit -> report, ~40 min
+python run_v2.py --from 2                 # T&P -> control -> histograms -> reco T&P -> acceptance -> fit -> report -> CMS comparison, ~1 h
 python run_v2.py --from 2 --max-files 2   # smoke test
 python scripts/v2_1_skim.py               # (re)make the skims from the NanoAOD parents, ~1.5 h
 

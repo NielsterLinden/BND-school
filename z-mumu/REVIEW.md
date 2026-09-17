@@ -1,5 +1,11 @@
 # Review of the Z → μ⁺μ⁻ cross-section measurement (v2)
 
+> **Historical document (15 Sep 2026).** The numbers below are the review's. The channel result was frozen on
+> 17 Sep 2026 with two further changes that the review did not see: the muon reconstruction scale factor is
+> measured (F8's 0.4 %/muon became 1.0001 ± 0.0013 per muon) and the acceptance uncertainties are evaluated for
+> the 60–120 GeV denominator with the rows of `docs/16`. Frozen result: σ_fid = 790.2 ± 0.2 (stat) ± 6.1 (syst)
+> ± 9.6 (lumi) pb, σ(60–120) = 1931 ± 30 pb (`handoff.md`).
+
 Reviewed 15 Sep 2026 against the committed state of `z-mumu/` (result of 14 Sep: σ_fid = 791.8 ± 0.2 (stat)
 ± 6.2 (syst) ± 9.3 (lumi) pb, μ_Z = 0.990 ± 0.014). Everything below was re-derived from the repository
 outputs and, where the outputs did not contain the information, from a dedicated pass over the v2 skims

@@ -2,6 +2,9 @@
 """v2 step 6 -- data/MC plots, results_v2.json, RESULTS_v2.md and the summary plot.
 
     python scripts/v2_6_report.py
+
+The simulation in the data/MC plots carries the reconstruction scale factor the fit applied
+(fit result `meta.reco_sf`: per event in the dimuon regions, per muon in the e-mu regions).
 """
 
 from __future__ import annotations
@@ -60,14 +63,29 @@ def lineshape_plot(hall, gens, fakes_res):
             "data_over_pred_prefit_5gev": (data / mc).tolist()}
 
 
+def apply_reco_sf(hall, reco_sf):
+    """Scale the simulated histograms by the reconstruction SF of the fit (squared for the |w2 sums)."""
+    if not reco_sf:
+        return hall
+    out = {}
+    for k, v in hall.items():
+        parts = k.split("|")
+        if parts[0] == "Data":
+            out[k] = v
+            continue
+        f = reco_sf["sf_per_event"] if parts[1] in ("SR", "SS") else reco_sf["sf_per_muon"]
+        out[k] = np.asarray(v) * (f * f if k.endswith("|w2") else f)
+    return out
+
+
 def main():
-    hall = pickle.load(open(OUT / "histograms.pkl", "rb"))
+    fit = json.load(open(FIT)) if FIT.exists() else None
+    hall = apply_reco_sf(pickle.load(open(OUT / "histograms.pkl", "rb")), (fit or {}).get("meta", {}).get("reco_sf"))
     fakes_res = json.load(open(OUT / "fakes.json")) if (OUT / "fakes.json").exists() else None
     made = plotting.all_plots(hall, fakes_res)
     print(f"[report] {len(made)} data/MC plots")
     gens = json.load(open(OUT / "gensums.json"))
     lineshape = lineshape_plot(hall, gens, fakes_res) if "DYmumu|SR|mass_fit|lhe50120" in hall else None
-    fit = json.load(open(FIT)) if FIT.exists() else None
     tnp = json.load(open(OUT / "tnp" / "tnp_result.json")) if (OUT / "tnp" / "tnp_result.json").exists() else None
     mom = json.load(open(OUT / "momentum.json")) if (OUT / "momentum.json").exists() else None
     yields = {}
@@ -95,17 +113,34 @@ def main():
                   "The statistical uncertainty is the data one; the effective statistical limit of the fit is the MC "
                   "statistics (gammas, see the breakdown), not the data.", "",
                   f"| quantity | value |", "|---|---:|",
-                  f"| sigma(Z/gamma* -> mu mu, 60 < m < 120 GeV), A = {fit['A_60_120']:.4f} | {fit['sigma_60_120_pb']:.0f} +- {fit['sigma_60_120_tot_pb']:.0f} pb |",
-                  f"| sigma(Z/gamma* -> mu mu, m > 50 GeV), A = {fit['A_m50']:.4f} | {fit['sigma_m50_pb']:.0f} +- {fit['sigma_m50_tot_pb']:.0f} pb |",
+                  f"| sigma(Z/gamma* -> mu mu, 60 < m < 120 GeV), A = {fit['A_60_120']:.4f} | {fit['sigma_60_120_pb']:.0f} +- {fit['sigma_60_120_stat_pb']:.1f} (stat) "
+                  f"+- {fit['sigma_60_120_syst_pb']:.1f} (syst) +- {fit['sigma_60_120_acc_pb']:.1f} (acc) +- {fit['sigma_60_120_lumi_pb']:.1f} (lumi) = +- {fit['sigma_60_120_tot_pb']:.0f} pb |",
+                  f"| sigma(Z/gamma* -> mu mu, m > 50 GeV), A = {fit['A_m50']:.4f} | {fit['sigma_m50_pb']:.0f} +- {fit['sigma_m50_stat_pb']:.1f} (stat) "
+                  f"+- {fit['sigma_m50_syst_pb']:.1f} (syst) +- {fit['sigma_m50_acc_pb']:.1f} (acc) +- {fit['sigma_m50_lumi_pb']:.1f} (lumi) = +- {fit['sigma_m50_tot_pb']:.0f} pb |",
                   f"| C factor (reco/fiducial, all corrections) | {fit['meta']['C_factor']:.4f} |",
                   f"| NLO prediction sigma_fid (6077.22 pb x fiducial fraction) | {fit['sigma_fid_pred_pb']:.1f} pb |",
                   f"| counting cross-check (N_obs - N_bkg)/(C L) | {fit['meta']['counting']['sigma_fid_pb']:.1f} pb |",
+                  *([f"| muon reconstruction SF applied to the simulation (T&P, step 7) | {fit['meta']['reco_sf']['sf_per_muon']:.4f} per muon, "
+                     f"{fit['meta']['reco_sf']['sf_per_event']:.4f} per event |"] if fit["meta"].get("reco_sf") else []),
                   f"| v1 (data-only counting) / v1 revised / reviewer | {V1['sigma_fid']} / {V1['revised']} / {V1['reviewer']} pb |", "",
                   "## Uncertainty breakdown (impact on mu_Z, from the grouped-impact fit)", "", "| group | relative |", "|---|---:|"]
         for k, v in sorted(fit["grouped_impacts_mu"].items(), key=lambda kv: -kv[1]):
             lines.append(f"| {k} | {100*v:.3f}% |")
         lines += [f"| statistical (stat-only fit) | {100*fit['mu_stat_only_fit']:.3f}% |", "",
                   f"Luminosity quoted as the external {100*fit['mu_lumi']:.1f}% (profiled impact {100*fit['mu_lumi_profiled']:.3f}%).", ""]
+        acc = fit["acceptance"]
+        if "A_ptz_rel" in acc:
+            names = [("A_pdf_rel", "PDF (NNPDF3.1 Hessian)"), ("A_scale_rel", "QCD scales (7-point)"),
+                     ("A_ptz_rel", "boson pT: spectrum reweighted to the measured pT(mumu)"), ("A_qedfsr_rel", f"QED FSR model (estimate, option {acc['qedfsr_option']})"),
+                     ("A_generator_rel", "powheg vs aMC@NLO"), ("A_alphas_rel", "alpha_s"), ("A_ps_fsr_rel", "PS FSR")]
+            lines += ["## Acceptance uncertainties (outside the fit; zmumu/acceptance.py, docs/16)", "",
+                      "| source | A(60-120) | A(m>50) |", "|---|---:|---:|"]
+            for key, label in names:
+                lines.append(f"| {label} | {100*acc[key]:.3f}% | {100*acc['m50'][key]:.3f}% |")
+            lines += [f"| MC statistics | {100*acc['A_stat']/acc['A']:.3f}% | {100*acc['m50']['A_stat']/acc['m50']['A']:.3f}% |",
+                      f"| **total** | **{100*acc['A_rel_unc']:.3f}%** | **{100*acc['m50']['A_rel_unc']:.3f}%** |", "",
+                      f"PS ISR ({100*acc['A_ps_isr_rel']:.3f}%) is smaller than the boson-pT row and not added. "
+                      f"QED FSR options: a {acc['qedfsr_options_pct']['a']:.2f}% (CMS-SMP-20-004) / b 0 / c {acc['qedfsr_options_pct']['c']:.2f}%.", ""]
         if stab:
             lines += ["## Stability of mu_Z against the fit configuration (scripts/v2_5_fit_variants.py)", "",
                       "| configuration | mu_Z | GoF p | notable pulls (constraint) |", "|---|---:|---:|---|"]
@@ -148,7 +183,7 @@ def main():
     print(f"[report] wrote {OUT / 'RESULTS_v2.md'}")
     if fit:
         import matplotlib.pyplot as plt
-        rows = [("DY aMC@NLO prediction", V1["pred_nlo"], V1["pred_nlo"] * fit["acceptance"].get("A_rel_unc", 0.006), "#1f77b4"),
+        rows = [("DY aMC@NLO prediction", V1["pred_nlo"], V1["pred_nlo"] * float(np.sqrt(sum(fit["acceptance"][k] ** 2 for k in ("A_pdf_rel", "A_alphas_rel", "A_scale_rel")))), "#1f77b4"),
                 ("DY madgraph LO prediction", V1["pred_lo"], V1["pred_lo"] * 0.01, "#aec7e8"),
                 ("v1: data-only counting (773.2)", V1["sigma_fid"], V1["sigma_fid_err"], "grey"),
                 ("v1 revised (review corrections)", V1["revised"], V1["revised_err"], "grey"),

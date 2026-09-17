@@ -1,20 +1,54 @@
 {
  "A_60_120": 0.40920878182397075,
  "A_m50": 0.39470310411465503,
- "C_factor": 0.7914150044068334,
+ "C_factor": 0.7915673233989594,
  "acceptance": {
-  "A": 0.394703104114655,
-  "A_alphas_rel": 0.00026935566785504794,
-  "A_lhe_mumu_60_120": 0.40920878182397075,
-  "A_pdf_rel": 0.0051655282427082805,
-  "A_rel_unc": 0.006096183065057161,
-  "A_scale_rel": 0.003195009388906489,
-  "A_stat": 0.00017657327596215717
+  "A": 0.40920878182397075,
+  "A_alphas_rel": 0.0003061585512586368,
+  "A_generator_rel": 0.00044596276449926364,
+  "A_pdf_rel": 0.0049999825108819245,
+  "A_ps_fsr_rel": 0.00026938341911247887,
+  "A_ps_isr_rel": 0.0006757283728248131,
+  "A_ptz_rel": 0.0037543200833254353,
+  "A_qedfsr_rel": 0.0010070080283758444,
+  "A_rel_unc": 0.007007839874220769,
+  "A_rel_unc_measured": 0.006935110275511498,
+  "A_scale_rel": 0.0028993037095211838,
+  "A_stat": 0.0001961919760345293,
+  "denominator": "LHE mu mu, 60 < m_LHE < 120 GeV (m50: m_LHE > 50 GeV, A = 3 sumw_fid / sumw)",
+  "m50": {
+   "A": 0.39470310411465503,
+   "A_alphas_rel": 0.00027506809333460724,
+   "A_generator_rel": 0.00044596276449926364,
+   "A_pdf_rel": 0.005161030306137272,
+   "A_ps_fsr_rel": 0.0002835114665374894,
+   "A_ps_isr_rel": 0.0006693133091548176,
+   "A_ptz_rel": 0.0037543200833254353,
+   "A_qedfsr_rel": 0.0010070080283758444,
+   "A_rel_unc": 0.007229080859491698,
+   "A_rel_unc_measured": 0.007158599367463989,
+   "A_scale_rel": 0.0031511272484658903,
+   "A_stat": 0.00018923734138366567
+  },
+  "ptz_shift_data_rel": 0.0037543200833254353,
+  "qedfsr_option": "c",
+  "qedfsr_options_pct": {
+   "a": 0.12,
+   "b": 0.0,
+   "c": 0.10070080283758445
+  },
+  "source": "zmumu/acceptance.py: output/v2/gensums.json, output/v2/histograms.pkl (pT(mumu), FSR photons), output/v2/cms_parity/theory_acceptance.json (A(pT(Z)), bare/dressed); docs/16 \u00a74-5"
  },
  "dy_xsec_pb": 6077.22,
  "fakes_method_rel_unc": 0.3,
  "lumi_pb": 16393.381,
  "n_fid_expected": 13107587.87805132,
+ "reco_sf": {
+  "sf_per_event": 1.0001924641196815,
+  "sf_per_muon": 1.0000962274299816,
+  "source": "output/v2/tnp/reco_result.json",
+  "unc_per_event": 0.0027000453737012586
+ },
  "regions": [
   "SR",
   "CRemu"

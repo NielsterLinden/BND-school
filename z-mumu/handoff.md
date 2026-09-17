@@ -6,57 +6,78 @@
 - Eugene Shalugin
 - Niels Ter Linden
 
-## v2 result (15 Sep 2026, MC-based, TRExFitter fit, after the review fixes) -- **use this for the combination**
+## Frozen result (17 Sep 2026) -- **the channel's final result, used by the combination**
 
-> **σ_fid(pp → Z/γ* → μ⁺μ⁻; dressed, pT > 26/20 GeV, |η| < 2.4, 60 < m < 120 GeV) = 790.1 ± 0.2 (stat) ± 8.5 (syst) ± 9.6 (lumi) pb**
-> μ_Z = 0.988 ± 0.016 w.r.t. the aMC@NLO prediction (799.6 pb); GoF p = 0.79; counting cross-check 794.7 pb; ±0.2 % between binnings.
-> **σ(Z/γ* → μμ, 60 < m_Born < 120 GeV) = 1931 ± 33 pb** (A = 0.4092) · σ(m > 50 GeV) = 2002 ± 34 pb (A = 0.3947)
+> **σ_fid(pp → Z/γ* → μ⁺μ⁻; dressed, pT > 26/20 GeV, |η| < 2.4, 60 < m < 120 GeV) = 790.2 ± 0.2 (stat) ± 6.1 (syst) ± 9.6 (lumi) pb**
+> μ_Z = 0.9883 ⁺⁰·⁰¹⁴¹₋₀.₀₁₃₈ w.r.t. the aMC@NLO prediction (799.6 pb); GoF p = 0.79; counting cross-check 794.5 pb; ±0.2 % between binnings.
+> **σ(Z/γ* → μμ, 60 < m_Born < 120 GeV) = 1931 ± 0.6 (stat) ± 15.0 (syst) ± 13.5 (acceptance) ± 23.4 (lumi) pb = 1931 ± 30 pb** (A = 0.4092)
+> σ(m > 50 GeV) = 2002 ± 32 pb (A = 0.3947)
+
+The analysis is **frozen**: no further reruns or improvements (17 Sep 2026, git tag `zmumu-freeze-2026-09-17`).
+It is the v2 analysis of 15 Sep plus what the comparison with CMS-SMP-20-004 (`docs/16`) measured:
+
+* the muon **reconstruction scale factor** from tag-and-probe on the unskimmed NanoAOD, 1.0001 ± 0.0013 per
+  muon, applied to every simulated template; `MuonReco` is its measured ±0.27 % per event (was 1 ± 0.4 %/muon
+  assigned, ±0.8 % per event);
+* the **acceptance uncertainties for the 60–120 GeV denominator** of the quoted cross section (they had been
+  evaluated for m > 50 GeV), with the rows the comparison showed to be missing: the boson-pT spectrum reweighted to
+  our measured pT(μμ), powheg vs aMC@NLO, PS FSR, and the QED FSR model as an estimate (option c of docs/16 §5);
+  total 0.61 → 0.70 %, in `zmumu/acceptance.py`.
+
+Changes against 15 Sep: μ_Z 0.9881 → 0.9883, σ_fid syst 8.5 → 6.1 pb, σ(60–120) 1931 ± 33 → 1931 ± 30 pb. The
+15 Sep result is kept as `fit/results/zmumu_v2_15sep_fit_result.json` (and `python scripts/v2_5_fit.py
+--no-reco-sf` rebuilds its fit). Against CMS (2024): 1931 ± 30.7 pb vs 1952 ± 49 pb, −21 pb, −0.36σ (docs/16).
 
 Method: own skims of the unskimmed NanoAOD (data + all MC), pileup and L1-prefiring weights,
-tight-ID/iso/trigger scale factors from tag-and-probe fits, fake-factor non-prompt estimate,
+tight-ID/iso/trigger and reconstruction scale factors from tag-and-probe fits, fake-factor non-prompt estimate,
 Z-peak momentum calibration, **TRExFitter v1.8.0** profile-likelihood fit of m(μμ) (12 × 5 GeV
-bins, MINOS on every parameter) with 24 nuisance parameters. Everything is in `docs/09`–`15`, `output/v2/RESULTS_v2.md`,
-`CLAUDE.md`; slide deck: <https://claude.ai/code/artifact/8072b961-01d5-47ed-9804-ee21f70ac985>. Reproduce: `source ../setup.sh && python run_v2.py --from 2` (~40 min).
+bins, MINOS on every parameter) with 24 nuisance parameters. Everything is in `docs/09`–`16`, `output/v2/RESULTS_v2.md`,
+`CLAUDE.md`; slide decks: v2 before the review <https://claude.ai/code/artifact/8072b961-01d5-47ed-9804-ee21f70ac985>
+(pre-review numbers), comparison with CMS <https://claude.ai/artifact/VCnvdCpXACmRdkXe9UrJ6A>.
+Reproduce: `source ../setup.sh && python run_v2.py --from 2` (~1 h; `--from 5` for fit, report and comparison only).
 
 ### What the combination gets (see `../fitting/CONVENTIONS.md`)
 
 | item | where |
 |---|---|
-| fit-input histograms (TH1D + Sumw2), names `mumu_SR__<sample>[__<NP>Up/Down]`, `mumu_CRemu__...` | `fit/fitinputs/zmumu.root` (committed, 210 kB, force-added like the ττ inputs; regenerate with `python scripts/v2_5_fit.py --no-fit`; metadata in `zmumu.root.meta.json`) |
+| fit-input histograms (TH1D + Sumw2), names `mumu_SR__<sample>[__<NP>Up/Down]`, `mumu_CRemu__...`, reconstruction SF applied | `fit/fitinputs/zmumu.root` (committed, force-added like the ττ inputs; regenerate with `python scripts/v2_5_fit.py --no-fit`; metadata in `zmumu.root.meta.json`, including the `acceptance` block the MultiFit reads) |
 | TRExFitter config (POI `mu_Z`, NP names/categories) | `fit/zmumu.config` (committed) |
-| workspace for the MultiFit | `fit/results/zmumu/RooStats/zmumu_combined_zmumu_model.root` (committed, 240 kB; `mumu_SR` only -- `mumu_CRemu` is a VALIDATION region) |
-| fit result (μ, uncertainties, grouped impacts, σ's, tables) | `fit/results/zmumu_fit_result.json`, `output/v2/results_v2.json` |
+| workspace | `fit/results/zmumu/RooStats/zmumu_combined_zmumu_model.root` (committed; `mumu_SR` only -- `mumu_CRemu` is a VALIDATION region) |
+| fit result (μ, uncertainties, grouped impacts, σ's, acceptance block, tables) | `fit/results/zmumu_fit_result.json`, `output/v2/results_v2.json` |
 | skims for laptops (one ROOT file per sample, NanoAOD names, `manifest.json` with SHA-256) | `/project/atlas/users/nterlind/BND-school-skims-lite/` (bulk: `/data/atlas/users/nterlind/BND-school-cache/skims_v2/`) |
 
-Numbers in the notebook's variables (`combination/combination.ipynb`):
+The combination (`../combination/combLieke/`, a TRExFitter MultiFit) reads the config, the fit inputs and the
+acceptance block of `zmumu.root.meta.json` (`combLieke/config/channels.json`).
+
+Counting-form numbers (for a cross-check by hand):
 
 | variable | value | note |
 |---|---:|---|
 | `n_obs` | 10,378,567 | tight ID, ≥ 1 trigger-matched muon, FSR-recovered mass |
-| `n_bkg` | 68,787 | prompt MC (Z→ττ 11.0k, tt̄ 31.6k, tW 2.9k, WW 3.8k, WZ 9.2k, ZZ 6.3k) + non-prompt 3.9k |
-| `C` | 0.7914 | N_sel(all corrections) / N_fid(dressed), aMC@NLO |
+| `n_bkg` | 68,799 | prompt MC (Z→ττ 11.0k, tt̄ 31.6k, tW 2.9k, WW 3.8k, WZ 9.2k, ZZ 6.3k) + non-prompt 3.9k |
+| `C` | 0.7916 | N_sel(all corrections, incl. reconstruction SF) / N_fid(dressed), aMC@NLO |
 | `A_60_120` / `A_m50` | 0.4092 / 0.3947 | dressed fiducial ÷ LHE μμ (60–120) / ÷ (6077.22/3) |
-| `acc_eff` | 0.3238 (60–120) / 0.3124 (m>50) | A × C |
+| `acc_eff` | 0.3239 (60–120) / 0.3124 (m>50) | A × C |
 | `lumi_pb` | 16393.381 | normtag, record 1059 |
 
 Uncertainties (impact on μ_Z / σ), and correlation with the other channels:
 
 | group | relative | correlated | NP names |
 |---|---:|---|---|
-| luminosity | 1.20% (external; profiled 1.16%) | yes | `Lumi` |
-| muon efficiency (ID, iso, trigger, reco 0.4%/muon correlated = 0.8%/event) | 0.87% | with μτ_h only | `MuonID`, `MuonIso`, `MuonTrigger`, `MuonReco` |
+| luminosity | 1.20% (external; profiled 1.18%) | yes | `Lumi` |
 | L1 prefiring | 0.51% | yes | `L1Prefiring` |
-| signal modelling (PDF, αs, scales, PS, generator) | 0.49% | yes | `PDF`, `AlphaS`, `QCDScale`, `PS_ISR`, `PS_FSR`, `SigModel` |
-| MC statistics (the effective statistical limit: 10× the data statistics) | 0.38% | no | gammas |
-| muon momentum scale/resolution | 0.37% | with μτ_h only | `MuonScale`, `MuonRes` |
-| pileup | 0.13% | yes | `Pileup` |
-| background cross sections | 0.08% | yes | `XS_TTbar`, `XS_SingleTop`, `XS_WW`, `XS_WZ`, `XS_ZZ`, `XS_DYtautau` |
+| muon efficiency (ID 0.19, iso 0.30, trigger 0.15, reconstruction 0.27 measured) | 0.48% | with μτ_h only | `MuonID`, `MuonIso`, `MuonTrigger`, `MuonReco` |
+| signal modelling (PDF, αs, scales, PS, generator) | 0.46% | yes (`SigModel_mumu` in the combination) | `PDF`, `AlphaS`, `QCDScale`, `PS_ISR`, `PS_FSR`, `SigModel` |
+| MC statistics (the effective statistical limit: 10× the data statistics) | 0.36% | no | gammas |
+| muon momentum scale/resolution | 0.35% | with μτ_h only | `MuonScale`, `MuonRes` |
+| pileup | 0.15% | yes | `Pileup` |
+| background cross sections | 0.07% | yes | `XS_TTbar`, `XS_SingleTop`, `XS_WW`, `XS_WZ`, `XS_ZZ`, `XS_DYtautau` |
 | non-prompt | 0.04% | no | `FakeStat_mumu`, `FakeMethod_mumu` |
 | statistical | 0.03% | no | |
-| acceptance (for σ_tot only): PDF 0.52%, scale 0.32%, αs 0.03%, stat 0.05% | 0.61% | yes | outside the fit |
+| **fit total without luminosity** | **0.77%** | | |
+| acceptance (σ(60–120) only, outside the fit): PDF 0.50%, boson pT 0.38%, scales 0.29%, QED FSR 0.10% (estimate), MC stat 0.05%, generator 0.04%, αs 0.03%, PS FSR 0.03% | 0.70% | PDF, αs, scales, PS FSR yes; the rest no | `Acc_PDF`, `Acc_AlphaS`, `Acc_QCDScale`, `Acc_PS_FSR`, `Acc_PTZ_mumu`, `Acc_QEDFSR_mumu`, `Acc_Generator_mumu`, `AccStat_mumu` |
 
-Decisions the three channels still have to take together: the acceptance denominator
-(60 < m < 120 GeV recommended, vs m > 50 GeV) and NLO vs LO for A (3.2% apart).
+Settled with the other channels: the acceptance denominator is 60 < m_LHE < 120 GeV, NLO (aMC@NLO).
 
 ### Cross-channel checks answered (15 Sep 2026)
 
@@ -66,7 +87,7 @@ and for all channels "common truth mass definition, lepton universality, event o
 
 - **Shape fit.** Fixed on 15 Sep (`REVIEW.md` §0, commit 3c95908): 12 × 5 GeV bins, two-sided
   `SigModel` inside 50 < m_LHE < 120 GeV, no smoothing, MINOS on every parameter; GoF p = 0.79, stable
-  to ±0.2 % over the accepted binnings. The combination already uses this fit (`combination/result.md`).
+  to ±0.2 % over the accepted binnings. The combination uses this fit (`../combination/combLieke/`).
   The 1-bin counting configuration exists as `fit/stab_1bin.config` + `fit/fitinputs/stab_1bin.root`
   (`python scripts/v2_5_fit_variants.py`), but it is a variation, not the measurement.
 - **Exact reference numbers** (`fit/results/zmumu_fit_result.json`, `meta_json` in the fit-input file,
@@ -95,7 +116,7 @@ and for all channels "common truth mass definition, lepton universality, event o
   a 0.002 % effect on a MultiFit with one shared `mu_Z` (`fitting/CONVENTIONS.md` §6).
 - **Lepton universality** is *assumed* in the normalisation (one 3-flavour NNLO cross section
   split by the generator's LHE flavour sums) and *tested* by the combination
-  (R = σ(ττ)/σ(μμ) = 1.21 ± 0.17). Nothing in this channel's σ_fid or σ(60–120) uses another
+  (one σ per channel in the MultiFit, compatibility test in `../combination/combLieke/README.md`). Nothing in this channel's σ_fid or σ(60–120) uses another
   flavour's cross section; Z→ττ in the SR is a background with its own `XS_DYtautau`.
 - **Event orthogonality.** μμ: `SingleMuon`, `HLT_IsoMu24||IsoTkMu24`, exactly two tight muons
   (no electron or τ veto). ττ: `Tau` dataset, di-τh trigger, **vetoes** muons and electrons
@@ -118,19 +139,18 @@ smoothing, MINOS on all parameters, stability table in `RESULTS_v2.md` (+-0.2% b
 describe the data); pileup profile matched to N_PV (`Pileup` pull -1.5 -> +0.06); `MuonReco` 0.4%/muon ->
 0.8%/event; lepton-cleaned jets; luminosity quoted as the external 1.2%; `Fakes` template without Sumw2.
 
-### Comparison with CMS-SMP-20-004 (16 Sep 2026) -- `docs/16-uncertainties-vs-cms.md`
+### Comparison with CMS-SMP-20-004 (16 Sep 2026, promoted 17 Sep) -- `docs/16-uncertainties-vs-cms.md`
 
 Every row of the CMS systematic table (arXiv:2408.03744, Table 7; e and μ fitted together) is mapped onto
-this analysis. Closed by measurements, in a **tagged variant only** (baseline, config and fit inputs
-unchanged): the muon reconstruction SF by tag-and-probe on the unskimmed NanoAOD,
-**1.0001 ± 0.0013 per muon** (was 1 ± 0.004 assigned; `scripts/v2_7_reco_tnp.py`,
-`fit/results/zmumu_recosf_fit_result.json`: μ_Z = 0.9883 ± 0.0141, σ_fid syst 8.5 → 6.1 pb), and the
-resummation/boson-pT uncertainty of the acceptance from our own pT(μμ) spectrum (+0.38 %, absent before).
-The acceptance theory uncertainties are now evaluated for the 60–120 GeV denominator (0.61 → 0.58 %).
-Estimated with three options: the QED FSR model (a 0.12 / b 0 / c 0.10 %). Result:
-**σ(60–120) = 1931 ± 0.6 ± 20.2 ± 23.2 pb against CMS 1952 ± 4 ± 18 ± 45 pb: −21 pb, −0.36σ**, whichever
-option. Plots `output/v2/plots/cms_parity_*`, `reco_*`; the same procedure for z-ee and z-tautau:
-`../fitting/UNCERTAINTY_PARITY.md` (agent `.claude/agents/uncertainty-parity-auditor.md`).
+this analysis. Closed by measurements, first in a tagged fit and **part of the frozen result since 17 Sep**:
+the muon reconstruction SF by tag-and-probe on the unskimmed NanoAOD, **1.0001 ± 0.0013 per muon**
+(was 1 ± 0.004 assigned; `scripts/v2_7_reco_tnp.py`), and the resummation/boson-pT uncertainty of the
+acceptance from our own pT(μμ) spectrum (0.38 %, absent before). The acceptance theory uncertainties are
+evaluated for the 60–120 GeV denominator. Estimated with three options: the QED FSR model (a 0.12 / b 0 /
+c 0.10 %; the result carries c). Result: **σ(60–120) = 1931 ± 0.6 ± 20.2 ± 23.2 pb against CMS
+1952 ± 4 ± 18 ± 45 pb: −21 pb, −0.36σ**, whichever option. Plots `output/v2/plots/cms_parity_*`, `reco_*`;
+the same procedure for z-ee and z-tautau: `../fitting/UNCERTAINTY_PARITY.md`
+(agent `.claude/agents/uncertainty-parity-auditor.md`).
 
 ### Open issues after v2
 
@@ -144,8 +164,8 @@ option. Plots `output/v2/plots/cms_parity_*`, `reco_*`; the same procedure for z
    fit resolves this with `SigModel` = +0.66 sigma. A third generator or NLO EW corrections would tell
    which is right; the counting extraction (794.7 pb) is 0.6% above the fit for this reason.
 4. Official prefiring maps, Muon-POG scale factors and Rochester corrections would replace the
-   in-house versions (all three files need CERN credentials). The 0.4%/muon reconstruction term is
-   now the second-largest systematic.
+   in-house versions (all three files need CERN credentials). The reconstruction term, the
+   second-largest systematic on 15 Sep (0.4%/muon assigned), is measured since 17 Sep (docs/16).
 5. The single-muon + jet fake-factor region is biased by the isolated trigger; the
    prescaled non-isolated paths are in the skim if someone wants to fix it.
 6. The LO madgraph acceptance (3.2% lower) is a convention question, not a systematic.

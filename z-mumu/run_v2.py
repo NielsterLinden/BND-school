@@ -1,13 +1,18 @@
 #!/usr/bin/env python
-"""Run the v2 (MC-based, TRExFitter) Z -> mu mu measurement end to end.
+"""Run the v2 (MC-based, TRExFitter) Z -> mu mu measurement end to end: the frozen result (17 Sep 2026).
 
     source ../setup.sh
     python run_v2.py                     # everything (skims take ~1.5 h the first time)
     python run_v2.py --from 2            # after the skims exist
+    python run_v2.py --from 5            # fit, report and the CMS comparison only
     python run_v2.py --from 2 --max-files 2 --workers 4     # quick smoke test
 
-Steps: 0 filelists, 1 skim, 2 pileup profile + tag-and-probe, 3 control (momentum + fakes), 4 histograms,
-5 fit, 6 report. Each step is also runnable on its own (scripts/v2_<n>_*.py).
+Execution order: 0 filelists, 1 skim, 2 pileup profile + tag-and-probe, 3 control (momentum + fakes),
+4 histograms, 7 reconstruction tag-and-probe (unskimmed parents), 8 generator-level acceptance study,
+5 fit (+ 5b stability variants), 6 report, 9 comparison with CMS-SMP-20-004. Steps 7 and 8 are inputs of
+the fit (reconstruction SF, acceptance), hence before 5; both are resumable and fast once their parts
+exist. `--from`/`--to` take step numbers and follow this order. Each step is also runnable on its own
+(scripts/v2_<n>_*.py).
 """
 
 from __future__ import annotations
@@ -19,24 +24,29 @@ import time
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-STEPS = [(0, "file lists", "v2_0_filelists.py", []), (1, "skims", "v2_1_skim.py", ["--workers", "--max-files"]),
-         (2, "pileup profile", "v2_2_pileup.py", ["--workers", "--max-files"]),
-         (2, "tag-and-probe", "v2_2_tnp.py", ["--workers", "--max-files"]),
-         (3, "control regions", "v2_3_control.py", ["--workers", "--max-files"]),
-         (4, "histograms", "v2_4_histograms.py", ["--workers", "--max-files"]),
-         (5, "fit", "v2_5_fit.py", []), (6, "report", "v2_6_report.py", [])]
+STEPS = [("0", "file lists", "v2_0_filelists.py", []), ("1", "skims", "v2_1_skim.py", ["--workers", "--max-files"]),
+         ("2", "pileup profile", "v2_2_pileup.py", ["--workers", "--max-files"]),
+         ("2", "tag-and-probe", "v2_2_tnp.py", ["--workers", "--max-files"]),
+         ("3", "control regions", "v2_3_control.py", ["--workers", "--max-files"]),
+         ("4", "histograms", "v2_4_histograms.py", ["--workers", "--max-files"]),
+         ("7", "reconstruction tag-and-probe", "v2_7_reco_tnp.py", ["--workers", "--max-files"]),
+         ("8", "generator-level acceptance", "v2_8_theory_acceptance.py", []),
+         ("5", "fit", "v2_5_fit.py", []), ("5", "fit stability variants", "v2_5_fit_variants.py", []),
+         ("6", "report", "v2_6_report.py", []), ("9", "comparison with CMS-SMP-20-004", "v2_9_cms_parity.py", [])]
+ORDER = list(dict.fromkeys(number for number, *_ in STEPS))
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--from", dest="start", type=int, default=0)
-    ap.add_argument("--to", dest="stop", type=int, default=6)
+    ap.add_argument("--from", dest="start", choices=ORDER, default=ORDER[0])
+    ap.add_argument("--to", dest="stop", choices=ORDER, default=ORDER[-1])
     ap.add_argument("--workers", type=int, default=None)
     ap.add_argument("--max-files", type=int, default=None)
     args = ap.parse_args()
+    first, last = ORDER.index(args.start), ORDER.index(args.stop)
     t_start = time.time()
     for number, name, script, opts in STEPS:
-        if not (args.start <= number <= args.stop):
+        if not (first <= ORDER.index(number) <= last):
             continue
         cmd = [sys.executable, str(HERE / "scripts" / script)]
         if "--workers" in opts and args.workers:

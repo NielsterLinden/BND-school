@@ -2,18 +2,20 @@
 """v2 step 5 -- TRExFitter inputs, config, fit, and the cross section.
 
     python scripts/v2_5_fit.py [--no-fit] [--emu-control] [--rebin 5] [--tag NAME] [--no-sigmodel] [--quick]
-                               [--reco-sf output/v2/tnp/reco_result.json]
+                               [--no-reco-sf]
 
-Reads output/v2/histograms.pkl, output/v2/fakes.json, output/v2/gensums.json and the
-acceptance numbers; writes fit/fitinputs/<tag>.root, fit/<tag>.config, runs trex-fitter
+Reads output/v2/histograms.pkl, output/v2/fakes.json, output/v2/gensums.json, the reconstruction
+scale factor (output/v2/tnp/reco_result.json, step 7) and the generator-level acceptance study
+(output/v2/cms_parity/theory_acceptance.json, step 8); writes fit/fitinputs/<tag>.root, fit/<tag>.config, runs trex-fitter
 (h, w, f, dp, r, i and a stat-only fit) into fit/results/<tag>/, and writes
 fit/results/<tag>_fit_result.json with mu, its uncertainty breakdown and the cross sections.
 The signal-region mass histogram is stored with 1 GeV bins and rebinned by `--rebin`
 (default 5 -> 12 bins of 5 GeV; see docs/14 for why not 2 GeV). `--tag`, `--no-sigmodel`
 and `--quick` (h w f i only) serve the stability variants (scripts/v2_5_fit_variants.py).
-`--reco-sf` applies the measured muon reconstruction scale factor (scripts/v2_7_reco_tnp.py) to every
-MC template -- per event in the SR, per muon in the e-mu region -- and replaces the assigned 0.8 %
-`MuonReco` by its measured uncertainty (docs/16).
+The measured muon reconstruction scale factor (scripts/v2_7_reco_tnp.py) scales every MC template -- per
+event in the SR, per muon in the e-mu region -- and `MuonReco` is its measured uncertainty; `--no-reco-sf`
+restores the assigned 1 +- 0.4 %/muon of the 15 Sep 2026 result. The acceptance and its uncertainties
+(60-120 GeV denominator, pT(Z), generator, PS FSR, QED FSR estimate) come from zmumu/acceptance.py (docs/16).
 See docs/14-fit-and-systematics.md and fitting/CONVENTIONS.md.
 """
 
@@ -21,6 +23,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import pickle
 import shutil
 import sys
@@ -35,14 +38,15 @@ import hist
 import numpy as np
 
 from fitting import run_trex, trexconfig as tc, trexhist
-from zmumu import config, fakes, histograms as H, samples, weights
+from zmumu import acceptance, config, fakes, histograms as H, samples, weights
 
 OUT = config.OUTPUT_DIR / "v2"
 FIT = config.REPO_DIR / "fit"
 JOB = "zmumu"
 MC_SAMPLES = ["DYmumu", "DYtautau", "DYee", "TTbar", "SingleTop", "WW", "WZ", "ZZ"]
 EMU_EXTRA_SAMPLES = ["WJets"]           # non-prompt electrons (jet -> e) in the e-mu region only
-MUON_RECO_UNC = 2 * config.MU_RECO_EFF_UNC   # 0.4% per muon, fully correlated -> 0.8% per event (docs/11)
+RECO_SF_JSON = OUT / "tnp" / "reco_result.json"
+MUON_RECO_UNC = 2 * config.MU_RECO_EFF_UNC   # assigned (--no-reco-sf): 0.4% per muon, fully correlated -> 0.8% per event (docs/11)
 ALL_MC_NP = ["Pileup", "L1Prefiring", "MuonID", "MuonIso", "MuonTrigger", "MuonScale", "MuonRes"]
 CATEGORY = {"Pileup": "Pileup", "L1Prefiring": "L1 prefiring", "MuonID": "Muon efficiency", "MuonIso": "Muon efficiency",
             "MuonTrigger": "Muon efficiency", "MuonScale": "Muon momentum", "MuonRes": "Muon momentum"}
@@ -233,14 +237,14 @@ def cross_sections(res, gens, acc):
     out["sigma_fid_syst_pb"] = out["mu_syst_excl_lumi"] * sigma_fid_pred
     out["sigma_fid_lumi_pb"] = lumi * sigma_fid_pred
     out["sigma_fid_tot_pb"] = tot * sigma_fid_pred
-    a_rel = acc.get("A_rel_unc", 0.0)
-    for name, a in (("60_120", a_60120), ("m50", a_m50)):
+    for name, a, a_rel in (("60_120", a_60120, acc.get("A_rel_unc", 0.0)), ("m50", a_m50, acc.get("m50", {}).get("A_rel_unc", 0.0))):
         s = out["sigma_fid_pb"] / a
         out[f"sigma_{name}_pb"] = s
         out[f"sigma_{name}_stat_pb"] = out["sigma_fid_stat_pb"] / a
         out[f"sigma_{name}_syst_pb"] = out["sigma_fid_syst_pb"] / a
         out[f"sigma_{name}_lumi_pb"] = out["sigma_fid_lumi_pb"] / a
         out[f"sigma_{name}_acc_pb"] = s * a_rel
+        out[f"sigma_{name}_syst_incl_acc_pb"] = float(np.hypot(out[f"sigma_{name}_syst_pb"], s * a_rel))
         out[f"sigma_{name}_tot_pb"] = float(np.sqrt((out["sigma_fid_tot_pb"] / a) ** 2 + (s * a_rel) ** 2))
     return out
 
@@ -255,8 +259,10 @@ def main():
     ap.add_argument("--no-sigmodel", action="store_true", help="drop the powheg SigModel template (stability check)")
     ap.add_argument("--smoothing", action="store_true", help="smooth the MuonScale/MuonRes templates (v2 default was on)")
     ap.add_argument("--quick", action="store_true", help="h w f i only (no plots, ranking or stat-only fit)")
-    ap.add_argument("--reco-sf", type=Path, default=None,
-                    help="reco_result.json of scripts/v2_7_reco_tnp.py: apply the measured reconstruction SF")
+    ap.add_argument("--reco-sf", type=Path, default=RECO_SF_JSON,
+                    help="reco_result.json of scripts/v2_7_reco_tnp.py (default: the measured reconstruction SF of step 7)")
+    ap.add_argument("--no-reco-sf", action="store_true",
+                    help="no reconstruction SF, MuonReco assigned 0.4%%/muon (the result before 17 Sep 2026)")
     args = ap.parse_args()
     JOB_ = args.tag
     if 60 % args.rebin:
@@ -271,7 +277,9 @@ def main():
     inputs = {n.replace("SR__", "mumu_SR__", 1).replace("CRemu__", "mumu_CRemu__", 1): h for n, h in inputs.items()}
     present = {n.replace("mumu_", "", 1) if n.startswith("mumu_") else n for n in inputs}
     reco_unc, reco_title = MUON_RECO_UNC, "Muon reconstruction (0.4%/muon, correlated)"
-    if args.reco_sf:
+    if not args.no_reco_sf:
+        if not args.reco_sf.exists():
+            sys.exit(f"{args.reco_sf} missing: run scripts/v2_7_reco_tnp.py (or pass --no-reco-sf)")
         rm = json.load(open(args.reco_sf))["meta"]
         sf_evt, sf_mu = rm["sf_reco_per_event"], rm["sf_reco_per_muon"]
         for name, h in inputs.items():
@@ -284,15 +292,12 @@ def main():
             view.variance[...] = view.variance * f * f
         reco_unc = rm["sf_reco_per_event_err"]
         reco_title = f"Muon reconstruction (T&P, {100 * rm['sf_reco_per_muon_err']:.2f}%/muon, correlated)"
-        meta["reco_sf"] = {"source": str(args.reco_sf), "sf_per_event": sf_evt, "sf_per_muon": sf_mu,
+        meta["reco_sf"] = {"source": os.path.relpath(args.reco_sf.resolve(), config.REPO_DIR.resolve()), "sf_per_event": sf_evt, "sf_per_muon": sf_mu,
                            "unc_per_event": reco_unc}
         print(f"[fit] reconstruction SF {sf_evt:.5f} per event applied to the MC templates; MuonReco = {100 * reco_unc:.3f} %")
-    acc = {}
-    acc_pkl = config.DATA_DIR / "mc_acceptance_nlo_result.pkl"
-    if acc_pkl.exists():
-        r = pickle.load(open(acc_pkl, "rb"))
-        acc = {k: float(r[k]) for k in ("A", "A_stat", "A_pdf_rel", "A_alphas_rel", "A_scale_rel", "A_lhe_mumu_60_120") if k in r}
-        acc["A_rel_unc"] = float(np.sqrt((acc["A_stat"] / acc["A"]) ** 2 + acc["A_pdf_rel"] ** 2 + acc["A_alphas_rel"] ** 2 + acc["A_scale_rel"] ** 2))
+    if not acceptance.THEORY_JSON.exists():
+        sys.exit(f"{acceptance.THEORY_JSON} missing: run scripts/v2_8_theory_acceptance.py")
+    acc, _ = acceptance.frozen(gens, hists_all)
     g = gens["DY_NLO"]
     meta.update(lumi_pb=weights.LUMI_PB, dy_xsec_pb=config.DY_XSEC_PB,
                 sigma_fid_pred_pb=config.DY_XSEC_PB * float(g["sumw_fid_dressed"]) / float(g["sumw"]),

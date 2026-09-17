@@ -39,7 +39,7 @@ across the pT thresholds and the mass window).
 | `Pileup` | shape | all MC | sigma_minbias +- 4.6% | Pileup |
 | `L1Prefiring` | shape | all MC | `L1PreFiringWeight_Up/Dn` | L1 prefiring |
 | `MuonID`, `MuonIso`, `MuonTrigger` | shape | all MC | T&P stat (+) syst, coherent | Muon efficiency |
-| `MuonReco` | norm 0.8% (0.4%/muon, correlated) | all MC | not measurable in NanoAOD | Muon efficiency |
+| `MuonReco` | norm 0.27% (T&P, 0.13%/muon, correlated) | all MC | tag-and-probe on the unskimmed NanoAOD (docs/16 §4.1; the SF 1.0001/muon scales all MC); 0.8% assigned until 16 Sep | Muon efficiency |
 | `MuonScale`, `MuonRes` | shape (not smoothed) | all MC | Z-peak calibration | Muon momentum |
 | `PDF`, `AlphaS`, `QCDScale`, `PS_ISR`, `PS_FSR` | shape | `DYmumu` | LHE/PS weights, renormalised to the fiducial yield (C factor only) | Signal modelling |
 | `SigModel` | two-sided shape (SR) | `DYmumu` | powheg / aMC@NLO ratio, both inside the powheg generator window 50 < m_LHE < 120 GeV and normalised to the NLO fiducial prediction in that window; Down = mirrored | Signal modelling |
@@ -63,9 +63,10 @@ sigma(60 < m < 120) = sigma_fid / A_60_120       sigma(m > 50) = sigma_fid / A_m
 
 with the statistical uncertainty from the stat-only fit, the systematic uncertainty from the
 grouped impacts (`FullSyst`; the luminosity is quoted as the external 1.2%, not the profiled
-impact), and the acceptance uncertainty
-(PDF 0.52%, scale 0.32%, alpha_s 0.03%, MC stat; from `scripts/mc_acceptance.py`) added in
-quadrature for the inclusive cross sections. The counting form `(N_data - N_bkg)/(L C)` is
+impact), and the acceptance uncertainty added in quadrature for the inclusive cross sections:
+0.70% for 60-120 GeV (PDF 0.50%, boson pT 0.38%, scales 0.29%, QED FSR 0.10% estimated, MC stat,
+generator, alpha_s, PS FSR < 0.05% each; `zmumu/acceptance.py`, docs/16 §4-5). Until 16 Sep it was
+PDF, scale, alpha_s and MC stat for the m > 50 GeV denominator (0.61%, `scripts/mc_acceptance.py`). The counting form `(N_data - N_bkg)/(L C)` is
 printed as a cross-check. Results: `fit/results/zmumu_fit_result.json`, `output/v2/RESULTS_v2.md`.
 
 ## Why 5 GeV bins, and the stability of the result
@@ -86,43 +87,47 @@ common generator window. `scripts/v2_5_fit_variants.py` repeats the fit with 2 a
 bins, one bin (counting), without `SigModel` and with the old smoothing; the table is in
 `RESULTS_v2.md` and summarised below.
 
-## Result (15 Sep 2026, after the review fixes)
+## Result (frozen 17 Sep 2026: the 15 Sep fit with the measured reconstruction SF and the docs/16 acceptance)
 
 ```
-mu_Z      = 0.9881 +0.0159 -0.0156        (stat 0.0003, syst 0.0157 of which lumi 0.0120 external / 0.0116 profiled)
-sigma_fid = 790.1 +- 0.2 (stat) +- 8.5 (syst) +- 9.6 (lumi) pb       GoF p = 0.79 (12 bins)
-sigma(60 < m < 120) = 1931 +- 33 pb        sigma(m > 50) = 2002 +- 34 pb
-counting: (10 378 567 - 68 787) / (16393.381 x 0.7914) = 794.7 pb
+mu_Z      = 0.9883 +0.0141 -0.0138        (stat 0.0003, syst 0.0139 of which lumi 0.0120 external / 0.0117 profiled)
+sigma_fid = 790.2 +- 0.2 (stat) +- 6.1 (syst) +- 9.6 (lumi) pb       GoF p = 0.79 (12 bins)
+sigma(60 < m < 120) = 1931 +- 0.6 (stat) +- 15.0 (syst) +- 13.5 (acc) +- 23.4 (lumi) = 1931 +- 30 pb
+sigma(m > 50)       = 2002 +- 32 pb
+counting: (10 378 567 - 68 799) / (16393.381 x 0.7916) = 794.5 pb
 ```
+
+15 Sep (reconstruction SF 1 +- 0.4%/muon assigned, acceptance for m > 50 GeV): mu_Z = 0.9881 +0.0159 -0.0156,
+sigma_fid = 790.1 +- 0.2 +- 8.5 +- 9.6 pb, sigma(60-120) = 1931 +- 33 pb (`fit/results/zmumu_v2_15sep_fit_result.json`).
 
 | group | impact on mu_Z |
 |---|---:|
-| luminosity (external) | 1.20% (profiled 1.16%) |
-| muon efficiency (of which `MuonReco` 0.77%) | 0.87% |
+| luminosity (external) | 1.20% (profiled 1.18%) |
 | L1 prefiring | 0.51% |
-| signal modelling | 0.49% |
-| MC statistics (gammas) | 0.38% |
-| muon momentum | 0.37% |
-| pileup | 0.13% |
-| background normalisation | 0.08% |
+| muon efficiency (of which `MuonReco` 0.27%; 0.77% on 15 Sep) | 0.48% |
+| signal modelling | 0.46% |
+| MC statistics (gammas) | 0.36% |
+| muon momentum | 0.35% |
+| pileup | 0.15% |
+| background normalisation | 0.07% |
 | fakes | 0.04% |
 | statistical | 0.03% |
-| **total systematic** | **1.57%** (1.06% without the luminosity) |
+| **total systematic** | **1.41%** (0.77% without the luminosity; 1.57% / 1.06% on 15 Sep) |
 
 Stability (`fit/results/stability.json`, MINOS on every parameter):
 
 | configuration | mu_Z | GoF p |
 |---|---:|---:|
-| **12 x 5 GeV (nominal)** | **0.9881** | 0.79 |
-| 30 x 2 GeV | 0.9901 | 0.16 |
-| 6 x 10 GeV | 0.9858 | 0.50 |
-| 1 bin (= counting) | 0.9939 | -- |
-| 12 x 5 GeV without `SigModel` | 1.0073 | 0.001 |
-| 12 x 5 GeV, `MuonScale`/`MuonRes` smoothed (old setup) | 1.0012 | 0.014 |
-| 30 x 2 GeV without `SigModel` | 1.0056 | 0.0002 |
+| **12 x 5 GeV (nominal)** | **0.9883** | 0.79 |
+| 30 x 2 GeV | 0.9900 | 0.16 |
+| 6 x 10 GeV | 0.9862 | 0.50 |
+| 1 bin (= counting) | 0.9937 | -- |
+| 12 x 5 GeV without `SigModel` | 1.0066 | 0.001 |
+| 12 x 5 GeV, `MuonScale`/`MuonRes` smoothed (old setup) | 1.0011 | 0.014 |
+| 30 x 2 GeV without `SigModel` | 1.0048 | 0.0002 |
 
 The binnings that describe the data (p > 0.05) agree within +-0.2%; the counting extraction is
-0.6% higher because it does not use the shape information that pulls `SigModel` (+0.66 sigma:
+0.55% higher because it does not use the shape information that pulls `SigModel` (+0.66 sigma:
 the data prefer a lineshape between aMC@NLO and powheg, `sigmodel_lineshape.png`), `MuonScale`
 (-0.48) and `MuonRes` (+0.40). Removing `SigModel` or smoothing the momentum templates gives
 fits that do not describe the data (p <= 0.01) and should not be used. Pulls of all other

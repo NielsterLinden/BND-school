@@ -1,17 +1,24 @@
 # 16 — Our uncertainties against CMS-SMP-20-004, and a fair comparison
 
 The CMS measurement of the same quantity, **CMS-SMP-20-004** ([arXiv:2408.03744](https://arxiv.org/abs/2408.03744),
-JHEP 04 (2025) 162), is linked from `combination/docs/05-vs-published.md` §2. This page takes its
+JHEP 04 (2025) 162), was linked from `combination/docs/05-vs-published.md` §2 (removed; `git show 17d497c:combination/docs/05-vs-published.md`). This page takes its
 uncertainty table apart row by row, says for each row whether this analysis does the same, better, less
 or nothing, closes the gaps that can be closed by a measurement, estimates the one that cannot (three
 options, carried to the end), and compares the two cross sections. The procedure is written up for the
 other channels in `fitting/UNCERTAINTY_PARITY.md` (agent: `.claude/agents/uncertainty-parity-auditor.md`).
 
 Scripts: `scripts/v2_7_reco_tnp.py` (reconstruction efficiency), `scripts/v2_8_theory_acceptance.py`
-(generator-level acceptance studies), `scripts/v2_5_fit.py --reco-sf ... --tag zmumu_recosf` (the fit with
-the measured SF), `scripts/v2_9_cms_parity.py` (budget, options, comparison, plots) and the shared
-`fitting/uncertainty_parity.py`. Numbers: `output/v2/cms_parity/`. **The channel baseline
-(`fit/results/zmumu_fit_result.json`, `handoff.md`, the combination) is not changed by anything here.**
+(generator-level acceptance studies), `zmumu/acceptance.py` (the acceptance block), `scripts/v2_5_fit.py`
+(the fit with the measured SF), `scripts/v2_9_cms_parity.py` (budget, options, comparison, plots) and the shared
+`fitting/uncertainty_parity.py`. Numbers: `output/v2/cms_parity/`.
+
+> **Status (17 Sep 2026): promoted and frozen.** This pass was first run as a tagged fit (`zmumu_recosf`) next
+> to an unchanged baseline. On 17 Sep its measurements became the channel result: the reconstruction SF is
+> applied in `fit/zmumu.config` / `fit/fitinputs/zmumu.root`, and the acceptance uncertainties (60–120 GeV
+> denominator, boson pT, generator, PS FSR, QED FSR option c) are in the `acceptance` block of
+> `fit/results/zmumu_fit_result.json` and `zmumu.root.meta.json`, which the combination reads. The fit is
+> identical to the tagged one (μ_Z = 0.9883 ± 0.0141). "Baseline" below means the 15 Sep result,
+> `fit/results/zmumu_v2_15sep_fit_result.json`. The analysis is frozen (tag `zmumu-freeze-2026-09-17`).
 
 ## 1. What CMS measured, and where its uncertainties are
 
@@ -21,8 +28,8 @@ the measured SF), `scripts/v2_9_cms_parity.py` (budget, options, comparison, plo
 | channels | e⁺e⁻ and μ⁺μ⁻ **fitted together** (lepton universality) | μ⁺μ⁻ |
 | fiducial volume | **Born** leptons, pT > 25 GeV, \|η\| < 2.4, 60 < m < 120 | **dressed** muons (ΔR < 0.1), pT > 26/20 GeV, \|η\| < 2.4, 60 < m < 120 |
 | extraction | binned likelihood fit of m(ℓℓ) (COMBINE), NPs | binned likelihood fit of m(μμ) (TRExFitter), NPs |
-| σ_fid | 754 ± 2 (stat) ± 3 (syst) ± 17 (lumi) pb (Table 10) | 790.1 ± 0.2 ± 8.5 ± 9.6 pb (other volume) |
-| **σ_tot(60–120)** | **1952 ± 4 (stat) ± 18 (syst) ± 45 (lumi) pb** (Table 13) | 1931 ± 33 pb (baseline) |
+| σ_fid | 754 ± 2 (stat) ± 3 (syst) ± 17 (lumi) pb (Table 10) | 790.2 ± 0.2 ± 6.1 ± 9.6 pb (other volume) |
+| **σ_tot(60–120)** | **1952 ± 4 (stat) ± 18 (syst) ± 45 (lumi) pb** (Table 13) | 1931 ± 30 pb (frozen result; 1931 ± 33 pb on 15 Sep) |
 
 The fiducial numbers are not comparable (different volumes and lepton definitions); the total cross
 section in 60 < m < 120 GeV is, and it is the quantity used below.
@@ -78,7 +85,7 @@ fiducial Table 4 alongside:
 ## 3. Row by row: what we do like CMS, better, less, or not at all
 
 Numbers in % of σ(60–120). Ours are the post-fit impacts of the fit with the measured reconstruction SF
-(`fit/results/zmumu_recosf_fit_result.json`) and the acceptance rows outside the fit; full table with
+(`fit/results/zmumu_fit_result.json` since 17 Sep; `zmumu_recosf` when this was written) and the acceptance rows outside the fit; full table with
 both descriptions in `output/v2/cms_parity/parity_zmumu.md`.
 
 | source | CMS | ours | status |
@@ -184,10 +191,10 @@ count. Three lessons from getting there, all visible in `output/v2/tnp/reco_resu
    probes need up to 15 GeV). Otherwise the fit widens the failing "signal" into the background. At
    ε → 1 HESSE errors are meaningless: MINOS is used.
 
-In the fit (`v2_5_fit.py --reco-sf output/v2/tnp/reco_result.json --tag zmumu_recosf`) the SF multiplies
+In the fit (`v2_5_fit.py`; a tagged fit `zmumu_recosf` until the promotion on 17 Sep) the SF multiplies
 the MC templates and `MuonReco` becomes ± 0.27 % per event (was 0.8 %):
-**μ_Z = 0.9883 ± 0.0141** (baseline 0.9881 ± 0.0157), σ_fid = 790.2 ± 0.2 ± **6.1** (syst) ± 9.6 (lumi) pb
-(baseline syst 8.5 pb), GoF p = 0.79.
+**μ_Z = 0.9883 ± 0.0141** (15 Sep: 0.9881 ± 0.0157), σ_fid = 790.2 ± 0.2 ± **6.1** (syst) ± 9.6 (lumi) pb
+(15 Sep: syst 8.5 pb), GoF p = 0.79.
 
 ![reconstruction SF maps](../output/v2/plots/reco_sf_maps.png)
 
@@ -254,8 +261,12 @@ The choice does not matter at this precision; c is the one we would quote.
 | | σ(60–120) [pb] | stat | syst | lumi | total |
 |---|---:|---:|---:|---:|---:|
 | CMS-SMP-20-004 (e and μ, 2017 low-pileup) | 1952 | 4 | 18 | 45 | 48.6 |
-| this work, baseline (`handoff.md`) | 1931 | 0.6 | 20.7 ⊕ 11.8 (A) | 23.4 | 32.9 |
-| **this work, after this pass (option c)** | **1931** | **0.6** | **20.2** | **23.2** | **30.7** |
+| this work, 15 Sep (before this pass) | 1931 | 0.6 | 20.7 ⊕ 11.8 (A) | 23.4 | 32.9 |
+| **this work, frozen result (option c)** | **1931** | **0.6** | **20.2** | **23.2** | **30.7** |
+
+(`handoff.md` quotes the frozen result as 1931 ± 0.6 ± 15.0 (syst) ± 13.5 (acc) ± 23.4 (lumi) = ± 30 pb:
+the same budget, with the luminosity taken on the prediction and the total from the fit's MINOS error with
+the profiled luminosity. The parity module takes 1.2 % of the measured value and adds in quadrature.)
 
 * **−21 ± 57 pb, −0.36σ.** The two measurements agree. The difference is 1.1 %, well inside CMS's
   2.3 % luminosity uncertainty alone.
@@ -277,12 +288,12 @@ The choice does not matter at this precision; c is the one we would quote.
 source ../setup.sh
 python scripts/v2_7_reco_tnp.py                     # reconstruction efficiency, ~15 min (dCache parents), then fits ~5 min
 python scripts/v2_8_theory_acceptance.py --files 12 # generator-level acceptance studies, ~4 min (EOS)
-python scripts/v2_5_fit.py --reco-sf output/v2/tnp/reco_result.json --tag zmumu_recosf     # ~10 min
+python scripts/v2_5_fit.py                          # the fit with the reconstruction SF and the acceptance block, ~10 min
 python scripts/v2_9_cms_parity.py                   # parity file, options, comparison, plots, <1 min
 ```
 
-Promoting the reconstruction SF to the baseline would change `fit/zmumu.config` and
-`fit/fitinputs/zmumu.root`, which the combination MultiFit reads (`combination/combLieke/config/channels.json`):
-μ_Z 0.9881 → 0.9883 and `MuonReco` 0.8 → 0.27 %. The acceptance rows (60–120 GeV denominator,
-pT(Z)) would go into the `*.meta.json` acceptance block the combination uses. Both are decisions for
-the channel and the combination group; nothing here makes them.
+(or `python run_v2.py --from 7`). The promotion on 17 Sep changed `fit/zmumu.config` and `fit/fitinputs/zmumu.root`
+(μ_Z 0.9881 → 0.9883, `MuonReco` 0.8 → 0.27 %) and the acceptance block of `zmumu.root.meta.json`
+(0.61 % → 0.70 %). The combination MultiFit reads both; its μμ acceptance parameters are now `Acc_PDF`,
+`Acc_AlphaS`, `Acc_QCDScale`, `Acc_PS_FSR` (shared with ττ), `Acc_PTZ_mumu`, `Acc_Generator_mumu`,
+`Acc_QEDFSR_mumu` and `AccStat_mumu` (`combination/combLieke/config/channels.json`).

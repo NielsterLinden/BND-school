@@ -1,6 +1,7 @@
 {
  "acceptance_60_120": {
-  "A_60_120": 0.40920878182397075,
+  "A": 0.40920878182397075,
+  "denominator": "lhe_mumu_60_120",
   "pdf_pct": 0.49999825108819246,
   "alphas_pct": 0.030615855125863678,
   "scale_pct": 0.2899303709521184,
@@ -286,8 +287,8 @@
   "sf_mutrk_loose_per_muon_err": 0.0026195611689034037,
   "sf_spread_over_cells": 0.00033761072511167303
  },
- "fit": "/project/atlas/Users/nterlind/BND-school/z-mumu/fit/results/zmumu_recosf_fit_result.json",
- "baseline_fit": "/project/atlas/Users/nterlind/BND-school/z-mumu/fit/results/zmumu_fit_result.json",
+ "fit": "/project/atlas/Users/nterlind/BND-school/z-mumu/fit/results/zmumu_fit_result.json",
+ "baseline_fit": "/project/atlas/Users/nterlind/BND-school/z-mumu/fit/results/zmumu_v2_15sep_fit_result.json",
  "sigma_60_120_baseline_pb": 1930.7459972880047,
  "sigma_60_120_pb": 1931.042994852695,
  "cms": {

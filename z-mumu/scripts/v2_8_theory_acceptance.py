@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """v2 step 8 -- generator-level studies of the acceptance for the CMS-SMP-20-004 comparison (docs/16).
 
-    python scripts/v2_8_theory_acceptance.py --files 6 --workers 4     # DY aMC@NLO parents, streamed from EOS
+    python scripts/v2_8_theory_acceptance.py --files 12 --workers 4    # DY aMC@NLO parents, streamed from EOS
     python scripts/v2_8_theory_acceptance.py --summarise-only
 
 CMS carries a "Resum. + FSR" uncertainty on the acceptance (DYTURBO NNLO+NNLL vs aMC@NLO, and
@@ -34,6 +34,7 @@ import awkward as ak
 import numpy as np
 
 from zmumu import batch, config, gen, hists, objects, samples
+from zmumu.acceptance import reweight_acceptance
 
 OUT = config.OUTPUT_DIR / "v2" / "cms_parity"
 config.PLOT_DIR = config.OUTPUT_DIR / "v2" / "plots"
@@ -142,11 +143,6 @@ def fill(ev, out):
 
 
 # ----------------------------------------------------------------------------- summary
-def reweight_acceptance(A_bin, den, shape):
-    """Acceptance after multiplying the boson-pT spectrum by `shape` (per bin), total rate unchanged."""
-    return float((A_bin * den * shape).sum() / (den * shape).sum())
-
-
 def summarise(t):
     den = t["den"]
     res = {"n_files": t["n_files"], "n_events": t["n_events"], "ptz_edges": PTZ_EDGES.tolist(), "volumes": {},
@@ -227,7 +223,7 @@ def plot(res, t):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--workers", type=int, default=4)
-    ap.add_argument("--files", type=int, default=6)
+    ap.add_argument("--files", type=int, default=12, help="DY NLO parent files (of 41); the frozen result used 12")
     ap.add_argument("--prefer", choices=["dcache", "eos"], default="eos")
     ap.add_argument("--summarise-only", action="store_true")
     ap.add_argument("--one-file", help=argparse.SUPPRESS)

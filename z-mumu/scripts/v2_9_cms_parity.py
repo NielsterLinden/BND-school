@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 """v2 step 9 -- uncertainty parity with CMS-SMP-20-004 (arXiv:2408.03744) and the comparison (docs/16).
 
-    python scripts/v2_9_cms_parity.py                   # after steps 7 (reco T&P), 8 (generator study) and
-                                                        # the fit with the measured reco SF (--tag zmumu_recosf)
+    python scripts/v2_9_cms_parity.py                   # after steps 7 (reco T&P), 8 (generator study) and 5 (fit)
 
 Maps every row of the CMS systematic table (Table 7: total inclusive Z -> ll at 13 TeV) onto this
 analysis, adds what the comparison showed to be missing -- measured where possible, estimated with three
@@ -14,7 +13,9 @@ options where not -- and writes
     output/v2/cms_parity/inputs.json            every intermediate number, with its source
     output/v2/plots/cms_parity_option_{a,b,c}.png, cms_parity_options.png, cms_parity_estimate_inputs.png
 
-Nothing here changes the channel's baseline result (fit/results/zmumu_fit_result.json).
+The measurements of this comparison (reconstruction SF, 60-120 GeV acceptance, pT(Z) row) were promoted
+into the channel result on 17 Sep 2026 (zmumu/acceptance.py, scripts/v2_5_fit.py); the "before" column
+of the reconstruction row is the 15 Sep result, fit/results/zmumu_v2_15sep_fit_result.json.
 """
 
 from __future__ import annotations
@@ -33,7 +34,7 @@ sys.path.insert(0, str(ROOT))
 import numpy as np
 
 from fitting import uncertainty_parity as up
-from zmumu import config, hists, weights
+from zmumu import acceptance, config
 
 OUT = config.OUTPUT_DIR / "v2" / "cms_parity"
 PLOTS = config.OUTPUT_DIR / "v2" / "plots"
@@ -68,64 +69,6 @@ def np_impact_pct(fit, name):
 
 def group_pct(fit, group):
     return 100 * fit["grouped_impacts_mu"].get(group, 0.0) / fit["mu"]
-
-
-def acceptance_theory(gens):
-    """Theory uncertainties of A(60-120) = fid(dressed) / LHE mumu (60 < m < 120), from the full-sample sums.
-
-    The baseline fit result carries the same quantities for A(m > 50) (scripts/mc_acceptance.py, the v1
-    review); the 60-120 GeV cross section needs the 60-120 GeV denominator."""
-    g, pw = gens["DY_NLO"], gens["DY_powheg"]
-    num, den = "fid_dressed", "lhe_mumu_60_120"
-    A = g[f"sumw_{num}"] / g[f"sumw_{den}"]
-    pdf = (np.array(g[f"pdf_{num}"]) / np.array(g[f"pdf_{den}"]))
-    pdf = pdf / pdf[0]
-    scale = np.array(g[f"scale_{num}"]) / np.array(g[f"scale_{den}"])
-    scale = scale / scale[weights.SCALE_NOMINAL]
-    ps = (np.array(g[f"ps_{num}"]) / np.array(g[f"ps_{den}"])) / A
-    A_pw = pw[f"sumw_{num}"] / pw[f"sumw_{den}"]
-    # binomial-like MC statistical uncertainty of a subset ratio
-    n2, d2 = g[f"sumw2_{num}"], g["sumw2"]
-    A_stat = np.sqrt(n2) / g[f"sumw_{num}"] * A           # dominated by the numerator
-    out = {"A_60_120": A,
-           "pdf_pct": 100 * float(np.sqrt(np.sum((pdf[weights.PDF_MEMBERS] - 1) ** 2))),
-           "alphas_pct": 100 * float(0.75 * 0.5 * abs(pdf[102] - pdf[101])),
-           "scale_pct": 100 * float(np.max(np.abs(scale[weights.SCALE_7POINT] - 1))),
-           "mc_stat_pct": 100 * float(A_stat / A),
-           "ps_isr_pct": 100 * float(0.5 * (abs(ps[weights.PS_ISR_UP] - 1) + abs(ps[weights.PS_ISR_DOWN] - 1))),
-           "ps_fsr_pct": 100 * float(0.5 * (abs(ps[weights.PS_FSR_UP] - 1) + abs(ps[weights.PS_FSR_DOWN] - 1))),
-           "generator_pct": 100 * float(abs(A_pw / A - 1)), "A_powheg": A_pw,
-           "source": "output/v2/gensums.json (all 71.8 M aMC@NLO events, 2.96 M powheg events)"}
-    return out
-
-
-def ptz_reweighting(hists_all, theory):
-    """Data/MC ratio of the reconstructed pT(mumu) in the SR (normalised), folded with A(pT(Z))."""
-    mc_samples = ["DYmumu", "DYtautau", "DYee", "TTbar", "SingleTop", "WW", "WZ", "ZZ"]
-    data = np.asarray(hists_all["Data|SR|zpt|nominal"], dtype=float)
-    mc = sum(np.asarray(hists_all[f"{s}|SR|zpt|nominal"], dtype=float) for s in mc_samples
-             if f"{s}|SR|zpt|nominal" in hists_all)
-    pw = np.asarray(hists_all["DYmumu_powheg|SR|zpt|nominal"], dtype=float)
-    sig = np.asarray(hists_all["DYmumu|SR|zpt|nominal"], dtype=float)
-    reco_edges = np.linspace(0, 200, len(data) + 1)
-    ratio = (data / data.sum()) / (mc / mc.sum())
-    ratio_pw = (pw / pw.sum()) / (sig / sig.sum())
-    e = np.array(theory["ptz_edges"])
-    c = 0.5 * (e[1:] + e[:-1])
-    idx = np.clip(np.digitize(c, reco_edges) - 1, 0, len(ratio) - 1)
-    w = np.where(c < 200, ratio[idx], 1.0)
-    w_pw = np.where(c < 200, ratio_pw[idx], 1.0)
-    return {"reco_edges": reco_edges.tolist(), "ratio_data_mc": ratio.tolist(), "ratio_powheg_amcnlo": ratio_pw.tolist(),
-            "gen_weights_data": w.tolist(), "gen_weights_powheg": w_pw.tolist()}
-
-
-def fsr_photons(hists_all):
-    mc_samples = ["DYmumu", "DYtautau", "DYee", "TTbar", "SingleTop", "WW", "WZ", "ZZ"]
-    d = np.asarray(hists_all["Data|SR|nfsr|nominal"], dtype=float)
-    m = sum(np.asarray(hists_all[f"{s}|SR|nfsr|nominal"], dtype=float) for s in mc_samples if f"{s}|SR|nfsr|nominal" in hists_all)
-    fd, fm = d[1:].sum() / d.sum(), m[1:].sum() / m.sum()
-    return {"frac_with_fsr_photon_data": fd, "frac_with_fsr_photon_mc": fm, "ratio": fd / fm,
-            "n_data": d.tolist(), "n_mc": m.tolist()}
 
 
 # ----------------------------------------------------------------------------- parity file
@@ -178,8 +121,8 @@ def build(base, fit, reco, acc, theory, ptz, fsr, dA_ptz):
         components={n: np_impact_pct(fit, n) for n in ("SigModel", "PS_ISR", "PS_FSR")},
         ours_how="in the fit: powheg vs aMC@NLO lineshape (SigModel), PS ISR/FSR weights, all on C",
         reference_how="no generator or shower term on the efficiency in the table")
-    fsr_size = abs(theory["fsr"]["A_bare_over_dressed"] - 1) * 100
-    r_fsr = abs(fsr["ratio"] - 1)
+    q = acceptance.qedfsr_options(theory, fsr, t7["Resum. + FSR"])
+    fsr_size, r_fsr = q["size_pct"], q["data_mc_rel"]
     row(id="qedfsr", source="QED FSR model (PHOTOS vs PYTHIA)", group="theory", reference_pct=None, status="partial",
         treatment="estimate", ours_pct=None,
         ours_how="not measurable here: estimated (three options)", reference_how="inside Resum. + FSR (0.12 %)",
@@ -194,7 +137,7 @@ def build(base, fit, reco, acc, theory, ptz, fsr, dA_ptz):
                                    "symmetric 25 GeV cuts; there is no muon-only or FSR-only number, and a Born-level volume is far "
                                    "more FSR-sensitive than our dressed one, so the number neither separates nor transfers. "
                                    "The generator-group PHOTOS/PYTHIA comparisons are internal.",
-                  "options": {"a": t7["Resum. + FSR"], "b": 0.0, "c": float(r_fsr * fsr_size)},
+                  "options": {k: q[k] for k in "abc"},
                   "derivation": f"(size of the FSR effect) x (plausible model difference) = |A_bare/A_dressed - 1| "
                                 f"= {fsr_size:.2f} % (generator level, bounds what the reconstructed bare-muon pT cuts can see) "
                                 f"x |data/MC - 1| of the fraction of SR events with a recovered FSR photon = {100*r_fsr:.1f} % "
@@ -255,7 +198,7 @@ def build(base, fit, reco, acc, theory, ptz, fsr, dA_ptz):
                       "note": "e and μ fitted together (lepton universality); 2017 low-pileup runs, 13 TeV"},
         "measurement": {"value": sigma, "stat_pct": stat_pct, "fit": fit.get("_path"),
                         "syst_pct_measured": syst_measured, "syst_pct_fit": fit_syst, "syst_pct_acceptance": acc_syst,
-                        "label": "σ_fid / A(60-120), measured reconstruction SF applied"},
+                        "label": "σ_fid / A(60-120), the frozen result (17 Sep 2026)"},
         "rows": rows,
     }
 
@@ -311,8 +254,9 @@ def plot_estimate_inputs(ptz, theory, fsr, dA, path):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--fit", type=Path, default=FIT / "zmumu_recosf_fit_result.json")
-    ap.add_argument("--baseline", type=Path, default=FIT / "zmumu_fit_result.json")
+    ap.add_argument("--fit", type=Path, default=FIT / "zmumu_fit_result.json")
+    ap.add_argument("--baseline", type=Path, default=FIT / "zmumu_v2_15sep_fit_result.json",
+                    help="the result before the reconstruction SF was measured (for the 'assigned before' column)")
     args = ap.parse_args()
     base = json.load(open(args.baseline))
     fit = json.load(open(args.fit))
@@ -322,19 +266,13 @@ def main():
     theory = json.load(open(OUT / "theory_acceptance.json"))
     hists_all = pickle.load(open(config.OUTPUT_DIR / "v2" / "histograms.pkl", "rb"))
 
-    acc = acceptance_theory(gens)
-    ptz = ptz_reweighting(hists_all, theory)
-    fsr = fsr_photons(hists_all)
-    # fold the reweighting into A(pT(Z)); the denominator spectrum is the generator one of step 8
-    import importlib
-    step8 = importlib.import_module("v2_8_theory_acceptance")
-    den = np.array(theory["den_ptz"])
-    dA = {}
-    for name, key, vol in (("data", "gen_weights_data", "dressed"), ("powheg", "gen_weights_powheg", "dressed"),
-                           ("data_2525", "gen_weights_data", "dressed2525")):
-        A_bin = np.array(theory["volumes"][vol]["A_ptz"])
-        dA[name] = step8.reweight_acceptance(A_bin, den, np.array(ptz[key])) / theory["volumes"][vol]["A"] - 1
+    acc = acceptance.theory(gens)
+    ptz = acceptance.ptz_reweighting(hists_all, theory)
+    fsr = acceptance.fsr_photons(hists_all)
+    dA = acceptance.ptz_shifts(theory, ptz)       # A(pT(Z)) of step 8 with the reweighted spectrum
     parity = build(base, fit, reco, acc, theory, ptz, fsr, dA)
+    assert abs(parity["measurement"]["syst_pct_acceptance"] - 100 * fit["acceptance"]["A_rel_unc_measured"]) < 1e-6, \
+        "the parity acceptance rows and the fit result's acceptance block (zmumu/acceptance.py) disagree"
     OUT.mkdir(parents=True, exist_ok=True)
     inputs = {"acceptance_60_120": acc, "ptz_reweighting": {**ptz, "dA_rel": dA}, "fsr_photons": fsr,
               "reco_sf": reco["meta"], "fit": str(args.fit), "baseline_fit": str(args.baseline),
@@ -358,5 +296,4 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.path.insert(0, str(HERE))
     main()

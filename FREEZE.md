@@ -24,6 +24,9 @@ the listed file; do not regenerate it.
 > Two statements of the frozen table need a footnote: `pos_def_forced` looked for the wrong MINUIT message and was
 > always false (the frozen combined fit was fine, the frozen standalone μμ and ee fits had a forced matrix; only
 > their MINOS intervals were used), and `compatibility.correlations` read the wrong matrix elements.
+> z-tautau's fit results are back on `main` since e0b0b1d (the note above predates them). The final combination was
+> run twice in full on HTCondor on the same inputs (17 Sep 13:57 and 16:01, identical to all printed digits);
+> `output/result.json` → `inputs` lists every channel input file with its SHA-256, date and commit.
 
 All results: CMS Open Data 2016 G+H, NanoAODv9, √s = 13 TeV, L = 16393.381 pb⁻¹ ± 1.2 %.
 Theory reference: aMC@NLO (NNLO-normalised, 6077.22 pb for m > 50 GeV).

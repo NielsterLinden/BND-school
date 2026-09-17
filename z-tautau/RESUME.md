@@ -1,31 +1,28 @@
-# Resume here (17 Sep 2026, node reboot)
+# State of z-tautau (17 September 2026)
 
-Committed locally as `b860653` on `main`, **not pushed** (no GitHub credentials in the batch session:
-`git push` asks for a username). Push from an interactive shell.
+Everything `REVIEW_v4.md` asked for is done and committed; `REVIEW_v4_RESPONSE.md` is the point-by-point
+answer and `output/RESULTS.md` the numbers. Nothing is pending in the analysis chain.
 
-## Done
-Repository restructured (four-channel measurement is the only one, canonical `fit/` + `output/`, job
-`ztautau`), every code fix of `REVIEW_v4.md` applied, templates rebuilt
-(`fit/fitinputs/ztautau.root`, 17 Sep 10:51), per-channel exports and **all TRExFitter configs written**.
-The combination can already build workspaces from those.
+**Not pushed.** The commits are local on `main` (this batch session has no GitHub credentials: `git push`
+asks for a username). Push from an interactive shell.
 
-## Not done — run this next, in this order
+## Two things left for other people
+
+1. **The combination** (`combination/combLieke/`) must change three entries of `config/channels.json`
+   before it can read our inputs: `signal` (the signal is 15 `DYtautau_tDM*` templates, listed in the
+   metadata as `signal_samples`), `acceptance` (must become `null` -- A x epsilon is inside our fit now and
+   adding `Acc_*` on top double counts), and `drop_empty_bins`. `docs/11-combination-inputs.md` section 6
+   says exactly how, and section 7 what has to be understood before our number is used.
+2. **The slide deck** in `slides/` was built against the v3 result schema and is marked superseded in
+   `build_deck.py` and `make_figures.py`. It has to be rebuilt before it is shown again.
+
+## How to re-run
+
 ```bash
-cd z-tautau && source ../setup.sh
-python run_all.py --from 5 --to 6      # all fits (~4 h: the ranking of the combined fit dominates), report,
-                                       # and scripts/update_docs.py injects the numbers into the docs
-# then, to regenerate the tau_h tau_h base plots that were dropped with the v3 output/ directory
-python scripts/step3_fakefactors.py && python scripts/step3b_bdt.py --no-train && python scripts/step4a_tautau_base.py
-# and check that fit/fitinputs/tautau_base.root still gives the yields of the committed one before committing it
+source ../setup.sh
+python run_tautau_base.py --from 3        # tau_h tau_h fake factors, BDT, fit/fitinputs/tautau_base.root
+python run_all.py --from 4                # templates (~45 min), then the fits and the report
+nohup setsid bash condor/orchestrator.sh > $BND_TAUTAU_CACHE/logs/condor_chain.log 2>&1 &   # step 5+6 on
+                                          # HTCondor instead: 12 fits in parallel, the ranking one job per
+                                          # parameter (26 min + 7 min, against ~4 h serially)
 ```
-Then commit `output/`, `fit/results/*_fit_result.json`, the workspaces
-(`git add -f fit/results/*/RooStats/*_combined_*_model.root`) and the updated docs.
-
-## Two things to fix in the documentation
-1. `docs/11-combination-inputs.md` §6 was written against the **BLUE / covariance** combination
-   (`combination/comb/inputs.py`, `ChannelResult`, `combination/docs/01-inputs.md`). Commit `b6aeeb2`
-   removed that combination: the live one is `combination/combLieke/`, a TRExFitter MultiFit. Route (a)
-   of §6 is therefore the route; route (b) and the `for_combination` block of `output/results.json`
-   should be kept (they cost nothing and the numbers are right) but presented as the secondary route,
-   and the references to `combination/docs/` and to `load_tautau` updated to `combination/combLieke/`.
-2. `slides/` is marked superseded (it was built against the v3 result schema) and has to be rebuilt.

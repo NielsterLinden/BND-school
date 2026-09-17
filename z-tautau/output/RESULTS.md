@@ -59,6 +59,8 @@ Scale factors of the pT-split fit (the assumption behind the tau_h tau_h / (l ta
 | DM10 | 0.904 +- 0.047 | 0.958 +- 0.037 | 1.060 |
 | DM11 | 0.786 +- 0.086 | 0.897 +- 0.051 | 1.140 |
 
+The scale factors below 40 GeV come out +6%, -0%, +6%, +14% relative to those above it (DM0, DM1, DM10, DM11), each 0.5-1 sigma on its own but coherent in sign, and mu_Z moves by -0.064 (1.8 times the total uncertainty) to 0.954. The single-scale-factor assumption is therefore worth more than any experimental systematic in the table below; the split is not the nominal model (the ratios are individually compatible with one and it doubles the number of free scale factors on the same data), but that spread should travel with the result. See REVIEW_v4_RESPONSE.md section 6.
+
 ## Grouped impacts on mu_Z
 
 The categories are not independent: mu_ttbar, the e mu trigger efficiency and mu_Z form one chain (the e mu control region fixes mu_ttbar x eff, the signal region mu_Z x eff), so `NormFactors` and `Emu trigger` contain the same degeneracy. Their quadrature sum therefore over-shoots the total. **The uncertainty of the measurement is the MINOS total, not the sum of the rows below.**

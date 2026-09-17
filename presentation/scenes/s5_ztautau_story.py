@@ -50,7 +50,8 @@ final frame (pure builders ``state_*()`` + ``ORDER_*`` tuples, ``check_order`` a
         tautau_m3_postfit       the four channels post-fit with data / pred.; mu_Z = 1.019 +0.079 -0.070 (with the
                                 tau_h ID SF p_T dependence, TauIDpT_tautau, since 17 Sep 2026; +0.037 -0.036 without)
         tautau_m4_sigma         sigma(60-120) = 1981 +153 -136 pb, the four channels alone (POG SFs, open
-                                points), the prediction with its band, CMS and ATLAS
+                                points), the prediction with its band (CMS and ATLAS
+                                are left for the end of the talk)
 
 Reserved areas (06 A1): nothing above y = 2.7 (title band) and nothing at x < -5.85, y > 0.22 (chapter
 identifier), except the first frames of a1, which open on 5-03's zoomed event display.
@@ -132,7 +133,7 @@ assert np.asarray(EVENT["posterior"]["weights"]).shape == (12, 12)
 assert MA["signal_weighting"] == "inclusive_unit"
 assert len(BI["features"]) == 16 and len(BI["dm_labels"]) == 4
 assert all(f["name"] == n for f, n in zip(BI["features"], BI["feature_order"]))
-assert RF["cms"]["value"] == 1952 and RF["atlas"]["value"] == 1981 and round(RF["theory"]["value"], 1) == 1944.9
+assert round(RF["theory"]["value"], 1) == 1944.9
 assert (round(RF["theory"]["unc_up"]), round(RF["theory"]["unc_down"])) == (15, 21)
 assert [round(x, 3) for x in FK["osss"]["range_per_category"]] == [0.960, 1.305]
 assert V4["channels"]["prefit"]["mutau"]["n_data"] == 48516 and round(V4["lephad"]["mutau"]["sr_fakes"]) == 11048
@@ -1051,7 +1052,7 @@ B = dict(
     m_px=(-4.0, -0.95, 2.1, 5.15), m_pw=2.6, m_ph=1.55, m_py=1.0, m_rlen=0.5, m_title_y=2.2, m_key=(-4.9, -1.6),
     mu_at=(0.6, -2.55), mu_top=(-3.7, 2.3), sig_label_at=(2.9, 2.3),
     sig=dict(lo=1750.0, hi=2250.0, x0=-2.6, length=8.0, y=-2.9, height=4.9,
-             rows=dict(comb=4.25, tautau=3.55, mutau=3.05, etau=2.55, emu=2.05, cms=1.2, atlas=0.6)),
+             rows=dict(comb=4.25, tautau=3.55, mutau=3.05, etau=2.55, emu=2.05)),
 )
 
 
@@ -1383,20 +1384,11 @@ def sigma_panel() -> VGroup:
                      fill_color=col(WHITE), fill_opacity=1.0)
         lab = tex_h(CH_TEX[ch], 0.16, color=CHANNEL_LINE["tautau"]).next_to(bar, RIGHT, buff=0.15)
         chans.add(VGroup(bar, dot, lab))
-    refs = VGroup()
-    for key in ("cms", "atlas"):
-        r = RF[key]
-        yr = y0 + R[key]
-        sc = col(SAMPLE["Data"])
-        rbar = Line([xs(r["value"] - r["total"]), yr, 0], [xs(r["value"] + r["total"]), yr, 0], stroke_color=sc, stroke_width=4.0)
-        rdot = Dot([xs(r["value"]), yr, 0], radius=0.08, color=sc)
-        rlab = tex_h(rf"\mathrm{{{r['label']}}}", 0.16, color=SAMPLE["Data"]).next_to(rbar, RIGHT, buff=0.15)
-        refs.add(VGroup(rbar, rdot, rlab))
     label = tex_h(rf"\sigma_{{60\text{{--}}120}} = {FITV['sigma']:.0f}^{{+{FITV['sigma_up']:.0f}}}_{{-{FITV['sigma_down']:.0f}}}"
                   rf"\ \mathrm{{pb}}", 0.3).move_to(_p3(B["sig_label_at"]))
-    g = VGroup(axis, ticks, tick_labels, unit_, band, theory, th_lab, chans, comb, refs, label)
-    g.frame, g.band, g.theory, g.th_lab, g.chans, g.comb, g.refs, g.label = \
-        VGroup(axis, ticks, tick_labels, unit_), band, theory, th_lab, chans, comb, refs, label
+    g = VGroup(axis, ticks, tick_labels, unit_, band, theory, th_lab, chans, comb, label)
+    g.frame, g.band, g.theory, g.th_lab, g.chans, g.comb, g.label = \
+        VGroup(axis, ticks, tick_labels, unit_), band, theory, th_lab, chans, comb, label
     return g
 
 
@@ -2038,7 +2030,6 @@ class TautauFit(Scene):
         self.play(FadeIn(sig.band), Create(sig.theory), FadeIn(sig.th_lab), run_time=0.6)
         self.play(ReplacementTransform(end["mu"].copy(), sig.label), GrowFromCenter(sig.comb), run_time=0.8)
         self.play(LaggedStart(*[FadeIn(c, shift=UP * 0.1) for c in sig.chans], lag_ratio=0.3, group=sig.chans), run_time=1.2)
-        self.play(LaggedStart(*[FadeIn(r, shift=UP * 0.1) for r in sig.refs], lag_ratio=0.4, group=sig.refs), run_time=0.9)
         self.remove(sig.label)
         self.add(sig.label)
         adopt(self, sig, "sig")

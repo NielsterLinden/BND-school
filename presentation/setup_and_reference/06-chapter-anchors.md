@@ -156,9 +156,9 @@ fit → σ**. The audience knows this map. A chapter:
 - **Uncertainty groups are descriptive.** No fit-internal jargon in the impact ranking: "Gammas" is
   "Template stat. (γ)", and any group name a non-expert cannot read is spelled out.
 - **The result frame is a comparison.** The σ axis is large, the result label sits above it, and it carries the
-  prediction with its uncertainty band and the value printed with that uncertainty, and the published CMS and ATLAS
-  values of the same quantity (`combination/result.md` has them with references) as slate points under the
-  chapter's red/gold/green point. The repository documents no uncertainty on the aMC@NLO/FEWZ σ(60–120) reference;
+  prediction with its uncertainty band and the value printed with that uncertainty, under the
+  chapter's red/gold/green point. **No published CMS / ATLAS points in a channel chapter** (deck owner, 17 Sep 2026):
+  they are revealed only at the end of the talk (`combination/result.md` has them with references). The repository documents no uncertainty on the aMC@NLO/FEWZ σ(60–120) reference;
   the band is the relative uncertainty of the published NNLO+NNLL NNPDF3.1 prediction of the same quantity,
   1940 +15 −21 pb (CMS-SMP-20-004, arXiv:2408.03744, Table 5), frozen with its source by the extractor
   (`extract_ztautau_reference.py` → `theory.unc_up/unc_down`) — reuse it, never type a band into a scene.

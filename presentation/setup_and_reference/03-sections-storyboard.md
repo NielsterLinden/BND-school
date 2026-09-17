@@ -6,57 +6,90 @@ one clip = one idea. Sources named so the fidelity checker can verify.
 
 ## 1 — Theory and relevance (`1_theory`)
 
-| # | candidate clip | what moves | source |
-|---|----------------|-----------|--------|
-| 1-01 | `drell_yan` (done, v1) | q q̄ → Z/γ* → ℓ⁺ℓ⁻ built left to right; ee/μμ/ττ colour variants in the same file | textbook |
-| | `z_lineshape` | Breit-Wigner at m_Z, Γ_Z; then the γ* tail and the radiative (FSR) left tail deform it | PDG values |
-| | `lepton_universality` | three equal-width bars (BR to ee, μμ, ττ) growing to the same height; the σ×BR per flavour = 6077.22/3 pb | CONVENTIONS.md |
-| | `pdf_x1x2` | two protons, a quark and antiquark pulled out with momentum fractions x₁, x₂, ŝ = x₁x₂s | textbook |
-| | `why_z` | Z as a standard candle: luminosity / detector calibration / PDF constraint (three icons, animation only) | — |
+17 Sep 2026: "why should we still care about the Z?", told through the **cross section** (not the mass), ~3 min talk,
+~70 s of clips, built backwards from the final plot. Brief: `briefs/theory.md`; scene `scenes/s1_theory_story.py`;
+numbers `data/theory_reference.json`. Clip number = play order (1-01 is not played in section 1: 1-02 ends on its frame).
+
+| # | clip | what moves | source |
+|---|------|-----------|--------|
+| 1-01 | `drell_yan` | q q̄ → Z/γ* → ℓ⁺ℓ⁻ built left to right; the base of 3-01 / 4-01 / 5-01 | textbook |
+| ✔ 1-02 | `sm_to_process` | the SM table builds; quarks, γ/Z and leptons turn into the Drell–Yan diagram; g_V, g_A at both vertices, g_V = T₃ − 2Q sin²θ_W | textbook |
+| ✔ 1-03 | `factorisation` | chained: protons, x₁P / x₂P; σ = Σ∫ f f σ̂ (σ̂ purple = known, f cyan = tested); the α_s series LO 1970 … N³LO 2022; inset x₁x₂ = m_Z²/s, \|y\| < 2.4 lit: x ∈ [6·10⁻⁴; 0.08] | theory_reference `orders`, `x_range` |
+| ✔ 1-04 | `prediction` | σ axis; aMC@NLO 1953.9 ⁺⁵⁶·¹₋₈₁.₇ pb, band grows scale → α_s → PDF; NNLO+NNLL by PDF set (CT18 1921, MSHT20 1935, NNPDF3.1 1940, NNPDF4.0 1970), 49 pb spread | combLieke result.json `prediction`; arXiv:2408.03744 Table 5 |
+| ✔ 1-05 | `lumi_limited` | chained: CMS 2024 1952 ± 49 pb splits into stat 4 / syst 18 / lumi 45, lumi lit above the PDF spread | combLieke references.json |
+| ✔ 1-06 | `z_everywhere` | H→ττ (σ𝓑 / 560, schematic shapes on a log axis) under the Z→ττ tail; small slice: Z→μμ + jet becomes Z→νν + jet | YR4 in theory_reference `higgs` |
+| ✔ 1-07 | `lepton_universality` | opens on 1-01's frame; legs split into e / μ / τ; log mass axis ×207 ×17; (g_A, g_V) plane, sin²θ runs to 0.2315, the three leptons stay on one point (g_V^ℓ = −0.037); equal 𝓑 = 3.366 % bars; LEP + SLD Γ_μμ/Γ_ee, Γ_ττ/Γ_ee | PDG, Phys. Rept. 427 |
+| ✔ 1-08 | `mass_window` | the generator-level m_ℓℓ spectrum of our aMC@NLO DY sample (log); 60–120 GeV window; σ = 1953.9 pb = 0.965 σ(m > 50) | z-mumu gensums.json `h_lhe_mll` |
+| ✔ 1-09 | `final_frame` | chained: the window becomes the prediction line of the final plot's axis (1650–2400 pb), band, empty rows Z→ee, Z→μμ, Z→ττ \| Z→ℓℓ: section 6 fills them | combLieke summary plot |
+
+Retired candidates (15 Sep): `z_lineshape` (mass, not σ), `pdf_x1x2` (→ 1-03), `why_z` (→ 1-05, 1-06).
 
 ## 2 — CMS and methods (`2_cms_methods`)
 
-| # | candidate | what moves | source |
-|---|-----------|-----------|--------|
-| archived (2-02) | `cms_slice_build` | inside-out build of the slice, superseded by the logo build (`00_archive/`) | `CMSSlice` |
-| archived (2-03) | `cms_signatures` | e, μ, τ_h, jet, γ signature legend on the slice, not used in the talk (`00_archive/`) | `signature()` |
-| ✔ 2-01 | `cms_logo_to_slice` | **the detector build**: CMS logo appears, expands to the top right, the quarter layers round up into the full slice, the detail fades in | `CMSLogo`, `logo_rings` |
-| ✔ 2-04 | `pipe_a_map` | **the analysis spine**: nodes appear left→right — detector → recorded & simulated files → selection → tag & probe → backgrounds → comparison → fit → σ | all channel docs |
-| ✔ 2-05 | `pipe_b1_collisions` | chained: zoom on detector + files; collisions flash, tracks, files fly to a pile | z-mumu docs/10-skims.md |
-| ✔ 2-06 | `pipe_b2_skim` | chained: the pile of 8 squeezes to 2 (the skim) | docs/10 |
-| ✔ 2-07 | `pipe_b3_simulation` | chained: mini Drell-Yan → the same slice → purple simulated files join the pile | docs/10 |
-| ✔ 2-08 | `pipe_c1_trigger` | chained: zoom out, zoom into the funnel; trigger bar | docs/01 |
-| ✔ 2-09 | `pipe_c2_lepton_id` | chained: ℓ p_T, ID/iso cut | docs/01 |
-| ✔ 2-10 | `pipe_c3_two_leptons` | chained: N_ℓ = 2, then ℓ⁺ℓ⁻ | docs/01 |
-| ✔ 2-11 | `pipe_c4_mass_window` | chained: m_ℓℓ window: the surviving bar | docs/01, docs/14 |
-| ✔ 2-12 | `pipe_d1_tag_probe` | chained: zoom out, zoom into tag & probe; tag bold, probe dashed | docs/12 |
-| ✔ 2-13 | `pipe_d2_efficiency` | chained: probes fall into pass / fail; ε = N_pass/(N_pass+N_fail) | docs/12 |
-| ✔ 2-14 | `pipe_d3_scale_factor` | chained: the same in simulation (dashed purple); ε_data/ε_MC slider moves off 1 | docs/12 |
-| ✔ 2-15 | `pipe_e1_simulation_stack` | chained: zoom out, zoom into backgrounds: **real Z→μμ SR stack, log y, 2 GeV** builds VV+ττ → tt̄/tW → Z/γ*→ℓℓ (generic legend) | data/zmumu_sr_stack.json (nominal) |
-| ✔ 2-16 | `pipe_e2_control_region` | chained: dashed ℓ±ℓ± box, mini slice, same-sign pair with a lepton in a jet | docs/13 |
-| ✔ 2-17 | `pipe_e3_fake_factor` | chained: arrow × f into the real Fakes layer at the bottom of the stack | docs/13, data/zmumu_sr_stack.json |
-| ✔ 2-18 | `pipe_f1_data` | chained: zoom out, zoom into comparison: real stack + key; real data points | data/zmumu_sr_stack.json |
-| ✔ 2-19 | `pipe_f2_ratio` | chained: ratio panel: real data/pred (2 GeV) | data/zmumu_sr_stack.json |
-| ✔ 2-20 | `pipe_f3_uncertainty` | chained: the (schematic) systematic band breathes | docs/14 |
-| ✔ 2-21 | `pipe_g1_fit_model` | chained: zoom out, zoom into fit: μ_Z slider, θ₁…θ₅ rows, real pre-fit ratio (5 GeV) | data/zmumu_fit.json |
-| ✔ 2-22 | `pipe_g2_fit` | chained: the fit: μ moves and tightens, pulls move, ratio goes to the real post-fit (flat) | data/zmumu_fit.json |
-| ✔ 2-23 | `pipe_g3_cross_section` | chained: σ = μ_Z σ_pred; σ = (N − B)/(A ε L) lit term by term | CONVENTIONS.md §2, docs/06 |
-| ✔ 2-24 | `pipe_h_three` | chained: zoom out to the finished spine; it shrinks and triplicates in ee green / μμ gold / ττ red | palette `CHANNEL` |
+Re-cut of 17 Sep 2026 on the user's notes (plan `notes-to-pipeline-1-dynamic-karp.md`): the one-row pipeline was
+too detailed. Section 2 is now **one map with two parallel rows**: theory on top (purple: Drell-Yan → Monte Carlo →
+simulated detector → simulated NanoAOD), experiment below (the CMS slice → **Ella's trigger chain** L1 → HLT → RAW →
+NanoAOD, `scenes/s2_trigger.py`, drawn at 0.6× as the row itself), the two files meet in a **selection** funnel (added
+17 Sep late, v2 of every map clip; section 2 only passes it, the ee chapter zooms into it), generic corrections
+(factors from data or simulation, applied to the prediction; the data never move) and a one-parameter fit.
+Tag and probe, the fake factor, stacks and pulls are left to the channel chapters (μμ: tag and probe; ττ: fake
+factor; ee: the fit in depth). **Clip number = play order.** Scenes: `scenes/s2_map.py` (`MapBuild MapTheory
+TriggerInMap MapCorrections MapFit MapThree`), the trigger chain via its `enter`/`leave` hooks. Schematic, no result
+numbers; the trigger numbers are Ella's (40 MHz, 100 kHz, 1 kHz, ~440 L1 seeds, O(µs), O(100 ms)).
 
-(The earlier candidates `open_data_pipeline`, `selection_funnel`, `xsec_formula`, `tag_and_probe`, `fake_factor`,
-`profile_likelihood`, `luminosity` are superseded by the `pipe_*` chain, 15 Sep 2026. On 16 Sep the chain was cut
-into one-idea clips (manim sections, `tools/deliver_chain.py`; each zoom-out is joined to the next zoom-in) and the
-stacks became the real Z→μμ signal region on a log axis, user request.)
+| # | clip | what moves | source |
+|---|------|-----------|--------|
+| ✔ 2-01 | `cms_logo_to_slice` | **the detector build** (kept, v3): CMS logo appears, expands to the top right, the quarter layers round up into the full slice, the detail fades in | `CMSLogo`, `logo_rings` |
+| ✔ 2-02 | `map_build` | chained on 2-01: the slice parks bottom left; the theory row draws in purple (diagram → MC box → slice in a dashed purple ring → purple file), then the experiment row (L1 → HLT → RAW → NanoAOD), then both files converge into corrections → fit→σ | all channel docs |
+| ✔ 2-03 | `theory_prediction` | zoom onto the theory row (full-size row at the bottom, purple panel above): the lineshape dσ/dm_ℓℓ draws, its area = σ_theory | schematic |
+| ✔ 2-04 | `theory_generator` | Monte Carlo hit or miss: the first kept point becomes an ℓ⁺ℓ⁻ event; ~90 points thrown, the kept ones drop into a histogram that follows the curve | schematic |
+| ✔ 2-05 | `theory_simulation` | the event flies into the simulated slice: purple tracks, a purple file to NanoAOD; a stream of simulated events | z-mumu docs/10 |
+| ✔ 2-06 | `trig_a_collisions` | zoom back to the map and onto the experiment row = the trigger spine; bunch crossings, 40 MHz | Ella's outline |
+| ✔ 2-07 | `trig_b_l1_primitives` | L1 step 1: coarse calorimeter towers and muon segments light up | Ella's outline |
+| ✔ 2-08 | `trig_c_l1_objects` | L1 step 2: candidate objects (μ, e/γ, jet) | Ella's outline |
+| ✔ 2-09 | `trig_d_l1_decision` | L1 step 3: menu of ~440 seeds, some fire → accept; O(µs) | Ella's outline |
+| ✔ 2-10 | `trig_e_l1_rate` | panel closes; 100 kHz to the HLT | Ella's outline |
+| ✔ 2-11 | `trig_f_hlt_paths` | HLT paths of filters, one trigger bit each | Ella's outline |
+| ✔ 2-12 | `trig_g_hlt_rate` | O(100 ms), 1 kHz leave the HLT | Ella's outline |
+| ✔ 2-13 | `trig_h_raw` | the RAW event: detector data + L1 result + HLT bits + objects | Ella's outline |
+| ✔ 2-14 | `trig_i_nanoaod` | the skim: detector data dropped, the rest squeezed into NanoAOD | Ella's outline, docs/10 |
+| ✔ 2-15 | `corr_compare` | the panel folds into NanoAOD, zoom out, zoom into corrections: the purple and the grey file drop onto one m_ℓℓ axis: data points, the purple prediction (high, tilted) | schematic |
+| ✔ 2-16 | `corr_factor` | dashed control sample: the same quantity in data (grey bar) and in simulation (purple bar); k₁ = grey/purple | docs/11, 12, 13 |
+| ✔ 2-17 | `corr_apply` | × k₁, × k₂ (shape), × k₃ fly onto the prediction, which moves toward the data; the data never move | schematic |
+| ✔ 2-18 | `fit_model` | zoom out, zoom into the fit: data points with error bars, the purple line μ σ_theory, the μ slider (purple reference at 1) | CONVENTIONS.md §2 |
+| ✔ 2-19 | `fit_scan` | μ scans, the line scales through the points, −2Δln L(μ) draws a parabola, settles at μ̂; the Δ = 1 crossings give ±δμ on the slider | schematic |
+| ✔ 2-20 | `fit_sigma` | σ = μ̂ σ_theory | CONVENTIONS.md §2 |
+| ✔ 2-21 | `map_three` | zoom out to the finished map; it shrinks and repeats in ee green / μμ gold / ττ red with e⁺e⁻, μ⁺μ⁻, τ⁺τ⁻ | palette `CHANNEL` |
+
+Superseded files: `clips/2_cms_methods/00_archive/pre_recut_2026-09-17/` (the one-row pipeline `pipe_a_map …
+pipe_h_three`, 2-04…2-24, `scenes/s2_pipeline.py`, and the standalone trigger clips 2-25…2-33), registry rows in
+`clips/CLIPLIST_2_cms_methods_pre_recut.tsv`; older still in `00_archive/` (`cms_slice_build`, `cms_signatures`).
 
 ## 3 — Z → ee (`3_zee`)
 
-| # | candidate | what moves | source |
-|---|-----------|-----------|--------|
+17 Sep 2026 (deck owner's storyline): the chapter is told **on the section-2 map**: it opens on 2-21's three maps, flies
+into the **selection** node and later into the **fit** node. Real data throughout; result = the channel's own fit
+(z-ee delivery 16 Sep, `FREEZE.md`). Brief `briefs/zee.md`; scene `scenes/s3_zee_story.py` (`ZeeSelection ZeeFit`);
+numbers `data/zee_fit.json`, `data/zee_selection.json`. **Clip number = play order.**
+
+| # | clip | what moves | source |
+|---|------|-----------|--------|
 | ✔ 3-01 | `ee_process` | Drell-Yan diagram in the ee flavour; each electron leg radiates and the photons convert: an EM shower in Feynman style, inside a faint cone | `shower_tree` |
 | ✔ 3-02 | `ee_detector` | chained: dissolves to the slice; e⁻/e⁺ tracks bend opposite ways, stop in the ECAL as green clusters, one brem photon, nothing beyond; camera zooms in at the end | `signature("e")` |
-| | `mass_peak_fill_ee` | one event → one bar; rain of events fills the m_ee peak (schematic, seeded) | recipes §4 |
-| | `ee_stack` | frozen data/MC stacked histogram (DYee, DYtautau, TTbar, dibosons, fakes) with data points, drawn step by step | data/ee_*.json from z-ee |
-| | `ee_result` | the number with stat and syst bars, next to theory | z-ee handoff |
+| ✔ 3-03 | `ee_map_selection` | opens on 2-21's last frame: μμ and ττ maps fade, the ee map grows to full size, the camera flies into the selection funnel; the inner detector grows out of it | s2_map geometry |
+| ✔ 3-04 | `ee_sel_event` | a real selected event (run 279024): two green tracks with deposits, e⁻ 45.5 GeV / e⁺ 41.4 GeV; cyan ring on the trigger electron → cut list "HLT: p_T^e > 27 GeV" ✓; the tracks glow, "e⁺e⁻" ✓ | zee_selection `event` |
+| ✔ 3-05 | `ee_sel_pt` | the view parks; the two p_T values drop onto a p_T axis; the real spectrum grows (Z-window pairs green on the non-Z grey); m_Z/2 line; 0–20 GeV veiled, cut line → "p_T > 20 GeV" ✓ | zee_selection `pt` |
+| ✔ 3-06 | `ee_sel_eta` | r-z side view (tracker to |η| = 2.5, ECAL barrel + endcaps): the two real electrons with hits; the η = 2.5 lines; a grey electron at η = 2.8 reaches the endcap without hits, "e / γ ?" → "|η| < 2.5" ✓ | zee_selection `cuts`, event η |
+| ✔ 3-07 | `ee_sel_id` | η-φ calorimeter panels: a real electron (narrow cluster, one track, empty cone, no H) vs a real failing candidate (wide, tracks in the cone, H/E 0.58); σ_iηiη, H/E, I_rel with the real values; ✓ / ✗ | zee_selection `event`, `fake_candidate` |
+| ✔ 3-08 | `ee_sel_wp` | real m_ee of e⁺e⁻ (green) and e^±e^± (grey) pairs steps no ID → veto → loose → medium → tight; purity vs efficiency builds point by point; medium lit → "ID: medium" ✓ | zee_selection `wp` |
+| ✔ 3-09 | `ee_sel_mass` | "60 < m_ee < 120 GeV" ✓; the cut list folds into a big green funnel; dots rain from its spout into the m_ee histogram (30 × 2 GeV, log), N counts up to 6,320,097 | zee_fit `data` |
+| ✔ 3-10 | `ee_sel_mc` | a purple simulation file drops into the funnel; the prefit stack grows under the data (bars → dots), key, ratio panel, 0.970 | zee_fit `prefit` |
+| ✔ 3-11 | `ee_sel_counting` | N_data = σ·L·εA + N_bkg → σ = (6,320,097 − 44,357)/(0.202 × 16.39 fb⁻¹) = 1896 pb; then stack, data and ratio flatten to their averages: the shape is gone | zee_fit `counting` |
+| ✔ 3-12 | `ee_map_fit` | everything shrinks back into the funnel node of the ee map; the camera flies into the fit node; the full-shape plot grows out of it | s2_map geometry |
+| ✔ 3-13 | `ee_fit_mu` | ν_i = μ s_i + b_i and a μ_Z slider: μ → 1.15 → 0.85 → 1, only the green layer and the ratio move | zee_fit `prefit` |
+| ✔ 3-14 | `ee_fit_nuisance` | ν_i = μ s_i(θ) + b_i(θ); pull rows; luminosity, electron ID, QCD scale, FSR each go +1 → −1 → 0 on their real templates, stack and ratio follow | zee_fit `templates` |
+| ✔ 3-15 | `ee_fit_result` | L(μ, θ) = Π Pois · Π G; pile-up, L1 prefiring, electron reco, σ(Z→ττ) rows join; all parameters (and the MC-stat γ) move to the post-fit values, the stack lands on TRExFitter's post-fit yields, ratio flat, pull bars; μ_Z = 0.942 ± 0.015 | zee_fit `nps`, `postfit`, `mu` |
+| ✔ 3-16 | `ee_sigma` | v2: the 5-33 result frame: σ axis 1750–2250 pb, 1954.1 ⁺¹⁵₋₂₁ pb band, σ_60–120 = 1841 ± 30 pb (green point); no CMS/ATLAS points (revealed only at the end of the talk) | zee_fit `sigma`, `theory` |
 
 ## 4 — Z → μμ (`4_zmumu`)
 

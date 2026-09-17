@@ -213,7 +213,8 @@ the data / prediction ratio of the region plots).
   k2 the charge dependence of f_W (OS quark jet 0.058 vs SS gluon jet 0.035), k3 same-sign validation 0.966 ± 0.014;
   l1 eμ signal region vs tt̄ control region, l2 μ_tt̄ floats → post-fit; m1 the lever (eμ ∝ μ_Z, ℓτh ∝ SF μ_Z,
   τhτh ∝ SF² μ_Z), m2 fitted vs POG SFs per decay mode, m3 the four channels post-fit, m4 σ with the four
-  one-channel fits (POG SFs fixed, open points), the prediction band, CMS and ATLAS on a 1750–2250 pb axis.
+  one-channel fits (POG SFs fixed, open points), the prediction band on a 1750–2250 pb axis (5-33 v3, 17 Sep: CMS and
+  ATLAS removed, the deck owner reveals them only at the end of the talk).
 - Not shown on purpose: the eμ multijet OS/SS, the in-situ trigger efficiencies (tag-and-probe-like, told in μμ),
   τh energy scale, the pT-split cross-check and the eμ vs τ-channel tension (a PowerPoint remark if wanted).
 

@@ -57,8 +57,9 @@ python tools/deliver_chain.py 4 scenes/s4_zmumu_story.py MumuEvent MumuFill Mumu
 Seams at 480p fail on mean |d| alone (blob 0) from H.264 noise even between two cuts of
 the same rendered frame; judge seams at 1080p.
 
-Scenes: `s1_drell_yan.py`, `s2_cms_logo.py` (logo → slice), `s2_cms_slice.py`,
-`s3_zee.py`, `s4_zmumu.py`, `s5_ztautau.py` (process clip → detector clip
+Scenes: `s1_drell_yan.py`, `s2_cms_logo.py` (logo → slice), `s2_map.py` (section 2 after the
+logo: the two-row map, chained on `s2_trigger.py`'s trigger chain), `s2_cms_slice.py`,
+`s3_zee.py`, `s3_zee_story.py` (the ee chapter on the map: selection and fit), `s4_zmumu.py`, `s5_ztautau.py` (process clip → detector clip
 chained through `scenes/channel_common.py`), `s6_combination.py`, `s7_outro.py`
 (mic drop on the detector, flag-coloured rays: `FLAG` in the palette, outro only).
 

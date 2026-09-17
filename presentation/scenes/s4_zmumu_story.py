@@ -1655,15 +1655,20 @@ class MumuTagProbeScan(Scene):
                   FadeIn(e5["sf_tex"], shift=UP * 0.1), run_time=0.8)
         sax = e5["sf_ax"]
         self.play(FadeIn(sax), ax.x_title.animate.set_opacity(0.0), ax.x_labels.animate.set_opacity(0.0), run_time=0.7)
-        merges = []
+        merges, copies = [], []
         for i in range(10):
             a, b = e4["eff_data"][i].copy(), e4["eff_mc"][i].copy()
             self.add(a, b)
+            copies += [a, b]
             tgt = e5["sf_pts"][i]
-            merges.append(Succession(Transform(a, tgt.copy(), run_time=0.55), FadeOut(a, run_time=0.01)))
-            merges.append(Succession(Transform(b, tgt.copy(), run_time=0.55), FadeOut(b, run_time=0.01)))
+            # the pair lands as one SF point, and that point stays: the real one is revealed on landing (the copies,
+            # identical to it by then, lie under it and leave after the play). Fading the copies out on landing made
+            # every point vanish until all ten popped back at the end.
+            merges.append(Succession(Transform(a, tgt.copy(), run_time=0.55), FadeIn(tgt, run_time=0.02)))
+            merges.append(Transform(b, tgt.copy(), run_time=0.55))
         self.play(LaggedStart(*merges, lag_ratio=0.06), run_time=2.0, rate_func=EASE)
-        self.add(e5["sf_pts"])
+        self.remove(*copies)
+        regroup(self, e5["sf_pts"], "SF points")
         for k in keep:
             settle(self, e4[k], e5[k], k)
         settle(self, ax, e5["eff_ax"], "eps axes")
@@ -1722,10 +1727,10 @@ class MumuTagProbeScan(Scene):
             lines = apply_lines(ev)
             rects = VGroup(*[SurroundingRectangle(tab.vg.cells[mu["ipt"] * 4 + mu["ieta"]], color=col(DETECTOR_ACCENT),
                                                   buff=0.0, stroke_width=3.5) for mu in ev["muons"]])
-            for k in (0, 1):
-                self.play(FadeIn(lines.mu[k], shift=RIGHT * 0.15), run_time=0.35 * f)
+            for k in (0, 1):                     # left-column items enter from the right: never across the top-left block
+                self.play(FadeIn(lines.mu[k], shift=LEFT * 0.15), run_time=0.35 * f)
                 self.play(Create(rects[k]), run_time=0.35 * f)
-            self.play(FadeIn(lines.w, shift=RIGHT * 0.15), run_time=0.45 * f)
+            self.play(FadeIn(lines.w, shift=LEFT * 0.15), run_time=0.45 * f)
             blk = Rectangle(width=0.13, height=0.13, stroke_color=darken(SAMPLE["DYmumu"], 0.4), stroke_width=1.5,
                             fill_color=col(SAMPLE["DYmumu"]), fill_opacity=1.0).move_to(lines.w.get_right() + RIGHT * 0.2)
             k_bin = int(np.clip(math.floor(ev["mass"]) - 60, 0, 59))
@@ -1736,10 +1741,10 @@ class MumuTagProbeScan(Scene):
         move_ratio(self, P, "sf_id", run_time=1.8)       # every simulated event, both muons: the identification table
         self.wait(0.2)
         subs = sub_rows()
-        self.play(ReplacementTransform(tab, subs[0][0]), FadeIn(VGroup(*subs[0][1:]), shift=RIGHT * 0.15), run_time=1.0,
+        self.play(ReplacementTransform(tab, subs[0][0]), FadeIn(VGroup(*subs[0][1:]), shift=LEFT * 0.15), run_time=1.0,
                   rate_func=EASE)
         for r in subs[1:]:
-            self.play(FadeIn(r, shift=RIGHT * 0.2), run_time=0.4, rate_func=EASE)
+            self.play(FadeIn(r, shift=LEFT * 0.2), run_time=0.4, rate_func=EASE)
         move_ratio(self, P, "sf_muon", run_time=1.4)     # isolation, trigger, reconstruction: the same method
         self.wait(0.2)
         self.play(*[FadeOut(VGroup(*r[1:])) for r in subs], *[FadeOut(r[0]) for r in subs[1:]],
@@ -1761,22 +1766,24 @@ class MumuCorrections(Scene):
         add_state(self, prev, ORDER_T7)
         clip_open(self, "mumu_corr_pileup")
         e1 = state_g1()
-        self.play(FadeIn(e1["row_pu"], shift=RIGHT * 0.25), run_time=0.6, rate_func=EASE)
+        # the rows start at LEFT_COL_X, 0.15 right of the top-left block: they enter from the right and leave
+        # downward, never from / to the left (a row sliding in from x - 0.25 crosses the block: keepout WARN)
+        self.play(FadeIn(e1["row_pu"], shift=LEFT * 0.25), run_time=0.6, rate_func=EASE)
         move_ratio(self, prev, "sf_pileup")
         settle_same(self, prev, e1, (*PLOT_KEYS, "row_mu"))
         finish(self, e1, ORDER_G1)
         clip_cut(self, "mumu_corr_prefiring")
 
         e2 = state_g2()
-        self.play(FadeIn(e2["row_l1"], shift=RIGHT * 0.25), run_time=0.6, rate_func=EASE)
+        self.play(FadeIn(e2["row_l1"], shift=LEFT * 0.25), run_time=0.6, rate_func=EASE)
         move_ratio(self, e1, "final")
         settle_same(self, e1, e2, (*PLOT_KEYS, "row_mu", "row_pu"))
         finish(self, e2, ORDER_G2)
         clip_cut(self, "mumu_corrected")
 
         e3 = state_g3()
-        self.play(*[FadeOut(e2[k], shift=LEFT * 0.2) for k in ("row_mu", "row_pu", "row_l1")], run_time=0.5)
-        self.play(FadeIn(e3["row_all"], shift=RIGHT * 0.25), run_time=0.6, rate_func=EASE)
+        self.play(*[FadeOut(e2[k], shift=DOWN * 0.15) for k in ("row_mu", "row_pu", "row_l1")], run_time=0.5)
+        self.play(FadeIn(e3["row_all"], shift=LEFT * 0.25), run_time=0.6, rate_func=EASE)
         pulse(self, [e2["rlabel"]], scale=1.5, run_time=0.7)
         settle_same(self, e2, e3, PLOT_KEYS)
         finish(self, e3, ORDER_G3)

@@ -38,7 +38,7 @@ the question:
 
 Do exactly the same in simulation, and the ratio is the scale factor.
 
-Two real pairs from run 278969 (the pairs shown in talk clips 4-24 and 4-25), both with the tag in the barrel:
+Two real pairs from run 278969 (the pairs shown in talk clips 4-08 `mumu_tnp_tag_probe` and 4-09 `mumu_tnp_pass_fail`), both with the tag in the barrel:
 
 | event | tag | probe | m(tag, probe) | tight ID |
 |---|---|---|---:|---|
@@ -376,7 +376,7 @@ the SFs lower the prediction by 2.5 %.
 | drivers | `scripts/v2_2_tnp.py`, `scripts/v2_7_reco_tnp.py` |
 | results | `output/v2/tnp/tnp_result.json`, `reco_result.json`; per-cell fits in `tnp_fits.pkl`, `reco_fits.pkl` (not in git) |
 | plots | `output/v2/plots/tnp_*.png`, `reco_*.png` |
-| numbers frozen for the talk | `presentation/data/zmumu_tnp.json` (clips 4-24 to 4-28) |
+| numbers frozen for the talk | `presentation/data/zmumu_tnp.json` (clips 4-08 to 4-14, the numbering of 17 Sep 2026) |
 
 The analysis is frozen, so these commands document how the outputs were made; they are not meant to be rerun.
 

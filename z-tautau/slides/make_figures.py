@@ -1,17 +1,14 @@
 #!/usr/bin/env python
-"""Vector figures for the slide deck, all on the deck background (prompts/presentation_style.md).
+"""Every figure of the slide deck, drawn dark and vector into slides/figs/ (PDF + PNG).
 
-    source ../setup.sh && python slides/make_figures.py        # -> slides/figs/*.pdf (+ .png fallbacks)
+    source ../setup.sh && python slides/make_figures.py
 
-Every figure is drawn on DARK_BG = #222222 so it blends with the slides. Inputs: output/results.json,
-output/data/{fakefactors,bdt,yields}.json, fit/fitinputs/ztautau.root, fit/results/ztautau/ (post-fit total
-histograms and yield tables) and, for the two control plots of the signal-dominated category, the ntuples.
-The deck itself is assembled by slides/build_deck.py (PyMuPDF, run in the betterplottingtool venv).
+Nothing here is typed by hand: the numbers come from output/results.json, the fit results in
+fit/results/*_fit_result.json, the fit inputs and their post-fit histograms, output/data/fakes_*.json and
+external/trigger_insitu_v4.json. Figures are drawn on `plotting.DARK_BG`, which is the deck background, so
+an embedded plot has no visible edge (prompts/presentation_style.md).
 
-NOTE (17 Sep 2026): this deck builder still expects the v3 schema of output/results.json
-(the tau_h tau_h-only measurement), which no longer exists: output/ now holds the four-channel
-result (docs/10-v4-plan.md) and its results.json has a different layout. SUPERSEDED -- the deck
-has to be rebuilt against the new schema before it is shown again.
+The deck itself is slides/build_deck.py.
 """
 
 from __future__ import annotations
@@ -26,333 +23,339 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 import uproot  # noqa: E402
-import yaml  # noqa: E402
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 
-from ztautau import analysis, bdt, config, fakes, plotting, samples  # noqa: E402
-from ztautau.plotting import COLORS, DARK_BG, DARK_FG, LABELS, dark_rc, save  # noqa: E402
+from ztautau import config, plotting  # noqa: E402
+from ztautau.plotting import DARK_BG, DARK_FG, dark_rc, save  # noqa: E402
 
 FIGS = HERE / "figs"
 FIGS.mkdir(exist_ok=True)
-NOM = "mcsub"
-BLUE, GREEN, ORANGE, PINK, MUTED = "#2BA4DD", "#8AC63F", "#D9822B", "#E377AC", "#99999E"
-R = json.loads((HERE.parent / "output/results.json").read_text())
-FIT = R["fit"][NOM]
-YIELDS = json.loads((config.DATA_DIR / "yields.json").read_text())
-BDT = json.loads((config.DATA_DIR / "bdt.json").read_text())
-FF = json.loads((config.DATA_DIR / "fakefactors.json").read_text())
-EDGES = np.asarray(config.FIT_BINS)
+BLUE, GREEN, ORANGE, PINK, MUTED, RED = "#2BA4DD", "#8AC63F", "#D9822B", "#E377AC", "#99999E", "#CC4C4C"
+
+R = json.loads((config.OUTPUT_DIR_V4 / "results.json").read_text())
+FIT = R["fit"]["combined"]
+VAR = R.get("fit_variants", {})
+FREE = R.get("fit_per_channel_free", {})
+META = json.loads((config.FIT_DIR_V4 / "fitinputs" / f"{config.JOB_V4}.root.meta.json").read_text())
+FITTED_REGIONS = [r for r in META["regions"] if META.get("region_sets", {}).get(r, "nominal") == "nominal"]
+
+CH = {"tautau": r"$\tau_h\tau_h$", "mutau": r"$\mu\tau_h$", "etau": r"$e\tau_h$", "emu": r"$e\mu$"}
+REGION_LABELS = {"tautau_SR0": r"$\tau_h\tau_h$, BDT < 0.55  ($m_{\tau\tau}$ > 110 GeV only)",
+                 "tautau_SR1": r"$\tau_h\tau_h$, 0.55 < BDT < 0.90", "tautau_SR2": r"$\tau_h\tau_h$, BDT > 0.90",
+                 "emu_SR": r"$e\mu$ signal region", "emu_CRtt": r"$e\mu$, $t\bar{t}$ control region"}
+for _c, _l in (("mutau", r"$\mu\tau_h$"), ("etau", r"$e\tau_h$")):
+    for _dm in config.TAU_DMS:
+        REGION_LABELS[f"{_c}_SR_dm{_dm}"] = f"{_l}, decay mode {_dm}"
 STACK_GROUPS = [("DYll", ["DYee", "DYmumu"]), ("DYlowmass", ["DYlowmass"]), ("Diboson", ["WW", "WZ", "ZZ"]),
                 ("Top", ["TTbar", "SingleTop"]), ("WJets", ["WJets"]), ("Fakes", ["Fakes"]),
-                ("DYtautau_nonfid", ["DYtautau_nonfid"]), ("DYtautau", ["DYtautau"])]
-TITLES = {"Z#rightarrow#tau#tau (fiducial)": "DYtautau", "Z/#gamma*#rightarrow#tau#tau (non-fid.)": "DYtautau_nonfid",
-          "Z#rightarrowee": "DYee", "Z#rightarrow#mu#mu": "DYmumu", "Z/#gamma*#rightarrowll (m<50)": "DYlowmass",
-          "W+jets": "WJets", "t#bar{t}": "TTbar", "single t": "SingleTop", "WW": "WW", "WZ": "WZ", "ZZ": "ZZ",
-          "jet#rightarrow#tau_{h} (FF)": "Fakes"}
+                ("DYtautau_nonfid", ["DYtautau_out"]), ("DYtautau", ["DYtautau"])]
 plt.rcParams.update({"font.size": 13})
 
 
-def dark_fig(figsize=(7, 4.4)):
+def dark_fig(figsize=(7, 4.4), n=1, **kw):
     plt.rcParams.update(dark_rc())
-    fig, ax = plt.subplots(figsize=figsize)
-    for sp in ("top", "right"):
-        ax.spines[sp].set_visible(False)
-    plotting.tag(ax, x=1.0, y=1.01, ha="right", va="bottom", color=DARK_FG, fontsize=10)   # version + working point
-    return fig, ax
+    fig, axes = plt.subplots(1, n, figsize=figsize, **kw)
+    for ax in (axes if n > 1 else [axes]):
+        ax.set_facecolor(DARK_BG)
+        for sp in ("top", "right"):
+            ax.spines[sp].set_visible(False)
+    fig.patch.set_facecolor(DARK_BG)
+    plotting.tag(axes[-1] if n > 1 else axes, x=1.0, y=1.01, ha="right", va="bottom", color=DARK_FG, fontsize=10)
+    return fig, axes
 
 
-def stack_from(hists, region):
-    stack = []
-    for g, members in STACK_GROUPS:
-        parts = [hists[f"{region}__{m}"] for m in members if f"{region}__{m}" in hists]
-        if parts:
-            v = sum(p[0] for p in parts); var = sum(p[1] for p in parts)
-            stack.append((g, np.maximum(v, 0), var))
-    return stack
+def _sig(f):
+    return f["sigma_60_120_pb"]
 
 
-# ------------------------------------------------------------------ 1. method flow diagram
-def flow():
-    fig, ax = dark_fig((6.2, 7.2))
-    ax.set_axis_off()
-    boxes = [("NanoAOD:  160 GB data, 4 Drell-Yan + background samples", MUTED), ("skims (trigger, $\\geq$2 $\\tau_h$ candidates):  1.7 GB", MUTED),
-             ("ntuples: pair, trigger match, vetoes, masses:  330 MB (laptop)", MUTED),
-             ("fake factors (era $\\times$ DM $\\times$ $N_{jets}$ $\\times$ $p_T$), MC subtracted,\nclosure corrections $f(|\\eta_1|)\\,g(p_{T,2})$, $C_{OS/SS}$", PINK),
-             ("k-fold BDT (5 folds by event number)  $\\rightarrow$  SR0 / SR1 / SR2", BLUE),
-             ("templates: fiducial signal, non-fiducial DY as background,\n39 nuisance parameters + 42 $\\gamma$", MUTED),
-             ("TRExFitter v1.8.0: fit of $m_{\\tau\\tau}$ in 3 categories  $\\rightarrow$  $\\mu_Z$, $\\sigma$", ORANGE)]
-    n = len(boxes); h = 1.0 / n
-    for i, (txt, col) in enumerate(boxes):
-        y = 1 - (i + 1) * h + 0.012
-        ax.add_patch(plt.Rectangle((0.02, y), 0.96, h - 0.024, transform=ax.transAxes, facecolor=col, alpha=0.22, edgecolor=col, lw=2))
-        ax.text(0.5, y + (h - 0.024) / 2, txt, transform=ax.transAxes, ha="center", va="center", fontsize=11.5, color=DARK_FG)
-        if i < n - 1:
-            ax.annotate("", xy=(0.5, y - 0.003), xytext=(0.5, y + 0.012 - 0.0), xycoords="axes fraction",
-                        arrowprops=dict(arrowstyle="-|>", color=DARK_FG, lw=1.5))
-    save(fig, FIGS / "flow", dark=True); plt.close(fig)
-
-
-# ------------------------------------------------------------------ 2. result summary and impacts
-def result_summary():
-    fig, ax = dark_fig((9, 5.4))
-    pred = R["prediction"]["sigma_tautau_60_120_pb"]
-    s = FIT["sigma_60_120_pb"]
-    H = json.loads((HERE / "history.json").read_text())
-    rows = [("v3 nominal: DeepTau Tight (this result)", s["value"], s["stat"], s["err_down"], s["err_up"], BLUE)]
-    for key, col in (("v2.1", ORANGE), ("v2", MUTED), ("v1", MUTED)):
-        h = H[key]; rows.append((h["label"], h["sigma60"], h["sigma_stat"], h["sigma_down"], h["sigma_up"], col))
-    rows.append((r"Z$\rightarrow\mu\mu$ v2 (60$-$120)", 1935, 5, 30, 30, GREEN))
-    ax.axvspan(pred * 0.96, pred * 1.04, color=ORANGE, alpha=0.25); ax.axvline(pred, color=ORANGE)
-    for i, (lab, v, st, dn, up, col) in enumerate(rows):
+# ------------------------------------------------------------------ 1. the result
+def summary():
+    """The measurement, the two sub-measurements it combines, and each channel on its own."""
+    rows = [(r"**combined**: $\tau_h\tau_h + \mu\tau_h + e\tau_h + e\mu$".replace("**", ""), _sig(FIT), BLUE, 7)]
+    if FREE.get("emu"):
+        rows.append((r"$e\mu$ alone  (no $\tau_h$, no ID scale factor)", _sig(FREE["emu"]), GREEN, 6))
+    if VAR.get("taulep"):
+        rows.append((r"$\tau_h\tau_h + \mu\tau_h + e\tau_h$ alone  (SF free)", _sig(VAR["taulep"]), ORANGE, 6))
+    for ch in config.CHANNELS:
+        if ch in R["fit"]:
+            rows.append((CH[ch] + r" alone, POG $\tau_h$ ID SF", _sig(R["fit"][ch]), MUTED, 5))
+    fig, ax = dark_fig((9.2, 1.2 + 0.58 * len(rows)))
+    pred = _sig(FIT)["prediction"]
+    ax.axvspan(pred * 0.96, pred * 1.04, color=ORANGE, alpha=0.20)
+    ax.axvline(pred, color=ORANGE, lw=1.5)
+    ax.text(pred + 18, len(rows) + 0.45, f"NLO prediction {pred:.0f} pb ($\\pm$4%)", fontsize=9.5, color=ORANGE)
+    for i, (lab, s, col, ms) in enumerate(rows):
         y = len(rows) - i
-        ax.errorbar([v], [y], xerr=[[dn], [up]], fmt="o", color=col, capsize=4, lw=1.6, ms=7)
-        ax.errorbar([v], [y], xerr=[[st], [st]], fmt="none", color="#CC4C4C", lw=5)
-        ax.text(1330, y + 0.28, lab, fontsize=11, color=col)
-        ax.text(3230, y + 0.28, f"{v:.0f} +{up:.0f} $-${dn:.0f} pb", fontsize=11, color=col, ha="right")
-    ax.text(pred + 12, 0.45, f"NNLO {pred:.0f} pb", fontsize=10, color=ORANGE)
-    ax.set_ylim(0.3, len(rows) + 0.9); ax.set_xlim(1300, 3250); ax.set_yticks([])
-    ax.set_xlabel(r"$\sigma(pp\rightarrow Z/\gamma^*\rightarrow\tau\tau)$, $60<m<120$ GeV [pb]   (red: statistical)")
-    save(fig, FIGS / "result_summary", dark=True); plt.close(fig)
+        ax.errorbar([s["value"]], [y], xerr=[[s["err_down"]], [s["err_up"]]], fmt="none", color=col, capsize=4, lw=2, zorder=2)
+        if s.get("stat"):
+            ax.errorbar([s["value"]], [y], xerr=[[s["stat"]], [s["stat"]]], fmt="none", color=RED, lw=5, zorder=3)
+        ax.plot([s["value"]], [y], "o", color=col, ms=ms, zorder=4)
+        ax.text(1330, y + 0.28, lab, fontsize=10.5, color=DARK_FG)
+        ax.text(2860, y + 0.28, f"{s['value']:.0f}  +{s['err_up']:.0f} $-${s['err_down']:.0f} pb",
+                fontsize=10.5, color=DARK_FG, ha="right")
+    ax.set_xlim(1300, 2900); ax.set_ylim(0.2, len(rows) + 0.95); ax.set_yticks([])
+    ax.set_xlabel(r"$\sigma(pp\rightarrow Z/\gamma^*\rightarrow\tau\tau,\ 60<m<120\ \mathrm{GeV})$ [pb]"
+                  "      (red: statistical only)")
+    save(fig, FIGS / "summary", dark=True)
 
-    gi = {k: v for k, v in FIT["grouped_impact"].items() if k != "FullSyst"}
-    gi["Data statistics"] = FIT["mu_stat"]
+
+def submeasurements():
+    """Why the combined number is a compromise: mu_Z of the two halves and of the cross-check fits."""
+    rows = []
+    if FREE.get("emu"):
+        rows.append((r"$e\mu$ alone", FREE["emu"], GREEN))
+    if VAR.get("taulep"):
+        rows.append((r"$\tau$ channels alone, SF free", VAR["taulep"], ORANGE))
+    rows.append(("combined (the measurement)", FIT, BLUE))
+    if VAR.get("emutrig2x"):
+        rows.append((r"combined, $e\mu$ trigger prior doubled", VAR["emutrig2x"], MUTED))
+    if VAR.get("ptsplit"):
+        rows.append((r"combined, $\tau_h$ ID SF split at $p_T$ = 40 GeV", VAR["ptsplit"], PINK))
+    fig, ax = dark_fig((8.6, 1.1 + 0.62 * len(rows)))
+    ax.axvline(1.0, color=MUTED, lw=1.0, ls=":")
+    for i, (lab, f, col) in enumerate(rows):
+        y = len(rows) - i
+        ax.errorbar([f["mu"]], [y], xerr=[[f["mu_err_down"]], [f["mu_err_up"]]], fmt="o", color=col,
+                    capsize=4, lw=2.2, ms=7 if col == BLUE else 6)
+        ax.text(0.845, y + 0.3, lab, fontsize=10.5, color=DARK_FG)
+        ax.text(1.335, y + 0.3, f"{f['mu']:.3f} +{f['mu_err_up']:.3f} $-${f['mu_err_down']:.3f}",
+                fontsize=10.5, color=DARK_FG, ha="right")
+    t = R.get("tension_taulep_vs_emu")
+    if t:
+        ax.text(0.845, 0.45, f"the two sub-measurements are {t['n_sigma']:.1f}$\\sigma$ apart "
+                             "(uncorrelated limit)", fontsize=10, color=RED)
+    ax.set_xlim(0.84, 1.34); ax.set_ylim(0.15, len(rows) + 0.95); ax.set_yticks([])
+    ax.set_xlabel(r"$\mu_Z$   (signal strength w.r.t. the NLO prediction)")
+    save(fig, FIGS / "submeasurements", dark=True)
+
+
+# ------------------------------------------------------------------ 2. what the fit measures in situ
+def tau_id():
+    sf = {k: v for k, v in (FIT.get("tau_id_sf") or {}).items() if not k.endswith("_lowpt")}
+    fig, ax = dark_fig((6.8, 4.3))
+    for i, (dm, v) in enumerate(sf.items()):
+        ax.errorbar(i - 0.13, v["pog"][0], v["pog"][1], fmt="s", color=MUTED, ms=7, capsize=4,
+                    label="TauPOG, external" if i == 0 else None)
+        ax.errorbar(i + 0.13, v["value"], [[v["err_down"]], [v["err_up"]]], fmt="o", color=BLUE, ms=7, capsize=4,
+                    label="this fit, in situ" if i == 0 else None)
+    ax.set_xticks(range(len(sf))); ax.set_xticklabels([f"DM {k[2:]}" for k in sf])
+    ax.axhline(1, color=MUTED, lw=0.8, ls=":")
+    ax.set_ylabel("DeepTau VSjet Tight scale factor"); ax.set_ylim(0.55, 1.35)
+    ax.legend(loc="upper left", fontsize=10)
+    ax.set_title(r"$\tau_h$ identification scale factor per decay mode", fontsize=12, pad=14, color=DARK_FG)
+    save(fig, FIGS / "tauid", dark=True)
+
+    es = FIT.get("tau_es") or {}
+    if es:
+        fig, ax = dark_fig((6.8, 3.7))
+        for i, (dm, v) in enumerate(es.items()):
+            ax.errorbar(i, v["pull"], v["constraint"], fmt="o", color=GREEN, ms=7, capsize=4)
+            ax.text(i, v["pull"] + v["constraint"] + 0.14, f"{v['constraint'] * v['prior_pct']:.1f}%",
+                    ha="center", fontsize=10, color=DARK_FG)
+        ax.axhspan(-1, 1, color=MUTED, alpha=0.15); ax.axhline(0, color=MUTED, lw=0.8)
+        ax.set_xticks(range(len(es))); ax.set_xticklabels([f"DM {k[2:]}" for k in es]); ax.set_ylim(-2.2, 2.6)
+        ax.set_ylabel("pull, in units of the 3% prior")
+        ax.set_title(r"$\tau_h$ energy scale: pull and post-fit constraint (label: absolute)",
+                     fontsize=11.5, pad=12, color=DARK_FG)
+        save(fig, FIGS / "taues", dark=True)
+
+
+def ptsplit():
+    """The one assumption the tau_h tau_h / (l tau_h)^2 lever rests on, measured."""
+    v = VAR.get("ptsplit")
+    if not v or not v.get("tau_id_sf"):
+        return
+    sf = v["tau_id_sf"]
+    dms = [dm for dm in config.TAU_DMS if f"DM{dm}" in sf and f"DM{dm}_lowpt" in sf]
+    fig, ax = dark_fig((7.4, 4.3))
+    for i, dm in enumerate(dms):
+        hi, lo = sf[f"DM{dm}"], sf[f"DM{dm}_lowpt"]
+        ax.errorbar(i - 0.13, hi["value"], [[hi["err_down"]], [hi["err_up"]]], fmt="o", color=BLUE, ms=7, capsize=4,
+                    label=r"$p_T(\tau_h)$ > 40 GeV" if i == 0 else None)
+        ax.errorbar(i + 0.13, lo["value"], [[lo["err_down"]], [lo["err_up"]]], fmt="D", color=PINK, ms=7, capsize=4,
+                    label=r"30 < $p_T(\tau_h)$ < 40 GeV" if i == 0 else None)
+        ax.text(i, 1.28, f"{100 * (lo['value'] / hi['value'] - 1):+.0f}%", ha="center", fontsize=11, color=PINK)
+    ax.set_xticks(range(len(dms))); ax.set_xticklabels([f"DM {d}" for d in dms])
+    ax.axhline(1, color=MUTED, lw=0.8, ls=":")
+    ax.set_ylabel("DeepTau VSjet Tight scale factor"); ax.set_ylim(0.6, 1.4)
+    ax.legend(loc="lower left", fontsize=10)
+    ax.set_title(r"the scale factor is not flat in $p_T$:  $\mu_Z$ moves "
+                 f"{v['mu'] - FIT['mu']:+.3f} to {v['mu']:.3f}", fontsize=11.5, pad=14, color=DARK_FG)
+    save(fig, FIGS / "ptsplit", dark=True)
+
+
+# ------------------------------------------------------------------ 3. uncertainties
+def impacts():
+    gi = {k: val for k, val in FIT["grouped_impact"].items() if k not in ("FullSyst", "Total")}
+    if FIT.get("mu_stat"):
+        gi["Data statistics"] = FIT["mu_stat"]
     items = sorted(gi.items(), key=lambda kv: kv[1])
-    fig, ax = dark_fig((7, 5))
-    ax.barh([k for k, _ in items], [100 * v for _, v in items], color=[GREEN if k == "Data statistics" else BLUE for k, _ in items])
+    fig, ax = dark_fig((7.6, 0.32 * len(items) + 1.7))
+    ax.barh([k for k, _ in items], [100 * v for _, v in items],
+            color=[GREEN if k == "Data statistics" else BLUE for k, _ in items])
     for i, (_, val) in enumerate(items):
-        ax.text(100 * val + 0.15, i, f"{100 * val:.1f}%", va="center", fontsize=10, color=DARK_FG)
-    ax.set_xlabel(r"impact on $\mu_Z$ [%]"); ax.set_xlim(0, 100 * max(gi.values()) * 1.25)
-    save(fig, FIGS / "impacts", dark=True); plt.close(fig)
+        ax.text(100 * val + 0.05, i, f"{100 * val:.2f}%", va="center", fontsize=9, color=DARK_FG)
+    tot = 100 * 0.5 * (FIT["mu_err_up"] + FIT["mu_err_down"])
+    ax.axvline(tot, color=RED, ls="--", lw=1.4)
+    ax.text(tot + 0.05, len(items) - 1.2, f"MINOS total {tot:.1f}%", fontsize=10, color=RED)
+    ax.set_xlabel(r"impact on $\mu_Z$ [%]")
+    ax.set_title("the categories overlap: their quadrature sum exceeds the total by "
+                 f"{1 / (FIT.get('grouped_impact_scale') or 1):.2f}", fontsize=11, pad=12, color=DARK_FG)
+    save(fig, FIGS / "impacts", dark=True)
 
 
-def ranking_and_pulls():
-    rk = FIT["ranking"]
-    titles = {"TauID_DM": r"$\tau_h$ ID DM", "TauTrigger_DM": r"$\tau_h$ trigger DM", "TauES_DM": r"$\tau_h$ energy scale DM",
-              "FakeOSSS_tautau": "FF OS/SS extrapolation", "FakeClosure_tautau_c": "FF non-closure SR", "XS_DYtautau_nonfid": r"$\sigma$(non-fid. DY)",
-              "MCStatNorm_WJets_tautau": "W+jets MC stat.", "MET_Unclustered": "MET unclustered", "PS_FSR": "PS FSR", "PS_ISR": "PS ISR",
-              "QCDScale": "QCD scales", "Pileup": "pileup", "Lumi": "luminosity", "PDF": "PDF", "L1Prefiring": "L1 prefiring",
-              "TauFakeEle": r"e$\rightarrow\tau_h$", "TauFakeMu": r"$\mu\rightarrow\tau_h$", "XS_": r"$\sigma$("}
+def ranking():
+    rows = (FIT.get("ranking") or [])[:16]
+    if not rows:
+        return
+    rows = sorted(rows, key=lambda r: max(abs(r["impact_up"]), abs(r["impact_down"])))
+    fig, ax = dark_fig((8.2, 0.36 * len(rows) + 1.6))
+    y = np.arange(len(rows))
+    ax.barh(y, [100 * r["impact_up"] for r in rows], color=BLUE, height=0.62, label=r"+1$\sigma$")
+    ax.barh(y, [100 * r["impact_down"] for r in rows], color=ORANGE, height=0.62, label=r"$-$1$\sigma$")
+    ax.set_yticks(y); ax.set_yticklabels([r["name"] for r in rows], fontsize=9.5)
+    ax.axvline(0, color=MUTED, lw=0.8)
+    ax.set_xlabel(r"post-fit impact on $\mu_Z$ [%]"); ax.legend(fontsize=10, loc="lower right")
+    ax.set_title("the parameters the data determine, and what they move", fontsize=11.5, pad=12, color=DARK_FG)
+    save(fig, FIGS / "ranking", dark=True)
 
-    def nice(n):
-        if n.startswith("gamma_stat_tautau_"):
-            return "MC stat. " + n[len("gamma_stat_tautau_"):].replace("_bin_", " bin ")
-        for k, v in titles.items():
-            if n.startswith(k):
-                rest = n[len(k):]
-                if k == "FakeClosure_tautau_c":
-                    return v + rest[0] + (" m<110" if rest.endswith("lo") else " m>110")
-                if k == "FakeOSSS_tautau" and rest.startswith("_c"):
-                    return v + " SR" + rest[2:]
-                if k == "XS_":
-                    return v + rest + ")"
-                return v + rest
-        return n
-    fig, ax = dark_fig((8, 6.5))
-    n = len(rk); ys = np.arange(n)[::-1]
-    for y, r in zip(ys, rk):
-        ax.barh(y, r["impact_up"], color=BLUE, alpha=0.9, height=0.7)
-        ax.barh(y, r["impact_down"], color=GREEN, alpha=0.9, height=0.7)
-    ax2 = ax.twiny()
-    ax2.errorbar([r["pull"] for r in rk], ys, xerr=[r["constraint"] for r in rk], fmt="o", color=DARK_FG, ms=5, capsize=3)
-    ax2.set_xlim(-2.2, 2.2); ax2.axvline(-1, color=MUTED, ls="--", lw=0.8); ax2.axvline(1, color=MUTED, ls="--", lw=0.8)
-    ax2.set_xlabel(r"$(\hat\theta-\theta_0)/\Delta\theta$ (markers)", color=DARK_FG)
-    lim = 1.15 * max(abs(r["impact_up"]) for r in rk); ax.set_xlim(-lim, lim)
-    ax.set_yticks(ys, [nice(r["name"]) for r in rk], fontsize=10.5)
-    ax.set_xlabel(r"post-fit impact on $\mu_Z$ (bars: $+1\sigma$ blue, $-1\sigma$ green)")
-    for sp in ("top", "right"):
-        ax2.spines[sp].set_visible(False)
-    save(fig, FIGS / "ranking", dark=True); plt.close(fig)
-
-    pulls = [(k, v) for k, v in FIT["pulls"].items()]
-    fig, ax = dark_fig((8, 9))
-    ys = np.arange(len(pulls))[::-1]
-    ax.axvspan(-1, 1, color=GREEN, alpha=0.15); ax.axvspan(-2, 2, color=ORANGE, alpha=0.08)
-    ax.errorbar([v[0] for _, v in pulls], ys, xerr=[v[1] for _, v in pulls], fmt="o", color=DARK_FG, ms=4, capsize=2)
-    ax.set_yticks(ys, [nice(k) for k, _ in pulls], fontsize=8.5); ax.set_xlim(-2.5, 2.5)
-    ax.axvline(0, color=MUTED, lw=0.8); ax.set_xlabel(r"$(\hat\theta-\theta_0)/\Delta\theta$")
-    save(fig, FIGS / "pulls", dark=True); plt.close(fig)
+    pulls = {k: v for k, v in (FIT.get("pulls") or {}).items()
+             if not k.startswith("gamma") and not k.startswith(("mu_", "TauIDSF"))}
+    if not pulls:
+        return
+    names = sorted(pulls, key=lambda k: -abs(pulls[k][0]))[:24]
+    names = names[::-1]
+    fig, ax = dark_fig((8.2, 0.33 * len(names) + 1.6))
+    y = np.arange(len(names))
+    ax.axvspan(-2, 2, color=MUTED, alpha=0.10); ax.axvspan(-1, 1, color=MUTED, alpha=0.18)
+    ax.errorbar([pulls[n][0] for n in names], y,
+                xerr=[[abs(pulls[n][2]) for n in names], [abs(pulls[n][1]) for n in names]],
+                fmt="o", color=BLUE, ms=5, capsize=3, lw=1.4)
+    ax.axvline(0, color=MUTED, lw=0.8)
+    ax.set_yticks(y); ax.set_yticklabels(names, fontsize=9)
+    ax.set_xlim(-3, 3); ax.set_xlabel(r"pull  $(\hat{\theta}-\theta_0)/\Delta\theta$   (band: the prior)")
+    ax.set_title("the 24 most-pulled nuisance parameters", fontsize=11.5, pad=12, color=DARK_FG)
+    save(fig, FIGS / "pulls", dark=True)
 
 
-# ------------------------------------------------------------------ 3. pre- and post-fit m_tt per category
+# ------------------------------------------------------------------ 4. the fitted regions
 def read_fitinputs():
     out = {}
-    with uproot.open(config.FIT_DIR / "fitinputs" / "ztautau.root") as f:
+    with uproot.open(config.FIT_DIR_V4 / "fitinputs" / f"{config.JOB_V4}.root") as f:
         for k in f.keys():
             name = k.split(";")[0]
-            if name.count("__") == 1 and name != "meta_json":
-                h = f[name]; out[name] = (h.values(), h.variances())
+            if name.count("__") != 1 or name == "meta_json":
+                continue
+            region, sample = name.split("__")
+            if region not in FITTED_REGIONS:
+                continue
+            key = f"{region}__{sample.split('_tDM')[0]}"
+            v, var = f[name].values(), f[name].variances()
+            out[key] = (out[key][0] + v, out[key][1] + var) if key in out else (v, var)
     return out
 
 
-def category_plots():
+def regions():
     hists = read_fitinputs()
-    post = yaml.safe_load(open(config.FIT_DIR / "results/ztautau/Tables/Table_postfit.yaml"))
-    pre = yaml.safe_load(open(config.FIT_DIR / "results/ztautau/Tables/Table_prefit.yaml"))
-    for k, region in enumerate(config.REGIONS):
+    for region in FITTED_REGIONS:
+        edges = np.asarray(META["bins"][region])
         data = hists[f"{region}__Data"][0]
-        stack = stack_from(hists, region)
-        lab = config.REGION_LABELS[k]
-        for logy in (False, True):
-            plotting.stack_plot(FIGS / f"prefit_{region}{'_log' if logy else ''}.png", EDGES, (data, np.sqrt(data)), stack,
-                                r"$m_{\tau\tau}$ [GeV]", title=f"prefit, {lab}", dark=True, logy=logy, density=not logy)
-        # post-fit: prefit templates scaled to the post-fit yields per sample, exact post-fit total from TRExFitter
-        sf = {}
-        for entry_pre, entry_post in zip(pre[k]["Samples"], post[k]["Samples"]):
-            if "Sample" in entry_pre and entry_pre["Sample"] in TITLES:
-                s = TITLES[entry_pre["Sample"]]
-                sf[s] = entry_post["Yield"] / entry_pre["Yield"] if entry_pre["Yield"] > 0 else 1.0
-        scaled = {}
-        for name, (v, var) in hists.items():
-            rg, s = name.split("__")
-            if rg == region and s in sf:
-                scaled[name] = (v * sf[s], var * sf[s] ** 2)
-        with uproot.open(config.FIT_DIR / f"results/ztautau/Histograms/{region}_postFit.root") as f:
-            tot = f["h_tot_postFit"]; tv, te = tot.values(), tot.errors()
-        plotting.stack_plot(FIGS / f"postfit_{region}.png", EDGES, (data, np.sqrt(data)), stack_from(scaled, region),
-                            r"$m_{\tau\tau}$ [GeV]", title=f"post-fit, {lab}", dark=True, overlay=(tv, te, "post-fit total"), density=True)
-    # all categories together, log: signal composition
-    tot = {}
-    for name, (v, var) in hists.items():
-        rg, s = name.split("__")
-        tot[f"all__{s}"] = (tot.get(f"all__{s}", (0, 0))[0] + v, tot.get(f"all__{s}", (0, 0))[1] + var)
-    data = tot["all__Data"][0]
-    plotting.stack_plot(FIGS / "prefit_all_log.png", EDGES, (data, np.sqrt(data)), stack_from(tot, "all"), r"$m_{\tau\tau}$ [GeV]",
-                        title="signal region, all categories, prefit", dark=True, logy=True)
-
-
-# ------------------------------------------------------------------ 4. BDT figures (from bdt.json)
-def bdt_figures():
-    t = BDT["training"]; e = np.asarray(BDT["sr_score"]["edges"]); c = 0.5 * (e[1:] + e[:-1])
-    # importance
-    items = list(t["importance"].items())[::-1]
-    fig, ax = dark_fig((6.4, 4.6))
-    ax.barh([k for k, _ in items], [v for _, v in items], color=BLUE)
-    ax.set_xlabel("feature importance (gain, mean over folds)")
-    save(fig, FIGS / "bdt_importance", dark=True); plt.close(fig)
-    # SR score, log
-    sr = BDT["sr_score"]; d = np.asarray(sr["data"], float)
-    mc = {k: (np.asarray(v), np.zeros(len(v))) for k, v in sr["mc"].items()}
-    mc["Fakes"] = (np.maximum(np.asarray(sr["fakes"]), 0), np.zeros(len(d)))
-    stack = []
-    for g, members in STACK_GROUPS:
-        parts = [mc[m] for m in members if m in mc]
-        if parts:
-            stack.append((g, np.maximum(sum(p[0] for p in parts), 0), np.zeros(len(d))))
-    plotting.stack_plot(FIGS / "bdt_sr_score.png", e, (d, np.sqrt(d)), stack, "BDT score", title="signal region, prefit", dark=True, logy=True)
-    # SS closure in the score
-    ss = BDT["ss_closure_score"]; o = np.asarray(ss["obs"], float); om = np.asarray(ss["obs_mc"]); p = np.asarray(ss["pred"]); pv = np.asarray(ss["pred_var"])
-    plotting.stack_plot(FIGS / "bdt_closure_ss.png", e, (o, np.sqrt(o)), [("MC", om, np.zeros(len(o))), ("Fakes", np.maximum(p, 0), pv)],
-                        "BDT score", title="same-sign closure of the FF in the score", dark=True, logy=True)
-    # score shapes are not stored per event: draw the normalised SR components instead
-    fig, ax = dark_fig((6.4, 4.2))
-    for name, col, lab in (("DYtautau", ORANGE, r"Z$\rightarrow\tau\tau$, fiducial"), ("DYtautau_nonfid", BLUE, r"Z/$\gamma^*\rightarrow\tau\tau$, non-fiducial")):
-        v = np.asarray(sr["mc"][name], float); ax.stairs(v / v.sum(), e, color=col, lw=2, label=lab)
-    v = np.maximum(np.asarray(sr["fakes"], float), 0); ax.stairs(v / v.sum(), e, color=PINK, lw=2, label="fakes (AR x FF)")
-    for x in config.BDT_CATEGORY_EDGES[1:-1]:
-        ax.axvline(x, color=MUTED, ls="--", lw=0.8)
-    ax.set_xlabel("BDT score (held-out fold)"); ax.set_ylabel("normalised"); ax.legend(fontsize=10, frameon=False)
-    ax.set_title(f"held-out AUC {np.mean(t['auc_test']):.3f} (train {np.mean(t['auc_train']):.3f})", fontsize=11, color=DARK_FG)
-    save(fig, FIGS / "bdt_shapes", dark=True); plt.close(fig)
-
-
-# ------------------------------------------------------------------ 5. fake-factor figures (from fakefactors.json)
-def ff_figures():
-    tbl = FF[NOM]["ff"]; ff, err = np.asarray(tbl["ff"]), np.asarray(tbl["err"])
-    edges = np.asarray(config.FF_PT_BINS[:-1] + [110.0]); centers = 0.5 * (edges[1:] + edges[:-1])
-    fig, axes = plt.subplots(1, 2, figsize=(9, 3.4), sharey=True)
-    plt.rcParams.update(dark_rc())
-    for e_, (ax, era) in enumerate(zip(axes, tbl["eras"])):
-        ax.set_facecolor(DARK_BG)
-        i = tbl["dms"].index(1)
-        for j, (lab, col) in enumerate(zip(["0 jets", "1 jet", r"$\geq$2 jets"], [DARK_FG, ORANGE, BLUE])):
-            ax.errorbar(centers + 1.2 * (j - 1), ff[e_, i, j], yerr=err[e_, i, j], xerr=np.diff(edges) / 2, fmt="o", ms=4, color=col, label=lab, elinewidth=1)
-        ax.set_title(f"Run2016{era}, decay mode 1", fontsize=11, color=DARK_FG); ax.set_xlabel(r"$p_T(\tau_1)$ [GeV]  (last bin > 80)")
-        ax.tick_params(colors=DARK_FG); [sp.set_color(DARK_FG) for sp in ax.spines.values()]
-    axes[0].set_ylabel("fake factor"); axes[0].legend(fontsize=9, frameon=False)
-    fig.patch.set_facecolor(DARK_BG); plotting.fig_tag(fig, dark=True); save(fig, FIGS / "ff_dm1", dark=True); plt.close(fig)
-    # closure corrections
-    fig, axes = plt.subplots(1, 2, figsize=(10, 3.6))
-    for ax, (var, xl) in zip(axes, (("eta", r"$|\eta(\tau_1)|$"), ("pt2", r"$p_T(\tau_2)$ [GeV] (last bin: > 80)"))):
-        ax.set_facecolor(DARK_BG); ax.tick_params(colors=DARK_FG); [sp.set_color(DARK_FG) for sp in ax.spines.values()]
-        for variant, col, lab in ((NOM, BLUE, "MC subtracted (nominal)"), ("nosub", MUTED, "no subtraction")):
-            if variant not in FF:          # the unsubtracted cross-check is only produced on request (step 3 --with-nosub)
-                continue
-            c = FF[variant]["ff"]["closure"][var]; ed = np.asarray(c["edges"]); ed[-1] = min(ed[-1], 120.0)
-            ax.errorbar(0.5 * (ed[1:] + ed[:-1]), c["values"], yerr=c["err"], xerr=np.diff(ed) / 2, fmt="o", color=col, label=lab)
-        ax.axhline(1, color=MUTED, lw=0.8); ax.set_xlabel(xl); ax.set_ylabel("same-sign obs / FF prediction"); ax.set_ylim(0.8, 1.2); ax.legend(fontsize=9, frameon=False)
-    fig.patch.set_facecolor(DARK_BG); fig.tight_layout(); plotting.fig_tag(fig, dark=True); save(fig, FIGS / "closure_corrections", dark=True); plt.close(fig)
-    # closure before / after in eta(tau1), pT(tau2), N_jets, m_tt
-    for var, xl in (("t1_eta", r"$\eta(\tau_1)$"), ("t2_pt", r"$p_T(\tau_2)$ [GeV]"), ("njets", r"$N_{jets}$"), ("m_tt", r"$m_{\tau\tau}$ [GeV]")):
-        c = FF[NOM]["closure"][var]; ed = np.asarray(c["edges"]); obs = np.asarray(c["obs"], float)
-        for tag, pred in (("before", c["pred_nocorr"]), ("after", c["pred"])):
-            stack = [("MC", np.asarray(c["obs_mc"]), np.zeros(len(obs))), ("Fakes", np.maximum(np.asarray(pred), 0), np.asarray(c["pred_var"]))]
-            plotting.stack_plot(FIGS / f"closure_{var}_{tag}.png", ed, (obs, np.sqrt(obs)), stack, xl,
-                                title=f"same-sign closure, {'before' if tag == 'before' else 'after'} the closure corrections", dark=True,
-                                logy=(var == "m_tt"))
-
-
-# ------------------------------------------------------------------ 6. from the ntuples: mass estimators, SR2 control plots
-def ntuple_figures():
-    d, _ = analysis.load(samples.DY_INCLUSIVE)
-    r = analysis.regions(d, is_mc=True); w = analysis.weights(d, samples.DY_INCLUSIVE)
-    sel = r["SR"] & (d["gen_lhe_flavour"] == 15) & (d["t1_genflav"] == 5) & (d["t2_genflav"] == 5) & (d["gen_mll_lhe"] > 70) & (d["gen_mll_lhe"] < 110)
-    ref = d["gen_mll_lhe"][sel]
-    fig, ax = dark_fig((6.4, 4.2))
-    bins = np.linspace(0.3, 2.0, 69)
-    for var, lab, col in (("m_vis", r"$m_\mathrm{vis}$", BLUE), ("m_col", r"$m_\mathrm{col}$ (38% defined)", MUTED), ("m_tt", r"$m_{\tau\tau}$ (MET likelihood)", ORANGE)):
-        x = d[var][sel] / ref; ok = d[var][sel] > 0
-        med = np.median(x[ok]); q25, q75 = np.percentile(x[ok], [25, 75])
-        ax.hist(x[ok], bins=bins, weights=w[sel][ok], histtype="step", lw=2, color=col, density=True, label=f"{lab}: median {med:.2f}, IQR/2 {100 * (q75 - q25) / 2 / med:.0f}%")
-    ax.axvline(1.0, color=DARK_FG, lw=0.8, ls="--"); ax.set_xlabel(r"reconstructed mass / generator $m_{\tau\tau}$"); ax.set_ylabel("normalised")
-    ax.set_ylim(0, ax.get_ylim()[1] * 1.45); ax.legend(fontsize=9, frameon=False)
-    save(fig, FIGS / "mass_estimators", dark=True); plt.close(fig)
-    # SR2 control plots: pT(tau1), pT(tau2), dR
-    table = fakes.from_json(FF[NOM]["ff"]); C = np.asarray(FF[NOM]["osss"]["C"])
-    data = analysis.load_data(); reg = analysis.regions(data); cat = analysis.categories(data, "data")
-    wf = fakes.fake_weights(data, reg["AR"], table, C)
-    k = len(config.REGIONS) - 1
-    sr, ar = reg["SR"] & (cat == k), reg["AR"] & (cat == k)
-    vars_ = {"t1_pt": (np.array([40, 45, 50, 55, 60, 65, 70, 80, 90, 100, 120, 150, 200, 300]), r"$p_T(\tau_1)$ [GeV]"),
-             "t2_pt": (np.array([40, 45, 50, 55, 60, 65, 70, 80, 90, 100, 120, 150]), r"$p_T(\tau_2)$ [GeV]"),
-             "dr_tt": (np.linspace(0.5, 4.0, 15), r"$\Delta R(\tau_1,\tau_2)$")}
-    books = {v: {} for v in vars_}
-
-    def add(book, name, x, w_, ed):
-        xc = np.clip(x, ed[0], ed[-1] - 1e-6)
-        v = np.histogram(xc, bins=ed, weights=w_)[0]; v2 = np.histogram(xc, bins=ed, weights=w_ ** 2)[0]
-        book[name] = (book[name][0] + v, book[name][1] + v2) if name in book else (v, v2)
-    for v, (ed, _) in vars_.items():
-        add(books[v], "Data", data[v][sr], np.ones(sr.sum()), ed); add(books[v], "Fakes", data[v][ar], wf[ar], ed)
-    for key in analysis.available_mc():
-        dm, _ = analysis.load(key)
-        if not len(dm):
-            continue
-        rm = analysis.regions(dm, is_mc=True); wm = analysis.weights(dm, key); cm_ = analysis.categories(dm, key)
-        wsub = analysis.subtraction_weights(key, wm)
-        for name, cm in analysis.mc_components(key):
-            m = rm["SR"] & cm & (cm_ == k); ma = rm["AR"] & cm & (cm_ == k)
-            wfa = fakes.fake_weights(dm, ma, table, C) * wsub
-            for v, (ed, _) in vars_.items():
-                add(books[v], name, dm[v][m], wm[m], ed)
-                xc = np.clip(dm[v][ma], ed[0], ed[-1] - 1e-6)
-                sub = np.histogram(xc, bins=ed, weights=wfa[ma])[0]
-                books[v]["Fakes"] = (books[v]["Fakes"][0] - sub, books[v]["Fakes"][1])
-    for v, (ed, xl) in vars_.items():
-        b = books[v]; dv = b["Data"][0]
         stack = []
         for g, members in STACK_GROUPS:
-            parts = [b[m] for m in members if m in b]
+            parts = [hists[f"{region}__{m}"] for m in members if f"{region}__{m}" in hists]
             if parts:
                 stack.append((g, np.maximum(sum(p[0] for p in parts), 0), sum(p[1] for p in parts)))
-        plotting.stack_plot(FIGS / f"SR2_{v}.png", ed, (dv, np.sqrt(dv)), stack, xl, title=f"prefit, {config.REGION_LABELS[k]}", dark=True,
-                            density=(v != "dr_tt"))
+        overlay = None
+        post = config.FIT_DIR_V4 / f"results/{config.JOB_V4}/Histograms/{region}_postFit.root"
+        if post.exists():
+            with uproot.open(post) as f:
+                tot = f["h_tot_postFit"]
+                overlay = (tot.values(), tot.errors(), "post-fit total")
+        if region == "tautau_SR0":       # fitted above 110 GeV only: the fake sideband
+            drop = edges[:-1] < config.SIDEBAND_REGION_MTT_MIN
+            data = np.where(drop, 0, data)
+            stack = [(g, np.where(drop, 0, v), np.where(drop, 0, var)) for g, v, var in stack]
+            if overlay:
+                overlay = (np.where(drop, 0, overlay[0]), np.where(drop, 0, overlay[1]), overlay[2])
+        plotting.stack_plot(FIGS / f"region_{region}.png", edges, (data, np.sqrt(data)), stack,
+                            r"$m_{\tau\tau}$ [GeV]", title=REGION_LABELS.get(region, region), dark=True,
+                            overlay=overlay, density=True, figsize=(5.6, 7.8))
+
+
+# ------------------------------------------------------------------ 5. backgrounds measured from data
+def fakes():
+    for ch in ("mutau", "etau"):
+        p = config.DATA_DIR_V4 / f"fakes_{ch}.json"
+        if not p.exists():
+            continue
+        fk = json.loads(p.read_text())
+        pt = np.asarray(fk["tables"]["qcd"]["pt_bins"]); x = 0.5 * (pt[1:] + pt[:-1]); x[-1] = pt[-2] + 15
+        fig, axes = dark_fig((11, 4.3), n=2, sharey=True)
+        for ax, dm in zip(axes, (1, 10)):
+            i = list(config.TAU_DMS).index(dm)
+            for proc, col, lab in (("qcd", BLUE, "multijet (same sign)"), ("w", RED, r"W+jets ($m_T$ > 70)"),
+                                   ("w_ss", ORANGE, "W+jets (same sign)"), ("tt", GREEN, r"$t\bar{t}$ (simulation)")):
+                if proc not in fk["tables"]:
+                    continue
+                t = fk["tables"][proc]
+                ax.errorbar(x, np.asarray(t["ff"])[i, 0], np.asarray(t["err"])[i, 0], fmt="o", color=col, ms=4,
+                            label=lab if dm == 1 else None)
+            ax.set_title(f"decay mode {dm}, 0 jets", color=DARK_FG, fontsize=11)
+            ax.set_xlim(30, 120); ax.set_ylim(0, 0.25); ax.grid(alpha=0.2)
+            ax.set_xlabel(r"$p_T(\tau_h)$ [GeV]")
+        axes[0].set_ylabel("fake factor  (Tight / VVVLoose-not-Tight)")
+        axes[0].legend(fontsize=9)
+        fig.suptitle(f"{CH[ch].strip('$')}: per-process fake factors — "
+                     f"C(OS/SS) = {fk['osss']['C']:.2f} $\\pm$ {fk['osss']['stat']:.2f}, "
+                     f"same-sign closure {fk['closure_ss']['ratio']:.3f} $\\pm$ {fk['closure_ss']['stat']:.3f}",
+                     color=DARK_FG, fontsize=11.5)
+        fig.tight_layout()
+        save(fig, FIGS / f"fakefactors_{ch}", dark=True)
+
+    p = config.DATA_DIR_V4 / "fakes_emu.json"
+    if p.exists():
+        fk = json.loads(p.read_text())
+        e = np.asarray(fk["osss"]["dr_edges"]); x = 0.5 * (e[1:] + e[:-1])
+        fig, ax = dark_fig((6.8, 4.2))
+        ax.errorbar(x, fk["SB1"]["ratio"], fk["SB1"]["stat"], fmt="o", color=BLUE,
+                    label=r"SB1: both $I_{rel}$ < 0.5, one > 0.15")
+        ax.errorbar(x + 0.06, fk["SB2"]["ratio"], fk["SB2"]["stat"], fmt="s", color=ORANGE,
+                    label=r"SB2: one $I_{rel}$ > 0.3")
+        ax.set_xlabel(r"$\Delta R(e,\mu)$"); ax.set_ylabel("multijet OS / SS")
+        ax.set_ylim(0, 3.5); ax.legend(fontsize=9)
+        ax.set_title(f"$e\\mu$ multijet: {fk['ss_region']['data']} same-sign events in data, "
+                     f"{fk['ss_region']['mc']:.0f} simulated $\\rightarrow$ {fk['sr_multijet']:.0f} in the SR",
+                     fontsize=11, pad=12, color=DARK_FG)
+        save(fig, FIGS / "emu_osss", dark=True)
+
+
+def triggers():
+    p = HERE.parent / "external" / "trigger_insitu_v4.json"
+    if not p.exists():
+        return
+    t = json.loads(p.read_text())
+    panels = (("ele27", r"Ele27_WPTight  ($e\tau_h$)"), ("emu_e", r"$e\mu$ cross trigger, electron leg"),
+              ("emu_mu", r"$e\mu$ cross trigger, muon leg"))
+    fig, axes = dark_fig((13, 4.2), n=3, sharey=True)
+    for ax, (name, title) in zip(axes, panels):
+        tb = t[name]; xe = np.asarray(tb["x_edges"]); x = 0.5 * (xe[1:] + xe[:-1]); x[-1] = xe[-2] * 1.3
+        for j in range(len(tb["y_edges"]) - 1):
+            ax.errorbar(x * (1 + 0.02 * j), np.asarray(tb["sf"])[:, j], np.asarray(tb["err"])[:, j], fmt="o", ms=4,
+                        color=[BLUE, GREEN, ORANGE, PINK][j],
+                        label=r"$|\eta|$ " + f"{tb['y_edges'][j]}–{tb['y_edges'][j + 1]}")
+        ax.set_xscale("log"); ax.set_ylim(0.7, 1.2); ax.axhline(1, color=MUTED, lw=0.8, ls=":")
+        ax.set_title(title, color=DARK_FG, fontsize=11); ax.grid(alpha=0.2)
+        ax.set_xlabel(r"lepton $p_T$ [GeV]")
+    axes[0].set_ylabel("scale factor, data / simulation")
+    axes[0].legend(fontsize=8)
+    axes[0].axvspan(config.EL_PT_MIN_ETAU, config.ELE27_PLATEAU_PT, color=RED, alpha=0.15)
+    axes[0].text(30, 0.74, "turn-on:\nown NP", fontsize=8, color=RED)
+    fig.tight_layout()
+    save(fig, FIGS / "triggers", dark=True)
 
 
 if __name__ == "__main__":
-    only = sys.argv[1:]
-    for fn in (flow, result_summary, ranking_and_pulls, category_plots, bdt_figures, ff_figures, ntuple_figures):
-        if not only or fn.__name__ in only:
-            fn()
-    print(f"figures -> {FIGS}: {len(list(FIGS.glob('*.pdf')))} PDFs")
+    summary(); submeasurements(); tau_id(); ptsplit(); impacts(); ranking(); regions(); fakes(); triggers()
+    print(f"{len(list(FIGS.glob('*.pdf')))} figures -> {FIGS}")

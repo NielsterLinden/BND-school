@@ -147,8 +147,16 @@ python scripts/step5_fit.py --skip-ranking --skip-asimov     # the four-channel 
 ```
 
 Every plot carries the stamp `config.PLOT_TAG` (`v4: DeepTau Tight τh`), so figures of different versions
-or working points cannot be mixed up. The slide deck in `slides/` was built against the v3 result schema
-and is marked superseded: it must be rebuilt before it is shown again.
+or working points cannot be mixed up. The slide deck is rebuilt with
+
+```bash
+python slides/make_figures.py                                  # the 25 dark vector figures (LCG)
+env -u PYTHONPATH -u LD_LIBRARY_PATH -u PYTHONHOME \
+    /project/atlas/users/sjankovy/boostHHbbtautau/HHARD_workfolder/betterplottingtool/venv/bin/python \
+    slides/build_deck.py                                        # slides/ztautau_slides.pdf (needs PyMuPDF)
+```
+
+Every number in it is read from `output/results.json`, so the deck cannot drift from the measurement.
 
 ## Open issues / next steps
 
@@ -161,4 +169,4 @@ and is marked superseded: it must be rebuilt before it is shown again.
 4. High-mass DY sample (record 35629) stitched in m_LHE for the `DYtautau_out` template; EWK Z→ττ; SM H→ττ.
 5. τh trigger efficiency in situ (μτh tag-and-probe from SingleMuon) instead of the POG turn-on curves —
    the single-lepton and cross triggers are done, the di-τ one is not.
-6. The slide deck (see above).
+6. A τh trigger scale factor measured in situ would close the last external correction in the τhτh channel.

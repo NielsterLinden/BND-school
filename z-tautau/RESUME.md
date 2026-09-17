@@ -13,8 +13,8 @@ asks for a username). Push from an interactive shell.
    metadata as `signal_samples`), `acceptance` (must become `null` -- A x epsilon is inside our fit now and
    adding `Acc_*` on top double counts), and `drop_empty_bins`. `docs/11-combination-inputs.md` section 6
    says exactly how, and section 7 what has to be understood before our number is used.
-2. **The slide deck** in `slides/` was built against the v3 result schema and is marked superseded in
-   `build_deck.py` and `make_figures.py`. It has to be rebuilt before it is shown again.
+2. Nothing. The slide deck was rebuilt from scratch for the four-channel measurement
+   (`slides/ztautau_slides.pdf`, 28 pages).
 
 ## How to re-run
 

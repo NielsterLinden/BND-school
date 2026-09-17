@@ -483,6 +483,45 @@ def control_plots(region, books, ctrl_vars, title):
             plotting.stack_plot(config.PLOT_DIR_V4 / f"step4_{region}_{v}_log.png", ed, (dv, np.sqrt(dv)), stack, xl, title=title, logy=True)
 
 
+# ------------------------------------------------------------------------------ completeness
+def complete_variations(names, registry, edges_of):
+    """Give every (region, template, HISTO systematic) the registry promises both of its variations.
+
+    A kinematic variation (JES, MET_Unclustered, TauES_DM*) is filled from the events that pass the region
+    *under that variation*. For a template with a handful of simulated events one direction can move all of
+    them out, and then no histogram was booked at all -- the file promised a systematic it did not contain.
+    TRExFitter reads that as "no variation" (with HistoChecks NOCRASH), but anything stricter, including the
+    combination, fails on it.
+
+    The missing side is filled by mirroring the side that exists about the nominal (the usual one-sided
+    symmetrisation, clipped at zero), which is both complete and stable: taking the variation literally
+    would turn the migration of one or two simulated events into a 100% uncertainty on that template.
+    If neither side exists the nominal is copied, i.e. the variation genuinely does nothing here.
+    """
+    added = []
+    for name, s in registry.systs.items():
+        if s["type"] != "HISTO":
+            continue
+        for r in s["regions"]:
+            for smp in s["samples"]:
+                nom = names.get(f"{r}__{smp}")
+                if nom is None:
+                    continue
+                up, dn = names.get(f"{r}__{smp}__{name}Up"), names.get(f"{r}__{smp}__{name}Down")
+                if up is not None and dn is not None:
+                    continue
+                nv = nom.view().value
+                for missing, present in (("Up", dn), ("Down", up)):
+                    if names.get(f"{r}__{smp}__{name}{missing}") is not None:
+                        continue
+                    h = hist.Hist(hist.axis.Variable(np.asarray(edges_of[r], dtype=float)), storage=hist.storage.Weight())
+                    h.view().value[...] = nv if present is None else np.maximum(2 * nv - present.view().value, 0.0)
+                    h.view().variance[...] = nom.view().variance
+                    names[f"{r}__{smp}__{name}{missing}"] = h
+                    added.append(f"{r}__{smp}__{name}{missing}")
+    return added
+
+
 # ------------------------------------------------------------------------------ main
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -514,6 +553,10 @@ def main():
         if f"{r}__Fakes" not in names:
             nb = len(BINS[r]) - 1
             names[f"{r}__Fakes"] = to_hist(np.stack([np.full(nb, 1e-6), np.zeros(nb)]), BINS[r])
+    added = complete_variations(names, registry, BINS)
+    if added:
+        print(f"completed {len(added)} systematic variation(s) that the region emptied: " + ", ".join(added[:6])
+              + (" ..." if len(added) > 6 else ""))
     # normalisation NPs (registry only; templates are the nominal ones)
     mc_templates = sorted(registry.samples)
     registry.syst("Lumi", mc_templates, regions, "Luminosity", kind="OVERALL", up=config.LUMI_REL_UNC, down=-config.LUMI_REL_UNC, title="Luminosity")
@@ -529,6 +572,15 @@ def main():
             "bins": {r: list(BINS[r]) for r in regions}, "lumi_pb": config.LUMI_PB, "channels": args.channels,
             "samples": registry.samples, "systs": registry.systs, "tau_id_sf_pog": pog_sf, "tes_prior": config.TES_PRIOR_V4,
             "signal": config.V4_SIGNAL, "signal_out": config.V4_SIGNAL_OUT, "sideband_mtt_min": config.SIDEBAND_REGION_MTT_MIN,
+            # for a combination (docs/11-combination-inputs.md): the signal is split by the decay mode of the
+            # genuine tau_h legs, so `mu_Z` (and any per-channel reference factor) goes on *these* templates,
+            # not on a sample called "DYtautau"; and there is no acceptance uncertainty to add outside the fit.
+            "signal_samples": sorted(t for t, i in registry.samples.items() if i["is_signal"]),
+            "acceptance_in_fit": True,
+            "acceptance_note": ("A x epsilon is profiled inside the fit: every theory variation member is "
+                                "renormalised to the same sigma(60 < m_LHE < 120) (fitting/CONVENTIONS.md section 3), "
+                                "so PDF / QCDScale / PS_ISR / PS_FSR vary only the acceptance, per region. There is "
+                                "no A_unc block here on purpose -- adding Acc_* parameters on top would double count."),
             "signal_prediction": an.signal_prediction("tautau" if "tautau" in args.channels else "mutau"),
             "yields_extra": yields, "titles": TITLES}
     rep = trexhist.write_fitinputs(out, names, meta=meta)

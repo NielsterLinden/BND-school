@@ -16,3 +16,12 @@ variants/*/fit/fitinputs/
 variants/*/fit/results/
 slides/figs/*.png
 variants/*/output/plots/
+
+# HTCondor scratch of the fit chain (condor/orchestrator.sh): the submit files, wrappers and the
+# hand-written params_step5.txt are committed, the logs and the generated parameter list are not.
+condor/out/
+condor/err/
+condor/logs/
+condor/params_rank.txt
+condor/*.rescue*
+condor/*.dagman.*

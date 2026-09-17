@@ -1,4 +1,6 @@
 {
+ "acceptance_in_fit": true,
+ "acceptance_note": "A x epsilon is profiled inside the fit: every theory variation member is renormalised to the same sigma(60 < m_LHE < 120) (fitting/CONVENTIONS.md section 3), so PDF / QCDScale / PS_ISR / PS_FSR vary only the acceptance, per region. There is no A_unc block here on purpose -- adding Acc_* parameters on top would double count.",
  "bins": {
   "etau_SR_dm0": [
    0.0,
@@ -718,6 +720,13 @@
   "sigma_tautau_60_120_pb": 1944.8826556737133,
   "sigma_tautau_pb": 2019.6751428185198
  },
+ "signal_samples": [
+  "DYtautau_tDM0",
+  "DYtautau_tDM1",
+  "DYtautau_tDM10",
+  "DYtautau_tDM11",
+  "DYtautau_tDMnone"
+ ],
  "source": "ztautau.root",
  "systs": {
   "BTag": {

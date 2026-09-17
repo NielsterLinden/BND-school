@@ -1,0 +1,22 @@
+executable = /project/atlas/users/sjankovy/BND/BND-school/z-tautau/condor/run_rank.sh
+arguments  = $(np)
+
+output = /project/atlas/users/sjankovy/BND/BND-school/z-tautau/condor/out/rank_$(np)_$(Cluster).$(Process).log
+error  = /project/atlas/users/sjankovy/BND/BND-school/z-tautau/condor/err/rank_$(np)_$(Cluster).$(Process).log
+log    = /project/atlas/users/sjankovy/BND/BND-school/z-tautau/condor/logs/rank_$(Cluster).log
+
+stream_output = True
+stream_error  = True
+
+accounting_group = atlas
+
+request_cpus   = 1
+request_memory = 4GB
+
++JobCategory = "short"
++SingularityImage    = "/cvmfs/atlas.cern.ch/repo/containers/fs/singularity/x86_64-almalinux9"
++SingularityBindCVMFS = True
+
+JobBatchName = "ztt_rank"
+
+queue np from /project/atlas/users/sjankovy/BND/BND-school/z-tautau/condor/params_rank.txt

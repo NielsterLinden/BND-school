@@ -22,7 +22,7 @@ combination has to make consciously.
 | workspace, one channel | `fit/results/ztautau_<ch>/RooStats/ztautau_<ch>_combined_ztautau_<ch>_model.root` | what a MultiFit reads |
 | fit results | `fit/results/ztautau_fit_result.json`, `fit/results/ztautau_<ch>_fit_result.json` | POI, NPs, grouped impacts, ranking |
 | MultiFit of our four channels | `fit/comb.config`, `fit/results/comb_fit_result.json` | the closure check of section 6 |
-| everything in one place | `output/results.json` → `for_combination` | the fields of `combination/comb/inputs.ChannelResult` |
+| everything in one place | `output/results.json` → `for_combination` | the channel result as a flat block: μ, σ^pred, grouped impacts, ranking |
 | the numbers in prose | `output/RESULTS.md`, `handoff.md` | |
 
 Regenerate with `python run_all.py --from 4` (needs `fit/fitinputs/tautau_base.root`, itself built by
@@ -115,58 +115,81 @@ block, not in the MultiFit.
   τhτh/ℓτh acceptance ratio, which then tightens the μμ and ee acceptance uncertainties. That is only
   legitimate if the constraint is believed — see §7.
 
-## 6. Two routes
+## 6. How the combination reads this channel
 
-**(a) TRExFitter MultiFit (profile likelihood).** `fit/comb.config` is the MultiFit of our four
-per-channel workspaces and reproduces the single-file fit to the third decimal of `mu_Z`; that is the
-closure check that our per-channel exports are usable. To add the other groups, append `Fit:` blocks:
+The live combination is **`combination/combLieke/`**: one TRExFitter v1.8.0 MultiFit of ee, μμ and ττ with a
+common POI (`combination/combLieke/README.md`). It takes each channel's own config and fit inputs and
+adapts them with `mf/trexcfg.adapt_channel`, driven by `config/channels.json`. Its ττ entry points at
+`z-tautau/fit/ztautau.config` and `z-tautau/fit/fitinputs/ztautau.root` — the paths this measurement now
+owns — so it will pick up the four-channel model automatically.
 
-```
-Fit: "zmumu"
-  ConfigFile: ../../z-mumu/fit/zmumu.config
-  Directory:  ../../z-mumu/fit/results/zmumu
-  Label: "#mu#mu"
-```
+**Three entries of `config/channels.json` must be changed with it, and the fit will not run until they are.**
 
-and run `trex-fitter mwf comb.config` from `z-tautau/fit/`. Remember §3: one shared `mu_Z` is **not**
-the right parameter across channels with different σ^pred; use it for cross-checks and for the
-correlation structure, and take the cross section from route (b), or give each channel its own POI.
+1. **`"signal": ["DYtautau"]` no longer matches anything.** The signal is split by the decay mode of the
+   genuine τh legs, so the samples are `DYtautau_tDMnone`, `DYtautau_tDM0`, `DYtautau_tDM1`,
+   `DYtautau_tDM10`, `DYtautau_tDM11`, `DYtautau_tDM0_0`, `DYtautau_tDM0_1`, … The adapter renames the
+   signal NormFactor to `mu_Z` and puts the constant `xsref_tautau` on those samples, so it needs all of
+   them. The exact list for the current inputs is in the metadata as `signal_samples`
+   (`fit/fitinputs/ztautau.root.meta.json`), so the entry can read that key instead of being hard-coded.
 
-**(b) Covariance / BLUE combination** (what `combination/result.md` does). Build a
-`combination.comb.inputs.ChannelResult` from `output/results.json`:
+2. **`"acceptance"` must become `null`.** It currently reads `signal_prediction.A_unc.*` and
+   `signal_prediction.A_mc_stat` and adds `Acc_PDF`, `Acc_AlphaS`, `Acc_QCDScale`, `Acc_PS_ISR`,
+   `Acc_PS_FSR`, `AccStat_tautau` as OVERALL parameters on the signal — a 3.7 % acceptance uncertainty
+   *outside* the fit. That was right for the τhτh-only measurement, which quoted σ = σ_fid / A with A from
+   aMC@NLO. It is **wrong here and would double count**: the four-channel fit measures σ(60–120) directly,
+   and its `PDF`, `QCDScale`, `PS_ISR` and `PS_FSR` templates are renormalised per variation member to a
+   constant σ(60–120) (§3), so they already vary A × ε inside the likelihood, per region. Those keys are
+   therefore absent from the metadata and the adapter will raise a `KeyError` rather than guess; the
+   metadata says so explicitly in `acceptance_in_fit` and `acceptance_note`. The right entry is
 
-```python
-cr = json.load(open("z-tautau/output/results.json"))["for_combination"]["channel_result"]
-ChannelResult(name="tautau", label=cr["label"], variant="v4",
-              mu=cr["mu"], mu_err_up=cr["mu_err_up"], mu_err_down=cr["mu_err_down"], mu_stat=cr["mu_stat"],
-              sigma_pred=cr["sigma_pred"],          # 1944.9 pb, ours
-              groups=cr["groups_rescaled"],          # see below
-              ranking=cr["ranking"], acc={},         # acceptance is inside the fit
-              sigmodel=0.0, residual=0.0, gof_p=cr["gof_p"])
-```
+   ```json
+   "acceptance": null,
+   "acceptance_note": "none outside the fit: the theory templates are renormalised to a constant
+                       sigma(60-120), so PDF/QCDScale/PS_* vary A x epsilon inside the likelihood
+                       (z-tautau/docs/11-combination-inputs.md section 3)"
+   ```
 
-`acc = {}` is not an omission (§3). `sigmodel = 0` because our generator comparison is reported, not fitted.
+   which is exactly what the ee entry already carries, for the same reason.
 
-> **The combination's `load_tautau` still expects the v3 layout** (`nominal_variant`, `prediction.A_unc`,
-> `for_combination.C`, `fit["mcsub"]`), which the four-channel result does not have: its acceptance is
-> inside the fit. It needs a small v4 loader — the eight lines above — and `run_combination.py --check`
-> will fail on its ττ assertions (μ 1.07074, σ 2082.46 pb, `Tau ID` 0.0844, GoF 0.250) until the reference
-> values are updated to the ones in `output/RESULTS.md`. That is a combination-side change; this channel
-> does not make it.
+3. **`drop_empty_bins` has to be re-derived.** `tautau_SR2` bin 1 is still empty, but the ℓτh and eμ regions
+   are new. The adapter refuses to drop a bin that is not exactly zero, so the safe procedure is to run the
+   combination once, read which γ parameters are unconstrained at zero, and list those bins.
 
-**The grouped impacts overlap and their quadrature sum over-shoots the MINOS total.** `mu_ttbar`, the eμ
-trigger efficiency and `mu_Z` form one chain (the control region fixes μ_tt̄ × ε, the signal region
-μ_Z × ε), so the categories `NormFactors` and `Emu trigger` contain the same degeneracy. `results.json`
-gives both `groups` (raw) and `groups_rescaled` (every row multiplied by `groups_rescale_factor` so that
-the quadrature sum equals the MINOS total). **Use `groups_rescaled` with `residual = 0`, or use the MINOS
-total directly.** Using the raw rows inflates our uncertainty by ~60 % and silently changes our weight.
+Two further decisions are the combination's to make, not ours (§4 has the details): whether our POG-based
+`MuonID/Iso/Trigger/Scale` and `ElectronID/Reco/Scale` are the same quantity as z-mumu's tag-and-probe and
+z-ee's own measurements — by default the MultiFit correlates them **by name**, which is a claim, not a
+default — and what to do about tt̄, which we normalise with a free `mu_ttbar` from `emu_CRtt` while z-mumu
+constrains it with `XS_TTbar`. Both channels describing the same tt̄ yield twice is not harmless.
 
-Categories and the recommended ρ with μμ/ee are in `output/results.json`
-(`for_combination.category_rho_recommended`) and in the grouped-impact table of `output/RESULTS.md`.
-v4 adds categories the combination's model does not know yet (`NormFactors`, `Emu trigger`,
-`Electron trigger`, `Electron energy`, `Jets`, `b tagging`, `Background modelling`, `Tau ID (fitted)`);
-all of them are ρ = 0 against μμ/ee except that `Background modelling` (top pT reweighting) may be
-correlated if the other channels use the same reweighting — they do not.
+`σ_reference_pb` (1944.88 pb) and `sigma_reference_source` are unchanged and still correct.
+
+### Our own MultiFit, as a closure test
+
+`fit/comb.config` is the MultiFit of our four per-channel workspaces and reproduces the single-file fit;
+that is the check that the per-channel exports are usable at all. To add the other groups, append `Fit:`
+blocks pointing at `../../z-mumu/fit/zmumu.config` and the z-ee config and run `trex-fitter mwf comb.config`
+from `z-tautau/fit/`. Remember §3: a single shared `mu_Z` across channels with different σ^pred fits one
+parameter against three references, which is precisely why `combLieke` adds the constant `xsref_<channel>`.
+
+### A covariance / BLUE combination, if one is ever wanted again
+
+`output/results.json` carries a ready-made `for_combination.channel_result` block with the fields the
+earlier BLUE combination used (`combination/comb/inputs.ChannelResult`, removed in commit `b6aeeb2`):
+`mu`, its MINOS and stat errors, `sigma_pred`, the grouped impacts, the ranking, `acc = {}` (§3),
+`sigmodel = 0`, `residual = 0` and `gof_p`. One caveat, and it is the reason the block also carries
+`groups_rescaled`:
+
+> **The grouped impacts overlap and their quadrature sum over-shoots the MINOS total.** `mu_ttbar`, the eμ
+> trigger efficiency and `mu_Z` form one chain (the control region fixes μ_tt̄ × ε, the signal region
+> μ_Z × ε), so the categories `NormFactors` and `Emu trigger` contain the same degeneracy. Use
+> `groups_rescaled` (every row multiplied by `groups_rescale_factor`, so the quadrature sum equals the
+> MINOS total) with `residual = 0`, or the MINOS total directly. The raw rows inflate our uncertainty by
+> more than half and silently change our weight.
+
+Categories and the recommended ρ with μμ/ee are in `for_combination.category_rho_recommended` and in the
+grouped-impact table of `output/RESULTS.md`. v4 adds categories the old model did not know
+(`NormFactors`, `Emu trigger`, `Electron trigger`, `Electron energy`, `Jets`, `b tagging`,
+`Background modelling`, `Tau ID (fitted)`); all are ρ = 0 against μμ and ee.
 
 ## 7. What a combiner must know before quoting our number
 

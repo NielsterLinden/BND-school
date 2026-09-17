@@ -20,8 +20,12 @@ import shutil
 import sys
 from pathlib import Path
 
+import numpy as np
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+import uproot  # noqa: E402
 
 from fitting import run_trex, trexconfig as tc  # noqa: E402
 from ztautau import analysis_v4 as an, config  # noqa: E402
@@ -50,6 +54,31 @@ for _ch, _lab in (("mutau", "#mu#tau_{h}"), ("etau", "e#tau_{h}")):
         REGION_LABELS[f"{_ch}_SR_dm{_dm}"] = f"{_lab}, DM {_dm}"
 
 
+def empty_bins(histo_path: Path, regions) -> dict:
+    """{region: [1-based bin indices]} of the bins with no data and no prediction at all.
+
+    Such a bin carries no information, but with `MCstatThreshold: 0` its MC-statistics gamma is
+    unconstrained and sits at zero, which makes the per-bin offset log(0): HESSE is then forced
+    positive-definite and MINOS wanders into a region where every parameter is NaN. That is what made the
+    Asimov fit of the first v4 round fail (REVIEW_v4.md finding 1) and what the combination had to work
+    around in its own copy of these inputs. They are dropped from the fit instead.
+    """
+    out = {}
+    with uproot.open(histo_path) as f:
+        keys = [k.split(";")[0] for k in f.keys()]
+        for r in regions:
+            nominal = [k for k in keys if k.startswith(f"{r}__") and "__" not in k[len(r) + 2:]]
+            if not nominal:
+                continue
+            total = None
+            for k in nominal:
+                v = np.asarray(f[k].values(), dtype=float)
+                total = v.copy() if total is None else total + v
+            # step 4 writes 1e-6 placeholders for templates a region does not really have
+            out[r] = [i + 1 for i, v in enumerate(total) if abs(v) < 1e-3]
+    return out
+
+
 def select_regions(meta, channels, region_set="nominal"):
     """Regions of a fit: the channels asked for, in the region set asked for. 'nominal' is the measurement
     (one l tau_h region per decay mode); 'ptsplit' replaces the l tau_h regions by their pT(tau_h) split
@@ -67,8 +96,10 @@ def select_regions(meta, channels, region_set="nominal"):
 
 
 def build_config(job: str, meta: dict, channels, fix_tauid: bool = False, region_set: str = "nominal",
-                 scale_systs: dict | None = None, fit_strategy: int | None = None) -> str:
+                 scale_systs: dict | None = None, fit_strategy: int | None = None, num_cpu: int = 6,
+                 empty: dict | None = None) -> str:
     scale_systs = scale_systs or {}
+    empty = empty or {}
     regions = select_regions(meta, channels, region_set)
     lowpt = [r for r in regions if "_SRlo_" in r]
     samples_ = {t: info for t, info in meta["samples"].items() if any(r in regions for r in info["regions"])}
@@ -81,13 +112,14 @@ def build_config(job: str, meta: dict, channels, fix_tauid: bool = False, region
                DoPieChartPlot=True, RankingMaxNP=25, RankingPlot="SYSTS", HistoChecks="NOCRASH", SystPruningShape=0.001,
                SystPruningNorm=0.001, GetChi2="TRUE", SystCategoryTables=True, RatioYmax=1.5, RatioYmin=0.5, POIPrecision=3,
                SummaryPlotYmin=1, LegendNColumns=2, PlotOptions="NOSIG,NOXERR", SummaryPlotRegions=",".join(regions)),
-        tc.fit("fit", FitType="SPLUSB", FitRegion="CRSR", UseMinos="mu_Z", NumCPU=6, FitStrategy=fit_strategy),
+        tc.fit("fit", FitType="SPLUSB", FitRegion="CRSR", UseMinos="mu_Z", NumCPU=num_cpu, FitStrategy=fit_strategy),
     ]
     edges = list(meta["bins"]["tautau_SR0"]) if "tautau_SR0" in regions else []
-    drop = [i + 1 for i in range(len(edges) - 1) if edges[i + 1] <= meta["sideband_mtt_min"]]
+    sideband = [i + 1 for i in range(len(edges) - 1) if edges[i + 1] <= meta["sideband_mtt_min"]]
     for r in regions:
+        drop = sorted(set(empty.get(r, [])) | (set(sideband) if r == "tautau_SR0" else set()))
         blocks.append(tc.region(r, Type="CONTROL" if r.endswith("CRtt") else "SIGNAL", HistoName=r, VariableTitle="m_{#tau#tau} [GeV]",
-                                Label=REGION_LABELS.get(r, r), ShortLabel=r, DropBins=",".join(map(str, drop)) if r == "tautau_SR0" and drop else None))
+                                Label=REGION_LABELS.get(r, r), ShortLabel=r, DropBins=",".join(map(str, drop)) if drop else None))
     blocks.append(tc.sample("Data", Type="DATA", Title="Data", HistoNameSuff="__Data"))
     smoothed = set(meta["yields_extra"].get("wjets_smoothed", {}).get("samples", []))
     for t, info in sorted(samples_.items(), key=lambda kv: (not kv[1]["is_signal"], kv[0])):
@@ -168,6 +200,10 @@ def main():
     ap.add_argument("--scale-syst", action="append", default=[], metavar="NAME=FACTOR",
                     help="scale one systematic variation (cross-check, e.g. EmuTrigger=2.0)")
     ap.add_argument("--fit-strategy", type=int, default=None, help="Minuit2 strategy of every fit (default: TRExFitter's)")
+    ap.add_argument("--num-cpu", type=int, default=6, help="NumCPU of the Fit block (RooFit parallelisation)")
+    ap.add_argument("--summarise-only", action="store_true",
+                    help="do not fit: only re-read the existing TRExFitter outputs into the result json "
+                         "(used after the ranking has been produced in parallel, see condor/)")
     args = ap.parse_args()
     job = args.job
     scale_systs = dict(kv.split("=") for kv in args.scale_syst)
@@ -181,11 +217,21 @@ def main():
     cfg = fitdir / f"{job}.config"
 
     def write(path, strategy=None):
-        txt = build_config(job, meta, args.channels, args.fix_tauid, args.region_set, scale_systs, strategy)
+        txt = build_config(job, meta, args.channels, args.fix_tauid, args.region_set, scale_systs, strategy,
+                           args.num_cpu, empty)
         txt = txt.replace(f'HistoFile: "{job}"', f'HistoFile: "{histo_file}"')
         txt = re.sub(r'Expression: "([^"]+)"', r"Expression: \1", txt)   # TRExFitter splits the value on ':' before unquoting
         Path(path).write_text(txt)
 
+    empty = empty_bins(fitdir / "fitinputs" / f"{histo_file}.root",
+                       select_regions(meta, args.channels, args.region_set))
+    n_empty = sum(len(v) for v in empty.values())
+    if n_empty:
+        print(f"dropping {n_empty} empty bin(s): " + ", ".join(f"{r}{v}" for r, v in empty.items() if v))
+
+    if args.summarise_only:          # the fits already ran (condor/): only re-read their outputs
+        summarise(args, job, fitdir, meta, scale_systs)
+        return
     write(cfg, args.fit_strategy)
     # The expected (Asimov) fit is run from its own copy of the config with Minuit2 strategy 2: with the
     # default strategy MINOS failed on mu_Z on the Asimov data set ("Invalid lower error", Hessian forced
@@ -212,6 +258,12 @@ def main():
     ws = fitdir / "results" / job / "RooStats"
     for p in ws.glob(f"{job}_allBinsFitRegions_combined_{job}_model.root"):
         shutil.copy(p, ws / f"{job}_combined_{job}_model.root")
+    summarise(args, job, fitdir, meta, scale_systs)
+
+
+def summarise(args, job, fitdir, meta, scale_systs):
+    """Read everything TRExFitter wrote for `job` into fit/results/<job>_fit_result.json."""
+    logs = f"results/{job}/logs"
     res = run_trex.summarise(fitdir / "results" / job, job, poi="mu_Z")
     res["gof"] = run_trex.parse_gof(fitdir / logs / "f.log")
     res["minos_status"] = minos_status(fitdir / logs / "f.log")
@@ -257,6 +309,7 @@ def main():
     res["tau_id_fixed"] = args.fix_tauid
     res["region_set"] = args.region_set
     res["scaled_systematics"] = scale_systs
+    res["channels"] = args.channels
     out = fitdir / "results" / f"{job}_fit_result.json"
     out.write_text(json.dumps(res, indent=1, default=float))
     print(f"mu_Z = {mu:.4f} +{up:.4f} -{dn:.4f}  (stat {stat});  sigma(60-120) = {res['sigma_60_120_pb']['value']:.1f} pb")

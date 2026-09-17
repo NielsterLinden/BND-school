@@ -60,39 +60,39 @@ stacks became the real Z→μμ signal region on a log axis, user request.)
 
 ## 4 — Z → μμ (`4_zmumu`)
 
+Final pass of 17 Sep 2026 on the frozen result (`FREEZE.md`, tag `zmumu-freeze-2026-09-17`); brief:
+`briefs/zmumu.md`. **Clip number = play order** (the section was renumbered once, on the deck owner's request).
+
 | # | candidate | what moves | source |
 |---|-----------|-----------|--------|
 | ✔ 4-01 | `mumu_process` | Drell-Yan diagram in the μμ flavour; the muon legs simply continue, straight and clean | — |
-| ✔ 4-02 | `mumu_detector` | chained: dissolves to the slice; two outlined gold tracks through everything, MIP dots in both calorimeters, stubs in the four muon stations | `signature("mu")` |
-| ✔ 4-03 | `mumu_a1_event` | chained: chained on 4-02 (**real data from here on**, `data/zmumu_*.json`): schematic tracks fade, real SR event drawn (φ, charge, p_T), p_T values appear | data/zmumu_events.json |
-| ✔ 4-04 | `mumu_a2_mass` | chained: the p_T values converge to m_μμ | data/zmumu_events.json |
-| ✔ 4-05 | `mumu_a3_first_entry` | chained: slice parks left, log-y axes appear, m_μμ becomes the first entry | data/zmumu_events.json |
-| ✔ 4-06 | `mumu_b1_more_events` | chained: three more real events, each drops an entry | data/zmumu_events.json |
-| ✔ 4-07 | `mumu_b2_rain` | chained: clock, rain, the 60 bins grow to the real counts; N = 10,378,567 | data/zmumu_sr_stack.json |
-| ✔ 4-08 | `mumu_c1_simulation` | chained: bars → points; the **uncorrected** simulation stack slides in; colour key | data/zmumu_sr_stack.json (stage `raw`) |
-| ✔ 4-09 | `mumu_c2_ratio` | chained: ratio panel opens (0.88–1.12, ticks 0.9/1.0/1.1, data stat error bars — one range for every stage): data/pred = 0.944 | data/zmumu_sr_stack.json |
-| ✔ 4-17 | `mumu_g1_pileup` | chained: the slice leaves; the data-driven fake template enters as a thin wedge (key gains Fakes, N_fake = 3870 ± 80, the ratio does not move); ⟨w_PU⟩ = 0.994: 0.944 → 0.950 | data/zmumu_sr_stack.json, RESULTS_v2.md, docs/11 |
-| ✔ 4-18 | `mumu_g2_prefiring` | chained: ⟨w_L1⟩ = 0.980: → 0.969 | docs/11 |
-| ✔ 4-24 | `mumu_t1_tag_probe` | chained: **tag and probe, real data** (replaces the fake-factor block 4-10…4-16, which Z→ττ tells): plot parks top right; a real Z pair, the tag (tight, isolated, trigger ring) and the probe | data/zmumu_tnp.json, docs/12 |
-| ✔ 4-25 | `mumu_t2_pass_fail` | chained: the passing probe drops into the pass spectrum; a second pair whose tracker-only probe (one muon station) fails tight ID drops into the fail spectrum; all probes of the 40–45 GeV, \|η\| < 0.9 cell rain in; fitted signal + background; ε_data = 0.9585 | data/zmumu_tnp.json, docs/12 |
-| ✔ 4-26 | `mumu_t3_data_vs_sim` | chained: simulation outline (fails less often); ε_sim = 0.9711; ε_ID vs p_T in the barrel: data 1–2 % below simulation in every bin | data/zmumu_tnp.json |
-| ✔ 4-27 | `mumu_t4_sf_map` | chained: SF = ε_data / ε_sim → the real 10 × 4 ID scale-factor map (barrel column highlighted); SF_ID 0.980, SF_iso 1.006, ε_trig 0.907 / 0.923 | data/zmumu_tnp.json, data/zmumu_corrections.json, docs/12 |
-| ✔ 4-28 | `mumu_t5_apply` | chained: the map goes into the plot; the prediction steps to the nominal: 0.969 → 0.994 (= the report plot `z-mumu/summary_deck/figures/sr_mass_log.png`) | data/zmumu_sr_stack.json |
-| ✔ 4-20 | `mumu_h1_rebin` | chained: rebin 60 → 12 (5 GeV) | data/zmumu_fit.json |
-| ✔ 4-21 | `mumu_h2_fit` | chained: pulls + μ slider; post-fit, ratio flat; μ_Z = 0.988 ± 0.016 | data/zmumu_fit.json |
-| ✔ 4-22 | `mumu_h3_sigma_fid` | chained: the plot parks left; μ_Z, σ_fid = 790.1 ± 0.2 ± 8.5 ± 9.6 pb, σ(60–120) = 1931 ± 33 pb | handoff.md |
-| ✔ 4-23 | `mumu_h4_sigma_total` | chained: σ(60–120) on its axis, labelled "this analysis", beside the dashed prediction 1953.9 pb labelled "prediction, aMC@NLO, NNLO norm." (no CMS/ATLAS points: previous results only in the combination chapter) | handoff.md:79, CONVENTIONS.md §6 |
+| ✔ 4-02 | `mumu_into_detector` | chained: the slice fades in behind the diagram, the diagram shrinks into the interaction point, a flash; two outlined gold tracks through everything, MIP dots in both calorimeters, stubs in the four muon stations | `signature("mu")` |
+| ✔ 4-03 | `mumu_event_to_mass` | chained (**real data from here on**, `data/zmumu_*.json`): schematic tracks fade, real SR event drawn (φ, charge, p_T), the p_T values converge to m_μμ = 89.7 GeV | data/zmumu_events.json |
+| ✔ 4-04 | `mumu_first_entry` | chained: slice parks left, *linear* count axes appear, m_μμ becomes the first entry: a block, not a dot | data/zmumu_events.json |
+| ✔ 4-05 | `mumu_fill` | chained: four more real events drop blocks (1,0,1,2,0,0,0,0,1: two share the 89–90 GeV bin); without a pause the axis becomes logarithmic, clock, blocks rain over the whole plot (bins sampled by their visible height), the 60 bins grow to the real counts; N = 10,378,567 | data/zmumu_events.json, zmumu_sr_stack.json |
+| ✔ 4-06 | `mumu_prediction` | chained: bars → points; the **uncorrected** prediction slides in (simulation + the data-driven fakes wedge); colour key | data/zmumu_sr_stack.json (`recut` stage `raw`) |
+| ✔ 4-07 | `mumu_ratio` | chained: ratio panel opens (0.88–1.12, ticks 0.9/1.0/1.1, data stat error bars — one range for every stage): data/pred = 0.944 | data/zmumu_sr_stack.json |
+| ✔ 4-08 | `mumu_tnp_tag_probe` | chained: plot parks top right, the slice grows back; a real Z pair: the tag (solid gold, tight, isolated, cyan trigger ring), the probe (dashed grey); m_μμ counts up to 90.45 GeV and the probe turns gold: a real muon, nothing asked of it | data/zmumu_tnp.json, docs/17 |
+| ✔ 4-09 | `mumu_tnp_pass_fail` | chained: the question, tight ID: the probe's muon-station stubs pulse, "3 muon stations ✓", it drops into `pass`; a second real pair, tracker-only probe, "1 muon station ✗", into `fail`; the pass panel is twice as high, own linear scales; all probes of the 40–45 GeV, \|η\| < 0.9 cell rain in; fitted peak on the grey background; ε_data = N_pass/(N_pass+N_fail) = 0.9585 | data/zmumu_tnp.json, docs/12, docs/17 |
+| ✔ 4-10 | `mumu_tnp_grid` | chained: the two panels move up = row `data`; the identical procedure on `simulation` below (gold outlines): pass \| fail × data / simulation; ε_data 0.9585, ε_sim 0.9711 above the fail panels | data/zmumu_tnp.json `cells_barrel` |
+| ✔ 4-11 | `mumu_tnp_scan` | chained: the grid parks left, ε_ID vs p_T opens; the p_T window steps through the ten barrel cells: the probe's curvature in the parked slice, the lit bin, the four real spectra (at 20–25 GeV the fail panel is mostly background) and both ε change; a data and a simulation point land per cell | data/zmumu_tnp.json |
+| ✔ 4-12 | `mumu_tnp_scale_factor` | chained: panel below the ε plot: each data/simulation pair merges into SF = ε_data/ε_sim (0.9585/0.9711 = 0.987) | data/zmumu_tnp.json |
+| ✔ 4-13 | `mumu_tnp_table` | chained: the SF points fly into the p_T column of a table; a side view of the detector (`eta_fan`) steps through \|η\| 0.9–1.2, 1.2–2.1, 2.1–2.4, the ε and SF points follow, the table fills to the real 10 × 4 map | data/zmumu_tnp.json |
+| ✔ 4-14 | `mumu_tnp_apply` | chained: table beside the m_μμ plot: three real simulated events light their two cells, w = SF·SF (0.974, 0.961, 0.971), a reweighted block lands; the whole prediction steps 0.944 → 0.971; identification, isolation, trigger, reconstruction (same method): → 0.968; row "muon efficiency × 0.976" | data/zmumu_tnp.json `apply_examples`, zmumu_sr_stack.json `recut` |
+| ✔ 4-15 | `mumu_corr_pileup` | chained: row "extra collisions (pile-up) × 0.994": → 0.974 | zmumu_sr_stack.json `recut`, docs/11 |
+| ✔ 4-16 | `mumu_corr_prefiring` | chained: row "trigger fired early (prefiring) × 0.980": → 0.994 | docs/11 |
+| ✔ 4-17 | `mumu_corrected` | chained: the rows collapse to "prediction × 0.950"; the final data vs prediction, 0.994 (= the frozen fit input, = the report plot `z-mumu/summary_deck/figures/sr_mass_log.png`) | zmumu_sr_stack.json `recut.final` |
+| ✔ 4-18 | `mumu_rebin` | chained: rebin 60 → 12 (5 GeV), five adjacent bins summed as in `v2_5_fit.py` | data/zmumu_fit.json |
+| ✔ 4-19 | `mumu_fit` | chained: pulls + μ slider; post-fit, ratio flat; μ_Z = 0.988 ± 0.014 | data/zmumu_fit.json |
+| ✔ 4-20 | `mumu_sigma_fid` | chained: the plot parks left; σ_fid = (N − B)/(C·L) = (10,378,567 − 68,799)/(0.792 × 16.39 fb⁻¹) = 794.5 pb (counting); the fit: σ_fid = 790.2 ± 0.2 ± 6.1 ± 9.6 pb | handoff.md:11-13, 56-58 |
+| ✔ 4-21 | `mumu_sigma_total` | chained: side view: pairs with a muon beyond \|η\| = 2.4 or too soft are lost, A = 0.409; σ(60–120) = σ_fid/A = 1931 ± 30 pb on its axis, "this analysis", beside the dashed prediction 1953.9 pb, "prediction, aMC@NLO, NNLO norm." (no CMS/ATLAS points: previous results only in the combination chapter) | handoff.md:13, 99-100, CONVENTIONS.md §6 |
 
-Rows in play order; clip numbers are creation order.
-Retired to `clips/4_zmumu/00_archive/` (16 Sep 2026): 4-10…4-16 (fake-factor block: the method is shown with
-real data in Z→ττ, sketched in 2-16/2-17) and 4-19 `mumu_g3_lepton_sf` (replaced by the tag-and-probe block).
-Why tag-and-probe: the largest single data/MC correction (prediction −2.5 %, ratio 0.969 → 0.994), measured by us
-(20.05 M data pairs, 320 fits per efficiency); pileup (−0.6 %, profile tuned on the N_PV plot itself), FSR recovery
-(0.007 % on the yield), L1 prefiring (CMS map), momentum calibration (κ ≈ 0.999) and the luminosity (reported, not a
-technique) were the alternatives.
-
-(The earlier candidates `tnp_efficiency`, `momentum_calibration`, `mumu_stack`, `mumu_result` are superseded
-by the `mumu_*` chain, 15 Sep 2026; cut into one-idea clips on 16 Sep.)
+Superseded files: `clips/4_zmumu/00_archive/pre_recut_2026-09-17/` (the numbering of 15–16 Sep: `mumu_a1…h4`,
+`mumu_t1…t5`, `mumu_detector`), registry rows in `clips/CLIPLIST_4_zmumu_pre_recut.tsv`; older still in
+`00_archive/` (the fake-factor block 4-10…4-16 and `mumu_g3_lepton_sf`, retired 16 Sep: Z→ττ tells the fake factor).
+Why tag-and-probe first and in full: the largest single data/MC correction (prediction −2.4 %), measured by us
+(20.05 M data pairs, 320 fits per efficiency). The correction order is a choice of the talk; the weights are the
+frozen ones and the last stage is the fit input.
 
 ## 5 — Z → ττ (`5_ztautau`)
 

@@ -213,7 +213,7 @@ vg = value_grid(ff, [r"20\text{--}26", "26\\text{--}30", "30\\text{--}35", "35\\
 ok("value_grid: 24 cells, vmax from data", len(vg.cells) == 24 and len(vg.texts) == 24 and vg.vmax == 0.39)
 inside(vg, "value_grid 6x4")
 
-sl = slider(0.95, 1.03, 0.988, err=0.016, ref=1.0)
+sl = slider(0.95, 1.03, 0.988, err=0.014, ref=1.0)
 ok("slider: marker at value", abs(sl.marker.dot.get_center()[0] - sl.x_of(0.988)) < 1e-9 and sl.marker is sl[-1])
 ok("slider: ref at 1.0", abs(sl.ref.get_center()[0] - sl.x_of(1.0)) < 1e-9)
 sl.shift(np.array([2.6, 1.9, 0.0])).scale(0.8)

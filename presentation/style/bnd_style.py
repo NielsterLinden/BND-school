@@ -1406,7 +1406,7 @@ def clock(center, radius: float = 0.32, color=INK, sw: float = 2.5) -> VGroup:
 
 def rain(det: CMSSlice, dax: DataAxes, edges, counts, n: int = 60, seed: int = 3, color=INK,
          radius: float = 0.045, flight: float = 0.55, fade: float = 0.2,
-         r_max: float | None = None) -> list:
+         r_max: float | None = None, p=None, square: bool = False, y_frac=None) -> list:
     """Event dots streaming from the detector into the histogram (recipes
     section 4): ``n`` dots start at seeded random points inside the tracker of
     ``det`` *as drawn now* (centre and radius read from the mobject, so a
@@ -1417,11 +1417,21 @@ def rain(det: CMSSlice, dax: DataAxes, edges, counts, n: int = 60, seed: int = 3
     ``Succession(move, FadeOut)`` per dot for
     ``LaggedStart(*rain(...), lag_ratio=0.06)``; the dot of animation ``a`` is
     ``a.animations[0].mobject``. Each Succession leaves an empty Group
-    placeholder in the scene afterwards, which ``check_order`` skips."""
+    placeholder in the scene afterwards, which ``check_order`` skips.
+
+    Optional (added 17 Sep 2026, defaults = the behaviour above): ``p`` gives the
+    bin sampling weights (e.g. the visible log-heights, so the rain covers the
+    whole plot and not only the peak); ``square=True`` drops filled squares of
+    side ``2 * radius`` (blocks) instead of dots; ``y_frac=(lo, hi)`` lands each
+    mark at a uniformly sampled fraction of the bar's height *on screen*."""
     rng = np.random.default_rng(seed)
     counts = np.asarray(counts, dtype=float)
     edges = np.asarray(edges, dtype=float)
-    p = counts / counts.sum() if counts.sum() > 0 else np.full(len(counts), 1.0 / len(counts))
+    if p is None:
+        p = counts / counts.sum() if counts.sum() > 0 else np.full(len(counts), 1.0 / len(counts))
+    else:
+        p = np.asarray(p, dtype=float)
+        p = p / p.sum()
     c = det.get_center()
     R = det.width / 2
     r_max = R * LOGO_R["tob"] / LOGO_R["muon"] if r_max is None else r_max
@@ -1430,8 +1440,15 @@ def rain(det: CMSSlice, dax: DataAxes, edges, counts, n: int = 60, seed: int = 3
         r, ph = r_max * math.sqrt(rng.uniform()), rng.uniform(0, TAU)
         j = int(rng.choice(len(counts), p=p))
         x = rng.uniform(edges[j], edges[j + 1])
-        dot = Dot(c + r * _e(ph), radius=radius, color=col(color))
+        if square:
+            dot = Rectangle(width=2 * radius, height=2 * radius, stroke_width=0, fill_color=col(color),
+                            fill_opacity=1.0).move_to(c + r * _e(ph))
+        else:
+            dot = Dot(c + r * _e(ph), radius=radius, color=col(color))
         dst = dax.c2p(x, counts[j])
+        if y_frac is not None:
+            base = dax.c2p(x, 0.0)                       # the axis floor (c2p clamps on a log axis)
+            dst = base + rng.uniform(*y_frac) * (dst - base)
         anims.append(Succession(
             dot.animate(run_time=flight, rate_func=rate_functions.ease_in_quad).move_to(dst),
             FadeOut(dot, run_time=fade)))
@@ -1472,6 +1489,67 @@ def spine(node_icons, xs, y: float = 0.0, box=(1.24, 1.24), done=(), accent=DETE
         arrows.add(VGroup(ln, arrow_tip_on(ln, color=INK, at=1.0, tip_length=0.2)))
     g = VGroup(boxes, arrows, icons)
     g.boxes, g.arrows, g.icons, g.nodes, g.centers, g.done = boxes, arrows, icons, nodes, centers, tuple(done)
+    return g
+
+
+# ---------------------------------------------------------------------------
+# side view: the |eta| bins of a measurement (added 17 Sep 2026)
+# ---------------------------------------------------------------------------
+
+def eta_theta(eta: float) -> float:
+    """Polar angle from the beam line, theta = 2 atan(exp(-eta)), in radians."""
+    return 2.0 * math.atan(math.exp(-eta))
+
+
+def eta_fan(center, half_z: float = 2.0, half_r: float = 1.35, eta_edges=(0.0, 0.9, 1.2, 2.1, 2.4),
+            fill=LIGHT_GREY, fill_opacity: float = 0.55, stroke=INK, sw: float = 1.6) -> VGroup:
+    """Schematic side view (beam line horizontal) of a cylindrical detector of half
+    length ``half_z`` and radius ``half_r``: one wedge per ``|eta|`` bin, mirrored
+    into the four quadrants, clipped to the cylinder outline. With the default
+    aspect the corner sits at ``|eta| = 1.18``: ``|eta| < 0.9`` leaves through the
+    barrel (top and bottom), ``0.9-1.2`` through the corner (overlap), larger
+    ``|eta|`` through the endcap faces, as in CMS. The cone ``|eta| > eta_edges[-1]``
+    around the beam line stays empty: nothing is measured there. No words.
+
+    Attributes: ``.wedges`` (list, one ``VGroup`` of four polygons per bin, inner
+    bin first), ``.outline``, ``.beam``, ``.ip``, ``.c``, ``.half_z``, ``.half_r``;
+    ``.edge_point(eta, side=+1, up=+1)`` is where a straight line of that ``eta``
+    leaves the cylinder (``side`` = sign of z, ``up`` = above / below the beam)."""
+    c = _p3(center)
+    g = VGroup()
+    g.c, g.half_z, g.half_r = c, half_z, half_r
+    corner = math.atan2(half_r, half_z)
+
+    def _hit(theta):
+        """First-quadrant exit point (z >= 0, r >= 0) of a ray at polar angle ``theta``."""
+        if theta >= corner:
+            return np.array([half_r / math.tan(theta) if theta < math.pi / 2 - 1e-12 else 0.0, half_r, 0.0])
+        return np.array([half_z, half_z * math.tan(theta), 0.0])
+
+    def edge_point(eta, side=+1, up=+1):
+        q = _hit(eta_theta(abs(eta)))
+        return c + np.array([side * q[0], up * q[1], 0.0])
+
+    g.edge_point = edge_point
+    g.outline = Rectangle(width=2 * half_z, height=2 * half_r, stroke_color=col(stroke), stroke_width=sw,
+                          fill_opacity=0.0).move_to(c)
+    g.wedges = []
+    for lo, hi in zip(eta_edges[:-1], eta_edges[1:]):
+        t_lo, t_hi = eta_theta(lo), eta_theta(hi)                  # t_lo > t_hi
+        quad = [np.zeros(3), _hit(t_lo)]
+        if t_hi < corner < t_lo:
+            quad.append(np.array([half_z, half_r, 0.0]))
+        quad.append(_hit(t_hi))
+        wedge = VGroup()
+        for side in (+1, -1):
+            for up in (+1, -1):
+                pts = [c + np.array([side * q[0], up * q[1], 0.0]) for q in quad]
+                wedge.add(Polygon(*pts, stroke_color=col(stroke), stroke_width=sw * 0.5,
+                                  fill_color=col(fill), fill_opacity=fill_opacity))
+        g.wedges.append(wedge)
+    g.beam = Line(c + (half_z + 0.35) * LEFT, c + (half_z + 0.35) * RIGHT, stroke_color=col(GREY), stroke_width=sw)
+    g.ip = Dot(c, radius=0.045, color=col(stroke))
+    g.add(*g.wedges, g.outline, g.beam, g.ip)
     return g
 
 
@@ -1553,4 +1631,5 @@ __all__ = [
     "pair_from_json",
     "stack_hist", "ratio_panel", "colour_key", "pull_plot", "value_grid", "Slider", "slider",
     "clock", "rain", "spine", "add_state", "check_order", "clip_open", "clip_cut",
+    "eta_theta", "eta_fan",
 ]

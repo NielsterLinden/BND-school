@@ -50,8 +50,9 @@ python tools/framediff.py work/ee_process/ee_process_final.png work/ee_detector/
 python tools/keepout.py clips/5_ztautau/*.mp4          # nothing in the title band / top-left block
 # a chain cut into one-idea clips (clip_open / clip_cut = manim sections): renders the scenes in
 # order, joins equal section names across scenes, numbers + delivers each clip, prints all seams
-python tools/deliver_chain.py 4 scenes/s4_zmumu_story.py MumuEvent MumuRain ... -q h \
-    --seam-before clips/4_zmumu/4-02_mumu_detector_v1.mp4
+python tools/deliver_chain.py 4 scenes/s4_zmumu_story.py MumuEvent MumuFill MumuStack MumuTagProbe \
+    MumuTagProbeScan MumuCorrections MumuFit -q h \
+    --seam-before clips/4_zmumu/4-02_mumu_into_detector_v1.mp4
 ```
 Seams at 480p fail on mean |d| alone (blob 0) from H.264 noise even between two cuts of
 the same rendered frame; judge seams at 1080p.

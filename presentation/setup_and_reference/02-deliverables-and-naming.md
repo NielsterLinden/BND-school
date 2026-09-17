@@ -19,6 +19,10 @@ presentation/clips/
   `tools/render.py` in creation order and recorded in `CLIPLIST.tsv`; it
   identifies the clip, it is **not** the slide order (the user orders in
   PowerPoint). Numbers are never reused or renumbered.
+  *One exception, made by the deck owner on 17 Sep 2026:* section 4 (Z→μμ) was renumbered once for its
+  final pass, 4-01…4-21 in play order. The superseded MP4s are in
+  `clips/4_zmumu/00_archive/pre_recut_2026-09-17/` and their registry rows in
+  `clips/CLIPLIST_4_zmumu_pre_recut.tsv`; nothing was deleted (`briefs/zmumu.md` §7).
 - `_v<K>` version. A re-render of the same clip gets the next version; old
   versions stay until the user deletes them, so a PowerPoint that links `_v2`
   never breaks.

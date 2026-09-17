@@ -67,7 +67,7 @@ needs the deck owner's approval and a palette entry (see A5 for known gaps).
 - POI `\mu_{Z}`; regions `ee_SR, mumu_SR, tautau_SR` (never printed as words in a clip).
 - L = 16393.381 pb⁻¹; σ(Z/γ*→ℓℓ, m > 50) = 6077.22/3 pb per flavour; window 60 < m_ℓℓ < 120 GeV.
 - Mass symbols: `m_{ee}`, `m_{\mu\mu}`, `m_{\tau\tau}` (say which one: visible, collinear, MMC...).
-- Result format as printed by μμ: `\sigma = 1931 \pm 33\ \mathrm{pb}`; split uncertainties with
+- Result format as printed by μμ: `\sigma = 1931 \pm 30\ \mathrm{pb}` (frozen result, 17 Sep 2026); split uncertainties with
   `_{\mathrm{stat}}`, `_{\mathrm{syst}}`, `_{\mathrm{lumi}}`; asymmetric ones as `^{+222}_{-194}`.
 
 ### A4. Frozen numbers

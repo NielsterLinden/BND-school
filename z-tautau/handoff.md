@@ -1,30 +1,66 @@
-# Handoff – Z → τ⁺τ⁻ (τhτh), v3
+# Handoff — Z → τ⁺τ⁻ (τhτh + μτh + eτh + eμ)
 
 ## Team
 
-- Niels ter Linden (v1, with Claude Code agents); v2, v2.1 and v3 by Claude Code (Fable 5.1) for Samuel Jankovych,
-  after the review in `REVIEW.md`.
+- Niels ter Linden (v1, with Claude Code agents); v2–v4 by Claude Code (Fable 5.1) for Samuel Jankovych,
+  after the reviews in `REVIEW.md` (the τhτh iteration) and `REVIEW_v4.md` (the four-channel measurement).
 
-## What we worked on
+## State (17 September 2026)
 
-- Complete **Z/γ* → τhτh cross-section measurement** on the CMS 2016 Tau dataset (Run2016G+H):
-  - jet→τh fakes from a data-driven fake factor (MC subtracted, closure corrected, no QCD simulation);
-  - UL16 simulation for the **fiducial** Z→ττ signal (inclusive + jet-binned aMC@NLO, stitched), the
-    non-fiducial Z/γ*→ττ as a theory-normalised background, and the small backgrounds, with TauPOG corrections;
-  - a **MET-corrected di-τ mass**;
-  - a **k-fold BDT** (XGBoost, mass-agnostic kinematics) sorting the signal region into three categories;
-  - a **TRExFitter v1.8.0** profile-likelihood fit of m_ττ in the three categories, in the shared `fitting/` conventions.
-- Skims (1.7 GB), flat ntuples (330 MB, laptop bundle) of all data and simulation, the five BDT fold models.
-- Documentation: `README.md`, `CLAUDE.md`, `REVIEW.md` (the review of v1 and the numerical studies behind it in
-  `review/`), `docs/00–09`, slides `slides/ztautau_slides.pdf`.
+- **One measurement, one set of results.** Four channels are fitted together (`run_all.py`,
+  `docs/10-v4-plan.md`): the τhτh BDT categories plus μτh (SingleMuon, IsoMu24), eτh (SingleElectron,
+  Ele27_WPTight; EOS only) and eμ (MuonEG cross triggers) with an eμ tt̄ control region. The τhτh-only fit
+  of v3 no longer exists; what remains of that chain is the τhτh Data and fake templates
+  (`fit/fitinputs/tautau_base.root`, `run_tautau_base.py`).
+- **No μμ channel**; second-muon / second-electron vetoes make every channel orthogonal to the z-mumu and
+  z-ee selections (the eμ channel shares events with z-mumu's tt̄ *control* region `mumu_CRemu`, which a
+  joint fit must drop).
+- Signal: Z/γ*→ττ with 60 < m_LHE < 120 GeV in every decay (one μ_Z); the rest of the DY ττ simulation is a
+  background. σ^pred(60–120) = 1944.9 pb, ours (z-mumu and z-ee have their own).
+- τh ID scale factors free per decay mode (TRExFitter NormFactors, products on the τhτh templates), τh energy
+  scale with a 3 % prior: both measured in situ as in CMS arXiv:1801.03535. Every source of the paper's
+  Table 2 is implemented from an official correction, measured in situ, or replaced by a stated estimate
+  (`docs/10-v4-plan.md` §9).
+- Lepton-channel fakes: per-process fake factors (multijet / W+jets / tt̄) with AR fractions, OS/SS and m_T
+  corrections, same-sign validation (0.97 ± 0.01 μτh, 1.03 ± 0.02 eτh). Two things learned: the isolated-lepton
+  same-sign region is ~50 % W+jets, and the W+jets fake factor is charge-correlated (OS 0.08, SS 0.04).
+- Outputs: `output/RESULTS.md`, `output/results.json`, `output/plots/`, `fit/ztautau.config`,
+  `fit/fitinputs/ztautau.root`, `fit/results/ztautau_fit_result.json`, `external/trigger_insitu_v4.json`.
+- Caches: `skims_v1/`, `ntuples_v1/` (τhτh), `skims_v4/` (17 GB), `ntuples_v4/` (2.9 GB) under
+  `/data/atlas/users/sjankovy/BND-school-cache/ztautau/`.
 
-**Result (v3, nominal: DeepTau Tight on both legs, MC-subtracted fake factor):**
+<!-- RESULT:BEGIN -->
+_(filled by `python scripts/update_docs.py` after step 6)_
+<!-- RESULT:END -->
 
-> **σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 2082 ± 41 (stat) +222/−194 (syst+stat) ± 76 (acc) pb** (NNLO 1945 pb)
-> **σ_fid(τhτh) = 4.82 ± 0.09 (stat) ± 0.47 (syst) pb** (prediction 4.50 pb) — μ_Z = 1.071 +0.114 -0.100
+## What the review changed
 
-Cross-check without the MC subtraction in the fake-factor regions: μ_Z = 1.166 +0.142 -0.124.
-The same chain with DeepTau Medium (v2.1) gave μ_Z = 1.205 +0.145 −0.125, σ(60–120) = 2343 pb (`docs/08`, working-point comparison).
+`REVIEW_v4.md` reviewed the four-channel measurement; `REVIEW_v4_RESPONSE.md` is the point-by-point answer.
+In short: the expected uncertainty was wrong (a failed Asimov MINOS) and is now either correct or not
+quoted; the eμ trigger prior was double counted per leg and is now applied once per event; the eτh Ele27
+turn-on and the ℓτh fake-composition priors were too tight and were corrected; the eμ and τ-channel
+sub-measurements are quoted separately because they do not agree; the assumption behind the
+τhτh / (ℓτh)² lever is now measured by a dedicated fit; and the grouped impacts are reported with their
+(real) over-shoot instead of as if they added up to the total.
+
+## For the combination
+
+Everything is in **`docs/11-combination-inputs.md`** — files, region and nuisance-parameter names, which
+NPs may be correlated with z-mumu / z-ee and which must not, the `mumu_CRemu` overlap, the two combination
+routes, and the caveats that must be understood before our number is used. The short version:
+
+| what | path |
+|---|---|
+| fit inputs (all channels / per channel) | `fit/fitinputs/ztautau.root`, `fit/fitinputs/ztautau_<ch>.root` (+ `.meta.json`) |
+| configs | `fit/ztautau.config`, `fit/ztautau_<ch>.config`, MultiFit `fit/comb.config` |
+| workspaces | `fit/results/ztautau[_<ch>]/RooStats/*_combined_*_model.root` |
+| results | `fit/results/*_fit_result.json`, `output/results.json` → `for_combination` |
+
+`output/results.json["for_combination"]["channel_result"]` has exactly the fields of
+`combination/comb/inputs.ChannelResult`, including `sigma_pred`, `acc = {}` (the acceptance is profiled
+inside the fit) and `groups_rescaled` (the grouped impacts scaled so that their quadrature sum equals the
+MINOS total). The combination's `load_tautau` still expects the v3 layout and has to be updated once, and
+its `--check` assertions on the ττ line will fail until then; §6 of `docs/11` gives the replacement.
 
 ## Data and simulation used
 
@@ -47,7 +83,10 @@ The same chain with DeepTau Medium (v2.1) gave μ_Z = 1.205 +0.145 −0.125, σ(
 - **Ntuples (use these):** `/data/atlas/users/sjankovy/BND-school-cache/ztautau/ntuples_v1/`
 - Luminosity: **16393.381 pb⁻¹ ± 1.2 %** (normtag, as in z-mumu v2 and `fitting/CONVENTIONS.md`).
 
-## Selection and method
+- v4 skims / ntuples also cover SingleMuon, SingleElectron and MuonEG (Run2016G+H) and every simulation
+  sample in the μτh / eτh / eμ selections; `docs/10-v4-plan.md` §10.
+
+## Selection and method (τhτh; the lepton channels are `docs/10-v4-plan.md` §3–§5)
 
 - **Trigger:** `HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg` (G) / `HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg`
   (H). Both legs are matched to HLT τ objects (filterBits 2, pT > 35, ΔR < 0.5).
@@ -78,82 +117,25 @@ The same chain with DeepTau Medium (v2.1) gave μ_Z = 1.205 +0.145 −0.125, σ(
 ```bash
 cd z-tautau
 source ../setup.sh
-python run_all.py --from 3        # from the ntuples: FF, BDT, histograms, fits, report (~25 min)
-python run_all.py                 # from NanoAOD: ~2 h
-rm -f slides/figs/*; python slides/make_figures.py      # slide figures (dark, vector) from the outputs above
-env -u PYTHONPATH -u LD_LIBRARY_PATH -u PYTHONHOME <betterplottingtool venv>/bin/python slides/build_deck.py   # the deck
+python run_tautau_base.py --from 3   # τhτh fake factors, BDT, base templates (~25 min from the ntuples)
+python run_all.py --from 3           # trigger efficiencies, fakes, templates, all fits, report (~4 h)
+python run_all.py --only 4           # templates only (~50 min)
+python scripts/step5_fit.py --skip-ranking --skip-asimov     # the four-channel fit alone (~5 min)
 ```
 
-Every plot (`output/plots/`, `slides/figs/`) carries the stamp `v3: DeepTau Tight τh` (`config.PLOT_TAG`) and every
-slide a `v3 | DeepTau Tight` footer, so figures of different versions or working points cannot be mixed up.
-
-## Results so far
-
-| quantity | v3 (Tight, nominal) | v2.1 (Medium, same chain) |
-|---|---:|---:|
-| μ_Z | 1.071 +0.114 -0.100 | 1.166 +0.142 -0.124 |
-| expected (Asimov) | +0.106 −0.093 | +11.8 / −10.2 % |
-| σ(60–120) [pb] | 2082 +222 −194 | 2357 |
-| σ_fid [pb] | 4.82 ± 0.09 ± 0.47 | 4.82 ± 0.09 ± 0.47 |
-| GoF p | 0.22 | 0.16 |
-
-Uncertainty on μ_Z (nominal, grouped impacts):
-
-| source | impact |
-|---|---:|
-| Tau ID | 8.4 % |
-| Fakes | 6.5 % |
-| Gammas | 3.9 % |
-| Tau trigger | 3.0 % |
-| Background normalisation | 2.6 % |
-| Tau energy scale | 1.5 % |
-| Signal modelling | 1.3 % |
-| MET | 0.8 % |
-| Luminosity | 0.7 % |
-| Pileup | 0.6 % |
-| L1 prefiring | 0.2 % |
-| **data statistics** | **2.1 %** |
-
-Prediction: σ(Z/γ*→ττ, 60–120) = 1944.9 pb; σ_fid = 4.501 pb; A = 0.002314 ± 3.7 %
-(scale 3.4 %, PDF 0.5 %, α_s 0.6 %, ISR 0.9 %, FSR 0.2 %); C = 0.0510.
-
-## For the combination
-
-**Profile-likelihood combination (recommended).**
-
-- Inputs, **all committed** (exception to the no-ROOT rule, they are 0.8–1.2 MB and the combination needs them
-  from any checkout): the histograms `fit/fitinputs/ztautau.root` (+ the `.meta.json` sidecar), the config `fit/ztautau.config`, the workspace
-  `fit/results/ztautau/RooStats/ztautau_combined_ztautau_model.root` (a copy of TRExFitter's
-  `ztautau_allBinsFitRegions_combined_ztautau_model.root`, the name it uses when a region has `DropBins`)
-  and `fit/results/ztautau_fit_result.json`. Job `ztautau`, POI `mu_Z`, regions `tautau_SR0`, `tautau_SR1`,
-  `tautau_SR2` (SR0 fitted above 110 GeV only). The entry in `fitting/combination_skeleton.config` already
-  points there. Regenerate with `python run_all.py --from 4 --to 6` (~15 min from the ntuples).
-- Correlated NPs (shared names): `Lumi`, `Pileup`, `L1Prefiring`, `QCDScale`, `PDF`, `PS_ISR`, `PS_FSR`,
-  `XS_TTbar`, `XS_SingleTop`, `XS_WW`, `XS_WZ`, `XS_ZZ`.
-- ττ-only NPs: `TauID_DM*`, `TauTrigger_DM*`, `TauES_DM*`, `TauFakeEle`, `TauFakeMu`, `MET_Unclustered`,
-  `XS_DYll`, `XS_DYlowmass`, `XS_DYtautau_nonfid`, `XS_WJets`, `MCStatNorm_WJets_tautau`, `FakeOSSS_tautau_c*`,
-  `FakeClosure_tautau_c*_lo|hi`. **`SigModel_tautau` is reported, not fitted, and must never be correlated
-  with z-mumu's `SigModel`** (different quantities).
-- In the combination μ_Z will be fixed by ee/μμ, and this channel will mainly constrain the τh ID parameters;
-  present the fitted `TauID_DM*` as a result. The 60–120 GeV denominator of σ is Born level here (m_LHE);
-  the acceptance uncertainty (3.7 %) is correlated.
-
-**BLUE / counting (`combination.ipynb`).**
-
-| variable | value |
-|---|---|
-| `n_obs` | 21 160 |
-| `n_bkg` (prefit, incl. non-fiducial DY) | 41459 |
-| `acc_eff` | 0.0001179 (for σ(60–120), L = 16393.381, fiducial signal) |
-
-> ⚠️ Counting is useless here (B/S ≈ 8 over the whole signal region): use the fitted σ = 2082 +222 −194 pb with the
-> uncertainties above. Correlated: lumi 1.2 %, acceptance 3.7 %. Uncorrelated: τh ID, trigger, fakes, MC stat.
+Every plot carries the stamp `config.PLOT_TAG` (`v4: DeepTau Tight τh`), so figures of different versions
+or working points cannot be mixed up. The slide deck in `slides/` was built against the v3 result schema
+and is marked superseded: it must be rebuilt before it is shown again.
 
 ## Open issues / next steps
 
-1. τh ID scale factors dominate: decay-mode categories and/or the combined fit to measure `TauID_DM*` in situ;
-   quote the pT-binned POG prescription (14 % different on the yield) as a cross-check.
-2. Trigger efficiency in situ (μτh tag-and-probe from SingleMuon) instead of the POG turn-on SFs.
+1. The eμ and τ-channel sub-measurements do not agree well (`RESULTS.md`, `docs/11` §7). The candidates are
+   the eμ trigger efficiency, the pT dependence of the τh ID scale factor (measured now, see
+   `ztautau_ptsplit`) and the τhτh trigger and fake modelling. This is the first thing to look at.
+2. The eμ channel alone has the worst goodness of fit of the four; the 130–150 GeV m_tt bin of the lepton
+   channels is where the leptonic likelihood mass sits ~10 % above m_LHE.
 3. W+jets: HT-binned madgraph samples with LHE_HT stitching (the inclusive sample has pathological weights).
-4. High-mass DY sample (record 35629) stitched in m_LHE for the non-fiducial template; EWK Z→ττ.
-5. Add eτh and μτh (the skims would need looser lepton content).
+4. High-mass DY sample (record 35629) stitched in m_LHE for the `DYtautau_out` template; EWK Z→ττ; SM H→ττ.
+5. τh trigger efficiency in situ (μτh tag-and-probe from SingleMuon) instead of the POG turn-on curves —
+   the single-lepton and cross triggers are done, the di-τ one is not.
+6. The slide deck (see above).

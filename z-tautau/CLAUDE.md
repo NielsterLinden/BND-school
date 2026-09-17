@@ -1,14 +1,20 @@
-# CLAUDE.md — z-tautau (Z → τhτh)
+# CLAUDE.md — z-tautau (Z → ττ: τhτh + μτh + eτh + eμ)
 
 Guidance for agents working in this folder. Read `README.md` for what the analysis is, `docs/00-overview.md`
-for the physics, and `REVIEW.md` for the review that led to the current (v2) set-up; this file is about
-working on the code without breaking it.
+for the physics, `docs/11-combination-inputs.md` for what the combination gets, and the two reviews
+(`REVIEW.md` of the first τhτh iteration, `REVIEW_v4.md` of the four-channel measurement, answered in
+`REVIEW_v4_RESPONSE.md`); this file is about working on the code without breaking it.
+
+**There is one measurement and one set of results.** The four-channel fit (v4) owns the canonical paths
+`fit/` and `output/` and the job name `ztautau`; the τhτh-only fit of v3 is gone, and what survives of the
+v3 chain is the *τhτh base templates* (Data, the fake estimate and the BDT categories) in
+`fit/fitinputs/tautau_base.root`, built by `run_tautau_base.py`.
 
 ## Environment
 
 * `source ../setup.sh` (LCG_110: python 3.13, uproot 5.7, awkward 2.9, hist, mplhep 1.1, xgboost 2.1, ROOT 6.40).
   Nothing to pip-install; do not create a venv.
-* TRExFitter v1.8.0: `step5_fit.py` finds `trex-fitter` on PATH, else `$TREXFITTER_HOME`, else
+* TRExFitter v1.8.0: `step5_fit.trex_environment` finds `trex-fitter` on PATH, else `$TREXFITTER_HOME`, else
   `config.TREX_FALLBACK_HOME`. Every channel must use this one binary. Never build another version.
 * Bulk data lives in `$BND_TAUTAU_CACHE` (default `/data/atlas/users/sjankovy/BND-school-cache/ztautau`):
   `skims_v1/` (data and small samples are symlinks to the original skims in
@@ -16,15 +22,39 @@ working on the code without breaking it.
   `ntuples_v1/` (the laptop bundle, ~330 MB), `bdt/` (the five fold models), `logs/`.
   `/data/atlas` is ~98 % full and `/project` is over quota: do not duplicate skims, keep plots small.
 
+## The measurement in one paragraph
+
+`docs/10-v4-plan.md` is the design record. Four channels are fitted together: τhτh (Tau dataset, three BDT
+categories), μτh (SingleMuon), eτh (SingleElectron, EOS only) and eμ (MuonEG, with a tt̄ control region).
+There is no μμ channel and every channel vetoes a second muon or electron (orthogonal to z-mumu / z-ee,
+except that eμ overlaps z-mumu's `mumu_CRemu`). The τhτh part **reuses the v1 skims, the v1 ntuples, the
+fake factors, the BDT and `fit/fitinputs/tautau_base.root`** (Data and Fakes templates are copied from
+there); its simulation templates are rebuilt with the four-channel signal definition. The signal is
+Z/γ*→ττ with 60 < m_LHE < 120 GeV (all decays; `DYtautau_out` is the rest); the τh ID scale factors are
+free NormFactors per decay mode (`TauIDSF_DM*`, products via TRExFitter `Expression` on the τhτh templates)
+and the τ energy scale has a 3 % prior, both constrained in situ.
+
 ## Running
 
 ```bash
-python run_all.py --from 3                  # normal iteration loop (~25 min): FF -> BDT -> histograms -> fits -> report
-python scripts/step3b_bdt.py --no-train     # only the BDT validation plots with the existing models
-python scripts/step4_histograms.py --no-plots           # fast histogram rebuild (nominal variant)
-python scripts/step5_fit.py --skip-ranking              # fast fit (~2 min)
-BND_TAUTAU_WP=Medium python run_all.py --from 3        # the same chain with another working point -> variants/medium/
+python run_tautau_base.py --from 3   # τhτh base: fake factors, BDT, fit/fitinputs/tautau_base.root (~25 min)
+python run_all.py --from 3           # trigger efficiencies + fakes -> templates -> fits -> report (~4 h with the ranking)
+python run_all.py --only 4           # templates only (~50 min)
+python scripts/step5_fit.py --skip-ranking --skip-asimov              # the four-channel fit alone (~5 min)
+python scripts/step5_fit.py --channels mutau --job ztautau_mutau --skip-ranking --skip-asimov   # one channel
+python scripts/step5b_multifit.py    # MultiFit of the four per-channel workspaces (needs them built)
+BND_TAUTAU_WP=Medium python run_all.py --from 3   # another working point -> variants/medium/
 ```
+
+Step 5 of `run_all.py` runs, besides the measurement, the cross-check fits the review of the four-channel
+result asked for: `ztautau_taulep` (no eμ), `ztautau_ptsplit` (τh ID scale factors split at pT = 40 GeV in
+the ℓτh channels) and `ztautau_emutrig2x` (the eμ trigger prior doubled). `run_all.py --help` says what each
+one tests; `REVIEW_v4_RESPONSE.md` says why.
+
+**Order inside step 5 matters.** The stat-only and Asimov runs overwrite TRExFitter's unsuffixed correlation
+matrix and NP plots, so the observed fit and everything drawn from it run *last*. The Asimov fit uses its own
+config copy with `FitStrategy: 2` (with the default strategy MINOS failed on `mu_Z` and the HESSE error of a
+Hessian forced positive-definite was quoted as the expected uncertainty). If MINOS fails, nothing is quoted.
 
 * Long jobs (skims): launch detached (`nohup setsid python scripts/step1_skim.py ... > $BND_TAUTAU_CACHE/logs/x.log &`)
   and poll the log. Steps 1 and 2 are resumable/cheap; step 1 skips finished files.
@@ -42,11 +72,15 @@ BND_TAUTAU_WP=Medium python run_all.py --from 3        # the same chain with ano
 
 ## Conventions you must keep
 
-* Histogram and nuisance-parameter names follow `../fitting/CONVENTIONS.md`: regions `tautau_SR0/1/2`
-  (BDT categories), POI `mu_Z` on the **fiducial** signal `DYtautau` only, `DYtautau_nonfid` is a
-  background, channel-specific NPs end in `_tautau` (`SigModel_tautau`, `FakeOSSS_tautau_c<k>`,
-  `FakeClosure_tautau_c<k>_lo|hi`). The combination (`../fitting/combination_skeleton.config`) expects
-  `fit/ztautau.config` and `fit/results/ztautau/`.
+* Histogram and nuisance-parameter names follow `../fitting/CONVENTIONS.md`, and what the combination may
+  do with them is `docs/11-combination-inputs.md` — keep the two in step. Regions `tautau_SR0/1/2` (BDT
+  categories), `mutau_SR_dm*`, `etau_SR_dm*`, `emu_SR`, `emu_CRtt`; POI `mu_Z` on every `DYtautau_tDM*`
+  template (60 < m_LHE < 120 GeV, all decays), `DYtautau_out` is a theory-normalised background;
+  channel-specific NPs carry the channel suffix. The combination
+  (`../fitting/combination_skeleton.config`) expects `fit/ztautau.config` and `fit/results/ztautau/`.
+* `mutau_SRlo/hi_dm*` and `etau_SRlo/hi_dm*` hold **the same events** as `mutau_SR_dm*` / `etau_SR_dm*`,
+  split at pT(τh) = 40 GeV, and exist only for the `ztautau_ptsplit` cross-check. They are tagged
+  `"ptsplit"` in `meta["region_sets"]`. Never fit them together with the unsplit ones.
 * Luminosity 16393.381 pb⁻¹ (normtag), DY cross section 6077.22 pb: identical in all channels.
 * Simulation keeps only events whose **leading τ is not a jet** (`analysis.regions(..., is_mc=True)`);
   removing that cut double-counts the fake-factor estimate.
@@ -55,10 +89,11 @@ BND_TAUTAU_WP=Medium python run_all.py --from 3        # the same chain with ano
   (`bdt.folds`: event number mod 5). Check `step3b_bdt_closure_SS.png` after any change.
 * Commit plots (PNG), `output/RESULTS.md`, `output/results.json`, `fit/*.config`, `fit/bdt_info.json`,
   `external/*.json`, `filelists/`, and — the one exception to the no-ROOT rule, because the combination reads
-  them from its own checkout — the fit inputs `fit/fitinputs/ztautau*.root` (+ `.meta.json`), the workspace
-  `fit/results/ztautau/RooStats/ztautau_combined_ztautau_model.root` and `fit/results/ztautau_fit_result.json`
-  (`git add -f`, they are git-ignored by pattern). Never commit other ROOT files, `output/data/`, the BDT
-  models or PDFs of plots.
+  them from its own checkout — the fit inputs `fit/fitinputs/*.root` (+ `.meta.json`, including
+  `tautau_base.root`), the workspaces
+  `fit/results/ztautau[_<ch>]/RooStats/*_combined_*_model.root` and every
+  `fit/results/*_fit_result.json` (`git add -f`, they are git-ignored by pattern). Never commit other ROOT
+  files, `output/data/`, the BDT models or PDFs of plots.
 
 ## Pitfalls that already cost time here (do not reintroduce)
 
@@ -71,12 +106,12 @@ BND_TAUTAU_WP=Medium python run_all.py --from 3        # the same chain with ano
    selection (`analysis.SMOOTHED_SAMPLES`), its normalisation stat. is `MCStatNorm_WJets_tautau`, and it is
    subtracted from the FF regions with **uniform weights** (`analysis.subtraction_weights`); dropping it instead
    moves C_OS/SS by 1.5 %.
-3. **multiprocessing with fork deadlocks** after the parent has used uproot: `step2_ntuples.py` uses the
+3. **multiprocessing with fork deadlocks** after the parent has used uproot: `step2_ntuples_tautau.py` and `step2_ntuples_lepton.py` use the
    `spawn` context. Keep it.
 4. **uproot ≥ 5.6 writes `f["name"] = {dict}` as an RNTuple**, which `.arrays(library="np")` cannot read
    back. Write trees with `f.mktree(name, dict_of_arrays)` (this also fills the first chunk).
 5. **mplhep 1.1 label helpers (`hep.cms.label/text`) crash with the LCG_110 matplotlib** at draw time; use
-   `plotting.label`. Every figure carries the stamp `config.PLOT_TAG` (`v3: DeepTau Tight τh`; `plotting.tag` /
+   `plotting.label`. Every figure carries the stamp `config.PLOT_TAG` (`v4: DeepTau Tight τh`; `plotting.tag` /
    `plotting.fig_tag`) so plots of different versions or working points cannot be confused; bump `config.VERSION`
    when the result changes. The slide figures are rebuilt with `rm -f slides/figs/*; python slides/make_figures.py`
    and the deck with `slides/build_deck.py` (PyMuPDF in the betterplottingtool venv, see its docstring).
@@ -103,6 +138,16 @@ BND_TAUTAU_WP=Medium python run_all.py --from 3        # the same chain with ano
     stitching with a warning. The bin variable is `LHE_NpNLO` (partons of the NLO matrix element), **not**
     `LHE_Njets` (which also counts the real-emission parton: the 0J/1J/2J samples overlap in it and the
     stitched yield came out 7 % high).
+14. **v4 fake factors:** the same-sign region with an isolated lepton is ~50 % W+jets, and the W+jets FF is
+    charge-correlated (OS quark-like 0.08, SS gluon-like 0.04): subtract the simulated W/top *jet fakes* from the
+    multijet DR, and validate in same-sign events with the same-sign W FF (`docs/10-v4-plan.md` 5.1). Without both,
+    the same-sign closure was off by 16–19 %.
+15. **TRExFitter config strings:** `Expression:` values and `HistoChecks: NOCRASH` must be unquoted (the reader splits
+    on `:` / compares before removing quotes); `fitting/trexconfig.py` knows `NOCRASH`, `step5_fit.py` strips the
+    quotes of `Expression`. With per-decay-mode templates some tiny systematic variations have "weird" bins:
+    `NOCRASH` is required, not cosmetic.
+16. **The skims keep leptons with I_rel < 0.5**: every isolation sideband must live below 0.5 (the eμ SB2 of the
+    paper, I_rel > 0.6, is not available).
 
 ## Where numbers come from
 
@@ -114,6 +159,10 @@ BND_TAUTAU_WP=Medium python run_all.py --from 3        # the same chain with ano
 | prefit yields per category, closure NPs, C_OS/SS per category | `output/data/yields.json` (step 4) |
 | μ, impacts, pulls, ranking | `fit/results/ztautau_fit_result.json` (step 5) |
 | everything collected | `output/results.json`, `output/RESULTS.md` (step 6) |
+| v4: in-situ trigger SFs, b-tag efficiencies | `external/trigger_insitu_v4.json`, `output_v4/data/btag_eff.json` (step 3c) |
+| v4: lepton-channel fake factors, fractions, OS/SS, r_W, same-sign closure | `output_v4/data/fakes_<channel>.json` (step 3) |
+| v4: yields, template and systematic registry | `output_v4/data/yields_v4.json`, `fit_v4/fitinputs/ztautau_v4.root.meta.json` (step 4) |
+| v4: μ, τh ID SFs, τES constraints, impacts | `fit_v4/results/ztautau_v4_fit_result.json` (step 5), `output_v4/RESULTS.md` (step 6) |
 
 ## Open issues (good next tasks)
 

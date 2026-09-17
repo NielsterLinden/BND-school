@@ -21,7 +21,7 @@ EXTERNAL_DIR = CHANNEL_DIR / "external"                     # small, committed P
 # docs/08). BND_TAUTAU_WP=<other WP> runs the whole chain from step 3 with that working point and the
 # matching TauPOG ID and trigger scale factors into variants/<wp>/{output,fit} and a separate BDT.
 NOMINAL_WP = "Tight"
-VERSION = "v3"                        # analysis version stamped on every plot (with the working point)
+VERSION = "v4"                        # analysis version stamped on every plot (with the working point)
 TAU_WP = os.environ.get("BND_TAUTAU_WP", NOMINAL_WP)
 PLOT_TAG = f"{VERSION}: DeepTau {TAU_WP} " + r"$\tau_h$"   # drawn by plotting.label on every figure
 _VARIANT = CHANNEL_DIR if TAU_WP == NOMINAL_WP else CHANNEL_DIR / "variants" / TAU_WP.lower()
@@ -32,7 +32,9 @@ FIT_DIR = _VARIANT / "fit"
 
 # Bulk storage (not in git). Override with BND_TAUTAU_CACHE=/somewhere on a laptop.
 CACHE_DIR = Path(os.environ.get("BND_TAUTAU_CACHE", "/data/atlas/users/sjankovy/BND-school-cache/ztautau"))
-SKIM_DIR = CACHE_DIR / "skims_v1"          # NanoAOD-format skims, one file per parent file
+SKIM_DIR = CACHE_DIR / "skims_v1"          # NanoAOD-format skims, one file per parent file (tau_h tau_h, v1-v3)
+SKIM_DIR_V4 = CACHE_DIR / "skims_v4"       # v4: lepton + tau_h / e mu preselections, all streams but Tau
+NTUPLE_DIR_V4 = CACHE_DIR / "ntuples_v4"   # v4 flat ntuples of the mu tau_h / e tau_h / e mu channels
 NTUPLE_DIR = CACHE_DIR / "ntuples_v1"      # flat analysis ntuples, one file per sample (laptop bundle)
 DOWNLOAD_DIR = CACHE_DIR / "downloads"     # raw POG ROOT files before conversion
 BDT_DIR = CACHE_DIR / ("bdt" if TAU_WP == NOMINAL_WP else f"bdt_{TAU_WP.lower()}")   # k-fold BDT models (not committed)
@@ -191,9 +193,115 @@ REGION_LABELS = ["BDT < 0.55 (fake dominated)", "0.55 < BDT < 0.90", "BDT > 0.90
 # The fake-dominated category is the fake sideband: its bins below this m_tt are dropped from the fit
 # (S/B = 0.09 there with a 15% closure prior; left in, its OS/SS parameter was 49% correlated with mu_Z).
 SIDEBAND_REGION_MTT_MIN = 110.0
-JOB = "ztautau"
+# The tau_h tau_h chain (steps 1-4a) no longer produces a measurement of its own: it produces the base
+# templates (Data, Fakes and the BDT categories) that step 4 copies into the four-channel fit inputs.
+JOB = "tautau_base"
 DY_XSEC_PB = 6077.22             # sigma(Z/gamma* -> ll, m > 50) summed over flavours, NNLO (all channels)
 
 # ------------------------------------------------------------------------------ processing
 N_WORKERS = int(os.environ.get("BND_TAUTAU_WORKERS", "10"))
 CHUNK_SIZE = "300 MB"
+
+# ============================================================================== v4: lepton channels
+# docs/10-v4-plan.md. Four channels fitted together: tau_h tau_h (the v3 chain above, unchanged
+# selection), mu tau_h (SingleMuon), e tau_h (SingleElectron) and e mu (MuonEG). No mu mu / e e channel:
+# the second-lepton vetoes below make every channel orthogonal to the z-mumu (>= 2 muons) and z-ee
+# (>= 2 electrons) selections of the other groups. The tau_h ID scale factors (per decay mode) and the
+# tau_h energy scale are constrained in situ by the combined fit (free NormFactors / a 3% prior).
+CHANNELS = ["tautau", "mutau", "etau", "emu"]
+# single-lepton and cross triggers (Run2016G+H menus; every listed path exists in the UL16 simulation)
+MU_TRIGGERS = ["HLT_IsoMu24", "HLT_IsoTkMu24"]
+EL_TRIGGERS = ["HLT_Ele27_WPTight_Gsf"]
+EMU_TRIGGERS = ["HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL", "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ",
+                "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL", "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ"]
+# trigger-object matching (NanoAODv9 TrigObj filterBits): muon id 13 bit 2 = Iso (IsoMu*), bit 8 = IsoTkMu,
+# bit 1 = TrkIsoVVL (the Mu8/Mu23 legs of the cross triggers); electron id 11 bit 2 = WPTight (Ele27),
+# bit 32 = 1e-1mu (the Ele12/Ele23 legs). The muon-side 1mu-1e bit is not filled in the UL16 NanoAOD.
+TRIGOBJ_MU_ID, TRIGOBJ_EL_ID = 13, 11
+TRIGOBJ_MU_ISO_BITS = 2 | 8
+TRIGOBJ_MU_TRKISOVVL_BIT = 1
+TRIGOBJ_EL_WPTIGHT_BIT = 2
+TRIGOBJ_EL_EMU_BIT = 32
+LEP_TRIG_MATCH_DR = 0.3
+# analysis leptons (Muon POG tight ID + tight PF isolation: the POG scale factors exist for exactly this
+# combination; electrons: Fall17V2 MVA noIso 90% + relative isolation 0.10, EGM 'wp90noiso' scale factors)
+MU_PT_MIN_MUTAU = 26.0                 # IsoMu24 plateau (z-mumu uses the same threshold)
+MU_ETA_MAX, MU_DXY, MU_DZ, MU_ISO = 2.4, 0.045, 0.2, 0.15
+EL_PT_MIN_ETAU = 29.0                  # Ele27_WPTight: 29 GeV is still on the turn-on (see ELE27_PLATEAU_PT)
+# Above this the in-situ Ele27 scale factor is flat; between EL_PT_MIN_ETAU and it the measurement changes
+# by 4-13% from one pT bin to the next, so the turn-on has its own nuisance parameter `ElectronTrigger_lowpt`
+# (REVIEW_v4.md finding 7) instead of sharing the flat 2% of the plateau.
+ELE27_PLATEAU_PT = 35.0
+EL_ETA_MAX, EL_DXY, EL_DZ, EL_ISO = 2.1, 0.045, 0.2, 0.10
+EL_GAP = (1.4442, 1.566)               # ECAL barrel-endcap transition (supercluster |eta|) excluded
+# e mu: leading lepton on the plateau of the 23 GeV leg, trailing above the 8 / 12 GeV leg
+EMU_MU_PT_MIN, EMU_EL_PT_MIN, EMU_LEAD_PT_MIN = 10.0, 13.0, 24.0
+EMU_ISO = 0.15
+# lepton isolation sidebands (anti-isolated leptons) for the QCD OS/SS extrapolation and the multijet DR
+LEP_ANTIISO = (0.15, 0.50)             # mu tau_h / e tau_h: 0.15 < I_rel < 0.50 (e: same on pfRelIso03)
+# (the skims keep leptons with I_rel < 0.5, so the sidebands live in 0.15-0.5 instead of the paper's 0.15-0.6 / > 0.6)
+EMU_SB1_ISO, EMU_SB2_ISO = 0.50, 0.30  # e mu OS/SS: SB1 both < 0.5 and >= 1 above 0.15; SB2 >= 1 in 0.3-0.5 (both < 0.5)
+# tau_h in the lepton channels: pT > 30 (no tau trigger), |eta| < 2.3, DeepTau VSjet at the nominal
+# working point, VSe / VSmu tightened against the lepton of the channel (TauPOG recommendation)
+LTAU_TAU_PT_MIN, LTAU_TAU_ETA_MAX = 30.0, 2.3
+LTAU_TAU_PT_NTUPLE = 28.0
+MUTAU_VSE_BIT, MUTAU_VSMU_BIT = 2, 8       # VVLoose VSe, Tight VSmu
+ETAU_VSE_BIT, ETAU_VSMU_BIT = 32, 1        # Tight VSe, VLoose VSmu
+LTAU_DR_MIN = 0.5
+LTAU_MT_MAX = 40.0                         # SR: m_T(lepton, MET) < 40 GeV (W+jets, ttbar suppression)
+LTAU_MT_WDR_MIN = 70.0                     # W+jets fake-factor determination region
+# e mu: D_zeta = P_zeta^miss - 0.85 P_zeta^vis (topological ttbar discriminant) and the ttbar control region
+EMU_DZETA_MIN = -20.0
+EMU_CR_DZETA_MAX, EMU_CR_MET_MIN = -40.0, 80.0
+EMU_BVETO = True
+# second-lepton vetoes (orthogonality to z-mumu / z-ee and between the channels): any additional muon
+# (loose ID, pT > 10, |eta| < 2.4, I_rel < 0.3) or electron (MVA noIso 90%, pT > 10, |eta| < 2.5, I_rel < 0.3);
+# the z-mumu signal region needs two tight, isolated (< 0.15) muons above 20 GeV and z-ee two medium cut-based
+# electrons above 20 GeV, both far inside these vetoes
+VETO_MU_V4 = dict(pt=10.0, eta=2.4, dxy=0.045, dz=0.2, iso=0.3)     # + Muon_looseId
+VETO_EL_V4 = dict(pt=10.0, eta=2.5, dxy=0.045, dz=0.2, iso=0.3)     # + mvaFall17V2noIso_WP90, convVeto, lostHits <= 1
+# fake factors of the lepton channels: (DM, pT(tau), N_jets), QCD DR = same sign, W DR = m_T > 70 (no b jet),
+# ttbar FF from simulation; fractions of the AR from simulation in bins of m_T
+LTAU_FF_PT_BINS = [30.0, 35.0, 40.0, 45.0, 50.0, 60.0, 80.0, 1000.0]
+LTAU_FF_NJET_BINS = [0, 1, 2]
+LTAU_FF_MT_BINS = [0.0, 20.0, 40.0, 60.0, 80.0, 100.0, 150.0, 1000.0]
+LTAU_FF_OSSS_SYST = 0.05
+# Prior on the W+jets fraction of the application region (the multijet fraction compensates). The first
+# iteration used 20%, an estimate; the fit then pulled `FakeFrac_etau` by +2.6 sigma and `FakeFrac_mutau`
+# by +1.5 sigma and constrained both to ~0.6 of the prior (REVIEW_v4.md finding 6): the composition of the
+# AR, taken from the LO inclusive W+jets sample, is not known to 20%. The prior is now 40%, which the data
+# still constrain to ~25%; the fitted fake yield barely moves, the pulls become acceptable.
+LTAU_FF_FRAC_SYST = 0.40
+LTAU_FF_WTT_SYST = 0.30                    # the paper's 30% on the W/ttbar part of the tau_h tau_h fakes
+# signal definition of the combined measurement: Z/gamma* -> tau tau with 60 < m_LHE < 120 GeV, every decay.
+# The simulation outside the window (DYtautau_out) is a theory-normalised background. (v3 used the
+# tau_h tau_h visible fiducial volume as the POI's signal; the per-channel fiducial numbers are reported
+# in addition.) The theory variations keep sigma(60-120) fixed and vary only A x epsilon.
+V4_SIGNAL, V4_SIGNAL_OUT = "DYtautau", "DYtautau_out"
+# tau_h energy scale: the POG central values are applied; the fit prior is +-3% per decay mode (the paper's
+# choice) instead of the POG uncertainty, so the m_tt shapes constrain it in situ
+TES_PRIOR_V4 = 0.03
+# fit
+FIT_BINS_LTAU = [0.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0, 110.0, 120.0, 130.0, 150.0, 175.0, 200.0, 250.0, 350.0]
+FIT_BINS_EMU = [0.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0, 110.0, 120.0, 130.0, 150.0, 175.0, 200.0, 250.0, 350.0]
+FIT_BINS_CRTT = [0.0, 100.0, 150.0, 200.0, 300.0, 500.0]
+# the mu tau_h and e tau_h signal regions are split by the tau_h decay mode: with one m_tt distribution per channel
+# the per-decay-mode ID scale factors are degenerate (the first combined fit pushed two of them to the boundary);
+# one region per decay mode measures SF(DM) x mu_Z, the e mu channel fixes mu_Z
+LTAU_DM_REGIONS = True
+LTAU_REGIONS = [f"{ch}_SR_dm{dm}" for ch in ("mutau", "etau") for dm in TAU_DMS] if LTAU_DM_REGIONS else ["mutau_SR", "etau_SR"]
+# The tau_h ID scale factor of the fit is one number per decay mode, measured by tau_h tau_h regions with
+# pT(tau_h) > 40 GeV and l tau_h regions with pT(tau_h) > 30 GeV. A pT dependence of the scale factor between
+# 30 and 40 GeV would bias the tau_h tau_h / (l tau_h)^2 lever (REVIEW_v4.md finding 4). Step 4 therefore also
+# fills every l tau_h region split at this pT; the alternative fit `ztautau_ptsplit` (step 5 --region-set ptsplit)
+# gives the 30-40 GeV part its own scale factors and measures the difference. The nominal fit is unchanged.
+LTAU_PT_SPLIT = 40.0
+LTAU_PTSPLIT_REGIONS = [f"{ch}_SR{tag}_dm{dm}" for ch in ("mutau", "etau") for dm in TAU_DMS for tag in ("lo", "hi")]
+REGIONS_V4 = REGIONS + LTAU_REGIONS + LTAU_PTSPLIT_REGIONS + ["emu_SR", "emu_CRtt"]
+# The four-channel measurement is *the* measurement: it owns the canonical job name and output paths
+# (fitting/CONVENTIONS.md section 1: the combination reads fit/ztautau.config and fit/results/ztautau/).
+JOB_V4 = "ztautau"
+FIT_DIR_V4 = FIT_DIR
+OUTPUT_DIR_V4 = OUTPUT_DIR
+PLOT_DIR_V4 = PLOT_DIR
+DATA_DIR_V4 = DATA_DIR

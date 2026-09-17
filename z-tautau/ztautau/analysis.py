@@ -162,16 +162,17 @@ def _masses_for(d, idx, pt1, m1, pt2, m2, metx, mety):
 _KIN_CACHE: dict = {}
 
 
-def kinematics(d, key: str, variation: str | None = None, direction: str | None = None):
+def kinematics(d, key: str, variation: str | None = None, direction: str | None = None, tes_rel: float | None = None):
     """dict(t1_pt, t2_pt, m_vis, m_tt, m_col, met, pt_tt, mt_tot, met_x, met_y) under a kinematic variation.
 
     TauES_DM<d>: genuine tau_h of that decay mode scaled by (1 +- sigma_TES), MET adjusted, masses
     recomputed for the affected events. MET_Unclustered: MET +- the NanoAOD unclustered-energy shift.
+    `tes_rel`: relative size of the energy-scale shift (default: the TauPOG uncertainty; v4 uses 3%).
     """
     base = {k: d[k] for k in KIN_KEYS}
     if variation is None:
         return base
-    ck = (key, variation, direction, len(d["run"]))
+    ck = (key, variation, direction, len(d["run"]), tes_rel)
     if ck in _KIN_CACHE:
         return _KIN_CACHE[ck]
     sign = 1.0 if direction == "Up" else -1.0
@@ -180,7 +181,7 @@ def kinematics(d, key: str, variation: str | None = None, direction: str | None 
     metx, mety = d["met_x"].astype(np.float64), d["met_y"].astype(np.float64)
     if variation.startswith("TauES_DM"):
         dm = int(variation[len("TauES_DM"):])
-        rel = corrections.tes_uncertainty()[dm] / corrections.tes_nominal()[dm]
+        rel = tes_rel if tes_rel is not None else corrections.tes_uncertainty()[dm] / corrections.tes_nominal()[dm]
         aff1 = (d["t1_genflav"] == 5) & (d["t1_dm"] == dm)
         aff2 = (d["t2_genflav"] == 5) & (d["t2_dm"] == dm)
         new1 = np.where(aff1, pt1 * (1 + sign * rel), pt1)
@@ -248,8 +249,10 @@ def pileup():
     return corrections.PileupWeights(prof)
 
 
-def weights(d, key: str, syst: str | None = None, direction: str | None = None, kin=None):
-    """Event weights of an MC ntuple: norm x genWeight x pileup x prefiring x trigger SFs x ID SFs."""
+def weights(d, key: str, syst: str | None = None, direction: str | None = None, kin=None, vsjet_sf: bool = True):
+    """Event weights of an MC ntuple: norm x genWeight x pileup x prefiring x trigger SFs x ID SFs.
+    `vsjet_sf=False` (v4): no DeepTau VSjet scale factor (it is a free parameter of the v4 fit), the VSe / VSmu
+    scale factors of lepton-faked legs are kept."""
     kin = kin or d
     sign = {"Up": 1, "Down": -1, None: 0}[direction]
     pu_var = {"Up": "up", "Down": "down"}.get(direction) if syst == "Pileup" else "nominal"
@@ -264,13 +267,16 @@ def weights(d, key: str, syst: str | None = None, direction: str | None = None, 
         trig_dm = int(syst[len("TauTrigger_DM"):]) if syst and syst.startswith("TauTrigger_DM") else None
         w = w * corrections.trigger_sf(dm, kin[f"t{i}_pt"], trig_dm, sign if trig_dm is not None else 0, genflav=flav)
         if syst and syst.startswith("TauID_DM"):
-            w = w * corrections.id_sf(dm, flav, abseta, int(syst[len("TauID_DM"):]), sign, "id")
+            sf = corrections.id_sf(dm, flav, abseta, int(syst[len("TauID_DM"):]), sign, "id")
         elif syst == "TauFakeEle":
-            w = w * corrections.id_sf(dm, flav, abseta, None, sign, "vse")
+            sf = corrections.id_sf(dm, flav, abseta, None, sign, "vse")
         elif syst == "TauFakeMu":
-            w = w * corrections.id_sf(dm, flav, abseta, None, sign, "vsmu")
+            sf = corrections.id_sf(dm, flav, abseta, None, sign, "vsmu")
         else:
-            w = w * corrections.id_sf(dm, flav, abseta)
+            sf = corrections.id_sf(dm, flav, abseta)
+        if not vsjet_sf:
+            sf = np.where(flav == 5, 1.0, sf)
+        w = w * sf
     return w
 
 

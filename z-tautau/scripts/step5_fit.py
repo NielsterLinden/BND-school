@@ -109,9 +109,13 @@ def build_config(job: str, meta: dict, channels, fix_tauid: bool = False, region
                ExperimentLabel="CMS", PlotLabel="Open Data", POI="mu_Z", ReadFrom="HIST", HistoPath="fitinputs",
                HistoFile=job, OutputDir="results", MCstatThreshold=0.0, UseGammaPulls=True, DebugLevel=1,
                ImageFormat="png", SystControlPlots=False, DoSummaryPlot=True, DoTables=True, DoSignalRegionsPlot=False,
+               # PlotOptions has no NOSIG: with it, TRExFitter leaves the signal out of the plotted total,
+               # of `h_tot_postFit` and of the per-bin Plots/<region>_postfit.yaml `Total` -- so every
+               # data/prediction ratio built from those files excludes Z -> tautau, which is most of the
+               # prediction in the signal regions.
                DoPieChartPlot=True, RankingMaxNP=25, RankingPlot="SYSTS", HistoChecks="NOCRASH", SystPruningShape=0.001,
                SystPruningNorm=0.001, GetChi2="TRUE", SystCategoryTables=True, RatioYmax=1.5, RatioYmin=0.5, POIPrecision=3,
-               SummaryPlotYmin=1, LegendNColumns=2, PlotOptions="NOSIG,NOXERR", SummaryPlotRegions=",".join(regions)),
+               SummaryPlotYmin=1, LegendNColumns=2, PlotOptions="NOXERR", SummaryPlotRegions=",".join(regions)),
         tc.fit("fit", FitType="SPLUSB", FitRegion="CRSR", UseMinos="mu_Z", NumCPU=num_cpu, FitStrategy=fit_strategy),
     ]
     edges = list(meta["bins"]["tautau_SR0"]) if "tautau_SR0" in regions else []

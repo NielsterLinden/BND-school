@@ -241,47 +241,50 @@ def ranking():
 
 
 # ------------------------------------------------------------------ 4. the fitted regions
-def read_fitinputs():
-    out = {}
-    with uproot.open(config.FIT_DIR_V4 / "fitinputs" / f"{config.JOB_V4}.root") as f:
-        for k in f.keys():
-            name = k.split(";")[0]
-            if name.count("__") != 1 or name == "meta_json":
-                continue
-            region, sample = name.split("__")
-            if region not in FITTED_REGIONS:
-                continue
-            key = f"{region}__{sample.split('_tDM')[0]}"
-            v, var = f[name].values(), f[name].variances()
-            out[key] = (out[key][0] + v, out[key][1] + var) if key in out else (v, var)
-    return out
+# The post-fit content comes from TRExFitter's own per-bin yaml (Plots/<region>_postfit.yaml), which lists
+# every sample, the total and its uncertainty. The `Histograms/<region>_postFit.root` file next to it holds
+# `h_tot_postFit`, which is the post-fit total *without* the signal (the job sets PlotOptions: NOSIG, so
+# TRExFitter's own plots draw the signal separately). Using it as the total, as the first version of these
+# figures did, left Z -> tautau out of the stack and out of the data/prediction ratio.
+TITLE_TO_SAMPLE = {v: k for k, v in META["titles"].items()}
+
+
+def postfit_yaml(region):
+    """(edges, data, [(sample, per-bin yield)], per-bin uncertainty of the total) of one region, post-fit."""
+    import yaml
+    p = config.FIT_DIR_V4 / f"results/{config.JOB_V4}/Plots/{region}_postfit.yaml"
+    if not p.exists():
+        return None
+    d = yaml.safe_load(p.read_text())
+    edges = np.asarray(d["Figure"][0]["BinEdges"], dtype=float)
+    data = np.asarray(d["Data"][0]["Yield"], dtype=float)
+    tot = d["Total"][0]
+    unc = 0.5 * (np.abs(np.asarray(tot["UncertaintyUp"], dtype=float))
+                 + np.abs(np.asarray(tot["UncertaintyDown"], dtype=float)))
+    samples = {TITLE_TO_SAMPLE.get(s["Name"], s["Name"]): np.asarray(s["Yield"], dtype=float) for s in d["Samples"]}
+    return edges, data, samples, unc
 
 
 def regions():
-    hists = read_fitinputs()
     for region in FITTED_REGIONS:
-        edges = np.asarray(META["bins"][region])
-        data = hists[f"{region}__Data"][0]
+        got = postfit_yaml(region)
+        if got is None:
+            print(f"  no post-fit yaml for {region}, skipped")
+            continue
+        edges, data, samples, unc = got
         stack = []
         for g, members in STACK_GROUPS:
-            parts = [hists[f"{region}__{m}"] for m in members if f"{region}__{m}" in hists]
+            parts = [samples[m] for m in members if m in samples]
             if parts:
-                stack.append((g, np.maximum(sum(p[0] for p in parts), 0), sum(p[1] for p in parts)))
-        overlay = None
-        post = config.FIT_DIR_V4 / f"results/{config.JOB_V4}/Histograms/{region}_postFit.root"
-        if post.exists():
-            with uproot.open(post) as f:
-                tot = f["h_tot_postFit"]
-                overlay = (tot.values(), tot.errors(), "post-fit total")
-        if region == "tautau_SR0":       # fitted above 110 GeV only: the fake sideband
-            drop = edges[:-1] < config.SIDEBAND_REGION_MTT_MIN
-            data = np.where(drop, 0, data)
-            stack = [(g, np.where(drop, 0, v), np.where(drop, 0, var)) for g, v, var in stack]
-            if overlay:
-                overlay = (np.where(drop, 0, overlay[0]), np.where(drop, 0, overlay[1]), overlay[2])
-        plotting.stack_plot(FIGS / f"region_{region}.png", edges, (data, np.sqrt(data)), stack,
+                v = np.maximum(sum(parts), 0)
+                stack.append((g, v, np.zeros_like(v)))     # the band below is the full post-fit uncertainty
+        total = sum(v for _, v, _ in stack)
+        if abs(total.sum() - sum(s.sum() for s in samples.values())) > 1.0:
+            missing = [k for k in samples if not any(k in m for _, m in STACK_GROUPS)]
+            print(f"  WARNING {region}: samples not drawn: {missing}")
+        plotting.stack_plot(FIGS / f"region_{region}.png", edges, (data, np.sqrt(np.maximum(data, 0))), stack,
                             r"$m_{\tau\tau}$ [GeV]", title=REGION_LABELS.get(region, region), dark=True,
-                            overlay=overlay, density=True, figsize=(5.6, 7.8))
+                            band=unc, density=True, figsize=(5.6, 7.8))
 
 
 # ------------------------------------------------------------------ 5. backgrounds measured from data

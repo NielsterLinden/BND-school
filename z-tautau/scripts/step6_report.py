@@ -256,13 +256,27 @@ def main():
             L += ["Scale factors of the pT-split fit (the assumption behind the tau_h tau_h / (l tau_h)^2 lever: one "
                   "scale factor per decay mode for pT(tau_h) > 30 GeV in l tau_h and > 40 GeV in tau_h tau_h):", "",
                   "| DM | pT > 40 GeV | pT < 40 GeV | ratio |", "|---|---|---|---|"]
+            ratios = []
             for dm in config.TAU_DMS:
                 hi, lo = pts["tau_id_sf"].get(f"DM{dm}"), pts["tau_id_sf"].get(f"DM{dm}_lowpt")
                 if hi and lo:
+                    ratios.append(lo["value"] / hi["value"])
                     L.append(f"| DM{dm} | {hi['value']:.3f} +- {0.5 * (hi['err_up'] + hi['err_down']):.3f} | "
                              f"{lo['value']:.3f} +- {0.5 * (lo['err_up'] + lo['err_down']):.3f} | "
                              f"{lo['value'] / hi['value']:.3f} |")
             L.append("")
+            if f and ratios:
+                shift = pts["mu"] - f["mu"]
+                tot = 0.5 * (f["mu_err_up"] + f["mu_err_down"])
+                L += [f"The scale factors below 40 GeV come out "
+                      f"{', '.join(f'{100 * (r - 1):+.0f}%' for r in ratios)} relative to those above it "
+                      f"(DM{', DM'.join(str(d) for d in config.TAU_DMS)}), each 0.5-1 sigma on its own but "
+                      f"coherent in sign, and mu_Z moves by {shift:+.3f} ({abs(shift) / tot:.1f} times the "
+                      f"total uncertainty) to {pts['mu']:.3f}. The single-scale-factor assumption is therefore "
+                      f"worth more than any experimental systematic in the table below; the split is not the "
+                      f"nominal model (the ratios are individually compatible with one and it doubles the "
+                      f"number of free scale factors on the same data), but that spread should travel with "
+                      f"the result. See REVIEW_v4_RESPONSE.md section 6.", ""]
     if f:
         gsum, gscale = f.get("grouped_impact_quadrature_sum"), f.get("grouped_impact_scale")
         L += ["## Grouped impacts on mu_Z", "",

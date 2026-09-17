@@ -203,9 +203,13 @@ grouped-impact table of `output/RESULTS.md`. v4 adds categories the old model di
    plus the 2 % of CMS arXiv:1801.03535, applied **once per event** (before the review it was applied once
    per leg, which doubled it and moved `mu_Z` by a full standard deviation). `ztautau_emutrig2x` is the
    fit with the old, doubled prior and is quoted in `RESULTS.md` as the size of that choice.
-3. **The τ-channel lever assumes one τh ID scale factor per decay mode over pT(τh) > 30 GeV.** The
-   cross-check fit `ztautau_ptsplit` gives the ℓτh regions below 40 GeV their own scale factors and
-   measures the difference; its table is in `RESULTS.md`.
+3. **The τh ID scale factor is not flat in pT, and that is worth 6 % on the result.** The τ-channel lever
+   assumes one scale factor per decay mode from 30 GeV upwards. The cross-check fit `ztautau_ptsplit`
+   gives the ℓτh regions below 40 GeV their own scale factors and finds them 6 / 0 / 6 / 14 % higher
+   (DM0 / DM1 / DM10 / DM11); μ_Z then moves from 1.019 to **0.954**, 1.8 times the total uncertainty, and
+   the τ channels come down onto the eμ value. Each ratio is only 0.5–1 σ, so the split is not the nominal
+   model, but a combination that wants a conservative ττ input should carry that 6 % as a modelling
+   uncertainty — it is larger than every experimental systematic we quote. Table in `RESULTS.md`.
 4. `mu_ttbar` is free and comes out above 1; it is the eμ trigger–tt̄ degeneracy, not a statement about
    the tt̄ cross section (§4).
 5. The τh ID scale factors and energy scales are *results* of this channel (`RESULTS.md`), measured in

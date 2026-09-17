@@ -30,18 +30,41 @@
   `/data/atlas/users/sjankovy/BND-school-cache/ztautau/`.
 
 <!-- RESULT:BEGIN -->
-_(filled by `python scripts/update_docs.py` after step 6)_
+**Result** (four channels, τh ID scale factors and energy scale fitted in situ)
+
+```
+σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 1981 +73 −70 pb   (stat ±9;  prediction 1945 pb: aMC@NLO acceptance, NNLO normalisation)
+μ_Z = 1.019 +0.037 −0.036   (stat ±0.005, syst ±0.036),   expected ±0.036,   GoF p = 0.15,   μ_tt̄ = 1.11 ± 0.04
+τh ID SF (Tight):  DM0 0.989 ± 0.040 (POG 0.90 ± 0.13)  DM1 0.963 ± 0.034 (POG 0.89 ± 0.05)  DM10 0.896 ± 0.035 (POG 0.94 ± 0.15)  DM11 0.795 ± 0.050 (POG 0.81 ± 0.15)
+τh energy scale:   DM0 -0.6 ± 0.9 %  DM1 -0.2 ± 0.6 %  DM10 +0.6 ± 1.0 %  DM11 +3.2 ± 2.2 %
+μ_Z of the two sub-measurements the fit combines:  e mu alone 0.960 +0.042 −0.040;  τ channels alone (SF free) 1.203 +0.091 −0.084   (2.6 σ apart)
+per channel alone (POG SFs fixed):  tautau 1.043 +0.079 −0.072  mutau 1.048 +0.055 −0.051  etau 1.016 +0.070 −0.065  emu 0.960 +0.042 −0.040
+```
+
+Largest grouped impacts on μ_Z: NormFactors 3.1 %, Emu trigger 2.5 %, Gammas 1.4 %, Tau trigger 1.2 %, Fakes 1.2 %, Electron energy 1.2 %; data statistics 0.5 %. The categories overlap, so their quadrature sum exceeds the MINOS total by a factor 1.46 (`output/RESULTS.md`).
+
+Ranking: mu_ttbar 3.1 %, EmuTrigger 2.6 %, TauIDSF_DM1 2.2 %, TauIDSF_DM10 2.1 %, TauIDSF_DM0 1.9 %, TauIDSF_DM11 1.3 %.
 <!-- RESULT:END -->
 
 ## What the review changed
 
 `REVIEW_v4.md` reviewed the four-channel measurement; `REVIEW_v4_RESPONSE.md` is the point-by-point answer.
-In short: the expected uncertainty was wrong (a failed Asimov MINOS) and is now either correct or not
-quoted; the eμ trigger prior was double counted per leg and is now applied once per event; the eτh Ele27
-turn-on and the ℓτh fake-composition priors were too tight and were corrected; the eμ and τ-channel
-sub-measurements are quoted separately because they do not agree; the assumption behind the
-τhτh / (ℓτh)² lever is now measured by a dedicated fit; and the grouped impacts are reported with their
-(real) over-shoot instead of as if they added up to the total.
+In short:
+
+* The eμ trigger prior applied the paper's 2 % **once per leg**, so it was 5.4 % instead of 2.7 %. Applying
+  it once per event moved the result from μ_Z = 1.055 ± 0.045 to **1.019 ± 0.037**; the cross-check fit
+  `ztautau_emutrig2x` restores the old treatment and gives 1.055 back, so the whole shift is that prior.
+* The expected uncertainty was the HESSE error of a failed Asimov MINOS (±0.009). The cause was one bin
+  with no data and no prediction, whose unconstrained MC-statistics γ made the per-bin offset log(0); such
+  bins are now dropped and the Asimov fit converges at **±0.036**, next to the observed ±0.037.
+* The eτh Ele27 turn-on and the ℓτh fake-composition priors were too tight and were corrected.
+* The eμ and τ-channel sub-measurements are quoted separately, because they do not agree: 0.960 against
+  1.203, 2.6 σ apart in the uncorrelated limit.
+* **The τh ID scale factor is not flat in pT.** `ztautau_ptsplit` gives the ℓτh regions below 40 GeV their
+  own scale factors and finds them 6 / 0 / 6 / 14 % higher; μ_Z then moves to 0.954, 1.8 times the total
+  uncertainty, and the τ channels come down onto the eμ value. That 6 % is the size of the
+  single-scale-factor assumption and it is larger than any experimental systematic we quote.
+* The grouped impacts are reported with their (real) over-shoot instead of as if they added up to the total.
 
 ## For the combination
 

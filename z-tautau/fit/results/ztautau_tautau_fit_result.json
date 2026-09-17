@@ -1,0 +1,3973 @@
+{
+ "job": "ztautau_tautau",
+ "poi": "mu_Z",
+ "poi_value": 1.00137,
+ "poi_err_up": 0.325733,
+ "poi_err_down": 0.198993,
+ "poi_err": 0.262363,
+ "nps": {
+  "TauIDSF_DM0": [
+   0.647448,
+   0.542376,
+   0.542376
+  ],
+  "TauIDSF_DM1": [
+   1.20001,
+   0.331409,
+   0.331409
+  ],
+  "TauIDSF_DM10": [
+   0.5,
+   0.621767,
+   0.621767
+  ],
+  "TauIDSF_DM11": [
+   1.49996,
+   0.500679,
+   0.500679
+  ],
+  "FakeClosure_tautau_c0_hi": [
+   0.0499212,
+   0.980535,
+   0.980535
+  ],
+  "FakeClosure_tautau_c1_hi": [
+   -0.0455502,
+   0.57427,
+   0.57427
+  ],
+  "FakeClosure_tautau_c1_lo": [
+   0.264118,
+   0.850357,
+   0.850357
+  ],
+  "FakeClosure_tautau_c2_hi": [
+   1.21078,
+   0.891407,
+   0.891407
+  ],
+  "FakeClosure_tautau_c2_lo": [
+   0.000436606,
+   1.02154,
+   1.02154
+  ],
+  "FakeOSSS_tautau_c0": [
+   0.125567,
+   0.898432,
+   0.898432
+  ],
+  "FakeOSSS_tautau_c1": [
+   0.152247,
+   0.93808,
+   0.93808
+  ],
+  "FakeOSSS_tautau_c2": [
+   0.184046,
+   0.985773,
+   0.985773
+  ],
+  "FakeWTT_tautau": [
+   0.139113,
+   0.975828,
+   0.975828
+  ],
+  "L1Prefiring": [
+   0.0543877,
+   0.99322,
+   0.99322
+  ],
+  "Lumi": [
+   0.00459263,
+   0.993083,
+   0.993083
+  ],
+  "MCStatNorm_WJets_tautau": [
+   0.353099,
+   0.840847,
+   0.840847
+  ],
+  "MET_Unclustered": [
+   -0.0280868,
+   0.966128,
+   0.966128
+  ],
+  "PDF": [
+   0.00456783,
+   0.986128,
+   0.986128
+  ],
+  "PS_FSR": [
+   0.426711,
+   1.04157,
+   1.04157
+  ],
+  "PS_ISR": [
+   0.106886,
+   0.968791,
+   0.968791
+  ],
+  "Pileup": [
+   0.252544,
+   0.659629,
+   0.659629
+  ],
+  "QCDScale": [
+   0.78245,
+   0.799485,
+   0.799485
+  ],
+  "TauES_DM0": [
+   0.329128,
+   0.923389,
+   0.923389
+  ],
+  "TauES_DM1": [
+   -0.871539,
+   0.440793,
+   0.440793
+  ],
+  "TauES_DM10": [
+   0.103656,
+   0.989958,
+   0.989958
+  ],
+  "TauES_DM11": [
+   -0.116623,
+   0.98228,
+   0.98228
+  ],
+  "TauFakeEle": [
+   0.0177363,
+   0.992461,
+   0.992461
+  ],
+  "TauFakeMu": [
+   -0.000192484,
+   0.993345,
+   0.993345
+  ],
+  "TauTrigger_DM0": [
+   0.0944557,
+   0.985085,
+   0.985085
+  ],
+  "TauTrigger_DM1": [
+   0.00697418,
+   0.992319,
+   0.992319
+  ],
+  "TauTrigger_DM10": [
+   0.0174629,
+   0.990417,
+   0.990417
+  ],
+  "TauTrigger_DM11": [
+   0.0175312,
+   0.986069,
+   0.986069
+  ],
+  "XS_DYll": [
+   0.0105346,
+   0.992935,
+   0.992935
+  ],
+  "XS_DYlowmass": [
+   -0.00586114,
+   0.993594,
+   0.993594
+  ],
+  "XS_DYtautau_out": [
+   -0.0515164,
+   0.994688,
+   0.994688
+  ],
+  "XS_SingleTop": [
+   -0.0164981,
+   0.993971,
+   0.993971
+  ],
+  "XS_WJets": [
+   0.113073,
+   0.972989,
+   0.972989
+  ],
+  "XS_WW": [
+   -0.0108894,
+   0.993796,
+   0.993796
+  ],
+  "XS_WZ": [
+   0.0146362,
+   0.992742,
+   0.992742
+  ],
+  "XS_ZZ": [
+   0.0224208,
+   0.992275,
+   0.992275
+  ],
+  "gamma_stat_tautau_SR0_bin_0": [
+   0.982821,
+   0.0228334,
+   0.0228334
+  ],
+  "gamma_stat_tautau_SR0_bin_1": [
+   1.00037,
+   0.0164367,
+   0.0164367
+  ],
+  "gamma_stat_tautau_SR0_bin_2": [
+   1.00668,
+   0.0101309,
+   0.0101309
+  ],
+  "gamma_stat_tautau_SR0_bin_3": [
+   1.00374,
+   0.0102482,
+   0.0102482
+  ],
+  "gamma_stat_tautau_SR0_bin_4": [
+   0.99339,
+   0.01246,
+   0.01246
+  ],
+  "gamma_stat_tautau_SR0_bin_5": [
+   1.00341,
+   0.0116858,
+   0.0116858
+  ],
+  "gamma_stat_tautau_SR0_bin_6": [
+   0.993035,
+   0.0114766,
+   0.0114766
+  ],
+  "gamma_stat_tautau_SR1_bin_0": [
+   0.408854,
+   0.538485,
+   0.538485
+  ],
+  "gamma_stat_tautau_SR1_bin_1": [
+   1.00583,
+   0.0943995,
+   0.0943995
+  ],
+  "gamma_stat_tautau_SR1_bin_10": [
+   1.04028,
+   0.176892,
+   0.176892
+  ],
+  "gamma_stat_tautau_SR1_bin_11": [
+   0.840665,
+   0.358483,
+   0.358483
+  ],
+  "gamma_stat_tautau_SR1_bin_12": [
+   0.774098,
+   0.307896,
+   0.307896
+  ],
+  "gamma_stat_tautau_SR1_bin_13": [
+   1.65202,
+   0.76736,
+   0.76736
+  ],
+  "gamma_stat_tautau_SR1_bin_2": [
+   1.03005,
+   0.0620771,
+   0.0620771
+  ],
+  "gamma_stat_tautau_SR1_bin_3": [
+   1.03887,
+   0.0527341,
+   0.0527341
+  ],
+  "gamma_stat_tautau_SR1_bin_4": [
+   1.00565,
+   0.0538106,
+   0.0538106
+  ],
+  "gamma_stat_tautau_SR1_bin_5": [
+   1.00576,
+   0.0358224,
+   0.0358224
+  ],
+  "gamma_stat_tautau_SR1_bin_6": [
+   0.978553,
+   0.0307732,
+   0.0307732
+  ],
+  "gamma_stat_tautau_SR1_bin_7": [
+   1.00285,
+   0.0307577,
+   0.0307577
+  ],
+  "gamma_stat_tautau_SR1_bin_8": [
+   0.983413,
+   0.0491166,
+   0.0491166
+  ],
+  "gamma_stat_tautau_SR1_bin_9": [
+   1.01251,
+   0.0698184,
+   0.0698184
+  ],
+  "gamma_stat_tautau_SR2_bin_0": [
+   0.975946,
+   0.13048,
+   0.13048
+  ],
+  "gamma_stat_tautau_SR2_bin_1": [
+   0.955146,
+   0.0553251,
+   0.0553251
+  ],
+  "gamma_stat_tautau_SR2_bin_10": [
+   0.830814,
+   0.27601,
+   0.27601
+  ],
+  "gamma_stat_tautau_SR2_bin_11": [
+   0.376671,
+   0.368107,
+   0.368107
+  ],
+  "gamma_stat_tautau_SR2_bin_12": [
+   0.942758,
+   0.426537,
+   0.426537
+  ],
+  "gamma_stat_tautau_SR2_bin_2": [
+   1.0175,
+   0.0363878,
+   0.0363878
+  ],
+  "gamma_stat_tautau_SR2_bin_3": [
+   0.998362,
+   0.0269963,
+   0.0269963
+  ],
+  "gamma_stat_tautau_SR2_bin_4": [
+   0.980511,
+   0.0301538,
+   0.0301538
+  ],
+  "gamma_stat_tautau_SR2_bin_5": [
+   1.01572,
+   0.047566,
+   0.047566
+  ],
+  "gamma_stat_tautau_SR2_bin_6": [
+   1.17857,
+   0.0969015,
+   0.0969015
+  ],
+  "gamma_stat_tautau_SR2_bin_7": [
+   1.16521,
+   0.156749,
+   0.156749
+  ],
+  "gamma_stat_tautau_SR2_bin_8": [
+   0.80091,
+   0.14869,
+   0.14869
+  ],
+  "gamma_stat_tautau_SR2_bin_9": [
+   1.32045,
+   0.358644,
+   0.358644
+  ],
+  "mu_ttbar": [
+   0.669267,
+   0.611913,
+   0.611913
+  ]
+ },
+ "nll": 22980.76943,
+ "err_decomp": {
+  "TOT_ERROR": 0.245529,
+  "STAT_ERROR": 0.0969037,
+  "SYST_ERROR": 0.198486,
+  "MCSTAT_ERROR": 0.107226,
+  "TOTSYST_ERROR": 0.225597,
+  "STAT_ERR_NO_NF": NaN,
+  "NF_ERROR": 0.118109,
+  "TauIDSF_DM0": -0.00781425,
+  "TauIDSF_DM1": -0.0492137,
+  "TauIDSF_DM10": -1.81223e-05,
+  "TauIDSF_DM11": -0.000132608,
+  "alpha_FakeClosure_tautau_c0_hi": 0.0557181,
+  "alpha_FakeClosure_tautau_c1_hi": 0.020559,
+  "alpha_FakeClosure_tautau_c1_lo": -0.011942,
+  "alpha_FakeClosure_tautau_c2_hi": 0.023955,
+  "alpha_FakeClosure_tautau_c2_lo": -0.00982284,
+  "alpha_FakeOSSS_tautau_c0": 0.147825,
+  "alpha_FakeOSSS_tautau_c1": -0.00369116,
+  "alpha_FakeOSSS_tautau_c2": -0.00131427,
+  "alpha_FakeWTT_tautau": 0.0656626,
+  "alpha_L1Prefiring": -0.000438855,
+  "alpha_Lumi": 0.00160444,
+  "alpha_MCStatNorm_WJets_tautau": 0.0398875,
+  "alpha_MET_Unclustered": 0.00706822,
+  "alpha_PDF": 0.0191607,
+  "alpha_PS_FSR": -0.0185573,
+  "alpha_PS_ISR": 0.0213723,
+  "alpha_Pileup": 0.0313457,
+  "alpha_QCDScale": 0.0386921,
+  "alpha_TauES_DM0": -0.0179569,
+  "alpha_TauES_DM1": -0.0216027,
+  "alpha_TauES_DM10": -0.0124144,
+  "alpha_TauES_DM11": -0.00737689,
+  "alpha_TauFakeEle": 0.00175712,
+  "alpha_TauFakeMu": 6.35742e-05,
+  "alpha_TauTrigger_DM0": 0.000838671,
+  "alpha_TauTrigger_DM1": 0.00109276,
+  "alpha_TauTrigger_DM10": 0.000139781,
+  "alpha_TauTrigger_DM11": -0.00285477,
+  "alpha_XS_DYll": -3.14868e-05,
+  "alpha_XS_DYlowmass": 0.000307216,
+  "alpha_XS_DYtautau_out": 0.0485398,
+  "alpha_XS_SingleTop": 0.0033057,
+  "alpha_XS_WJets": 0.0141362,
+  "alpha_XS_WW": 0.00164482,
+  "alpha_XS_WZ": -0.0016385,
+  "alpha_XS_ZZ": -0.00157128,
+  "gamma_stat_tautau_SR0_bin_0": -0.0245921,
+  "gamma_stat_tautau_SR0_bin_1": 0.00447667,
+  "gamma_stat_tautau_SR0_bin_2": 0.0151897,
+  "gamma_stat_tautau_SR0_bin_3": 0.0138731,
+  "gamma_stat_tautau_SR0_bin_4": 0.0232819,
+  "gamma_stat_tautau_SR0_bin_5": 0.0241753,
+  "gamma_stat_tautau_SR0_bin_6": 0.00360262,
+  "gamma_stat_tautau_SR1_bin_0": -0.00195889,
+  "gamma_stat_tautau_SR1_bin_1": -0.0146726,
+  "gamma_stat_tautau_SR1_bin_10": 0.00515442,
+  "gamma_stat_tautau_SR1_bin_11": 0.00180182,
+  "gamma_stat_tautau_SR1_bin_12": 0.00949618,
+  "gamma_stat_tautau_SR1_bin_13": -0.051751,
+  "gamma_stat_tautau_SR1_bin_2": -0.00325649,
+  "gamma_stat_tautau_SR1_bin_3": -0.00564309,
+  "gamma_stat_tautau_SR1_bin_4": 0.0142514,
+  "gamma_stat_tautau_SR1_bin_5": -0.00566762,
+  "gamma_stat_tautau_SR1_bin_6": -0.00146893,
+  "gamma_stat_tautau_SR1_bin_7": -0.00494507,
+  "gamma_stat_tautau_SR1_bin_8": 0.0319783,
+  "gamma_stat_tautau_SR1_bin_9": -0.0129616,
+  "gamma_stat_tautau_SR2_bin_0": 0.00633771,
+  "gamma_stat_tautau_SR2_bin_1": -0.00886071,
+  "gamma_stat_tautau_SR2_bin_10": 0.0301219,
+  "gamma_stat_tautau_SR2_bin_11": 0.00530223,
+  "gamma_stat_tautau_SR2_bin_12": 0.0115123,
+  "gamma_stat_tautau_SR2_bin_2": -0.00887445,
+  "gamma_stat_tautau_SR2_bin_3": 0.00125972,
+  "gamma_stat_tautau_SR2_bin_4": -0.0228899,
+  "gamma_stat_tautau_SR2_bin_5": -0.0255371,
+  "gamma_stat_tautau_SR2_bin_6": -0.0102519,
+  "gamma_stat_tautau_SR2_bin_7": 0.0318932,
+  "gamma_stat_tautau_SR2_bin_8": 0.0196403,
+  "gamma_stat_tautau_SR2_bin_9": 0.0290988,
+  "mu_ttbar": 0.107082
+ },
+ "grouped_impact": {
+  "Background normalisation": 0.0524228,
+  "Fakes": 0.209237,
+  "FullSyst": 0.257563,
+  "Gammas": 0.115476,
+  "L1 prefiring": NaN,
+  "Luminosity": NaN,
+  "MET": 0.0805683,
+  "NormFactors": 0.248434,
+  "Pileup": NaN,
+  "Signal modelling": 0.0383169,
+  "Tau ID": NaN,
+  "Tau energy scale": 0.0362532,
+  "Tau trigger": 0.00900554
+ },
+ "grouped_impact_file": "GroupedImpact_mu_Z.txt",
+ "poi_stat_only": {
+  "value": 0.974304,
+  "err_up": 0.117142,
+  "err_down": 0.0879719,
+  "err": 0.10255695000000001
+ },
+ "table_prefit": [
+  {
+   "Region": "#tau_{h}#tau_{h}, BDT < 0.55",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
+     "Yield": 10.19512857715502,
+     "Error": 2.6124320101898917
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_0]",
+     "Yield": 34.238088993350566,
+     "Error": 19.2740368410744
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_1]",
+     "Yield": 143.7387101927475,
+     "Error": 53.102646893948844
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_10]",
+     "Yield": 45.21167937063895,
+     "Error": 16.70218407874923
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_11]",
+     "Yield": 12.933060515940452,
+     "Error": 4.071828662105082
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
+     "Yield": 23.701340544262965,
+     "Error": 3.670134655972721
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
+     "Yield": 10.186190191896529,
+     "Error": 2.5329892169761425
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10_10]",
+     "Yield": 16.76378649861004,
+     "Error": 7.325253450807771
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10_11]",
+     "Yield": 14.486407059576484,
+     "Error": 5.960695309167492
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
+     "Yield": 2.2929066541751064,
+     "Error": 0.6129066556694625
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11_11]",
+     "Yield": 3.584424991994653,
+     "Error": 1.73541826453127
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1_1]",
+     "Yield": 176.5998395234721,
+     "Error": 95.45914147423815
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1_10]",
+     "Yield": 116.32846120607135,
+     "Error": 34.07924711516972
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1_11]",
+     "Yield": 42.321013249889724,
+     "Error": 16.795645119586084
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 68.20805536370581,
+     "Error": 7.823514220920707
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0]",
+     "Yield": 5.930841080676807,
+     "Error": 3.1560110909877044
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0_0]",
+     "Yield": 6.4859952967291035,
+     "Error": 2.758501330123432
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0_1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [1_1]",
+     "Yield": 3.586170758973628,
+     "Error": 2.0118009173971543
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
+     "Yield": 1.6869448745429294,
+     "Error": 1.0347205831241133
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_0]",
+     "Yield": 177.58974353321454,
+     "Error": 23.179992190907694
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_1]",
+     "Yield": 464.48406744934704,
+     "Error": 46.73003835653529
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_10]",
+     "Yield": 228.78389231514097,
+     "Error": 22.523185394472744
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_11]",
+     "Yield": 46.102248758238424,
+     "Error": 7.317714313447592
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
+     "Yield": 8.259723348343176,
+     "Error": 1.5570344158622886
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
+     "Yield": 4.646143416189031,
+     "Error": 1.4150341153612485
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10_10]",
+     "Yield": 75.31449462083434,
+     "Error": 9.924894768833532
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10_11]",
+     "Yield": 27.40042996516931,
+     "Error": 3.9693061762565494
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
+     "Yield": 3.047269428595706,
+     "Error": 1.269620457278664
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11_11]",
+     "Yield": 2.393967587080691,
+     "Error": 0.7809264096781214
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1_1]",
+     "Yield": 355.5139282788511,
+     "Error": 40.22007680998676
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1_10]",
+     "Yield": 338.18213005136187,
+     "Error": 35.500981639575386
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1_11]",
+     "Yield": 85.34074689052586,
+     "Error": 10.722390401997751
+    },
+    {
+     "Sample": "single t [0]",
+     "Yield": 2.4240335221963334,
+     "Error": 0.295171332368023
+    },
+    {
+     "Sample": "single t [0_0]",
+     "Yield": 1.6569073124822429,
+     "Error": 0.2573923902742943
+    },
+    {
+     "Sample": "single t [0_1]",
+     "Yield": 6.33625772684757,
+     "Error": 0.8088482774938504
+    },
+    {
+     "Sample": "single t [0_10]",
+     "Yield": 2.5639933324184683,
+     "Error": 0.360381523309024
+    },
+    {
+     "Sample": "single t [0_11]",
+     "Yield": 0.7187248116796012,
+     "Error": 0.1234338638274017
+    },
+    {
+     "Sample": "single t [1]",
+     "Yield": 4.49452020266679,
+     "Error": 0.5813127640352802
+    },
+    {
+     "Sample": "single t [10]",
+     "Yield": 2.6144414545923524,
+     "Error": 0.3189155286997409
+    },
+    {
+     "Sample": "single t [10_10]",
+     "Yield": 1.20837240321808,
+     "Error": 0.21897506033807138
+    },
+    {
+     "Sample": "single t [10_11]",
+     "Yield": 0.7387628732875396,
+     "Error": 0.10821338923722473
+    },
+    {
+     "Sample": "single t [11]",
+     "Yield": 0.550893207706774,
+     "Error": 0.07373610883729427
+    },
+    {
+     "Sample": "single t [11_11]",
+     "Yield": 0.07323522826322204,
+     "Error": 0.03533563123550379
+    },
+    {
+     "Sample": "single t [1_1]",
+     "Yield": 7.242010261407955,
+     "Error": 1.0212775357971886
+    },
+    {
+     "Sample": "single t [1_10]",
+     "Yield": 8.342681191268541,
+     "Error": 1.0801451400372424
+    },
+    {
+     "Sample": "single t [1_11]",
+     "Yield": 1.5775773107778397,
+     "Error": 0.22917474226325918
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 1.0869423380727528,
+     "Error": 0.14099554160423466
+    },
+    {
+     "Sample": "t#bar{t} [0]",
+     "Yield": 11.86752815959543,
+     "Error": 1.0247766724276879
+    },
+    {
+     "Sample": "t#bar{t} [0_0]",
+     "Yield": 12.195785160418605,
+     "Error": 1.1502031082869877
+    },
+    {
+     "Sample": "t#bar{t} [0_1]",
+     "Yield": 51.37901760453747,
+     "Error": 3.899982310144681
+    },
+    {
+     "Sample": "t#bar{t} [0_10]",
+     "Yield": 24.867508695669684,
+     "Error": 1.929774877628847
+    },
+    {
+     "Sample": "t#bar{t} [0_11]",
+     "Yield": 6.687165060559423,
+     "Error": 0.6031756771121992
+    },
+    {
+     "Sample": "t#bar{t} [1]",
+     "Yield": 43.813487275168384,
+     "Error": 2.528610446463086
+    },
+    {
+     "Sample": "t#bar{t} [10]",
+     "Yield": 20.364051613123195,
+     "Error": 1.2086395366191296
+    },
+    {
+     "Sample": "t#bar{t} [10_10]",
+     "Yield": 14.426654573358302,
+     "Error": 1.600406855063155
+    },
+    {
+     "Sample": "t#bar{t} [10_11]",
+     "Yield": 6.600437092380281,
+     "Error": 0.6620940175271417
+    },
+    {
+     "Sample": "t#bar{t} [11]",
+     "Yield": 5.4784193105698415,
+     "Error": 0.45143242224813324
+    },
+    {
+     "Sample": "t#bar{t} [11_11]",
+     "Yield": 0.4628856100954145,
+     "Error": 0.06800015346798703
+    },
+    {
+     "Sample": "t#bar{t} [1_1]",
+     "Yield": 69.22337672431124,
+     "Error": 6.457527623374031
+    },
+    {
+     "Sample": "t#bar{t} [1_10]",
+     "Yield": 63.45533591882294,
+     "Error": 4.822757050855378
+    },
+    {
+     "Sample": "t#bar{t} [1_11]",
+     "Yield": 15.015880215566746,
+     "Error": 1.3248246619196684
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 7.7329524025524385,
+     "Error": 0.5128074918153814
+    },
+    {
+     "Sample": "W+jets [0]",
+     "Yield": 1.26224e-05,
+     "Error": 4.845114526068226e-06
+    },
+    {
+     "Sample": "W+jets [1]",
+     "Yield": 138.43626684126227,
+     "Error": 65.52200900164297
+    },
+    {
+     "Sample": "W+jets [10]",
+     "Yield": 175.91623196108662,
+     "Error": 68.81453500337042
+    },
+    {
+     "Sample": "W+jets [none]",
+     "Yield": 141.49062227808594,
+     "Error": 57.83157220176564
+    },
+    {
+     "Sample": "WW [0]",
+     "Yield": 1.7367624067127738,
+     "Error": 0.34524993512767593
+    },
+    {
+     "Sample": "WW [0_0]",
+     "Yield": 1.329544353425785,
+     "Error": 0.17381131324956195
+    },
+    {
+     "Sample": "WW [0_1]",
+     "Yield": 5.176054146566364,
+     "Error": 0.6648991859991141
+    },
+    {
+     "Sample": "WW [0_10]",
+     "Yield": 2.861008173504729,
+     "Error": 0.397813682267981
+    },
+    {
+     "Sample": "WW [0_11]",
+     "Yield": 0.8269247626804594,
+     "Error": 0.13616547428936313
+    },
+    {
+     "Sample": "WW [1]",
+     "Yield": 5.002653765620872,
+     "Error": 0.6511468644398585
+    },
+    {
+     "Sample": "WW [10]",
+     "Yield": 2.4890114446726157,
+     "Error": 0.3365782798110434
+    },
+    {
+     "Sample": "WW [10_10]",
+     "Yield": 1.3793235628276976,
+     "Error": 0.22021235246228751
+    },
+    {
+     "Sample": "WW [10_11]",
+     "Yield": 0.476980341634111,
+     "Error": 0.10899565582856773
+    },
+    {
+     "Sample": "WW [11]",
+     "Yield": 0.7505912731682247,
+     "Error": 0.11408952602602038
+    },
+    {
+     "Sample": "WW [11_11]",
+     "Yield": 0.2943161384551479,
+     "Error": 0.048019402202988094
+    },
+    {
+     "Sample": "WW [1_1]",
+     "Yield": 7.90461041081874,
+     "Error": 1.1172226409014598
+    },
+    {
+     "Sample": "WW [1_10]",
+     "Yield": 5.972440915162799,
+     "Error": 0.7474167043171617
+    },
+    {
+     "Sample": "WW [1_11]",
+     "Yield": 1.8309377078634206,
+     "Error": 0.2862165342934275
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 1.4296841526614903,
+     "Error": 0.16078924018432939
+    },
+    {
+     "Sample": "WZ [0]",
+     "Yield": 0.32396592850169437,
+     "Error": 0.07111075167774246
+    },
+    {
+     "Sample": "WZ [0_0]",
+     "Yield": 0.224973593264503,
+     "Error": 0.05521533803676456
+    },
+    {
+     "Sample": "WZ [0_1]",
+     "Yield": 1.416038835789296,
+     "Error": 0.18929809911262946
+    },
+    {
+     "Sample": "WZ [0_10]",
+     "Yield": 0.6089473989814788,
+     "Error": 0.18787399380262704
+    },
+    {
+     "Sample": "WZ [0_11]",
+     "Yield": 0.1361061079260629,
+     "Error": 0.02561222132566807
+    },
+    {
+     "Sample": "WZ [1]",
+     "Yield": 0.3681333815871175,
+     "Error": 0.05204308547536885
+    },
+    {
+     "Sample": "WZ [10]",
+     "Yield": 0.42333625554970256,
+     "Error": 0.0981397145488941
+    },
+    {
+     "Sample": "WZ [10_10]",
+     "Yield": 0.18981794536998003,
+     "Error": 0.0747136030974219
+    },
+    {
+     "Sample": "WZ [10_11]",
+     "Yield": 0.051410215285962776,
+     "Error": 0.01174991628536141
+    },
+    {
+     "Sample": "WZ [11]",
+     "Yield": 0.12387566759871095,
+     "Error": 0.12790571187666108
+    },
+    {
+     "Sample": "WZ [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [1_1]",
+     "Yield": 1.5978975178799606,
+     "Error": 0.4035833052381535
+    },
+    {
+     "Sample": "WZ [1_10]",
+     "Yield": 0.6439362831626666,
+     "Error": 0.11617658676308389
+    },
+    {
+     "Sample": "WZ [1_11]",
+     "Yield": 0.40320939676178846,
+     "Error": 0.1370294514550572
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 0.08400583250664073,
+     "Error": 0.010198501612375966
+    },
+    {
+     "Sample": "ZZ [0]",
+     "Yield": 0.603700890066724,
+     "Error": 0.3563841926986851
+    },
+    {
+     "Sample": "ZZ [0_0]",
+     "Yield": 0.3639895639673912,
+     "Error": 0.09740876189744531
+    },
+    {
+     "Sample": "ZZ [0_1]",
+     "Yield": 1.3503293697109735,
+     "Error": 0.2815977816481473
+    },
+    {
+     "Sample": "ZZ [0_10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [0_11]",
+     "Yield": 0.07770850714587524,
+     "Error": 0.02921724823256562
+    },
+    {
+     "Sample": "ZZ [10_10]",
+     "Yield": 0.3857344549999122,
+     "Error": 0.2537999347119377
+    },
+    {
+     "Sample": "ZZ [10_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [1_1]",
+     "Yield": 1.7494152195608295,
+     "Error": 0.8012611989830715
+    },
+    {
+     "Sample": "ZZ [1_10]",
+     "Yield": 1.3225565887207886,
+     "Error": 0.24089009437243686
+    },
+    {
+     "Sample": "ZZ [1_11]",
+     "Yield": 0.29604140423531583,
+     "Error": 0.09443593807841526
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 12351.146648816288,
+     "Error": 449.7029631279588
+    },
+    {
+     "Sample": "Total",
+     "Yield": 15809.933425614388,
+     "Error": 604.5361830568216
+    },
+    {
+     "Data": "Data",
+     "Yield": -1
+    }
+   ]
+  },
+  {
+   "Region": "#tau_{h}#tau_{h}, 0.55 < BDT < 0.90",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
+     "Yield": 3.064564591825643,
+     "Error": 1.5366123476379407
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_0]",
+     "Yield": 103.78519325473033,
+     "Error": 36.527801154064974
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_1]",
+     "Yield": 332.6188050360559,
+     "Error": 69.44546949323139
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_10]",
+     "Yield": 115.50921251032128,
+     "Error": 22.71535927789975
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_11]",
+     "Yield": 31.14647811579581,
+     "Error": 8.735489279142985
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
+     "Yield": 4.9236796466337225,
+     "Error": 2.0192393742738193
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
+     "Yield": 1.0219155551527088,
+     "Error": 0.5460717383652419
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10_10]",
+     "Yield": 43.07431853712527,
+     "Error": 11.08066673242135
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10_11]",
+     "Yield": 39.06373411711213,
+     "Error": 6.302695771542195
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
+     "Yield": 0.2994737308335042,
+     "Error": 0.11879366800255345
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11_11]",
+     "Yield": 4.9266301181485765,
+     "Error": 1.7050255918910349
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1_1]",
+     "Yield": 307.07789883249797,
+     "Error": 96.04417176472374
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1_10]",
+     "Yield": 247.07151733594196,
+     "Error": 49.0937552853425
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1_11]",
+     "Yield": 82.96264321821258,
+     "Error": 16.044233883977974
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 27.15855829580473,
+     "Error": 4.356777843022447
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0_0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0_1]",
+     "Yield": 1.1257918559999999e-05,
+     "Error": 1.6855702180691202e-06
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [1_1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_0]",
+     "Yield": 5.786080099683768,
+     "Error": 1.580257185976611
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_1]",
+     "Yield": 14.641765343135184,
+     "Error": 3.5161467144045635
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_10]",
+     "Yield": 8.2906984057465,
+     "Error": 1.8224813419371124
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_11]",
+     "Yield": 3.0409686953332296,
+     "Error": 1.1685417035083248
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
+     "Yield": 0.5175507354123465,
+     "Error": 0.17607373239328208
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10_10]",
+     "Yield": 4.223198957651122,
+     "Error": 1.119865415915583
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10_11]",
+     "Yield": 2.9207796055882973,
+     "Error": 0.9213720288703852
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
+     "Yield": 1.1368e-05,
+     "Error": 1.3884326273922677e-06
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11_11]",
+     "Yield": 9.230816e-06,
+     "Error": 1.1274072934425219e-06
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1_1]",
+     "Yield": 14.74940422802927,
+     "Error": 3.2631400483442934
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1_10]",
+     "Yield": 7.164879339339076,
+     "Error": 3.1259861689146056
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1_11]",
+     "Yield": 3.7741027227756305,
+     "Error": 2.1042416367433465
+    },
+    {
+     "Sample": "single t [0]",
+     "Yield": 0.39221787835202004,
+     "Error": 0.055964179986891224
+    },
+    {
+     "Sample": "single t [0_0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [0_1]",
+     "Yield": 0.31354956550278695,
+     "Error": 0.10423525575709311
+    },
+    {
+     "Sample": "single t [0_10]",
+     "Yield": 0.10844194657201726,
+     "Error": 0.023660756835737328
+    },
+    {
+     "Sample": "single t [0_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [1]",
+     "Yield": 0.6021957173134618,
+     "Error": 0.1610316874822141
+    },
+    {
+     "Sample": "single t [10]",
+     "Yield": 0.08268472611600408,
+     "Error": 0.03536138943971644
+    },
+    {
+     "Sample": "single t [10_10]",
+     "Yield": 0.4022854776112392,
+     "Error": 0.11220543897440029
+    },
+    {
+     "Sample": "single t [10_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [1_1]",
+     "Yield": 0.6000012498426973,
+     "Error": 0.1189663267218999
+    },
+    {
+     "Sample": "single t [1_10]",
+     "Yield": 0.6747686094842369,
+     "Error": 0.10961921640367832
+    },
+    {
+     "Sample": "single t [1_11]",
+     "Yield": 0.07954428347866392,
+     "Error": 0.020343086224365172
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 0.039031316114451105,
+     "Error": 0.02088666832957572
+    },
+    {
+     "Sample": "t#bar{t} [0]",
+     "Yield": 2.0757465417282566,
+     "Error": 0.2518406344559789
+    },
+    {
+     "Sample": "t#bar{t} [0_0]",
+     "Yield": 0.6550630006573556,
+     "Error": 0.14728820595992625
+    },
+    {
+     "Sample": "t#bar{t} [0_1]",
+     "Yield": 4.085547796498122,
+     "Error": 0.5338580703015275
+    },
+    {
+     "Sample": "t#bar{t} [0_10]",
+     "Yield": 1.658374329488268,
+     "Error": 0.20761852235543887
+    },
+    {
+     "Sample": "t#bar{t} [0_11]",
+     "Yield": 0.5575959194370481,
+     "Error": 0.09132153976473274
+    },
+    {
+     "Sample": "t#bar{t} [1]",
+     "Yield": 8.303742691091514,
+     "Error": 0.6205995373306054
+    },
+    {
+     "Sample": "t#bar{t} [10]",
+     "Yield": 3.555690614242324,
+     "Error": 0.3254598519398669
+    },
+    {
+     "Sample": "t#bar{t} [10_10]",
+     "Yield": 0.9719212641916277,
+     "Error": 0.231433640306362
+    },
+    {
+     "Sample": "t#bar{t} [10_11]",
+     "Yield": 0.4793388154977917,
+     "Error": 0.12187358600102609
+    },
+    {
+     "Sample": "t#bar{t} [11]",
+     "Yield": 0.5664826662161313,
+     "Error": 0.07930057058582528
+    },
+    {
+     "Sample": "t#bar{t} [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [1_1]",
+     "Yield": 8.532317780812797,
+     "Error": 1.3554493278037236
+    },
+    {
+     "Sample": "t#bar{t} [1_10]",
+     "Yield": 6.146745923046728,
+     "Error": 0.5791705923288729
+    },
+    {
+     "Sample": "t#bar{t} [1_11]",
+     "Yield": 1.8846695334990893,
+     "Error": 0.2834918306033031
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 1.047088837332762,
+     "Error": 0.393848919063563
+    },
+    {
+     "Sample": "W+jets [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "W+jets [1]",
+     "Yield": 61.81250982882405,
+     "Error": 37.99780363002108
+    },
+    {
+     "Sample": "W+jets [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "W+jets [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [0]",
+     "Yield": 0.07579263019794484,
+     "Error": 0.01976669199538381
+    },
+    {
+     "Sample": "WW [0_0]",
+     "Yield": 0.09519023052743851,
+     "Error": 0.02722378474884549
+    },
+    {
+     "Sample": "WW [0_1]",
+     "Yield": 0.4292212071677055,
+     "Error": 0.10423125561475433
+    },
+    {
+     "Sample": "WW [0_10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [0_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [1]",
+     "Yield": 0.35574549330934147,
+     "Error": 0.08122666064673767
+    },
+    {
+     "Sample": "WW [10]",
+     "Yield": 0.16588955680320827,
+     "Error": 0.0194700275427237
+    },
+    {
+     "Sample": "WW [10_10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [10_11]",
+     "Yield": 0.08911795501952198,
+     "Error": 0.050874777476488796
+    },
+    {
+     "Sample": "WW [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [1_1]",
+     "Yield": 0.15083931193796513,
+     "Error": 0.05749649164020748
+    },
+    {
+     "Sample": "WW [1_10]",
+     "Yield": 0.25165128297820977,
+     "Error": 0.04498458833701931
+    },
+    {
+     "Sample": "WW [1_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [0_0]",
+     "Yield": 0.5394249576748189,
+     "Error": 0.13429342650753398
+    },
+    {
+     "Sample": "WZ [0_1]",
+     "Yield": 1.7589367569141274,
+     "Error": 0.24336887926747838
+    },
+    {
+     "Sample": "WZ [0_10]",
+     "Yield": 0.8354755503824284,
+     "Error": 0.20078648494864101
+    },
+    {
+     "Sample": "WZ [0_11]",
+     "Yield": 0.2910451153805718,
+     "Error": 0.10977520260762437
+    },
+    {
+     "Sample": "WZ [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [10_10]",
+     "Yield": 0.05760022816931613,
+     "Error": 0.014574839896488452
+    },
+    {
+     "Sample": "WZ [10_11]",
+     "Yield": 0.061705393514540435,
+     "Error": 0.009133062263281562
+    },
+    {
+     "Sample": "WZ [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [1_1]",
+     "Yield": 1.2303861656592052,
+     "Error": 0.17653005114098663
+    },
+    {
+     "Sample": "WZ [1_10]",
+     "Yield": 1.200650967767465,
+     "Error": 0.1808865382171349
+    },
+    {
+     "Sample": "WZ [1_11]",
+     "Yield": 0.23693534039535544,
+     "Error": 0.057701117609895596
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 0.33348405477421034,
+     "Error": 0.0564890588754098
+    },
+    {
+     "Sample": "ZZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [0_0]",
+     "Yield": 0.30831838648826443,
+     "Error": 0.09202429666723087
+    },
+    {
+     "Sample": "ZZ [0_1]",
+     "Yield": 1.2883905294610967,
+     "Error": 0.23504056149670113
+    },
+    {
+     "Sample": "ZZ [0_10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [0_11]",
+     "Yield": 0.8969860201198601,
+     "Error": 0.159408446181254
+    },
+    {
+     "Sample": "ZZ [10_10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [10_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [1_1]",
+     "Yield": 0.9327310639858523,
+     "Error": 0.3564779223398183
+    },
+    {
+     "Sample": "ZZ [1_10]",
+     "Yield": 2.0032806491227104,
+     "Error": 0.3676932043393422
+    },
+    {
+     "Sample": "ZZ [1_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 1043.8195260725386,
+     "Error": 115.42668524391199
+    },
+    {
+     "Sample": "Total",
+     "Yield": 2571.8499641188628,
+     "Error": 259.36379398081374
+    },
+    {
+     "Data": "Data",
+     "Yield": 2704
+    }
+   ]
+  },
+  {
+   "Region": "#tau_{h}#tau_{h}, BDT > 0.90",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
+     "Yield": 5.691557611278702,
+     "Error": 1.675345464085908
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_0]",
+     "Yield": 190.86167468375334,
+     "Error": 26.580260787331646
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_1]",
+     "Yield": 582.3698933953873,
+     "Error": 54.35326950625609
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_10]",
+     "Yield": 245.40599146716534,
+     "Error": 27.362426443263196
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_11]",
+     "Yield": 59.53622080588379,
+     "Error": 9.956244998991657
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
+     "Yield": 7.420736706994417,
+     "Error": 2.3556366085893243
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
+     "Yield": 3.875397149609397,
+     "Error": 0.6370925148421497
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10_10]",
+     "Yield": 92.58614629585696,
+     "Error": 14.316756884119044
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10_11]",
+     "Yield": 40.236670893326476,
+     "Error": 7.135757944329451
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
+     "Yield": 1.4757240724063332,
+     "Error": 0.44064856196132135
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11_11]",
+     "Yield": 5.5283710945273405,
+     "Error": 1.4502736440645372
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1_1]",
+     "Yield": 490.6967163816319,
+     "Error": 54.31824313701509
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1_10]",
+     "Yield": 398.22967469086257,
+     "Error": 37.768957912993514
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1_11]",
+     "Yield": 102.24688775039364,
+     "Error": 12.225746182714696
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 16.552651155703586,
+     "Error": 2.0618821362730175
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0_0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0_1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [1_1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_0]",
+     "Yield": 4.494536405333487,
+     "Error": 1.2663346242501603
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_1]",
+     "Yield": 10.593387030329257,
+     "Error": 3.24738744895962
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_10]",
+     "Yield": 3.581015829712939,
+     "Error": 1.3041204527614558
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_11]",
+     "Yield": 0.6443010711914109,
+     "Error": 0.2819085692779699
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
+     "Yield": 1.299756972378034,
+     "Error": 0.7391721711251388
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
+     "Yield": 0.18847287429681386,
+     "Error": 0.09401427093702434
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10_10]",
+     "Yield": 2.643228261612523,
+     "Error": 0.7510048596034947
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10_11]",
+     "Yield": 0.6746585418048876,
+     "Error": 0.38387754060651724
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11_11]",
+     "Yield": 0.10425095160032723,
+     "Error": 0.031331741914445814
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1_1]",
+     "Yield": 9.478563104329352,
+     "Error": 2.3714032837866594
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1_10]",
+     "Yield": 11.430719754702968,
+     "Error": 3.3497312088270914
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1_11]",
+     "Yield": 2.0165361598200153,
+     "Error": 0.5549625310053452
+    },
+    {
+     "Sample": "single t [0]",
+     "Yield": 0.18318087286610046,
+     "Error": 0.10363249604494777
+    },
+    {
+     "Sample": "single t [0_0]",
+     "Yield": 0.07660931896818453,
+     "Error": 0.018198979907539405
+    },
+    {
+     "Sample": "single t [0_1]",
+     "Yield": 0.23531685453269274,
+     "Error": 0.03746612104869664
+    },
+    {
+     "Sample": "single t [0_10]",
+     "Yield": 0.11415289791965803,
+     "Error": 0.04425273431393402
+    },
+    {
+     "Sample": "single t [0_11]",
+     "Yield": 0.15434123322842988,
+     "Error": 0.07418062978771384
+    },
+    {
+     "Sample": "single t [1]",
+     "Yield": 0.4011069197472085,
+     "Error": 0.10043277520814908
+    },
+    {
+     "Sample": "single t [10]",
+     "Yield": 0.2440254337718352,
+     "Error": 0.04101194959589168
+    },
+    {
+     "Sample": "single t [10_10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [10_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [1_1]",
+     "Yield": 0.5637653665456439,
+     "Error": 0.13473614940194997
+    },
+    {
+     "Sample": "single t [1_10]",
+     "Yield": 0.1932644275339682,
+     "Error": 0.0721865172275028
+    },
+    {
+     "Sample": "single t [1_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 0.20581709890782385,
+     "Error": 0.060652131675925154
+    },
+    {
+     "Sample": "t#bar{t} [0]",
+     "Yield": 0.7762102905198426,
+     "Error": 0.10933884627578482
+    },
+    {
+     "Sample": "t#bar{t} [0_0]",
+     "Yield": 0.42966958915037307,
+     "Error": 0.06684302258707357
+    },
+    {
+     "Sample": "t#bar{t} [0_1]",
+     "Yield": 3.1462856968962427,
+     "Error": 0.38558875657536257
+    },
+    {
+     "Sample": "t#bar{t} [0_10]",
+     "Yield": 0.6597332787485205,
+     "Error": 0.14557689245231964
+    },
+    {
+     "Sample": "t#bar{t} [0_11]",
+     "Yield": 0.38661705835324617,
+     "Error": 0.041749098744457695
+    },
+    {
+     "Sample": "t#bar{t} [1]",
+     "Yield": 2.6225037456647726,
+     "Error": 0.40803628766118166
+    },
+    {
+     "Sample": "t#bar{t} [10]",
+     "Yield": 0.4905544963051077,
+     "Error": 0.06943262217640589
+    },
+    {
+     "Sample": "t#bar{t} [10_10]",
+     "Yield": 1.065585478000498,
+     "Error": 0.16197413023792465
+    },
+    {
+     "Sample": "t#bar{t} [10_11]",
+     "Yield": 0.24355902345113015,
+     "Error": 0.04141032416023163
+    },
+    {
+     "Sample": "t#bar{t} [11]",
+     "Yield": 0.03159160327902909,
+     "Error": 0.012799481429857942
+    },
+    {
+     "Sample": "t#bar{t} [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [1_1]",
+     "Yield": 2.925117974842084,
+     "Error": 0.42346513848550366
+    },
+    {
+     "Sample": "t#bar{t} [1_10]",
+     "Yield": 2.4288606759437394,
+     "Error": 0.21451949349927885
+    },
+    {
+     "Sample": "t#bar{t} [1_11]",
+     "Yield": 0.5877030555850863,
+     "Error": 0.13244900025523892
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 0.38954556863324175,
+     "Error": 0.04857046291664817
+    },
+    {
+     "Sample": "W+jets [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "W+jets [1]",
+     "Yield": 1.24866e-05,
+     "Error": 4.79298762843861e-06
+    },
+    {
+     "Sample": "W+jets [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "W+jets [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [0_0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [0_1]",
+     "Yield": 0.2826886131639946,
+     "Error": 0.0522514133631777
+    },
+    {
+     "Sample": "WW [0_10]",
+     "Yield": 0.06978796419232645,
+     "Error": 0.03666489728883957
+    },
+    {
+     "Sample": "WW [0_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [1]",
+     "Yield": 0.18413314276577186,
+     "Error": 0.02368847925739418
+    },
+    {
+     "Sample": "WW [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [10_10]",
+     "Yield": 0.09250781656232838,
+     "Error": 0.015786038646900216
+    },
+    {
+     "Sample": "WW [10_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [11]",
+     "Yield": 0.06500343977212263,
+     "Error": 0.0658546922026671
+    },
+    {
+     "Sample": "WW [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [1_1]",
+     "Yield": 0.4101082856587106,
+     "Error": 0.1779160266354682
+    },
+    {
+     "Sample": "WW [1_10]",
+     "Yield": 0.26483480285523786,
+     "Error": 0.07491474122048568
+    },
+    {
+     "Sample": "WW [1_11]",
+     "Yield": 0.0036752027254661553,
+     "Error": 0.00681880361256065
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 0.18369048193178028,
+     "Error": 0.031315625389337624
+    },
+    {
+     "Sample": "WZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [0_0]",
+     "Yield": 1.7185947780409967,
+     "Error": 0.27793858329543425
+    },
+    {
+     "Sample": "WZ [0_1]",
+     "Yield": 4.140267228785669,
+     "Error": 0.49043879338773433
+    },
+    {
+     "Sample": "WZ [0_10]",
+     "Yield": 1.801105546700858,
+     "Error": 0.2604519215183342
+    },
+    {
+     "Sample": "WZ [0_11]",
+     "Yield": 0.6482736346705134,
+     "Error": 0.0862217945023953
+    },
+    {
+     "Sample": "WZ [1]",
+     "Yield": 0.08589120617531949,
+     "Error": 0.013924424805265784
+    },
+    {
+     "Sample": "WZ [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [10_10]",
+     "Yield": 0.4037699376094075,
+     "Error": 0.09071430707178357
+    },
+    {
+     "Sample": "WZ [10_11]",
+     "Yield": 0.34474571704515394,
+     "Error": 0.13797756793287208
+    },
+    {
+     "Sample": "WZ [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [11_11]",
+     "Yield": 0.12072855196898806,
+     "Error": 0.05401118392261581
+    },
+    {
+     "Sample": "WZ [1_1]",
+     "Yield": 2.946729183406325,
+     "Error": 0.5151738891801494
+    },
+    {
+     "Sample": "WZ [1_10]",
+     "Yield": 3.650609345695417,
+     "Error": 0.45747861667637957
+    },
+    {
+     "Sample": "WZ [1_11]",
+     "Yield": 0.8534518240080101,
+     "Error": 0.1369716004218136
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 0.08718987015747037,
+     "Error": 0.02334848008466095
+    },
+    {
+     "Sample": "ZZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [0_0]",
+     "Yield": 1.0515615131905542,
+     "Error": 0.2920283371155943
+    },
+    {
+     "Sample": "ZZ [0_1]",
+     "Yield": 2.095666450756378,
+     "Error": 0.32982421814270796
+    },
+    {
+     "Sample": "ZZ [0_10]",
+     "Yield": 0.39044657636360175,
+     "Error": 0.10888301570644462
+    },
+    {
+     "Sample": "ZZ [0_11]",
+     "Yield": 0.24393002433154182,
+     "Error": 0.04280164366303706
+    },
+    {
+     "Sample": "ZZ [10_10]",
+     "Yield": 0.5567126753591771,
+     "Error": 0.08497604804424201
+    },
+    {
+     "Sample": "ZZ [10_11]",
+     "Yield": 0.2993876237537554,
+     "Error": 0.04170699265391108
+    },
+    {
+     "Sample": "ZZ [11_11]",
+     "Yield": 0.019386787307217948,
+     "Error": 0.02064869991460673
+    },
+    {
+     "Sample": "ZZ [1_1]",
+     "Yield": 2.4602573648601975,
+     "Error": 0.34245009738249127
+    },
+    {
+     "Sample": "ZZ [1_10]",
+     "Yield": 1.3232076921688276,
+     "Error": 0.2517858594271321
+    },
+    {
+     "Sample": "ZZ [1_11]",
+     "Yield": 0.31432401389800046,
+     "Error": 0.07164498596084255
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 197.16223283529683,
+     "Error": 31.80025957148714
+    },
+    {
+     "Sample": "Total",
+     "Yield": 2532.6937716890657,
+     "Error": 206.83608758282233
+    },
+    {
+     "Data": "Data",
+     "Yield": -1
+    }
+   ]
+  }
+ ],
+ "table_postfit": [
+  {
+   "Region": "#tau_{h}#tau_{h}, BDT < 0.55",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
+     "Yield": 8.212693127464288,
+     "Error": 5.5500654219863295
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_0]",
+     "Yield": 21.993468924262196,
+     "Error": 28.08413563739375
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_1]",
+     "Yield": 113.43187481647198,
+     "Error": 42.598038214572085
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_10]",
+     "Yield": 19.82812600388066,
+     "Error": 11.861315248084477
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_11]",
+     "Yield": 20.110797305979116,
+     "Error": 10.507381120370797
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
+     "Yield": 36.005028281230054,
+     "Error": 10.333694261232795
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
+     "Yield": 6.454617194864877,
+     "Error": 2.1286481397446315
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10_10]",
+     "Yield": 5.699103429918132,
+     "Error": 2.7498011488841403
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10_11]",
+     "Yield": 13.467973775523422,
+     "Error": 6.374519791195109
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
+     "Yield": 5.151404288103352,
+     "Error": 1.7417214383727573
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11_11]",
+     "Yield": 13.66836079206944,
+     "Error": 6.994835633407896
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1_1]",
+     "Yield": 172.17992055365949,
+     "Error": 75.68844740609234
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1_10]",
+     "Yield": 70.319789419398,
+     "Error": 18.740273880724786
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1_11]",
+     "Yield": 78.41585848595619,
+     "Error": 21.555684881330784
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 68.63068870798982,
+     "Error": 7.8423127502793735
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0]",
+     "Yield": 3.3874347211134173,
+     "Error": 2.299878136024512
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0_0]",
+     "Yield": 3.6351304397721447,
+     "Error": 4.446171055516239
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0_1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [1_1]",
+     "Yield": 3.4765309995753686,
+     "Error": 2.123298976524448
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
+     "Yield": 1.253529487142903,
+     "Error": 0.8102393823136319
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_0]",
+     "Yield": 98.20372223488317,
+     "Error": 114.42529533564361
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_1]",
+     "Yield": 442.68068478594705,
+     "Error": 149.03406506255763
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_10]",
+     "Yield": 91.4728295082148,
+     "Error": 43.021218186212174
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_11]",
+     "Yield": 66.30295884075923,
+     "Error": 27.748024517379243
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
+     "Yield": 13.404774097338235,
+     "Error": 4.177590718391061
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
+     "Yield": 3.1242636894901508,
+     "Error": 0.6881895758356259
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10_10]",
+     "Yield": 21.83271965885948,
+     "Error": 2.7824055940018275
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10_11]",
+     "Yield": 28.70454054461697,
+     "Error": 3.850183518337179
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
+     "Yield": 7.138260147378488,
+     "Error": 2.6733056176862373
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11_11]",
+     "Yield": 9.256254744593905,
+     "Error": 2.792656777900479
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1_1]",
+     "Yield": 617.9874245458313,
+     "Error": 326.817366003205
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1_10]",
+     "Yield": 240.91433774824313,
+     "Error": 64.51581878106768
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1_11]",
+     "Yield": 209.8691271065622,
+     "Error": 60.098509863016396
+    },
+    {
+     "Sample": "single t [0]",
+     "Yield": 1.7612645043508752,
+     "Error": 0.8495904332168946
+    },
+    {
+     "Sample": "single t [0_0]",
+     "Yield": 0.8695594090702263,
+     "Error": 1.0142788606979338
+    },
+    {
+     "Sample": "single t [0_1]",
+     "Yield": 6.225922114704745,
+     "Error": 2.1548007974933787
+    },
+    {
+     "Sample": "single t [0_10]",
+     "Yield": 1.0104648299963122,
+     "Error": 0.49196790298987797
+    },
+    {
+     "Sample": "single t [0_11]",
+     "Yield": 0.97631817480437,
+     "Error": 0.493019593491907
+    },
+    {
+     "Sample": "single t [1]",
+     "Yield": 5.734160997022252,
+     "Error": 1.7259163290326256
+    },
+    {
+     "Sample": "single t [10]",
+     "Yield": 1.3843296120555613,
+     "Error": 0.16691200543409548
+    },
+    {
+     "Sample": "single t [10_10]",
+     "Yield": 0.3383995740792365,
+     "Error": 0.05789338697292632
+    },
+    {
+     "Sample": "single t [10_11]",
+     "Yield": 0.7167073179946055,
+     "Error": 0.098541258435197
+    },
+    {
+     "Sample": "single t [11]",
+     "Yield": 1.0313597332115914,
+     "Error": 0.13544879409695298
+    },
+    {
+     "Sample": "single t [11_11]",
+     "Yield": 0.27826502652047747,
+     "Error": 0.08883161243582359
+    },
+    {
+     "Sample": "single t [1_1]",
+     "Yield": 12.220110949633092,
+     "Error": 6.646143574858874
+    },
+    {
+     "Sample": "single t [1_10]",
+     "Yield": 5.821595852848001,
+     "Error": 1.6963431422806494
+    },
+    {
+     "Sample": "single t [1_11]",
+     "Yield": 3.7250951416959994,
+     "Error": 1.124733991095255
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 1.0941647519061541,
+     "Error": 0.14136041444268094
+    },
+    {
+     "Sample": "t#bar{t} [0]",
+     "Yield": 5.873588361381484,
+     "Error": 5.334414768840514
+    },
+    {
+     "Sample": "t#bar{t} [0_0]",
+     "Yield": 4.328828741031602,
+     "Error": 5.275196020120255
+    },
+    {
+     "Sample": "t#bar{t} [0_1]",
+     "Yield": 32.81949229766675,
+     "Error": 25.311797861684468
+    },
+    {
+     "Sample": "t#bar{t} [0_10]",
+     "Yield": 6.467913208267598,
+     "Error": 5.820878133008545
+    },
+    {
+     "Sample": "t#bar{t} [0_11]",
+     "Yield": 6.005773716463361,
+     "Error": 5.415661250350961
+    },
+    {
+     "Sample": "t#bar{t} [1]",
+     "Yield": 38.48825240552336,
+     "Error": 36.1046665943414
+    },
+    {
+     "Sample": "t#bar{t} [10]",
+     "Yield": 7.309010580593333,
+     "Error": 7.012796291674818
+    },
+    {
+     "Sample": "t#bar{t} [10_10]",
+     "Yield": 2.740517488942267,
+     "Error": 2.6345016690331593
+    },
+    {
+     "Sample": "t#bar{t} [10_11]",
+     "Yield": 4.309011298816976,
+     "Error": 4.115885474851999
+    },
+    {
+     "Sample": "t#bar{t} [11]",
+     "Yield": 6.7273238409179585,
+     "Error": 6.424853258994815
+    },
+    {
+     "Sample": "t#bar{t} [11_11]",
+     "Yield": 1.0482539367942632,
+     "Error": 1.0064658123102057
+    },
+    {
+     "Sample": "t#bar{t} [1_1]",
+     "Yield": 79.18071063995949,
+     "Error": 78.52960653193611
+    },
+    {
+     "Sample": "t#bar{t} [1_10]",
+     "Yield": 29.46302426095954,
+     "Error": 27.693265059588708
+    },
+    {
+     "Sample": "t#bar{t} [1_11]",
+     "Yield": 24.062415887034135,
+     "Error": 22.54439870005937
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 5.156566352893244,
+     "Error": 4.92790327162895
+    },
+    {
+     "Sample": "W+jets [0]",
+     "Yield": 1.032802493995194e-05,
+     "Error": 6.305186401652694e-06
+    },
+    {
+     "Sample": "W+jets [1]",
+     "Yield": 176.12665164150306,
+     "Error": 72.20561147942541
+    },
+    {
+     "Sample": "W+jets [10]",
+     "Yield": 108.53861836934593,
+     "Error": 32.630631793444074
+    },
+    {
+     "Sample": "W+jets [none]",
+     "Yield": 167.14826738798757,
+     "Error": 51.488498981656
+    },
+    {
+     "Sample": "WW [0]",
+     "Yield": 1.3066790685901377,
+     "Error": 0.6727881216692599
+    },
+    {
+     "Sample": "WW [0_0]",
+     "Yield": 0.6836198010925572,
+     "Error": 0.7934284033933662
+    },
+    {
+     "Sample": "WW [0_1]",
+     "Yield": 4.954308574341758,
+     "Error": 1.7309092627700662
+    },
+    {
+     "Sample": "WW [0_10]",
+     "Yield": 1.1310822069519437,
+     "Error": 0.5559013163982506
+    },
+    {
+     "Sample": "WW [0_11]",
+     "Yield": 1.0885439496439984,
+     "Error": 0.5256165792531353
+    },
+    {
+     "Sample": "WW [1]",
+     "Yield": 6.674359909601408,
+     "Error": 1.9174951004833707
+    },
+    {
+     "Sample": "WW [10]",
+     "Yield": 1.3183069152949796,
+     "Error": 0.17235812022692296
+    },
+    {
+     "Sample": "WW [10_10]",
+     "Yield": 0.3881893327451529,
+     "Error": 0.060696502667175266
+    },
+    {
+     "Sample": "WW [10_11]",
+     "Yield": 0.4535371209626055,
+     "Error": 0.10362625657477616
+    },
+    {
+     "Sample": "WW [11]",
+     "Yield": 1.3768607919048947,
+     "Error": 0.20859206393200824
+    },
+    {
+     "Sample": "WW [11_11]",
+     "Yield": 1.0106125632681988,
+     "Error": 0.16617013095871783
+    },
+    {
+     "Sample": "WW [1_1]",
+     "Yield": 13.414931034933744,
+     "Error": 7.328156145495727
+    },
+    {
+     "Sample": "WW [1_10]",
+     "Yield": 4.1328451540514015,
+     "Error": 1.2286109067656148
+    },
+    {
+     "Sample": "WW [1_11]",
+     "Yield": 4.446674111033987,
+     "Error": 1.3192455118205177
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 1.4380509980095533,
+     "Error": 0.16040177086781154
+    },
+    {
+     "Sample": "WZ [0]",
+     "Yield": 0.2419127923992179,
+     "Error": 0.128200971582739
+    },
+    {
+     "Sample": "WZ [0_0]",
+     "Yield": 0.12415581913377818,
+     "Error": 0.1490203249380695
+    },
+    {
+     "Sample": "WZ [0_1]",
+     "Yield": 1.396419648188307,
+     "Error": 0.4669025115229956
+    },
+    {
+     "Sample": "WZ [0_10]",
+     "Yield": 0.23043499337629111,
+     "Error": 0.10942648752430252
+    },
+    {
+     "Sample": "WZ [0_11]",
+     "Yield": 0.17656745818773817,
+     "Error": 0.08459923397333335
+    },
+    {
+     "Sample": "WZ [1]",
+     "Yield": 0.5067205875021202,
+     "Error": 0.145940526029642
+    },
+    {
+     "Sample": "WZ [10]",
+     "Yield": 0.22110422936894955,
+     "Error": 0.05142293731243078
+    },
+    {
+     "Sample": "WZ [10_10]",
+     "Yield": 0.056366853629743974,
+     "Error": 0.021053485090162905
+    },
+    {
+     "Sample": "WZ [10_11]",
+     "Yield": 0.0482239180987528,
+     "Error": 0.00876369413072308
+    },
+    {
+     "Sample": "WZ [11]",
+     "Yield": 0.22751907691456133,
+     "Error": 0.02945355595215394
+    },
+    {
+     "Sample": "WZ [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [1_1]",
+     "Yield": 2.5018430121549167,
+     "Error": 1.3280537662773109
+    },
+    {
+     "Sample": "WZ [1_10]",
+     "Yield": 0.4136288155566708,
+     "Error": 0.13043244689667224
+    },
+    {
+     "Sample": "WZ [1_11]",
+     "Yield": 1.2926656537784085,
+     "Error": 0.45241682231769853
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 0.08410879922083403,
+     "Error": 0.010115972306631223
+    },
+    {
+     "Sample": "ZZ [0]",
+     "Yield": 0.4381367784583442,
+     "Error": 0.21007708504040148
+    },
+    {
+     "Sample": "ZZ [0_0]",
+     "Yield": 0.187096561325518,
+     "Error": 0.21723233232219194
+    },
+    {
+     "Sample": "ZZ [0_1]",
+     "Yield": 1.34294232374583,
+     "Error": 0.445933625115829
+    },
+    {
+     "Sample": "ZZ [0_10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [0_11]",
+     "Yield": 0.09391096798396285,
+     "Error": 0.047574701100109654
+    },
+    {
+     "Sample": "ZZ [10_10]",
+     "Yield": 0.10965663208587209,
+     "Error": 0.015669613473442662
+    },
+    {
+     "Sample": "ZZ [10_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [1_1]",
+     "Yield": 3.5553094938963787,
+     "Error": 2.0324201781697333
+    },
+    {
+     "Sample": "ZZ [1_10]",
+     "Yield": 0.9366154771275138,
+     "Error": 0.2700173644797924
+    },
+    {
+     "Sample": "ZZ [1_11]",
+     "Yield": 0.5823907827748798,
+     "Error": 0.20713462551966955
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 12428.35202858438,
+     "Error": 395.5422935974001
+    },
+    {
+     "Sample": "Total",
+     "Yield": 15752.134537932809,
+     "Error": 231.68562164065776
+    },
+    {
+     "Data": "Data",
+     "Yield": -1
+    }
+   ]
+  },
+  {
+   "Region": "#tau_{h}#tau_{h}, 0.55 < BDT < 0.90",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
+     "Yield": 2.564879427973409,
+     "Error": 1.9207123938337753
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_0]",
+     "Yield": 65.06200312132269,
+     "Error": 79.43834985154703
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_1]",
+     "Yield": 313.4665154066527,
+     "Error": 100.27296809400588
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_10]",
+     "Yield": 50.98737790620497,
+     "Error": 27.246266943999117
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_11]",
+     "Yield": 46.21321194321625,
+     "Error": 27.76316137928447
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
+     "Yield": 9.652135486812908,
+     "Error": 5.4767530046351585
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
+     "Yield": 0.7392890462912052,
+     "Error": 0.4087418790859736
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10_10]",
+     "Yield": 13.294820913169712,
+     "Error": 4.7587094317295815
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10_11]",
+     "Yield": 41.78015218332512,
+     "Error": 12.478655992060402
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
+     "Yield": 0.6740058350785116,
+     "Error": 0.2790361212671709
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11_11]",
+     "Yield": 18.010101832665367,
+     "Error": 7.4296145045273505
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1_1]",
+     "Yield": 424.74503619021226,
+     "Error": 171.6984355369246
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1_10]",
+     "Yield": 165.63889759583574,
+     "Error": 45.34819347236683
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1_11]",
+     "Yield": 190.6334843445861,
+     "Error": 42.378036312854206
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 27.993425830394862,
+     "Error": 3.8723358389524845
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0_0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0_1]",
+     "Yield": 1.0700125534314878e-05,
+     "Error": 3.8019011705096015e-06
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [1_1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_0]",
+     "Yield": 3.4818993789162516,
+     "Error": 4.0674020192606495
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_1]",
+     "Yield": 17.195558659214026,
+     "Error": 4.984823571442355
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_10]",
+     "Yield": 3.5146913389293513,
+     "Error": 1.8310195476484123
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_11]",
+     "Yield": 4.907902536342362,
+     "Error": 2.509057802244735
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
+     "Yield": 0.6459655418971008,
+     "Error": 0.19828988597492037
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10_10]",
+     "Yield": 1.4371119178802436,
+     "Error": 0.3093533834353022
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10_11]",
+     "Yield": 2.9065739547059812,
+     "Error": 0.8855117181501059
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
+     "Yield": 2.0616371680157413e-05,
+     "Error": 1.9607172450271393e-06
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11_11]",
+     "Yield": 3.0923760418464296e-05,
+     "Error": 3.021337861607602e-06
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1_1]",
+     "Yield": 32.27505464717784,
+     "Error": 17.38682301803987
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1_10]",
+     "Yield": 6.639399812465706,
+     "Error": 3.6478295640494696
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1_11]",
+     "Yield": 13.291558161777424,
+     "Error": 5.294130449130444
+    },
+    {
+     "Sample": "single t [0]",
+     "Yield": 0.2860655294448298,
+     "Error": 0.14178398421561614
+    },
+    {
+     "Sample": "single t [0_0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [0_1]",
+     "Yield": 0.2761568089751579,
+     "Error": 0.11919316675761862
+    },
+    {
+     "Sample": "single t [0_10]",
+     "Yield": 0.04070776614199629,
+     "Error": 0.0198647155808534
+    },
+    {
+     "Sample": "single t [0_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [1]",
+     "Yield": 0.9653764755666437,
+     "Error": 0.3247523595453215
+    },
+    {
+     "Sample": "single t [10]",
+     "Yield": 0.04317757898687538,
+     "Error": 0.01724216603101492
+    },
+    {
+     "Sample": "single t [10_10]",
+     "Yield": 0.11674099711433798,
+     "Error": 0.03189617808072115
+    },
+    {
+     "Sample": "single t [10_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [1_1]",
+     "Yield": 0.9398238352123327,
+     "Error": 0.5130618351113364
+    },
+    {
+     "Sample": "single t [1_10]",
+     "Yield": 0.5092568109123997,
+     "Error": 0.15387993485833223
+    },
+    {
+     "Sample": "single t [1_11]",
+     "Yield": 0.18227995068714425,
+     "Error": 0.06578907873617366
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 0.02979784554802577,
+     "Error": 0.015117603228169168
+    },
+    {
+     "Sample": "t#bar{t} [0]",
+     "Yield": 1.0426241125361209,
+     "Error": 0.9229383666051311
+    },
+    {
+     "Sample": "t#bar{t} [0_0]",
+     "Yield": 0.22268321944995206,
+     "Error": 0.267731089012923
+    },
+    {
+     "Sample": "t#bar{t} [0_1]",
+     "Yield": 2.7031872225560143,
+     "Error": 1.9993847909159832
+    },
+    {
+     "Sample": "t#bar{t} [0_10]",
+     "Yield": 0.4375691384420825,
+     "Error": 0.3959505303766885
+    },
+    {
+     "Sample": "t#bar{t} [0_11]",
+     "Yield": 0.5472338161459931,
+     "Error": 0.4726488951898995
+    },
+    {
+     "Sample": "t#bar{t} [1]",
+     "Yield": 7.873471768934895,
+     "Error": 7.418072926631742
+    },
+    {
+     "Sample": "t#bar{t} [10]",
+     "Yield": 1.293727506369372,
+     "Error": 1.229561453516711
+    },
+    {
+     "Sample": "t#bar{t} [10_10]",
+     "Yield": 0.18858555528926468,
+     "Error": 0.18590779791754616
+    },
+    {
+     "Sample": "t#bar{t} [10_11]",
+     "Yield": 0.29768335479562247,
+     "Error": 0.28571901656577026
+    },
+    {
+     "Sample": "t#bar{t} [11]",
+     "Yield": 0.6931316543354488,
+     "Error": 0.661587815358097
+    },
+    {
+     "Sample": "t#bar{t} [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [1_1]",
+     "Yield": 9.146980609648477,
+     "Error": 8.931059734624752
+    },
+    {
+     "Sample": "t#bar{t} [1_10]",
+     "Yield": 2.9183721002833134,
+     "Error": 2.734114397218754
+    },
+    {
+     "Sample": "t#bar{t} [1_11]",
+     "Yield": 2.939950321419394,
+     "Error": 2.73232468842106
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 0.7790575773107689,
+     "Error": 0.7932840586464992
+    },
+    {
+     "Sample": "W+jets [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "W+jets [1]",
+     "Yield": 130.11529938288064,
+     "Error": 50.50362021516834
+    },
+    {
+     "Sample": "W+jets [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "W+jets [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [0]",
+     "Yield": 0.05147914292336369,
+     "Error": 0.02425775009142578
+    },
+    {
+     "Sample": "WW [0_0]",
+     "Yield": 0.047176236514547214,
+     "Error": 0.05485524529785855
+    },
+    {
+     "Sample": "WW [0_1]",
+     "Yield": 0.43221739432102385,
+     "Error": 0.1755463999151875
+    },
+    {
+     "Sample": "WW [0_10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [0_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [1]",
+     "Yield": 0.41435243871396044,
+     "Error": 0.12999256243943916
+    },
+    {
+     "Sample": "WW [10]",
+     "Yield": 0.0892702959200806,
+     "Error": 0.01027556663912158
+    },
+    {
+     "Sample": "WW [10_10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [10_11]",
+     "Yield": 0.07983375058950216,
+     "Error": 0.045314593330086896
+    },
+    {
+     "Sample": "WW [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [1_1]",
+     "Yield": 0.18951984179977635,
+     "Error": 0.11596053546303636
+    },
+    {
+     "Sample": "WW [1_10]",
+     "Yield": 0.17268410824809982,
+     "Error": 0.05494192640032399
+    },
+    {
+     "Sample": "WW [1_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [0_0]",
+     "Yield": 0.3147684921337461,
+     "Error": 0.37777023541308064
+    },
+    {
+     "Sample": "WZ [0_1]",
+     "Yield": 1.6962431859971128,
+     "Error": 0.6093617489401436
+    },
+    {
+     "Sample": "WZ [0_10]",
+     "Yield": 0.31288746770054887,
+     "Error": 0.15629321003227364
+    },
+    {
+     "Sample": "WZ [0_11]",
+     "Yield": 0.42229599347355473,
+     "Error": 0.2658609167768268
+    },
+    {
+     "Sample": "WZ [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [10_10]",
+     "Yield": 0.016771294324966175,
+     "Error": 0.0044163454535586285
+    },
+    {
+     "Sample": "WZ [10_11]",
+     "Yield": 0.05995536271058158,
+     "Error": 0.008763220254313055
+    },
+    {
+     "Sample": "WZ [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [1_1]",
+     "Yield": 2.1333846387806625,
+     "Error": 1.1778663515266974
+    },
+    {
+     "Sample": "WZ [1_10]",
+     "Yield": 0.8451287771469005,
+     "Error": 0.25835732354864716
+    },
+    {
+     "Sample": "WZ [1_11]",
+     "Yield": 0.5046575783857449,
+     "Error": 0.16354829520809944
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 0.3299260398925122,
+     "Error": 0.05327175718780005
+    },
+    {
+     "Sample": "ZZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [0_0]",
+     "Yield": 0.14925789222470612,
+     "Error": 0.1764433962515577
+    },
+    {
+     "Sample": "ZZ [0_1]",
+     "Yield": 1.1495050668949516,
+     "Error": 0.42759246367453635
+    },
+    {
+     "Sample": "ZZ [0_10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [0_11]",
+     "Yield": 1.2304813220476825,
+     "Error": 0.6098583669144411
+    },
+    {
+     "Sample": "ZZ [10_10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [10_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [1_1]",
+     "Yield": 1.2871108367459625,
+     "Error": 0.7155545453242655
+    },
+    {
+     "Sample": "ZZ [1_10]",
+     "Yield": 1.3001234572929286,
+     "Error": 0.3840696505247213
+    },
+    {
+     "Sample": "ZZ [1_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 1059.7555558300876,
+     "Error": 74.52909699206884
+    },
+    {
+     "Sample": "Total",
+     "Yield": 2695.3246426371634,
+     "Error": 107.6103994781348
+    },
+    {
+     "Data": "Data",
+     "Yield": 2704
+    }
+   ]
+  },
+  {
+   "Region": "#tau_{h}#tau_{h}, BDT > 0.90",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
+     "Yield": 5.0057655224246105,
+     "Error": 2.080510490218725
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_0]",
+     "Yield": 110.71192367842151,
+     "Error": 127.9626833345424
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_1]",
+     "Yield": 580.1047304906449,
+     "Error": 145.9773729928154
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_10]",
+     "Yield": 103.36997358666554,
+     "Error": 50.762534468632246
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0_11]",
+     "Yield": 85.36265943038238,
+     "Error": 51.04693295427979
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
+     "Yield": 9.81902568332741,
+     "Error": 2.4676891150554896
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
+     "Yield": 2.3925581786322305,
+     "Error": 0.7141484062966141
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10_10]",
+     "Yield": 29.207552670533534,
+     "Error": 8.495269921082905
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10_11]",
+     "Yield": 41.60558765388253,
+     "Error": 12.303690605130607
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
+     "Yield": 3.3409064912868587,
+     "Error": 1.193818559428603
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11_11]",
+     "Yield": 21.302893653870452,
+     "Error": 7.281013741841388
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1_1]",
+     "Yield": 866.0663900488622,
+     "Error": 365.0770518797925
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1_10]",
+     "Yield": 292.5592679148994,
+     "Error": 73.07975597794935
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1_11]",
+     "Yield": 266.7971813172048,
+     "Error": 63.76018289101431
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 17.70464181728468,
+     "Error": 2.2472349924578907
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0_0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [0_1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [1_1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_0]",
+     "Yield": 2.388031632887084,
+     "Error": 2.751719382867906
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_1]",
+     "Yield": 12.472325469032546,
+     "Error": 3.8049907069050626
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_10]",
+     "Yield": 1.494456637920001,
+     "Error": 1.0463546583933443
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0_11]",
+     "Yield": 1.2277002181369252,
+     "Error": 0.7222155136136611
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
+     "Yield": 2.8450775986035604,
+     "Error": 1.7777291649124374
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
+     "Yield": 0.12378349952135301,
+     "Error": 0.06820853640199749
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10_10]",
+     "Yield": 0.8849241392608223,
+     "Error": 0.23062025096907587
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10_11]",
+     "Yield": 0.682123539772611,
+     "Error": 0.3227394292377997
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11_11]",
+     "Yield": 0.4201596015549979,
+     "Error": 0.13921943114906135
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1_1]",
+     "Yield": 17.834092532330526,
+     "Error": 9.982119914267914
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1_10]",
+     "Yield": 11.373897410080435,
+     "Error": 4.760024479618689
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1_11]",
+     "Yield": 5.323093799934861,
+     "Error": 1.2305153495211842
+    },
+    {
+     "Sample": "single t [0]",
+     "Yield": 0.11862781479156041,
+     "Error": 0.0870550130560518
+    },
+    {
+     "Sample": "single t [0_0]",
+     "Yield": 0.044921356060802956,
+     "Error": 0.05228208537865107
+    },
+    {
+     "Sample": "single t [0_1]",
+     "Yield": 0.25170078517662775,
+     "Error": 0.09125571420951095
+    },
+    {
+     "Sample": "single t [0_10]",
+     "Yield": 0.04306351359854672,
+     "Error": 0.023472370538796375
+    },
+    {
+     "Sample": "single t [0_11]",
+     "Yield": 0.22590947526004693,
+     "Error": 0.13563779563047412
+    },
+    {
+     "Sample": "single t [1]",
+     "Yield": 0.5987127318720199,
+     "Error": 0.20709099386256924
+    },
+    {
+     "Sample": "single t [10]",
+     "Yield": 0.1408937139180992,
+     "Error": 0.022583431320862074
+    },
+    {
+     "Sample": "single t [10_10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [10_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [1_1]",
+     "Yield": 0.9749091626498921,
+     "Error": 0.5391826309820702
+    },
+    {
+     "Sample": "single t [1_10]",
+     "Yield": 0.1615501420571032,
+     "Error": 0.051402895286547214
+    },
+    {
+     "Sample": "single t [1_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 0.18501336890106324,
+     "Error": 0.04258256690752986
+    },
+    {
+     "Sample": "t#bar{t} [0]",
+     "Yield": 0.37706275003238676,
+     "Error": 0.33273480871690575
+    },
+    {
+     "Sample": "t#bar{t} [0_0]",
+     "Yield": 0.14725991692856374,
+     "Error": 0.18160824192137887
+    },
+    {
+     "Sample": "t#bar{t} [0_1]",
+     "Yield": 2.17901955770991,
+     "Error": 1.7030315662054092
+    },
+    {
+     "Sample": "t#bar{t} [0_10]",
+     "Yield": 0.19817142780492658,
+     "Error": 0.18374396589100825
+    },
+    {
+     "Sample": "t#bar{t} [0_11]",
+     "Yield": 0.359013745026565,
+     "Error": 0.32634289184121773
+    },
+    {
+     "Sample": "t#bar{t} [1]",
+     "Yield": 2.0731980947525916,
+     "Error": 1.9297511573077542
+    },
+    {
+     "Sample": "t#bar{t} [10]",
+     "Yield": 0.1784633430154501,
+     "Error": 0.17343812440884826
+    },
+    {
+     "Sample": "t#bar{t} [10_10]",
+     "Yield": 0.1779410133215455,
+     "Error": 0.17226650221310977
+    },
+    {
+     "Sample": "t#bar{t} [10_11]",
+     "Yield": 0.16870480619008837,
+     "Error": 0.16450054063432776
+    },
+    {
+     "Sample": "t#bar{t} [11]",
+     "Yield": 0.04223888638416402,
+     "Error": 0.041255124894140724
+    },
+    {
+     "Sample": "t#bar{t} [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [1_1]",
+     "Yield": 3.209234844063959,
+     "Error": 3.2077193036255975
+    },
+    {
+     "Sample": "t#bar{t} [1_10]",
+     "Yield": 1.1374671181215485,
+     "Error": 1.0741846347373571
+    },
+    {
+     "Sample": "t#bar{t} [1_11]",
+     "Yield": 0.9571054386110782,
+     "Error": 0.9076193353503954
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 0.30022552532547975,
+     "Error": 0.2870432931335518
+    },
+    {
+     "Sample": "W+jets [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "W+jets [1]",
+     "Yield": 1.9142436362450382e-05,
+     "Error": 6.483782316288587e-06
+    },
+    {
+     "Sample": "W+jets [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "W+jets [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [0_0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [0_1]",
+     "Yield": 0.2835207405273089,
+     "Error": 0.09917827560940455
+    },
+    {
+     "Sample": "WW [0_10]",
+     "Yield": 0.02100234784915567,
+     "Error": 0.012284630605916204
+    },
+    {
+     "Sample": "WW [0_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [1]",
+     "Yield": 0.2746481871853079,
+     "Error": 0.08403694129268031
+    },
+    {
+     "Sample": "WW [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [10_10]",
+     "Yield": 0.02576505260216219,
+     "Error": 0.0037280687444674427
+    },
+    {
+     "Sample": "WW [10_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [11]",
+     "Yield": 0.10642148561227123,
+     "Error": 0.05305576742851627
+    },
+    {
+     "Sample": "WW [11_11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [1_1]",
+     "Yield": 0.6463705631873835,
+     "Error": 0.3449591284872884
+    },
+    {
+     "Sample": "WW [1_10]",
+     "Yield": 0.1613262539323355,
+     "Error": 0.053811010442985995
+    },
+    {
+     "Sample": "WW [1_11]",
+     "Yield": 0.009331583899292784,
+     "Error": 0.0027681480925926464
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 0.22120126485911046,
+     "Error": 0.03702292413416874
+    },
+    {
+     "Sample": "WZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [0_0]",
+     "Yield": 0.9242675779239067,
+     "Error": 1.0815526537679223
+    },
+    {
+     "Sample": "WZ [0_1]",
+     "Yield": 4.002168653520881,
+     "Error": 1.3441147543136345
+    },
+    {
+     "Sample": "WZ [0_10]",
+     "Yield": 0.7019077518710116,
+     "Error": 0.3397943679920754
+    },
+    {
+     "Sample": "WZ [0_11]",
+     "Yield": 0.8792017047246917,
+     "Error": 0.4200741156526708
+    },
+    {
+     "Sample": "WZ [1]",
+     "Yield": 0.11406491661852906,
+     "Error": 0.03456646175489794
+    },
+    {
+     "Sample": "WZ [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [10_10]",
+     "Yield": 0.11469296851409617,
+     "Error": 0.025223241224770206
+    },
+    {
+     "Sample": "WZ [10_11]",
+     "Yield": 0.3696847255684007,
+     "Error": 0.11976514026250183
+    },
+    {
+     "Sample": "WZ [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [11_11]",
+     "Yield": 0.38273637821621675,
+     "Error": 0.16303706199414808
+    },
+    {
+     "Sample": "WZ [1_1]",
+     "Yield": 4.807050188426418,
+     "Error": 2.680708482541217
+    },
+    {
+     "Sample": "WZ [1_10]",
+     "Yield": 2.6224404320238826,
+     "Error": 0.7921451895775702
+    },
+    {
+     "Sample": "WZ [1_11]",
+     "Yield": 2.1831644818361835,
+     "Error": 0.707143428282436
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 0.09823715151914295,
+     "Error": 0.021057373764769856
+    },
+    {
+     "Sample": "ZZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [0_0]",
+     "Yield": 0.6317530561989932,
+     "Error": 0.7612001012650313
+    },
+    {
+     "Sample": "ZZ [0_1]",
+     "Yield": 1.9632020581379046,
+     "Error": 0.6882332543929983
+    },
+    {
+     "Sample": "ZZ [0_10]",
+     "Yield": 0.1533718264092289,
+     "Error": 0.07467936988036625
+    },
+    {
+     "Sample": "ZZ [0_11]",
+     "Yield": 0.3189274074485891,
+     "Error": 0.14989180246454314
+    },
+    {
+     "Sample": "ZZ [10_10]",
+     "Yield": 0.16299147985933243,
+     "Error": 0.024133892693464127
+    },
+    {
+     "Sample": "ZZ [10_11]",
+     "Yield": 0.2937146729905976,
+     "Error": 0.04034320960665123
+    },
+    {
+     "Sample": "ZZ [11_11]",
+     "Yield": 0.04206013726417053,
+     "Error": 0.05130387731350006
+    },
+    {
+     "Sample": "ZZ [1_1]",
+     "Yield": 4.2449577223032255,
+     "Error": 2.3834153590204634
+    },
+    {
+     "Sample": "ZZ [1_10]",
+     "Yield": 0.8742081209831187,
+     "Error": 0.2911500967450119
+    },
+    {
+     "Sample": "ZZ [1_11]",
+     "Yield": 0.8106333999336988,
+     "Error": 0.24098896550970156
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 219.0424093898577,
+     "Error": 36.24379374436048
+    },
+    {
+     "Sample": "Total",
+     "Yield": 2754.158585573174,
+     "Error": 173.61605926430872
+    },
+    {
+     "Data": "Data",
+     "Yield": -1
+    }
+   ]
+  }
+ ],
+ "gof": {
+  "gof_probability": 0.370534,
+  "gof_chi2_ndf": null
+ },
+ "minos_status": 0,
+ "poi_asimov": null,
+ "asimov_minos_status": null,
+ "tau_id_sf": {
+  "DM0": {
+   "value": 0.647448,
+   "err_up": 0.542376,
+   "err_down": 0.542376,
+   "pog": [
+    0.9015691876411438,
+    0.125892
+   ]
+  },
+  "DM1": {
+   "value": 1.20001,
+   "err_up": 0.331409,
+   "err_down": 0.331409,
+   "pog": [
+    0.8919064998626709,
+    0.052963
+   ]
+  },
+  "DM10": {
+   "value": 0.5,
+   "err_up": 0.621767,
+   "err_down": 0.621767,
+   "pog": [
+    0.9384543895721436,
+    0.148149
+   ]
+  },
+  "DM11": {
+   "value": 1.49996,
+   "err_up": 0.500679,
+   "err_down": 0.500679,
+   "pog": [
+    0.8119813203811646,
+    0.149246
+   ]
+  }
+ },
+ "tau_es": {
+  "DM0": {
+   "pull": 0.329128,
+   "constraint": 0.923389,
+   "prior_pct": 3.0
+  },
+  "DM1": {
+   "pull": -0.871539,
+   "constraint": 0.440793,
+   "prior_pct": 3.0
+  },
+  "DM10": {
+   "pull": 0.103656,
+   "constraint": 0.989958,
+   "prior_pct": 3.0
+  },
+  "DM11": {
+   "pull": -0.116623,
+   "constraint": 0.98228,
+   "prior_pct": 3.0
+  }
+ },
+ "mu_ttbar": {
+  "value": 0.669267,
+  "err_up": 0.611913,
+  "err_down": 0.611913
+ },
+ "prediction": {
+  "sigma_fid_tautau_pb": 4.500519576488651,
+  "sigma_tautau_60_120_pb": 1944.8826556737133,
+  "sigma_tautau_pb": 2019.6751428185198
+ },
+ "sigma_60_120_pb": {
+  "value": 1947.5471449119864,
+  "up": 633.5124620805657,
+  "down": 387.01803430047926,
+  "stat": 199.46123327379624,
+  "note": "sigma(pp -> Z/gamma* -> tautau, 60 < m_LHE < 120 GeV) = mu_Z x aMC@NLO prediction normalised to 6077.22 pb (m > 50)"
+ },
+ "grouped_impact_quadrature_sum": NaN,
+ "grouped_impact_scale": null,
+ "lumi_pb": 16393.381,
+ "channels": [
+  "tautau"
+ ],
+ "tau_id_fixed": false,
+ "region_set": "nominal",
+ "scaled_systematics": {}
+}

@@ -1,0 +1,670 @@
+{
+ "job": "ztautau_emu_fixedid",
+ "poi": "mu_Z",
+ "poi_value": 0.960366,
+ "poi_err_up": 0.0421851,
+ "poi_err_down": 0.0402595,
+ "poi_err": 0.0412223,
+ "nps": {
+  "BTag": [
+   0.0175005,
+   0.745316,
+   0.745316
+  ],
+  "ElectronID": [
+   -0.151034,
+   0.989712,
+   0.989712
+  ],
+  "ElectronReco": [
+   0.579168,
+   0.918397,
+   0.918397
+  ],
+  "ElectronScale": [
+   -0.134414,
+   0.893932,
+   0.893932
+  ],
+  "EmuTrigger": [
+   -0.424291,
+   0.946932,
+   0.946932
+  ],
+  "JES": [
+   -0.697718,
+   0.836689,
+   0.836689
+  ],
+  "L1Prefiring": [
+   0.180661,
+   0.989119,
+   0.989119
+  ],
+  "Lumi": [
+   -0.160546,
+   0.987204,
+   0.987204
+  ],
+  "MET_Unclustered": [
+   1.06117,
+   0.391927,
+   0.391927
+  ],
+  "MuonID": [
+   -0.0548337,
+   0.992605,
+   0.992605
+  ],
+  "MuonIso": [
+   0.285313,
+   0.984213,
+   0.984213
+  ],
+  "MuonScale": [
+   0.0287131,
+   0.98912,
+   0.98912
+  ],
+  "PDF": [
+   -0.0325031,
+   0.991763,
+   0.991763
+  ],
+  "PS_FSR": [
+   0.452452,
+   0.929057,
+   0.929057
+  ],
+  "PS_ISR": [
+   -0.0594376,
+   0.983151,
+   0.983151
+  ],
+  "Pileup": [
+   -0.827628,
+   0.776584,
+   0.776584
+  ],
+  "QCDOSSS_emu": [
+   -0.967012,
+   0.811861,
+   0.811861
+  ],
+  "QCDScale": [
+   -0.0136915,
+   0.941556,
+   0.941556
+  ],
+  "TopPt": [
+   1.14388,
+   0.304501,
+   0.304501
+  ],
+  "XS_DYll": [
+   -0.0297528,
+   0.993075,
+   0.993075
+  ],
+  "XS_DYlowmass": [
+   -0.118494,
+   0.985697,
+   0.985697
+  ],
+  "XS_DYtautau_out": [
+   -0.252406,
+   0.986058,
+   0.986058
+  ],
+  "XS_SingleTop": [
+   0.0777432,
+   0.983966,
+   0.983966
+  ],
+  "XS_WJets": [
+   -0.542652,
+   0.948457,
+   0.948457
+  ],
+  "XS_WW": [
+   -0.236374,
+   0.837612,
+   0.837612
+  ],
+  "XS_WZ": [
+   -0.0090007,
+   0.993502,
+   0.993502
+  ],
+  "XS_ZZ": [
+   -0.00131728,
+   0.993396,
+   0.993396
+  ],
+  "gamma_stat_emu_CRtt_bin_0": [
+   1.00404,
+   0.00431872,
+   0.00431872
+  ],
+  "gamma_stat_emu_CRtt_bin_1": [
+   0.999079,
+   0.004857,
+   0.004857
+  ],
+  "gamma_stat_emu_CRtt_bin_2": [
+   0.995534,
+   0.00559172,
+   0.00559172
+  ],
+  "gamma_stat_emu_CRtt_bin_3": [
+   0.996462,
+   0.00545441,
+   0.00545441
+  ],
+  "gamma_stat_emu_CRtt_bin_4": [
+   1.00275,
+   0.00651472,
+   0.00651472
+  ],
+  "gamma_stat_emu_SR_bin_0": [
+   0.983523,
+   0.0395418,
+   0.0395418
+  ],
+  "gamma_stat_emu_SR_bin_1": [
+   0.951656,
+   0.0476082,
+   0.0476082
+  ],
+  "gamma_stat_emu_SR_bin_10": [
+   1.01869,
+   0.0151302,
+   0.0151302
+  ],
+  "gamma_stat_emu_SR_bin_11": [
+   0.981478,
+   0.0176298,
+   0.0176298
+  ],
+  "gamma_stat_emu_SR_bin_12": [
+   0.997429,
+   0.0199968,
+   0.0199968
+  ],
+  "gamma_stat_emu_SR_bin_13": [
+   0.962698,
+   0.0169575,
+   0.0169575
+  ],
+  "gamma_stat_emu_SR_bin_14": [
+   1.01029,
+   0.0117581,
+   0.0117581
+  ],
+  "gamma_stat_emu_SR_bin_2": [
+   0.975297,
+   0.0315352,
+   0.0315352
+  ],
+  "gamma_stat_emu_SR_bin_3": [
+   1.0073,
+   0.0174546,
+   0.0174546
+  ],
+  "gamma_stat_emu_SR_bin_4": [
+   1.00465,
+   0.0104127,
+   0.0104127
+  ],
+  "gamma_stat_emu_SR_bin_5": [
+   0.995109,
+   0.00854091,
+   0.00854091
+  ],
+  "gamma_stat_emu_SR_bin_6": [
+   0.994505,
+   0.00810334,
+   0.00810334
+  ],
+  "gamma_stat_emu_SR_bin_7": [
+   1.00413,
+   0.00860998,
+   0.00860998
+  ],
+  "gamma_stat_emu_SR_bin_8": [
+   1.0112,
+   0.0103273,
+   0.0103273
+  ],
+  "gamma_stat_emu_SR_bin_9": [
+   0.981603,
+   0.0124149,
+   0.0124149
+  ],
+  "mu_ttbar": [
+   1.06835,
+   0.0411919,
+   0.0411919
+  ]
+ },
+ "nll": 87047.60293,
+ "err_decomp": {
+  "TOT_ERROR": 0.0414228,
+  "STAT_ERROR": 0.0121672,
+  "SYST_ERROR": 0.0375009,
+  "MCSTAT_ERROR": 0.012708,
+  "TOTSYST_ERROR": 0.0395956,
+  "STAT_ERR_NO_NF": 0.0120818,
+  "NF_ERROR": 0.00143883,
+  "alpha_BTag": -0.00451017,
+  "alpha_ElectronID": -0.00966738,
+  "alpha_ElectronReco": -0.0078153,
+  "alpha_ElectronScale": -0.00904801,
+  "alpha_EmuTrigger": -0.0285274,
+  "alpha_JES": -0.00230971,
+  "alpha_L1Prefiring": 0.00289781,
+  "alpha_Lumi": -0.0102039,
+  "alpha_MET_Unclustered": 0.00290485,
+  "alpha_MuonID": -0.00352437,
+  "alpha_MuonIso": -0.00436031,
+  "alpha_MuonScale": -0.00298739,
+  "alpha_PDF": -0.00458923,
+  "alpha_PS_FSR": -0.00345306,
+  "alpha_PS_ISR": -0.00270046,
+  "alpha_Pileup": 0.00671399,
+  "alpha_QCDOSSS_emu": 0.000874199,
+  "alpha_QCDScale": -0.00613636,
+  "alpha_TopPt": -0.000417683,
+  "alpha_XS_DYll": -0.000141482,
+  "alpha_XS_DYlowmass": 0.00149457,
+  "alpha_XS_DYtautau_out": 0.000832226,
+  "alpha_XS_SingleTop": 0.00107195,
+  "alpha_XS_WJets": 0.00145261,
+  "alpha_XS_WW": 0.00623976,
+  "alpha_XS_WZ": 0.000156991,
+  "alpha_XS_ZZ": -2.58434e-05,
+  "gamma_stat_emu_CRtt_bin_0": 0.00165983,
+  "gamma_stat_emu_CRtt_bin_1": -0.00159005,
+  "gamma_stat_emu_CRtt_bin_2": -0.00116793,
+  "gamma_stat_emu_CRtt_bin_3": -0.000851854,
+  "gamma_stat_emu_CRtt_bin_4": 0.000920855,
+  "gamma_stat_emu_SR_bin_0": 0.00534191,
+  "gamma_stat_emu_SR_bin_1": 0.00161922,
+  "gamma_stat_emu_SR_bin_10": -0.00165273,
+  "gamma_stat_emu_SR_bin_11": 0.00348881,
+  "gamma_stat_emu_SR_bin_12": 0.00337997,
+  "gamma_stat_emu_SR_bin_13": 0.00233792,
+  "gamma_stat_emu_SR_bin_14": 0.00153541,
+  "gamma_stat_emu_SR_bin_2": -0.000142834,
+  "gamma_stat_emu_SR_bin_3": -0.00405707,
+  "gamma_stat_emu_SR_bin_4": -0.000538743,
+  "gamma_stat_emu_SR_bin_5": 0.00066075,
+  "gamma_stat_emu_SR_bin_6": 0.000225025,
+  "gamma_stat_emu_SR_bin_7": -0.00437335,
+  "gamma_stat_emu_SR_bin_8": -0.00593922,
+  "gamma_stat_emu_SR_bin_9": -0.00403803,
+  "mu_ttbar": 0.00143883
+ },
+ "grouped_impact": {
+  "Background modelling": 0.00132871,
+  "Background normalisation": 0.00793744,
+  "Electron efficiency": 0.0131852,
+  "Electron energy": 0.0101101,
+  "Emu trigger": 0.0298441,
+  "Fakes": 0.000995955,
+  "FullSyst": 0.0409288,
+  "Gammas": 0.0162622,
+  "Jets": 0.00277822,
+  "L1 prefiring": 0.00295012,
+  "Luminosity": 0.0103895,
+  "MET": 0.00733849,
+  "Muon efficiency": 0.00571056,
+  "Muon momentum": 0.00301889,
+  "NormFactors": 0.0346741,
+  "Pileup": 0.00866917,
+  "Signal modelling": 0.00925879,
+  "b tagging": 0.00597067
+ },
+ "grouped_impact_file": "GroupedImpact_mu_Z.txt",
+ "poi_stat_only": {
+  "value": 0.93929,
+  "err_up": 0.00485201,
+  "err_down": 0.00483723,
+  "err": 0.00484462
+ },
+ "table_prefit": [
+  {
+   "Region": "e#mu",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 52984.83529663167,
+     "Error": 2539.5837282374587
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 189.14325138053877,
+     "Error": 12.316489140102886
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [none]",
+     "Yield": 275.490128239282,
+     "Error": 57.66024943369375
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [none]",
+     "Yield": 498.59626462884995,
+     "Error": 33.1565384576424
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
+     "Yield": 2040.4103179203942,
+     "Error": 142.44537877608886
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 848.8181128633819,
+     "Error": 94.41775493607463
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 5341.562517528089,
+     "Error": 320.63963272785026
+    },
+    {
+     "Sample": "W+jets [none]",
+     "Yield": 1400.6749358941681,
+     "Error": 194.79426115669088
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 3447.0226096340325,
+     "Error": 367.81425926834015
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 194.20811154121557,
+     "Error": 20.946163253003817
+    },
+    {
+     "Sample": "ZZ [none]",
+     "Yield": 56.677678846817976,
+     "Error": 6.321327856394948
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 15240.600290937811,
+     "Error": 423.0358216510992
+    },
+    {
+     "Sample": "Total",
+     "Yield": 82518.03951604625,
+     "Error": 3051.9908554996996
+    },
+    {
+     "Data": "Data",
+     "Yield": 79300
+    }
+   ]
+  },
+  {
+   "Region": "e#mu t#bar{t} CR",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 116.41235537334323,
+     "Error": 25.42360980600022
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 0.860776359578295,
+     "Error": 0.349693532321099
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [none]",
+     "Yield": 4.9999999999999996e-06,
+     "Error": 5.037509007366503e-07
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [none]",
+     "Yield": 15.785341984848106,
+     "Error": 1.4683891441442725
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
+     "Yield": 9.375030847470391,
+     "Error": 3.0513580374433222
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 3420.563354277215,
+     "Error": 365.7817269834794
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 37650.31282889225,
+     "Error": 1412.2371948474367
+    },
+    {
+     "Sample": "W+jets [none]",
+     "Yield": 352.15295305054883,
+     "Error": 56.3182878181429
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 1989.3220335101562,
+     "Error": 234.35705173060154
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 82.0538843622922,
+     "Error": 9.568931851055392
+    },
+    {
+     "Sample": "ZZ [none]",
+     "Yield": 4.9093389141948345,
+     "Error": 0.6492405716894782
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 424.27340675100226,
+     "Error": 13.325392571299412
+    },
+    {
+     "Sample": "Total",
+     "Yield": 44066.021309322896,
+     "Error": 1715.6448392455422
+    },
+    {
+     "Data": "Data",
+     "Yield": 45931
+    }
+   ]
+  }
+ ],
+ "table_postfit": [
+  {
+   "Region": "e#mu",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 50307.97635114362,
+     "Error": 368.9817003318001
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 183.76453798207095,
+     "Error": 11.31004641314328
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [none]",
+     "Yield": 274.8541964587054,
+     "Error": 42.7685882377142
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [none]",
+     "Yield": 488.7373751725006,
+     "Error": 30.797478386332006
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
+     "Yield": 1972.7289067045615,
+     "Error": 125.6777238647671
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 845.0882391613721,
+     "Error": 86.42244178256183
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 5582.802323383193,
+     "Error": 224.8826256610823
+    },
+    {
+     "Sample": "W+jets [none]",
+     "Yield": 1311.8027437171324,
+     "Error": 139.40360607753342
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 3344.942331624434,
+     "Error": 273.03756828048216
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 189.46845108985735,
+     "Error": 20.05680185842188
+    },
+    {
+     "Sample": "ZZ [none]",
+     "Yield": 55.60309078191065,
+     "Error": 6.031699953222701
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 14784.714984809505,
+     "Error": 308.74301217126583
+    },
+    {
+     "Sample": "Total",
+     "Yield": 79342.48353202885,
+     "Error": 279.74232454253837
+    },
+    {
+     "Data": "Data",
+     "Yield": 79300
+    }
+   ]
+  },
+  {
+   "Region": "e#mu t#bar{t} CR",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 123.28500661118362,
+     "Error": 11.29580094476577
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 0.6944725072543457,
+     "Error": 0.2180341947326244
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [none]",
+     "Yield": 4.9287433669348464e-06,
+     "Error": 4.954930634108382e-07
+    },
+    {
+     "Sample": "Z#rightarrow#mu#mu [none]",
+     "Yield": 15.884964156628806,
+     "Error": 1.2178310862668464
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
+     "Yield": 9.911325256282321,
+     "Error": 1.8251102951163582
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 3425.8676702913153,
+     "Error": 354.0348444655149
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 39594.2168431688,
+     "Error": 456.723218208049
+    },
+    {
+     "Sample": "W+jets [none]",
+     "Yield": 286.73151484056035,
+     "Error": 39.44396362320381
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 1970.9325921770812,
+     "Error": 165.47231463695144
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 81.45407422303721,
+     "Error": 8.73854209709916
+    },
+    {
+     "Sample": "ZZ [none]",
+     "Yield": 5.404815918425298,
+     "Error": 0.6387677243432872
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 412.0036387696601,
+     "Error": 10.771998111040771
+    },
+    {
+     "Sample": "Total",
+     "Yield": 45926.386922848964,
+     "Error": 214.64841379677014
+    },
+    {
+     "Data": "Data",
+     "Yield": 45931
+    }
+   ]
+  }
+ ],
+ "gof": {
+  "gof_probability": 0.0339111,
+  "gof_chi2_ndf": null
+ },
+ "minos_status": 0,
+ "poi_asimov": null,
+ "asimov_minos_status": null,
+ "tau_id_sf": {},
+ "tau_es": {},
+ "mu_ttbar": {
+  "value": 1.06835,
+  "err_up": 0.0411919,
+  "err_down": 0.0411919
+ },
+ "prediction": {
+  "sigma_fid_tautau_pb": 4.500519576488651,
+  "sigma_tautau_60_120_pb": 1944.8826556737133,
+  "sigma_tautau_pb": 2019.6751428185198
+ },
+ "sigma_60_120_pb": {
+  "value": 1867.7991764987414,
+  "up": 82.04506931786116,
+  "down": 78.30000327609585,
+  "stat": 9.422217411329985,
+  "note": "sigma(pp -> Z/gamma* -> tautau, 60 < m_LHE < 120 GeV) = mu_Z x aMC@NLO prediction normalised to 6077.22 pb (m > 50)"
+ },
+ "grouped_impact_quadrature_sum": 0.05602844484986733,
+ "grouped_impact_scale": 0.7357387860837192,
+ "lumi_pb": 16393.381,
+ "channels": [
+  "emu"
+ ],
+ "tau_id_fixed": true,
+ "region_set": "nominal",
+ "scaled_systematics": {}
+}

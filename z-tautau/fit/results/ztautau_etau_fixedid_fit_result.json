@@ -1,0 +1,2521 @@
+{
+ "job": "ztautau_etau_fixedid",
+ "poi": "mu_Z",
+ "poi_value": 1.01583,
+ "poi_err_up": 0.0695359,
+ "poi_err_down": 0.064541,
+ "poi_err": 0.06703845,
+ "nps": {
+  "BTag": [
+   0.080049,
+   0.990499,
+   0.990499
+  ],
+  "ElectronID": [
+   -0.0462604,
+   0.992663,
+   0.992663
+  ],
+  "ElectronReco": [
+   -0.0210593,
+   0.992915,
+   0.992915
+  ],
+  "ElectronScale": [
+   -0.229547,
+   0.977266,
+   0.977266
+  ],
+  "ElectronTrigger": [
+   0.106943,
+   0.974062,
+   0.974062
+  ],
+  "ElectronTrigger_lowpt": [
+   -0.1,
+   0.968655,
+   0.968655
+  ],
+  "FakeClosure_etau": [
+   0.352684,
+   0.968623,
+   0.968623
+  ],
+  "FakeFrac_etau": [
+   1.90668,
+   0.375397,
+   0.375397
+  ],
+  "FakeMCSub_etau": [
+   -0.204872,
+   0.988625,
+   0.988625
+  ],
+  "FakeOSSS_etau": [
+   0.341279,
+   0.930744,
+   0.930744
+  ],
+  "FakeTT_etau": [
+   0.318818,
+   0.972136,
+   0.972136
+  ],
+  "FakeWmT_etau": [
+   0.840139,
+   0.710821,
+   0.710821
+  ],
+  "JES": [
+   -0.525134,
+   0.883429,
+   0.883429
+  ],
+  "L1Prefiring": [
+   -0.056391,
+   0.992168,
+   0.992168
+  ],
+  "Lumi": [
+   -0.0057043,
+   0.990133,
+   0.990133
+  ],
+  "MET_Unclustered": [
+   1.0786,
+   0.779646,
+   0.779646
+  ],
+  "PDF": [
+   0.132625,
+   0.983638,
+   0.983638
+  ],
+  "PS_FSR": [
+   0.117197,
+   0.547592,
+   0.547592
+  ],
+  "PS_ISR": [
+   0.00155794,
+   0.928658,
+   0.928658
+  ],
+  "Pileup": [
+   0.0501095,
+   0.709862,
+   0.709862
+  ],
+  "QCDScale": [
+   -0.191522,
+   0.762614,
+   0.762614
+  ],
+  "TauES_DM0": [
+   0.0852161,
+   0.554394,
+   0.554394
+  ],
+  "TauES_DM1": [
+   0.492568,
+   0.399458,
+   0.399458
+  ],
+  "TauES_DM10": [
+   -0.272947,
+   0.479729,
+   0.479729
+  ],
+  "TauES_DM11": [
+   0.397594,
+   0.763218,
+   0.763218
+  ],
+  "TauFakeEle": [
+   0.128192,
+   0.596078,
+   0.596078
+  ],
+  "TauFakeMu": [
+   0.00346901,
+   0.993118,
+   0.993118
+  ],
+  "TopPt": [
+   0.222851,
+   0.962934,
+   0.962934
+  ],
+  "XS_DYll": [
+   0.0559203,
+   0.951881,
+   0.951881
+  ],
+  "XS_DYlowmass": [
+   -0.128391,
+   0.996554,
+   0.996554
+  ],
+  "XS_DYtautau_out": [
+   -0.0214724,
+   0.985809,
+   0.985809
+  ],
+  "XS_SingleTop": [
+   -0.0118932,
+   0.993738,
+   0.993738
+  ],
+  "XS_WJets": [
+   -0.021361,
+   0.991264,
+   0.991264
+  ],
+  "XS_WW": [
+   0.011644,
+   0.992491,
+   0.992491
+  ],
+  "XS_WZ": [
+   0.0266952,
+   0.992156,
+   0.992156
+  ],
+  "XS_ZZ": [
+   0.00279449,
+   0.993208,
+   0.993208
+  ],
+  "gamma_stat_etau_SR_dm0_bin_0": [
+   1.2893,
+   0.292468,
+   0.292468
+  ],
+  "gamma_stat_etau_SR_dm0_bin_1": [
+   0.951838,
+   0.161191,
+   0.161191
+  ],
+  "gamma_stat_etau_SR_dm0_bin_10": [
+   0.985998,
+   0.0419669,
+   0.0419669
+  ],
+  "gamma_stat_etau_SR_dm0_bin_11": [
+   0.971981,
+   0.0468877,
+   0.0468877
+  ],
+  "gamma_stat_etau_SR_dm0_bin_12": [
+   0.943401,
+   0.054559,
+   0.054559
+  ],
+  "gamma_stat_etau_SR_dm0_bin_13": [
+   1.0125,
+   0.0501832,
+   0.0501832
+  ],
+  "gamma_stat_etau_SR_dm0_bin_14": [
+   0.961551,
+   0.045378,
+   0.045378
+  ],
+  "gamma_stat_etau_SR_dm0_bin_2": [
+   0.860215,
+   0.171808,
+   0.171808
+  ],
+  "gamma_stat_etau_SR_dm0_bin_3": [
+   0.958275,
+   0.113145,
+   0.113145
+  ],
+  "gamma_stat_etau_SR_dm0_bin_4": [
+   1.13054,
+   0.0831315,
+   0.0831315
+  ],
+  "gamma_stat_etau_SR_dm0_bin_5": [
+   0.972576,
+   0.0570883,
+   0.0570883
+  ],
+  "gamma_stat_etau_SR_dm0_bin_6": [
+   1.00799,
+   0.057439,
+   0.057439
+  ],
+  "gamma_stat_etau_SR_dm0_bin_7": [
+   1.04023,
+   0.0445431,
+   0.0445431
+  ],
+  "gamma_stat_etau_SR_dm0_bin_8": [
+   0.992794,
+   0.0452885,
+   0.0452885
+  ],
+  "gamma_stat_etau_SR_dm0_bin_9": [
+   0.991951,
+   0.0458425,
+   0.0458425
+  ],
+  "gamma_stat_etau_SR_dm10_bin_0": [
+   0.923946,
+   0.19759,
+   0.19759
+  ],
+  "gamma_stat_etau_SR_dm10_bin_1": [
+   1.79935,
+   0.315776,
+   0.315776
+  ],
+  "gamma_stat_etau_SR_dm10_bin_10": [
+   1.04058,
+   0.0327622,
+   0.0327622
+  ],
+  "gamma_stat_etau_SR_dm10_bin_11": [
+   1.0005,
+   0.0319566,
+   0.0319566
+  ],
+  "gamma_stat_etau_SR_dm10_bin_12": [
+   1.01153,
+   0.0402805,
+   0.0402805
+  ],
+  "gamma_stat_etau_SR_dm10_bin_13": [
+   0.975209,
+   0.0337745,
+   0.0337745
+  ],
+  "gamma_stat_etau_SR_dm10_bin_14": [
+   0.982064,
+   0.0309338,
+   0.0309338
+  ],
+  "gamma_stat_etau_SR_dm10_bin_2": [
+   0.776308,
+   0.121903,
+   0.121903
+  ],
+  "gamma_stat_etau_SR_dm10_bin_3": [
+   0.852593,
+   0.10101,
+   0.10101
+  ],
+  "gamma_stat_etau_SR_dm10_bin_4": [
+   0.943142,
+   0.0632203,
+   0.0632203
+  ],
+  "gamma_stat_etau_SR_dm10_bin_5": [
+   1.02528,
+   0.0510228,
+   0.0510228
+  ],
+  "gamma_stat_etau_SR_dm10_bin_6": [
+   0.945634,
+   0.0294983,
+   0.0294983
+  ],
+  "gamma_stat_etau_SR_dm10_bin_7": [
+   0.996174,
+   0.0273656,
+   0.0273656
+  ],
+  "gamma_stat_etau_SR_dm10_bin_8": [
+   1.00244,
+   0.0307553,
+   0.0307553
+  ],
+  "gamma_stat_etau_SR_dm10_bin_9": [
+   0.978846,
+   0.0368567,
+   0.0368567
+  ],
+  "gamma_stat_etau_SR_dm11_bin_0": [
+   0.679961,
+   0.26423,
+   0.26423
+  ],
+  "gamma_stat_etau_SR_dm11_bin_1": [
+   1.47515,
+   0.48774,
+   0.48774
+  ],
+  "gamma_stat_etau_SR_dm11_bin_10": [
+   1.07748,
+   0.0601365,
+   0.0601365
+  ],
+  "gamma_stat_etau_SR_dm11_bin_11": [
+   1.01485,
+   0.0662006,
+   0.0662006
+  ],
+  "gamma_stat_etau_SR_dm11_bin_12": [
+   1.0307,
+   0.0744635,
+   0.0744635
+  ],
+  "gamma_stat_etau_SR_dm11_bin_13": [
+   0.97851,
+   0.0604183,
+   0.0604183
+  ],
+  "gamma_stat_etau_SR_dm11_bin_14": [
+   0.982236,
+   0.0406318,
+   0.0406318
+  ],
+  "gamma_stat_etau_SR_dm11_bin_2": [
+   0.844989,
+   0.284623,
+   0.284623
+  ],
+  "gamma_stat_etau_SR_dm11_bin_3": [
+   0.901548,
+   0.204506,
+   0.204506
+  ],
+  "gamma_stat_etau_SR_dm11_bin_4": [
+   0.980076,
+   0.121198,
+   0.121198
+  ],
+  "gamma_stat_etau_SR_dm11_bin_5": [
+   1.05997,
+   0.0857078,
+   0.0857078
+  ],
+  "gamma_stat_etau_SR_dm11_bin_6": [
+   0.958247,
+   0.0602461,
+   0.0602461
+  ],
+  "gamma_stat_etau_SR_dm11_bin_7": [
+   1.01978,
+   0.0563348,
+   0.0563348
+  ],
+  "gamma_stat_etau_SR_dm11_bin_8": [
+   0.993082,
+   0.0606314,
+   0.0606314
+  ],
+  "gamma_stat_etau_SR_dm11_bin_9": [
+   1.0358,
+   0.0718843,
+   0.0718843
+  ],
+  "gamma_stat_etau_SR_dm1_bin_0": [
+   1.123,
+   0.184675,
+   0.184675
+  ],
+  "gamma_stat_etau_SR_dm1_bin_1": [
+   1.00189,
+   0.0648317,
+   0.0648317
+  ],
+  "gamma_stat_etau_SR_dm1_bin_10": [
+   0.99938,
+   0.0231535,
+   0.0231535
+  ],
+  "gamma_stat_etau_SR_dm1_bin_11": [
+   1.01342,
+   0.023268,
+   0.023268
+  ],
+  "gamma_stat_etau_SR_dm1_bin_12": [
+   1.03793,
+   0.0256331,
+   0.0256331
+  ],
+  "gamma_stat_etau_SR_dm1_bin_13": [
+   0.980951,
+   0.0207178,
+   0.0207178
+  ],
+  "gamma_stat_etau_SR_dm1_bin_14": [
+   1.01154,
+   0.0193063,
+   0.0193063
+  ],
+  "gamma_stat_etau_SR_dm1_bin_2": [
+   0.950033,
+   0.0752277,
+   0.0752277
+  ],
+  "gamma_stat_etau_SR_dm1_bin_3": [
+   1.06426,
+   0.0664183,
+   0.0664183
+  ],
+  "gamma_stat_etau_SR_dm1_bin_4": [
+   1.06293,
+   0.0474439,
+   0.0474439
+  ],
+  "gamma_stat_etau_SR_dm1_bin_5": [
+   1.0066,
+   0.031817,
+   0.031817
+  ],
+  "gamma_stat_etau_SR_dm1_bin_6": [
+   1.0041,
+   0.023431,
+   0.023431
+  ],
+  "gamma_stat_etau_SR_dm1_bin_7": [
+   0.996121,
+   0.0208284,
+   0.0208284
+  ],
+  "gamma_stat_etau_SR_dm1_bin_8": [
+   0.994488,
+   0.0226266,
+   0.0226266
+  ],
+  "gamma_stat_etau_SR_dm1_bin_9": [
+   1.00013,
+   0.026019,
+   0.026019
+  ],
+  "mu_ttbar": [
+   1.37608,
+   0.214579,
+   0.214579
+  ]
+ },
+ "nll": 26666.54466,
+ "err_decomp": {
+  "TOT_ERROR": 0.0670748,
+  "STAT_ERROR": 0.0252223,
+  "SYST_ERROR": 0.0574518,
+  "MCSTAT_ERROR": 0.0237096,
+  "TOTSYST_ERROR": 0.0621519,
+  "STAT_ERR_NO_NF": 0.0251001,
+  "NF_ERROR": 0.00247971,
+  "alpha_BTag": -0.000468452,
+  "alpha_ElectronID": -0.007404,
+  "alpha_ElectronReco": -0.00231483,
+  "alpha_ElectronScale": -0.00702496,
+  "alpha_ElectronTrigger": -0.012089,
+  "alpha_ElectronTrigger_lowpt": -0.0284069,
+  "alpha_FakeClosure_etau": 9.51564e-05,
+  "alpha_FakeFrac_etau": -0.000474485,
+  "alpha_FakeMCSub_etau": 0.00465994,
+  "alpha_FakeOSSS_etau": 0.000236993,
+  "alpha_FakeTT_etau": 0.000405096,
+  "alpha_FakeWmT_etau": 0.00186444,
+  "alpha_JES": 0.0143364,
+  "alpha_L1Prefiring": 0.00233851,
+  "alpha_Lumi": -0.0111758,
+  "alpha_MET_Unclustered": 0.0292426,
+  "alpha_PDF": -0.00631516,
+  "alpha_PS_FSR": 0.00210873,
+  "alpha_PS_ISR": -0.0080263,
+  "alpha_Pileup": 0.0180728,
+  "alpha_QCDScale": -0.0137462,
+  "alpha_TauES_DM0": -0.00235722,
+  "alpha_TauES_DM1": -0.0109787,
+  "alpha_TauES_DM10": -0.012905,
+  "alpha_TauES_DM11": -0.00792076,
+  "alpha_TauFakeEle": 0.00495463,
+  "alpha_TauFakeMu": 6.93543e-06,
+  "alpha_TopPt": -0.00302846,
+  "alpha_XS_DYll": 0.00149914,
+  "alpha_XS_DYlowmass": 0.000837716,
+  "alpha_XS_DYtautau_out": 0.00213696,
+  "alpha_XS_SingleTop": 0.000328132,
+  "alpha_XS_WJets": -1.5441e-05,
+  "alpha_XS_WW": 0.000118295,
+  "alpha_XS_WZ": -0.000344814,
+  "alpha_XS_ZZ": -0.000141667,
+  "gamma_stat_etau_SR_dm0_bin_0": 0.000622999,
+  "gamma_stat_etau_SR_dm0_bin_1": 0.000959634,
+  "gamma_stat_etau_SR_dm0_bin_10": -0.00220226,
+  "gamma_stat_etau_SR_dm0_bin_11": 0.00168861,
+  "gamma_stat_etau_SR_dm0_bin_12": 0.000630117,
+  "gamma_stat_etau_SR_dm0_bin_13": 0.00147567,
+  "gamma_stat_etau_SR_dm0_bin_14": 0.000420805,
+  "gamma_stat_etau_SR_dm0_bin_2": -0.00114429,
+  "gamma_stat_etau_SR_dm0_bin_3": -0.00334013,
+  "gamma_stat_etau_SR_dm0_bin_4": -0.00490267,
+  "gamma_stat_etau_SR_dm0_bin_5": -0.00286344,
+  "gamma_stat_etau_SR_dm0_bin_6": -0.00768897,
+  "gamma_stat_etau_SR_dm0_bin_7": -0.00330492,
+  "gamma_stat_etau_SR_dm0_bin_8": 0.00230807,
+  "gamma_stat_etau_SR_dm0_bin_9": 0.0068904,
+  "gamma_stat_etau_SR_dm10_bin_0": 8.9866e-05,
+  "gamma_stat_etau_SR_dm10_bin_1": 0.0012488,
+  "gamma_stat_etau_SR_dm10_bin_10": -0.00122938,
+  "gamma_stat_etau_SR_dm10_bin_11": 0.00260489,
+  "gamma_stat_etau_SR_dm10_bin_12": 0.00234919,
+  "gamma_stat_etau_SR_dm10_bin_13": 0.00147947,
+  "gamma_stat_etau_SR_dm10_bin_14": 0.00302276,
+  "gamma_stat_etau_SR_dm10_bin_2": 0.00140165,
+  "gamma_stat_etau_SR_dm10_bin_3": -0.00277824,
+  "gamma_stat_etau_SR_dm10_bin_4": -0.00306225,
+  "gamma_stat_etau_SR_dm10_bin_5": -0.000760538,
+  "gamma_stat_etau_SR_dm10_bin_6": -0.00697763,
+  "gamma_stat_etau_SR_dm10_bin_7": -0.00826159,
+  "gamma_stat_etau_SR_dm10_bin_8": -0.00408465,
+  "gamma_stat_etau_SR_dm10_bin_9": 0.00183874,
+  "gamma_stat_etau_SR_dm11_bin_0": 0.00300068,
+  "gamma_stat_etau_SR_dm11_bin_1": 0.000481564,
+  "gamma_stat_etau_SR_dm11_bin_10": -0.000499565,
+  "gamma_stat_etau_SR_dm11_bin_11": 0.000615997,
+  "gamma_stat_etau_SR_dm11_bin_12": 0.00101762,
+  "gamma_stat_etau_SR_dm11_bin_13": 0.000407343,
+  "gamma_stat_etau_SR_dm11_bin_14": 9.89496e-05,
+  "gamma_stat_etau_SR_dm11_bin_2": 0.00136394,
+  "gamma_stat_etau_SR_dm11_bin_3": 0.00221052,
+  "gamma_stat_etau_SR_dm11_bin_4": -0.000902643,
+  "gamma_stat_etau_SR_dm11_bin_5": -0.00298994,
+  "gamma_stat_etau_SR_dm11_bin_6": -0.00379154,
+  "gamma_stat_etau_SR_dm11_bin_7": -0.00367444,
+  "gamma_stat_etau_SR_dm11_bin_8": -0.00202547,
+  "gamma_stat_etau_SR_dm11_bin_9": -0.00286997,
+  "gamma_stat_etau_SR_dm1_bin_0": -0.000643248,
+  "gamma_stat_etau_SR_dm1_bin_1": 0.000114797,
+  "gamma_stat_etau_SR_dm1_bin_10": 0.00102015,
+  "gamma_stat_etau_SR_dm1_bin_11": -0.0023016,
+  "gamma_stat_etau_SR_dm1_bin_12": 8.47678e-05,
+  "gamma_stat_etau_SR_dm1_bin_13": -0.000373022,
+  "gamma_stat_etau_SR_dm1_bin_14": 0.00129173,
+  "gamma_stat_etau_SR_dm1_bin_2": 0.000444481,
+  "gamma_stat_etau_SR_dm1_bin_3": 0.000413294,
+  "gamma_stat_etau_SR_dm1_bin_4": -0.00811504,
+  "gamma_stat_etau_SR_dm1_bin_5": -0.00684266,
+  "gamma_stat_etau_SR_dm1_bin_6": 0.000650621,
+  "gamma_stat_etau_SR_dm1_bin_7": 0.000987344,
+  "gamma_stat_etau_SR_dm1_bin_8": -0.00133373,
+  "gamma_stat_etau_SR_dm1_bin_9": -0.002624,
+  "mu_ttbar": 0.00247971
+ },
+ "grouped_impact": {
+  "Background modelling": 0.00315288,
+  "Background normalisation": 0.00286479,
+  "Electron efficiency": 0.00782077,
+  "Electron energy": 0.00717442,
+  "Electron trigger": 0.0316085,
+  "Fakes": 0.00575091,
+  "FullSyst": 0.0658255,
+  "Gammas": 0.0273143,
+  "Jets": 0.0162329,
+  "L1 prefiring": 0.0023575,
+  "Luminosity": 0.0112899,
+  "MET": 0.0375253,
+  "NormFactors": 0.0114765,
+  "Pileup": 0.025437,
+  "Signal modelling": 0.0214118,
+  "Tau ID": 0.00830333,
+  "Tau energy scale": 0.0322985,
+  "b tagging": 0.000471478
+ },
+ "grouped_impact_file": "GroupedImpact_mu_Z.txt",
+ "poi_stat_only": {
+  "value": 0.989086,
+  "err_up": 0.0129007,
+  "err_down": 0.0128282,
+  "err": 0.01286445
+ },
+ "table_prefit": [
+  {
+   "Region": "e#tau_{h}, DM 0",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
+     "Yield": 1001.7213874072798,
+     "Error": 120.01223002596184
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 2.54152655252152,
+     "Error": 0.6682217133081584
+    },
+    {
+     "Sample": "Z#rightarrowee [0]",
+     "Yield": 0.18604137247920677,
+     "Error": 0.13427723701756705
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 615.3515421164876,
+     "Error": 105.4081089183689
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
+     "Yield": 201.18092817263366,
+     "Error": 22.823702192580516
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
+     "Yield": 0.38928295443884586,
+     "Error": 0.15046995092556834
+    },
+    {
+     "Sample": "single t [0]",
+     "Yield": 14.649554070764333,
+     "Error": 1.9005011419906332
+    },
+    {
+     "Sample": "single t [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 0.10861886395830839,
+     "Error": 0.018475086335890612
+    },
+    {
+     "Sample": "t#bar{t} [0]",
+     "Yield": 163.80313095962168,
+     "Error": 9.904281689820468
+    },
+    {
+     "Sample": "t#bar{t} [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 3.0695105885804974,
+     "Error": 0.4104870118289416
+    },
+    {
+     "Sample": "W+jets [0]",
+     "Yield": 13.815338385777938,
+     "Error": 1.7488002186875458
+    },
+    {
+     "Sample": "W+jets [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [0]",
+     "Yield": 12.772269861379966,
+     "Error": 1.9970664487392633
+    },
+    {
+     "Sample": "WW [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [0]",
+     "Yield": 4.083891591122125,
+     "Error": 0.5211375293290246
+    },
+    {
+     "Sample": "WZ [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 0.32713660944527384,
+     "Error": 0.09498411378804343
+    },
+    {
+     "Sample": "ZZ [0]",
+     "Yield": 1.0580726268744187,
+     "Error": 0.1643957201050619
+    },
+    {
+     "Sample": "ZZ [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [none]",
+     "Yield": 0.3286309908124379,
+     "Error": 0.1785155946618705
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 586.4773342553491,
+     "Error": 59.39549296334651
+    },
+    {
+     "Sample": "Total",
+     "Yield": 2621.864197379527,
+     "Error": 202.2502448197418
+    },
+    {
+     "Data": "Data",
+     "Yield": 2639
+    }
+   ]
+  },
+  {
+   "Region": "e#tau_{h}, DM 1",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
+     "Yield": 4641.9319666780875,
+     "Error": 509.2411052841525
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 1.390283870079363,
+     "Error": 0.43486217041888936
+    },
+    {
+     "Sample": "Z#rightarrowee [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 959.1477789666183,
+     "Error": 150.90886336670357
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [1]",
+     "Yield": 1.3378499999999999e-05,
+     "Error": 1.4707308495523624e-06
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
+     "Yield": 509.2347860416794,
+     "Error": 50.48383198629523
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [1]",
+     "Yield": 70.41086197113694,
+     "Error": 7.915999589015255
+    },
+    {
+     "Sample": "single t [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 0.36637080350734574,
+     "Error": 0.07282121071645456
+    },
+    {
+     "Sample": "t#bar{t} [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [1]",
+     "Yield": 728.8101581936978,
+     "Error": 40.21430990290824
+    },
+    {
+     "Sample": "t#bar{t} [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 2.382979132179214,
+     "Error": 0.4015545119303321
+    },
+    {
+     "Sample": "W+jets [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "W+jets [1]",
+     "Yield": 8.673408192964837,
+     "Error": 1.8920497975169006
+    },
+    {
+     "Sample": "WW [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [1]",
+     "Yield": 66.19671085438458,
+     "Error": 8.64224733743198
+    },
+    {
+     "Sample": "WW [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 0.2266297747469541,
+     "Error": 0.03949749730135439
+    },
+    {
+     "Sample": "WZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [1]",
+     "Yield": 14.422245817662468,
+     "Error": 1.7597426109789194
+    },
+    {
+     "Sample": "WZ [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 0.9572509338541189,
+     "Error": 0.20008598396906532
+    },
+    {
+     "Sample": "ZZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [1]",
+     "Yield": 8.91446784697392,
+     "Error": 1.0886191980493531
+    },
+    {
+     "Sample": "ZZ [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [none]",
+     "Yield": 0.796296594331465,
+     "Error": 0.24713264955973677
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 2503.919598886045,
+     "Error": 243.8037548588643
+    },
+    {
+     "Sample": "Total",
+     "Yield": 9517.78180793645,
+     "Error": 660.9925341351724
+    },
+    {
+     "Data": "Data",
+     "Yield": 10106
+    }
+   ]
+  },
+  {
+   "Region": "e#tau_{h}, DM 10",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
+     "Yield": 2701.408329342766,
+     "Error": 247.30103140127468
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrowee [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 48.7844812509296,
+     "Error": 8.498127388763622
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [10]",
+     "Yield": 7.615849863850158,
+     "Error": 2.266221478786411
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
+     "Yield": 309.8101189212583,
+     "Error": 30.5959474001818
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [10]",
+     "Yield": 38.674921636766896,
+     "Error": 4.550183293062204
+    },
+    {
+     "Sample": "single t [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [10]",
+     "Yield": 395.6984206707551,
+     "Error": 18.947968538449057
+    },
+    {
+     "Sample": "t#bar{t} [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 0.21936285551122975,
+     "Error": 0.08999524581175178
+    },
+    {
+     "Sample": "W+jets [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "W+jets [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [10]",
+     "Yield": 39.446914236252425,
+     "Error": 4.843045664017132
+    },
+    {
+     "Sample": "WW [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [10]",
+     "Yield": 8.487392942551931,
+     "Error": 0.947362378351106
+    },
+    {
+     "Sample": "WZ [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [10]",
+     "Yield": 4.1718988770472345,
+     "Error": 0.6119444049994931
+    },
+    {
+     "Sample": "ZZ [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 1429.4577116917683,
+     "Error": 193.72274091661112
+    },
+    {
+     "Sample": "Total",
+     "Yield": 4983.775402289457,
+     "Error": 346.40632633667013
+    },
+    {
+     "Data": "Data",
+     "Yield": 4940
+    }
+   ]
+  },
+  {
+   "Region": "e#tau_{h}, DM 11",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
+     "Yield": 561.6068421075382,
+     "Error": 57.469608342162125
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrowee [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 21.883517954189887,
+     "Error": 3.676016698589917
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [11]",
+     "Yield": 3.8869747872205425,
+     "Error": 2.6630437390535038
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
+     "Yield": 48.963597694226905,
+     "Error": 7.057494360681925
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [11]",
+     "Yield": 8.033604419335626,
+     "Error": 0.9411994359319743
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [11]",
+     "Yield": 84.0138863027579,
+     "Error": 4.448600911791344
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 0.1758144295172337,
+     "Error": 0.023253881143955074
+    },
+    {
+     "Sample": "W+jets [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "W+jets [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [11]",
+     "Yield": 9.919971584089678,
+     "Error": 1.2452389152157555
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [11]",
+     "Yield": 1.9346970382544018,
+     "Error": 0.22297919897486182
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [11]",
+     "Yield": 0.3020583504373122,
+     "Error": 0.14920683637497742
+    },
+    {
+     "Sample": "ZZ [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 492.0258989000415,
+     "Error": 86.03116450000591
+    },
+    {
+     "Sample": "Total",
+     "Yield": 1232.7468635676094,
+     "Error": 109.23180103281548
+    },
+    {
+     "Data": "Data",
+     "Yield": 1211
+    }
+   ]
+  }
+ ],
+ "table_postfit": [
+  {
+   "Region": "e#tau_{h}, DM 0",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
+     "Yield": 1000.7497035671332,
+     "Error": 47.13978586506865
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 2.796964580855679,
+     "Error": 0.5654021176760835
+    },
+    {
+     "Sample": "Z#rightarrowee [0]",
+     "Yield": 0.272624326523746,
+     "Error": 0.12504832125179874
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 596.3087449626718,
+     "Error": 45.438260163054956
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
+     "Yield": 186.03400113430234,
+     "Error": 15.604785762690074
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
+     "Yield": 0.3774543754777882,
+     "Error": 0.10286968853607216
+    },
+    {
+     "Sample": "single t [0]",
+     "Yield": 15.05856172220156,
+     "Error": 1.721254259868584
+    },
+    {
+     "Sample": "single t [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 0.10740876208437439,
+     "Error": 0.01417620281400382
+    },
+    {
+     "Sample": "t#bar{t} [0]",
+     "Yield": 223.52508645497142,
+     "Error": 33.41422435097465
+    },
+    {
+     "Sample": "t#bar{t} [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 3.854948288347274,
+     "Error": 0.7056783395755944
+    },
+    {
+     "Sample": "W+jets [0]",
+     "Yield": 13.685127949440082,
+     "Error": 1.6015092465343261
+    },
+    {
+     "Sample": "W+jets [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [0]",
+     "Yield": 12.861388636048673,
+     "Error": 1.542439606896876
+    },
+    {
+     "Sample": "WW [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [0]",
+     "Yield": 4.102896493765065,
+     "Error": 0.45984141194319733
+    },
+    {
+     "Sample": "WZ [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 0.2716244327593946,
+     "Error": 0.06019188811412252
+    },
+    {
+     "Sample": "ZZ [0]",
+     "Yield": 0.9237976860298195,
+     "Error": 0.12712942206789266
+    },
+    {
+     "Sample": "ZZ [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [none]",
+     "Yield": 0.5086859069011583,
+     "Error": 0.18499323376828072
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 596.182323020063,
+     "Error": 38.9597801807549
+    },
+    {
+     "Sample": "Total",
+     "Yield": 2657.621342299576,
+     "Error": 47.51514775132287
+    },
+    {
+     "Data": "Data",
+     "Yield": 2639
+    }
+   ]
+  },
+  {
+   "Region": "e#tau_{h}, DM 1",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
+     "Yield": 4727.942520317418,
+     "Error": 106.67457433014413
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 1.4128304228001154,
+     "Error": 0.29073382124283437
+    },
+    {
+     "Sample": "Z#rightarrowee [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 961.8322737196971,
+     "Error": 72.6263224729489
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [1]",
+     "Yield": 1.3421871312379278e-05,
+     "Error": 1.3831651164987282e-06
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
+     "Yield": 508.6560626610299,
+     "Error": 42.388680630182826
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [1]",
+     "Yield": 72.36939366443951,
+     "Error": 7.614233428771956
+    },
+    {
+     "Sample": "single t [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 0.4057961422326215,
+     "Error": 0.0643032689293125
+    },
+    {
+     "Sample": "t#bar{t} [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [1]",
+     "Yield": 1027.8080323618844,
+     "Error": 151.74320925023315
+    },
+    {
+     "Sample": "t#bar{t} [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 3.5825557761191624,
+     "Error": 0.684644420130437
+    },
+    {
+     "Sample": "W+jets [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "W+jets [1]",
+     "Yield": 8.586444615760216,
+     "Error": 1.5054899646651503
+    },
+    {
+     "Sample": "WW [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [1]",
+     "Yield": 70.11257833810467,
+     "Error": 7.694398925788751
+    },
+    {
+     "Sample": "WW [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 0.22735124936732617,
+     "Error": 0.03461943865509751
+    },
+    {
+     "Sample": "WZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [1]",
+     "Yield": 14.972807932745923,
+     "Error": 1.6077281110983133
+    },
+    {
+     "Sample": "WZ [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 0.977502932965359,
+     "Error": 0.14780479143050246
+    },
+    {
+     "Sample": "ZZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [1]",
+     "Yield": 9.567221122836607,
+     "Error": 1.0636858794793709
+    },
+    {
+     "Sample": "ZZ [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [none]",
+     "Yield": 0.5915299881623635,
+     "Error": 0.16048043301657006
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 2625.3855341976564,
+     "Error": 165.39664359349158
+    },
+    {
+     "Sample": "Total",
+     "Yield": 10034.43044886509,
+     "Error": 96.45464992153677
+    },
+    {
+     "Data": "Data",
+     "Yield": 10106
+    }
+   ]
+  },
+  {
+   "Region": "e#tau_{h}, DM 10",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
+     "Yield": 2553.848756106263,
+     "Error": 62.484589498022295
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrowee [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 52.11525354406185,
+     "Error": 4.886167948878179
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [10]",
+     "Yield": 5.767654042669751,
+     "Error": 1.1523540689767482
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
+     "Yield": 299.8676982793882,
+     "Error": 25.224590713102018
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [10]",
+     "Yield": 38.353794277196805,
+     "Error": 4.161133334891318
+    },
+    {
+     "Sample": "single t [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [10]",
+     "Yield": 537.9357864373787,
+     "Error": 80.9613751871295
+    },
+    {
+     "Sample": "t#bar{t} [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 0.21331527029756125,
+     "Error": 0.0754662526086631
+    },
+    {
+     "Sample": "W+jets [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "W+jets [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [10]",
+     "Yield": 38.32035208615563,
+     "Error": 4.303022339224542
+    },
+    {
+     "Sample": "WW [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [10]",
+     "Yield": 8.280708664059768,
+     "Error": 0.8847437347206979
+    },
+    {
+     "Sample": "WZ [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [10]",
+     "Yield": 3.735226173371915,
+     "Error": 0.4725667744463833
+    },
+    {
+     "Sample": "ZZ [11]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 1454.526195893627,
+     "Error": 110.27209255261512
+    },
+    {
+     "Sample": "Total",
+     "Yield": 4992.964740774471,
+     "Error": 65.28420705450455
+    },
+    {
+     "Data": "Data",
+     "Yield": 4940
+    }
+   ]
+  },
+  {
+   "Region": "e#tau_{h}, DM 11",
+   "Samples": [
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [11]",
+     "Yield": 561.3783326998292,
+     "Error": 24.44544325569733
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (60-120) [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrowee [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z#rightarrowee [none]",
+     "Yield": 23.96011826531984,
+     "Error": 2.439376862988827
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrowll (m<50) [11]",
+     "Yield": 2.5505021268641936,
+     "Error": 1.068025981969866
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [11]",
+     "Yield": 49.0405555007858,
+     "Error": 5.470061548723552
+    },
+    {
+     "Sample": "Z/#gamma*#rightarrow#tau#tau (outside) [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "single t [11]",
+     "Yield": 8.285006591950633,
+     "Error": 0.9166152931645142
+    },
+    {
+     "Sample": "single t [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "t#bar{t} [11]",
+     "Yield": 115.0743856652454,
+     "Error": 18.02743886647692
+    },
+    {
+     "Sample": "t#bar{t} [none]",
+     "Yield": 0.24097714062717246,
+     "Error": 0.04317616714273726
+    },
+    {
+     "Sample": "W+jets [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "W+jets [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WW [11]",
+     "Yield": 10.369186734066941,
+     "Error": 1.22209741702117
+    },
+    {
+     "Sample": "WW [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "WZ [11]",
+     "Yield": 1.9865301980803656,
+     "Error": 0.2194124876300041
+    },
+    {
+     "Sample": "WZ [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [0]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [1]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [10]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "ZZ [11]",
+     "Yield": 0.16756691325564058,
+     "Error": 0.0797439687457512
+    },
+    {
+     "Sample": "ZZ [none]",
+     "Yield": 0,
+     "Error": 0
+    },
+    {
+     "Sample": "jet#rightarrow#tau_{h} / multijet",
+     "Yield": 427.2784463605691,
+     "Error": 34.166555047727506
+    },
+    {
+     "Sample": "Total",
+     "Yield": 1200.3316081965943,
+     "Error": 30.672922548776235
+    },
+    {
+     "Data": "Data",
+     "Yield": 1211
+    }
+   ]
+  }
+ ],
+ "gof": {
+  "gof_probability": 0.493195,
+  "gof_chi2_ndf": null
+ },
+ "minos_status": 0,
+ "poi_asimov": null,
+ "asimov_minos_status": null,
+ "tau_id_sf": {},
+ "tau_es": {
+  "DM0": {
+   "pull": 0.0852161,
+   "constraint": 0.554394,
+   "prior_pct": 3.0
+  },
+  "DM1": {
+   "pull": 0.492568,
+   "constraint": 0.399458,
+   "prior_pct": 3.0
+  },
+  "DM10": {
+   "pull": -0.272947,
+   "constraint": 0.479729,
+   "prior_pct": 3.0
+  },
+  "DM11": {
+   "pull": 0.397594,
+   "constraint": 0.763218,
+   "prior_pct": 3.0
+  }
+ },
+ "mu_ttbar": {
+  "value": 1.37608,
+  "err_up": 0.214579,
+  "err_down": 0.214579
+ },
+ "prediction": {
+  "sigma_fid_tautau_pb": 4.500519576488651,
+  "sigma_tautau_60_120_pb": 1944.8826556737133,
+  "sigma_tautau_pb": 2019.6751428185198
+ },
+ "sigma_60_120_pb": {
+  "value": 1975.6701481130283,
+  "up": 135.23916585666177,
+  "down": 125.52467147983714,
+  "stat": 25.0198456797817,
+  "note": "sigma(pp -> Z/gamma* -> tautau, 60 < m_LHE < 120 GeV) = mu_Z x aMC@NLO prediction normalised to 6077.22 pb (m > 50)"
+ },
+ "grouped_impact_quadrature_sum": 0.07892256603932607,
+ "grouped_impact_scale": 0.8494205569367275,
+ "lumi_pb": 16393.381,
+ "channels": [
+  "etau"
+ ],
+ "tau_id_fixed": true,
+ "region_set": "nominal",
+ "scaled_systematics": {}
+}

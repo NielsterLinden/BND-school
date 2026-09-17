@@ -36,7 +36,7 @@ deviation the brief records is fine. Only the fixed anchors (06 §A) are absolut
 - [ ] **Numbers**: every printed number is read from `presentation/data/<chapter>_*.json`,
       asserted at import, matches the brief's version and the channel `handoff.md` /
       `docs` page the brief cites; L = 16393.381 pb⁻¹; prediction values consistent with
-      `combination/result.md` or the difference explained in the brief. → BLOCK
+      `combination/combLieke/output/result.json` (frozen 17 Sep 2026) or the difference explained in the brief. → BLOCK
 - [ ] **Entry**: the first clip's opening state equals the final state of the clip the brief
       says it chains on (same builder or an exact reproduction; compare the `_t0.png` with that
       clip's `_final.png` by eye; the pixel diff is clip-deliverer's). → MAJOR

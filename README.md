@@ -29,13 +29,15 @@ Keep `handoff.md` up to date so the other groups can pick up where you left off.
 - Do **not** commit data files (ROOT files, large CSVs). Copy them locally and add the path/DOI to your `handoff.md` instead.
 - Strip notebook outputs before committing, but keep the numbers the combination needs (see below) in your `handoff.md`.
 
-## Result so far
+## Result
 
 All three channels are finished and combined in one TRExFitter v1.8.0 MultiFit:
 
-> **σ(pp → Z/γ* → ℓℓ, 60 < m_ℓℓ < 120 GeV) = 1948 ⁺³³₋₃₂ pb** per lepton flavour, assuming lepton
+> **σ(pp → Z/γ* → ℓℓ, 60 < m_ℓℓ < 120 GeV) = 1945 ⁺³¹₋₃₀ pb** per lepton flavour, assuming lepton
 > universality (aMC@NLO: 1954 ⁺⁵⁶₋₈₂ pb). The channels are compatible (−2Δln L = 2.4 for 2 dof,
 > p = 0.30). Result, method, figures: [`combination/combLieke/README.md`](combination/combLieke/README.md).
+
+**The results are frozen (17 Sep 2026):** [`FREEZE.md`](FREEZE.md) has every final number and where it comes from.
 
 The value is carried by μμ. The ee inputs have two problems. The ±5.9 % electron-ID uncertainty comes
 from not vetoing the ECAL barrel–endcap gap; the official scale-factor map gives ~1.2 %. And no electron

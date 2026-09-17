@@ -3,8 +3,11 @@
 One TRExFitter v1.8.0 MultiFit of the three BND-school channels on CMS Open Data 2016 G+H
 (16.4 fb⁻¹, √s = 13 TeV).
 
-> **σ(pp → Z/γ\* → ℓℓ, 60 < m_ℓℓ < 120 GeV) = 1948 ⁺³³₋₃₂ pb** per lepton flavour
+> **σ(pp → Z/γ\* → ℓℓ, 60 < m_ℓℓ < 120 GeV) = 1945 ⁺³¹₋₃₀ pb** per lepton flavour
 > (aMC@NLO: 1954 ⁺⁵⁶₋₈₂ pb; channel compatibility p = 0.30)
+
+Frozen on 17 Sep 2026 (git tag `zmumu-freeze-2026-09-17`, [`../FREEZE.md`](../FREEZE.md)); read and
+present these numbers, do not rerun.
 
 Everything is in [`combLieke/`](combLieke/):
 

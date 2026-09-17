@@ -3,8 +3,12 @@
 Read this first, then the channel `CLAUDE.md` you are working on. Shared workspace of three
 subgroups (Z→ee, Z→μμ, Z→ττ) plus a combination, on CMS 2016 Open Data (NanoAODv9, Run2016G+H).
 
-**State (16 Sep 2026):** all three channels have a result. `combination/combLieke/` combines them in
-one **TRExFitter MultiFit** (σ(Z/γ*→ℓℓ, 60–120 GeV) = 1948 ⁺³³₋₃₂ pb, channel compatibility p = 0.30 —
+> **Frozen on 17 Sep 2026 — read `FREEZE.md` first** (git tag `zmumu-freeze-2026-09-17`). No more reruns or
+> improved analyses: the channel and combination outputs are final; cite them. The talk (`presentation/`) is
+> built on them by the animation agents; `FREEZE.md` lists what there still shows pre-freeze numbers.
+
+**State (17 Sep 2026):** all three channels have a result. `combination/combLieke/` combines them in
+one **TRExFitter MultiFit** (σ(Z/γ*→ℓℓ, 60–120 GeV) = 1945 ⁺³¹₋₃₀ pb, channel compatibility p = 0.30 —
 `combination/combLieke/README.md`, `output/result.json`, `output/plots/`). `combination/CLAUDE.md` is
 the agent guide. The earlier covariance (BLUE) combination and its slide deck were removed; they are in
 the git history. The conventions the combination settled are `fitting/CONVENTIONS.md` §6. Its

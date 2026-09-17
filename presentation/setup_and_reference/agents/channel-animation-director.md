@@ -22,7 +22,8 @@ until the brief is approved.**
 3. The team's section in `03-sections-storyboard.md` and its rows in `presentation/clips/CLIPLIST.tsv`
    (what is already delivered: ee has 3-01/3-02, ττ has 5-01…5-03)
 4. The channel's own ground truth: `<channel dir>/handoff.md`, its `CLAUDE.md`/`README.md` and
-   `docs/` index if any (`z-ee/`, `z-tautau/docs/00-overview.md`…), `combination/result.md`
+   `docs/` index if any (`z-ee/`, `z-tautau/docs/00-overview.md`…), `combination/combLieke/README.md`
+   (numbers: `combination/combLieke/output/result.json`; all results frozen on 17 Sep 2026)
 5. The worked example `presentation/setup_and_reference/briefs/zmumu.md`, and skim the
    docstrings of `presentation/scenes/s4_zmumu_story.py` and `s2_pipeline.py`
 6. Existing previews the team can watch before answering:

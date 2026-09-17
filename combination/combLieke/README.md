@@ -4,8 +4,12 @@ One profile-likelihood fit (TRExFitter v1.8.0 MultiFit) of the three BND-school 
 Data 2016 G+H (16.4 fb⁻¹, √s = 13 TeV). Shared nuisance parameters are fitted jointly, and the μμ and ττ
 acceptance uncertainties are inside the likelihood.
 
-> **σ(pp → Z/γ\* → ℓℓ, 60 < m_ℓℓ < 120 GeV) = 1948 ⁺³³₋₃₂ pb**
-> = 1948 ± 0.5 (stat) ⁺³³₋₃₂ (syst, including 20.7 pb luminosity and 10.6 pb acceptance) pb,
+**Frozen on 17 Sep 2026** (git tag `zmumu-freeze-2026-09-17`, repository `FREEZE.md`). The fit uses the frozen Z → μμ
+inputs, with the measured muon reconstruction scale factor and the 60–120 GeV acceptance block of
+`z-mumu/zmumu/acceptance.py`. It runs with MINUIT strategy 2. The 16 Sep result, 1948 ⁺³³₋₃₂ pb, is superseded.
+
+> **σ(pp → Z/γ\* → ℓℓ, 60 < m_ℓℓ < 120 GeV) = 1945 ⁺³¹₋₃₀ pb**
+> = 1945 ± 0.5 (stat) ⁺³¹₋₃₀ (syst, including 22.5 pb luminosity and 13.1 pb acceptance) pb,
 > per lepton flavour, assuming lepton universality.
 >
 > aMC@NLO (NNLO-normalised): 1954 ⁺⁵⁶₋₈₂ pb. CMS (2024): 1952 ± 49 pb.
@@ -29,22 +33,25 @@ All numbers: `output/result.json`. All figures: `output/plots/` (PDF and PNG).
 
 | | σ(60–120) [pb] | from |
 |---|---|---|
-| **combined** | **1947.8 ⁺³³·¹₋₃₂.₄** | common POI, all three channels |
-| Z → ee | 2093.8 ⁺¹²¹·⁹₋₁₁₄.₄ | standalone fit, same model |
-| Z → μμ | 1930.8 ⁺³³·²₋₃₂.₆ | standalone fit, same model |
+| **combined** | **1945.4 ⁺³¹·⁰₋₂₉.₇** | common POI, all three channels |
+| Z → ee | 2093.7 ⁺¹²¹·⁹₋₁₁₄.₄ | standalone fit, same model |
+| Z → μμ | 1931.1 ⁺³⁰·⁸₋₃₀.₁ | standalone fit, same model |
 | Z → τhτh | 2082.5 ⁺²³⁶·⁸₋₂₀₆.₈ | standalone fit, same model |
 | aMC@NLO | 1953.9 ⁺⁵⁶·¹₋₈₁.₇ | scale +2.5/−3.9 %, PDF 0.74 %, α_s 1.3 % |
 
 * **Channel compatibility.** The three-POI fit (one σ per channel, every shared NP profiled together)
-  gives ee 2097.5, μμ 1939.8, ττ 2082.2 pb. Against the common POI,
-  −2 ln(L_common/L_split) = **2.41 for 2 degrees of freedom, p = 0.30**.
-* **Weights.** The result is carried by μμ. Without ee it is 1932.3 ⁺³³·²₋₃₂.₄ pb; without ττ it is
-  1945.4 pb (`variations`).
+  gives ee 2097.4, μμ 1940.3, ττ 2082.2 pb. Against the common POI,
+  −2 ln(L_common/L_split) = **2.44 for 2 degrees of freedom, p = 0.30**.
+* **Weights.** The result is carried by μμ. Without ee it is 1932.2 ⁺³⁰·⁶₋₂₉.₉ pb; without ττ it is
+  1943.9 pb (`variations`).
 * **Goodness of fit.** Saturated model: μμ p = 0.79, ττ p = 0.21, **ee p = 4 × 10⁻⁴²**. The combined
   p = 8 × 10⁻³³ is entirely the ee peak shape (next section).
 * **Fit quality.** Every fit (combined, three-POI, standalone, stat-only, variations) ends with MIGRAD 0,
-  HESSE 0, MINOS 0 and no forced positive-definite covariance.
-* **The channels' own numbers.** ee 1840.8 ± 29.9 pb (`z-ee/Zee_fit.tar.gz`), μμ 1930.7 pb, ττ 2082.5 pb.
+  HESSE 0, MINOS 0 and no forced positive-definite covariance. All of them use MINUIT strategy 2, except the
+  `without_ee` variation (strategy 1) and the ranking refits (TRExFitter's default escalation). With strategy 1
+  the combined covariance is wrong even at status 0 (`../CLAUDE.md` item 9). The HESSE and MINOS errors on
+  μ_Z agree to 0.2 % (`combined.hesse_over_minos` = 1.0015).
+* **The channels' own numbers.** ee 1840.8 ± 29.9 pb (`z-ee/Zee_fit.tar.gz`), μμ 1931.0 ± 30 pb, ττ 2082.5 pb.
   μμ and ττ are reproduced exactly; their errors are now slightly larger because acceptance is in the fit.
   ee differs, as explained below.
 
@@ -64,9 +71,11 @@ The only changes, made by `mf/trexcfg.adapt_channel`:
    `xsref_<channel>` = 1953.93 pb / σ_ref(channel) is added on the same samples. So
    σ = μ_Z × 1953.93 pb in every channel, even though the three aMC@NLO references differ (by 0.46 % for ττ).
 2. **Acceptance inside the fit.** μμ and ττ quote σ(60–120) = σ_fid / A, with A from aMC@NLO. Their
-   δA/A enter as OVERALL parameters on the signal: `Acc_PDF`, `Acc_AlphaS`, `Acc_QCDScale`,
-   `Acc_PS_ISR`, `Acc_PS_FSR` (shared μμ/ττ) and `AccStat_<channel>`. The values are read from
-   `zmumu.root.meta.json` (total 0.61 %) and `ztautau.root.meta.json` (3.7 %). ee has no acceptance
+   δA/A enter as OVERALL parameters on the signal. `Acc_PDF`, `Acc_AlphaS`, `Acc_QCDScale` and `Acc_PS_FSR`
+   are shared by μμ and ττ, and ττ adds `Acc_PS_ISR`. μμ adds `Acc_PTZ_mumu`: the boson p_T reweighted to the
+   measured p_T(μμ), which replaces the ISR weights. It also adds `Acc_Generator_mumu` (powheg vs aMC@NLO) and
+   `Acc_QEDFSR_mumu` (an estimate). Both channels carry `AccStat_<channel>`. The values are read by key from
+   `zmumu.root.meta.json` (total 0.70 %, from `z-mumu/zmumu/acceptance.py`) and `ztautau.root.meta.json` (3.7 %). ee has no acceptance
    term: its template is already normalised to the 60–120 GeV LHE cross section.
 3. **Correlations by name,** as `fitting/CONVENTIONS.md` §3 prescribes. Shared are `Lumi`, `Pileup`,
    `L1Prefiring`, `PDF`, `QCDScale`, `PS_FSR`, `PS_ISR`, `XS_TTbar`, `XS_DYtautau`, `XS_WJets`,
@@ -109,17 +118,18 @@ How much this matters (`variations`, all converged):
 
 | likelihood | σ [pb] | Δ |
 |---|---|---|
-| baseline | 1947.8 ⁺³³·¹₋₃₂.₄ | |
-| without ee | 1932.3 ⁺³³·²₋₃₂.₄ | −15.6 |
-| without ττ | 1945.4 ⁺³³·³₋₃₂.₅ | −2.4 |
-| shape/normalisation split in all three channels | 1954.7 ⁺³⁴·⁴₋₃₃.₇ | +6.9 |
-| ee: split only the shared parameters (the gap-driven `ElectronID` shape constraint trusted) | 1873.2 ⁺²⁷·³₋₂₆.₈ | −74.6 |
-| ee: `ElectronID` normalisation ±1.2 % (official map outside the gap) — *diagnostic* | 1933.5 ⁺³⁰·⁴₋₂₉.₉ | −14.3 |
+| baseline | 1945.4 ⁺³¹·⁰₋₂₉.₇ | |
+| without ee | 1932.2 ⁺³⁰·⁶₋₂₉.₉ | −13.2 |
+| without ττ | 1943.9 ⁺³⁰·⁸₋₃₀.₂ | −1.5 |
+| shape/normalisation split in all three channels | 1952.8 ⁺³¹·⁹₋₃₁.₃ | +7.4 |
+| ee: split only the shared parameters (the gap-driven `ElectronID` shape constraint trusted) | 1883.9 ⁺²⁷·¹₋₂₆.₆ | −61.5 |
+| ee: `ElectronID` normalisation ±1.2 % (official map outside the gap) — *diagnostic* | 1935.8 ⁺²⁹·³₋₂₈.₇ | −9.6 |
 
 The last row is not a result: it uses an uncertainty z-ee did not deliver. It shows what to expect
-once the gap is vetoed. In that fit ee alone gives 1918 ± 39 pb, in agreement with μμ. The
-"shared only" row shows the opposite: if the artefact constraint is trusted, the μμ `MuonReco`
-parameter is pulled to +2.5σ.
+once the gap is vetoed. In that fit ee alone gives 1918 ± 39 pb, in agreement with μμ (an ee-only fit
+from 16 Sep; the ee inputs have not changed since). The "shared only" row shows the opposite: if the
+artefact constraint is trusted, the μμ `MuonReco` parameter is pulled to +1.1σ (+2.5σ with the 16 Sep
+±0.8 % prior).
 
 **For z-ee** (in order of impact): veto the ECAL gap; apply an `HLT_Ele27_WPTight_Gsf` scale factor
 with its uncertainty (no trigger correction is applied at all now, which alone could explain the ee
@@ -143,10 +153,12 @@ of fit, and consider coarser bins if it is still poor.
 
 The breakdown (`breakdown`) is TRExFitter's covariance decomposition of the combined fit, per Category.
 The groups do not add to the total in quadrature, because the post-fit parameters are correlated.
-Largest: luminosity 20.7 pb, muon efficiency 14.8, acceptance 10.6, L1 prefiring 9.1, MC statistics 5.3,
-electron ID 3.3, signal modelling 3.3 pb. Data statistics, 0.47 pb, come from a separate stat-only fit.
+Largest: luminosity 22.5 pb, acceptance 13.1, L1 prefiring 9.7, muon efficiency 8.4, MC statistics 5.2,
+signal modelling 3.2, background normalisation 2.5, electron ID 2.3 pb. Data statistics, 0.47 pb, come from a separate stat-only fit.
 TRExFitter's refit-based grouped impacts (`trex-fitter mi`) fail HESSE in this likelihood and are not
-used. The ranking (`impacts`) is refit-based: one `trex-fitter mr Ranking=<NP>` per parameter.
+used. The ranking (`impacts`) is refit-based: one `trex-fitter mr Ranking=<NP>` per parameter. It runs on
+`work/common/multifit_ranking.config`, which keeps TRExFitter's default strategy escalation (`ranking_fit` in
+`config/channels.json`). With strategy 2 fixed, 27 of the 75 refits fail.
 
 The theory band is the aMC@NLO sample's own uncertainty on σ(60 < m_LHE < 120): 7-point μ_R/μ_F envelope
 ⊕ NNPDF3.1 Hessian ⊕ α_s ± 0.0015, from `z-mumu/output/v2/gensums.json` (`mf/prediction.py`). The
@@ -170,7 +182,7 @@ python checks/orthogonality.py    # -> checks/orthogonality.json (~3 min, reads 
 | path | what |
 |---|---|
 | `run.py` | the pipeline, step by step |
-| `config/channels.json` | the channels, POI, acceptance terms, ee treatment, variations |
+| `config/channels.json` | the channels, POI, acceptance terms, ee treatment, fit options (`fit`, `ranking_fit`), variations |
 | `config/references.json` | published measurements |
 | `mf/trexcfg.py` | reads, adapts and writes TRExFitter configs |
 | `mf/ee_input.py` | ee histograms from the tarball |

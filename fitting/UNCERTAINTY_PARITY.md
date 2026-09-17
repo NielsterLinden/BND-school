@@ -3,9 +3,14 @@
 How a channel makes its uncertainty budget comparable, row by row, with a published measurement of the
 same quantity, so that "we agree with CMS at n σ" means something. Worked out on Z → μμ against
 CMS-SMP-20-004 (16 Sep 2026): `z-mumu/docs/16-uncertainties-vs-cms.md`,
-`z-mumu/scripts/v2_7_reco_tnp.py`, `v2_8_theory_acceptance.py`, `v2_9_cms_parity.py`. The agent that
-runs this procedure for another channel is `.claude/agents/uncertainty-parity-auditor.md`; ready-to-paste
-prompts for z-ee and z-tautau are at the end of this file.
+`z-mumu/scripts/v2_7_reco_tnp.py`, `v2_8_theory_acceptance.py`, `v2_9_cms_parity.py`, `z-mumu/zmumu/acceptance.py`.
+The agent that runs this procedure for another channel is `.claude/agents/uncertainty-parity-auditor.md`;
+ready-to-paste prompts for z-ee and z-tautau are at the end of this file.
+
+> **The channel results were frozen on 17 Sep 2026.** Z → μμ went through this procedure and its
+> measurements were promoted into the frozen result (tag `zmumu-freeze-2026-09-17`). A run for z-ee or
+> z-tautau after that date is a study next to the frozen result: it produces tagged variants and a
+> comparison, and never overwrites the channel's result files or the inputs the combination reads.
 
 ## Why
 
@@ -52,10 +57,14 @@ last two are closed by measuring what can be measured and by an explicit, bracke
       back-of-the-envelope estimate as (size of the effect we can compute) × (plausible model difference,
       ideally sized by data), with the derivation written out.
 6. **Add the measurements to the result without touching the channel's baseline.** A fit variant with a
-   `--tag` (Z → μμ: `v2_5_fit.py --reco-sf ... --tag zmumu_recosf`), acceptance items outside the fit as
+   `--tag` (Z → μμ did this first as the tagged fit `zmumu_recosf`), acceptance items outside the fit as
    the channel already does. The combination (a TRExFitter MultiFit, `combination/combLieke/`) reads each
-   channel's baseline config and fit inputs (`combLieke/config/channels.json`); promoting a variant is the
-   channel's decision, taken with the combination group.
+   channel's baseline config, fit inputs and acceptance metadata (`combLieke/config/channels.json`);
+   promoting a variant is the channel's decision, taken with the combination group. For Z → μμ it was
+   promoted on 17 Sep 2026: the reconstruction SF became the default of `v2_5_fit.py`, the acceptance rows
+   moved into `zmumu/acceptance.py` (the `acceptance` block of the fit result and of `zmumu.root.meta.json`),
+   and each new row got a combination parameter (`Acc_PTZ_mumu`, `Acc_Generator_mumu`, `Acc_PS_FSR`,
+   `Acc_QEDFSR_mumu`).
 7. **Write the parity file and run the shared module:**
    `python fitting/uncertainty_parity.py <parity.json> --plot-dir <plots> --prefix <name>` (or call
    `fitting.uncertainty_parity` from the channel script). It gives the total for each option, the pull

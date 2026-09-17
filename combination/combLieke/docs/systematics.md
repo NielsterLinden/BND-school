@@ -6,7 +6,9 @@ measurements of the same cross section, and which ones are missing.
 **Our numbers** are the relative change of each channel's signal yield in the fitted bins (%), for a
 ±1σ variation as it enters the combined likelihood. They come from `checks/systematics.py` →
 `checks/systematics.json`, and are the same quantity ATLAS tabulates as δC/C. Where the channel quotes
-σ(60–120) = σ_fid / A, the acceptance uncertainty (δA/A) is listed separately.
+σ(60–120) = σ_fid / A, the acceptance uncertainty (δA/A) is listed separately. The μμ column is the frozen
+result (17 Sep 2026): the reconstruction SF is measured and the acceptance block is computed for the 60–120 GeV
+denominator (`z-mumu/zmumu/acceptance.py`, `z-mumu/docs/16`).
 
 **The published numbers**, verified against the papers on 16 Sep 2026:
 
@@ -23,7 +25,7 @@ measurements of the same cross section, and which ones are missing.
 |---|---|---|---|---|---|---|---|
 | luminosity | 2.1 | 2.1 | 2.3 | 1.2 | 1.2 | 2.3 (1.9) | 1.2 |
 | lepton trigger | 0.1 | 0.2 | in efficiency | **none** | 0.19 | τh ID+trigger 6–12 (1.5) | τh trigger 0.8–3.1 per DM |
-| lepton reconstruction / ID | 0.9 | 0.9 | 0.28 (stat) ⊕ 0.16 (syst) | reco 0.62, **ID 5.9** | reco 0.80, ID 0.21 | τh ID in the line above (constrained in situ to 2.2) | τh ID 1.9–8.0 per DM |
+| lepton reconstruction / ID | 0.9 | 0.9 | 0.28 (stat) ⊕ 0.16 (syst) | reco 0.62, **ID 5.9** | reco 0.27 (measured, T&P), ID 0.21 | τh ID in the line above (constrained in situ to 2.2) | τh ID 1.9–8.0 per DM |
 | isolation | 0.3 | 0.5 | in efficiency | in the cut-based ID | 0.36 | – | – |
 | energy / momentum scale, resolution | 0.2 | 0.1 | shape NPs, "small" | shape only (0 on yield) | 0.02–0.03 | τh ES 2–17 (< 0.1), e/μ ES < 1 | τh ES 0.07–1.8 |
 | charge misidentification | 0.1 | – | – | **none** | – | – | – |
@@ -32,12 +34,12 @@ measurements of the same cross section, and which ones are missing.
 | background cross sections | negligible | negligible | EW + tt̄ 0.04 | tt̄ 6, VV 10, W+jets 10, Z→ττ 5 (on 0.7 % of the yield) | tt̄, tW, VV, Z→ττ | tt̄ 7 (1.0), VV 15 (0.2), Z→ee/μμ (1.8) | as CMS, plus DY low mass, non-fiducial Z→ττ |
 | multijet / non-prompt | – | – | 0.14 (syst) ⊕ 0.07 (stat) | **none** | fake factor (0.04) | jet→τh 6–16 (< 0.1) | fake factor, the dominant background |
 | MC statistics | – | – | 0.16 | per-bin γ | per-bin γ | – | per-bin γ |
-| PDF (+ α_s) | 0.1 (C) + in A | < 0.1 (C) + in A | 0.43 | +0.11 / +0.10 (A·C) | 0.06 (C) + 0.52 (A), α_s 0.01 + 0.03 | 1 (1.0) | 0.68 (C) + 0.49 (A), α_s 0.59 (A) |
-| μ_R, μ_F scales | in A | in A | 0.66 | +0.31 / −0.10 (A·C) | 0.18 (C) + 0.32 (A) | < 6 (0.5) | 2.7 (C) + 3.4 (A) |
-| parton shower / FSR / generator | in A | in A | resummation + FSR 0.12 | FSR +0.10 / −0.17 (A·C) | ISR 0.13, FSR 0.04, powheg vs aMC@NLO 0.28 | UE + PS 1 (1.0) | FSR 1.1–2.2, ISR 0.35 (C); ISR 0.93, FSR 0.25 (A) |
+| PDF (+ α_s) | 0.1 (C) + in A | < 0.1 (C) + in A | 0.43 | +0.11 / +0.10 (A·C) | 0.06 (C) + 0.50 (A), α_s 0.01 + 0.03 | 1 (1.0) | 0.68 (C) + 0.49 (A), α_s 0.59 (A) |
+| μ_R, μ_F scales | in A | in A | 0.66 | +0.31 / −0.10 (A·C) | 0.18 (C) + 0.29 (A) | < 6 (0.5) | 2.7 (C) + 3.4 (A) |
+| parton shower / FSR / generator | in A | in A | resummation + FSR 0.12 | FSR +0.10 / −0.17 (A·C) | ISR 0.13, FSR 0.04, powheg vs aMC@NLO 0.28 (C); boson p_T 0.38, powheg vs aMC@NLO 0.04, FSR 0.03, QED FSR 0.10 (estimate) (A) | UE + PS 1 (1.0) | FSR 1.1–2.2, ISR 0.35 (C); ISR 0.93, FSR 0.25 (A) |
 | acceptance MC statistics | – | – | – | in the template | 0.05 | – | 0.71 |
-| total acceptance | 1.8 | 1.8 | (in the rows above) | in the template | 0.61 | ~2–6 (in the rows above) | 3.7 |
-| total systematic on σ, without luminosity | 1.0 ⊕ 1.8 | 1.1 ⊕ 1.8 | 0.90 | 5.5 (standalone fit) | 1.2 (standalone fit) | 3.1 | 10.6 (standalone fit, incl. stat.) |
+| total acceptance | 1.8 | 1.8 | (in the rows above) | in the template | 0.70 | ~2–6 (in the rows above) | 3.7 |
+| total systematic on σ, without luminosity | 1.0 ⊕ 1.8 | 1.1 ⊕ 1.8 | 0.90 | 5.5 (standalone fit) | 1.0 (standalone fit) | 3.1 | 10.6 (standalone fit, incl. stat.) |
 
 (A·C) marks templates normalised to the LHE 60–120 GeV cross section: they vary acceptance and
 efficiency together, and are then fitted.
@@ -77,8 +79,10 @@ efficiency together, and are then fitted.
 * **L1 prefiring** (0.3–0.5 %). ATLAS has no such effect; CMS assigns 0.34 %. Consistent.
 * **Pileup** (0.3–1.0 %) is larger than ATLAS's < 0.1 %. The 2016 G+H pileup (~25 interactions per crossing) is much higher
   than in the 2015 ATLAS data or the CMS low-pileup run.
-* **Generator comparison in μμ** (`SigModel_mumu`, powheg vs aMC@NLO, 0.28 %). It plays the role of
-  CMS's "resummation + FSR" (0.12 %).
+* **Generator comparison in μμ** (`SigModel_mumu`, powheg vs aMC@NLO, 0.28 % on the yield in the fit; 0.04 %
+  on the acceptance, `Acc_Generator_mumu`). Together with the boson-p_T row (`Acc_PTZ_mumu`, 0.38 %: the
+  generator p_T(Z) reweighted to the measured p_T(μμ)) and the QED FSR estimate (`Acc_QEDFSR_mumu`, 0.10 %)
+  it plays the role of CMS's "resummation + FSR" (0.12 %).
 * **MET unclustered energy** (ττ only). There is no analogue in a dilepton counting measurement.
 * **Luminosity 1.2 %** is smaller than any published number: this is the final 2016 legacy
   calibration, against 2.1–2.3 % for the early 2015 and low-pileup 2017 datasets.

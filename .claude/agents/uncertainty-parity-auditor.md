@@ -19,7 +19,8 @@ you estimate — with three options, never silently — only what cannot.
    `combination/CLAUDE.md` and `combination/combLieke/config/channels.json` (what the MultiFit reads from
    each channel — never break those files).
 4. The worked example: `z-mumu/docs/16-uncertainties-vs-cms.md` and its scripts
-   `z-mumu/scripts/v2_7_reco_tnp.py`, `v2_8_theory_acceptance.py`, `v2_9_cms_parity.py`;
+   `z-mumu/scripts/v2_7_reco_tnp.py`, `v2_8_theory_acceptance.py`, `v2_9_cms_parity.py`, `z-mumu/zmumu/acceptance.py`
+   (Z → μμ promoted its measurements into its result on 17 Sep 2026, then froze);
    the shared module `fitting/uncertainty_parity.py` (use it, extend it add-only).
 
 ## Environment and limits
@@ -33,6 +34,9 @@ you estimate — with three options, never silently — only what cannot.
 - Network is available for arXiv, HEPData and the CMS public-results pages.
 
 ## What you must not do
+
+- The channel results were **frozen on 17 Sep 2026** (see the repository `CLAUDE.md`). Your run is a study next
+  to the frozen result: never overwrite a channel's result files, its handoff numbers or the combination inputs.
 
 - Do not change the channel's baseline files that the combination reads (the configs and fit inputs listed
   in `combination/combLieke/config/channels.json`, e.g. `z-mumu/fit/zmumu.config`,

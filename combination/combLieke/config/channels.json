@@ -70,12 +70,33 @@
             "title": "Acceptance: QCD scales"
           },
           {
+            "name": "Acc_PTZ_mumu",
+            "key": "acceptance.A_ptz_rel",
+            "title": "Acceptance: boson p_{T} (#mu#mu)"
+          },
+          {
+            "name": "Acc_Generator_mumu",
+            "key": "acceptance.A_generator_rel",
+            "title": "Acceptance: powheg vs aMC@NLO (#mu#mu)"
+          },
+          {
+            "name": "Acc_PS_FSR",
+            "key": "acceptance.A_ps_fsr_rel",
+            "title": "Acceptance: PS FSR"
+          },
+          {
+            "name": "Acc_QEDFSR_mumu",
+            "key": "acceptance.A_qedfsr_rel",
+            "title": "Acceptance: QED FSR model (#mu#mu, estimate)"
+          },
+          {
             "name": "AccStat_mumu",
             "key": "acceptance.A_stat",
             "divide_by": "acceptance.A",
             "title": "Acceptance: MC stat. (#mu#mu)"
           }
-        ]
+        ],
+        "note": "60-120 GeV denominator (z-mumu/zmumu/acceptance.py, frozen 17 Sep 2026). Acc_PDF, Acc_AlphaS, Acc_QCDScale and Acc_PS_FSR share their names with tautau (same aMC@NLO weights). Acc_PTZ_mumu is the pT(Z) spectrum reweighted to the measured pT(mumu) (larger than the PYTHIA ISR weights, which it replaces), Acc_Generator_mumu powheg vs aMC@NLO, Acc_QEDFSR_mumu the QED FSR estimate (option c of z-mumu/docs/16): all three are sized or derived in the mumu channel only, hence channel-suffixed. Until 16 Sep the block had PDF, alpha_s, scale and statistics for the m > 50 GeV denominator (0.61 %); now 0.70 %."
       },
       "published": {
         "source": "z-mumu/fit/results/zmumu_fit_result.json"
@@ -138,16 +159,25 @@
     }
   },
   "fit": {
-    "_doc": "extra Fit/MultiFit options for every likelihood. Deliberately empty: NLLOffset 'bin' would help the precision of the 2M-event bins but ROOT 6.40 returns NaN for bins with zero observed events (RooFit::Detail::MathFuncs::nll, 0 x log 0), which tautau has; the default 'initial' offset converges once the empty tautau bin is dropped and the ee shape is split off."
+    "_doc": "extra Fit/MultiFit options for every likelihood. FitStrategy 2 (MINUIT strategy 2, accurate HESSE): with strategy 1 the HESSE covariance of the combined fit is wrong once the frozen mumu acceptance block (17 Sep 2026) adds four more normalisation parameters degenerate with mu_Z -- HESSE error on mu_Z 1.65x below MINOS, Lumi post-fit error 0.71, Acc_PDF 1.19 -- and the covariance decomposition (the uncertainty groups) with it; MINOS on mu_Z was right either way. Strategy 2 gives HESSE = MINOS and Lumi 0.98, at 8 s per fit. NLLOffset 'bin' would help the precision of the 2M-event bins but ROOT 6.40 returns NaN for bins with zero observed events (RooFit::Detail::MathFuncs::nll, 0 x log 0), which tautau has; the default 'initial' offset converges once the empty tautau bin is dropped and the ee shape is split off.",
+    "FitStrategy": "2"
+  },
+  "ranking_fit": {
+    "_doc": "overrides of 'fit' for the ranking refits (run.py impacts, multifit_ranking.config). FitStrategy -1 is TRExFitter's default: start at strategy 1 and retry at 2 and 3 if a fit fails. With an explicit strategy 2 only one retry is left, and 27 of the 75 refits failed (MINUIT status 3, recorded as a POI of 0); with the default all converge. The nominal fit they start from, and the post-fit errors that set the +-1 sigma points, stay strategy 2.",
+    "FitStrategy": "-1"
   },
   "variations": {
-    "_doc": "Alternative likelihoods, each fitted with the common POI only (run.py variations). 'channels' restricts the fit; 'split' overrides split_shape_norm per channel; 'overall' replaces the normalisation part of a split systematic by a symmetric OVERALL of that size.",
+    "_doc": "Alternative likelihoods, each fitted with the common POI only (run.py variations). 'channels' restricts the fit; 'split' overrides split_shape_norm per channel; 'overall' replaces the normalisation part of a split systematic by a symmetric OVERALL of that size; 'fit' overrides entries of the top-level 'fit' options for this likelihood.",
     "without_ee": {
       "label": "without Z#rightarrowee",
       "channels": [
         "mumu",
         "tautau"
-      ]
+      ],
+      "fit": {
+        "_doc": "strategy 2 walks MIGRAD through a region where the covariance has to be forced positive-definite (MINUIT status 1, MINOS status 1, 17 Sep 2026); strategy 1 converges with status 0 everywhere. Only the MINOS interval of mu_Z is used from this likelihood.",
+        "FitStrategy": "1"
+      }
     },
     "without_tautau": {
       "label": "without Z#rightarrow#tau#tau",

@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import copy
+import json
 import sys
 import tempfile
 from pathlib import Path
@@ -49,9 +50,12 @@ def test_poi_and_reference_factor():
 def test_acceptance_nps_follow_the_channel_metadata():
     _, info = _adapt("mumu")
     acc = {a["name"]: a["rel"] for a in info["acceptance"]}
-    assert set(acc) == {"Acc_PDF", "Acc_AlphaS", "Acc_QCDScale", "AccStat_mumu"}
+    assert set(acc) == {"Acc_PDF", "Acc_AlphaS", "Acc_QCDScale", "Acc_PTZ_mumu", "Acc_Generator_mumu", "Acc_PS_FSR",
+                        "Acc_QEDFSR_mumu", "AccStat_mumu"}
+    meta = json.loads(repo_path("z-mumu/fit/fitinputs/zmumu.root.meta.json").read_text())
     total = sum(v * v for v in acc.values()) ** 0.5
-    assert abs(total - 0.006096183065057161) < 2e-6          # A_rel_unc of zmumu.root.meta.json
+    assert abs(total - meta["acceptance"]["A_rel_unc"]) < 1e-9     # every row of the frozen acceptance block (17 Sep 2026)
+    assert abs(total - 0.0070078) < 1e-6
 
 
 def test_empty_bin_drop_is_checked():

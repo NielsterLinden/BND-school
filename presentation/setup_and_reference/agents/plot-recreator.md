@@ -40,7 +40,7 @@ A scene only ever calls `load_data("<name>")`; it never imports uproot/ROOT.
   luminosity, date. Bin edges and counts verbatim; no rebinning at render time
   unless stated in the provenance.
 - **Assert** the frozen numbers against the anchors in the channel `handoff.md`
-  (e.g. z-mumu σ_fid = 790.1 ± 0.2 (stat) ± 8.5 (syst) ± 9.6 (lumi) pb, σ(60–120) = 1931 ± 33 pb, L = 16393.381 pb⁻¹). A mismatch is
+  (e.g. z-mumu σ_fid = 790.2 ± 0.2 (stat) ± 6.1 (syst) ± 9.6 (lumi) pb, σ(60–120) = 1931 ± 30 pb (the results frozen on 17 Sep 2026, repository `CLAUDE.md`; 790.1 ± 8.5 and 1931 ± 33 pb are the superseded 15 Sep numbers), L = 16393.381 pb⁻¹; combination: `combination/combLieke/output/result.json`). A mismatch is
   reported, never silently adjusted.
 - Sample names and colours from `fitting/CONVENTIONS.md` / `SAMPLE[...]`.
 

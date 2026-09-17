@@ -56,7 +56,7 @@ which the config in `fitting/trexconfig.py` maps onto exactly these names. Rules
 | `XS_TTbar` 6 %, `XS_SingleTop` 10 %, `XS_WW` 10 %, `XS_WZ` 10 %, `XS_ZZ` 10 %, `XS_DYtautau` 5 % | OVERALL | yes | Background normalisation |
 | `PDF`, `QCDScale`, `PS_ISR`, `PS_FSR`, `SigModel` | HISTO on the DY samples (vary the C factor only: renormalised to a constant fiducial yield) | yes | Signal modelling |
 | `SigModel_tautau` | HISTO (normalisation only, one-sided) on `DYtautau`: fiducial C with LO madgraph instead of aMC@NLO | **no** (the μμ `SigModel` is a powheg-vs-aMC@NLO shape: a different quantity, must not be correlated) | Signal modelling |
-| `MuonID`, `MuonIso`, `MuonTrigger`, `MuonReco` (OVERALL 0.4 % per muon, correlated: 0.8 % per event in μμ), `MuonScale`, `MuonRes` | HISTO/OVERALL | yes between channels that use muons (μμ, μτ_h) | Muon efficiency / Muon momentum |
+| `MuonID`, `MuonIso`, `MuonTrigger`, `MuonReco` (OVERALL; μμ since 17 Sep 2026: measured by tag-and-probe, 0.13 % per muon, correlated: 0.27 % per event — was 0.4 % per muon assigned), `MuonScale`, `MuonRes` | HISTO/OVERALL | yes between channels that use muons (μμ, μτ_h) | Muon efficiency / Muon momentum |
 | `ElectronID`, `ElectronReco`, `ElectronTrigger`, `ElectronScale` | | yes between channels that use electrons | Electron efficiency / Electron energy |
 | `TauID_DM0/1/10/11`, `TauTrigger_DM*`, `TauES_DM*`, `TauFakeEle`, `TauFakeMu` | HISTO | ττ only (would be shared with eτh/μτh) | Tau (SubCategory Tau ID / Tau trigger / Tau energy scale) |
 | `MET_Unclustered` | HISTO (shape) | channels that use MET | MET |
@@ -65,6 +65,7 @@ which the config in `fitting/trexconfig.py` maps onto exactly these names. Rules
 | `FakeStat_<channel>`, `FakeMethod_<channel>` | HISTO on `Fakes` | no (channel suffix) | Fakes |
 | ττ: `FakeOSSS_tautau_c<k>`, `FakeClosure_tautau_c<k>_lo`, `FakeClosure_tautau_c<k>_hi` (one per BDT category k, the closure ones also per m_tt region below / above 110 GeV) | HISTO on `Fakes` (the FF statistics are in the `Fakes` Sumw2, i.e. in the γ parameters) | no | Fakes |
 | MC statistics | per-bin gammas (`MCstatThreshold: 0`) | no | Gammas |
+| acceptance (combination only, σ(60–120) = σ_fid / A): `Acc_PDF`, `Acc_AlphaS`, `Acc_QCDScale`, `Acc_PS_ISR`, `Acc_PS_FSR`; `Acc_PTZ_mumu`, `Acc_Generator_mumu`, `Acc_QEDFSR_mumu`; `AccStat_<channel>` | OVERALL on the signal, sizes read from the channel's `*.meta.json` (`combination/combLieke/config/channels.json`) | the unsuffixed ones yes (same aMC@NLO weights); suffixed no | Acceptance |
 
 Use the same `Category` strings, so the grouped-impact tables of the individual fits and of the
 combination have the same rows.
@@ -152,5 +153,7 @@ The combination (`combination/`, now μμ ⊕ ττ ⊕ ee) settled them as follo
   11.1k of 10.4M μμ events and 6.7k of 6.32M ee events: 0.005 % on the combination, documented
   rather than fixed.
 
-The rationale for each is in `combination/docs/02-correlation-model.md`; the resulting numbers in
-`combination/result.md`.
+The rationale for each was in `combination/docs/02-correlation-model.md` and the numbers in `combination/result.md`,
+both removed with the covariance (BLUE) combination on 16 Sep 2026 (`git show 17d497c:combination/docs/`). The
+MultiFit that replaced it, with the channel results frozen on 17 Sep 2026: `combination/combLieke/README.md`,
+`combination/combLieke/output/result.json`.

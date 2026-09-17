@@ -104,6 +104,13 @@ def collect() -> dict:
     comb.update(_gof(WORK / "common/logs/multifit_mwf.log"), nll=common["nll"], pulls=_pulls(common))
     fits_dir = WORK / "common/combination/Fits"
     comb["grouped_impacts"] = _grouped(fits_dir / "combination_group_errDecomp_mu_Z.txt", ref)
+    full = (comb["grouped_impacts"] or {}).get("FullSyst")
+    if full and full["impact"] > 0:
+        # the decomposition is HESSE-based and its +/- columns are rescaled to MINOS: their ratio checks the covariance
+        comb["hesse_over_minos"] = full["impact"] / (0.5 * (full["up"] + full["down"]))
+        if abs(comb["hesse_over_minos"] - 1) > 0.1:
+            print(f"WARNING: HESSE/MINOS = {comb['hesse_over_minos']:.2f} for mu_Z in the combined fit: the covariance, and so "
+                  f"the uncertainty groups and post-fit NP errors, are unreliable (see CLAUDE.md, FitStrategy)")
     stat = fits_dir / "combination_statOnly.txt"
     if stat.exists():
         s = run_trex.parse_fit_txt(stat)["nps"][m["poi"]["name"]]

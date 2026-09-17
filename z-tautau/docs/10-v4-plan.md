@@ -199,28 +199,30 @@ results, `run_v4.py` the combined one.
 
 | quantity | value |
 |---|---|
-| σ(pp → Z/γ* → ττ, 60 < m_LHE < 120 GeV) | **2057 +90 −86 pb** (stat ±9); prediction 1945 pb (aMC@NLO acceptance, NNLO normalisation 6077.22 pb for m > 50 GeV) |
-| μ_Z | 1.058 +0.046 −0.044 (stat ±0.005, syst ±0.045); goodness of fit p = 0.09 |
-| μ_tt̄ (from `emu_CRtt`) | 1.156 ± 0.048 |
-| τh ID SF DM0 (Tight, fitted) | 0.959 +0.043 −0.043 (TauPOG 0.902 ± 0.126) |
-| τh ID SF DM1 (Tight, fitted) | 0.934 +0.038 −0.038 (TauPOG 0.892 ± 0.053) |
-| τh ID SF DM10 (Tight, fitted) | 0.866 +0.038 −0.038 (TauPOG 0.938 ± 0.148) |
-| τh ID SF DM11 (Tight, fitted) | 0.768 +0.051 −0.051 (TauPOG 0.812 ± 0.149) |
-| τh energy scale DM0 | -0.70 ± 0.91 % relative to the POG central value (prior ±3 %) |
-| τh energy scale DM1 | -0.24 ± 0.59 % relative to the POG central value (prior ±3 %) |
+| σ(pp → Z/γ* → ττ, 60 < m_LHE < 120 GeV) | **2053 +90 −86 pb** (stat ±9); prediction 1945 pb (aMC@NLO acceptance, NNLO normalisation 6077.22 pb for m > 50 GeV) |
+| μ_Z | 1.055 +0.046 −0.044 (stat ±0.005, syst ±0.045); expected ±0.009; goodness of fit p = 0.09 |
+| μ_tt̄ (from `emu_CRtt`) | 1.153 ± 0.048 |
+| τh ID SF DM0 (Tight, fitted) | 0.962 +0.043 −0.043 (TauPOG 0.902 ± 0.126) |
+| τh ID SF DM1 (Tight, fitted) | 0.935 +0.038 −0.038 (TauPOG 0.892 ± 0.053) |
+| τh ID SF DM10 (Tight, fitted) | 0.867 +0.038 −0.038 (TauPOG 0.938 ± 0.148) |
+| τh ID SF DM11 (Tight, fitted) | 0.771 +0.051 −0.051 (TauPOG 0.812 ± 0.149) |
+| τh energy scale DM0 | -0.74 ± 0.90 % relative to the POG central value (prior ±3 %) |
+| τh energy scale DM1 | -0.26 ± 0.59 % relative to the POG central value (prior ±3 %) |
 | τh energy scale DM10 | +0.53 ± 1.00 % relative to the POG central value (prior ±3 %) |
-| τh energy scale DM11 | +3.36 ± 2.21 % relative to the POG central value (prior ±3 %) |
+| τh energy scale DM11 | +3.26 ± 2.20 % relative to the POG central value (prior ±3 %) |
 | tautau alone, POG τh ID SFs fixed | μ_Z = 1.043 +0.079 −0.072 |
 | mutau alone, POG τh ID SFs fixed | μ_Z = 1.049 +0.056 −0.051 |
 | etau alone, POG τh ID SFs fixed | μ_Z = 1.017 +0.068 −0.063 |
 | emu alone, POG τh ID SFs fixed | μ_Z = 0.978 +0.056 −0.053 |
 
-Grouped impacts on μ_Z: NormFactors 4.05 %, Electron efficiency 3.90 %, Tau trigger 1.96 %, Gammas 1.83 %, Fakes 1.67 %, MET 1.51 %, Electron energy 1.37 %, Background normalisation 1.21 %, Tau energy scale 1.06 %, Luminosity 0.99 %, b tagging 0.86 %, Pileup 0.77 %, Muon momentum 0.66 %, Muon efficiency 0.60 %, Signal modelling 0.46 %, Background modelling 0.46 %, L1 prefiring 0.36 %, Jets 0.28 %, Tau ID 0.27 %; data statistics 0.46 %.
+Grouped impacts on μ_Z: NormFactors 4.04 %, Electron efficiency 3.89 %, Tau trigger 1.96 %, Gammas 1.83 %, Fakes 1.80 %, MET 1.50 %, Electron energy 1.36 %, Background normalisation 1.18 %, Tau energy scale 1.06 %, Luminosity 0.98 %, b tagging 0.86 %, Pileup 0.76 %, Muon momentum 0.66 %, Muon efficiency 0.60 %, Signal modelling 0.47 %, Background modelling 0.45 %, L1 prefiring 0.36 %, Jets 0.27 %, Tau ID 0.26 %; data statistics 0.46 %.
 
-Compared with v3 (τhτh alone, POG τh ID scale factors as priors: μ_Z = 1.071 +0.114 −0.100), the four-channel fit is 2.4× more precise; the τh ID scale factors come out at 4–5 % precision each (POG: 5–15 %) and the energy scales at 0.6–1.0 % (DM11: 2.2 %), against CMS 2.2 % / 0.9 % with 2.3 fb⁻¹ and one inclusive SF. The four channels agree with each other and with the NNLO prediction within their uncertainties.
+Ranking (post-fit impact on μ_Z, `output_v4/plots/fit_ranking.png`): mu_ttbar 4.06 % (pull +0.15, constraint 0.05), EmuTrigger 3.67 % (pull -1.62, constraint 0.71), TauIDSF_DM1 3.26 % (pull +0.04, constraint 0.04), TauIDSF_DM10 3.13 % (pull -0.07, constraint 0.04), TauIDSF_DM0 2.96 % (pull +0.06, constraint 0.04), TauIDSF_DM11 2.17 % (pull -0.04, constraint 0.05), MET_Unclustered 1.51 % (pull +1.05, constraint 0.32), ElectronScale 1.37 % (pull -0.78, constraint 0.82), TauTrigger_DM1 1.24 % (pull -0.50, constraint 0.90), FakeOSSS_tautau_c0 0.99 % (pull -0.01, constraint 0.62).
+
+Compared with v3 (τhτh alone, POG τh ID scale factors as priors: μ_Z = 1.071 +0.114 −0.100), the four-channel fit is 2.4× more precise; the τh ID scale factors come out at 4–5 % precision each (POG: 5–15 %) and the energy scales at 0.6–1.0 % (DM11: 2.2 %), against CMS 2.2 % / 0.9 % with 2.3 fb⁻¹ and one inclusive SF. The four channels agree with each other and with the prediction within their uncertainties.
 
 Prefit yields (data / Z→ττ signal / fakes): tautau_SR0 15742 / 795 / 12351; tautau_SR1 2704 / 1630 / 1044; tautau_SR2 2714 / 2749 / 197; mutau_SR_dm0 11244 / 6313 / 2231; mutau_SR_dm1 23866 / 15545 / 5309; mutau_SR_dm10 10795 / 7316 / 2797; mutau_SR_dm11 2611 / 1794 / 710; etau_SR_dm0 2639 / 1113 / 586; etau_SR_dm1 10106 / 5206 / 2504; etau_SR_dm10 4940 / 2877 / 1429; etau_SR_dm11 1211 / 692 / 492; emu_SR 79300 / 52985 / 15241; emu_CRtt 45931 / 116 / 406.
 
 Fake estimates: mutau: C_OS/SS 1.05 ± 0.03, same-sign closure 0.966 ± 0.014, 11048 fakes in the SR; etau: C_OS/SS 1.14 ± 0.14, same-sign closure 1.025 ± 0.021, 5012 fakes in the SR; eμ multijet 15241 events (OS/SS 1.7–2.9 vs ΔR, SB1/SB2 within 2 %).
 
-Things to look at in a review: the `EmuTrigger` pull (−1.7σ; the in-situ cross-trigger SF has a conservative 2 % per leg), `TauFakeMu` (+1.0σ), the eμ-alone μ_Z (0.98) versus the τ channels (1.02–1.05), and the τES of DM11 (+1.1σ pull). The ranking plot (`output_v4/plots/fit_ranking.png`, `slides/figs/v4_ranking.png`) comes from the full `python scripts/step5_fit_v4.py` run (~2 h with the `r` action); the numbers above are identical with or without it.
+Things to look at in a review: the top of the ranking is μ_tt̄ and the τh ID scale factors (as intended: they are the parameters the data determine) followed by `EmuTrigger` (pulled −1.6σ; the in-situ cross-trigger SF carries a conservative 2 % per leg), `MET_Unclustered` (+1.0σ, constrained to 0.3), `TauFakeMu` (+1.0σ); the eμ-alone μ_Z (0.98) versus the τ channels (1.02–1.05); the τES of DM11 (+1.1σ); the 130–150 GeV m_ττ bin of the lepton channels (the leptonic likelihood mass sits ~10 % above m_LHE).

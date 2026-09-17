@@ -6,54 +6,54 @@ CMS Open Data 2016 (Run2016G+H), L = 16393.4 pb^-1. Channels: tau_h tau_h (3 BDT
 
 | quantity | value |
 |---|---|
-| mu_Z | 1.058 +0.046 -0.044 (stat 0.00456806, syst 0.045) |
-| sigma(pp -> Z/gamma* -> tautau, 60 < m < 120) | 2057 +90 -86 pb (stat 9) (pred. 1945 pb) |
+| mu_Z | 1.055 +0.046 -0.044 (stat 0.00456806, syst 0.045) |
+| sigma(pp -> Z/gamma* -> tautau, 60 < m < 120) | 2053 +90 -86 pb (stat 9) (pred. 1945 pb) |
 | expected (Asimov) | +0.009 -0.009 |
 | goodness of fit | p = 0.0851012 |
-| mu_ttbar | [1.15554, 0.0483426, 0.0483426] |
+| mu_ttbar | [1.15342, 0.048216, 0.048216] |
 
 tau_h ID scale factors (fitted, TauPOG prior-free):
 
 | DM | fitted | TauPOG |
 |---|---|---|
-| DM0 | 0.959 +0.043 -0.043 | 0.902 +- 0.126 |
-| DM1 | 0.934 +0.038 -0.038 | 0.892 +- 0.053 |
-| DM10 | 0.866 +0.038 -0.038 | 0.938 +- 0.148 |
-| DM11 | 0.768 +0.051 -0.051 | 0.812 +- 0.149 |
+| DM0 | 0.962 +0.043 -0.043 | 0.902 +- 0.126 |
+| DM1 | 0.935 +0.038 -0.038 | 0.892 +- 0.053 |
+| DM10 | 0.867 +0.038 -0.038 | 0.938 +- 0.148 |
+| DM11 | 0.771 +0.051 -0.051 | 0.812 +- 0.149 |
 
 tau_h energy scale (pull and post-fit constraint in units of the 3% prior):
 
 | DM | pull | constraint | -> % |
 |---|---|---|---|
-| DM0 | -0.23 | 0.30 | 0.91% |
-| DM1 | -0.08 | 0.20 | 0.59% |
+| DM0 | -0.25 | 0.30 | 0.90% |
+| DM1 | -0.09 | 0.20 | 0.59% |
 | DM10 | +0.18 | 0.33 | 1.00% |
-| DM11 | +1.12 | 0.74 | 2.21% |
+| DM11 | +1.09 | 0.73 | 2.20% |
 
 Grouped impacts on mu_Z:
 
 | group | impact |
 |---|---|
-| FullSyst | 0.0452 |
-| NormFactors | 0.0405 |
-| Electron efficiency | 0.0390 |
+| FullSyst | 0.0450 |
+| NormFactors | 0.0404 |
+| Electron efficiency | 0.0389 |
 | Tau trigger | 0.0196 |
 | Gammas | 0.0183 |
-| Fakes | 0.0167 |
-| MET | 0.0151 |
-| Electron energy | 0.0137 |
-| Background normalisation | 0.0121 |
+| Fakes | 0.0180 |
+| MET | 0.0150 |
+| Electron energy | 0.0136 |
+| Background normalisation | 0.0118 |
 | Tau energy scale | 0.0106 |
-| Luminosity | 0.0099 |
+| Luminosity | 0.0098 |
 | b tagging | 0.0086 |
-| Pileup | 0.0077 |
+| Pileup | 0.0076 |
 | Muon momentum | 0.0066 |
 | Muon efficiency | 0.0060 |
-| Signal modelling | 0.0046 |
-| Background modelling | 0.0046 |
+| Signal modelling | 0.0047 |
+| Background modelling | 0.0045 |
 | L1 prefiring | 0.0036 |
-| Jets | 0.0028 |
-| Tau ID | 0.0027 |
+| Jets | 0.0027 |
+| Tau ID | 0.0026 |
 
 ## Per-channel fits (same model, one channel each; tau_h ID scale factors fixed to the TauPOG values where marked)
 

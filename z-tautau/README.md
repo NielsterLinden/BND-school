@@ -13,15 +13,15 @@ Design, selections, the systematics map against the paper's Table 2 and the find
 **Result (v4, four channels, τh ID scale factors and energy scale fitted in situ)**
 
 ```
-σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 2057 +90 −86 pb   (stat ±9;  prediction 1945 pb: aMC@NLO acceptance, NNLO normalisation)
-μ_Z = 1.058 +0.046 −0.044   (stat ±0.005, syst ±0.045),   goodness of fit p = 0.09,   μ_tt̄ = 1.16 ± 0.05
-τh ID SF (Tight):  DM0 0.959 ± 0.043 (POG 0.90 ± 0.13)  DM1 0.934 ± 0.038 (POG 0.89 ± 0.05)  DM10 0.866 ± 0.038 (POG 0.94 ± 0.15)  DM11 0.768 ± 0.051 (POG 0.81 ± 0.15)
-τh energy scale:   DM0 -0.7 ± 0.9 %  DM1 -0.2 ± 0.6 %  DM10 +0.5 ± 1.0 %  DM11 +3.4 ± 2.2 %
+σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 2053 +90 −86 pb   (stat ±9;  prediction 1945 pb: aMC@NLO acceptance, NNLO normalisation)
+μ_Z = 1.055 +0.046 −0.044   (stat ±0.005, syst ±0.045),   goodness of fit p = 0.09,   μ_tt̄ = 1.15 ± 0.05
+τh ID SF (Tight):  DM0 0.962 ± 0.043 (POG 0.90 ± 0.13)  DM1 0.935 ± 0.038 (POG 0.89 ± 0.05)  DM10 0.867 ± 0.038 (POG 0.94 ± 0.15)  DM11 0.771 ± 0.051 (POG 0.81 ± 0.15)
+τh energy scale:   DM0 -0.7 ± 0.9 %  DM1 -0.3 ± 0.6 %  DM10 +0.5 ± 1.0 %  DM11 +3.3 ± 2.2 %
 per channel alone (POG SFs fixed):  tautau 1.043 +0.079 −0.072  mutau 1.049 +0.056 −0.051  etau 1.017 +0.068 −0.063  emu 0.978 +0.056 −0.053
 v3 (τhτh alone):  μ_Z = 1.071 +0.114 −0.100,  σ = 2082 +222 −194 pb
 ```
 
-Largest impacts on μ_Z: NormFactors 4.1 %, Electron efficiency 3.9 %, Tau trigger 2.0 %, Gammas 1.8 %, Fakes 1.7 %, MET 1.5 %; data statistics 0.5 %.
+Largest impacts on μ_Z: NormFactors 4.0 %, Electron efficiency 3.9 %, Tau trigger 2.0 %, Gammas 1.8 %, Fakes 1.8 %, MET 1.5 %; data statistics 0.5 %. Ranking: mu_ttbar 4.1 %, EmuTrigger 3.7 %, TauIDSF_DM1 3.3 %, TauIDSF_DM10 3.1 %, TauIDSF_DM0 3.0 %, TauIDSF_DM11 2.2 %.
 
 ```bash
 source ../setup.sh

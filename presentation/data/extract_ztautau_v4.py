@@ -173,8 +173,10 @@ def verify(d, ck: Checker):
     H = "z-tautau/handoff.md RESULT"
     R = "z-tautau/output/RESULTS.md"
     f = d["fit"]
-    ck.check("mu_Z 1.019 +0.037 -0.036", [f["mu"], f["mu_up"], f["mu_down"]], [1.019, 0.037, 0.036], 5e-4, H)
-    ck.check("sigma(60-120) 1981 +73 -70, stat 9", [f["sigma"], f["sigma_up"], f["sigma_down"], f["sigma_stat"]], [1981, 73, 70, 9], 0.5, H)
+    # since 17 Sep 2026 the uncertainty contains the tau_h ID scale-factor pT dependence (TauIDpT_tautau); without it
+    # (z-tautau job ztautau_flatsf) the same fit gives +0.037 -0.036, i.e. 1981 +73 -70 pb
+    ck.check("mu_Z 1.019 +0.079 -0.070", [f["mu"], f["mu_up"], f["mu_down"]], [1.019, 0.079, 0.070], 5e-4, H)
+    ck.check("sigma(60-120) 1981 +153 -136, stat 9", [f["sigma"], f["sigma_up"], f["sigma_down"], f["sigma_stat"]], [1981, 153, 136, 9], 0.5, H)
     ck.check("prediction 1944.9", f["pred"], 1944.9, 0.05, H)
     ck.check("mu_ttbar 1.11 +- 0.04", [f["mu_ttbar"]["value"], f["mu_ttbar"]["err_up"]], [1.111, 0.038], 5e-4, R)
     ck.check("GoF p 0.15", f["gof_p"], 0.154, 5e-4, R)

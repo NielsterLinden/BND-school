@@ -202,7 +202,8 @@ the data / prediction ratio of the region plots).
 
 - Numbers: **z-tautau v4** (`handoff.md` RESULT block, `output/RESULTS.md`), frozen in `data/ztautau_v4.json`
   (`extract_ztautau_v4.py`: the TRExFitter per-bin yaml of the nominal fit, the ℓτh fake-factor files, the fit
-  results). σ(60–120) = 1981 +73 −70 pb, μ_Z = 1.019 +0.037 −0.036, μ_tt̄ = 1.11 ± 0.04, τh ID SF 0.989 / 0.963 /
+  results). σ(60–120) = 1981 +153 −136 pb, μ_Z = 1.019 +0.079 −0.070 (since 17 Sep with the τh ID p_T dependence
+  `TauIDpT_tautau` in the fit; +73 −70 pb, +0.037 −0.036 without: clips 5-32 / 5-33 are v2), μ_tt̄ = 1.11 ± 0.04, τh ID SF 0.989 / 0.963 /
   0.896 / 0.795 (POG 0.90 / 0.89 / 0.94 / 0.81). §3's v3 fit rows are superseded.
 - τhτh common part kept (a–f, h): event, mass, fake factor and BDT numbers are unchanged in v4 (re-extracted against
   the v4 τhτh base: identical). The stacks (d, f, h5) now draw the v4 prefit (signal = Z/γ*→ττ 60–120 GeV, the

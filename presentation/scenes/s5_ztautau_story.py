@@ -47,8 +47,9 @@ final frame (pure builders ``state_*()`` + ``ORDER_*`` tuples, ``check_order`` a
     TautauFit (new in v4)
         tautau_m1_sf_lever      e mu ~ mu_Z, l tau_h ~ SF mu_Z, tau_h tau_h ~ SF^2 mu_Z
         tautau_m2_sf_fit        the tau_h ID SF per decay mode: TauPOG (grey) vs in situ (red)
-        tautau_m3_postfit       the four channels post-fit with data / pred.; mu_Z = 1.019 +0.037 -0.036
-        tautau_m4_sigma         sigma(60-120) = 1981 +73 -70 pb, the four channels alone (POG SFs, open
+        tautau_m3_postfit       the four channels post-fit with data / pred.; mu_Z = 1.019 +0.079 -0.070 (with the
+                                tau_h ID SF p_T dependence, TauIDpT_tautau, since 17 Sep 2026; +0.037 -0.036 without)
+        tautau_m4_sigma         sigma(60-120) = 1981 +153 -136 pb, the four channels alone (POG SFs, open
                                 points), the prediction with its band, CMS and ATLAS
 
 Reserved areas (06 A1): nothing above y = 2.7 (title band) and nothing at x < -5.85, y > 0.22 (chapter
@@ -115,8 +116,8 @@ FITV = V4["fit"]
 assert HH["n_data"] == 21160 and len(HH["edges"]) == 15
 assert abs(HH["n"]["Fakes"] - 13592) < 1 and abs(FK["yields"]["n_fake"]["total"] - 13592) < 1
 assert tuple(V4["groups"]) == ("Fakes", "rest", "TTbar", "DYtautau_out", "DYtautau")
-assert round(FITV["mu"], 3) == 1.019 and round(FITV["mu_up"], 3) == 0.037 and round(FITV["mu_down"], 3) == 0.036
-assert round(FITV["sigma"]) == 1981 and round(FITV["sigma_up"]) == 73 and round(FITV["sigma_down"]) == 70
+assert round(FITV["mu"], 3) == 1.019 and round(FITV["mu_up"], 3) == 0.079 and round(FITV["mu_down"], 3) == 0.070
+assert round(FITV["sigma"]) == 1981 and round(FITV["sigma_up"]) == 153 and round(FITV["sigma_down"]) == 136
 assert round(FITV["pred"], 1) == 1944.9
 assert round(FITV["mu_ttbar"]["value"], 2) == 1.11 and round(FITV["mu_ttbar"]["err_up"], 2) == 0.04
 assert [round(FITV["tau_id_sf"][d]["value"], 3) for d in ("0", "1", "10", "11")] == [0.989, 0.963, 0.896, 0.795]

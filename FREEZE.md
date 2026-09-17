@@ -149,4 +149,5 @@ YAML-vs-`histograms.pkl` comparison had to move too), the chapter was rebuilt as
 (4-01 … 4-21, `presentation/setup_and_reference/briefs/zmumu.md`), and the brief, the storyboard and the
 result-format anchor quote the frozen numbers. The data/MC ladder of those clips is now told tag-and-probe first:
 0.944 → 0.971 → 0.968 → 0.974 → 0.994 (`zmumu_sr_stack.json` block `recut`; the old-order stages are kept for
-section 2). **Still open from the table:** the pipeline clips 2-21/2-22 and any combination clip.
+section 2). **Still open from the table:** any combination clip. (The pipeline clips 2-21/2-22 are archived:
+section 2 was re-cut on 17 Sep as a schematic two-row map, 2-01 … 2-21, that prints no result numbers.)

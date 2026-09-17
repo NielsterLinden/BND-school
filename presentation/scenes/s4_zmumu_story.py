@@ -199,7 +199,8 @@ SF_TEX_LEFT = (-3.6, -2.75)                        # left end of the SF formula:
 FAN_T = (0.62, (-3.2, 1.2))                        # the side view of clip tnp_table
 ETA_LAB_C = (-3.2, 2.32)
 TAB_T = (0.85, (-3.05, -1.55))                     # the table while it fills
-TAB_APPLY = (0.92, (-3.3, -0.95))                  # the table beside the plot
+TAB_APPLY = (0.85, (-4.37, -1.25))                 # the table beside the plot: the size of TAB_T, it ends left of the
+                                                   # plot's y title (ROW_RIGHT); its top stays under the top-left block
 DOT_R, RDOT_R = 0.036, 0.034
 
 
@@ -967,10 +968,11 @@ def apply_lines(ev) -> VGroup:
     """One simulated event: its two muons (p_T, |eta|) and the weight the table gives it."""
     mu1, mu2 = ev["muons"]
     rows = [tex_h(rf"p_T = {m['pt']:.0f}\ \mathrm{{GeV}},\ \ |\eta| = {abs(m['eta']):.1f}", 0.17) for m in (mu1, mu2)]
-    w = tex_h(rf"w = {mu1['sf_id']:.3f} \times {mu2['sf_id']:.3f} = {ev['w_id']:.3f}", 0.2)
+    w = tex_h(rf"w = {mu1['sf_id']:.3f} \times {mu2['sf_id']:.3f} = {ev['w_id']:.3f}", 0.18)
     g = VGroup(*rows, w)
     for k, r in enumerate(g):
         r.shift(np.array([LEFT_COL_X, 2.32 - 0.36 * k - (0.08 if k == 2 else 0.0), 0.0]) - r.get_left())
+    assert g.get_right()[0] <= ROW_RIGHT + 1e-6, f"apply lines reach x = {g.get_right()[0]:.2f}, past {ROW_RIGHT}"
     g.mu, g.w = rows, w
     return g
 
@@ -1718,6 +1720,7 @@ class MumuTagProbeScan(Scene):
         e7 = state_t7()
         P = plot_parts(stage="raw")
         tab = sf_map(TAB_APPLY)
+        assert tab.get_right()[0] <= ROW_RIGHT + 1e-6 and tab.get_top()[1] < 0.2, "the table must clear the plot's y title"
         self.play(*[FadeOut(e6[k]) for k in ("fan", "eta_lab", "eff_ax", "eff_key", "eff_data", "eff_mc", "sf_ax", "sf_pts")],
                   ReplacementTransform(e6["sfmap"], tab), run_time=1.0, rate_func=EASE)
         self.play(*[FadeIn(P[k]) for k in PLOT_KEYS], run_time=0.8)

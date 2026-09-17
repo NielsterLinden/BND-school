@@ -1,5 +1,5 @@
 {
-  "_doc": "The combined likelihood. Read by mf/trexcfg.adapt_channel; every entry is explained in README.md.",
+  "_doc": "The combined likelihood. Read by mf/trexcfg.adapt_channel; every entry is explained in README.md. Since 17 Sep 2026 (after the freeze) tautau is the four-channel v4 measurement (tau_h tau_h + mu tau_h + e tau_h + e mu, z-tautau commit b7ec3d9, z-tautau/docs/11-combination-inputs.md); the frozen three-channel result is at the git tag zmumu-freeze-2026-09-17.",
   "observable": "sigma(pp -> Z/gamma* -> ll), 60 < m_ll(LHE) < 120 GeV, sqrt(s) = 13 TeV, per lepton flavour, lepton universality",
   "lumi_pb": 16393.381,
   "poi": {
@@ -51,6 +51,10 @@
       "rename_systematics": {
         "SigModel": "SigModel_mumu"
       },
+      "drop_regions": [
+        "mumu_CRemu"
+      ],
+      "drop_regions_note": "mumu_CRemu (exactly one muon and one electron, opposite sign) selects the same data as the tautau e-mu channel (emu_SR, emu_CRtt). It is Type VALIDATION in z-mumu/fit/zmumu.config, so it never entered the mumu likelihood and dropping it cannot change a fit; it is removed so that no combination workspace, table or plot holds those events twice. With it go the WJets sample and the XS_WJets / ElectronEff_mumu parameters of mumu, which act only there. checks.mumu_cremu_control measures what the region would do as a control region of mumu.",
       "acceptance": {
         "source": "z-mumu/fit/fitinputs/zmumu.root.meta.json",
         "nps": [
@@ -96,71 +100,49 @@
             "title": "Acceptance: MC stat. (#mu#mu)"
           }
         ],
-        "note": "60-120 GeV denominator (z-mumu/zmumu/acceptance.py, frozen 17 Sep 2026). Acc_PDF, Acc_AlphaS, Acc_QCDScale and Acc_PS_FSR share their names with tautau (same aMC@NLO weights). Acc_PTZ_mumu is the pT(Z) spectrum reweighted to the measured pT(mumu) (larger than the PYTHIA ISR weights, which it replaces), Acc_Generator_mumu powheg vs aMC@NLO, Acc_QEDFSR_mumu the QED FSR estimate (option c of z-mumu/docs/16): all three are sized or derived in the mumu channel only, hence channel-suffixed. Until 16 Sep the block had PDF, alpha_s, scale and statistics for the m > 50 GeV denominator (0.61 %); now 0.70 %."
+        "note": "60-120 GeV denominator (z-mumu/zmumu/acceptance.py, frozen 17 Sep 2026). Until the freeze Acc_PDF, Acc_AlphaS, Acc_QCDScale and Acc_PS_FSR were shared with the tau_h tau_h-only tautau (v3), which quoted sigma_fid / A as well; tautau v4 carries its acceptance inside its PDF / QCDScale / PS_* templates, so these parameters are now mumu-only. They are deliberately not merged into PDF / QCDScale / PS_FSR: the four tautau final states constrain QCDScale through their acceptance ratios (z-tautau/docs/11 section 5) and that constraint must not shrink the mumu acceptance uncertainty. Acc_PTZ_mumu is the pT(Z) spectrum reweighted to the measured pT(mumu) (larger than the PYTHIA ISR weights, which it replaces), Acc_Generator_mumu powheg vs aMC@NLO, Acc_QEDFSR_mumu the QED FSR estimate (option c of z-mumu/docs/16): all three are sized or derived in the mumu channel only, hence channel-suffixed. Until 16 Sep the block had PDF, alpha_s, scale and statistics for the m > 50 GeV denominator (0.61 %); now 0.70 %."
       },
       "published": {
         "source": "z-mumu/fit/results/zmumu_fit_result.json"
       }
     },
     "tautau": {
-      "label": "#tau_{h}#tau_{h}",
+      "label": "#tau#tau",
+      "label_note": "four final states in one likelihood: tau_h tau_h (3 BDT categories), mu tau_h and e tau_h (4 decay-mode regions each), e mu (signal region + ttbar control region); the 13 regions of z-tautau/fit/ztautau.config, never the pT-split copies",
       "config": "z-tautau/fit/ztautau.config",
       "histo_path": "z-tautau/fit/fitinputs",
-      "signal": [
-        "DYtautau"
-      ],
+      "signal": {
+        "meta": "z-tautau/fit/fitinputs/ztautau.root.meta.json",
+        "key": "signal_samples"
+      },
+      "signal_note": "mu_Z acts on the 15 DYtautau_tDM* templates (Z/gamma* -> tautau, 60 < m_LHE < 120 GeV, all decays, split by the decay mode of the genuine tau_h legs); DYtautau_out is a background",
       "sigma_reference_pb": 1944.8826556737133,
       "sigma_reference_source": "z-tautau/fit/fitinputs/ztautau.root.meta.json: signal_prediction.sigma_tautau_60_120_pb",
-      "rename_systematics": {},
-      "acceptance": {
-        "source": "z-tautau/fit/fitinputs/ztautau.root.meta.json",
-        "nps": [
-          {
-            "name": "Acc_PDF",
-            "key": "signal_prediction.A_unc.A_pdf",
-            "title": "Acceptance: PDF"
-          },
-          {
-            "name": "Acc_AlphaS",
-            "key": "signal_prediction.A_unc.A_alphas",
-            "title": "Acceptance: #alpha_{s}"
-          },
-          {
-            "name": "Acc_QCDScale",
-            "key": "signal_prediction.A_unc.A_scale",
-            "title": "Acceptance: QCD scales"
-          },
-          {
-            "name": "Acc_PS_ISR",
-            "key": "signal_prediction.A_unc.A_isr",
-            "title": "Acceptance: PS ISR"
-          },
-          {
-            "name": "Acc_PS_FSR",
-            "key": "signal_prediction.A_unc.A_fsr",
-            "title": "Acceptance: PS FSR"
-          },
-          {
-            "name": "AccStat_tautau",
-            "key": "signal_prediction.A_mc_stat",
-            "title": "Acceptance: MC stat. (#tau#tau)"
-          }
-        ]
+      "rename_systematics": {
+        "MuonID": "MuonID_tautau",
+        "MuonIso": "MuonIso_tautau",
+        "MuonTrigger": "MuonTrigger_tautau",
+        "MuonScale": "MuonScale_tautau",
+        "ElectronID": "ElectronID_tautau",
+        "ElectronReco": "ElectronReco_tautau",
+        "ElectronScale": "ElectronScale_tautau"
       },
-      "drop_empty_bins": {
-        "tautau_SR2": [
-          1
-        ]
-      },
-      "drop_empty_bins_note": "0 < m_tt < 40 GeV of the BDT > 0.90 category: 0 data events and 0 predicted events. It carries no information, but its MC-statistics gamma is unconstrained and sits at 0, which breaks HESSE/MINOS and makes the per-bin offset log(0)",
+      "rename_systematics_note": "decorrelated from mumu and ee: tautau takes its muon ID / isolation / trigger / scale and electron ID / reco / scale from the POG jsons, z-mumu measures its own with tag-and-probe and z-ee's ElectronID is the +-5.9 % gap artefact. Same names would claim they are one measurement (TRExFitter correlates by name). variations.tautau_leptons_correlated is the fit with that claim.",
+      "acceptance": null,
+      "acceptance_note": "none outside the fit: the theory templates are renormalised to a constant sigma(60-120), so PDF / QCDScale / PS_ISR / PS_FSR vary A x epsilon inside the likelihood (z-tautau/docs/11-combination-inputs.md section 3, metadata acceptance_in_fit). Until the freeze (tau_h tau_h only) this was a 3.7 % block of Acc_* parameters.",
+      "drop_empty_bins_note": "none: tautau_SR2 bin 1 (0 data, 0 prediction) is dropped by z-tautau's own config since b7ec3d9 (DropBins). Re-derived on the v4 inputs: it is the only bin of the 13 regions with no prediction; tautau_SR1 bin 1 and tautau_SR2 bin 13 have 0 data but 0.8 and 2.0 predicted events, which is an ordinary Poisson term.",
+      "ttbar_note": "tautau normalises ttbar with a free mu_ttbar (from emu_CRtt) and has no XS_TTbar; mumu and ee constrain it with XS_TTbar (6 %). They stay two parameters: mu_ttbar absorbs the e-mu trigger efficiency (it comes out above 1, z-tautau/docs/11 section 7.4), so it is not the cross section XS_TTbar describes, and no yield is described twice (each parameter acts in its own channel). ttbar is 0.2 % of mumu_SR. variations.tautau_ttbar_constrained replaces mu_ttbar by the shared XS_TTbar.",
       "published": {
-        "source": "z-tautau/fit/results/ztautau_fit_result.json"
+        "source": "z-tautau/fit/results/ztautau_fit_result.json",
+        "optional": true
       }
     }
   },
   "fit": {
-    "_doc": "extra Fit/MultiFit options for every likelihood. FitStrategy 2 (MINUIT strategy 2, accurate HESSE): with strategy 1 the HESSE covariance of the combined fit is wrong once the frozen mumu acceptance block (17 Sep 2026) adds four more normalisation parameters degenerate with mu_Z -- HESSE error on mu_Z 1.65x below MINOS, Lumi post-fit error 0.71, Acc_PDF 1.19 -- and the covariance decomposition (the uncertainty groups) with it; MINOS on mu_Z was right either way. Strategy 2 gives HESSE = MINOS and Lumi 0.98, at 8 s per fit. NLLOffset 'bin' would help the precision of the 2M-event bins but ROOT 6.40 returns NaN for bins with zero observed events (RooFit::Detail::MathFuncs::nll, 0 x log 0), which tautau has; the default 'initial' offset converges once the empty tautau bin is dropped and the ee shape is split off.",
-    "FitStrategy": "2"
+    "_doc": "extra Fit/MultiFit options for every likelihood. FitStrategy 3 (Minuit2 'very high': central finite differences for the Hessian and NO forcing of a non-positive-definite matrix). With strategy 2 MINUIT returns status 0 everywhere but HESSE runs on a matrix 'forced pos-def by adding to diagonal': HESSE error on mu_Z 8x below MINOS (0.0018 vs 0.0152), Lumi post-fit error 0.15, mu_Z most correlated with a single tautau MC-statistics gamma -- the covariance, and with it the uncertainty groups, the post-fit NP errors and the +-1 sigma points of the ranking, is useless, while MINOS on mu_Z is right. The frozen three-channel fit asked for strategy 2 too, but there MIGRAD failed at 2 and TRExFitter escalated to 3 by itself, which is why its covariance was good (work_freeze_2026-09-17/common/logs/multifit_mwf.log); the four-channel tautau likelihood 'converges' at 2, so nothing escalates. With 3: HESSE/MINOS = 1.001, Lumi 0.97, same minimum, 66 s. NLLOffset 'bin' would help the precision of the 2M-event bins but ROOT 6.40 returns NaN for bins with zero observed events (RooFit::Detail::MathFuncs::nll, 0 x log 0), which tautau has (tautau_SR1 bin 1, tautau_SR2 bin 13). NumCPU 4: what the HTCondor slots of mf/condor.py request. MaximumNumberFCNcalls 2000000: the central-difference HESSE of strategy 3 needs about twice the calls; with TRExFitter's default (500 per parameter) the ee + mumu likelihood ends with 'MnHesse maximum number of function calls exhausted', status 300 and a segfault.",
+    "FitStrategy": "3",
+    "NumCPU": "4",
+    "MaximumNumberFCNcalls": "2000000"
   },
   "ranking_fit": {
     "_doc": "overrides of 'fit' for the ranking refits (run.py impacts, multifit_ranking.config). FitStrategy -1 is TRExFitter's default: start at strategy 1 and retry at 2 and 3 if a fit fails. With an explicit strategy 2 only one retry is left, and 27 of the 75 refits failed (MINUIT status 3, recorded as a POI of 0); with the default all converge. The nominal fit they start from, and the post-fit errors that set the +-1 sigma points, stay strategy 2.",
@@ -173,11 +155,7 @@
       "channels": [
         "mumu",
         "tautau"
-      ],
-      "fit": {
-        "_doc": "strategy 2 walks MIGRAD through a region where the covariance has to be forced positive-definite (MINUIT status 1, MINOS status 1, 17 Sep 2026); strategy 1 converges with status 0 everywhere. Only the MINOS interval of mu_Z is used from this likelihood.",
-        "FitStrategy": "1"
-      }
+      ]
     },
     "without_tautau": {
       "label": "without Z#rightarrow#tau#tau",
@@ -214,6 +192,76 @@
         }
       },
       "note": "diagnostic: the UL2016postVFP Medium-ID SF map (datasets/corrections, POG/EGM) gives +-0.3-1.6% per electron outside the ECAL gap, 1.2% per Z->ee event; inside 1.444 < |eta_SC| < 1.566, which z-ee does not veto, it is sf = 1 +- 1. Not a result: it uses a number z-ee did not deliver."
+    },
+    "tautau_leptons_correlated": {
+      "label": "#tau#tau lepton NPs correlated",
+      "channel_overrides": {
+        "tautau": {
+          "rename_systematics": {
+            "ElectronReco": "ElectronRECO",
+            "ElectronScale": "ElectronES"
+          }
+        }
+      },
+      "note": "the name-based default the tautau group warned about: MuonID/Iso/Trigger/Scale of tautau (POG) shared with mumu (tag-and-probe), ElectronID/Reco/Scale shared with the normalisation parts of ee's ElectronID/ElectronRECO/ElectronES"
+    },
+    "tautau_theory_decorrelated": {
+      "label": "#tau#tau theory NPs decorrelated",
+      "channel_overrides": {
+        "tautau": {
+          "rename_systematics": {
+            "MuonID": "MuonID_tautau",
+            "MuonIso": "MuonIso_tautau",
+            "MuonTrigger": "MuonTrigger_tautau",
+            "MuonScale": "MuonScale_tautau",
+            "ElectronID": "ElectronID_tautau",
+            "ElectronReco": "ElectronReco_tautau",
+            "ElectronScale": "ElectronScale_tautau",
+            "PDF": "PDF_tautau",
+            "QCDScale": "QCDScale_tautau",
+            "PS_ISR": "PS_ISR_tautau",
+            "PS_FSR": "PS_FSR_tautau"
+          }
+        }
+      },
+      "note": "tautau constrains QCDScale through the acceptance ratios of its four final states; here that constraint cannot reach ee and mumu"
+    },
+    "tautau_ttbar_constrained": {
+      "label": "#tau#tau: XS_TTbar instead of #mu_{t#bar{t}}",
+      "channel_overrides": {
+        "tautau": {
+          "normfactor_to_overall": {
+            "mu_ttbar": {
+              "name": "XS_TTbar",
+              "rel": 0.06,
+              "title": "t#bar{t} cross section"
+            }
+          }
+        }
+      },
+      "note": "the other answer to the ttbar question of z-tautau/docs/11 section 4: one 6 % XS_TTbar for all channels, no free mu_ttbar"
+    }
+  },
+  "checks": {
+    "_doc": "Single-channel likelihoods fitted on their own (run.py: hw + f), compared with the channel's standalone fit of the common likelihood.",
+    "mumu_cremu_validation": {
+      "label": "#mu#mu with mumu_CRemu as delivered (validation region)",
+      "channel": "mumu",
+      "overrides": {
+        "drop_regions": []
+      },
+      "note": "must reproduce the standalone mumu fit exactly: a VALIDATION region is not in the likelihood"
+    },
+    "mumu_cremu_control": {
+      "label": "#mu#mu with mumu_CRemu as a control region",
+      "channel": "mumu",
+      "overrides": {
+        "drop_regions": [],
+        "region_types": {
+          "mumu_CRemu": "CONTROL"
+        }
+      },
+      "note": "what the e-mu region would add to mumu if it were fitted: the size of what is given up by leaving it to tautau"
     }
   }
 }

@@ -18,7 +18,7 @@ from .paths import OUTPUT, PLOTS
 C_MUMU, C_TAUTAU, C_EE, C_COMB = "#2B6CB0", "#EB811B", "#8E44AD", "#23373B"
 C_PRED, C_GREY = "#14B03D", "#8C8C94"
 COLOUR = {"ee": C_EE, "mumu": C_MUMU, "tautau": C_TAUTAU, "combined": C_COMB}
-LABEL = {"ee": r"$Z\to ee$", "mumu": r"$Z\to\mu\mu$", "tautau": r"$Z\to\tau_h\tau_h$", "combined": r"$Z\to\ell\ell$ combined"}
+LABEL = {"ee": r"$Z\to ee$", "mumu": r"$Z\to\mu\mu$", "tautau": r"$Z\to\tau\tau$", "combined": r"$Z\to\ell\ell$ combined"}
 XLABEL = r"$\sigma(\mathrm{pp}\to Z/\gamma^{*}\to\ell\ell)$, $60 < m_{\ell\ell} < 120$ GeV  [pb]"
 ORDER = ("ee", "mumu", "tautau")
 
@@ -278,10 +278,13 @@ def variations(res):
     v = res["variations"]
     if not v:
         return
-    labels = {"without_ee": r"without $Z\to ee$", "without_tautau": r"without $Z\to\tau_h\tau_h$",
+    labels = {"without_ee": r"without $Z\to ee$", "without_tautau": r"without $Z\to\tau\tau$",
               "split_all_channels": "shape/norm. split in all channels",
               "ee_split_shared_only": "ee: split shared NPs only",
-              "ee_electron_id_1p2": r"ee: electron ID norm. $\pm$1.2%"}
+              "ee_electron_id_1p2": r"ee: electron ID norm. $\pm$1.2%",
+              "tautau_leptons_correlated": r"$\tau\tau$: $\mu$/e NPs shared with $\mu\mu$/ee",
+              "tautau_theory_decorrelated": r"$\tau\tau$: theory NPs not shared",
+              "tautau_ttbar_constrained": r"$\tau\tau$: XS_TTbar instead of free $\mu_{t\bar{t}}$"}
     c = res["combined"]
     rows = [dict(label="Baseline", value=c["sigma_pb"], up=c["err_up_pb"], down=c["err_down_pb"], colour=C_COMB, own=True)]
     for k, x in v.items():

@@ -9,6 +9,12 @@ One TRExFitter v1.8.0 MultiFit of the three BND-school channels on CMS Open Data
 Frozen on 17 Sep 2026 (git tag `zmumu-freeze-2026-09-17`, [`../FREEZE.md`](../FREEZE.md)); read and
 present these numbers, do not rerun.
 
+> **After the freeze: the four-channel Z → ττ.** z-tautau's τhτh + μτh + eτh + eμ measurement has been combined with ee and μμ
+> (17 Sep, fits on HTCondor): **1951 ⁺³⁰₋₂₉ pb** (interim), ττ alone 1981 ⁺⁷³₋₇₀ pb, compatibility p = 0.35. Method, decisions,
+> checks: [`combLieke/docs/four-channel-tautau.md`](combLieke/docs/four-channel-tautau.md); numbers: `combLieke/interim/result.json`. Everything below, and
+> `combLieke/output/`, is still the **frozen** ee ⊕ μμ ⊕ τhτh result until z-tautau's own fit results are in and
+> `python run.py results && python run.py plots` has been run.
+
 Everything is in [`combLieke/`](combLieke/):
 
 | | |

@@ -14,6 +14,13 @@ the agent guide. The earlier covariance (BLUE) combination and its slide deck we
 the git history. The conventions the combination settled are `fitting/CONVENTIONS.md` §6. Its
 references to `combination/docs/` point to that removed version.
 
+> **After the freeze (17 Sep, on the user's request): a combination with the four-channel Z → ττ** (τhτh + μτh + eτh + eμ,
+> z-tautau b7ec3d9). `combination/combLieke/run.py` + `config/channels.json` on `main` build it; the fits run on HTCondor
+> (`python run.py condor --submit`). Interim: **1951 ⁺³⁰₋₂₉ pb**, ττ alone 1981 ⁺⁷³₋₇₀ pb, p = 0.35
+> (`combLieke/docs/four-channel-tautau.md`, `combLieke/interim/result.json`). `combLieke/output/` stays the frozen result
+> until z-tautau's own fit results are in the repository and the final `results`/`plots` are run. `mumu_CRemu` is dropped
+> there (same data as the ττ eμ channel; a validation region, so μμ does not change).
+
 > **Open, limiting the ee channel:** z-ee (re-delivered 16 Sep 14:44, renormalised PDF/QCDScale) does not
 > veto the ECAL barrel–endcap gap. The official electron-ID SF map is a placeholder (sf = 1 ± 1) there,
 > which makes the ee `ElectronID` uncertainty ±5.9 % instead of ~1.2 %. Its shape then over-constrains

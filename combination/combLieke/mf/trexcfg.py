@@ -17,7 +17,7 @@ from .paths import repo_path
 
 KINDS = ("Job", "Fit", "Region", "Sample", "NormFactor", "ShapeFactor", "Systematic", "MultiFit", "Options")
 #: options whose value TRExFitter shows to a human; quoted on output (ROOT '#' markup inside)
-QUOTED = ("Label", "Title", "Category", "SubCategory", "VariableTitle", "ShortLabel", "LegendLabel")
+QUOTED = ("Label", "Title", "Category", "SubCategory", "VariableTitle", "ShortLabel", "LegendLabel", "Group")
 
 
 @dataclass
@@ -97,6 +97,47 @@ QUIET = {"SystControlPlots": "FALSE", "DoSummaryPlot": "FALSE", "DoPieChartPlot"
          "DebugLevel": "1", "ImageFormat": "png"}
 
 
+def signal_samples(spec: dict) -> list[str]:
+    """The channel's signal samples: a list, or {"meta": <metadata json>, "key": <key>} to read it from the channel."""
+    sig = spec["signal"]
+    if isinstance(sig, dict):
+        return list(json.loads(repo_path(sig["meta"]).read_text())[sig["key"]])
+    return list(sig)
+
+
+def drop_regions(key: str, blocks: list[Block], names: list[str]) -> dict:
+    """Remove regions from a channel config: the Region blocks, their names in every `Regions:` option, and the
+    samples / systematics / factors that then act nowhere. Returns what was removed."""
+    removed = {"regions": [], "blocks": []}
+    known = [b.name for b in blocks if b.kind == "Region"]
+    for name in names:
+        if name not in known:
+            raise ValueError(f"{key}: drop_regions names unknown region {name}")
+    if set(names) >= set(known):
+        raise ValueError(f"{key}: drop_regions would remove every region")
+    for b in list(blocks):
+        if b.kind == "Region" and b.name in names:
+            blocks.remove(b)
+            removed["regions"].append(b.name)
+        elif "Regions" in b.opts and listopt(b.opts["Regions"]) != ["all"]:
+            left = [r for r in listopt(b.opts["Regions"]) if r not in names]
+            if not left:
+                blocks.remove(b)
+                removed["blocks"].append(f"{b.kind} {b.name}")
+            else:
+                b.opts["Regions"] = ",".join(left)
+    gone = {x.split(" ", 1)[1] for x in removed["blocks"] if x.startswith("Sample ")}
+    for b in list(blocks):          # a sample that is gone must not be named by what is left
+        if gone and "Samples" in b.opts and b.kind != "Sample":
+            left = [x for x in listopt(b.opts["Samples"]) if x not in gone]
+            if not left:
+                blocks.remove(b)
+                removed["blocks"].append(f"{b.kind} {b.name}")
+            else:
+                b.opts["Samples"] = ",".join(left)
+    return removed
+
+
 def _check_empty(histo_path: Path, job: Block, region: Block, blocks: list[Block], bins: list[int]) -> None:
     """Refuse to drop a bin unless data and every sample are exactly zero there (1-based indices)."""
     import uproot
@@ -125,6 +166,10 @@ def adapt_channel(key: str, spec: dict, poi: dict, poi_name: str, workdir: Path,
       * a constant NormFactor `xsref_<key>` = poi["reference_pb"] / sigma_reference(channel) on the same
         samples, so that poi_name x poi["reference_pb"] is the channel's sigma(60 < m < 120 GeV) in pb;
       * systematics renamed per spec["rename_systematics"] (NuisanceParameter only, histograms unchanged);
+      * spec["drop_regions"]: regions removed from the channel (drop_regions above), e.g. a region whose data
+        another channel fits; spec["region_types"] {region: Type} overrides a region's Type (checks only);
+      * spec["normfactor_to_overall"] {NormFactor: {"name", "rel", ...}}: a free normalisation replaced by a
+        constrained OVERALL parameter on the same samples (used only by a variation);
       * one OVERALL systematic per acceptance source (spec["acceptance"]) on the signal samples, when the
         channel quotes sigma(60-120) = sigma_fid / A outside its own fit;
       * MINOS on the POI(s) only, plus any extra Fit options given in `fit` (config/channels.json "fit");
@@ -141,8 +186,22 @@ def adapt_channel(key: str, spec: dict, poi: dict, poi_name: str, workdir: Path,
     if len(poi_nf) != 1:
         raise ValueError(f"{key}: no NormFactor for the POI {old_poi}")
     signal = poi_nf[0].opts["Samples"]
-    if set(listopt(signal)) != set(spec["signal"]):
-        raise ValueError(f"{key}: POI acts on {signal}, the manifest says {spec['signal']}")
+    if set(listopt(signal)) != set(signal_samples(spec)):
+        raise ValueError(f"{key}: POI acts on {signal}, the manifest says {signal_samples(spec)}")
+
+    dropped = drop_regions(key, blocks, spec.get("drop_regions") or [])
+    for region_name, rtype in (spec.get("region_types") or {}).items():
+        region = [b for b in blocks if b.kind == "Region" and b.name == region_name]
+        if len(region) != 1:
+            raise ValueError(f"{key}: region_types names unknown region {region_name}")
+        region[0].opts["Type"] = rtype
+    for nf_name, o in (spec.get("normfactor_to_overall") or {}).items():
+        nf = [b for b in blocks if b.kind == "NormFactor" and b.name == nf_name]
+        if len(nf) != 1 or nf_name == old_poi:
+            raise ValueError(f"{key}: normfactor_to_overall needs a NormFactor other than the POI, got {nf_name}")
+        blocks[blocks.index(nf[0])] = Block("Systematic", o["name"], {
+            "Title": o.get("title", o["name"]), "Type": "OVERALL", "OverallUp": repr(o["rel"]), "OverallDown": repr(-o["rel"]),
+            "Samples": nf[0].opts["Samples"], "Category": o.get("category", "Background normalisation")})
 
     job.name = key
     job.opts.update(POI=poi_name, OutputDir=str(workdir), HistoPath=str(histo_path), **QUIET)
@@ -196,7 +255,9 @@ def adapt_channel(key: str, spec: dict, poi: dict, poi_name: str, workdir: Path,
             "Samples": signal, "Category": "Acceptance"}))
     info = {"poi": poi_name, "signal": listopt(signal), "xsref_factor": factor, "acceptance": acc,
             "renamed": renames, "config": spec["config"], "histo_path": str(histo_path),
-            "dropped_empty_bins": spec.get("drop_empty_bins", {}), "split_shape_norm": split,
+            "dropped_empty_bins": spec.get("drop_empty_bins", {}), "dropped_regions": dropped,
+            "region_types": spec.get("region_types") or {}, "normfactor_to_overall": spec.get("normfactor_to_overall") or {},
+            "split_shape_norm": split,
             "overall_override": spec.get("overall") or {}}
     return blocks, info
 

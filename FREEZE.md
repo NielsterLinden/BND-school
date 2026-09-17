@@ -15,6 +15,12 @@ the listed file; do not regenerate it.
 > (`git show zmumu-freeze-2026-09-17:z-tautau/fit/...`). `combination/combLieke/run.py` no longer reproduces the freeze
 > on `main` (the ττ acceptance keys `signal_prediction.A_unc.*` and the v3 fit result are missing): check out the tag to rerun it.
 
+> **17 Sep, later: a combination with the four-channel ττ exists, outside the freeze** (requested by the user). ee ⊕ μμ ⊕ ττ(τhτh + μτh + eτh + eμ)
+> = **1951 ⁺³⁰₋₂₉ pb** (interim; ττ alone 1981 ⁺⁷³₋₇₀ pb; p = 0.35), `combination/combLieke/docs/four-channel-tautau.md` and
+> `combination/combLieke/interim/result.json`. `run.py` and `config/channels.json` on `main` build *that* likelihood; `combLieke/output/` below stays the
+> frozen result until z-tautau's own fit results are in the repository and the final `results`/`plots` have been run. `mumu_CRemu` is dropped
+> from the μμ config there (same data as the ττ eμ channel; it is a validation region, so nothing in μμ changes).
+
 All results: CMS Open Data 2016 G+H, NanoAODv9, √s = 13 TeV, L = 16393.381 pb⁻¹ ± 1.2 %.
 Theory reference: aMC@NLO (NNLO-normalised, 6077.22 pb for m > 50 GeV).
 

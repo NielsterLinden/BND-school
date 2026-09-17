@@ -1,22 +1,19 @@
-# CLAUDE.md — combination (TRExFitter MultiFit of Z → ee, Z → μμ, Z → τhτh)
+# CLAUDE.md — combination (TRExFitter MultiFit of Z → ee, Z → μμ, Z → ττ)
 
 For agents. `combLieke/README.md` is the physics and the result; this file is about changing the
 combination without breaking it.
 
-> **Frozen on 17 Sep 2026** (git tag `zmumu-freeze-2026-09-17`, repository `FREEZE.md`). The combination was rerun
-> on the frozen channel inputs: Z → μμ with its measured muon reconstruction scale factor and its 60–120 GeV
-> acceptance block (eight μμ acceptance parameters instead of four), and MINUIT strategy 2 for every fit.
-> `combLieke/output/` is the final result: read and present it, do not regenerate it. Only
-> `presentation/` still shows pre-freeze numbers; updating it is the animation agents' job.
-
-> **Z → ττ v4 arrived after the freeze (merge 5b7cc83).** On `main`, `z-tautau/` is now the four-channel measurement
-> (τhτh + μτh + eτh + eμ) and its fits are not run yet (`z-tautau/RESUME.md`). `run.py` does not reproduce
-> `combLieke/output/` on `main`: `channels.json` → `tautau` points at v3 keys (`signal_prediction.A_unc.*`,
-> `fit/results/ztautau_fit_result.json`, sample `DYtautau`, `tautau_SR2` bin drop) that v4 no longer has. The v3 inputs
-> are at the tag. Adopting v4 is a new combination, not a rerun; `z-tautau/docs/11-combination-inputs.md` §3–5 lists what
-> it needs: signal `DYtautau_tDM*` only, the `nominal` region set (never the pT-split copies), no acceptance block
-> (inside the ττ fit), decorrelate `Muon*`/`Electron*`, decide `mu_ttbar` vs `XS_TTbar`, and drop `mumu_CRemu`
-> (it overlaps the ττ eμ channel).
+> **Two combinations exist.** The **frozen** one (17 Sep 2026, git tag `zmumu-freeze-2026-09-17`, repository `FREEZE.md`)
+> is ee ⊕ μμ ⊕ τhτh: 1945 ⁺³¹₋₃₀ pb. It is what `combLieke/output/` holds and what the talk quotes; its TRExFitter
+> jobs are kept in `combLieke/work_freeze_2026-09-17/` (git-ignored). Do not regenerate it on `main`; check out the tag.
+>
+> The **four-channel ττ combination** (started 17 Sep, after the freeze, on the user's request) is what `run.py` and
+> `config/channels.json` on `main` now build: ee ⊕ μμ ⊕ ττ with ττ = τhτh + μτh + eτh + eμ (z-tautau v4, commit b7ec3d9,
+> `z-tautau/docs/11-combination-inputs.md`). Its fits run on HTCondor (`python run.py condor --submit`) and end in
+> `combLieke/interim/result.json` (tracked in git). **`output/result.json` and `output/plots/` are only replaced by
+> `python run.py results && python run.py plots` once z-tautau's own fit results are in the repository**
+> (`z-tautau/fit/results/ztautau_fit_result.json`, the "channel's own" ττ point of the figures) — until then `output/`
+> is the frozen result and other sessions (the talk) read it.
 
 The combination is **one TRExFitter v1.8.0 MultiFit** over the three
 channel likelihoods. There is no covariance/BLUE combination any more: it and its slide deck were
@@ -27,8 +24,10 @@ removed on 16 Sep 2026 (last present in git commit 9501c41).
 ```bash
 source ../setup.sh               # LCG_110 + trex-fitter v1.8.0 on PATH
 cd combLieke
-python run.py all                # prepare -> workspaces -> fits -> variations -> impacts -> results -> plots (~10 min)
-python run.py results && python run.py plots   # re-parse and redraw only
+python run.py prepare            # configs of every likelihood in work/ (seconds)
+python run.py condor --submit    # all fits as one HTCondor DAG (mf/condor.py); ends with `results --interim`
+python run.py results && python run.py plots   # output/result.json and output/plots/ (see the note above first)
+python run.py all                # the same chain on one machine: hours with the four-channel tautau likelihood
 python tests/test_trexcfg.py     # adapter checks, 2 s
 python checks/systematics.py     # input-level systematic sizes -> checks/systematics.json (after prepare)
 python checks/orthogonality.py   # event-level overlap on data -> checks/orthogonality.json (~3 min)
@@ -44,10 +43,15 @@ What is kept is `combLieke/output/` (`result.json`, `plots/`) and the `checks/*.
 | which channel configs / inputs, references, signal samples | `combLieke/config/channels.json` |
 | every change made to a channel config | `mf/trexcfg.adapt_channel` (docstring lists all of them) |
 | the ee inputs (histograms from `z-ee/Zee_fit.tar.gz`) | `mf/ee_input.py` |
-| acceptance uncertainties of μμ and ττ | `channels.json` → `acceptance`, read by key from the channels' `*.meta.json` (μμ: `z-mumu/zmumu/acceptance.py`) |
+| acceptance uncertainties of μμ | `channels.json` → `acceptance`, read by key from `zmumu.root.meta.json` (`z-mumu/zmumu/acceptance.py`). ee and ττ have none outside the fit: their theory templates carry A × ε (`acceptance: null`, `acceptance_note`) |
+| the ττ signal samples (15 `DYtautau_tDM*`) | read from `ztautau.root.meta.json` → `signal_samples` (`channels.json` → `tautau.signal`), never hard-coded |
+| regions removed from a channel (`mumu_CRemu`) | `channels.json` → `drop_regions`, `mf/trexcfg.drop_regions` |
+| ττ lepton parameters decorrelated from μμ / ee; `mu_ttbar` vs `XS_TTbar` | `channels.json` → `tautau.rename_systematics` (+ note), `tautau.ttbar_note`; the alternatives are the variations `tautau_leptons_correlated`, `tautau_ttbar_constrained` |
+| single-channel cross-checks (`mumu_CRemu` as a control region) | `channels.json` → `checks` |
+| the HTCondor DAG (nodes, resources, job category) | `mf/condor.py`; the job wrapper is `combLieke/condor/run_step.sh` |
 | fit options for every channel fit and MultiFit (`FitStrategy: 2`); ranking refits; per-variation overrides | `channels.json` → `fit`, `ranking_fit`, `variations.<name>.fit` |
 | correlations | **by nuisance-parameter name only** (TRExFitter). Renames in `rename_systematics`; ee shape parts get `<NP>_eeShape` |
-| alternative likelihoods | `channels.json` → `variations` |
+| alternative likelihoods | `channels.json` → `variations` (`channels`, `split`, `overall`, `channel_overrides`, `fit`) |
 | published ATLAS/CMS numbers | `combLieke/config/references.json` (with paper and table) |
 | theory prediction and its uncertainty | `mf/prediction.py` |
 
@@ -61,8 +65,11 @@ What is kept is `combLieke/output/` (`result.json`, `plots/`) and the `checks/*.
    `ee_split_shared_only` and `ee_electron_id_1p2` variations exist for exactly that.
 2. **`NLLOffset: bin` does not work** here: ROOT 6.40 returns NaN for bins with zero observed events,
    which ττ has. The default offset converges once the empty ττ bin is dropped.
-3. **`drop_empty_bins` refuses non-empty bins.** Only `tautau_SR2` bin 1 (0 data, 0 prediction) is
-   dropped, because its free MC-statistics γ sits at 0 and breaks HESSE/MINOS.
+3. **`drop_empty_bins` refuses non-empty bins, and refuses a region that already has `DropBins`.** ττ v4 drops
+   `tautau_SR2` bin 1 (0 data, 0 prediction: its free MC-statistics γ sits at 0 and breaks HESSE/MINOS) in its own
+   config, and `tautau_SR0` below 110 GeV (fake sideband), so the manifest lists no bin any more. Re-derive after
+   every ττ delivery: a bin needs dropping only if **no sample predicts anything** there; 0 data with a non-zero
+   prediction (`tautau_SR1` bin 1, `tautau_SR2` bin 13) is an ordinary Poisson term.
 4. **TRExFitter reserves `shape_`, `alpha`, `gamma` in NP names**, so the ee shape parts are `<NP>_eeShape`.
 5. **The refit-based grouped impacts (`trex-fitter mi`) return NaN** in this likelihood (HESSE fails
    with groups fixed). The uncertainty groups are TRExFitter's covariance decomposition from `mwf`;
@@ -77,18 +84,34 @@ What is kept is `combLieke/output/` (`result.json`, `plots/`) and the `checks/*.
 8. **The theory band is the generator's own uncertainty** (aMC@NLO weights on σ(60 < m_LHE < 120):
    7-point scale ⊕ NNPDF3.1 Hessian ⊕ α_s). The uncertainty of the NNLO normalisation 6077.22 pb is not
    public and not included.
-9. **Strategy 1 HESSE is not reliable in this likelihood.** Every channel normalisation parameter (`Lumi`,
-   `MuonReco`, the `Acc_*`) is degenerate with `mu_Z`. With the frozen μμ acceptance block (four more of them),
-   MINUIT strategy 1 still returns status 0 and a correct MINOS interval, but its covariance is wrong: HESSE error
-   on `mu_Z` 1.65× below MINOS, `Lumi` post-fit error 0.71, `Acc_PDF` 1.19 (above its prior), and the
-   uncertainty groups with it (luminosity 1 pb instead of 22). Hence `"FitStrategy": "2"` in `channels.json`
-   (8 s per fit). `run.py results` records `combined.hesse_over_minos` and prints a WARNING if it is off by more
-   than 10 %. Two exceptions, both in `channels.json`:
-   - **the ranking refits (`ranking_fit`, `FitStrategy -1`):** TRExFitter's default starts at strategy 1 and
-     retries at 2 and 3. An explicit 2 leaves one retry, and 27 of 75 refits failed (status 3).
-     `run.py prepare` writes `work/common/multifit_ranking.config` for them.
-   - **`without_ee` (per-variation `fit`, `FitStrategy 1`):** strategy 2 ends with MINUIT and MINOS status 1
-     there, strategy 1 with 0. Only its MINOS interval on μ_Z is used.
+9. **Only MINUIT strategy 3 gives a usable covariance; status 0 proves nothing.** Every channel normalisation
+   parameter (`Lumi`, `MuonReco`, the `Acc_*`, the ττ `TauIDSF_DM*`, `mu_ttbar`) is degenerate with `mu_Z`, and the
+   likelihood has ~320 parameters. With strategy 1 or 2 MINUIT ends with status 0 and a correct MINOS interval on
+   `mu_Z`, but HESSE runs on a matrix "forced pos-def by adding to diagonal" and the covariance is wrong:
+   HESSE error on `mu_Z` 8× below MINOS (0.0018 vs 0.0152), `Lumi` post-fit error 0.15, `mu_Z` most correlated with
+   one ττ MC-statistics γ. The uncertainty groups, the post-fit NP errors and the ±1σ points of the ranking all come
+   from that matrix. Strategy 3 (Minuit2 "very high": central differences, no forcing) gives HESSE/MINOS = 1.001 and
+   `Lumi` 0.97 at the same minimum. Hence `"FitStrategy": "3"` in `channels.json`.
+   - The frozen three-channel fit asked for strategy 2 and was still right: there MIGRAD *failed* at 2 and TRExFitter
+     escalated to 3 by itself. The four-channel ττ likelihood "converges" at 2, so nothing escalates. Do not go back.
+   - `run.py results` records `combined.hesse_over_minos` and `pos_def_forced` per fit and prints a WARNING if
+     HESSE/MINOS is off by more than 10 %. Grep the logs for `forced pos-def` after any change of the model.
+   - **The ranking refits (`ranking_fit`, `FitStrategy -1`)** keep TRExFitter's default (start at 1, retry at 2 and 3):
+     only the POI value of each refit is used, and a fixed high strategy leaves no retry. `run.py prepare` writes
+     `work/common/multifit_ranking.config` for them.
+10. **The correlation matrix in TRExFitter's `Fits/*.txt` has its rows in reverse parameter order** (row k is
+    parameter n−1−k, columns in order). `mf/results._corr` accounts for it; until 17 Sep it did not, so the
+    `compatibility.correlations` of the frozen `result.json` are other matrix elements (nothing else used them).
+11. **ττ v4 is one `Fit` of the MultiFit with 13 regions** (`z-tautau/fit/ztautau.config`): never add the pT-split
+    copies (`*_SRlo/hi_dm*`, same events), never put `mu_Z` on `DYtautau_out`, never add `Acc_*` for ττ (its theory
+    templates carry A × ε), and never let `mumu_CRemu` back in (same data as `emu_SR`/`emu_CRtt`). A per-final-state
+    POI is not defined in this model: with free `TauIDSF_DM*` a single ℓτh channel cannot separate `mu_Z` from the
+    scale factors, so the three-POI fit stays ee / μμ / ττ.
+12. **HTCondor** (`mf/condor.py`, nikhef-condor skill): one DAG, batch name `zcomb`; watch it with
+    `/user/sjankovy/.claude/skills/nikhef-condor/condor_watch.sh --prefix zcomb` (it stops on held jobs). `condor_rm`
+    of the DAG still runs its FINAL node. The list of parameters to rank is written by the `common` job; the ranking
+    node waits for it on the schedd (`condor/wait_for_file.sh`). `run.py condor` removes the `NPRanking_*` files of an
+    earlier submission; everything else in `work/` is overwritten job by job, so `rm -rf work` first if the model changed.
 
 ## Figures
 

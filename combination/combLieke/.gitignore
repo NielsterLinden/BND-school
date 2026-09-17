@@ -1,5 +1,7 @@
 # TRExFitter jobs, workspaces and logs: rebuilt by `python run.py all`
 work/
+# the work directory of the frozen three-channel combination (tag zmumu-freeze-2026-09-17), kept aside on 17 Sep 2026
+work_*/
 work_all.log
 __pycache__/
 *.pyc

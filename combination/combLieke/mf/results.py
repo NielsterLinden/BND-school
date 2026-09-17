@@ -48,7 +48,8 @@ def _corr(fit: dict, a: str, b: str):
     names = list(fit["nps"])
     if not fit.get("corr") or a not in names or b not in names:
         return None
-    return fit["corr"]["matrix"][names.index(a)][names.index(b)]
+    # TRExFitter writes the matrix with its rows in reverse parameter order (row k is parameter n-1-k), columns in order
+    return fit["corr"]["matrix"][len(names) - 1 - names.index(a)][names.index(b)]
 
 
 def _grouped(path: Path, ref: float) -> dict | None:
@@ -73,9 +74,13 @@ def _ranking(fits: Path, rankings: Path) -> tuple[list | None, str | None]:
     return None, None
 
 
-def _channel_published(key: str, spec: dict, status: dict) -> dict:
-    """The channel group's own POI, read from the file it published (not from config/channels.json)."""
+def _channel_published(key: str, spec: dict, status: dict) -> dict | None:
+    """The channel group's own POI, read from the file it published (not from config/channels.json).
+    None when the file is not there yet and the manifest marks it "optional" (tautau v4 before its fits are pulled)."""
     src = spec["published"]["source"]
+    if key != "ee" and spec["published"].get("optional") and not repo_path(src).exists():
+        print(f"NOTE: {src} does not exist yet: no 'published_by_channel' for {key}")
+        return None
     if key == "ee":
         v = status["ee_input"]["published_fit"]
         return {"source": src, "mu": v[0], "err_up": v[1], "err_down": v[2]}
@@ -91,7 +96,8 @@ def _published(entry: dict, scale: float) -> dict:
     return {**entry, "value_60_120_pb": entry["value"] * k, "err_60_120_pb": err * k, "window_scale": k}
 
 
-def collect() -> dict:
+def collect(interim: bool = False) -> dict:
+    """-> output/result.json; with `interim` -> interim/result.json, leaving output/ (and what reads it) alone."""
     m, refs = manifest(), references()
     ref = m["poi"]["reference_pb"]
     status = json.loads((WORK / "status.json").read_text())
@@ -119,7 +125,7 @@ def collect() -> dict:
         tot = 0.5 * (comb["err_up_pb"] + comb["err_down_pb"])
         comb["syst_pb"] = math.sqrt(max(tot ** 2 - comb["stat_pb"] ** 2, 0.0))
     comb["ranking"], comb["ranking_method"] = _ranking(fits_dir, WORK / "common/combination/Rankings")
-    scan = WORK / "common/combination/LHoodPlots/NLLscan_mu_Z.yaml"
+    scan = WORK / "common/combination_scan/LHoodPlots/NLLscan_mu_Z.yaml"
     comb["nll_scan"] = yaml.safe_load(scan.read_text()) if scan.exists() else None
     out["combined"] = comb
 
@@ -130,9 +136,10 @@ def collect() -> dict:
         standalone.update(_gof(WORK / f"common/logs/{key}_f.log"), pulls=_pulls(fit))
         joint = _poi(split, f'{m["poi"]["name"]}_{key}', ref)
         pub = _channel_published(key, m["channels"][key], status)
-        pub_sigma = pub["mu"] * m["channels"][key]["sigma_reference_pb"]
+        if pub is not None:
+            pub = {**pub, "sigma_pb": pub["mu"] * m["channels"][key]["sigma_reference_pb"]}
         chans[key] = {"standalone": standalone, "joint": joint,
-                      "published_by_channel": {**pub, "sigma_pb": pub_sigma},
+                      "published_by_channel": pub,
                       "sigma_reference_pb": m["channels"][key]["sigma_reference_pb"]}
     out["channels"] = chans
 
@@ -158,6 +165,20 @@ def collect() -> dict:
         variations[name] = v
     out["variations"] = variations
 
+    checks = {}
+    for name, chk in m.get("checks", {}).items():
+        key = chk.get("channel") if isinstance(chk, dict) else None
+        path = WORK / f"check_{name}/{key}/Fits/{key}.txt"
+        if name.startswith("_") or not path.exists():
+            continue
+        v = _poi(run_trex.parse_fit_txt(path), m["poi"]["name"], ref)
+        base = chans[key]["standalone"]
+        v.update(_gof(WORK / f"check_{name}/logs/{key}_f.log"), label=chk["label"], note=chk.get("note"), channel=key,
+                 shift_pb=v["sigma_pb"] - base["sigma_pb"],
+                 err_ratio=(v["err_up_pb"] + v["err_down_pb"]) / (base["err_up_pb"] + base["err_down_pb"]))
+        checks[name] = v
+    out["checks"] = checks
+
     out["prediction"] = prediction.amcatnlo(m["poi"].get("prediction_flavour", "mumu"))
     scale = prediction.window_ratio()
     if abs(scale - refs["window_scale_66_116_to_60_120"]["value"]) > 1e-4:
@@ -168,20 +189,24 @@ def collect() -> dict:
     orth = HERE / "checks/orthogonality.json"
     if orth.exists():
         o = json.loads(orth.read_text())
+        # measured for ee, mumu and tau_h tau_h; the mu tau_h, e tau_h and e mu channels veto a second lepton by
+        # construction and mumu_CRemu, the one overlap with e mu, is dropped (config/channels.json)
         out["orthogonality"] = {"mumu_ee_upper_bound": o["mumu_and_ee"]["overlap_upper_bound"],
                                 "tautau_mumu": o["tautau_and_mumu_ee"]["tautau_sr_and_two_mumu_signal_muons"],
                                 "tautau_ee_upper_bound": o["tautau_and_mumu_ee"]["tautau_sr_and_ee_selected"],
                                 "source": "checks/orthogonality.json"}
-    OUTPUT.mkdir(parents=True, exist_ok=True)
-    (OUTPUT / "result.json").write_text(json.dumps(out, indent=1) + "\n")
+    target = HERE / "interim" / "result.json" if interim else OUTPUT / "result.json"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps(out, indent=1) + "\n")
+    print(f"-> {target}")
     c = out["combined"]
     print(f"sigma = {c['sigma_pb']:.1f} +{c['err_up_pb']:.1f} -{c['err_down_pb']:.1f} pb  (mu_Z = {c['mu']:.4f}); "
           f"compatibility q = {q:.2f} / {ndf} dof")
     for k, v in chans.items():
         s, j = v["standalone"], v["joint"]
+        own = f"{v['published_by_channel']['sigma_pb']:.1f}" if v["published_by_channel"] else "not published yet"
         print(f"  {k:7s} standalone {s['sigma_pb']:7.1f} +{s['err_up_pb']:.1f} -{s['err_down_pb']:.1f}   "
-              f"joint {j['sigma_pb']:7.1f} +{j['err_up_pb']:.1f} -{j['err_down_pb']:.1f}   "
-              f"channel's own {v['published_by_channel']['sigma_pb']:.1f}")
-    for k, v in variations.items():
-        print(f"  {k:24s} {v['sigma_pb']:7.1f} +{v['err_up_pb']:.1f} -{v['err_down_pb']:.1f}  ({v['shift_pb']:+.1f})")
+              f"joint {j['sigma_pb']:7.1f} +{j['err_up_pb']:.1f} -{j['err_down_pb']:.1f}   channel's own {own}")
+    for k, v in {**variations, **checks}.items():
+        print(f"  {k:28s} {v['sigma_pb']:7.1f} +{v['err_up_pb']:.1f} -{v['err_down_pb']:.1f}  ({v['shift_pb']:+.1f})")
     return out

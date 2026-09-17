@@ -41,7 +41,10 @@ def test_poi_and_reference_factor():
     job = trexcfg.first(blocks, "Job")
     assert job.opts["POI"] == "mu_Z_tautau"
     nf = {b.name: b for b in blocks if b.kind == "NormFactor"}
-    assert "mu_Z" not in nf and nf["mu_Z_tautau"].opts["Samples"] == "DYtautau"
+    signal = trexcfg.listopt(nf["mu_Z_tautau"].opts["Samples"])
+    assert "mu_Z" not in nf and len(signal) == 15 and all(s.startswith("DYtautau_tDM") for s in signal)
+    assert nf["xsref_tautau"].opts["Samples"] == nf["mu_Z_tautau"].opts["Samples"]      # never DYtautau_out
+    assert info["acceptance"] == [] and "mu_ttbar" in nf                                # acceptance inside the tautau fit
     factor = float(nf["xsref_tautau"].opts["Nominal"])
     assert abs(factor * m["channels"]["tautau"]["sigma_reference_pb"] - m["poi"]["reference_pb"]) < 1e-9
     assert nf["xsref_tautau"].opts["Constant"] == "TRUE"
@@ -60,14 +63,43 @@ def test_acceptance_nps_follow_the_channel_metadata():
 
 def test_empty_bin_drop_is_checked():
     blocks, _ = _adapt("tautau")
-    sr2 = [b for b in blocks if b.kind == "Region" and b.name == "tautau_SR2"][0]
-    assert sr2.opts["DropBins"] == "1"
+    regions = {b.name: b for b in blocks if b.kind == "Region"}
+    assert regions["tautau_SR2"].opts["DropBins"] == "1"           # z-tautau's own config drops its empty bin
+    assert len(regions) == 13 and not any("SRlo" in r or "SRhi" in r for r in regions)   # never the pT-split copies
     try:
-        _adapt("tautau", drop_empty_bins={"tautau_SR2": [5]})
+        _adapt("tautau", drop_empty_bins={"tautau_SR1": [5]})
     except ValueError as err:
         assert "not empty" in str(err)
     else:
         raise AssertionError("a non-empty bin was dropped")
+
+
+def test_tautau_lepton_parameters_are_decorrelated():
+    blocks, _ = _adapt("tautau")
+    nps = {b.opts.get("NuisanceParameter", b.name) for b in blocks if b.kind == "Systematic"}
+    shared_with_mumu_or_ee = {"MuonID", "MuonIso", "MuonTrigger", "MuonScale", "ElectronID", "ElectronReco", "ElectronScale"}
+    assert not nps & shared_with_mumu_or_ee and {f"{n}_tautau" for n in shared_with_mumu_or_ee} <= nps
+    assert {"Lumi", "Pileup", "L1Prefiring", "PDF", "QCDScale", "PS_ISR", "PS_FSR"} <= nps and "XS_TTbar" not in nps
+
+
+def test_mumu_emu_region_is_dropped():
+    blocks, info = _adapt("mumu")
+    assert [b.name for b in blocks if b.kind == "Region"] == ["mumu_SR"]
+    assert info["dropped_regions"]["regions"] == ["mumu_CRemu"]
+    names = {(b.kind, b.name) for b in blocks}
+    assert not names & {("Sample", "WJets"), ("Systematic", "XS_WJets"), ("Systematic", "ElectronEff_mumu")}
+    for b in blocks:
+        assert "mumu_CRemu" not in b.opts.get("Regions", "") and "WJets" not in trexcfg.listopt(b.opts.get("Samples", ""))
+    # as delivered it is a validation region: not part of the likelihood either way
+    delivered = trexcfg.read(repo_path(manifest()["channels"]["mumu"]["config"]))
+    assert [b.opts["Type"] for b in delivered if b.kind == "Region" and b.name == "mumu_CRemu"] == ["VALIDATION"]
+
+
+def test_ttbar_variation_replaces_the_free_normalisation():
+    blocks, _ = _adapt("tautau", normfactor_to_overall={"mu_ttbar": {"name": "XS_TTbar", "rel": 0.06}})
+    assert not [b for b in blocks if b.kind == "NormFactor" and b.name == "mu_ttbar"]
+    xs = [b for b in blocks if b.kind == "Systematic" and b.name == "XS_TTbar"]
+    assert len(xs) == 1 and xs[0].opts["OverallUp"] == "0.06" and "TTbar_tDMnone" in xs[0].opts["Samples"]
 
 
 def test_split_shape_norm():

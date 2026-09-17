@@ -4,6 +4,12 @@ One profile-likelihood fit (TRExFitter v1.8.0 MultiFit) of the three BND-school 
 Data 2016 G+H (16.4 fb⁻¹, √s = 13 TeV). Shared nuisance parameters are fitted jointly, and the μμ and ττ
 acceptance uncertainties are inside the likelihood.
 
+> **After the freeze: the four-channel Z → ττ.** z-tautau's τhτh + μτh + eτh + eμ measurement has been combined with ee and μμ
+> (17 Sep, fits on HTCondor): **1951 ⁺³⁰₋₂₉ pb** (interim), ττ alone 1981 ⁺⁷³₋₇₀ pb, compatibility p = 0.35. Method, decisions,
+> checks: [`docs/four-channel-tautau.md`](docs/four-channel-tautau.md); numbers: `interim/result.json`. Everything below, and
+> `output/`, is still the **frozen** ee ⊕ μμ ⊕ τhτh result until z-tautau's own fit results are in and
+> `python run.py results && python run.py plots` has been run.
+
 **Frozen on 17 Sep 2026** (git tag `zmumu-freeze-2026-09-17`, repository `FREEZE.md`). The fit uses the frozen Z → μμ
 inputs, with the measured muon reconstruction scale factor and the 60–120 GeV acceptance block of
 `z-mumu/zmumu/acceptance.py`. It runs with MINUIT strategy 2. The 16 Sep result, 1948 ⁺³³₋₃₂ pb, is superseded.
@@ -168,7 +174,10 @@ uncertainty of the NNLO normalisation (6077.22 pb) is not public and not include
 
 ```bash
 source ../../setup.sh
-python run.py all                 # ~10 min on stbc-i*; TRExFitter output in work/ (git-ignored)
+python run.py prepare             # configs of every likelihood in work/ (git-ignored)
+python run.py condor --submit     # all fits as one HTCondor DAG (~15 min), ends with `results --interim` -> interim/result.json
+python run.py results && python run.py plots    # output/ -- only once the channel results are final (docs/four-channel-tautau.md)
+python run.py all                 # the same chain on one machine
 python tests/test_trexcfg.py      # the adapter
 python checks/systematics.py      # -> checks/systematics.json
 python checks/orthogonality.py    # -> checks/orthogonality.json (~3 min, reads the data skims)

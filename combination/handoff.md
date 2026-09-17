@@ -22,6 +22,12 @@ All fits use MINUIT strategy 2. The 16 Sep number, 1948 ⁺³³₋₃₂ pb, is 
 Per channel, same likelihood model: ee 2094 ⁺¹²²₋₁₁₄, μμ 1931 ⁺³¹₋₃₀, τhτh 2082 ⁺²³⁷₋₂₀₇ pb. They are
 compatible: −2Δln L (one σ against three) = 2.44 for 2 dof, p = 0.30.
 
+> **After the freeze: the four-channel Z → ττ.** z-tautau's τhτh + μτh + eτh + eμ measurement has been combined with ee and μμ
+> (17 Sep, fits on HTCondor): **1951 ⁺³⁰₋₂₉ pb** (interim), ττ alone 1981 ⁺⁷³₋₇₀ pb, compatibility p = 0.35. Method, decisions,
+> checks: [`combLieke/docs/four-channel-tautau.md`](combLieke/docs/four-channel-tautau.md); numbers: `combLieke/interim/result.json`. Everything below, and
+> `combLieke/output/`, is still the **frozen** ee ⊕ μμ ⊕ τhτh result until z-tautau's own fit results are in and
+> `python run.py results && python run.py plots` has been run.
+
 Everything is in `combLieke/`: `README.md` (method and result), `output/plots/`, `output/result.json`,
 `docs/`. Rerun with `source ../setup.sh && cd combLieke && python run.py all` (~10 min).
 

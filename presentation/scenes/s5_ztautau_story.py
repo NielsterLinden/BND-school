@@ -1,96 +1,72 @@
-"""Section 5, real data: the Z -> tautau story, chained on 5-03 (``tautau_detector``).
+"""Section 5, real data: the Z -> tautau story (four-channel v4 measurement), chained on 5-03 (``tautau_detector``).
 
-Every number printed here is read from ``presentation/data/ztautau_*.json`` (v3, DeepTau
-Tight, MC-subtracted fake factor) and formatted in code; module-level asserts stop the
-render on schema drift. Nine scenes, each opening on the previous scene's final frame
-(pure builders ``state_*()`` + ``ORDER_*`` tuples, ``check_order`` at the end).
+The common method is told once on the tau_h tau_h channel (event, MET-likelihood mass, fake factor, BDT);
+the mu tau_h / e tau_h and e mu channels add only what is new with respect to Z -> ee and Z -> mumu (fake
+factors per process, the charge dependence of the W+jets fake factor, the e mu ttbar control region with
+a free normalisation), and the fit adds the in-situ tau_h ID scale factors.
+
+Every number is read from ``presentation/data/ztautau_*.json`` and formatted in code; module-level asserts
+stop the render on schema drift. v4 inputs: ``ztautau_v4.json`` (TRExFitter per-bin yaml of the nominal
+four-channel fit, written after cf54006 put the signal back into the plotted total; the lepton-channel fake
+factors; the fit). The tau_h tau_h event, mass, fake-factor and BDT numbers are the v3 chain that v4 reuses
+unchanged (re-extracted 17 Sep 2026 against the v4 base: identical). Scenes open on the previous scene's
+final frame (pure builders ``state_*()`` + ``ORDER_*`` tuples, ``check_order`` at the end).
 
     TautauEvent (MovingCameraScene)
-        tautau_a1_event         camera zooms out of 5-03; the schematic tracks fade; the real SR
-                                event (run 281976) is drawn from its tau_h phi / charge / DM / p_T
-                                and the real p_T^miss; p_T values; run/event stamp
-        tautau_a2_visible_mass  the two p_T values converge to m_vis = 69.3 GeV; a mass scale
-                                with the dashed m_Z shows it sits low
+        tautau_a1_event         camera zooms out of 5-03; the real SR event (run 281976)
+        tautau_a2_visible_mass  the two p_T values converge to m_vis = 69.3 GeV, below m_Z
     TautauMass
-        tautau_b1_neutrinos     two dashed nu arrows grow along the tau_h axes (head-to-tail),
-                                their sum lands inside the p_T^miss resolution ellipse
-        tautau_b2_likelihood    the event's (x1, x2) posterior lights up cell by cell; the formula
-                                m_tautau = m_vis / sqrt(x1 x2); the median cell flashes; 86.6 GeV
-        tautau_b3_shapes        the grid parks; simulated m_vis (grey ghost) vs m_tautau (red)
-                                shapes with dashed m_Z and median ticks; 0.80 -> 0.99, 13% -> 11%
+        tautau_b1_neutrinos     collinear nu arrows, their sum inside the p_T^miss resolution ellipse
+        tautau_b2_likelihood    the (x1, x2) posterior; m_tautau = m_vis / sqrt(x1 x2) = 86.6 GeV
+        tautau_b3_shapes        simulated m_vis (grey) vs m_tautau (red): 0.80 -> 0.99, 13% -> 11%
     TautauRain
-        tautau_c1_first_entry   shapes fade, slice parks left, linear m_tautau axes (14 fit bins);
-                                the event's m_tautau is the first entry
-        tautau_c2_rain          clock, rain, the 14 data bins grow to the real counts; N = 21,160
+        tautau_c1_first_entry   the event's m_tautau is the first entry (14 fit bins, linear)
+        tautau_c2_rain          N = 21,160
     TautauStack
-        tautau_d1_simulation    bars -> points; the simulation stack (rest / non-fid / fiducial)
-                                slides in and reaches a third of the data; key
-        tautau_d2_gap           the ratio panel (0-4) opens at data / simulation = 2.97
+        tautau_d1_simulation    the v4 simulation stack (prefit, nominal NormFactors) reaches a third
+        tautau_d2_gap           ratio panel 0-4: data / simulation = 2.89
     TautauFakes
-        tautau_e1_same_sign     plot parks; the slice in the dashed same-sign box with a real SS
-                                pair: tau2 Tight (red), tau1 a jet with a grey tau_h-like core
-        tautau_e2_tally         ten real SS pairs, a ten-box tally: f = N_T / N_L = 2/8
-        tautau_e3_ff_map        the real 4 x 5 fake-factor map (period G, 0 jets; decay modes named);
-                                the full dependence written as f = f(period, DM, N_jets, p_T)
-        tautau_e4_eta_closure   first the disagreement: same-sign data vs FF prediction in |eta(tau1)|
-                                with a ratio strip (0.93 ... 1.14 ... 0.84); the ratio becomes the
-                                correction f(|eta|) and slides to 1; then the same for pT(tau2), g(pT)
-        tautau_e5_osss          C_OS/SS = C(period, N_jets, D_BDT) in [0.96; 1.305]; box turns OS
+        tautau_e1_same_sign ... tautau_e5_osss   same-sign box, 2/8 tally, FF map, closure, C_OS/SS
     TautauTransfer
-        tautau_f1_apply         N_fake = C_OS/SS f x N_AR; the plot returns to the main position
-        tautau_f2_template      the fake template enters the bottom of the stack; the ratio drops
-                                from 2.97 to 1.02; N_fake = 13592 (64%)
-    TautauCorrections
-        tautau_g1_tau_sf        the fiducial layer inflates to its raw yield, then the tau_h ID /
-                                TES / trigger scale factors bring it down
-        tautau_g2_event_weights pileup, L1 prefiring, the MC subtraction in the AR (2.5%), the
-                                non-fiducial fraction (38%)
-    TautauBDT (its own scene: everything of g2 fades to a blank frame first)
-        tautau_h1_inputs        the 16 mass-agnostic input symbols, by importance, two columns
-        tautau_h2_shapes        the list parks left; for the 8 leading inputs a small panel each:
-                                unit-normalised fakes (pale slate fill) vs Z -> tautau (red line)
-        tautau_h3_sketch        the list collapses to a bracket; three schematic trees (one
-                                highlighted path each) summed into D_BDT
-        tautau_h4_score         D_BDT (log y from 10^1.5), 4-layer stack, data, data/pred ratio panel,
-                                cuts at 0.55 / 0.90, AUC, key
-        tautau_h5_categories    three category panels; SR0 below 110 GeV greyed; yields
-    TautauFit
-        tautau_i1_fit           the mu_Z slider (top) and the pulls of 8 named NPs (below) go post-fit;
-                                the panels too
-        tautau_i2_impacts       grouped impacts as horizontal bars ("Gammas" printed as
-                                "Template stat. (gamma)"; stat in red)
-        tautau_i3_sigma_fid     sigma_fid = 4.82 +- 0.09_stat +- 0.47_syst pb
-        tautau_i4_sigma_total   a large 1700-2400 pb axis: this work (red, +222/-194), the published
-                                CMS 1952 +- 49 pb (60-120 GeV) and ATLAS 1981 +- 57 pb (66-116 GeV,
-                                narrower window, noted here only) as slate points, the 1944.9 pb
-                                prediction as a purple dashed line with its +15/-21 pb band (NNLO+NNLL
-                                NNPDF3.1 uncertainty of CMS-SMP-20-004 Table 5, ztautau_reference.json)
+        tautau_f1_apply         N_fake = C_OS/SS f x N_AR
+        tautau_f2_template      the fakes fill the gap: 2.89 -> 1.01, N_fake = 13592 (64%)
+    TautauBDT (from a blank frame)
+        tautau_h1_inputs        the 16 mass-agnostic inputs
+        tautau_h2_shapes        fakes vs Z -> tautau shapes of the 8 leading inputs
+        tautau_h4_score         D_BDT with data, ratio, cuts, AUC (the h3 tree sketch is retired)
+        tautau_h5_categories    three category panels (v4 prefit), SR0 below 110 GeV greyed
+    TautauLepHad (new in v4)
+        tautau_k1_lephad_fakes  mu tau_h: the application region is multijet / W+jets / ttbar (fractions);
+                                each process has its own fake factor from its own region; N_fake = 11,048
+        tautau_k2_w_charge      the W+jets fake factor depends on the charge: OS quark jet vs SS gluon jet
+        tautau_k3_lephad_closure the same-sign validation: prediction vs data, 0.966 +- 0.014
+    TautauEmu (new in v4)
+        tautau_l1_emu_regions   e mu signal region (D_zeta > -20, no b) and ttbar control region (D_zeta < -40,
+                                p_T^miss > 80) side by side, prefit
+        tautau_l2_emu_ttbar     mu_ttbar floats: slider 1 -> 1.11 +- 0.04, both panels go post-fit
+    TautauFit (new in v4)
+        tautau_m1_sf_lever      e mu ~ mu_Z, l tau_h ~ SF mu_Z, tau_h tau_h ~ SF^2 mu_Z
+        tautau_m2_sf_fit        the tau_h ID SF per decay mode: TauPOG (grey) vs in situ (red)
+        tautau_m3_postfit       the four channels post-fit with data / pred.; mu_Z = 1.019 +0.037 -0.036
+        tautau_m4_sigma         sigma(60-120) = 1981 +73 -70 pb, the four channels alone (POG SFs, open
+                                points), the prediction with its band, CMS and ATLAS
 
 Reserved areas (06 A1): nothing above y = 2.7 (title band) and nothing at x < -5.85, y > 0.22 (chapter
 identifier), except the first frames of a1, which open on 5-03's zoomed event display.
 
 Physics honesty (schematic parts on top of real numbers):
-  * Track curvature follows kappa_from_pt (exaggerated scale, honest relative curvature); eta is
-    not drawn (r-phi view); the p_T^miss arrow length is proportional to p_T with the event's
-    57.4 GeV reaching the HCAL inner radius.
-  * b1: the neutrino arrows use the event's posterior mode (x1, x2) of the MET likelihood; this
-    event's collinear solution is undefined (m_col null: the p_T^miss points outside the tau_h
-    wedge), so the head-to-tail sum lands inside the p_T^miss resolution ellipse (drawn from the
-    event's MET covariance), not on the arrow tip. The nu2 arrow (0.4 GeV) is floored to a
-    visible length.
-  * b3: both shapes are the inclusive aMC@NLO Z -> tautau signal sample alone with unit weights
-    (``signal_weighting == "inclusive_unit"``: one clean peak each; the stitched jet-binned mix
-    had a shoulder); the medians are marked and the docs/04 scale / resolution numbers printed.
-  * e4: the same-sign closure plots draw closure.eta / closure.pt2 obs and pred; the corrected
-    prediction is pred x before (= obs by construction), the ratio after is the frozen "after".
-  * h2: the input shapes are unit-normalised (fakes = AR data x FF, signal = unit-weight Z -> tautau).
-  * h3: the trees are a schematic of a gradient-boosted classifier, not the real 300 trees.
-  * The stack draws the clamped fit-input histograms (region-wise negative bins at 0); the
-    printed data / simulation = 2.969 and data / pred. = 1.021 are the RESULTS.md totals
-    (unclamped, 1 % below the drawn stack's total).
-  * g1/g2: the fiducial layer is scaled uniformly by the frozen raw / corrected signal-yield
-    ratio and the mean scale factors (shape assumed unchanged); the ratio dots follow.
-  * h4: two negative "rest" score bins are drawn at 0; the ratio uses the frozen sr_score.pred.
+  * Track curvature follows kappa_from_pt (exaggerated scale, honest relative curvature); eta is not drawn.
+  * b1: nu arrows at the posterior mode; this event's collinear solution is undefined, so the sum lands
+    inside the p_T^miss resolution ellipse, not on the arrow tip. b3: inclusive aMC@NLO signal, unit weights.
+  * The m_tautau stacks draw the TRExFitter prefit/postfit per-bin yields (the prefit includes the tau_h ID
+    NormFactors at their nominal TauPOG values); "rest" = ttbar, single t, W+jets, VV, Z -> ee, low-mass DY.
+  * h4: the score stack is the v3 BDT output with the v3 split of the Z -> tautau simulation (same sum).
+  * k1: the fractions are those of the jet fakes in the mu tau_h application region (m_T < 40 GeV, all N_jets);
+    the fake factors are inclusive averages ((N_T - MC) / (N_L - MC) over DM x N_jets x p_T); the fit
+    applies the binned tables. k2: the cones are schematic (quark jet narrow, gluon jet wide).
+  * l2: the ttbar layer moves by the full post-fit result (mu_ttbar and the other NPs), not by 1.11 alone.
+  * m4: the per-channel points are the one-channel fits with the TauPOG scale factors fixed (consistency
+    checks); the combined point has the scale factors free.
 """
 from __future__ import annotations
 
@@ -116,84 +92,74 @@ from style.bnd_style import _cap_scale, _is_placeholder  # noqa: E402
 # frozen data + anchors (a mismatch stops the render; never adjusted here)
 # ---------------------------------------------------------------------------
 
+from manim import Arc, Polygon  # noqa: E402
+
+# ---------------------------------------------------------------------------
+# frozen data + anchors (a mismatch stops the render; never adjusted here)
+# ---------------------------------------------------------------------------
+
 EV = load_data("ztautau_events")
 MA = load_data("ztautau_mass")
-SR = load_data("ztautau_sr_stack")
 FK = load_data("ztautau_fakes")
 BD = load_data("ztautau_bdt")
-CO = load_data("ztautau_corrections")
-FIT = load_data("ztautau_fit")
 BI = load_data("ztautau_bdt_inputs")
 RF = load_data("ztautau_reference")
+V4 = load_data("ztautau_v4")
 
 EVENT = EV["sr"]["chosen"][0]
 SS_PAIRS = EV["ss_ff"]["chosen"]
 REGIONS = ("tautau_SR0", "tautau_SR1", "tautau_SR2")
+HH = V4["channels"]["prefit"]["tautau"]
+FITV = V4["fit"]
 
-assert SR["data"]["total"] == 21160
-assert sum(SR["data"]["inclusive"]) == 21160 and len(SR["edges"]) == 15
-assert abs(SR["fakes"]["total"] - 13592) < 1 and abs(FK["yields"]["n_fake"]["total"] - 13592) < 1
-assert tuple(SR["stack_order"]) == ("Fakes", "rest", "DYtautau_nonfid", "DYtautau")
-assert abs(FIT["poi"]["value"] - 1.071) < 5e-4
-assert round(FIT["poi"]["err_up"], 3) == 0.114 and round(FIT["poi"]["err_down"], 3) == 0.100
-assert abs(FIT["sigma_60_120"]["value"] - 2082) < 1
-assert round(FIT["sigma_60_120"]["err_up"]) == 222 and round(FIT["sigma_60_120"]["err_down"]) == 194
-assert round(FIT["sigma_60_120"]["pred"], 1) == 1944.9
-assert (round(FIT["sigma_fid"]["value"], 2), round(FIT["sigma_fid"]["stat"], 2),
-        round(FIT["sigma_fid"]["syst"], 2)) == (4.82, 0.09, 0.47)
+assert HH["n_data"] == 21160 and len(HH["edges"]) == 15
+assert abs(HH["n"]["Fakes"] - 13592) < 1 and abs(FK["yields"]["n_fake"]["total"] - 13592) < 1
+assert tuple(V4["groups"]) == ("Fakes", "rest", "TTbar", "DYtautau_out", "DYtautau")
+assert round(FITV["mu"], 3) == 1.019 and round(FITV["mu_up"], 3) == 0.037 and round(FITV["mu_down"], 3) == 0.036
+assert round(FITV["sigma"]) == 1981 and round(FITV["sigma_up"]) == 73 and round(FITV["sigma_down"]) == 70
+assert round(FITV["pred"], 1) == 1944.9
+assert round(FITV["mu_ttbar"]["value"], 2) == 1.11 and round(FITV["mu_ttbar"]["err_up"], 2) == 0.04
+assert [round(FITV["tau_id_sf"][d]["value"], 3) for d in ("0", "1", "10", "11")] == [0.989, 0.963, 0.896, 0.795]
 assert round(EVENT["m_tt"], 1) == 86.6 and round(EVENT["m_vis"], 1) == 69.3
 assert EVENT["run"] == 281976 and EVENT["event"] == 2983852771
 assert len(SS_PAIRS) == 10 and sum(bool(p["passes"]) for p in SS_PAIRS) == 2
 assert [BD["categories"][r]["data"] for r in REGIONS] == [15742, 2704, 2714]
+assert [sum(V4["regions"]["prefit"][r]["data"]) for r in REGIONS] == [15742, 2704, 2714]
 assert len(MA["signal"]["m_vis"]) == 40 and len(MA["signal"]["m_tt"]) == 40 and len(MA["edges"]) == 41
 assert len(FK["closure"]["eta"]["before"]) == 6 and len(FK["closure"]["pt2"]["before"]) == 5
-assert abs(FIT["grouped_impact"]["Tau ID"] - 0.084) < 0.001
-assert len(FIT["nps_shown"]) == 8 and len(FIT["impact_order"]) == 11
 assert np.asarray(EVENT["posterior"]["weights"]).shape == (12, 12)
 assert MA["signal_weighting"] == "inclusive_unit"
 assert len(BI["features"]) == 16 and len(BI["dm_labels"]) == 4
 assert all(f["name"] == n for f, n in zip(BI["features"], BI["feature_order"]))
-assert abs(RF["this_work"]["value"] - FIT["sigma_60_120"]["value"]) < 1e-6
 assert RF["cms"]["value"] == 1952 and RF["atlas"]["value"] == 1981 and round(RF["theory"]["value"], 1) == 1944.9
 assert (round(RF["theory"]["unc_up"]), round(RF["theory"]["unc_down"])) == (15, 21)
 assert [round(x, 3) for x in FK["osss"]["range_per_category"]] == [0.960, 1.305]
-for r in REGIONS:
-    assert FIT["regions"]["prefit"][r]["data"] == SR["data"]["per_region"][r]
+assert V4["channels"]["prefit"]["mutau"]["n_data"] == 48516 and round(V4["lephad"]["mutau"]["sr_fakes"]) == 11048
+assert round(V4["lephad"]["mutau"]["closure_ss"]["ratio"], 3) == 0.966
+assert V4["channels"]["prefit"]["emu"]["n_data"] == 79300 and V4["channels"]["prefit"]["emu_CRtt"]["n_data"] == 45931
+assert [round(V4["per_channel_fixedid"][c]["sigma"]) for c in ("tautau", "mutau", "etau", "emu")] == [2029, 2038, 1976, 1868]
 
-EDGES = np.asarray(SR["edges"], dtype=float)
+EDGES = np.asarray(HH["edges"], dtype=float)
 NB = len(EDGES) - 1
 XC = 0.5 * (EDGES[:-1] + EDGES[1:])
 HW = 0.5 * (EDGES[1:] - EDGES[:-1])
-DATA = np.asarray(SR["data"]["inclusive"], dtype=float)
-TOTAL = int(SR["data"]["total"])
-FAKES = np.asarray(SR["fakes"]["inclusive"], dtype=float)
-LAYERS = tuple(SR["stack_order"])                  # bottom-up
-GROUP_INCL = {n: np.clip(np.asarray(SR["groups_counts"][n]["inclusive_clamped"], dtype=float), 0, None)
-              for n in ("rest", "DYtautau_nonfid", "DYtautau")}
-REST_NAMES = tuple(SR["groups"]["rest"])
+DATA = np.asarray(HH["data"], dtype=float)
+TOTAL = int(HH["n_data"])
+FAKES = np.clip(np.asarray(HH["groups"]["Fakes"], dtype=float), 0, None)
+LAYERS = ("Fakes", "rest", "DYtautau_nonfid", "DYtautau")      # bottom-up (tau_h tau_h stack: ttbar inside "rest")
+GROUP_INCL = {"rest": np.clip(np.asarray(HH["groups"]["rest"], dtype=float) + np.asarray(HH["groups"]["TTbar"], dtype=float), 0, None),
+              "DYtautau_nonfid": np.clip(np.asarray(HH["groups"]["DYtautau_out"], dtype=float), 0, None),
+              "DYtautau": np.clip(np.asarray(HH["groups"]["DYtautau"], dtype=float), 0, None)}
 LAYER_COL = {"Fakes": SAMPLE["Fakes"], "rest": SAMPLE["TTbar"],
              "DYtautau_nonfid": lighten(CHANNEL["tautau"], 0.55), "DYtautau": CHANNEL["tautau"]}
 M_Z = float(EV["m_Z"])
-MEANS = CO["means_on_fiducial_signal_in_sr"]
-K_RAW = float(MEANS["signal_yield"]["raw"]) / float(MEANS["signal_yield"]["corrected"])
-K_SF = K_RAW * float(MEANS["sf_id_both_legs"]) * float(MEANS["sf_trig_both_legs"])
-DY_TOTAL = float(SR["groups_counts"]["DYtautau"]["total"])
 DM_TEX = {str(k): v for k, v in BI["dm_labels"].items()}      # decay modes named, never coded
 DMS = ("0", "1", "10", "11")
 FEATURES = {f["name"]: f for f in BI["features"]}
 SHAPE_FEATURES = ("dr_tt", "t1_pt", "pt_vis", "dphi_tt", "pt_tt", "t2_pt", "t1_abseta", "t2_abseta")
-IMPACT_NAME = {"Gammas": "Template stat. (γ)"}
-_CAT = {"c0": r"D_{\mathrm{BDT}} < 0.55", "c1": r"0.55 < D_{\mathrm{BDT}} < 0.90", "c2": r"D_{\mathrm{BDT}} > 0.90"}
-NP_TEX = {                                                     # pull labels: named, never coded (06 B5)
-    **{f"TauID_DM{d}": rf"\tau_h\ \mathrm{{ID}}\ ({DM_TEX[d]})" for d in DMS},
-    **{f"TauTrigger_DM{d}": rf"\tau_h\ \mathrm{{trigger}}\ ({DM_TEX[d]})" for d in DMS},
-    **{f"FakeOSSS_tautau_{c}": rf"C_{{\mathrm{{OS/SS}}}}\ ({t})" for c, t in _CAT.items()},
-    **{f"FakeClosure_tautau_{c}_{r}": rf"f\ \mathrm{{closure}}\ ({t},\ m_{{\tau\tau}} {o} 110)"
-       for c, t in _CAT.items() for r, o in (("lo", "<"), ("hi", ">"))},
-    "Lumi": r"\mathrm{Luminosity}",
-}
-assert all(n in NP_TEX for n in FIT["nps_shown"]), [n for n in FIT["nps_shown"] if n not in NP_TEX]
-PRED_TOTAL = float(SR["totals"]["pred"])
+PRED_TOTAL = float(HH["n_pred"])
+MC_TOTAL = PRED_TOTAL - float(HH["n"]["Fakes"])
+SR0_MTT_MIN = 110.0                                            # z-tautau config.SIDEBAND_REGION_MTT_MIN (DropBins)
 
 # ---------------------------------------------------------------------------
 # one coordinate dictionary (06 section B3 defaults unless the brief says otherwise)
@@ -732,12 +698,10 @@ def ratio_parts(dax, total, wide: bool) -> VGroup:
 
 
 def ratio_value(fakes: bool, dy_scale: float = 1.0) -> float:
-    t = SR["totals"]
-    if fakes:
-        if dy_scale != 1.0:
-            return TOTAL / (PRED_TOTAL + DY_TOTAL * (dy_scale - 1.0))
-        return float(t["data_over_pred"])
-    return float(t["data_over_mc"])
+    """data / prediction over all bins (v4 prefit yaml totals); ``dy_scale`` is kept for the
+    builder signature and must be 1."""
+    assert dy_scale == 1.0
+    return TOTAL / (PRED_TOTAL if fakes else MC_TOTAL)
 
 
 def n_fakes_big() -> VGroup:
@@ -934,32 +898,8 @@ def osss_parts() -> VGroup:
 
 
 # ---------------------------------------------------------------------------
-# corrections, topologies, score plot, category panels, fit
+# BDT inputs, shapes, score plot
 # ---------------------------------------------------------------------------
-
-def corr_rows() -> VGroup:
-    tp = CO["taupog"]
-    sf = ",\ ".join(f"{tp['id_sf_tight_per_dm'][d]['value']:.3f}" for d in DMS)
-    tes = ",\ ".join(f"{tp['tes_per_dm'][d]['value']:.3f}" for d in DMS)
-    cst = CO["constants"]
-    exprs = [
-        (",\ ".join(DM_TEX[d] for d in DMS), GREY),
-        (rf"\mathrm{{SF}}_{{\mathrm{{ID}}}} = {sf}", INK),
-        (rf"\mathrm{{TES}} = {tes}", INK),
-        (rf"\langle \mathrm{{SF}}_{{\mathrm{{ID}}}} \rangle = {MEANS['sf_id_both_legs']:.3f}", INK),
-        (rf"\langle \mathrm{{SF}}_{{\mathrm{{trig}}}} \rangle = {MEANS['sf_trig_both_legs']:.3f}", INK),
-        (rf"\langle w_{{\mathrm{{PU}}}} \rangle = {MEANS['w_pu']:.3f}", INK),
-        (rf"\langle w_{{\mathrm{{L1}}}} \rangle = {MEANS['w_l1']:.3f}", INK),
-        (rf"f_{{\tau}}^{{\mathrm{{AR}}}} = {100 * cst['mc_subtraction_ar_fraction']['value']:.1f}\%", INK),
-        (rf"f_{{\mathrm{{non\text{{-}}fid}}}} = {100 * cst['nonfiducial_fraction_of_selected_dy']['value']:.0f}\%", INK),
-    ]
-    g = VGroup()
-    for i, (e, cc) in enumerate(exprs):
-        lab = tex_h(e, 0.125 if i == 0 else A["corr_h"], color=cc)
-        lab.shift(np.array([A["left_col_x"], A["corr_y0"] - A["corr_dy"] * i, 0.0]) - lab.get_left())
-        g.add(lab)
-    return g
-
 
 def inputs_list(parked: bool = False) -> VGroup:
     """The 16 BDT input symbols by importance: two columns of eight, or (parked) one narrow
@@ -1003,54 +943,6 @@ def feature_panels() -> dict:
     out["fkey"] = key
     return out
 
-
-def bdt_sketch() -> VGroup:
-    """Schematic gradient-boosted classifier: the input bracket, three depth-2 trees (nodes and
-    branches in DETECTOR_ACCENT, one highlighted path each in the channel colour), plus signs,
-    an arrow into D_BDT."""
-    T = A["tree"]
-    acc, red = col(DETECTOR_ACCENT), col(CHANNEL_LINE["tautau"])
-
-    def node(p, hl):
-        return Circle(radius=T["r"], arc_center=_p3(p), fill_color=lighten(DETECTOR_ACCENT, 0.8), fill_opacity=1.0,
-                      stroke_color=red if hl else acc, stroke_width=2.6 if hl else 2.0)
-
-    def edge(p, q, hl):
-        return Line(_p3(p), _p3(q), stroke_color=red if hl else acc, stroke_width=3.0 if hl else 2.0)
-
-    trees = VGroup()
-    for k, x in enumerate(T["xs"]):
-        y_root = T["y"] + T["dy"]
-        hl_kid, hl_leaf = (0, 1, 0)[k], (1, 3, 0)[k]
-        root = (x, y_root)
-        kids = [(x - T["dx"][0], y_root - T["dy"]), (x + T["dx"][0], y_root - T["dy"])]
-        leaves = [(kx + s * T["dx"][1], y_root - 2 * T["dy"]) for kx, _ in kids for s in (-1, 1)]
-        edges, nodes = VGroup(), VGroup()
-        for j, kid in enumerate(kids):
-            edges.add(edge(root, kid, j == hl_kid))
-        for j, lf in enumerate(leaves):
-            edges.add(edge(kids[j // 2], lf, j == hl_leaf))
-        nodes.add(node(root, True))
-        for j, kid in enumerate(kids):
-            nodes.add(node(kid, j == hl_kid))
-        for j, lf in enumerate(leaves):
-            nodes.add(node(lf, j == hl_leaf))
-        trees.add(VGroup(edges, nodes))
-    plus = VGroup(*[tex_h("+", 0.3).move_to(np.array([T["xs"][i] + T["plus_dx"], T["y"], 0.0])) for i in range(2)])
-    bx, y = T["bracket_x"], T["y"]
-    bracket = VGroup(Line([bx, y - 1.5, 0], [bx, y + 1.5, 0], stroke_color=col(INK), stroke_width=2.5),
-                     Line([bx, y + 1.5, 0], [bx + 0.22, y + 1.5, 0], stroke_color=col(INK), stroke_width=2.5),
-                     Line([bx, y - 1.5, 0], [bx + 0.22, y - 1.5, 0], stroke_color=col(INK), stroke_width=2.5))
-    ln_in = Line([bx + 0.35, y, 0], [T["xs"][0] - 1.05, y, 0], stroke_color=col(INK), stroke_width=2.5)
-    arrow_in = VGroup(ln_in, arrow_tip_on(ln_in, color=INK, at=1.0, tip_length=0.2))
-    ln_out = Line([T["xs"][2] + 1.05, y, 0], [T["out_at"][0] - 0.7, y, 0], stroke_color=col(INK), stroke_width=2.5)
-    arrow_out = VGroup(ln_out, arrow_tip_on(ln_out, color=INK, at=1.0, tip_length=0.2))
-    out = tex_h(r"D_{\mathrm{BDT}}", 0.28).move_to(_p3(T["out_at"]))
-    g = VGroup(bracket, arrow_in, trees, plus, arrow_out, out)
-    g.bracket, g.arrow_in, g.trees, g.plus, g.arrow_out, g.out = bracket, arrow_in, trees, plus, arrow_out, out
-    return g
-
-
 def score_parts() -> dict:
     S = BD["sr_score"]
     e = np.asarray(S["edges"], dtype=float)
@@ -1080,17 +972,29 @@ def score_parts() -> dict:
 SCORE_KEYS = ("s_dax", "s_stack", "s_data", "s_ratio", "s_cuts", "s_auc")
 
 
+# ---------------------------------------------------------------------------
+# tau_h tau_h category panels (v4 prefit per region)
+# ---------------------------------------------------------------------------
+
+P_YTOP = {"tautau_SR0": (3500.0, [0, 1000, 2000, 3000]), "tautau_SR1": (800.0, [0, 400, 800]),
+          "tautau_SR2": (1000.0, [0, 500, 1000])}
+
+
+def _clip0(v):
+    return np.clip(np.asarray(v, dtype=float), 0, None)
+
+
 def region_layers(fit: str, r: str):
-    S = FIT["regions"][fit][r]["samples"]
-    rest = np.clip(np.sum([np.asarray(S[n], dtype=float) for n in REST_NAMES], axis=0), 0, None)
-    return [("Fakes", np.asarray(S["Fakes"], dtype=float), LAYER_COL["Fakes"]), ("rest", rest, LAYER_COL["rest"]),
-            ("DYtautau_nonfid", np.asarray(S["DYtautau_nonfid"], dtype=float), LAYER_COL["DYtautau_nonfid"]),
-            ("DYtautau", np.asarray(S["DYtautau"], dtype=float), LAYER_COL["DYtautau"])]
+    G = V4["regions"][fit][r]["groups"]
+    return [("Fakes", _clip0(G["Fakes"]), LAYER_COL["Fakes"]),
+            ("rest", _clip0(np.asarray(G["rest"], dtype=float) + np.asarray(G["TTbar"], dtype=float)), LAYER_COL["rest"]),
+            ("DYtautau_nonfid", _clip0(G["DYtautau_out"]), LAYER_COL["DYtautau_nonfid"]),
+            ("DYtautau", _clip0(G["DYtautau"]), LAYER_COL["DYtautau"])]
 
 
 def panel_parts(fit: str = "prefit", placement=None) -> dict:
     """Three narrow category panels at the main plot position: dax, stack, data, (SR0) the
-    greyed dropped bins, the category range and the fiducial / fake yields above."""
+    greyed sideband-only bins, the category range and the Z -> tautau / fake yields above."""
     placement = placement or A["plot_main"]
     P = {}
     ranges = (r"D_{\mathrm{BDT}} < 0.55", r"0.55 < D_{\mathrm{BDT}} < 0.90", r"D_{\mathrm{BDT}} > 0.90")
@@ -1102,18 +1006,17 @@ def panel_parts(fit: str = "prefit", placement=None) -> dict:
         dax.move_frame_to((A["panel_x"][k], A["panel_cy"]))
         P[f"p{k}_dax"] = dax
         P[f"p{k}_stack"] = stack_hist(dax, EDGES, region_layers(fit, r))
-        D = FIT["regions"][fit][r]["data"]
+        D = V4["regions"][fit][r]["data"]
         P[f"p{k}_data"] = VGroup(*[data_dot(dax, XC[i], float(D[i]), color=SAMPLE["Data"], radius=0.03)
                                    for i in range(NB)])
         if k == 0:
-            m_max = float(FIT["dropped_bins"][r]["m_tt_max"])
-            lo, hi = dax.c2p(0.0, 0.0), dax.c2p(m_max, ytop)
+            lo, hi = dax.c2p(0.0, 0.0), dax.c2p(SR0_MTT_MIN, ytop)
             P["p0_drop"] = Rectangle(width=hi[0] - lo[0], height=hi[1] - lo[1], fill_color=col(LIGHT_GREY),
                                      fill_opacity=0.6, stroke_width=0).move_to(0.5 * (lo + hi))
-        c = BD["categories"][r]
+        G = V4["regions"]["prefit"][r]["groups"]
         rng_lab = tex_h(ranges[k], 0.15).move_to(np.array([A["panel_x"][k], A["panel_lab_y"][0], 0.0]))
-        yl = VGroup(tex_h(f"{c['DYtautau']:.0f}", 0.16, color=CHANNEL_LINE["tautau"]), tex_h("/", 0.16),
-                    tex_h(f"{c['fakes']:.0f}", 0.16, color=darken(SAMPLE["Fakes"], 0.45))).arrange(RIGHT, buff=0.07)
+        yl = VGroup(tex_h(f"{sum(G['DYtautau']):.0f}", 0.16, color=CHANNEL_LINE["tautau"]), tex_h("/", 0.16),
+                    tex_h(f"{sum(G['Fakes']):.0f}", 0.16, color=darken(SAMPLE["Fakes"], 0.45))).arrange(RIGHT, buff=0.07)
         yl.move_to(np.array([A["panel_x"][k], A["panel_lab_y"][1], 0.0]))
         P[f"p{k}_lab"] = VGroup(rng_lab, yl)
     for m in P.values():
@@ -1124,75 +1027,261 @@ def panel_parts(fit: str = "prefit", placement=None) -> dict:
 PANEL_KEYS = ("p0_dax", "p0_stack", "p0_data", "p0_drop", "p0_lab", "p1_dax", "p1_stack", "p1_data", "p1_lab",
               "p2_dax", "p2_stack", "p2_data", "p2_lab")
 
-NP = {n["name"]: n for n in FIT["nps"]}
+
+# ---------------------------------------------------------------------------
+# lepton channels: stacks with ttbar split off, keys
+# ---------------------------------------------------------------------------
+
+V4_ORDER = ("Fakes", "rest", "TTbar", "DYtautau_out", "DYtautau")
+V4_COL = {"Fakes": SAMPLE["Fakes"], "rest": SAMPLE["WW"], "TTbar": SAMPLE["TTbar"],
+          "DYtautau_out": LAYER_COL["DYtautau_nonfid"], "DYtautau": CHANNEL["tautau"]}
+CH_TEX = {"tautau": r"\tau_h\tau_h", "mutau": r"\mu\tau_h", "etau": r"e\tau_h", "emu": r"e\mu"}
+LH = V4["lephad"]["mutau"]
+B = dict(
+    bar_x0=-5.2, bar_w=7.0, bar_y=1.5, bar_h=0.5, sym_y=2.08, nar_at=(2.2, 1.5), ch_at=(5.4, 2.08),
+    col_x=(-3.8, -0.6, 2.6), col_top=0.72, reg_y=0.38, f_y=-0.28, c_y=-0.8, formula_at=(-0.6, -1.55), nfake_at=(-0.6, -2.35),
+    diag_y=(0.35, -1.95), diag_v=-1.0, cone_len=3.3, pair_x=4.4, clos_c=(1.85, 0.7), clos_len=(6.4, 2.3),
+    clos_ratio=(1.85, -1.5), clos_sym=(-0.85, 2.2), clos_val=(4.6, 2.2),
+    l_c=((-2.35, 0.85), (3.55, 0.85)), l_w=(4.0, 3.4), l_h=2.0, l_rlen=0.55, l_lab_y=2.25, l_key=(-5.2, -2.3),
+    l_slider=(0.2, -3.2), l_mu_at=(4.3, -3.1),
+    m_rows=(1.5, 0.4, -0.7), m_sym_r=-1.1, m_expr_l=-0.5, m_to_l=3.4, m_park=(0.5, (-3.55, -2.75)),
+    sf_rows=(2.0, 1.25, 0.5, -0.25), sf_ax=dict(lo=0.6, hi=1.2, x0=-0.2, length=6.4, y=-0.75), sf_lab_r=-0.45,
+    sf_key_y=-1.75,
+    m_px=(-4.0, -0.95, 2.1, 5.15), m_pw=2.6, m_ph=1.55, m_py=1.0, m_rlen=0.5, m_title_y=2.2, m_key=(-4.9, -1.6),
+    mu_at=(0.6, -2.55), mu_top=(-3.7, 2.3), sig_label_at=(2.9, 2.3),
+    sig=dict(lo=1750.0, hi=2250.0, x0=-2.6, length=8.0, y=-2.9, height=4.9,
+             rows=dict(comb=4.25, tautau=3.55, mutau=3.05, etau=2.55, emu=2.05, cms=1.2, atlas=0.6)),
+)
 
 
-def pulls(post: bool) -> VGroup:
-    names = list(FIT["nps_shown"])
-    p = [NP[n]["pull"] for n in names] if post else [0.0] * len(names)
-    c = [NP[n]["constraint"] for n in names] if post else [1.0] * len(names)
-    pp = pull_plot([NP_TEX[n] for n in names], p, c, x_length=1.6, row_h=0.34, label_h=0.12, tex=True)
-    pp.move_to(_p3(A["pulls_at"]))
-    pp.shift(RIGHT * (A["pulls_at"][0] - pp.baseline.get_center()[0]))   # centre the axis, not the names
-    return pp
+def v4_layers(G):
+    return [(n, _clip0(G[n]), V4_COL[n]) for n in V4_ORDER]
 
 
-def mu_strings():
-    poi = FIT["poi"]
-    return f"{poi['value']:.3f}", rf"^{{+{poi['err_up']:.3f}}}_{{-{poi['err_down']:.3f}}}"
-
-
-def mu_slider() -> VGroup:
-    sl = slider(0.8, 1.3, 1.0, err=None, ref=1.0, length=2.6, ticks=[0.8, 1.0, 1.2], fmt="{:.1f}", tick_label_h=0.16)
-    sl.move_to(_p3(A["slider_at"]))
-    return sl
-
-
-def asym_marker(sl) -> VGroup:
-    poi = FIT["poi"]
-    y = sl.axis.get_center()[1]
-    cc = col(sl.color)
-    bar = Line([sl.x_of(poi["value"] - poi["err_down"]), y, 0], [sl.x_of(poi["value"] + poi["err_up"]), y, 0],
-               stroke_color=cc, stroke_width=sl.bar_sw)
-    dot = Dot([sl.x_of(poi["value"]), y, 0], radius=sl.marker_r, color=cc)
-    return VGroup(bar, dot)
-
-
-def mu_line(h=0.34, at=None):
-    v, e = mu_strings()
-    return tex_h(rf"\mu_{{Z}} = {v} {e}", h).move_to(_p3(at or A["mu_line_at"]))
-
-
-def impact_bars() -> VGroup:
-    rows = [(n, float(FIT["grouped_impact"][n]), SLATE) for n in FIT["impact_order"]]
-    rows.append(("stat", float(FIT["stat_impact"]), CHANNEL["tautau"]))
-    g = VGroup()
-    g.bars, g.nums, g.names = VGroup(), VGroup(), VGroup()
-    for i, (name, v, cc) in enumerate(rows):
-        y = A["imp_y0"] - A["imp_dy"] * i
-        lab = text_h(IMPACT_NAME.get(name, name), 0.13)
-        lab.shift(np.array([A["imp_name_r"], y, 0.0]) - lab.get_right())
-        w = 100.0 * v * A["imp_per_pct"]
-        bar = Rectangle(width=w, height=0.18, fill_color=col(cc), fill_opacity=0.85, stroke_width=0)
-        bar.shift(np.array([A["imp_bar_x0"], y, 0.0]) - bar.get_left())
-        num = text_h(f"{100 * v:.1f}", 0.13).next_to(bar, RIGHT, buff=0.08)
-        g.names.add(lab); g.bars.add(bar); g.nums.add(num)
-    head = tex_h(r"\Delta\mu_Z / \mu_Z\ [\%]", 0.16).move_to(_p3(A["imp_head"]))
-    g.head = head
-    g.add(head, g.names, g.bars, g.nums)
+def key_row(entries, left, label_h=0.16, buff=0.22) -> VGroup:
+    """A one-row key of any length (colour_key takes 4 rows at a time)."""
+    rows = []
+    for i in range(0, len(entries), 4):
+        rows += list(colour_key(entries[i:i + 4], label_h=label_h).rows)
+    g = VGroup(*rows).arrange(RIGHT, buff=buff)
+    g.shift(_p3(left) - g.get_left())
     return g
 
 
-def sigma_fid_line():
-    s = FIT["sigma_fid"]
-    expr = (rf"\sigma_{{\mathrm{{fid}}}} = {s['value']:.2f} \pm {s['stat']:.2f}_{{\mathrm{{stat}}}}"
-            rf" \pm {s['syst']:.2f}_{{\mathrm{{syst}}}}\ \mathrm{{pb}}")
-    return tex_h(expr, 0.27).move_to(_p3(A["sig_fid_at"]))
+def v4_key(left, fakes_tex=r"\mathrm{Fakes}", label_h=0.16) -> VGroup:
+    return key_row([(r"\mathrm{Data}", SAMPLE["Data"], "dot"), (r"Z\to\tau\tau", V4_COL["DYtautau"]),
+                    (r"Z/\gamma^{*}\to\tau\tau", V4_COL["DYtautau_out"]), (r"t\bar{t}", V4_COL["TTbar"]),
+                    (r"W,\ tW,\ VV,\ Z\to\ell\ell", V4_COL["rest"]), (fakes_tex, V4_COL["Fakes"])], left, label_h=label_h)
 
 
-def sigma_panel() -> VGroup:
-    s = FIT["sigma_60_120"]
-    S = A["sig_ax"]
+def chan_panel(tag, ch, center, w, h, ytop, yticks, rlen, show_y=True, x_title=True, tick_h=0.12) -> VGroup:
+    """One channel (regions summed): stack, data dots, data / pred. panel under it."""
+    C = V4["channels"][tag][ch]
+    e = np.asarray(C["edges"], dtype=float)
+    xt = [0, 250, 500] if e[-1] > 400 else [0, 100, 200, 300]
+    dax = DataAxes([0, e[-1], 100], [0, ytop, ytop], w, h, x_ticks=xt, y_ticks=yticks, show_x_labels=False,
+                   show_y_labels=show_y, tick_label_h=tick_h)
+    dax.move_frame_to(center)
+    stack = stack_hist(dax, e, v4_layers(C["groups"]))
+    xc = 0.5 * (e[:-1] + e[1:])
+    dots = VGroup(*[data_dot(dax, xc[i], float(C["data"][i]), color=SAMPLE["Data"], radius=0.028) for i in range(len(xc))])
+    rc = (center[0], center[1] - h / 2 - rlen / 2 - (0.28 if show_y else 0.1))
+    rp = ratio_panel(dax, e, C["data"], C["total"], rc, y_range=(0.8, 1.2, 0.2), y_length=rlen, y_ticks=[0.8, 1.0, 1.2],
+                     dot_radius=0.026, tick_label_h=tick_h, show_y_labels=show_y,
+                     x_title=r"m_{\tau\tau}\ [\mathrm{GeV}]" if x_title else None, title_h=0.15, title_buff=0.1)
+    g = VGroup(dax, stack, dots, rp)
+    g.dax, g.stack, g.dots, g.rp = dax, stack, dots, rp
+    return g
+
+
+# -- k: mu tau_h fakes --------------------------------------------------------------
+
+PROC = ("qcd", "w", "tt")
+PROC_TEX = {"qcd": r"\mathrm{QCD}", "w": r"W\!+\!\mathrm{jets}", "tt": r"t\bar t"}
+PROC_COL = {"qcd": SAMPLE["Fakes"], "w": SAMPLE["WW"], "tt": SAMPLE["TTbar"]}
+PROC_REGION = {"qcd": r"\mu^{\pm}\tau_h^{\pm}", "w": r"m_T > 70\ \mathrm{GeV}", "tt": r"\mathrm{simulation}"}
+PROC_F = {"qcd": LH["ff_inclusive"]["qcd"], "w": LH["ff_inclusive"]["w_os"], "tt": LH["ff_inclusive"]["tt"]}
+
+
+def ar_bar() -> VGroup:
+    x = B["bar_x0"]
+    segs, pcts, syms = VGroup(), VGroup(), VGroup()
+    for p in PROC:
+        w = B["bar_w"] * float(LH["ar_fractions"][p])
+        r = Rectangle(width=w, height=B["bar_h"], fill_color=col(PROC_COL[p]), fill_opacity=0.95,
+                      stroke_color=col(WHITE), stroke_width=1.5)
+        r.shift(np.array([x, B["bar_y"], 0.0]) - r.get_left())
+        segs.add(r)
+        pc = 100 * float(LH["ar_fractions"][p])
+        txt = WHITE if p == "tt" else INK
+        pcts.add(tex_h(rf"{pc:.0f}\%", 0.17, color=txt).move_to(r))
+        syms.add(tex_h(PROC_TEX[p], 0.2).move_to(np.array([r.get_center()[0], B["sym_y"], 0.0])))
+        x += w
+    nar = tex_h(rf"N_{{\mathrm{{AR}}}} = {int(LH['n_data']['AR']):,}".replace(",", "{,}"), 0.2)
+    nar.shift(_p3(B["nar_at"]) - nar.get_left())
+    ch = tex_h(CH_TEX["mutau"], 0.34, color=CHANNEL_LINE["tautau"]).move_to(_p3(B["ch_at"]))
+    g = VGroup(segs, pcts, syms, nar, ch)
+    g.segs, g.pcts, g.syms, g.nar, g.ch = segs, pcts, syms, nar, ch
+    return g
+
+
+def ff_columns(bar) -> dict:
+    out = {}
+    for i, p in enumerate(PROC):
+        x = B["col_x"][i]
+        seg = bar.segs[i]
+        con = DashedLine(seg.get_bottom() + DOWN * 0.04, np.array([x, B["col_top"], 0.0]), dash_length=0.08,
+                         stroke_color=col(GREY), stroke_width=2.0)
+        reg = tex_h(PROC_REGION[p], 0.2, color=DETECTOR_ACCENT).move_to(np.array([x, B["reg_y"], 0.0]))
+        f = tex_h(rf"f_{{{PROC_TEX[p]}}} = {PROC_F[p]:.3f}", 0.22).move_to(np.array([x, B["f_y"], 0.0]))
+        grp = VGroup(con, reg, f)
+        if p == "qcd":
+            c = tex_h(rf"\times\ C_{{\mathrm{{OS/SS}}}} = {LH['osss']['C']:.2f}", 0.17).move_to(np.array([x, B["c_y"], 0.0]))
+            grp.add(c)
+        grp.con, grp.reg, grp.f = con, reg, f
+        out[p] = grp
+    return out
+
+
+def lephad_formula():
+    return tex_h(r"N_{\mathrm{fake}} = \sum_{p} R_p\, f_p \times N_{\mathrm{AR}}", 0.26).move_to(_p3(B["formula_at"]))
+
+
+def lephad_nfake():
+    n = f"{LH['sr_fakes']:,.0f}".replace(",", "{,}")
+    pc = 100 * LH["sr_fakes"] / V4["channels"]["prefit"]["mutau"]["n_data"]
+    return tex_h(rf"N_{{\mathrm{{fake}}}} = {n}\ \ ({pc:.0f}\%)", 0.26).move_to(_p3(B["nfake_at"]))
+
+
+def w_diagram(os_: bool) -> VGroup:
+    """Schematic W+jets event: W -> mu nu to the left, the recoiling jet cone to the right;
+    OS = quark jet (narrow), SS = gluon jet (wide)."""
+    y = B["diag_y"][0 if os_ else 1]
+    v = np.array([B["diag_v"], y, 0.0])
+    wend = v + LEFT * 1.2
+    w = wavy(v, wend, color=PARTICLE["W"], sw=3.0, amplitude=0.07, wavelength=0.3)
+    mu = fline(wend, wend + np.array([-0.9, 0.5, 0.0]), color=INK, sw=3.0)
+    nu = dashed(wend, wend + np.array([-0.9, -0.5, 0.0]), color=PARTICLE["nu"], sw=2.5, dash_length=0.08)
+    mu_lab = tex_h(r"\mu^{+}", 0.2).next_to(mu.get_end(), LEFT, buff=0.08)
+    nu_lab = tex_h(r"\nu", 0.2, color=PARTICLE["nu"]).next_to(nu.get_end(), LEFT, buff=0.08)
+    w_lab = tex_h(r"W^{+}", 0.18).next_to(w, UP, buff=0.08)
+    half = 0.10 if os_ else 0.30
+    L = B["cone_len"]
+    cone = Polygon(v, v + L * unit(half), v + L * unit(-half), fill_color=col(PARTICLE["jet"]), fill_opacity=0.3,
+                   stroke_color=col(PARTICLE["jet"]), stroke_width=1.5)
+    n_trk = 3 if os_ else 7
+    trks = VGroup(*[fline(v, v + (L - 0.2) * unit(a), color=PARTICLE["jet"], sw=2.2)
+                    for a in np.linspace(-0.8 * half, 0.8 * half, n_trk)])
+    jlab = tex_h(r"q" if os_ else r"g", 0.24).next_to(v + L * RIGHT, RIGHT, buff=0.12)
+    vd = vertex_dot(v, radius=0.05)
+    pair = tex_h(r"\mu^{+}\tau_h^{-}" if os_ else r"\mu^{+}\tau_h^{+}", 0.24, color=DETECTOR_ACCENT)
+    pair.move_to(np.array([B["pair_x"], y + 0.3, 0.0]))
+    fv = LH["ff_inclusive"]["w_os" if os_ else "w_ss"]
+    f = tex_h(rf"f_{{W}} = {fv:.3f}", 0.24).move_to(np.array([B["pair_x"], y - 0.3, 0.0]))
+    g = VGroup(w, mu, nu, vd, mu_lab, nu_lab, w_lab, cone, trks, jlab, pair, f)
+    g.lines, g.labels, g.jet, g.num = VGroup(w, mu, nu, vd), VGroup(mu_lab, nu_lab, w_lab), VGroup(cone, trks, jlab), VGroup(pair, f)
+    return g
+
+
+def lephad_closure() -> dict:
+    C = LH["closure_ss"]
+    e = np.asarray(C["edges"], dtype=float)
+    obs, pred = np.asarray(C["obs"], dtype=float), np.asarray(C["pred"], dtype=float)
+    w, h = B["clos_len"]
+    dax = DataAxes([0, 350, 50], [0, 900, 300], w, h, x_ticks=[0, 100, 200, 300], show_x_labels=False,
+                   tick_label_h=0.15, title_h=0.18, title_buff=0.14, y_title=r"\mathrm{events\,/\,bin}")
+    dax.move_frame_to(B["clos_c"])
+    fill = step_hist(dax, e, pred, color=SAMPLE["Fakes"], stroke_width=0, fill_opacity=0.95)
+    line = step_hist(dax, e, pred, color=darken(SAMPLE["Fakes"], 0.45), stroke_width=2.5)
+    xc = 0.5 * (e[:-1] + e[1:])
+    dots = VGroup(*[data_dot(dax, xc[i], obs[i], color=SAMPLE["Data"], radius=0.04) for i in range(len(xc))])
+    rp = ratio_panel(dax, e, obs, pred, B["clos_ratio"], y_range=(0.5, 1.5, 0.5), y_length=0.9, y_ticks=[0.5, 1.0, 1.5],
+                     dot_radius=0.034, tick_label_h=0.15, x_title=r"m_{\tau\tau}\ [\mathrm{GeV}]",
+                     y_title=r"\mathrm{data/pred.}", title_h=0.18, title_buff=0.14)
+    sym = tex_h(r"\mu^{\pm}\tau_h^{\pm}", 0.26, color=DETECTOR_ACCENT).move_to(_p3(B["clos_sym"]))
+    val = tex_h(rf"{C['ratio']:.3f} \pm {C['stat']:.3f}", 0.24).move_to(_p3(B["clos_val"]))
+    return {"c_dax": dax, "c_fill": VGroup(fill, line), "c_data": dots, "c_ratio": rp, "c_sym": sym, "c_val": val}
+
+
+CLOS_KEYS = ("c_sym", "c_dax", "c_fill", "c_data", "c_ratio", "c_val")
+
+
+# -- l: e mu signal and ttbar control region ----------------------------------------
+
+L_SPEC = {"emu": dict(ytop=15000.0, yticks=[5000, 10000, 15000],
+                      lab=r"e\mu:\ D_\zeta > -20\ \mathrm{GeV},\ N_b = 0"),
+          "emu_CRtt": dict(ytop=22000.0, yticks=[10000, 20000],
+                           lab=r"D_\zeta < -40\ \mathrm{GeV},\ p_T^{\mathrm{miss}} > 80\ \mathrm{GeV}")}
+
+
+def emu_panels(tag: str) -> dict:
+    out = {}
+    for i, ch in enumerate(("emu", "emu_CRtt")):
+        S = L_SPEC[ch]
+        out[f"l{i}"] = chan_panel(tag, ch, B["l_c"][i], B["l_w"][i], B["l_h"], S["ytop"], S["yticks"], B["l_rlen"])
+        lab = tex_h(S["lab"], 0.18, color=CHANNEL_LINE["tautau"] if i == 0 else DETECTOR_ACCENT)
+        out[f"l{i}_lab"] = lab.move_to(np.array([B["l_c"][i][0], B["l_lab_y"], 0.0]))
+    return out
+
+
+def ttbar_slider(post: bool):
+    sl = slider(0.9, 1.2, 1.0, err=None, ref=1.0, length=3.0, ticks=[0.9, 1.0, 1.1, 1.2], fmt="{:.1f}",
+                tick_label_h=0.14, ref_h=0.3)
+    sl.move_to(_p3(B["l_slider"]))
+    if post:
+        mt = FITV["mu_ttbar"]
+        new = sl.marker_at(mt["value"], mt["err_up"])
+        sl.remove(sl.marker)
+        sl.marker = new
+        sl.add(new)
+    name = tex_h(r"\mu_{t\bar t}", 0.22).next_to(sl.axis, LEFT, buff=0.3)
+    sl.add(name)
+    sl.name = name
+    return sl
+
+
+def ttbar_value():
+    mt = FITV["mu_ttbar"]
+    return tex_h(rf"\mu_{{t\bar t}} = {mt['value']:.2f} \pm {mt['err_up']:.2f}", 0.22).move_to(_p3(B["l_mu_at"]))
+
+
+# -- m: the tau_h ID scale factors in situ, post-fit, sigma ---------------------------
+
+def lever() -> dict:
+    rows = (("emu", r"N \propto \mu_Z", r"\to\ \mu_Z"),
+            ("mutau", r"N \propto \mathrm{SF}\cdot\mu_Z", None),
+            ("tautau", r"N \propto \mathrm{SF}^{2}\cdot\mu_Z", None))
+    syms, exprs = VGroup(), VGroup()
+    for (ch, e, _), y in zip(rows, B["m_rows"]):
+        tex = r"\ell\tau_h" if ch == "mutau" else CH_TEX[ch]
+        s = tex_h(tex, 0.32, color=CHANNEL_LINE["tautau"])
+        s.shift(np.array([B["m_sym_r"], y, 0.0]) - s.get_right())
+        x = tex_h(e, 0.32)
+        x.shift(np.array([B["m_expr_l"], y, 0.0]) - x.get_left())
+        syms.add(s); exprs.add(x)
+    to_mu = tex_h(r"\to\ \mu_Z", 0.3)
+    to_mu.shift(np.array([B["m_to_l"], B["m_rows"][0], 0.0]) - to_mu.get_left())
+    y1, y2 = B["m_rows"][1], B["m_rows"][2]
+    bx = B["m_to_l"] - 0.1
+    brace = VGroup(Line([bx - 0.15, y1 + 0.2, 0], [bx, y1 + 0.2, 0], stroke_color=col(INK), stroke_width=2.5),
+                   Line([bx, y1 + 0.2, 0], [bx, y2 - 0.2, 0], stroke_color=col(INK), stroke_width=2.5),
+                   Line([bx - 0.15, y2 - 0.2, 0], [bx, y2 - 0.2, 0], stroke_color=col(INK), stroke_width=2.5))
+    to_sf = tex_h(r"\to\ \mathrm{SF}(\mathrm{DM})", 0.3)
+    to_sf.shift(np.array([B["m_to_l"] + 0.2, 0.5 * (y1 + y2), 0.0]) - to_sf.get_left())
+    g = VGroup(syms, exprs, to_mu, brace, to_sf)
+    g.syms, g.exprs, g.to_mu, g.brace, g.to_sf = syms, exprs, to_mu, brace, to_sf
+    return {"lever": g}
+
+
+def lever_parked():
+    g = lever()["lever"]
+    s, c = B["m_park"]
+    g.scale(s).move_to(_p3(c))
+    return g
+
+
+def sf_plot() -> VGroup:
+    S = B["sf_ax"]
     lo, hi, x0, L, y0 = S["lo"], S["hi"], S["x0"], S["length"], S["y"]
     ink = col(INK)
 
@@ -1200,51 +1289,113 @@ def sigma_panel() -> VGroup:
         return x0 + (float(v) - lo) / (hi - lo) * L
 
     axis = Line([xs(lo), y0, 0], [xs(hi), y0, 0], stroke_color=ink, stroke_width=2.5)
-    ticks, tick_labels = VGroup(), VGroup()
-    for v in np.arange(lo, hi + 1, 100.0):
+    ticks, labels = VGroup(), VGroup()
+    for v in np.arange(lo, hi + 1e-9, 0.1):
         p = np.array([xs(v), y0, 0.0])
         ticks.add(Line(p, p + DOWN * 0.08, stroke_color=ink, stroke_width=2.5))
-        tick_labels.add(text_h(f"{v:.0f}", 0.15).next_to(p + DOWN * 0.08, DOWN, buff=0.08))
-    unit_ = tex_h(r"\mathrm{pb}", 0.17).next_to(tick_labels[-1], RIGHT, buff=0.18)
+        if abs(round(v * 10) % 2) < 1e-9:
+            labels.add(text_h(f"{v:.1f}", 0.15).next_to(p + DOWN * 0.08, DOWN, buff=0.08))
+    title = tex_h(r"\mathrm{SF}_{\mathrm{ID}}(\tau_h)", 0.2).next_to(labels, DOWN, buff=0.14)
+    ref = DashedLine([xs(1.0), y0, 0], [xs(1.0), B["sf_rows"][0] + 0.4, 0], dash_length=0.1,
+                     stroke_color=col(GREY), stroke_width=2.0)
+    names, pog, fit = VGroup(), VGroup(), VGroup()
+    for d, y in zip(DMS, B["sf_rows"]):
+        t = FITV["tau_id_sf"][d]
+        n = tex_h(DM_TEX[d], 0.2)
+        n.shift(np.array([B["sf_lab_r"], y, 0.0]) - n.get_right())
+        names.add(n)
+        for grp, val, err, cc, dy in ((pog, t["pog"], t["pog_err"], GREY, 0.13), (fit, t["value"], t["err"], CHANNEL_LINE["tautau"], -0.13)):
+            yy = y + dy
+            bar = Line([xs(val - err), yy, 0], [xs(val + err), yy, 0], stroke_color=col(cc), stroke_width=4.0)
+            dot = Dot([xs(val), yy, 0], radius=0.075, color=col(cc))
+            grp.add(VGroup(bar, dot))
+    key = VGroup(
+        VGroup(Dot(ORIGIN, radius=0.075, color=col(GREY)), tex_h(r"\mathrm{TauPOG}", 0.17)).arrange(RIGHT, buff=0.15),
+        VGroup(Dot(ORIGIN, radius=0.075, color=col(CHANNEL_LINE["tautau"])), tex_h(r"\mathrm{in\ situ}", 0.17)).arrange(RIGHT, buff=0.15),
+    ).arrange(RIGHT, buff=0.6)
+    key.move_to(np.array([xs(1.05), B["sf_key_y"], 0.0]))
+    frame = VGroup(axis, ticks, labels, title, ref)
+    g = VGroup(frame, names, pog, fit, key)
+    g.frame, g.names, g.pog, g.fit, g.key = frame, names, pog, fit, key
+    return g
+
+
+M_SPEC = {"tautau": (3600.0, [0, 3000]), "mutau": (12000.0, [0, 10000]), "etau": (3600.0, [0, 3000]),
+          "emu": (15000.0, [0, 15000])}
+
+
+def postfit_panels() -> dict:
+    out = {}
+    for i, ch in enumerate(("tautau", "mutau", "etau", "emu")):
+        ytop, yt = M_SPEC[ch]
+        out[f"m{i}"] = chan_panel("postfit", ch, (B["m_px"][i], B["m_py"]), B["m_pw"], B["m_ph"], ytop, yt, B["m_rlen"],
+                                  show_y=False, x_title=False)
+        out[f"m{i}_lab"] = tex_h(CH_TEX[ch], 0.26, color=CHANNEL_LINE["tautau"]).move_to(np.array([B["m_px"][i], B["m_title_y"], 0.0]))
+    out["m_key"] = v4_key(B["m_key"], label_h=0.15)
+    return out
+
+
+POST_KEYS = ("m0", "m0_lab", "m1", "m1_lab", "m2", "m2_lab", "m3", "m3_lab", "m_key")
+
+
+def mu_line(at=None, h=0.34):
+    return tex_h(rf"\mu_Z = {FITV['mu']:.3f}^{{+{FITV['mu_up']:.3f}}}_{{-{FITV['mu_down']:.3f}}}", h).move_to(_p3(at or B["mu_at"]))
+
+
+def sigma_panel() -> VGroup:
+    S = B["sig"]
+    lo, hi, x0, L, y0, H = S["lo"], S["hi"], S["x0"], S["length"], S["y"], S["height"]
+    ink = col(INK)
+
+    def xs(v):
+        return x0 + (float(v) - lo) / (hi - lo) * L
+
+    axis = Line([xs(lo), y0, 0], [xs(hi), y0, 0], stroke_color=ink, stroke_width=2.5)
+    ticks, tick_labels = VGroup(), VGroup()
+    for v in np.arange(lo, hi + 1, 50.0):
+        p = np.array([xs(v), y0, 0.0])
+        big = abs(v % 100) < 1e-9
+        ticks.add(Line(p, p + DOWN * (0.1 if big else 0.06), stroke_color=ink, stroke_width=2.5))
+        if big:
+            tick_labels.add(text_h(f"{v:.0f}", 0.15).next_to(p + DOWN * 0.1, DOWN, buff=0.08))
+    unit_ = tex_h(r"\mathrm{pb}", 0.17).next_to(tick_labels[-1], RIGHT, buff=0.3)
     th = RF["theory"]
-    pred = float(th["value"])
-    H = S["height"]
-    band = None
-    if th.get("unc_up") is not None and th.get("unc_down") is not None:      # only a documented one
-        lo_b, hi_b = xs(pred - float(th["unc_down"])), xs(pred + float(th["unc_up"]))
-        band = Rectangle(width=hi_b - lo_b, height=H, fill_color=col(THEORY), fill_opacity=0.15,
-                         stroke_width=0).move_to([0.5 * (lo_b + hi_b), y0 + H / 2, 0.0])
-    theory = DashedLine([xs(pred), y0, 0], [xs(pred), y0 + H, 0], dash_length=0.1,
-                        stroke_color=col(THEORY), stroke_width=3.0)
-    if band is not None:                                                     # the value with its uncertainty
-        th_lab = tex_h(rf"{pred:.1f}^{{+{float(th['unc_up']):.0f}}}_{{-{float(th['unc_down']):.0f}}}", 0.17,
-                       color=THEORY)
-    else:
-        th_lab = tex_h(f"{pred:.1f}", 0.17, color=THEORY)
-    th_lab.next_to(theory.get_end(), LEFT, buff=0.14)                        # the result label sits above
-    cc = col(CHANNEL_LINE["tautau"])
-    ypt = y0 + S["rows"][0]
-    bar = Line([xs(s["value"] - s["err_down"]), ypt, 0], [xs(s["value"] + s["err_up"]), ypt, 0],
-               stroke_color=cc, stroke_width=5.0)
-    dot = Dot([xs(s["value"]), ypt, 0], radius=0.1, color=cc)
+    pred = float(FITV["pred"])
+    lo_b, hi_b = xs(pred - float(th["unc_down"])), xs(pred + float(th["unc_up"]))
+    band = Rectangle(width=hi_b - lo_b, height=H, fill_color=col(THEORY), fill_opacity=0.15,
+                     stroke_width=0).move_to([0.5 * (lo_b + hi_b), y0 + H / 2, 0.0])
+    theory = DashedLine([xs(pred), y0, 0], [xs(pred), y0 + H, 0], dash_length=0.1, stroke_color=col(THEORY), stroke_width=3.0)
+    th_lab = tex_h(rf"{pred:.1f}^{{+{float(th['unc_up']):.0f}}}_{{-{float(th['unc_down']):.0f}}}", 0.17, color=THEORY)
+    th_lab.next_to(theory.get_end(), LEFT, buff=0.14)
+    red = col(CHANNEL_LINE["tautau"])
+    R = S["rows"]
+    yc = y0 + R["comb"]
+    comb = VGroup(Line([xs(FITV["sigma"] - FITV["sigma_down"]), yc, 0], [xs(FITV["sigma"] + FITV["sigma_up"]), yc, 0],
+                       stroke_color=red, stroke_width=5.0),
+                  Dot([xs(FITV["sigma"]), yc, 0], radius=0.1, color=red))
+    chans = VGroup()
+    for ch in ("tautau", "mutau", "etau", "emu"):
+        p = V4["per_channel_fixedid"][ch]
+        y = y0 + R[ch]
+        bar = Line([xs(p["sigma"] - p["sigma_down"]), y, 0], [xs(p["sigma"] + p["sigma_up"]), y, 0], stroke_color=red, stroke_width=3.0)
+        dot = Circle(radius=0.07, arc_center=[xs(p["sigma"]), y, 0], stroke_color=red, stroke_width=3.0,
+                     fill_color=col(WHITE), fill_opacity=1.0)
+        lab = tex_h(CH_TEX[ch], 0.16, color=CHANNEL_LINE["tautau"]).next_to(bar, RIGHT, buff=0.15)
+        chans.add(VGroup(bar, dot, lab))
     refs = VGroup()
-    for key, dy in (("cms", S["rows"][1]), ("atlas", S["rows"][2])):
+    for key in ("cms", "atlas"):
         r = RF[key]
-        yr = y0 + dy
+        yr = y0 + R[key]
         sc = col(SAMPLE["Data"])
-        rbar = Line([xs(r["value"] - r["total"]), yr, 0], [xs(r["value"] + r["total"]), yr, 0],
-                    stroke_color=sc, stroke_width=4.0)
+        rbar = Line([xs(r["value"] - r["total"]), yr, 0], [xs(r["value"] + r["total"]), yr, 0], stroke_color=sc, stroke_width=4.0)
         rdot = Dot([xs(r["value"]), yr, 0], radius=0.08, color=sc)
         rlab = tex_h(rf"\mathrm{{{r['label']}}}", 0.16, color=SAMPLE["Data"]).next_to(rbar, RIGHT, buff=0.15)
         refs.add(VGroup(rbar, rdot, rlab))
-    label = tex_h(rf"\sigma_{{60\text{{--}}120}} = {s['value']:.0f}^{{+{s['err_up']:.0f}}}_{{-{s['err_down']:.0f}}}"
-                  rf"\ \mathrm{{pb}}", 0.27)
-    label.move_to(_p3(A["sig_label_at"]))
-    members = [axis, ticks, tick_labels, unit_] + ([band] if band is not None else []) + \
-        [theory, th_lab, bar, dot, refs, label]
-    g = VGroup(*members)
-    g.axis, g.theory, g.th_lab, g.bar, g.dot, g.refs, g.label, g.band = axis, theory, th_lab, bar, dot, refs, label, band
-    g.frame = VGroup(axis, ticks, tick_labels, unit_)
+    label = tex_h(rf"\sigma_{{60\text{{--}}120}} = {FITV['sigma']:.0f}^{{+{FITV['sigma_up']:.0f}}}_{{-{FITV['sigma_down']:.0f}}}"
+                  rf"\ \mathrm{{pb}}", 0.3).move_to(_p3(B["sig_label_at"]))
+    g = VGroup(axis, ticks, tick_labels, unit_, band, theory, th_lab, chans, comb, refs, label)
+    g.frame, g.band, g.theory, g.th_lab, g.chans, g.comb, g.refs, g.label = \
+        VGroup(axis, ticks, tick_labels, unit_), band, theory, th_lab, chans, comb, refs, label
     return g
 
 
@@ -1328,12 +1479,6 @@ def state_f() -> dict:
 ORDER_F = ("dax", "stack", "data", "counter", "key", "n_fakes", "ratio", "rlabel", "pct")
 
 
-def state_g() -> dict:
-    P = plot_parts(fakes=True, key_rows=5)
-    return {**P, "n_fakes": n_fakes_small(), "corr": corr_rows()}
-
-
-ORDER_G = ("dax", "stack", "data", "counter", "key", "n_fakes", "ratio", "rlabel", "corr")
 
 
 def state_h() -> dict:
@@ -1343,14 +1488,31 @@ def state_h() -> dict:
 ORDER_H = (*PANEL_KEYS, "key")
 
 
-def state_i() -> dict:
-    st = {**panel_parts("postfit", A["plot_left"]), "key": key_i(), "mu_line": mu_line(),
-          "sig_fid": sigma_fid_line(), "sig_tot": sigma_panel()}
-    return st
+def state_k() -> dict:
+    return lephad_closure()
 
 
-ORDER_I = (*PANEL_KEYS, "key", "mu_line", "sig_fid", "sig_tot")
+ORDER_K = CLOS_KEYS
 
+
+def state_l() -> dict:
+    return {**emu_panels("postfit"), "l_key": v4_key(B["l_key"], label_h=0.15), "slider": ttbar_slider(True),
+            "mu_tt": ttbar_value()}
+
+
+ORDER_L = ("l0", "l0_lab", "l1", "l1_lab", "l_key", "slider", "mu_tt")
+
+
+def state_m() -> dict:
+    return {"mu": mu_line(B["mu_top"], 0.28), "sig": sigma_panel()}
+
+
+ORDER_M = ("mu", "sig")
+
+
+# ---------------------------------------------------------------------------
+# the scenes
+# ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
 # the nine scenes
@@ -1675,56 +1837,20 @@ class TautauTransfer(Scene):
         self.wait(0.1)
 
 
-class TautauCorrections(Scene):
-    """tautau_g1_tau_sf / g2_event_weights: the fiducial layer inflates to its raw yield and the
-    tau_h scale factors, then the event weights, bring it to the corrected height."""
+
+class TautauBDT(Scene):
+    """tautau_h1_inputs / h2_shapes / h4_score / h5_categories: from a blank frame, the classifier's
+    inputs, the fakes-vs-signal shapes per input, the D_BDT output with its ratio panel, the three
+    categories (v4 prefit)."""
 
     def construct(self):
         white_background(self)
         prev = state_f()
         add_state(self, prev, ORDER_F)
-        clip_open(self, "tautau_g1_tau_sf")
-        end = state_g()
-        corr = end["corr"]
-        stack, ratio, rlabel = prev["stack"], prev["ratio"], prev["rlabel"]
-        self.play(ReplacementTransform(prev["n_fakes"], end["n_fakes"]), FadeOut(prev["pct"]), run_time=0.9,
-                  rate_func=EASE)
-
-        def to_stage(k, rt=1.4):
-            S = plot_parts(fakes=True, dy_scale=k, key_rows=0, counter=False)
-            self.play(Transform(stack, S["stack"]), Transform(ratio.dots, S["ratio"].dots),
-                      Transform(rlabel, S["rlabel"]), run_time=rt, rate_func=EASE)
-
-        to_stage(K_RAW, 1.0)
-        self.wait(0.2)
-        for j in (0, 1, 2, 3, 4):
-            self.play(FadeIn(corr[j], shift=RIGHT * 0.25), run_time=0.45, rate_func=EASE)
-        to_stage(K_SF)
-        clip_cut(self, "tautau_g2_event_weights")
-        for j in (5, 6):
-            self.play(FadeIn(corr[j], shift=RIGHT * 0.25), run_time=0.45, rate_func=EASE)
-        to_stage(1.0)
-        for j in (7, 8):
-            self.play(FadeIn(corr[j], shift=RIGHT * 0.25), run_time=0.45, rate_func=EASE)
-        adopt(self, corr, "corr")
-        settle_same(self, prev, end, PLOT_KEYS)
-        check_order(self, end, ORDER_G)
-        self.wait(0.1)
-
-
-class TautauBDT(Scene):
-    """tautau_h1_inputs ... h5_categories: from a blank frame, the classifier's inputs, the
-    fakes-vs-signal shapes per input, a schematic BDT, the D_BDT output with its ratio panel,
-    the three categories."""
-
-    def construct(self):
-        white_background(self)
-        prev = state_g()
-        add_state(self, prev, ORDER_G)
         clip_open(self, "tautau_h1_inputs")
         end = state_h()
 
-        self.play(*[FadeOut(prev[k]) for k in ORDER_G], run_time=0.6)          # blank frame
+        self.play(*[FadeOut(prev[k]) for k in ORDER_F], run_time=0.6)          # blank frame
         self.wait(0.2)
         lst = inputs_list()
         self.play(LaggedStart(*[FadeIn(t, shift=RIGHT * 0.2) for t in lst], lag_ratio=0.08, group=lst), run_time=2.4)
@@ -1735,20 +1861,10 @@ class TautauBDT(Scene):
         pan = [FP[f"f{k}"] for k in range(len(SHAPE_FEATURES))]
         self.play(LaggedStart(*[FadeIn(p) for p in pan], lag_ratio=0.25), run_time=3.2)
         self.play(FadeIn(FP["fkey"]), run_time=0.4)
-        clip_cut(self, "tautau_h3_sketch")
-
-        SK = bdt_sketch()
-        self.play(*[FadeOut(p) for p in pan], FadeOut(FP["fkey"]), ReplacementTransform(lst, SK.bracket),
-                  run_time=0.8, rate_func=EASE)
-        self.play(FadeIn(SK.arrow_in), run_time=0.3)
-        self.play(LaggedStart(*[Create(t) for t in SK.trees], lag_ratio=0.3), run_time=1.8)
-        self.play(FadeIn(SK.plus), run_time=0.3)
-        self.play(FadeIn(SK.arrow_out), FadeIn(SK.out, shift=RIGHT * 0.2), run_time=0.5)
         clip_cut(self, "tautau_h4_score")
 
         S = score_parts()
-        self.play(FadeOut(SK.bracket), FadeOut(SK.arrow_in), *[FadeOut(t) for t in SK.trees], FadeOut(SK.plus),
-                  FadeOut(SK.arrow_out), FadeOut(SK.out), run_time=0.5)
+        self.play(*[FadeOut(p) for p in pan], FadeOut(FP["fkey"]), FadeOut(lst), run_time=0.5)
         self.play(FadeIn(S["s_dax"]), run_time=0.5)
         self.play(FadeIn(S["s_stack"]), run_time=0.8)
         self.play(LaggedStart(*[GrowFromCenter(d) for d in S["s_data"]], lag_ratio=0.04, group=S["s_data"]),
@@ -1770,56 +1886,160 @@ class TautauBDT(Scene):
         self.wait(0.1)
 
 
-class TautauFit(Scene):
-    """tautau_i1_fit ... i4_sigma_total: the profile-likelihood fit (pulls, mu_Z slider,
-    post-fit panels), the grouped impacts, sigma_fid, sigma(60-120) beside the prediction."""
+class TautauLepHad(Scene):
+    """tautau_k1_lephad_fakes / k2_w_charge / k3_lephad_closure: in mu tau_h the jet fakes come from
+    three processes, each with its own fake factor; the W+jets one depends on the charge; the
+    same-sign validation."""
 
     def construct(self):
         white_background(self)
         prev = state_h()
         add_state(self, prev, ORDER_H)
-        clip_open(self, "tautau_i1_fit")
-        end = state_i()
+        clip_open(self, "tautau_k1_lephad_fakes")
+        end = state_k()
 
-        pp0, pp1 = pulls(False), pulls(True)
-        sl = mu_slider()
-        self.play(FadeIn(pp0), FadeIn(sl), run_time=0.7)
-        post = panel_parts("postfit")
-        self.play(*[Transform(prev[f"p{k}_stack"], post[f"p{k}_stack"]) for k in range(3)],
-                  Transform(pp0.rows, pp1.rows), Transform(sl.marker, asym_marker(sl)), run_time=2.4, rate_func=EASE)
-        for k in range(3):
-            settle(self, prev[f"p{k}_stack"], post[f"p{k}_stack"], f"p{k}_stack")
-        v, e = mu_strings()
-        seed = tex_h(rf"\mu_{{Z}} = {v} {e}", 0.18).next_to(sl.marker, UP, buff=A["mu_seed_dy"])
-        self.play(FadeIn(seed, shift=UP * 0.15), run_time=0.5)
-        clip_cut(self, "tautau_i2_impacts")
+        self.play(*[FadeOut(prev[k]) for k in ORDER_H], run_time=0.6)
+        bar = ar_bar()
+        self.play(FadeIn(bar.ch, shift=DOWN * 0.15), run_time=0.5)
+        self.play(LaggedStart(*[GrowFromEdge(s, LEFT) for s in bar.segs], lag_ratio=0.5, group=bar.segs), run_time=1.4,
+                  rate_func=EASE)
+        self.play(FadeIn(bar.syms), FadeIn(bar.pcts), FadeIn(bar.nar), run_time=0.6)
+        adopt(self, bar, "bar")
+        cols = ff_columns(bar)
+        for p in PROC:
+            c = cols[p]
+            self.play(Create(c.con), run_time=0.35)
+            self.play(FadeIn(c.reg, shift=DOWN * 0.1), run_time=0.4)
+            self.play(FadeIn(VGroup(*[m for m in c if m is not c.con and m is not c.reg]), shift=DOWN * 0.1), run_time=0.45)
+            adopt(self, c, p)
+        form = lephad_formula()
+        self.play(FadeIn(form, shift=UP * 0.15), run_time=0.7)
+        nf = lephad_nfake()
+        self.play(FadeIn(nf, shift=UP * 0.15), run_time=0.6)
+        clip_cut(self, "tautau_k2_w_charge")
 
-        imp = impact_bars()
-        self.play(FadeOut(pp0), FadeOut(sl), seed.animate.move_to(_p3(A["mu_seed_i2"])), run_time=0.6)
-        self.play(FadeIn(imp.head), FadeIn(imp.names), run_time=0.5)
-        self.play(LaggedStart(*[GrowFromEdge(b, LEFT) for b in imp.bars], lag_ratio=0.12, group=imp.bars), run_time=2.0)
-        self.play(FadeIn(imp.nums), run_time=0.4)
-        adopt(self, imp, "impacts")
-        clip_cut(self, "tautau_i3_sigma_fid")
+        self.play(*[FadeOut(cols[p]) for p in PROC], FadeOut(form), FadeOut(nf),
+                  bar.segs[0].animate.set_opacity(0.25), bar.segs[2].animate.set_opacity(0.25),
+                  bar.pcts[0].animate.set_opacity(0.25), bar.pcts[2].animate.set_opacity(0.25),
+                  bar.syms[0].animate.set_opacity(0.25), bar.syms[2].animate.set_opacity(0.25), run_time=0.7)
+        for os_ in (True, False):
+            dg = w_diagram(os_)
+            self.play(Create(dg.lines), run_time=0.7, rate_func=EASE)
+            self.play(FadeIn(dg.labels), run_time=0.3)
+            self.play(FadeIn(dg.jet[0]), Create(dg.jet[1]), FadeIn(dg.jet[2]), run_time=0.8)
+            self.play(FadeIn(dg.num, shift=LEFT * 0.15), run_time=0.5)
+            adopt(self, dg, "w_diagram")
+            self.wait(0.3)
+            if os_:
+                first = dg
+        second = dg
+        clip_cut(self, "tautau_k3_lephad_closure")
 
-        sig = end["sig_tot"]
-        moves = {f"p{k}_{p}": None for k in range(3) for p in ("dax", "data", "lab")}
-        anims = [FadeOut(imp)]
-        for key in PANEL_KEYS:
-            src = post[key] if key.endswith("_stack") else prev[key]
-            anims.append(ReplacementTransform(src, end[key]))
-        anims += [ReplacementTransform(prev["key"], end["key"]), ReplacementTransform(seed, end["mu_line"]),
-                  ReplacementTransform(seed.copy(), end["sig_fid"]), ReplacementTransform(seed.copy(), sig.label)]
-        self.play(*anims, run_time=2.0, rate_func=EASE)
-        clip_cut(self, "tautau_i4_sigma_total")
+        self.play(FadeOut(first), FadeOut(second), FadeOut(bar), run_time=0.6)
+        self.play(FadeIn(end["c_sym"], shift=DOWN * 0.15), FadeIn(end["c_dax"]), run_time=0.6)
+        self.play(FadeIn(end["c_fill"]), run_time=0.7)
+        self.play(LaggedStart(*[GrowFromCenter(d) for d in end["c_data"]], lag_ratio=0.05, group=end["c_data"]), run_time=0.9)
+        rp = end["c_ratio"]
+        self.play(FadeIn(rp.dax), FadeIn(rp.ref), run_time=0.4)
+        self.play(LaggedStart(*[GrowFromCenter(d) for d in rp.dots], lag_ratio=0.05, group=rp.dots), run_time=0.8)
+        adopt(self, rp, "c_ratio")
+        self.play(FadeIn(end["c_val"], shift=LEFT * 0.15), run_time=0.5)
+        check_order(self, end, ORDER_K)
+        self.wait(0.1)
+
+
+class TautauEmu(Scene):
+    """tautau_l1_emu_regions / l2_emu_ttbar: the e mu signal region and the ttbar control region,
+    prefit; mu_ttbar floats and both go post-fit."""
+
+    def construct(self):
+        white_background(self)
+        prev = state_k()
+        add_state(self, prev, ORDER_K)
+        clip_open(self, "tautau_l1_emu_regions")
+        end = state_l()
+
+        self.play(*[FadeOut(prev[k]) for k in ORDER_K], run_time=0.6)
+        pre = emu_panels("prefit")
+        for i in range(2):
+            P = pre[f"l{i}"]
+            self.play(FadeIn(pre[f"l{i}_lab"], shift=DOWN * 0.15), FadeIn(P.dax), run_time=0.6)
+            self.play(FadeIn(P.stack), run_time=0.7)
+            self.play(LaggedStart(*[GrowFromCenter(d) for d in P.dots], lag_ratio=0.04, group=P.dots), run_time=0.7)
+            self.play(FadeIn(P.rp), run_time=0.6)
+            adopt(self, P, f"l{i}")
+        self.play(FadeIn(end["l_key"]), run_time=0.5)
+        clip_cut(self, "tautau_l2_emu_ttbar")
+
+        sl0 = ttbar_slider(False)
+        self.play(FadeIn(sl0), run_time=0.6)
+        self.wait(0.2)
+        post = end
+        self.play(Transform(sl0.marker, post["slider"].marker),
+                  *[Transform(pre[f"l{i}"].stack, post[f"l{i}"].stack) for i in range(2)],
+                  *[Transform(pre[f"l{i}"].rp.dots, post[f"l{i}"].rp.dots) for i in range(2)],
+                  run_time=2.2, rate_func=EASE)
+        self.play(FadeIn(end["mu_tt"], shift=LEFT * 0.15), run_time=0.5)
+        # hand over to the pure end state (same geometry; the dots of the data never move)
+        for i in range(2):
+            self.remove(pre[f"l{i}"])
+        self.remove(pre["l0_lab"], pre["l1_lab"], sl0, end["l_key"], end["mu_tt"])
+        add_state(self, end, ORDER_L)
+        check_order(self, end, ORDER_L)
+        self.wait(0.1)
+
+
+class TautauFit(Scene):
+    """tautau_m1_sf_lever / m2_sf_fit / m3_postfit / m4_sigma: why the tau_h ID scale factors can be
+    fitted, their fitted values, the four channels post-fit, sigma(60-120)."""
+
+    def construct(self):
+        white_background(self)
+        prev = state_l()
+        add_state(self, prev, ORDER_L)
+        clip_open(self, "tautau_m1_sf_lever")
+        end = state_m()
+
+        self.play(*[FadeOut(prev[k]) for k in ORDER_L], run_time=0.6)
+        lv = lever()["lever"]
+        for i in (0, 1, 2):
+            self.play(FadeIn(lv.syms[i], shift=RIGHT * 0.15), FadeIn(lv.exprs[i], shift=RIGHT * 0.15), run_time=0.6)
+        self.wait(0.3)
+        self.play(FadeIn(lv.to_mu, shift=RIGHT * 0.15), run_time=0.5)
+        self.play(Create(lv.brace), FadeIn(lv.to_sf, shift=RIGHT * 0.15), run_time=0.7)
+        adopt(self, lv, "lever")
+        clip_cut(self, "tautau_m2_sf_fit")
+
+        self.play(Transform(lv, lever_parked()), run_time=0.9, rate_func=EASE)
+        sp = sf_plot()
+        self.play(FadeIn(sp.frame), FadeIn(sp.names), run_time=0.6)
+        self.play(LaggedStart(*[GrowFromCenter(m) for m in sp.pog], lag_ratio=0.2, group=sp.pog), run_time=1.0)
+        self.play(LaggedStart(*[GrowFromCenter(m) for m in sp.fit], lag_ratio=0.2, group=sp.fit), run_time=1.0)
+        self.play(FadeIn(sp.key), run_time=0.4)
+        adopt(self, sp, "sf_plot")
+        clip_cut(self, "tautau_m3_postfit")
+
+        self.play(FadeOut(sp), FadeOut(lv), run_time=0.6)
+        PF = postfit_panels()
+        for i in range(4):
+            P = PF[f"m{i}"]
+            self.play(FadeIn(PF[f"m{i}_lab"]), FadeIn(P.dax), FadeIn(P.stack), run_time=0.5)
+            self.play(FadeIn(P.dots), FadeIn(P.rp), run_time=0.45)
+            adopt(self, P, f"m{i}")
+        self.play(FadeIn(PF["m_key"]), run_time=0.4)
+        mu = mu_line()
+        self.play(FadeIn(mu, shift=UP * 0.15), run_time=0.6)
+        clip_cut(self, "tautau_m4_sigma")
+
+        sig = end["sig"]
+        self.play(*[FadeOut(PF[k]) for k in POST_KEYS], ReplacementTransform(mu, end["mu"]), run_time=0.9, rate_func=EASE)
         self.play(FadeIn(sig.frame), run_time=0.5)
-        self.play(Create(sig.theory), FadeIn(sig.th_lab), *([FadeIn(sig.band)] if sig.band is not None else []),
-                  run_time=0.6)
-        self.play(GrowFromCenter(sig.bar), GrowFromCenter(sig.dot), run_time=0.6)
-        self.play(LaggedStart(*[FadeIn(r, shift=UP * 0.1) for r in sig.refs], lag_ratio=0.4, group=sig.refs),
-                  run_time=1.0)
+        self.play(FadeIn(sig.band), Create(sig.theory), FadeIn(sig.th_lab), run_time=0.6)
+        self.play(ReplacementTransform(end["mu"].copy(), sig.label), GrowFromCenter(sig.comb), run_time=0.8)
+        self.play(LaggedStart(*[FadeIn(c, shift=UP * 0.1) for c in sig.chans], lag_ratio=0.3, group=sig.chans), run_time=1.2)
+        self.play(LaggedStart(*[FadeIn(r, shift=UP * 0.1) for r in sig.refs], lag_ratio=0.4, group=sig.refs), run_time=0.9)
         self.remove(sig.label)
         self.add(sig.label)
-        adopt(self, sig, "sig_tot")
-        check_order(self, end, ORDER_I)
+        adopt(self, sig, "sig")
+        check_order(self, end, ORDER_M)
         self.wait(0.1)

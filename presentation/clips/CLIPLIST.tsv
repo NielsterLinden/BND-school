@@ -79,3 +79,16 @@ number	section	name	scene_file	scene_class
 19	4_zmumu	mumu_fit	scenes/s4_zmumu_story.py	MumuFit
 20	4_zmumu	mumu_sigma_fid	scenes/s4_zmumu_story.py	MumuFit
 21	4_zmumu	mumu_sigma_total	scenes/s4_zmumu_story.py	MumuFit
+31	5_ztautau	tau_challenges	scenes/s5_tau_channels.py	TauChallenges
+32	5_ztautau	tautau_channels_a	scenes/s5_tau_channels.py	TautauChannelsA
+33	5_ztautau	tautau_channels_b	scenes/s5_tau_channels.py	TautauChannelsB
+34	5_ztautau	tautau_channels_c	scenes/s5_tau_channels.py	TautauChannelsC
+35	5_ztautau	tautau_k1_lephad_fakes	scenes/s5_ztautau_story.py	TautauLepHad
+36	5_ztautau	tautau_k2_w_charge	scenes/s5_ztautau_story.py	TautauLepHad
+37	5_ztautau	tautau_k3_lephad_closure	scenes/s5_ztautau_story.py	TautauLepHad
+38	5_ztautau	tautau_l1_emu_regions	scenes/s5_ztautau_story.py	TautauEmu
+39	5_ztautau	tautau_l2_emu_ttbar	scenes/s5_ztautau_story.py	TautauEmu
+40	5_ztautau	tautau_m1_sf_lever	scenes/s5_ztautau_story.py	TautauFit
+41	5_ztautau	tautau_m2_sf_fit	scenes/s5_ztautau_story.py	TautauFit
+42	5_ztautau	tautau_m3_postfit	scenes/s5_ztautau_story.py	TautauFit
+43	5_ztautau	tautau_m4_sigma	scenes/s5_ztautau_story.py	TautauFit

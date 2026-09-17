@@ -193,6 +193,29 @@ The general form of these rules is in `../06-chapter-anchors.md` §B5 so every c
 3. Pull labels are named, not coded (the DM rule of point 2 applied to the fit).
 4. `bdt_sketch` used `Circle` without importing it: the h3 clip could not render before this round.
 
+## 8d. v4 rework (deck owner, 2026-09-17) — four channels
+Request: *"Redo the animations for the tautau analysis channel. The new v4 now contains the lephad and leplep
+channels. We don't want to make the whole animation super long, so … show the common stuff for one channel, like
+the hadhad one for fake estimation, and if there is something new (a technique or method) in the other ones,
+which is not described by the previous mumu or ee channels, then add that as well."* (after cf54006, which fixed
+the data / prediction ratio of the region plots).
+
+- Numbers: **z-tautau v4** (`handoff.md` RESULT block, `output/RESULTS.md`), frozen in `data/ztautau_v4.json`
+  (`extract_ztautau_v4.py`: the TRExFitter per-bin yaml of the nominal fit, the ℓτh fake-factor files, the fit
+  results). σ(60–120) = 1981 +73 −70 pb, μ_Z = 1.019 +0.037 −0.036, μ_tt̄ = 1.11 ± 0.04, τh ID SF 0.989 / 0.963 /
+  0.896 / 0.795 (POG 0.90 / 0.89 / 0.94 / 0.81). §3's v3 fit rows are superseded.
+- τhτh common part kept (a–f, h): event, mass, fake factor and BDT numbers are unchanged in v4 (re-extracted against
+  the v4 τhτh base: identical). The stacks (d, f, h5) now draw the v4 prefit (signal = Z/γ*→ττ 60–120 GeV, the
+  τh ID NormFactors at their POG values): data / simulation 2.89 → with fakes 1.01.
+- Retired: g1/g2 (the POG scale-factor list: v4 fits the SFs), h3 (tree sketch), i1–i4 (v3 fit).
+- New: k1 ℓτh fakes per process (AR = QCD 39 % / W+jets 52 % / tt̄ 8 %, each with its own f, N_fake = 11 048),
+  k2 the charge dependence of f_W (OS quark jet 0.058 vs SS gluon jet 0.035), k3 same-sign validation 0.966 ± 0.014;
+  l1 eμ signal region vs tt̄ control region, l2 μ_tt̄ floats → post-fit; m1 the lever (eμ ∝ μ_Z, ℓτh ∝ SF μ_Z,
+  τhτh ∝ SF² μ_Z), m2 fitted vs POG SFs per decay mode, m3 the four channels post-fit, m4 σ with the four
+  one-channel fits (POG SFs fixed, open points), the prediction band, CMS and ATLAS on a 1750–2250 pb axis.
+- Not shown on purpose: the eμ multijet OS/SS, the in-situ trigger efficiencies (tag-and-probe-like, told in μμ),
+  τh energy scale, the pT-split cross-check and the eμ vs τ-channel tension (a PowerPoint remark if wanted).
+
 ## 9. Open questions (for the first critique)
 1. Time budget: ≈ 4 min assumed; cut clips if the chapter must be shorter (candidates: e5, g2, i2).
 2. The real event: plot-recreator picks one; say if you prefer another topology (e.g. two 1-prong).

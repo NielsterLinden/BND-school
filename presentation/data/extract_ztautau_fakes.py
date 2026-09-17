@@ -24,7 +24,7 @@ from _extract_common import (DATASET_TAUTAU, VERSION_TAUTAU, ZTAUTAU, Checker, a
                              provenance, standard_args)
 
 FF_JSON = ZTAUTAU / "output" / "data" / "fakefactors.json"
-META = ZTAUTAU / "fit" / "fitinputs" / "ztautau.root.meta.json"
+META = ZTAUTAU / "fit" / "fitinputs" / "tautau_base.root.meta.json"   # v4: the tau_h tau_h base templates carry C per category
 YIELDS = ZTAUTAU / "output" / "data" / "yields.json"
 REGIONS = ["tautau_SR0", "tautau_SR1", "tautau_SR2"]
 DOCS05_ETA_BEFORE = [0.92, 0.99, 1.08, 1.16, 0.98, 0.93]

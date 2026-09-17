@@ -99,6 +99,8 @@ def build():
                          "definition": "sigma(Z/gamma* -> mu mu, 60 < m_LHE < 120 GeV) = sigma_fid / A; pred = sigma_fid^pred / A (fitting/CONVENTIONS.md section 6)"},
         "sigma_m50": {"value": fit["sigma_m50_pb"], "total": fit["sigma_m50_tot_pb"], "A": fit["A_m50"], "pred": fit["meta"]["dy_xsec_pb"] / 3.0, "unit": "pb"},
         "C": meta["C_factor"],
+        "reco_sf": dict(meta["reco_sf"]),
+        "acceptance": {k: v for k, v in fit["acceptance"].items() if not isinstance(v, dict)},
         "counting": dict(meta["counting"]),
         "gof_p": fit["gof"]["gof_probability"],
         "n_fid_expected": meta["n_fid_expected"],
@@ -127,32 +129,39 @@ def verify(d, ck: Checker):
     H = "z-mumu/handoff.md:11-13"
     R = "z-mumu/output/v2/RESULTS_v2.md"
     p, sf, s6 = d["poi"], d["sigma_fid"], d["sigma_60_120"]
-    ck.check("mu_Z", p["value"], 0.988134, 5e-7, R + ":9 / fit result")
-    ck.check("mu_Z err_up", p["err_up"], 0.0158981, 5e-8, R + ":9")
-    ck.check("mu_Z err_down", p["err_down"], 0.0155715, 5e-8, R + ":9")
-    ck.check("mu_Z rounded 0.988 +- 0.016", [p["value"], p["err_sym"]], [0.988, 0.016], 5e-4, H)
+    ck.check("mu_Z", p["value"], 0.988286, 5e-7, R + ":9 / fit result")
+    ck.check("mu_Z err_up", p["err_up"], 0.0141294, 5e-8, R + ":9")
+    ck.check("mu_Z err_down", p["err_down"], 0.0137727, 5e-8, R + ":9")
+    ck.check("mu_Z rounded 0.988 +- 0.014", [p["value"], p["err_sym"]], [0.988, 0.014], 5e-4, H)
     ck.check("mu_Z stat-only 0.031%", 100 * p["stat_only"], 0.031, 5e-4, R + ":37")
-    ck.check("sigma_fid 790.1 pb", sf["value"], 790.1, 0.05, H)
+    ck.check("sigma_fid 790.2 pb", sf["value"], 790.2, 0.05, H)
     ck.check("sigma_fid stat 0.2", sf["stat"], 0.2, 0.05, H)
-    ck.check("sigma_fid syst 8.5", sf["syst"], 8.5, 0.05, H)
+    ck.check("sigma_fid syst 6.1", sf["syst"], 6.1, 0.05, H)
     ck.check("sigma_fid lumi 9.6", sf["lumi"], 9.6, 0.05, H)
-    ck.check("sigma_fid exact 790.078 +- 0.248 +- 8.473 +- 9.595", [sf["value"], sf["stat"], sf["syst"], sf["lumi"]],
-             [790.078, 0.248, 8.473, 9.595], 5e-4, "fit/results/zmumu_fit_result.json")
-    ck.check("sigma_fid^pred 799.566 pb", sf["pred"], 799.566, 5e-4, "z-mumu/handoff.md:77")
-    ck.check("sigma(60-120) 1931 +- 33 pb", [s6["value"], s6["total"]], [1931.0, 33.0], 0.5, H)
-    ck.check("sigma(60-120) exact 1930.746 +- 32.921", [s6["value"], s6["total"]], [1930.746, 32.921], 5e-4, "fit result")
-    ck.check("A_60_120 0.409209", s6["A"], 0.409209, 5e-7, "z-mumu/handoff.md:78")
-    ck.check("sigma^pred(60-120) 1953.9 pb", s6["pred"], 1953.9, 0.05, "fitting/CONVENTIONS.md section 6 / handoff.md:79")
-    ck.check("C factor 0.7914", d["C"], 0.7914, 5e-5, R + ":17")
-    ck.check("C factor exact 0.791415", d["C"], 0.791415, 5e-7, "fit result meta")
-    ck.check("counting cross-check 794.7 pb", d["counting"]["sigma_fid_pb"], 794.7, 0.05, R + ":19")
-    ck.check("counting n_obs", d["counting"]["n_obs"], 10378567, 0, "z-mumu/handoff.md:35")
-    ck.check("GoF p 0.792273", d["gof_p"], 0.792273, 5e-7, R + ":9")
+    ck.check("sigma_fid exact 790.200 +- 0.248 +- 6.118 +- 9.595", [sf["value"], sf["stat"], sf["syst"], sf["lumi"]],
+             [790.200, 0.248, 6.118, 9.595], 5e-4, "fit/results/zmumu_fit_result.json")
+    ck.check("sigma_fid^pred 799.566 pb", sf["pred"], 799.566, 5e-4, "z-mumu/handoff.md:12")
+    ck.check("sigma(60-120) 1931 +- 30 pb", [s6["value"], s6["total"]], [1931.0, 30.0], 0.5, H)
+    ck.check("sigma(60-120) exact 1931.043 +- 30.434", [s6["value"], s6["total"]], [1931.043, 30.434], 5e-4, "fit result")
+    ck.check("A_60_120 0.409209", s6["A"], 0.409209, 5e-7, "z-mumu/handoff.md:99")
+    ck.check("A rel. unc. 0.70%", 100 * s6["A_rel_unc"], 0.70, 5e-3, "FREEZE.md (acceptance A(60-120) 0.4092 +- 0.70%)")
+    ck.check("sigma(60-120) == sigma_fid / A", s6["value"], sf["value"] / s6["A"], 1e-9, "fitting/CONVENTIONS.md section 6", rel=True)
+    ck.check("1/A = 2.4437 (the fiducial -> 60-120 factor)", 1.0 / s6["A"], 2.4437, 5e-5, "A_60_120")
+    ck.check("sigma^pred(60-120) 1953.9 pb", s6["pred"], 1953.9, 0.05, "fitting/CONVENTIONS.md section 6 / handoff.md:100")
+    ck.check("C factor 0.7916", d["C"], 0.7916, 5e-5, R + ":17")
+    ck.check("C factor exact 0.791567", d["C"], 0.791567, 5e-7, "fit result meta")
+    ck.check("counting cross-check 794.5 pb", d["counting"]["sigma_fid_pb"], 794.5, 0.05, R + ":19")
+    ck.check("counting n_bkg 68 799", d["counting"]["n_bkg"], 68799.0, 0.05, "z-mumu/handoff.md:57")
+    ck.check("counting == (N_obs - N_bkg) / (C L)", d["counting"]["sigma_fid_pb"],
+             (d["counting"]["n_obs"] - d["counting"]["n_bkg"]) / (d["C"] * d["lumi_pb"]), 1e-9, "v2_5_fit.py counting", rel=True)
+    ck.check("reco SF per event 1.0002", d["reco_sf"]["sf_per_event"], 1.0002, 5e-5, "FREEZE.md / output/v2/tnp/reco_result.json")
+    ck.check("counting n_obs", d["counting"]["n_obs"], 10378567, 0, "z-mumu/handoff.md:56")
+    ck.check("GoF p 0.792272", d["gof_p"], 0.792272, 5e-7, R + ":9")
     ck.check("lumi_pb", d["lumi_pb"], LUMI_PB, 1e-6, "fitting/CONVENTIONS.md")
     gi = d["grouped_impacts"]
-    for name, want in (("FullSyst", 1.573), ("Luminosity", 1.163), ("Muon efficiency", 0.869), ("L1 prefiring", 0.506),
-                       ("Signal modelling", 0.491), ("Gammas", 0.382), ("Muon momentum", 0.367), ("Pileup", 0.134),
-                       ("Background normalisation", 0.081), ("Fakes", 0.044), ("Electron efficiency", 0.0)):
+    for name, want in (("FullSyst", 1.3947), ("Luminosity", 1.1661), ("Muon efficiency", 0.4752), ("L1 prefiring", 0.5082),
+                       ("Signal modelling", 0.4542), ("Gammas", 0.3534), ("Muon momentum", 0.3502), ("Pileup", 0.1434),
+                       ("Background normalisation", 0.0722), ("Fakes", 0.0383), ("Electron efficiency", 0.0)):
         ck.check(f"grouped impact {name} {want}%", 100 * gi[name], want, 5e-4, R + ":26-37")
     nps = {r["name"]: r for r in d["nps"]}
     for name, pull, constr in (("SigModel", 0.66, 0.14), ("MuonScale", -0.48, 0.14), ("MuonRes", 0.40, 0.12), ("PDF", 0.56, 0.93),
@@ -171,22 +180,24 @@ def verify(d, ck: Checker):
     for smp in sr["samples"]:
         ck.check(f"YAML prefit sum == table_prefit {smp}", sum(sr["prefit"][smp]), tab[smp], 1e-9, "results_v2.json /fit/table_prefit", rel=True)
     ck.check("YAML prefit total == table_prefit Total", sum(sr["total_prefit"]["yield"]), tab["Total"], 1e-9, "results_v2.json", rel=True)
-    ck.check("data 12 bins sum", sum(sr["data"]), 10378567, 0, "z-mumu/handoff.md:35")
+    ck.check("data 12 bins sum", sum(sr["data"]), 10378567, 0, "z-mumu/handoff.md:56")
     ck.check("ratio_prefit == lineshape/data_over_pred_prefit_5gev", sr["ratio_prefit"], res["lineshape"]["data_over_pred_prefit_5gev"], 1e-9,
              "results_v2.json /lineshape", rel=True)
-    ck.check("ratio_prefit range 0.9644 .. 1.0133 (plan table quotes 0.965 .. 1.013)", [min(sr["ratio_prefit"]), max(sr["ratio_prefit"])], [0.9644, 1.0133], 5e-5,
+    ck.check("ratio_prefit range 0.9642 .. 1.0131", [min(sr["ratio_prefit"]), max(sr["ratio_prefit"])], [0.9642, 1.0131], 5e-5,
              "results_v2.json /lineshape/data_over_pred_prefit_5gev")
     with open(HIST_PKL, "rb") as fh:
         hall = pickle.load(fh)
+    reco = d["reco_sf"]["sf_per_event"]            # since the freeze every simulated template carries the measured reconstruction SF
     for smp in ("DYmumu", "DYtautau", "TTbar", "SingleTop", "WW", "WZ", "ZZ", "Data"):
         k = f"{smp}|SR|mass_fit|nominal"
-        ck.check(f"YAML prefit {smp} == 5 GeV rebin of histograms.pkl", sr["prefit"][smp] if smp != "Data" else sr["data"], rebin(hall[k], 5), 1e-9,
-                 "output/v2/histograms.pkl", rel=True)
+        want = rebin(hall[k], 5) * (1.0 if smp == "Data" else reco)
+        ck.check(f"YAML prefit {smp} == 5 GeV rebin of histograms.pkl" + ("" if smp == "Data" else " x reco SF"),
+                 sr["prefit"][smp] if smp != "Data" else sr["data"], want, 1e-9, "output/v2/histograms.pkl, fit meta reco_sf", rel=True)
     f = np.array(load_json(FAKES_JSON)["templates"]["nominal"])
     ck.check("YAML prefit Fakes == 5 GeV rebin of fakes.json template", sr["prefit"]["Fakes"], np.clip(rebin(f, 10), 0, None), 1e-9, "output/v2/fakes.json", rel=True)
     ck.check("postfit DYmumu total / prefit == mu_Z (within NP shifts)", sum(sr["postfit"]["DYmumu"]) / sum(sr["prefit"]["DYmumu"]), d["poi"]["value"], 0.01, "consistency")
     ck.check_true("ratio_postfit within 0.3% of 1", max(abs(r - 1) for r in sr["ratio_postfit"]) < 0.003, detail=f"max |r-1| = {max(abs(r - 1) for r in sr['ratio_postfit']):.4f}")
-    ck.check("stability nominal mu", d["stability"][0]["mu"], 0.988134, 5e-7, "fit/results/stability.json")
+    ck.check("stability nominal mu", d["stability"][0]["mu"], 0.988286, 5e-7, "fit/results/stability.json")
     return ck
 
 

@@ -12,6 +12,10 @@ Stages (prompt-prompt MC only in every stage, momentum calibration applied in ev
     pileup     raw x w_PU(nTrueInt)
     prefiring  pileup x L1PreFiringWeight_Nom
     nominal    prefiring x SF_ID(mu1) SF_ID(mu2) SF_iso(mu1) SF_iso(mu2) x SF_trigger(event)   == histograms.pkl
+Block `recut` (17 Sep 2026): the same frozen weights in the order the talk tells them, tag-and-probe first, plus the
+measured reconstruction SF that the frozen fit inputs carry (FREEZE.md; flat per event, applied at merge time):
+    raw -> sf_id (x SF_ID SF_ID) -> sf_muon (x SF_iso SF_iso SF_trigger SF_reco) -> sf_pileup (x w_PU) -> final (x L1 prefiring)
+`final` == nominal x SF_reco == the frozen fit input (mumu_SR_prefit.yaml, results_v2.json /yields/SR); asserted.
 The worker is a copy of z-mumu/scripts/v2_4_histograms.py:process_file with BRANCHES and _FixedWeighter imported from
 that script and the same iterate(filter_name, step_size="150 MB") chunking (the momentum smearing is seeded per chunk,
 zmumu/momentum.py:122-124), so that stage `nominal` reproduces output/v2/histograms.pkl bin by bin.
@@ -31,7 +35,7 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from _extract_common import (V2, WORK, ZMUMU, Checker, add_zmumu_path, dump_json, load_json, provenance,  # noqa: E402
+from _extract_common import (FIT_RESULTS, V2, WORK, ZMUMU, Checker, add_zmumu_path, dump_json, load_json, provenance,  # noqa: E402
                              rebin, standard_args)
 
 add_zmumu_path()
@@ -53,7 +57,19 @@ STAGE_LABELS = {
 MOMENTUM_NOTE = ("the Z-peak momentum calibration (kappa per |eta| bin, extra smearing) is applied to the MC muon pT in ALL four "
                  "stages: it is a re-selection, so the stages share one event set and their ratios are clean mean weight factors")
 SUM_NAMES = ["raw", "raw_pu", "pileup", "pileup_pref", "pileup_pref_mu", "pileup_pref_ecal", "prefiring", "prefiring_sf",
-             "prefiring_id", "prefiring_iso", "prefiring_trig", "n_entries"]
+             "prefiring_id", "prefiring_iso", "prefiring_trig", "raw_id", "raw_iso", "raw_trig", "raw_sf", "raw_sf_pu", "n_entries"]
+# ---- the order the talk tells it in (re-cut of 17 Sep 2026): tag-and-probe first, then pileup, then L1 prefiring. The weights
+# are the same frozen per-event factors; only the order of multiplication differs, so `final` is the frozen fit input.
+RECUT_STAGES = ["raw", "sf_id", "sf_muon", "sf_pileup", "final"]
+RECUT_FILLED = {"sf_id": "recut_id", "sf_muon": "recut_sf", "sf_pileup": "recut_sf_pu"}      # worker histograms (before the reco SF)
+RECUT_LABELS = {
+    "raw": "identical to stage `raw`",
+    "sf_id": "raw x SF_ID(mu1) SF_ID(mu2): the tag-and-probe tight-ID map alone",
+    "sf_muon": "raw x SF_ID SF_ID x SF_iso SF_iso x SF_trigger(event) x SF_reco(event): every tag-and-probe scale factor; the "
+               "reconstruction SF (fit meta reco_sf.sf_per_event, flat) is applied at merge time, which is exact for a flat factor",
+    "sf_pileup": "sf_muon x pileup weight w_PU(nTrueInt)",
+    "final": "sf_pileup x L1PreFiringWeight_Nom == stage `nominal` x SF_reco == the frozen fit input (FREEZE.md, mumu_SR_prefit.yaml)",
+}
 EDGES = H.edges("SR", "mass_fit")          # 60 x 1 GeV, 60-120
 PARTS_DEFAULT = WORK / "sr_stack"
 
@@ -94,7 +110,8 @@ def fill_stages(ev, out, key, weighter, sf, calib, split, fit_sample):
     w_pu = w_raw * pu[idx]
     w_pref = w_pu * pref[idx]
     w_nom = w_pref * sfw
-    stage_w = {"raw": w_raw, "pileup": w_pu, "prefiring": w_pref, "nominal": w_nom}
+    stage_w = {"raw": w_raw, "pileup": w_pu, "prefiring": w_pref, "nominal": w_nom,
+               "recut_id": w_raw * id_pair, "recut_sf": w_raw * sfw, "recut_sf_pu": w_raw * sfw * pu[idx]}
     if flav is None:
         here = np.full(len(idx), fit_sample, dtype=object)
     else:
@@ -109,6 +126,8 @@ def fill_stages(ev, out, key, weighter, sf, calib, split, fit_sample):
                 "pileup_pref_ecal": (w_pu * pref_ecal[idx])[m].sum(), "prefiring": w_pref[m].sum(),
                 "prefiring_sf": w_nom[m].sum(), "prefiring_id": (w_pref * id_pair)[m].sum(),
                 "prefiring_iso": (w_pref * iso_pair)[m].sum(), "prefiring_trig": (w_pref * trig)[m].sum(),
+                "raw_id": (w_raw * id_pair)[m].sum(), "raw_iso": (w_raw * iso_pair)[m].sum(), "raw_trig": (w_raw * trig)[m].sum(),
+                "raw_sf": (w_raw * sfw)[m].sum(), "raw_sf_pu": (w_raw * sfw * pu[idx])[m].sum(),
                 "n_entries": float(np.count_nonzero(pp[m]))}
         for name, v in sums.items():
             k = f"{smp}|sum|{name}"
@@ -231,9 +250,44 @@ def build_json(total, n_files, runtime, args):
                       "bkg_plus_fakes": float(pred.sum() - (np.sum(mc["DYmumu"][st]) if "DYmumu" in mc else 0.0))}
         with np.errstate(divide="ignore", invalid="ignore"):
             ratio[st] = np.where(pred > 0, data / pred, np.nan).tolist()
+    # ---- re-cut order, with the frozen reconstruction SF on the prompt simulation (never on the data-driven fakes)
+    if "DYmumu" in mc and "DYmumu|recut_sf" not in total:
+        sys.exit("[stack] the part files carry no recut histograms (stale parts cache): delete the parts directory and rerun")
+    reco = float(load_json(FIT_RESULTS / "zmumu_fit_result.json")["meta"]["reco_sf"]["sf_per_event"])
+
+    def recut_hist(smp, st):
+        if st == "raw":
+            return np.asarray(mc[smp]["raw"], dtype=float)
+        if st == "final":
+            return np.asarray(mc[smp]["nominal"], dtype=float) * reco
+        h = np.asarray(total.get(f"{smp}|{RECUT_FILLED[st]}", np.zeros(60)), dtype=float)
+        return h if st == "sf_id" else h * reco
+
+    recut_mc = {smp: {st: recut_hist(smp, st).tolist() for st in RECUT_STAGES} for smp in mc}
+    recut_totals, recut_ratio = {}, {}
+    for st in RECUT_STAGES:
+        mc_tot = np.sum([recut_mc[s][st] for s in mc], axis=0) if mc else np.zeros(60)
+        pred = mc_tot + np.array(fakes["counts"])
+        recut_totals[st] = {"mc": float(mc_tot.sum()), "mc_plus_fakes": float(pred.sum()), "data_over_pred": float(data.sum() / pred.sum()),
+                            "bkg_plus_fakes": float(pred.sum() - (np.sum(recut_mc["DYmumu"][st]) if "DYmumu" in mc else 0.0))}
+        with np.errstate(divide="ignore", invalid="ignore"):
+            recut_ratio[st] = np.where(pred > 0, data / pred, np.nan).tolist()
+    n = {st: recut_totals[st]["mc"] for st in RECUT_STAGES}
+    g = lambda a, b: (all_sums[a] / all_sums[b]) if all_sums[b] else float("nan")
+    recut = {"stages": RECUT_STAGES, "stage_labels": RECUT_LABELS, "reco_sf_per_event": reco, "mc": recut_mc, "totals": recut_totals,
+             "data_over_pred": recut_ratio,
+             "step_factors": {"muon_id": n["sf_id"] / n["raw"], "muon_iso_trigger_reco": n["sf_muon"] / n["sf_id"],
+                              "muon_efficiency": n["sf_muon"] / n["raw"], "pileup": n["sf_pileup"] / n["sf_muon"],
+                              "prefiring": n["final"] / n["sf_pileup"], "all": n["final"] / n["raw"],
+                              "note": "ratios of the total simulated SR yield (all prompt samples) between consecutive recut stages: the mean "
+                                      "event weight of each step, in the order shown; they multiply to `all` exactly"},
+             "raw_weighted_means": {"sf_id_pair": g("raw_id", "raw"), "sf_iso_pair": g("raw_iso", "raw"), "sf_trigger_event": g("raw_trig", "raw"),
+                                    "sf_reco_event": reco, "sf_event": g("raw_sf", "raw"),
+                                    "note": "mean pair / event scale factors over all prompt simulation, weighted with the raw event weight"}}
     out = {
         "provenance": provenance("extract_zmumu_sr_stack.py",
-                                 [skim.skim_dir()] + [V2 / p for p in ("gensums.json", "momentum.json", "tnp/tnp_result.json", "tnp/pileup_weights.json", "histograms.pkl", "fakes.json")],
+                                 [skim.skim_dir()] + [V2 / p for p in ("gensums.json", "momentum.json", "tnp/tnp_result.json", "tnp/pileup_weights.json", "histograms.pkl", "fakes.json")]
+                                 + [FIT_RESULTS / "zmumu_fit_result.json"],
                                  skim_dir=str(skim.skim_dir()), skim_files=n_files, mc_keys=list(n_files),
                                  fit_sample_map={k: (samples.SAMPLES[k]["fit_sample"] or "DYmumu/DYee/DYtautau by gen_lhe_flavour") for k in n_files},
                                  selection=("HLT_IsoMu24 || HLT_IsoTkMu24, MET filters, PV_npvsGood >= 1; exactly two tight muons (tightId, pfRelIso04 < 0.15, "
@@ -249,6 +303,7 @@ def build_json(total, n_files, runtime, args):
         "momentum_calibration": MOMENTUM_NOTE,
         "data": {"counts": [int(v) for v in data], "total": int(data.sum())},
         "mc": mc, "mc_extra": extra, "fakes": fakes, "totals": totals, "data_over_pred": ratio, "mean_factors": mean_factors,
+        "recut": recut,
     }
     return out
 
@@ -259,7 +314,9 @@ def verify(d, ck: Checker):
         hall = pickle.load(fh)
     res = load_json(V2 / "results_v2.json")
     pre = read_plot_yaml(ZMUMU / "fit" / "results" / "zmumu" / "Plots" / "mumu_SR_prefit.yaml")
-    ck.check("data total 10 378 567", d["data"]["total"], 10378567, 0, "z-mumu/handoff.md:35")
+    fitres = load_json(FIT_RESULTS / "zmumu_fit_result.json")
+    rc = d["recut"]
+    ck.check("data total 10 378 567", d["data"]["total"], 10378567, 0, "z-mumu/handoff.md:56")
     ck.check("data counts sum == total", sum(d["data"]["counts"]), d["data"]["total"], 0)
     ck.check("data == histograms.pkl Data|SR|mass_fit|nominal", d["data"]["counts"], hall["Data|SR|mass_fit|nominal"], 0, "output/v2/histograms.pkl")
     ck.check("data 5 GeV rebin == prefit YAML Data", rebin(d["data"]["counts"], 5), pre["data"], 0, "fit/results/zmumu/Plots/mumu_SR_prefit.yaml")
@@ -286,15 +343,22 @@ def verify(d, ck: Checker):
     d.setdefault("checks_meta", {})["histograms_pkl_comparison_mode"] = modes
     print(f"[stack] histograms.pkl comparison modes: {modes}")
     for smp, want in (("DYmumu", 10373541.7), ("DYtautau", 11022.9), ("TTbar", 31607.2), ("SingleTop", 2935.7), ("WW", 3847.3), ("WZ", 9194.9), ("ZZ", 6308.7)):
-        ck.check(f"nominal total {smp} {want:,.1f}", d["mc"][smp]["totals"]["nominal"], want, 0.05, "RESULTS_v2.md yields / handoff.md:36")
-        ck.check(f"nominal total {smp} == results_v2.json /yields/SR", d["mc"][smp]["totals"]["nominal"], res["yields"]["SR"][smp], 1e-9, rel=True)
+        ck.check(f"nominal total {smp} {want:,.1f} (before the reconstruction SF)", d["mc"][smp]["totals"]["nominal"], want, 0.05, "output/v2/histograms.pkl")
+        ck.check(f"recut final total {smp} == results_v2.json /yields/SR (frozen, incl. reconstruction SF)", sum(rc["mc"][smp]["final"]),
+                 res["yields"]["SR"][smp], 1e-9, "results_v2.json /yields/SR", rel=True)
+        ck.check(f"recut final {smp} 5 GeV rebin == frozen prefit YAML", rebin(rc["mc"][smp]["final"], 5), pre["samples"][smp], 1e-6,
+                 "fit/results/zmumu/Plots/mumu_SR_prefit.yaml", rel=True)
     bkg = sum(d["mc"][s]["totals"]["nominal"] for s in SAMPLES_OUT if s != "DYmumu") + d["fakes"]["total"]
-    ck.check("sum bkg + fakes 68 786.5", bkg, 68786.5, 0.05, "z-mumu/handoff.md:36 (68,787) / fit meta counting n_bkg")
-    ck.check("bkg_plus_fakes (nominal) == counting n_bkg 68786.525", d["totals"]["nominal"]["bkg_plus_fakes"], 68786.52541969114, 1e-6, "fit result meta", rel=True)
+    ck.check("sum bkg + fakes 68 786.5 (nominal, before the reconstruction SF)", bkg, 68786.5, 0.05, "fit/results/zmumu_v2_15sep_fit_result.json counting n_bkg")
+    ck.check("bkg_plus_fakes (nominal) == 15 Sep counting n_bkg 68786.525", d["totals"]["nominal"]["bkg_plus_fakes"], 68786.52541969114, 1e-6, "15 Sep fit result meta", rel=True)
+    ck.check("recut final: bkg + fakes 68 799.0", rc["totals"]["final"]["bkg_plus_fakes"], 68799.0, 0.05, "z-mumu/handoff.md:57 / FREEZE.md")
+    ck.check("recut final: bkg + fakes == frozen counting n_bkg", rc["totals"]["final"]["bkg_plus_fakes"], fitres["meta"]["counting"]["n_bkg"], 1e-6,
+             "fit/results/zmumu_fit_result.json meta.counting", rel=True)
     ck.check("fakes total 3869.955", d["fakes"]["total"], 3869.955, 5e-4, "fakes.json")
     ck.check("fakes counts sum == total", sum(d["fakes"]["counts"]), d["fakes"]["total"], 1e-9, rel=True)
     ck.check_true("fakes no negative bins", min(d["fakes"]["counts"]) >= 0)
-    ck.check("DYmumu 5 GeV rebin == prefit YAML DYmumu", rebin(d["mc"]["DYmumu"]["nominal"], 5), pre["samples"]["DYmumu"], 1e-6, "mumu_SR_prefit.yaml", rel=True)
+    ck.check("DYmumu nominal 5 GeV rebin x reco SF == prefit YAML DYmumu", np.asarray(rebin(d["mc"]["DYmumu"]["nominal"], 5)) * rc["reco_sf_per_event"],
+             pre["samples"]["DYmumu"], 1e-6, "mumu_SR_prefit.yaml", rel=True)
     for smp in SAMPLES_OUT:
         for st, nm in (("raw", "raw"), ("pileup", "pileup"), ("prefiring", "prefiring"), ("nominal", "prefiring_sf")):
             ck.check(f"{smp} {st} histogram sum == weight sum", d["mc"][smp]["totals"][st], d["mc"][smp]["sums"][nm], 1e-9, rel=True)
@@ -306,9 +370,31 @@ def verify(d, ck: Checker):
     ck.check("stage ratio pileup/raw DYmumu == <pileup>", d["mc"]["DYmumu"]["totals"]["pileup"] / d["mc"]["DYmumu"]["totals"]["raw"], mf["DYmumu"]["pileup"], 1e-9, rel=True)
     r_raw, r_nom = d["totals"]["raw"]["data_over_pred"], d["totals"]["nominal"]["data_over_pred"]
     ck.check_true("raw stage: data / (raw MC + fakes) in [0.90, 0.98] (~0.94 expected)", 0.90 < r_raw < 0.98, "plan: raw simulation ~6% above data", f"{r_raw:.4f}")
-    ck.check("nominal stage: data / (MC + fakes) == counting N_obs / (N_DYmumu + N_bkg)", r_nom, 10378567 / (res["yields"]["SR"]["DYmumu"] + 68786.52541969114), 1e-6, rel=True)
-    ck.check("nominal 5 GeV data/pred == results_v2 lineshape", rebin(d["data"]["counts"], 5) / (sum(rebin(d["mc"][s]["nominal"], 5) for s in SAMPLES_OUT) + rebin(d["fakes"]["counts"], 5)),
+    ck.check_true("nominal stage: data / (MC + fakes) rounds to 0.994", round(r_nom, 3) == 0.994, detail=f"{r_nom:.6f}")
+    r_fin = rc["totals"]["final"]["data_over_pred"]
+    ck.check("recut final: data / (MC + fakes) == frozen counting N_obs / (N_DYmumu + N_bkg)", r_fin,
+             10378567 / (res["yields"]["SR"]["DYmumu"] + fitres["meta"]["counting"]["n_bkg"]), 1e-6, "fit result meta.counting", rel=True)
+    ck.check("recut final 5 GeV data/pred == results_v2 lineshape (frozen)",
+             rebin(d["data"]["counts"], 5) / (sum(np.asarray(rebin(rc["mc"][s]["final"], 5)) for s in SAMPLES_OUT) + rebin(d["fakes"]["counts"], 5)),
              res["lineshape"]["data_over_pred_prefit_5gev"], 1e-9, "results_v2.json /lineshape", rel=True)
+    # ---- the re-cut order itself
+    ck.check("reco SF per event == fit meta", rc["reco_sf_per_event"], fitres["meta"]["reco_sf"]["sf_per_event"], 0, "fit result meta.reco_sf")
+    for smp in SAMPLES_OUT:
+        ck.check(f"recut raw {smp} == stage raw", rc["mc"][smp]["raw"], d["mc"][smp]["raw"], 0)
+        ck.check(f"recut sf_id {smp} histogram sum == weight sum", sum(rc["mc"][smp]["sf_id"]), d["mc"][smp]["sums"]["raw_id"], 1e-9, rel=True)
+        ck.check(f"recut sf_muon {smp} histogram sum == weight sum x reco SF", sum(rc["mc"][smp]["sf_muon"]),
+                 d["mc"][smp]["sums"]["raw_sf"] * rc["reco_sf_per_event"], 1e-9, rel=True)
+        ck.check(f"recut sf_pileup {smp} histogram sum == weight sum x reco SF", sum(rc["mc"][smp]["sf_pileup"]),
+                 d["mc"][smp]["sums"]["raw_sf_pu"] * rc["reco_sf_per_event"], 1e-9, rel=True)
+    sfac = rc["step_factors"]
+    ck.check("recut step factors multiply to the overall factor", sfac["muon_efficiency"] * sfac["pileup"] * sfac["prefiring"], sfac["all"], 1e-12, rel=True)
+    ck.check("recut muon_efficiency == muon_id x (iso, trigger, reco)", sfac["muon_id"] * sfac["muon_iso_trigger_reco"], sfac["muon_efficiency"], 1e-12, rel=True)
+    ladder = [round(rc["totals"][st]["data_over_pred"], 3) for st in RECUT_STAGES]
+    ck.check("recut ladder data/pred: raw, sf_id, sf_muon, sf_pileup, final", ladder, [0.944, 0.971, 0.968, 0.974, 0.994], 1e-9,
+             "this extractor (the numbers the clips 4-07, 4-14 ... 4-17 print)")
+    ck.check_true("recut: every stage has a ratio inside the fixed panel range 0.88-1.12 in all 60 bins",
+                  all(0.88 < v < 1.12 for st in RECUT_STAGES for v in rc["data_over_pred"][st]),
+                  detail=str({st: (round(min(rc["data_over_pred"][st]), 4), round(max(rc["data_over_pred"][st]), 4)) for st in RECUT_STAGES}))
     ck.check("lumi_pb", d["provenance"]["lumi_pb"], 16393.381, 1e-6)
     return ck
 

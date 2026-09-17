@@ -49,7 +49,7 @@ with the `WJets` sample and the `XS_WJets` / `ElectronEff_mumu` parameters that 
    uncertainty.
 2. **`mu_ttbar` or `XS_TTbar`? — Both, each in its own channel.** ττ has no `XS_TTbar`; its tt̄ is scaled by the free
    `mu_ttbar` = 1.105 ± 0.026, which absorbs the eμ trigger efficiency and is therefore not the cross section that
-   `XS_TTbar` describes. No yield is described twice. The alternative (`tautau_ttbar_constrained`: one 6 % `XS_TTbar`
+   `XS_TTbar` describes. No yield is described twice. The alternative (`tautau_ttbar_constrained`, now `ttbar_xs_constrained`: one 6 % `XS_TTbar`
    for all channels, no free factor) gives **−6.7 pb** and a smaller uncertainty (⁺²⁹·¹₋₂₈.₅): with tt̄ tied to its
    theory cross section the 46 k events of `emu_CRtt` become a luminosity × efficiency monitor, and a 10 % tt̄ excess
    is pushed into `Lumi`, `EmuTrigger` and `BTag`. That is a different measurement; it is not the baseline.

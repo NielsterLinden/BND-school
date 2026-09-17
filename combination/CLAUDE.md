@@ -38,13 +38,14 @@ What is kept is `combLieke/output/` (`result.json`, `plots/`) and the `checks/*.
 | which channel configs / inputs, references, signal samples | `combLieke/config/channels.json` |
 | every change made to a channel config | `mf/trexcfg.adapt_channel` (docstring lists all of them) |
 | the ee inputs (histograms from `z-ee/Zee_fit.tar.gz`) | `mf/ee_input.py` |
+| which files a result was built from (SHA-256, date, last channel commit) | `mf/provenance.py`, written by `prepare` → `work/status.json` → `result.json` `inputs`. Compare it before calling a rerun "the same inputs" |
 | acceptance uncertainties of μμ | `channels.json` → `acceptance`, read by key from `zmumu.root.meta.json` (`z-mumu/zmumu/acceptance.py`). ee and ττ have none outside the fit: their theory templates carry A × ε (`acceptance: null`, `acceptance_note`) |
 | the ττ signal samples (15 `DYtautau_tDM*`) | read from `ztautau.root.meta.json` → `signal_samples` (`channels.json` → `tautau.signal`), never hard-coded |
 | regions removed from a channel (`mumu_CRemu`) | `channels.json` → `drop_regions`, `mf/trexcfg.drop_regions` |
-| ττ lepton parameters decorrelated from μμ / ee; `mu_ttbar` vs `XS_TTbar` | `channels.json` → `tautau.rename_systematics` (+ note), `tautau.ttbar_note`; the alternatives are the variations `tautau_leptons_correlated`, `tautau_ttbar_constrained` |
+| ττ lepton parameters decorrelated from μμ / ee; `mu_ttbar` vs `XS_TTbar` | `channels.json` → `tautau.rename_systematics` (+ note), `tautau.ttbar_note`; the alternatives are the variations `tautau_leptons_correlated`, `ttbar_xs_constrained`, `ttbar_cr_for_all_channels` |
 | single-channel cross-checks (`mumu_CRemu` as a control region) | `channels.json` → `checks` |
 | the HTCondor DAG (nodes, resources, job category) | `mf/condor.py`; the job wrapper is `combLieke/condor/run_step.sh` |
-| fit options for every channel fit and MultiFit (`FitStrategy: 2`); ranking refits; per-variation overrides | `channels.json` → `fit`, `ranking_fit`, `variations.<name>.fit` |
+| fit options for every channel fit and MultiFit (`FitStrategy: 3`, item 9); ranking refits; per-variation overrides | `channels.json` → `fit`, `ranking_fit`, `variations.<name>.fit` |
 | correlations | **by nuisance-parameter name only** (TRExFitter). Renames in `rename_systematics`; ee shape parts get `<NP>_eeShape` |
 | alternative likelihoods | `channels.json` → `variations` (`channels`, `split`, `overall`, `channel_overrides`, `fit`) |
 | a modelling uncertainty a channel reports but does not fit (`TauIDpT_tautau`) | `channels.json` → `tautau.modelling`: the size is read from two of the channel's published fits (`mf/trexcfg.modelling_nps`), never typed in |

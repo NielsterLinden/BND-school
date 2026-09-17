@@ -43,7 +43,7 @@ import re
 import subprocess
 import time
 
-from mf import ee_input, trexcfg
+from mf import ee_input, provenance, trexcfg
 from mf.paths import WORK, manifest, repo_path
 
 from fitting import run_trex  # noqa: E402  (mf.paths puts the repository root on sys.path)
@@ -81,7 +81,8 @@ def likelihoods(m):
 def prepare(args):
     m = manifest()
     poi = m["poi"]
-    status = {"ee_input": ee_input.extract(m["channels"]["ee"]["inputs"], WORK / "inputs" / "ee"), "likelihoods": {}}
+    status = {"ee_input": ee_input.extract(m["channels"]["ee"]["inputs"], WORK / "inputs" / "ee"),
+              "inputs": provenance.record(m), "likelihoods": {}}
     if abs(status["ee_input"]["sigma_reference_pb"] - m["channels"]["ee"]["sigma_reference_pb"]) > 1e-6:
         raise ValueError("config/channels.json: ee sigma_reference_pb differs from the tarball's reference_cross_section.txt")
     for name, lk in likelihoods(m).items():

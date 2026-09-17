@@ -204,6 +204,11 @@ of fit, and consider coarser bins if it is still poor.
 
 ## Checks
 
+* **Inputs and reproducibility.** `output/result.json` → `inputs` lists every file the combination was built from
+  (channel config, histogram file, published result) with its SHA-256 and date, and the last commit of each channel
+  directory (`mf/provenance.py`; the ROOT inputs are not in git). The whole DAG was run twice on the same inputs
+  (17 Sep, 13:57 and 16:01): the 67 generated configs are identical, the combined result, the three channel results
+  and the compatibility test agree to all printed digits, the largest difference in any variation is 0.006 pb.
 * **Orthogonality** (`docs/orthogonality.md`, measured on data event by event for ee, μμ and τhτh): μμ ∩ ee ≤ 97
   events (1.5 × 10⁻⁵ of ee), τhτh ∩ μμ = 0, τhτh ∩ ee ≤ 4 events. The three new ττ final states veto any second
   muon or electron by construction, and their one known overlap, `mumu_CRemu`, is removed; the event-level
@@ -263,6 +268,7 @@ The DAG (`mf/condor.py`, batch name `zcomb`) never writes to `output/`: look at 
 | `mf/trexcfg.py` | reads, adapts and writes TRExFitter configs |
 | `mf/condor.py`, `condor/` | the HTCondor DAG and its job wrapper |
 | `mf/ee_input.py` | ee histograms from the tarball |
+| `mf/provenance.py` | checksums, dates and commits of the channel inputs → `result.json` `inputs` |
 | `mf/prediction.py` | aMC@NLO prediction and uncertainty |
 | `mf/results.py`, `mf/plots.py` | `output/result.json`, `output/plots/` |
 | `checks/` | orthogonality and systematic-size checks, with their JSON outputs |

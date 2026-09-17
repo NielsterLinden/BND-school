@@ -150,6 +150,14 @@ def test_split_shape_norm():
     assert "shape_" not in shape.opts["NuisanceParameter"]          # reserved by TRExFitter
 
 
+def test_input_provenance_names_the_histogram_files_of_every_channel():
+    from mf import provenance
+    m = manifest()
+    files = {k: [p.name for p in provenance.channel_files(spec)] for k, spec in m["channels"].items()}
+    assert "Zee_fit.tar.gz" in files["ee"] and "zmumu.root" in files["mumu"]
+    assert {"ztautau.root", "ztautau.root.meta.json", "ztautau_fit_result.json"} <= set(files["tautau"])
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

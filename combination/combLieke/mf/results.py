@@ -104,7 +104,7 @@ def collect(interim: bool = False) -> dict:
     common = run_trex.parse_fit_txt(WORK / "common/combination/Fits/combination.txt")
     split = run_trex.parse_fit_txt(WORK / "split/combination/Fits/combination.txt")
     out = {"observable": m["observable"], "lumi_pb": m["lumi_pb"], "poi_reference_pb": ref,
-           "ee_input": status["ee_input"], "model": {k: v["channels"] for k, v in status["likelihoods"].items() if k == "common"}}
+           "ee_input": status["ee_input"], "inputs": status.get("inputs"), "model": {k: v["channels"] for k, v in status["likelihoods"].items() if k == "common"}}
 
     comb = _poi(common, m["poi"]["name"], ref)
     comb.update(_gof(WORK / "common/logs/multifit_mwf.log"), nll=common["nll"], pulls=_pulls(common))

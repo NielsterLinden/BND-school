@@ -15,6 +15,86 @@
   "check_against": "datasets/z-ee/zee.root",
   "max_relative_difference": 0.0
  },
+ "inputs": {
+  "repository_head": "b1fcd4e 2026-09-17T15:00:14+02:00",
+  "channels": {
+   "ee": {
+    "directory": "z-ee",
+    "last_commit": "69bcdcc 2026-09-16T14:44:39+02:00 Add systematics",
+    "uncommitted": false,
+    "files": [
+     {
+      "file": "z-ee/fit.config",
+      "sha256": "3dfecb9df615c462ef0d3cc3cea9a94a6716e8492f7d50bb2e7e569512b96531",
+      "modified": "2026-09-16 16:11:30",
+      "bytes": 4525
+     },
+     {
+      "file": "z-ee/Zee_fit.tar.gz",
+      "sha256": "d48a899b5460abb113e021f5e11b9c2f8589ccbe4bf4b2bf8b108aa8186d7e49",
+      "modified": "2026-09-16 16:11:30",
+      "bytes": 2584885
+     }
+    ]
+   },
+   "mumu": {
+    "directory": "z-mumu",
+    "last_commit": "47f355d 2026-09-17T14:53:36+02:00 presentation: deliver the re-cut Z->mumu chapter, 4-01 ... 4-21 in play order",
+    "uncommitted": false,
+    "files": [
+     {
+      "file": "z-mumu/fit/zmumu.config",
+      "sha256": "420ce2bed7d79cf40f5cf68eb0d7efbc21fd7ec18104e58abce5e64225bee283",
+      "modified": "2026-09-17 10:54:59",
+      "bytes": 8080
+     },
+     {
+      "file": "z-mumu/fit/fitinputs/zmumu.root",
+      "sha256": "7b2cf2bde9c5f2cd4b2bcb466a2c2e920648e3c359b9b81190be29d2561f9ae9",
+      "modified": "2026-09-17 10:54:59",
+      "bytes": 210212
+     },
+     {
+      "file": "z-mumu/fit/results/zmumu_fit_result.json",
+      "sha256": "f3333e10629204838e5c287e29d004e6622527ba68c880df0e4b1fca3fb46c91",
+      "modified": "2026-09-17 10:55:41",
+      "bytes": 18768
+     }
+    ]
+   },
+   "tautau": {
+    "directory": "z-tautau",
+    "last_commit": "cf54006 2026-09-17T13:48:58+02:00 z-tautau: the signal was missing from the data/prediction ratio of the region plots",
+    "uncommitted": false,
+    "files": [
+     {
+      "file": "z-tautau/fit/ztautau.config",
+      "sha256": "e1db564c30068260a96a77e44b7325cc5dc168ef425c481a6920007c8c77c622",
+      "modified": "2026-09-17 13:56:06",
+      "bytes": 91289
+     },
+     {
+      "file": "z-tautau/fit/fitinputs/ztautau.root",
+      "sha256": "e60d819a1b42e54ef4d5c5817960e3450f715070b75f9e9cea16908bd7da383b",
+      "modified": "2026-09-17 12:36:40",
+      "bytes": 12211807
+     },
+     {
+      "file": "z-tautau/fit/fitinputs/ztautau.root.meta.json",
+      "sha256": "7c69023e46ac73a92ba83a553aadd0241121485ce31b47b5727bb147a822a3b2",
+      "modified": "2026-09-17 12:36:40",
+      "bytes": 133919
+     },
+     {
+      "file": "z-tautau/fit/results/ztautau_fit_result.json",
+      "sha256": "b497c1de04655ccc790cd1fe361a8210b8f9f455a1fa38cacff468b9b164852b",
+      "modified": "2026-09-17 13:51:29",
+      "bytes": 403260
+     }
+    ]
+   }
+  }
+ },
  "model": {
   "common": {
    "ee": {
@@ -1653,8 +1733,8 @@
     "pull": 0.0851023,
     "err_up": 0.0376497,
     "err_down": 0.0376497,
-    "post_up": 0.000463106,
-    "post_down": -0.000442715,
+    "post_up": 0.000462643,
+    "post_down": -0.000439385,
     "pre_up": 0.0,
     "pre_down": 0.0
    },
@@ -1663,8 +1743,8 @@
     "pull": 0.0682225,
     "err_up": 0.0312965,
     "err_down": 0.0312965,
-    "post_up": 0.000552352,
-    "post_down": -0.000583574,
+    "post_up": 0.00055262,
+    "post_down": -0.000513415,
     "pre_up": 0.0,
     "pre_down": 0.0
    },
@@ -1673,8 +1753,8 @@
     "pull": -0.0440254,
     "err_up": 0.0327371,
     "err_down": 0.0327371,
-    "post_up": 0.000387229,
-    "post_down": -0.000414961,
+    "post_up": 0.000407091,
+    "post_down": -0.00037691,
     "pre_up": 0.0,
     "pre_down": 0.0
    },
@@ -1693,30 +1773,30 @@
     "pull": -0.0133622,
     "err_up": 0.996559,
     "err_down": 0.996559,
-    "post_up": -0.000465785,
-    "post_down": 0.000464518,
-    "pre_up": -0.000460797,
-    "pre_down": 0.000453904
+    "post_up": -0.000436031,
+    "post_down": 0.000468885,
+    "pre_up": -0.000460439,
+    "pre_down": 0.00046957
    },
    {
     "name": "Acc_AlphaS",
     "pull": -0.00852589,
     "err_up": 0.998951,
     "err_down": 0.998951,
-    "post_up": -0.000282804,
-    "post_down": 0.000277721,
-    "pre_up": -0.000288654,
-    "pre_down": 0.000268891
+    "post_up": -0.000276978,
+    "post_down": 0.000289459,
+    "pre_up": -0.000306424,
+    "pre_down": 0.00028932
    },
    {
     "name": "Acc_Generator_mumu",
     "pull": -0.0124329,
     "err_up": 0.996911,
     "err_down": 0.996911,
-    "post_up": -0.000418981,
-    "post_down": 0.000403249,
-    "pre_up": -0.000405554,
-    "pre_down": 0.000431968
+    "post_up": -0.000431016,
+    "post_down": 0.000421192,
+    "pre_up": -0.00041391,
+    "pre_down": 0.000430224
    },
    {
     "name": "Acc_PDF",
@@ -1743,30 +1823,30 @@
     "pull": -0.10468,
     "err_up": 0.990109,
     "err_down": 0.990109,
-    "post_up": -0.00352294,
-    "post_down": 0.00355316,
-    "pre_up": -0.00358552,
-    "pre_down": 0.00358732
+    "post_up": -0.00354879,
+    "post_down": 0.00355272,
+    "pre_up": -0.00358181,
+    "pre_down": 0.00358815
    },
    {
     "name": "Acc_QCDScale",
     "pull": -0.0808132,
     "err_up": 0.991501,
     "err_down": 0.991501,
-    "post_up": -0.00271575,
-    "post_down": 0.00273782,
-    "pre_up": -0.0027298,
-    "pre_down": 0.00276064
+    "post_up": -0.00271592,
+    "post_down": 0.00275315,
+    "pre_up": -0.00272999,
+    "pre_down": 0.0027704
    },
    {
     "name": "Acc_QEDFSR_mumu",
     "pull": -0.028059,
     "err_up": 0.994064,
     "err_down": 0.994064,
-    "post_up": -0.000971938,
-    "post_down": 0.000919573,
-    "pre_up": -0.000946635,
-    "pre_down": 0.000925118
+    "post_up": -0.000961787,
+    "post_down": 0.000919945,
+    "pre_up": -0.000995559,
+    "pre_down": 0.000925348
    },
    {
     "name": "AlphaS",
@@ -1803,10 +1883,10 @@
     "pull": 1.42464,
     "err_up": 0.98241,
     "err_down": 0.98241,
-    "post_up": -1.81513e-05,
-    "post_down": -8.21712e-05,
-    "pre_up": 3.4603e-05,
-    "pre_down": 1.03229e-06
+    "post_up": 3.83327e-05,
+    "post_down": 5.86455e-06,
+    "pre_up": 3.28311e-05,
+    "pre_down": -4.96127e-05
    },
    {
     "name": "ElectronES",
@@ -1823,10 +1903,10 @@
     "pull": 0.0,
     "err_up": 1.00454,
     "err_down": 1.00454,
-    "post_up": 1.53319e-05,
-    "post_down": 1.53319e-05,
-    "pre_up": -8.71507e-06,
-    "pre_down": -8.71507e-06
+    "post_up": 2.9348e-05,
+    "post_down": 2.9348e-05,
+    "pre_up": -3.34629e-05,
+    "pre_down": -3.34629e-05
    },
    {
     "name": "ElectronID",
@@ -1853,10 +1933,10 @@
     "pull": -0.679176,
     "err_up": 0.9535,
     "err_down": 0.9535,
-    "post_up": 3.1031e-05,
-    "post_down": -9.34271e-05,
-    "pre_up": 3.76969e-05,
-    "pre_down": -6.14521e-05
+    "post_up": 5.93789e-05,
+    "post_down": -5.98404e-05,
+    "pre_up": 3.08426e-05,
+    "pre_down": -2.89374e-05
    },
    {
     "name": "ElectronRECO",
@@ -1873,10 +1953,10 @@
     "pull": 0.605863,
     "err_up": 0.997495,
     "err_down": 0.997495,
-    "post_up": -3.09936e-05,
-    "post_down": 4.67947e-05,
-    "pre_up": -4.41671e-06,
-    "pre_down": 2.88086e-05
+    "post_up": -3.70552e-05,
+    "post_down": 4.01695e-05,
+    "pre_up": -3.24207e-05,
+    "pre_down": 4.69459e-05
    },
    {
     "name": "ElectronReco_tautau",
@@ -1923,10 +2003,10 @@
     "pull": -1.3742,
     "err_up": 0.786039,
     "err_down": 0.786039,
-    "post_up": 0.000164238,
-    "post_down": -0.0001294,
-    "pre_up": 0.000220315,
-    "pre_down": -0.000183881
+    "post_up": 0.000162828,
+    "post_down": -0.00011436,
+    "pre_up": 0.000219211,
+    "pre_down": -0.000200103
    },
    {
     "name": "FakeClosure_etau",
@@ -1953,40 +2033,40 @@
     "pull": -0.0820616,
     "err_up": 0.95843,
     "err_down": 0.95843,
-    "post_up": 0.000132198,
-    "post_down": -0.000151767,
-    "pre_up": 9.83841e-05,
-    "pre_down": -0.000150145
+    "post_up": 0.000143967,
+    "post_down": -0.000161202,
+    "pre_up": 0.000151273,
+    "pre_down": -0.00015745
    },
    {
     "name": "FakeClosure_tautau_c1_hi",
     "pull": -0.327795,
     "err_up": 0.478596,
     "err_down": 0.478596,
-    "post_up": -0.000179844,
-    "post_down": 0.000185356,
-    "pre_up": -0.000333585,
-    "pre_down": 0.000382826
+    "post_up": -0.000198347,
+    "post_down": 0.000185849,
+    "pre_up": -0.000316714,
+    "pre_down": 0.000385477
    },
    {
     "name": "FakeClosure_tautau_c1_lo",
     "pull": 0.324127,
     "err_up": 0.830496,
     "err_down": 0.830496,
-    "post_up": -0.000121665,
-    "post_down": 0.000104814,
-    "pre_up": -8.11812e-05,
-    "pre_down": 0.000104195
+    "post_up": -9.08854e-05,
+    "post_down": 0.000114188,
+    "pre_up": -0.000112403,
+    "pre_down": 0.000123113
    },
    {
     "name": "FakeClosure_tautau_c2_hi",
     "pull": 0.978168,
     "err_up": 0.876143,
     "err_down": 0.876143,
-    "post_up": 0.000150848,
-    "post_down": -0.000201143,
-    "pre_up": 0.000110273,
-    "pre_down": -0.000188696
+    "post_up": 0.000122537,
+    "post_down": -0.000138961,
+    "pre_up": 0.000164251,
+    "pre_down": -0.00016988
    },
    {
     "name": "FakeClosure_tautau_c2_lo",
@@ -2073,10 +2153,10 @@
     "pull": -0.23985,
     "err_up": 0.637686,
     "err_down": 0.637686,
-    "post_up": 0.000561927,
-    "post_down": -0.000630571,
-    "pre_up": 0.0008765,
-    "pre_down": -0.00101745
+    "post_up": 0.00056155,
+    "post_down": -0.000630506,
+    "pre_up": 0.000876948,
+    "pre_down": -0.00102004
    },
    {
     "name": "FakeOSSS_tautau_c1",
@@ -2093,10 +2173,10 @@
     "pull": 0.0373072,
     "err_up": 0.994954,
     "err_down": 0.994954,
-    "post_up": 5.56036e-05,
-    "post_down": -4.36085e-06,
-    "pre_up": 7.52501e-06,
-    "pre_down": -3.32618e-05
+    "post_up": -1.14199e-05,
+    "post_down": -1.63397e-05,
+    "pre_up": -1.27784e-06,
+    "pre_down": -1.59303e-05
    },
    {
     "name": "FakeStat_mumu",
@@ -2113,20 +2193,20 @@
     "pull": 0.514278,
     "err_up": 0.922815,
     "err_down": 0.922815,
-    "post_up": 2.41662e-05,
-    "post_down": -6.69805e-05,
-    "pre_up": 4.07914e-05,
-    "pre_down": -6.58428e-05
+    "post_up": 4.61631e-05,
+    "post_down": -2.94331e-05,
+    "pre_up": -1.05433e-05,
+    "pre_down": -7.74566e-05
    },
    {
     "name": "FakeTT_mutau",
     "pull": -0.329233,
     "err_up": 0.86851,
     "err_down": 0.86851,
-    "post_up": 0.000127649,
-    "post_down": -0.000136512,
-    "pre_up": 0.000162717,
-    "pre_down": -0.00019888
+    "post_up": 0.000141265,
+    "post_down": -0.000180634,
+    "pre_up": 0.000191367,
+    "pre_down": -0.000224625
    },
    {
     "name": "FakeWTT_tautau",
@@ -2143,30 +2223,30 @@
     "pull": 1.35837,
     "err_up": 0.613984,
     "err_down": 0.613984,
-    "post_up": 0.00022072,
-    "post_down": -0.000284968,
-    "pre_up": 0.000367632,
-    "pre_down": -0.000364394
+    "post_up": 0.00022044,
+    "post_down": -0.000246386,
+    "pre_up": 0.000330051,
+    "pre_down": -0.000390813
    },
    {
     "name": "FakeWmT_mutau",
     "pull": -0.641199,
     "err_up": 0.673304,
     "err_down": 0.673304,
-    "post_up": 0.000278267,
-    "post_down": -0.000303882,
-    "pre_up": 0.000386756,
-    "pre_down": -0.000470182
+    "post_up": 0.000266884,
+    "post_down": -0.000329887,
+    "pre_up": 0.00039441,
+    "pre_down": -0.000480109
    },
    {
     "name": "JES",
     "pull": -0.578046,
     "err_up": 0.631533,
     "err_down": 0.631533,
-    "post_up": -3.37625e-06,
-    "post_down": 6.35637e-06,
-    "pre_up": -3.32782e-05,
-    "pre_down": -9.78447e-06
+    "post_up": 2.32522e-06,
+    "post_down": -5.54651e-06,
+    "pre_up": 5.01377e-05,
+    "pre_down": -2.85439e-06
    },
    {
     "name": "L1Prefiring",
@@ -2203,10 +2283,10 @@
     "pull": -0.0365261,
     "err_up": 0.859578,
     "err_down": 0.859578,
-    "post_up": 0.000170475,
-    "post_down": -0.000200908,
-    "pre_up": 0.000239936,
-    "pre_down": -0.000265885
+    "post_up": 0.000184567,
+    "post_down": -0.000156281,
+    "pre_up": 0.000242118,
+    "pre_down": -0.000230056
    },
    {
     "name": "MET_Unclustered",
@@ -2223,10 +2303,10 @@
     "pull": 0.017617,
     "err_up": 0.987107,
     "err_down": 0.987107,
-    "post_up": -0.00181006,
-    "post_down": 0.00182884,
-    "pre_up": -0.00182346,
-    "pre_down": 0.00185668
+    "post_up": -0.00184364,
+    "post_down": 0.00182803,
+    "pre_up": -0.00184666,
+    "pre_down": 0.00184832
    },
    {
     "name": "MuonID_tautau",
@@ -2243,10 +2323,10 @@
     "pull": 0.0861311,
     "err_up": 0.883615,
     "err_down": 0.883615,
-    "post_up": -0.00286148,
-    "post_down": 0.00288614,
-    "pre_up": -0.00326324,
-    "pre_down": 0.00326686
+    "post_up": -0.00286142,
+    "post_down": 0.00288649,
+    "pre_up": -0.0030889,
+    "pre_down": 0.00326738
    },
    {
     "name": "MuonIso_tautau",
@@ -2293,10 +2373,10 @@
     "pull": 0.417996,
     "err_up": 0.948111,
     "err_down": 0.948111,
-    "post_up": -0.000143876,
-    "post_down": 0.000138363,
-    "pre_up": -0.000144234,
-    "pre_down": 0.000169225
+    "post_up": -0.000143115,
+    "post_down": 0.000115426,
+    "pre_up": -0.000158003,
+    "pre_down": 0.000103677
    },
    {
     "name": "MuonTrigger",
@@ -2333,10 +2413,10 @@
     "pull": 0.0684925,
     "err_up": 1.00371,
     "err_down": 1.00371,
-    "post_up": -9.23981e-06,
-    "post_down": -2.77643e-05,
-    "pre_up": 3.44701e-05,
-    "pre_down": -2.97412e-05
+    "post_up": 2.25381e-05,
+    "post_down": -2.59172e-05,
+    "pre_up": 1.83968e-05,
+    "pre_down": -3.19711e-05
    },
    {
     "name": "PS_FSR",
@@ -2353,20 +2433,20 @@
     "pull": -0.45089,
     "err_up": 0.536541,
     "err_down": 0.536541,
-    "post_up": 0.000219386,
-    "post_down": -0.000222096,
-    "pre_up": 0.000396286,
-    "pre_down": -0.000328177
+    "post_up": 0.00023415,
+    "post_down": -0.0002136,
+    "pre_up": 0.000399119,
+    "pre_down": -0.000418659
    },
    {
     "name": "PS_ISR",
     "pull": 0.533023,
     "err_up": 0.767552,
     "err_down": 0.767552,
-    "post_up": -0.000813165,
-    "post_down": 0.000807343,
-    "pre_up": -0.00102496,
-    "pre_down": 0.00105671
+    "post_up": -0.000812276,
+    "post_down": 0.000806329,
+    "pre_up": -0.0010268,
+    "pre_down": 0.00105686
    },
    {
     "name": "Pileup",
@@ -2383,30 +2463,30 @@
     "pull": -1.67359,
     "err_up": 0.588392,
     "err_down": 0.588392,
-    "post_up": -0.000292557,
-    "post_down": 0.000313771,
-    "pre_up": -0.000541039,
-    "pre_down": 0.000518877
+    "post_up": -0.000347568,
+    "post_down": 0.000310216,
+    "pre_up": -0.000540888,
+    "pre_down": 0.000518959
    },
    {
     "name": "QCDOSSS_emu",
     "pull": -0.823785,
     "err_up": 0.797813,
     "err_down": 0.797813,
-    "post_up": 0.000463037,
-    "post_down": -0.000496688,
-    "pre_up": 0.000581545,
-    "pre_down": -0.000614765
+    "post_up": 0.000462657,
+    "post_down": -0.000485909,
+    "pre_up": 0.000581497,
+    "pre_down": -0.000617422
    },
    {
     "name": "QCDScale",
     "pull": 0.598879,
     "err_up": 0.52803,
     "err_down": 0.52803,
-    "post_up": -0.000616986,
-    "post_down": 0.00062636,
-    "pre_up": -0.00120335,
-    "pre_down": 0.00126057
+    "post_up": -0.000654966,
+    "post_down": 0.000627799,
+    "pre_up": -0.00117605,
+    "pre_down": 0.00124531
    },
    {
     "name": "QCDScale_eeShape",
@@ -2433,10 +2513,10 @@
     "pull": -0.21518,
     "err_up": 0.303568,
     "err_down": 0.303568,
-    "post_up": -6.33772e-05,
-    "post_down": 1.46686e-05,
-    "pre_up": -0.000153739,
-    "pre_down": 5.05466e-05
+    "post_up": -4.10927e-05,
+    "post_down": 2.87735e-05,
+    "pre_up": -0.000168766,
+    "pre_down": 4.30301e-05
    },
    {
     "name": "TauES_DM1",
@@ -2503,10 +2583,10 @@
     "pull": -0.661295,
     "err_up": 0.926028,
     "err_down": 0.926028,
-    "post_up": -8.80377e-05,
-    "post_down": 0.000100232,
-    "pre_up": -9.24572e-05,
-    "pre_down": 5.42404e-05
+    "post_up": -8.17018e-05,
+    "post_down": 9.71555e-05,
+    "pre_up": -6.23749e-05,
+    "pre_down": 8.68949e-05
    },
    {
     "name": "TauTrigger_DM1",
@@ -2533,10 +2613,10 @@
     "pull": -0.195095,
     "err_up": 0.991082,
     "err_down": 0.991082,
-    "post_up": -6.10218e-05,
-    "post_down": 4.51274e-05,
-    "pre_up": -4.94608e-05,
-    "pre_down": 3.59782e-06
+    "post_up": -5.18284e-05,
+    "post_down": 4.45967e-05,
+    "pre_up": -7.23463e-05,
+    "pre_down": 2.67094e-05
    },
    {
     "name": "TopPt",
@@ -2553,10 +2633,10 @@
     "pull": 0.237752,
     "err_up": 0.928841,
     "err_down": 0.928841,
-    "post_up": 0.000342858,
-    "post_down": -0.000416132,
-    "pre_up": 0.000369327,
-    "pre_down": -0.000457968
+    "post_up": 0.000342587,
+    "post_down": -0.00039899,
+    "pre_up": 0.000377839,
+    "pre_down": -0.000447426
    },
    {
     "name": "XS_DYlowmass",
@@ -2603,20 +2683,20 @@
     "pull": 0.602571,
     "err_up": 0.91722,
     "err_down": 0.91722,
-    "post_up": 0.000801603,
-    "post_down": -0.000697061,
-    "pre_up": 0.00088325,
-    "pre_down": -0.000776279
+    "post_up": 0.000801297,
+    "post_down": -0.000720913,
+    "pre_up": 0.000883985,
+    "pre_down": -0.000772359
    },
    {
     "name": "XS_VV",
     "pull": 0.0173497,
     "err_up": 1.0002,
     "err_down": 1.0002,
-    "post_up": 9.86822e-05,
-    "post_down": -6.63249e-05,
-    "pre_up": 6.03357e-05,
-    "pre_down": -7.56901e-05
+    "post_up": 4.44097e-05,
+    "post_down": -7.38504e-05,
+    "pre_up": 7.67179e-05,
+    "pre_down": -3.18072e-05
    },
    {
     "name": "XS_WJets",
@@ -2643,20 +2723,20 @@
     "pull": 0.0457046,
     "err_up": 1.00354,
     "err_down": 1.00354,
-    "post_up": -8.75501e-06,
-    "post_down": 4.65222e-06,
-    "pre_up": -4.23225e-05,
-    "pre_down": 3.55556e-05
+    "post_up": -4.5838e-05,
+    "post_down": 8.06469e-05,
+    "pre_up": -3.08387e-05,
+    "pre_down": 5.70141e-05
    },
    {
     "name": "XS_ZZ",
     "pull": 0.000298204,
     "err_up": 1.00395,
     "err_down": 1.00395,
-    "post_up": -5.04071e-05,
-    "post_down": 9.81219e-05,
-    "pre_up": -6.53897e-05,
-    "pre_down": 5.29985e-05
+    "post_up": -5.31662e-05,
+    "post_down": 3.40178e-05,
+    "pre_up": -7.17242e-05,
+    "pre_down": 5.12016e-05
    },
    {
     "name": "mu_ttbar",
@@ -2842,25 +2922,25 @@
    "standalone": {
     "poi": "mu_Z",
     "mu": 1.07157,
-    "mu_err_up": 0.0623505,
-    "mu_err_down": 0.0585806,
+    "mu_err_up": 0.0623485,
+    "mu_err_down": 0.0585827,
     "sigma_pb": 2093.7742131268706,
-    "err_up_pb": 121.82859642913384,
-    "err_down_pb": 114.46247064540809,
+    "err_up_pb": 121.82468856644054,
+    "err_down_pb": 114.46657390123606,
     "gof_probability": 4.20039e-42,
     "minuit_status": 0,
     "hesse_status": 0,
     "minos_status": 0,
-    "edm": 1.92575e-06,
+    "edm": 1.97667e-06,
     "pos_def_forced": false,
     "pulls": {
      "ElectronER": {
-      "value": 0.00483419,
+      "value": 0.00483415,
       "err": 1.00433
      },
      "ElectronER_eeShape": {
       "value": 1.43947,
-      "err": 0.982297
+      "err": 0.982296
      },
      "ElectronES": {
       "value": 0.0,
@@ -2871,79 +2951,79 @@
       "err": 1.00433
      },
      "ElectronID": {
-      "value": -1.55711,
-      "err": 0.899787
+      "value": -1.55714,
+      "err": 0.899788
      },
      "ElectronID_eeShape": {
-      "value": 0.567626,
+      "value": 0.567627,
       "err": 0.0727408
      },
      "ElectronRECO": {
-      "value": -0.167157,
+      "value": -0.167182,
       "err": 0.992807
      },
      "ElectronRECO_eeShape": {
-      "value": 0.596911,
-      "err": 0.997434
+      "value": 0.596905,
+      "err": 0.997435
      },
      "L1Prefiring": {
-      "value": 0.151968,
+      "value": 0.151974,
       "err": 0.993267
      },
      "L1Prefiring_eeShape": {
       "value": 1.90908,
-      "err": 0.940696
+      "err": 0.940695
      },
      "Lumi": {
-      "value": -0.351858,
-      "err": 0.9914
+      "value": -0.351869,
+      "err": 0.991399
      },
      "PDF": {
-      "value": -1.24141e-06,
+      "value": -4.04714e-07,
       "err": 1.00408
      },
      "PDF_eeShape": {
-      "value": 0.0803709,
+      "value": 0.0803699,
       "err": 1.00353
      },
      "PS_FSR": {
-      "value": -0.286414,
+      "value": -0.286411,
       "err": 0.99584
      },
      "PS_FSR_eeShape": {
-      "value": -0.438914,
+      "value": -0.438909,
       "err": 0.538748
      },
      "Pileup": {
-      "value": -0.181958,
+      "value": -0.181984,
       "err": 1.00019
      },
      "Pileup_eeShape": {
-      "value": -1.72216,
-      "err": 0.590159
+      "value": -1.72217,
+      "err": 0.590158
      },
      "QCDScale": {
-      "value": -9.85129e-05,
+      "value": -9.43392e-05,
       "err": 0.993744
      },
      "QCDScale_eeShape": {
-      "value": -1.5166,
-      "err": 0.424335
+      "value": -1.51659,
+      "err": 0.424334
      },
      "XS_DYtautau": {
-      "value": -1.48667,
+      "value": -1.48666,
       "err": 0.954145
      },
      "XS_TTbar": {
-      "value": 0.48269,
-      "err": 0.970577
+      "value": 0.482706,
+      "err": 0.970578
      },
      "XS_VV": {
-      "value": 0.0333373,
+      "value": 0.0333491,
       "err": 1.00065
      },
      "XS_WJets": {
-      "value": -0.929054,
+      "value": -0.929051,
       "err": 0.960431
      },
      "gamma_stat_ee_SR_bin_0": {
@@ -2956,7 +3036,7 @@
      },
      "gamma_stat_ee_SR_bin_10": {
       "value": 1.00802,
-      "err": 0.00322409
+      "err": 0.0032241
      },
      "gamma_stat_ee_SR_bin_11": {
       "value": 1.01688,
@@ -2976,7 +3056,7 @@
      },
      "gamma_stat_ee_SR_bin_15": {
       "value": 1.00702,
-      "err": 0.00090211
+      "err": 0.000902021
      },
      "gamma_stat_ee_SR_bin_16": {
       "value": 0.997651,
@@ -3004,7 +3084,7 @@
      },
      "gamma_stat_ee_SR_bin_21": {
       "value": 1.02269,
-      "err": 0.00556089
+      "err": 0.00556088
      },
      "gamma_stat_ee_SR_bin_22": {
       "value": 1.01347,
@@ -3024,11 +3104,11 @@
      },
      "gamma_stat_ee_SR_bin_26": {
       "value": 1.02964,
-      "err": 0.00942305
+      "err": 0.00942306
      },
      "gamma_stat_ee_SR_bin_27": {
       "value": 1.04635,
-      "err": 0.0105496
+      "err": 0.0105497
      },
      "gamma_stat_ee_SR_bin_28": {
       "value": 1.02314,
@@ -3044,7 +3124,7 @@
      },
      "gamma_stat_ee_SR_bin_4": {
       "value": 0.973703,
-      "err": 0.00683198
+      "err": 0.00683197
      },
      "gamma_stat_ee_SR_bin_5": {
       "value": 0.981902,
@@ -4381,21 +4461,21 @@
  "variations": {
   "without_ee": {
    "poi": "mu_Z",
-   "mu": 0.991191,
-   "mu_err_up": 0.0154806,
-   "mu_err_down": 0.0151353,
-   "sigma_pb": 1936.7191654147057,
-   "err_up_pb": 30.24802960490853,
-   "err_down_pb": 29.57333711091121,
+   "mu": 0.991192,
+   "mu_err_up": 0.0154798,
+   "mu_err_down": 0.0151361,
+   "sigma_pb": 1936.721119346052,
+   "err_up_pb": 30.24646645983121,
+   "err_down_pb": 29.574900255988528,
    "gof_probability": 0.22735,
    "minuit_status": 0,
    "hesse_status": 0,
    "minos_status": 0,
-   "edm": 6.17614e-06,
+   "edm": 4.22808e-05,
    "pos_def_forced": false,
    "label": "without Z#rightarrowee",
    "note": null,
-   "shift_pb": -12.624350430688082
+   "shift_pb": -12.622396499341676
   },
   "without_tautau": {
    "poi": "mu_Z",
@@ -4453,71 +4533,71 @@
   },
   "ee_electron_id_1p2": {
    "poi": "mu_Z",
-   "mu": 0.992123,
-   "mu_err_up": 0.0147183,
-   "mu_err_down": 0.0144878,
-   "sigma_pb": 1938.5402294297808,
-   "err_up_pb": 28.758547739359276,
-   "err_down_pb": 28.30816656395707,
+   "mu": 0.992122,
+   "mu_err_up": 0.0147184,
+   "mu_err_down": 0.0144877,
+   "sigma_pb": 1938.5382754984341,
+   "err_up_pb": 28.75874313249394,
+   "err_down_pb": 28.3079711708224,
    "gof_probability": 2.4084e-22,
    "minuit_status": 0,
    "hesse_status": 0,
    "minos_status": 0,
-   "edm": 1.82261e-05,
+   "edm": 1.83038e-05,
    "pos_def_forced": false,
    "label": "ee: ElectronID norm. #pm1.2%",
    "note": "diagnostic: the UL2016postVFP Medium-ID SF map (datasets/corrections, POG/EGM) gives +-0.3-1.6% per electron outside the ECAL gap, 1.2% per Z->ee event; inside 1.444 < |eta_SC| < 1.566, which z-ee does not veto, it is sf = 1 +- 1. Not a result: it uses a number z-ee did not deliver.",
-   "shift_pb": -10.803286415613002
+   "shift_pb": -10.805240346959636
   },
   "tautau_as_delivered": {
    "poi": "mu_Z",
-   "mu": 0.998521,
-   "mu_err_up": 0.0152886,
-   "mu_err_down": 0.0150099,
-   "sigma_pb": 1951.0414821856305,
-   "err_up_pb": 29.87287478635224,
-   "err_down_pb": 29.328314120041636,
+   "mu": 0.998522,
+   "mu_err_up": 0.0152878,
+   "mu_err_down": 0.0150108,
+   "sigma_pb": 1951.043436116977,
+   "err_up_pb": 29.87131164127493,
+   "err_down_pb": 29.330072658253616,
    "gof_probability": 3.71143e-22,
    "minuit_status": 0,
    "hesse_status": 0,
    "minos_status": 0,
-   "edm": 2.10202e-05,
+   "edm": 2.10328e-05,
    "pos_def_forced": false,
    "label": "#tau#tau as delivered (no #tau_{h} ID p_{T} uncertainty)",
    "note": "the tautau likelihood exactly as z-tautau publishes it (1981 +73 -70 pb alone)",
-   "shift_pb": 1.6979663402366896
+   "shift_pb": 1.6999202715833235
   },
   "tautau_ptsplit": {
    "poi": "mu_Z",
-   "mu": 0.990593,
-   "mu_err_up": 0.0150444,
-   "mu_err_down": 0.0147386,
-   "sigma_pb": 1935.5507144694104,
-   "err_up_pb": 29.395724751500968,
-   "err_down_pb": 28.798212545696217,
-   "gof_probability": 5.83587e-21,
+   "mu": 0.990594,
+   "mu_err_up": 0.0150427,
+   "mu_err_down": 0.0147406,
+   "sigma_pb": 1935.552668400757,
+   "err_up_pb": 29.39240306821167,
+   "err_down_pb": 28.80212040838951,
+   "gof_probability": 5.83584e-21,
    "minuit_status": 0,
    "hesse_status": 0,
    "minos_status": 0,
-   "edm": 2.87151e-05,
+   "edm": 3.41944e-05,
    "pos_def_forced": false,
    "label": "#tau#tau: p_{T}-split #tau_{h} ID SF model",
    "note": "z-tautau's cross-check model (l tau_h regions split at pT(tau_h) = 40 GeV, own scale factors below) in place of the nominal one: the effect TauIDpT_tautau stands for, fitted instead of assigned",
-   "shift_pb": -13.792801375983345
+   "shift_pb": -13.79084744463671
   },
   "tautau_emu_only": {
    "poi": "mu_Z",
    "mu": 0.994498,
-   "mu_err_up": 0.0154793,
-   "mu_err_down": 0.0151814,
+   "mu_err_up": 0.0154797,
+   "mu_err_down": 0.0151811,
    "sigma_pb": 1943.1808163780681,
-   "err_up_pb": 30.245489494157887,
-   "err_down_pb": 29.66341334599165,
+   "err_up_pb": 30.246271066696547,
+   "err_down_pb": 29.662827166587658,
    "gof_probability": 1.53775e-36,
    "minuit_status": 0,
    "hesse_status": 0,
    "minos_status": 0,
-   "edm": 6.15016e-05,
+   "edm": 6.12007e-05,
    "pos_def_forced": false,
    "label": "#tau#tau: e#mu channel only",
    "note": "the sub-measurement without any tau_h (z-tautau: 0.960 +0.042 -0.040); docs/11 section 7.1",
@@ -4525,21 +4605,21 @@
   },
   "tautau_tauh_only": {
    "poi": "mu_Z",
-   "mu": 0.997458,
-   "mu_err_up": 0.0155765,
-   "mu_err_down": 0.0152749,
-   "sigma_pb": 1948.9644531641443,
-   "err_up_pb": 30.43541162105201,
-   "err_down_pb": 29.846105926903174,
+   "mu": 0.997457,
+   "mu_err_up": 0.0155776,
+   "mu_err_down": 0.0152738,
+   "sigma_pb": 1948.9624992327977,
+   "err_up_pb": 30.43756094553332,
+   "err_down_pb": 29.843956602421866,
    "gof_probability": 1.26433e-21,
    "minuit_status": 0,
    "hesse_status": 0,
    "minos_status": 0,
-   "edm": 2.221e-06,
+   "edm": 2.20633e-06,
    "pos_def_forced": false,
    "label": "#tau#tau: #tau_{h} channels only",
    "note": "tau_h tau_h + mu tau_h + e tau_h with free scale factors, no e mu (z-tautau: 1.203 +0.091 -0.084); docs/11 section 7.1",
-   "shift_pb": -0.3790626812494793
+   "shift_pb": -0.3810166125961132
   },
   "tautau_emutrig2x": {
    "poi": "mu_Z",
@@ -4561,117 +4641,117 @@
   },
   "tautau_leptons_correlated": {
    "poi": "mu_Z",
-   "mu": 0.997204,
-   "mu_err_up": 0.0154082,
-   "mu_err_down": 0.0151336,
-   "sigma_pb": 1948.4681546020959,
-   "err_up_pb": 30.106564975411263,
-   "err_down_pb": 29.57001542762191,
+   "mu": 0.997207,
+   "mu_err_up": 0.0154057,
+   "mu_err_down": 0.015136,
+   "sigma_pb": 1948.4740163961358,
+   "err_up_pb": 30.101680147044643,
+   "err_down_pb": 29.574704862853864,
    "gof_probability": 3.28263e-22,
    "minuit_status": 0,
    "hesse_status": 0,
    "minos_status": 0,
-   "edm": 8.63676e-06,
+   "edm": 8.59997e-06,
    "pos_def_forced": false,
    "label": "#tau#tau lepton NPs correlated",
    "note": "the name-based default the tautau group warned about: MuonID/Iso/Trigger/Scale of tautau (POG) shared with mumu (tag-and-probe), ElectronID/Reco/Scale shared with the normalisation parts of ee's ElectronID/ElectronRECO/ElectronES",
-   "shift_pb": -0.8753612432979025
+   "shift_pb": -0.8694994492580008
   },
   "tautau_theory_decorrelated": {
    "poi": "mu_Z",
-   "mu": 0.997283,
-   "mu_err_up": 0.0154935,
-   "mu_err_down": 0.0152158,
-   "sigma_pb": 1948.622515178481,
-   "err_up_pb": 30.273235319280282,
-   "err_down_pb": 29.730628584316317,
+   "mu": 0.997282,
+   "mu_err_up": 0.0154936,
+   "mu_err_down": 0.0152157,
+   "sigma_pb": 1948.6205612471344,
+   "err_up_pb": 30.273430712414946,
+   "err_down_pb": 29.730433191181653,
    "gof_probability": 4.01182e-22,
    "minuit_status": 0,
    "hesse_status": 0,
    "minos_status": 0,
-   "edm": 1.58084e-06,
+   "edm": 1.583e-06,
    "pos_def_forced": false,
    "label": "#tau#tau theory NPs decorrelated",
    "note": "tautau constrains QCDScale through the acceptance ratios of its four final states; here that constraint cannot reach ee and mumu",
-   "shift_pb": -0.7210006669126869
+   "shift_pb": -0.7229545982593208
   },
   "ttbar_cr_for_all_channels": {
    "poi": "mu_Z",
-   "mu": 0.999932,
-   "mu_err_up": 0.0156042,
-   "mu_err_down": 0.015292,
-   "sigma_pb": 1953.7984793157498,
-   "err_up_pb": 30.48953551935414,
-   "err_down_pb": 29.879518152930846,
+   "mu": 0.999931,
+   "mu_err_up": 0.0156048,
+   "mu_err_down": 0.0152914,
+   "sigma_pb": 1953.7965253844031,
+   "err_up_pb": 30.490707878162127,
+   "err_down_pb": 29.878345794122858,
    "gof_probability": 6.08753e-22,
    "minuit_status": 0,
    "hesse_status": 0,
    "minos_status": 0,
-   "edm": 8.82413e-05,
+   "edm": 8.79775e-05,
    "pos_def_forced": false,
    "label": "t#bar{t}: e#mu control region for all channels",
    "note": "the free mu_ttbar that emu_CRtt determines also scales ttbar in mumu and ee, instead of their 6 % XS_TTbar prior",
-   "shift_pb": 4.454963470356006
+   "shift_pb": 4.453009539009372
   },
   "ttbar_xs_constrained": {
    "poi": "mu_Z",
-   "mu": 0.995094,
-   "mu_err_up": 0.0152435,
-   "mu_err_down": 0.014938,
-   "sigma_pb": 1944.3453594606701,
-   "err_up_pb": 29.78475248261845,
-   "err_down_pb": 29.187826456217692,
+   "mu": 0.995095,
+   "mu_err_up": 0.0152419,
+   "mu_err_down": 0.0149396,
+   "sigma_pb": 1944.3473133920165,
+   "err_up_pb": 29.78162619246381,
+   "err_down_pb": 29.19095274637233,
    "gof_probability": 3.99078e-22,
    "minuit_status": 0,
    "hesse_status": 0,
    "minos_status": 0,
-   "edm": 9.39206e-07,
+   "edm": 9.41231e-07,
    "pos_def_forced": false,
    "label": "t#bar{t}: XS_TTbar (6%) everywhere, no free #mu_{t#bar{t}}",
    "note": "one 6 % XS_TTbar for all channels, constrained by emu_CRtt, no free factor: the control region then measures Lumi x XS_TTbar x e-mu trigger x b-tag, and its 10 % excess is shared out by prior width -- 0.3 sigma of it to Lumi, which moves every channel",
-   "shift_pb": -4.998156384723643
+   "shift_pb": -4.9962024533772365
   }
  },
  "checks": {
   "mumu_cremu_validation": {
    "poi": "mu_Z",
-   "mu": 0.988296,
-   "mu_err_up": 0.0157523,
-   "mu_err_down": 0.0153958,
-   "sigma_pb": 1931.0625341661614,
-   "err_up_pb": 30.778912751792607,
-   "err_down_pb": 30.082336226712837,
+   "mu": 0.988297,
+   "mu_err_up": 0.0157513,
+   "mu_err_down": 0.0153967,
+   "sigma_pb": 1931.064488097508,
+   "err_up_pb": 30.77695882044596,
+   "err_down_pb": 30.084094764924817,
    "gof_probability": 0.792273,
    "minuit_status": 0,
    "hesse_status": 0,
    "minos_status": 0,
-   "edm": 1.41636e-08,
+   "edm": 7.69545e-06,
    "pos_def_forced": false,
    "label": "#mu#mu with mumu_CRemu as delivered (validation region)",
    "note": "must reproduce the standalone mumu fit exactly: a VALIDATION region is not in the likelihood",
    "channel": "mumu",
-   "shift_pb": 0.0,
-   "err_ratio": 1.0
+   "shift_pb": 0.001953931346633908,
+   "err_ratio": 0.9999967895313037
   },
   "mumu_cremu_control": {
    "poi": "mu_Z",
-   "mu": 0.988114,
-   "mu_err_up": 0.0153511,
-   "mu_err_down": 0.0150189,
-   "sigma_pb": 1930.7069186610718,
-   "err_up_pb": 29.9949954955177,
-   "err_down_pb": 29.345899502161462,
+   "mu": 0.988117,
+   "mu_err_up": 0.0153476,
+   "mu_err_down": 0.0150225,
+   "sigma_pb": 1930.7127804551117,
+   "err_up_pb": 29.988156735804434,
+   "err_down_pb": 29.35293365500939,
    "gof_probability": 0.880188,
    "minuit_status": 0,
    "hesse_status": 0,
    "minos_status": 0,
-   "edm": 1.13111e-07,
+   "edm": 6.94093e-08,
    "pos_def_forced": false,
    "label": "#mu#mu with mumu_CRemu as a control region",
    "note": "what the e-mu region would add to mumu if it were fitted: the size of what is given up by leaving it to tautau",
    "channel": "mumu",
-   "shift_pb": -0.355615505089645,
-   "err_ratio": 0.9750193430738953
+   "shift_pb": -0.3497537110497433,
+   "err_ratio": 0.9750225535425916
   }
  },
  "prediction": {

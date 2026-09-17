@@ -95,16 +95,30 @@ def test_mumu_emu_region_is_dropped():
     assert [b.opts["Type"] for b in delivered if b.kind == "Region" and b.name == "mumu_CRemu"] == ["VALIDATION"]
 
 
-def test_tautau_modelling_uncertainty_is_read_from_the_two_published_fits():
+def test_tautau_pt_dependence_comes_with_the_channel_and_is_not_added_twice():
+    """z-tautau's own config carries TauIDpT_tautau (size: its fits ztautau_flatsf vs ztautau_ptsplit); the
+    combination adds nothing to the baseline, and adds the same parameter where a z-tautau config lacks it."""
+    flat, split = (json.loads(repo_path(f"z-tautau/fit/results/ztautau_{j}_fit_result.json").read_text())["poi_value"]
+                   for j in ("flatsf", "ptsplit"))
+    rel = abs(split - flat) / flat
+    assert 0.05 < rel < 0.08
+
+    def np_of(blocks):
+        (np_,) = [b for b in blocks if b.kind == "Systematic" and b.name == "TauIDpT_tautau"]
+        poi = [b for b in blocks if b.kind == "NormFactor" and b.name == "mu_Z"][0]
+        assert np_.opts["Samples"] == poi.opts["Samples"] and np_.opts["Type"] == "OVERALL"     # the signal, nothing else
+        return float(np_.opts["OverallUp"])
+
     blocks, info = _adapt("tautau")
-    (mod,) = info["modelling"]
-    nominal = json.loads(repo_path("z-tautau/fit/results/ztautau_fit_result.json").read_text())["poi_value"]
-    split = json.loads(repo_path("z-tautau/fit/results/ztautau_ptsplit_fit_result.json").read_text())["poi_value"]
-    assert mod["name"] == "TauIDpT_tautau" and abs(mod["rel"] - abs(split - nominal) / nominal) < 1e-12 and 0.05 < mod["rel"] < 0.08
-    (np_,) = [b for b in blocks if b.kind == "Systematic" and b.name == "TauIDpT_tautau"]
-    poi = [b for b in blocks if b.kind == "NormFactor" and b.name == "mu_Z"][0]
-    assert np_.opts["Samples"] == poi.opts["Samples"] and np_.opts["Type"] == "OVERALL"     # the signal, nothing else
-    assert _adapt("tautau", modelling=[])[1]["modelling"] == []
+    assert info["modelling"] == [] and abs(np_of(blocks) - rel) < 1e-6
+    v = manifest()["variations"]
+    blocks, info = _adapt("tautau", **v["tautau_tauh_only"]["channel_overrides"]["tautau"])       # a config without it
+    assert [a["name"] for a in info["modelling"]] == ["TauIDpT_tautau"] and abs(np_of(blocks) - rel) < 1e-6
+    blocks, _ = _adapt("tautau", **v["tautau_without_tauidpt"]["channel_overrides"]["tautau"])
+    assert not [b for b in blocks if b.name == "TauIDpT_tautau"]
+    for key in ("tautau_ptsplit", "tautau_emu_only"):                                            # other models: never there
+        blocks, _ = _adapt("tautau", **v[key]["channel_overrides"]["tautau"])
+        assert not [b for b in blocks if b.name == "TauIDpT_tautau"]
 
 
 def test_ttbar_control_region_factor_can_be_shared():

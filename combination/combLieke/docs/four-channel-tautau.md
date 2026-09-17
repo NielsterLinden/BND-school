@@ -10,7 +10,9 @@ that led there.** The frozen combination (git tag `zmumu-freeze-2026-09-17`) is 
 2. **z-tautau's results arrive (e0b0b1d)** with what a combiner has to decide (`z-tautau/docs/11` §7): the τh ID
    scale factor is not flat in p_T (−6.3 % on their μ_Z), two sub-measurements 2.6σ apart, the eμ trigger prior.
    The baseline gains `TauIDpT_tautau`, every item gets a variation, the tt̄ question gets two
-   (`../README.md`): **1949.3 ⁺³⁰·²₋₂₉.₆ pb**, p = 0.38. Step 1 is the variation `tautau_as_delivered`.
+   (`../README.md`): **1949.3 ⁺³⁰·²₋₂₉.₆ pb**, p = 0.38. Step 1 is the variation `tautau_as_delivered`
+   (`tautau_without_tauidpt` since z-tautau carries `TauIDpT_tautau` itself, 17 Sep: their own result is now
+   1981 ⁺¹⁵³₋₁₃₆ pb and the combination adds nothing).
 
 The numbers in the tables below are those of **step 1** (no `TauIDpT_tautau`); the final ones are in `../README.md`.
 

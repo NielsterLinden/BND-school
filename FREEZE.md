@@ -17,7 +17,8 @@ the listed file; do not regenerate it.
 
 > **17 Sep, later: the combination was reopened by the user for the four-channel ττ, and that result supersedes the
 > frozen one.** ee ⊕ μμ ⊕ ττ(τhτh + μτh + eτh + eμ) = **1949 ⁺³⁰₋₃₀ pb** (1949.3 ± 0.5 (stat) ⁺³⁰·²₋₂₉.₆ (syst); ττ alone
-> 1981 ⁺¹⁵³₋₁₃₆ pb in the combination, 1981 ⁺⁷³₋₇₀ pb as z-tautau quotes it; compatibility p = 0.38):
+> 1981 ⁺¹⁵³₋₁₃₆ pb, in the combination and — since z-tautau was unfrozen on 17 Sep to fit its τh ID p_T dependence itself
+> (`TauIDpT_tautau`; 1981 ⁺⁷³₋₇₀ pb without it) — as z-tautau quotes it; compatibility p = 0.38):
 > `combination/combLieke/README.md`, `output/result.json`, `output/plots/`. **The combination numbers below are the frozen
 > three-channel ones and are kept as the record of the freeze**; they are reproducible from the tag only
 > (`combLieke/output/` on `main` is the new result). ee and μμ are unchanged by this: their numbers below stand.

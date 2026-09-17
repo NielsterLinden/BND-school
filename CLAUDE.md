@@ -16,7 +16,7 @@ references to `combination/docs/` point to that removed version.
 
 > **After the freeze (17 Sep, on the user's request): the combination uses the four-channel Z → ττ** (τhτh + μτh + eτh + eμ,
 > z-tautau inputs b7ec3d9, results e0b0b1d) and **supersedes the frozen one: 1949 ⁺³⁰₋₃₀ pb**, ττ alone 1981 ⁺¹⁵³₋₁₃₆ pb
-> (z-tautau's own 1981 ⁺⁷³₋₇₀ plus their τh ID p_T dependence, ±6.3 %), compatibility p = 0.38 —
+> (= z-tautau's own result, which carries its τh ID p_T dependence, ±6.3 %, since 17 Sep; ⁺⁷³₋₇₀ without), compatibility p = 0.38 —
 > `combination/combLieke/README.md`, `output/result.json`, `output/plots/`. The fits run on HTCondor
 > (`python run.py prepare && python run.py condor --submit`, then `results`, `plots`). `mumu_CRemu` is dropped there
 > (same data as the ττ eμ channel; a validation region, so μμ does not change). The frozen 1945 ⁺³¹₋₃₀ pb is at the tag;

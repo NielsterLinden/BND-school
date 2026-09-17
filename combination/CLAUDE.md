@@ -48,7 +48,7 @@ What is kept is `combLieke/output/` (`result.json`, `plots/`) and the `checks/*.
 | fit options for every channel fit and MultiFit (`FitStrategy: 3`, item 9); ranking refits; per-variation overrides | `channels.json` → `fit`, `ranking_fit`, `variations.<name>.fit` |
 | correlations | **by nuisance-parameter name only** (TRExFitter). Renames in `rename_systematics`; ee shape parts get `<NP>_eeShape` |
 | alternative likelihoods | `channels.json` → `variations` (`channels`, `split`, `overall`, `channel_overrides`, `fit`) |
-| a modelling uncertainty a channel reports but does not fit (`TauIDpT_tautau`) | `channels.json` → `tautau.modelling`: the size is read from two of the channel's published fits (`mf/trexcfg.modelling_nps`), never typed in |
+| a modelling uncertainty a channel reports but does not fit | `channels.json` → `<channel>.modelling`: the size is read from two of the channel's published fits (`mf/trexcfg.modelling_nps`), never typed in. Empty in the baseline since z-tautau fits `TauIDpT_tautau` itself; used by `tautau_tauh_only`, whose z-tautau config lacks it |
 | sharing a free factor across channels, dropping a prior (the tt̄ variations) | `channel_overrides` with `normfactors`, `drop_systematics`, `normfactor_to_overall` |
 | z-tautau's own sub-measurements shown in `tautau_channels` | `channels.json` → `tautau.published_submeasurements` |
 | published ATLAS/CMS numbers | `combLieke/config/references.json` (with paper and table) |
@@ -112,10 +112,11 @@ What is kept is `combLieke/output/` (`result.json`, `plots/`) and the `checks/*.
     templates carry A × ε), and never let `mumu_CRemu` back in (same data as `emu_SR`/`emu_CRtt`). A per-final-state
     POI is not defined in this model: with free `TauIDSF_DM*` a single ℓτh channel cannot separate `mu_Z` from the
     scale factors, so the three-POI fit stays ee / μμ / ττ.
-12. **`TauIDpT_tautau` is in the baseline, and it is not a free choice of size.** z-tautau's p_T-split cross-check moves
-    their μ_Z by 6.3 %; the combination carries that as one OVERALL parameter on the ττ signal (`tautau.modelling`).
-    Never apply it together with the p_T-split model (`tautau_ptsplit` sets `modelling: []`), and if z-tautau
-    re-delivers, it follows their two result files by itself. tt̄: the baseline keeps the free ττ `mu_ttbar` and the
+12. **`TauIDpT_tautau` is in the baseline, and since 17 Sep it is z-tautau's own parameter.** Their p_T-split cross-check
+    moves μ_Z by 6.3 %; their measurement config carries that as one OVERALL parameter on the ττ signal (size from
+    their fits `ztautau_flatsf` and `ztautau_ptsplit`), so `tautau.modelling` is empty: **never add it a second time**
+    (`tests/test_trexcfg.py` checks it is there exactly once), and never together with the p_T-split model.
+    `tautau_without_tauidpt` drops it (`drop_systematics`), `tautau_tauh_only` adds it to a z-tautau config that lacks it. tt̄: the baseline keeps the free ττ `mu_ttbar` and the
     `XS_TTbar` prior of ee/μμ as two parameters; the two alternatives (±5 pb) and the reasons are in
     `combLieke/README.md`, "tt̄: the eμ control region, and who uses it". Do not share a free factor with μμ or ee
     without a prior: their standalone fits and `without_tautau` would have nothing to determine it.

@@ -135,18 +135,8 @@
       "published": {
         "source": "z-tautau/fit/results/ztautau_fit_result.json"
       },
-      "modelling": [
-        {
-          "name": "TauIDpT_tautau",
-          "title": "#tau_{h} ID SF p_{T} dependence (#tau#tau)",
-          "category": "Tau ID pT dependence",
-          "relative_shift": {
-            "nominal": "z-tautau/fit/results/ztautau_fit_result.json:poi_value",
-            "alternative": "z-tautau/fit/results/ztautau_ptsplit_fit_result.json:poi_value"
-          }
-        }
-      ],
-      "modelling_note": "z-tautau/docs/11-combination-inputs.md section 7.3: the tautau fit assumes one tau_h ID scale factor per decay mode for every pT. Their cross-check with separate scale factors below 40 GeV in the l tau_h regions moves mu_Z from 1.019 to 0.954 (-6.3 %, 1.8x their total uncertainty), which no parameter of their fit covers; they ask a combination that wants a conservative tautau input to carry it. It enters as one OVERALL parameter on the tautau signal, its size read from their two published fits. variations.tautau_as_delivered is the fit without it, variations.tautau_ptsplit the fit with their pT-split model instead.",
+      "modelling": [],
+      "modelling_note": "z-tautau carries the pT dependence of its tau_h ID scale factor itself since 17 Sep 2026: its config has TauIDpT_tautau, one OVERALL parameter on the signal whose size is the relative difference between its fits ztautau_flatsf (one scale factor per decay mode) and ztautau_ptsplit (own scale factors below 40 GeV in the l tau_h regions): mu_Z 1.019 -> 0.954, -6.3 % (z-tautau/scripts/step5_fit.py pt_model, docs/11-combination-inputs.md section 7.3). Until then the combination added the same parameter here, so the likelihood is the one it was; what changed is that z-tautau's own 1981 pb now has the uncertainty the tautau line of the combination has. variations.tautau_without_tauidpt is the fit without it, variations.tautau_ptsplit the fit with their pT-split model instead; variations.tautau_tauh_only adds it to z-tautau's tau-channel fit, which does not carry it.",
       "published_submeasurements": {
         "_doc": "z-tautau's own fits of parts of its data, shown next to the combination's tautau line (figure tautau_channels); mu x sigma_reference_pb",
         "tau_h tau_h": "z-tautau/fit/results/ztautau_tautau_fixedid_fit_result.json",
@@ -155,6 +145,7 @@
         "e mu": "z-tautau/fit/results/ztautau_emu_fit_result.json",
         "tau channels, SF free": "z-tautau/fit/results/ztautau_taulep_fit_result.json",
         "four channels": "z-tautau/fit/results/ztautau_fit_result.json",
+        "four channels, no tau_h ID pT uncertainty": "z-tautau/fit/results/ztautau_flatsf_fit_result.json",
         "four channels, pT-split SF": "z-tautau/fit/results/ztautau_ptsplit_fit_result.json",
         "four channels, e mu trigger prior x2": "z-tautau/fit/results/ztautau_emutrig2x_fit_result.json"
       }
@@ -219,21 +210,22 @@
       },
       "note": "diagnostic: the UL2016postVFP Medium-ID SF map (datasets/corrections, POG/EGM) gives +-0.3-1.6% per electron outside the ECAL gap, 1.2% per Z->ee event; inside 1.444 < |eta_SC| < 1.566, which z-ee does not veto, it is sf = 1 +- 1. Not a result: it uses a number z-ee did not deliver."
     },
-    "tautau_as_delivered": {
-      "label": "#tau#tau as delivered (no #tau_{h} ID p_{T} uncertainty)",
+    "tautau_without_tauidpt": {
+      "label": "#tau#tau without the #tau_{h} ID p_{T} uncertainty",
       "channel_overrides": {
         "tautau": {
-          "modelling": []
+          "drop_systematics": [
+            "TauIDpT_tautau"
+          ]
         }
       },
-      "note": "the tautau likelihood exactly as z-tautau publishes it (1981 +73 -70 pb alone)"
+      "note": "the tautau likelihood without z-tautau's TauIDpT_tautau, i.e. their fit ztautau_flatsf (1981 +73 -70 pb alone), which was their result until 17 Sep 2026 (then the variation tautau_as_delivered)"
     },
     "tautau_ptsplit": {
       "label": "#tau#tau: p_{T}-split #tau_{h} ID SF model",
       "channel_overrides": {
         "tautau": {
-          "config": "z-tautau/fit/ztautau_ptsplit.config",
-          "modelling": []
+          "config": "z-tautau/fit/ztautau_ptsplit.config"
         }
       },
       "note": "z-tautau's cross-check model (l tau_h regions split at pT(tau_h) = 40 GeV, own scale factors below) in place of the nominal one: the effect TauIDpT_tautau stands for, fitted instead of assigned"
@@ -243,7 +235,6 @@
       "channel_overrides": {
         "tautau": {
           "config": "z-tautau/fit/ztautau_emu.config",
-          "modelling": [],
           "signal": {
             "meta": "z-tautau/fit/fitinputs/ztautau_emu.root.meta.json",
             "key": "signal_samples"
@@ -264,7 +255,18 @@
       "label": "#tau#tau: #tau_{h} channels only",
       "channel_overrides": {
         "tautau": {
-          "config": "z-tautau/fit/ztautau_taulep.config"
+          "config": "z-tautau/fit/ztautau_taulep.config",
+          "modelling": [
+            {
+              "name": "TauIDpT_tautau",
+              "title": "#tau_{h} ID SF p_{T} dependence",
+              "category": "Tau ID pT dependence",
+              "relative_shift": {
+                "nominal": "z-tautau/fit/results/ztautau_flatsf_fit_result.json:poi_value",
+                "alternative": "z-tautau/fit/results/ztautau_ptsplit_fit_result.json:poi_value"
+              }
+            }
+          ]
         }
       },
       "note": "tau_h tau_h + mu tau_h + e tau_h with free scale factors, no e mu (z-tautau: 1.203 +0.091 -0.084); docs/11 section 7.1"

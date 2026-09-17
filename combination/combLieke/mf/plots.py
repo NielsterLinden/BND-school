@@ -293,12 +293,13 @@ def tautau_channels(res):
     labels = {"tau_h tau_h": r"$\tau_h\tau_h$ alone (POG $\tau_h$ ID SF)", "mu tau_h": r"$\mu\tau_h$ alone (POG $\tau_h$ ID SF)",
               "e tau_h": r"$e\tau_h$ alone (POG $\tau_h$ ID SF)", "e mu": r"$e\mu$ alone (no $\tau_h$)",
               "tau channels, SF free": r"$\tau_h$ channels, free $\tau_h$ ID SF", "four channels": "four channels (z-tautau result)",
+              "four channels, no tau_h ID pT uncertainty": r"four channels, no $\tau_h$ ID $p_T$ uncertainty",
               "four channels, pT-split SF": r"four channels, $p_T$-split $\tau_h$ ID SF",
               "four channels, e mu trigger prior x2": r"four channels, $e\mu$ trigger prior $\times 2$"}
     rows = [dict(label=labels.get(k, k), value=v["sigma_pb"], up=v["err_up_pb"], down=v["err_down_pb"],
                  colour=C_TAUTAU if k == "four channels" else C_GREY) for k, v in sub.items()]
     s = ch["standalone"]
-    rows.append(dict(label="in the combination\n(with $\\tau_h$ ID $p_T$ uncertainty)", value=s["sigma_pb"], up=s["err_up_pb"], down=s["err_down_pb"],
+    rows.append(dict(label="in the combination\n(standalone fit, same model)", value=s["sigma_pb"], up=s["err_up_pb"], down=s["err_down_pb"],
                      colour=C_TAUTAU, own=True))
     fig, ax = plt.subplots(figsize=(7.2, 0.5 * len(rows) + 1.4))
     pred_centre = res["prediction"]["sigma_pb"] * ch["sigma_reference_pb"] / res["poi_reference_pb"]
@@ -320,7 +321,7 @@ def variations(res):
               "split_all_channels": "shape/norm. split in all channels",
               "ee_split_shared_only": "ee: split shared NPs only",
               "ee_electron_id_1p2": r"ee: electron ID norm. $\pm$1.2%",
-              "tautau_as_delivered": r"$\tau\tau$ as delivered (no $\tau_h$ ID $p_T$ uncertainty)",
+              "tautau_without_tauidpt": r"$\tau\tau$ without the $\tau_h$ ID $p_T$ uncertainty",
               "tautau_ptsplit": r"$\tau\tau$: $p_T$-split $\tau_h$ ID SF model",
               "tautau_emu_only": r"$\tau\tau$: $e\mu$ channel only",
               "tautau_tauh_only": r"$\tau\tau$: $\tau_h$ channels only",

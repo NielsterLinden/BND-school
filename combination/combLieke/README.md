@@ -38,7 +38,7 @@ All numbers: `output/result.json`. All figures: `output/plots/` (PDF and PNG).
 | **combined** | **1949.3 ⁺³⁰·²₋₂₉.₆** | common POI, all three channels |
 | Z → ee | 2093.8 ⁺¹²¹·⁸₋₁₁₄.₅ | standalone fit, same model |
 | Z → μμ | 1931.1 ⁺³⁰·⁸₋₃₀.₁ | standalone fit, same model |
-| Z → ττ | 1981.3 ⁺¹⁵³₋₁₃₆ | standalone fit, same model (z-tautau's own: 1981.3 ⁺⁷³₋₇₀; the difference is `TauIDpT_tautau`, below) |
+| Z → ττ | 1981.3 ⁺¹⁵³₋₁₃₆ | standalone fit, same model (= z-tautau's own result, which carries `TauIDpT_tautau` since 17 Sep; ⁺⁷³₋₇₀ without it) |
 | aMC@NLO | 1953.9 ⁺⁵⁶·¹₋₈₁.₇ | scale +2.5/−3.9 %, PDF 0.74 %, α_s 1.3 % |
 
 * **Channel compatibility.** The three-POI fit (one σ per channel, every shared NP profiled together)
@@ -54,7 +54,7 @@ All numbers: `output/result.json`. All figures: `output/plots/` (PDF and PNG).
   constrained parameter has a post-fit error above 1.02, and 102/102 ranking refits converged. This needs MINUIT
   **strategy 3** (`../CLAUDE.md` item 9). The exception is `split_all_channels`, which only converges with
   strategy 2; only its MINOS interval is used.
-* **The channels' own numbers.** ee 1840.8 ± 29.9 pb (`z-ee/Zee_fit.tar.gz`), μμ 1931.0 pb, ττ 1981.3 ⁺⁷³₋₇₀ pb.
+* **The channels' own numbers.** ee 1840.8 ± 29.9 pb (`z-ee/Zee_fit.tar.gz`), μμ 1931.0 pb, ττ 1981.3 ⁺¹⁵³₋₁₃₆ pb.
   μμ and ττ are reproduced exactly; ee differs, as explained below.
 
 ## The likelihood
@@ -88,7 +88,8 @@ The only changes, made by `mf/trexcfg.adapt_channel` and driven by `config/chann
    μμ config, so it never was in the μμ likelihood and nothing changes (`checks.mumu_cremu_validation`: identical
    fit). Fitted as a control region it would move μμ by −0.4 pb and shrink its uncertainty by 2.6 %
    (`checks.mumu_cremu_control`): that is all that is given up.
-6. **ττ: one modelling uncertainty added**, `TauIDpT_tautau` (next section).
+6. **ττ: nothing added.** Its modelling uncertainty `TauIDpT_tautau` comes with z-tautau's own config since
+   17 Sep (until then the combination added it; next section).
 
 Nothing else is touched: binning, samples, smoothing, symmetrisation, the channels' own DropBins (ττ drops its
 one empty bin, `tautau_SR2` bin 1, itself), MC statistics.
@@ -102,11 +103,12 @@ fit in `variations` (figure `variations`, numbers below); `tautau_channels` show
 
 1. **The τh ID scale factor is not flat in p_T (§7.3) → `TauIDpT_tautau`, ±6.3 % on the ττ signal, in the baseline.**
    The ττ fit assumes one scale factor per decay mode at every p_T. z-tautau's cross-check with separate scale
-   factors below 40 GeV moves their μ_Z from 1.019 to 0.954 (1.8 × their total uncertainty); no parameter of their
-   fit covers that, and they ask a combination that wants a conservative ττ input to carry it. It enters as one
-   OVERALL parameter on the 15 signal templates, its size **read from their two published fits**
-   (`ztautau_fit_result.json`, `ztautau_ptsplit_fit_result.json`), not typed in. The ττ line becomes
-   1981 ⁺¹⁵³₋₁₃₆ pb; in the combined fit the parameter is constrained to 0.49 by μμ and ee (pull +0.18) and
+   factors below 40 GeV moves their μ_Z from 1.019 to 0.954 (1.8 × the uncertainty of the fit without the parameter).
+   It is one OVERALL parameter on the 15 signal templates, its size **read from two fits** (`ztautau_flatsf_fit_result.json`,
+   `ztautau_ptsplit_fit_result.json`), not typed in. **Until 17 Sep the combination added it and z-tautau quoted
+   1981 ⁺⁷³₋₇₀ pb; now z-tautau's own fit carries it (`z-tautau/scripts/step5_fit.py` `pt_model`), so their result and
+   the ττ line here are the same 1981 ⁺¹⁵³₋₁₃₆ pb, and the combination adds nothing (`tautau.modelling: []`).** The
+   likelihood is the one it was. In the combined fit the parameter is constrained to 0.49 by μμ and ee (pull +0.18) and
    costs 2.2 pb in the covariance decomposition (±4.6 pb in the refit ranking). Why it belongs in the baseline: taken at face value, ττ moves the combination by **+1.7 pb with
    its nominal model and −13.8 pb with its p_T-split model** — a 15 pb spread from one modelling choice inside a
    channel that quotes ±3.6 %. With the parameter the baseline sits between the two and depends little on which
@@ -180,10 +182,10 @@ ee's normalisation is limited by the ±5.9 % it was delivered with, and its stan
 | baseline | 1949.3 ⁺³⁰·²₋₂₉.₆ | |
 | without ee | 1936.7 ⁺³⁰·²₋₂₉.₆ | −12.6 |
 | without ττ | 1943.9 ⁺³⁰·⁸₋₃₀.₂ | −5.4 |
-| shape/normalisation split in all three channels (strategy 2) | 1959.4 ⁺³¹·⁵₋₃₁.₀ | +10.1 |
+| shape/normalisation split in all three channels (strategy 2) | 1959.5 ⁺³¹·⁵₋₃₁.₀ | +10.1 |
 | ee: split only the shared parameters (the gap-driven `ElectronID` shape constraint trusted) | 1882.1 ⁺²⁶·⁴₋₂₆.₀ | −67.3 |
 | ee: `ElectronID` normalisation ±1.2 % (official map outside the gap) — *diagnostic* | 1938.5 ⁺²⁸·⁸₋₂₈.₃ | −10.8 |
-| ττ as delivered (no `TauIDpT_tautau`) | 1951.0 ⁺²⁹·⁹₋₂₉.₃ | +1.7 |
+| ττ without `TauIDpT_tautau` (z-tautau's `ztautau_flatsf`) | 1951.0 ⁺²⁹·⁹₋₂₉.₃ | +1.7 |
 | ττ: p_T-split τh ID scale-factor model | 1935.6 ⁺²⁹·⁴₋₂₈.₈ | −13.8 |
 | ττ: eμ channel only | 1943.2 ⁺³⁰·²₋₂₉.₇ | −6.2 |
 | ττ: τh channels only | 1949.0 ⁺³⁰·⁴₋₂₉.₈ | −0.4 |
@@ -209,6 +211,9 @@ of fit, and consider coarser bins if it is still poor.
   directory (`mf/provenance.py`; the ROOT inputs are not in git). The whole DAG was run twice on the same inputs
   (17 Sep, 13:57 and 16:01): the 67 generated configs are identical, the combined result, the three channel results
   and the compatibility test agree to all printed digits, the largest difference in any variation is 0.006 pb.
+  A third run (17 Sep, 18:10) followed z-tautau's re-delivery with `TauIDpT_tautau` in its own config: the ττ
+  likelihood is block for block the one the combination built before, and every number is reproduced (the
+  strategy-2 variation `split_all_channels` moves by 0.04 pb, everything else by less than 0.01 pb).
 * **Orthogonality** (`docs/orthogonality.md`, measured on data event by event for ee, μμ and τhτh): μμ ∩ ee ≤ 97
   events (1.5 × 10⁻⁵ of ee), τhτh ∩ μμ = 0, τhτh ∩ ee ≤ 4 events. The three new ττ final states veto any second
   muon or electron by construction, and their one known overlap, `mumu_CRemu`, is removed; the event-level

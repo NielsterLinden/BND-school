@@ -134,8 +134,8 @@ Nothing under `presentation/` was regenerated. Only the agent definitions in
 The git worktrees under `.claude/worktrees/` belong to other sessions and still carry pre-freeze copies of these
 docs; they are not the source of truth.
 
-**Status, 17 Sep afternoon — section 4 (Z → μμ) is done** on branch `worktree-tnp-explainer` (not yet merged into
-`main`): the three μμ extractors and `zmumu_{fit,sr_stack,tnp}.json` are on the frozen result (all checks pass; the
+**Status, 17 Sep afternoon — section 4 (Z → μμ) is done** (built on branch `worktree-tnp-explainer`, merged into
+`main` on 17 Sep): the three μμ extractors and `zmumu_{fit,sr_stack,tnp}.json` are on the frozen result (all checks pass; the
 table above under-reported `extract_zmumu_fit.py`: the GoF, the grouped impacts, the `ratio_prefit` range and the
 YAML-vs-`histograms.pkl` comparison had to move too), the chapter was rebuilt as 21 clips numbered in play order
 (4-01 … 4-21, `presentation/setup_and_reference/briefs/zmumu.md`), and the brief, the storyboard and the

@@ -213,9 +213,13 @@ scale factors free: the workspaces of the MultiFit), `ztautau_<ch>_fixedid` (POG
   the disagreement between the eμ channel (0.960) and the τ channels. So the single-scale-factor
   assumption is not an academic caveat: it is worth more than every experimental systematic in the table.
   It is not adopted as the nominal model because the four ratios are individually compatible with one and
-  the split doubles the number of free scale factors on the same data; but any use of this measurement
-  should carry the 6 % spread between the two fits. The TauPOG pT-binned prescription, which is 7 % below
-  the DM-binned one above 40 GeV (`docs/07`), points the same way.
+  the split doubles the number of free scale factors on the same data (and its goodness of fit is lower,
+  p = 0.015 against 0.154); but any use of this measurement should carry the 6 % spread between the two fits.
+  **Since 17 Sep 2026 the measurement does that itself:** `TauIDpT_tautau`, one OVERALL parameter on the signal
+  with the relative difference between `ztautau_flatsf` (this model without the parameter) and
+  `ztautau_ptsplit` as its size (`scripts/step5_fit.py` `pt_model`). It is degenerate with μ_Z, so the central
+  value stays and the uncertainty becomes +0.079 −0.070 (1981 ⁺¹⁵³₋₁₃₆ pb). The TauPOG pT-binned prescription,
+  which is 7 % below the DM-binned one above 40 GeV (`docs/07`), points the same way.
 * With the scale factors free, the eμ channel (no τh) and the three τ channels measure μ_Z in different ways
   and the combined number is their compromise; both are quoted (`docs/11-combination-inputs.md` §7).
 * `MET_Unclustered` changes the ℓτh *yield* by −3.8 % / +2.9 % through the m_T < 40 GeV cut and the MET term
@@ -233,17 +237,18 @@ injected here by `scripts/update_docs.py`:
 **Result** (four channels, τh ID scale factors and energy scale fitted in situ)
 
 ```
-σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 1981 +73 −70 pb   (stat ±9;  prediction 1945 pb: aMC@NLO acceptance, NNLO normalisation)
-μ_Z = 1.019 +0.037 −0.036   (stat ±0.005, syst ±0.036),   expected ±0.036,   GoF p = 0.15,   μ_tt̄ = 1.11 ± 0.04
+σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 1981 +153 −136 pb   (stat ±9;  prediction 1945 pb: aMC@NLO acceptance, NNLO normalisation)
+μ_Z = 1.019 +0.079 −0.070   (stat ±0.005, syst ±0.074),   expected ±0.073,   GoF p = 0.15,   μ_tt̄ = 1.11 ± 0.04
+includes the τh ID scale-factor pT dependence (TauIDpT_tautau, ±6.3 % on the signal: μ_Z 1.019 flat, 0.954 pT-split);   without it 1981 +73 −70 pb
 τh ID SF (Tight):  DM0 0.989 ± 0.040 (POG 0.90 ± 0.13)  DM1 0.963 ± 0.034 (POG 0.89 ± 0.05)  DM10 0.896 ± 0.035 (POG 0.94 ± 0.15)  DM11 0.795 ± 0.050 (POG 0.81 ± 0.15)
 τh energy scale:   DM0 -0.6 ± 0.9 %  DM1 -0.2 ± 0.6 %  DM10 +0.6 ± 1.0 %  DM11 +3.2 ± 2.2 %
 μ_Z of the two sub-measurements the fit combines:  e mu alone 0.960 +0.042 −0.040;  τ channels alone (SF free) 1.203 +0.091 −0.084   (2.6 σ apart)
 per channel alone (POG SFs fixed):  tautau 1.043 +0.079 −0.072  mutau 1.048 +0.055 −0.051  etau 1.016 +0.070 −0.065  emu 0.960 +0.042 −0.040
 ```
 
-Largest grouped impacts on μ_Z: NormFactors 3.1 %, Emu trigger 2.5 %, Gammas 1.4 %, Tau trigger 1.2 %, Fakes 1.2 %, Electron energy 1.2 %; data statistics 0.5 %. The categories overlap, so their quadrature sum exceeds the MINOS total by a factor 1.46 (`output/RESULTS.md`).
+Largest grouped impacts on μ_Z: Tau ID pT dependence 6.5 %, NormFactors 3.1 %, Emu trigger 2.5 %, Gammas 1.4 %, Tau trigger 1.2 %, Fakes 1.2 %; data statistics 0.5 %. The categories overlap, so their quadrature sum exceeds the MINOS total by a factor 1.13 (`output/RESULTS.md`).
 
-Ranking: mu_ttbar 3.1 %, EmuTrigger 2.6 %, TauIDSF_DM1 2.2 %, TauIDSF_DM10 2.1 %, TauIDSF_DM0 1.9 %, TauIDSF_DM11 1.3 %.
+Ranking: TauIDpT_tautau 6.8 %, mu_ttbar 3.1 %, EmuTrigger 2.6 %, TauIDSF_DM1 2.2 %, TauIDSF_DM10 2.1 %, TauIDSF_DM0 1.9 %.
 <!-- RESULT:END -->
 
 ## 13. Channel readiness and the per-channel exports for a combination

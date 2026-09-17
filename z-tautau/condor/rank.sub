@@ -1,9 +1,11 @@
-executable = /project/atlas/users/sjankovy/BND/BND-school/z-tautau/condor/run_rank.sh
-arguments  = $(np)
+# CH (this z-tautau checkout) comes from condor/orchestrator.sh:
+#   condor_submit CH=<checkout>/z-tautau condor/rank.sub
+executable = $(CH)/condor/run_rank.sh
+arguments  = $(CH) $(np)
 
-output = /project/atlas/users/sjankovy/BND/BND-school/z-tautau/condor/out/rank_$(np)_$(Cluster).$(Process).log
-error  = /project/atlas/users/sjankovy/BND/BND-school/z-tautau/condor/err/rank_$(np)_$(Cluster).$(Process).log
-log    = /project/atlas/users/sjankovy/BND/BND-school/z-tautau/condor/logs/rank_$(Cluster).log
+output = $(CH)/condor/out/rank_$(np)_$(Cluster).$(Process).log
+error  = $(CH)/condor/err/rank_$(np)_$(Cluster).$(Process).log
+log    = $(CH)/condor/logs/rank_$(Cluster).log
 
 stream_output = True
 stream_error  = True
@@ -19,4 +21,4 @@ request_memory = 4GB
 
 JobBatchName = "ztt_rank"
 
-queue np from /project/atlas/users/sjankovy/BND/BND-school/z-tautau/condor/params_rank.txt
+queue np from $(CH)/condor/params_rank.txt

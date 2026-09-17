@@ -3,13 +3,16 @@
 #
 #   nohup setsid bash condor/orchestrator.sh > $BND_TAUTAU_CACHE/logs/condor_chain.log 2>&1 &
 #
-# Stage 1  the 12 TRExFitter jobs of step 5, one Condor job each (batch ztt_fit)
+# Stage 1  the TRExFitter jobs of step 5, one Condor job each (batch ztt_fit): first the cross-checks, among them
+#          ztautau_flatsf and ztautau_ptsplit, then the fits that read those two for the size of TauIDpT_tautau
+#          (the measurement and ztautau_emutrig2x; scripts/step5_fit.py pt_model)
 # Stage 2  the nuisance-parameter ranking of the combined fit, one Condor job per parameter (ztt_rank)
 # Stage 3  merge the ranking, re-read the result, MultiFit of the four channel workspaces
 # Stage 4  the report and the result block injected into the documents
 # NB: no `set -u` before the LCG view is sourced -- its setup.sh reads unset variables (nikhef-condor skill)
-CH=/project/atlas/users/sjankovy/BND/BND-school/z-tautau
+CH=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)      # this checkout: the jobs run where the orchestrator is
 D=$CH/condor
+mkdir -p "$D"/{out,err,logs}
 cd "$CH" || exit 1
 source ../setup.sh
 set -o pipefail
@@ -31,10 +34,19 @@ wait_for_batch() {           # $1 = JobBatchName, $2 = stage label
     done
 }
 
-echo "######## stage 1: the fits ($(date))"
-condor_submit "$D/step5.sub" || exit 1
+echo "######## stage 1: the cross-check fits ($(date))"
+for j in ztautau ztautau_flatsf ztautau_ptsplit ztautau_emutrig2x; do      # never read a result of an earlier chain
+    rm -f "$CH/fit/results/${j}_fit_result.json"
+done
+condor_submit "CH=$CH" "params=$D/params_step5.txt" "$D/step5.sub" || exit 1
 wait_for_batch ztt_fit stage1 || exit 2
-for j in ztautau ztautau_tautau ztautau_mutau ztautau_etau ztautau_emu ztautau_taulep ztautau_ptsplit ztautau_emutrig2x; do
+for j in ztautau_flatsf ztautau_ptsplit; do
+    [[ -f "$CH/fit/results/${j}_fit_result.json" ]] || { echo "MISSING result for $j -- see condor/err"; exit 3; }
+done
+echo "######## stage 1b: the measurement and ztautau_emutrig2x, with TauIDpT_tautau ($(date))"
+condor_submit "CH=$CH" "params=$D/params_step5_measurement.txt" "$D/step5.sub" || exit 1
+wait_for_batch ztt_fit stage1b || exit 2
+for j in ztautau ztautau_flatsf ztautau_tautau ztautau_mutau ztautau_etau ztautau_emu ztautau_taulep ztautau_ptsplit ztautau_emutrig2x; do
     [[ -f "$CH/fit/results/${j}_fit_result.json" ]] || { echo "MISSING result for $j -- see condor/err"; exit 3; }
 done
 echo "stage 1 results:"
@@ -44,7 +56,7 @@ echo "######## stage 2: the ranking, one Condor job per parameter ($(date))"
 python condor/make_rank_params.py || exit 4
 # the ranking jobs are single-core: one CPU per parameter beats six CPUs per fit here
 sed 's/^  NumCPU: .*/  NumCPU: 1/' "$CH/fit/ztautau.config" > "$CH/fit/ztautau_rank.config"
-condor_submit "$D/rank.sub" || exit 5
+condor_submit "CH=$CH" "$D/rank.sub" || exit 5
 wait_for_batch ztt_rank stage2 || exit 6
 echo "ranking files: $(ls "$CH"/fit/results/ztautau/Fits/NPRanking_* 2>/dev/null | wc -l)"
 

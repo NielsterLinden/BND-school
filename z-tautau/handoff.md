@@ -33,17 +33,18 @@
 **Result** (four channels, τh ID scale factors and energy scale fitted in situ)
 
 ```
-σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 1981 +73 −70 pb   (stat ±9;  prediction 1945 pb: aMC@NLO acceptance, NNLO normalisation)
-μ_Z = 1.019 +0.037 −0.036   (stat ±0.005, syst ±0.036),   expected ±0.036,   GoF p = 0.15,   μ_tt̄ = 1.11 ± 0.04
+σ(pp → Z/γ* → ττ, 60 < m < 120 GeV) = 1981 +153 −136 pb   (stat ±9;  prediction 1945 pb: aMC@NLO acceptance, NNLO normalisation)
+μ_Z = 1.019 +0.079 −0.070   (stat ±0.005, syst ±0.074),   expected ±0.073,   GoF p = 0.15,   μ_tt̄ = 1.11 ± 0.04
+includes the τh ID scale-factor pT dependence (TauIDpT_tautau, ±6.3 % on the signal: μ_Z 1.019 flat, 0.954 pT-split);   without it 1981 +73 −70 pb
 τh ID SF (Tight):  DM0 0.989 ± 0.040 (POG 0.90 ± 0.13)  DM1 0.963 ± 0.034 (POG 0.89 ± 0.05)  DM10 0.896 ± 0.035 (POG 0.94 ± 0.15)  DM11 0.795 ± 0.050 (POG 0.81 ± 0.15)
 τh energy scale:   DM0 -0.6 ± 0.9 %  DM1 -0.2 ± 0.6 %  DM10 +0.6 ± 1.0 %  DM11 +3.2 ± 2.2 %
 μ_Z of the two sub-measurements the fit combines:  e mu alone 0.960 +0.042 −0.040;  τ channels alone (SF free) 1.203 +0.091 −0.084   (2.6 σ apart)
 per channel alone (POG SFs fixed):  tautau 1.043 +0.079 −0.072  mutau 1.048 +0.055 −0.051  etau 1.016 +0.070 −0.065  emu 0.960 +0.042 −0.040
 ```
 
-Largest grouped impacts on μ_Z: NormFactors 3.1 %, Emu trigger 2.5 %, Gammas 1.4 %, Tau trigger 1.2 %, Fakes 1.2 %, Electron energy 1.2 %; data statistics 0.5 %. The categories overlap, so their quadrature sum exceeds the MINOS total by a factor 1.46 (`output/RESULTS.md`).
+Largest grouped impacts on μ_Z: Tau ID pT dependence 6.5 %, NormFactors 3.1 %, Emu trigger 2.5 %, Gammas 1.4 %, Tau trigger 1.2 %, Fakes 1.2 %; data statistics 0.5 %. The categories overlap, so their quadrature sum exceeds the MINOS total by a factor 1.13 (`output/RESULTS.md`).
 
-Ranking: mu_ttbar 3.1 %, EmuTrigger 2.6 %, TauIDSF_DM1 2.2 %, TauIDSF_DM10 2.1 %, TauIDSF_DM0 1.9 %, TauIDSF_DM11 1.3 %.
+Ranking: TauIDpT_tautau 6.8 %, mu_ttbar 3.1 %, EmuTrigger 2.6 %, TauIDSF_DM1 2.2 %, TauIDSF_DM10 2.1 %, TauIDSF_DM0 1.9 %.
 <!-- RESULT:END -->
 
 ## What the review changed
@@ -64,6 +65,10 @@ In short:
   own scale factors and finds them 6 / 0 / 6 / 14 % higher; μ_Z then moves to 0.954, 1.8 times the total
   uncertainty, and the τ channels come down onto the eμ value. That 6 % is the size of the
   single-scale-factor assumption and it is larger than any experimental systematic we quote.
+  **Since 17 Sep 2026 the measurement carries it itself** as the nuisance parameter `TauIDpT_tautau`
+  (±6.3 % on the signal, its size read from the fits `ztautau_flatsf` and `ztautau_ptsplit`): the central
+  value is unchanged, the result is 1981 ⁺¹⁵³₋₁₃₆ pb instead of 1981 ⁺⁷³₋₇₀ pb (which stays available as
+  `ztautau_flatsf`), and it is the number the combination has for its ττ line.
 * The grouped impacts are reported with their (real) over-shoot instead of as if they added up to the total.
 
 ## For the combination

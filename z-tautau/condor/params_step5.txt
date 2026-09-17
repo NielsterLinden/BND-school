@@ -1,4 +1,4 @@
---skip-ranking --num-cpu 4
+--job ztautau_flatsf --no-tauid-pt --skip-ranking --skip-asimov --num-cpu 4
 --channels tautau --job ztautau_tautau --skip-ranking --skip-asimov --num-cpu 4
 --channels mutau --job ztautau_mutau --skip-ranking --skip-asimov --num-cpu 4
 --channels etau --job ztautau_etau --skip-ranking --skip-asimov --num-cpu 4
@@ -9,4 +9,3 @@
 --channels emu --job ztautau_emu_fixedid --skip-ranking --skip-asimov --fix-tauid --num-cpu 4
 --channels tautau mutau etau --job ztautau_taulep --skip-ranking --skip-asimov --num-cpu 4
 --job ztautau_ptsplit --region-set ptsplit --skip-ranking --skip-asimov --num-cpu 4
---job ztautau_emutrig2x --scale-syst EmuTrigger=2.0 --skip-ranking --skip-asimov --num-cpu 4

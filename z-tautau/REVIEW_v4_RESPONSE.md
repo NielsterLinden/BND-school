@@ -128,6 +128,10 @@ compatible with one, and the split doubles the number of free scale factors on t
 6 % between the two fits is the honest size of that modelling choice, and `docs/10-v4-plan.md` §11 and
 `docs/11-combination-inputs.md` §7 both say so.
 
+*Added 17 Sep 2026:* the measurement now carries that 6 % itself, as the nuisance parameter `TauIDpT_tautau`
+(size read from `ztautau_flatsf` and `ztautau_ptsplit`); the result is 1981 ⁺¹⁵³₋₁₃₆ pb with the same central
+value. The numbers in this document are those of the fit without it, which is now the job `ztautau_flatsf`.
+
 ## 7. What a reader of the result should carry away
 
 The review's central point stands and is now in the report rather than in a review document: with the τh ID

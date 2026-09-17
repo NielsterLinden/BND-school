@@ -2578,5 +2578,6 @@
  ],
  "tau_id_fixed": false,
  "region_set": "nominal",
- "scaled_systematics": {}
+ "scaled_systematics": {},
+ "tauid_pt_model": null
 }

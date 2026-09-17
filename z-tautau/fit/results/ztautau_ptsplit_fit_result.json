@@ -29001,5 +29001,6 @@
  ],
  "tau_id_fixed": false,
  "region_set": "ptsplit",
- "scaled_systematics": {}
+ "scaled_systematics": {},
+ "tauid_pt_model": null
 }

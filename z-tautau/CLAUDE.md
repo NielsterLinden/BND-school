@@ -51,9 +51,18 @@ result asked for: `ztautau_taulep` (no eμ), `ztautau_ptsplit` (τh ID scale fac
 the ℓτh channels) and `ztautau_emutrig2x` (the eμ trigger prior doubled). `run_all.py --help` says what each
 one tests; `REVIEW_v4_RESPONSE.md` says why.
 
+**The measurement carries the pT dependence of the τh ID scale factor as `TauIDpT_tautau`** (since 17 Sep 2026):
+one OVERALL parameter on the signal whose size is the relative difference in μ_Z between `ztautau_flatsf` (the
+same model without the parameter, `--no-tauid-pt`) and `ztautau_ptsplit` — read from their result files by
+`step5_fit.pt_model`, never typed in. Those two jobs therefore run **before** the measurement (`run_all.py`
+order; stage 1 / 1b of `condor/orchestrator.sh`). Every four-channel fit with one scale factor per decay mode
+carries it (the measurement, `ztautau_emutrig2x`); the single-channel jobs, `ztautau_taulep` and the pT-split
+model do not. It is degenerate with μ_Z: the central value is that of `ztautau_flatsf`, the uncertainty grows.
+The Condor chain runs from any checkout: `nohup setsid bash condor/orchestrator.sh > condor/out/chain.log 2>&1 &`.
+
 **Order inside step 5 matters.** The stat-only and Asimov runs overwrite TRExFitter's unsuffixed correlation
 matrix and NP plots, so the observed fit and everything drawn from it run *last*. The Asimov fit uses its own
-config copy with `FitStrategy: 2` (with the default strategy MINOS failed on `mu_Z` and the HESSE error of a
+config copy with `FitStrategy: 3` (with the default strategy MINOS failed on `mu_Z` and the HESSE error of a
 Hessian forced positive-definite was quoted as the expected uncertainty). If MINOS fails, nothing is quoted.
 
 * Long jobs (skims): launch detached (`nohup setsid python scripts/step1_skim.py ... > $BND_TAUTAU_CACHE/logs/x.log &`)
@@ -148,6 +157,13 @@ Hessian forced positive-definite was quoted as the expected uncertainty). If MIN
     `NOCRASH` is required, not cosmetic.
 16. **The skims keep leptons with I_rel < 0.5**: every isolation sideband must live below 0.5 (the eμ SB2 of the
     paper, I_rel > 0.6, is not available).
+17. **With `DropBins` TRExFitter writes two workspaces**: `<job>_combined_<job>_model.root` is the fitted model,
+    `<job>_allBinsFitRegions_combined_...` the one it draws from. Until 17 Sep 2026 step 5 copied the second over
+    the first "to keep the conventional name", so the ranking, the MultiFit check and the committed `ztautau` /
+    `ztautau_tautau` workspaces were the all-bins model (fake sideband of `tautau_SR0` and the empty bin included):
+    μ_Z 1.0172 instead of 1.0187. The quoted fits ran before the copy and were never affected. After removing it the
+    MultiFit reproduces the single-file fit to all digits. A standalone `trex-fitter f` after a job is only a
+    reproduction of that job if the workspace is still the fitted one.
 
 ## Where numbers come from
 

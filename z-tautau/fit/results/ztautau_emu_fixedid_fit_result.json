@@ -666,5 +666,6 @@
  ],
  "tau_id_fixed": true,
  "region_set": "nominal",
- "scaled_systematics": {}
+ "scaled_systematics": {},
+ "tauid_pt_model": null
 }

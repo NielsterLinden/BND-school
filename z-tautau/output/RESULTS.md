@@ -6,11 +6,14 @@ CMS Open Data 2016 (Run2016G+H), L = 16393.4 pb^-1. Channels: tau_h tau_h (3 BDT
 
 | quantity | value |
 |---|---|
-| mu_Z | 1.019 +0.037 -0.036 (stat 0.005, syst 0.036) |
-| sigma(pp -> Z/gamma* -> tautau, 60 < m < 120) | 1981 +73 -70 pb (stat 9) (prediction 1945 pb) |
-| expected (Asimov, MINOS) | +0.037 -0.035 |
+| mu_Z | 1.019 +0.079 -0.070 (stat 0.005, syst 0.074) |
+| sigma(pp -> Z/gamma* -> tautau, 60 < m < 120) | 1981 +153 -136 pb (stat 9) (prediction 1945 pb) |
+| expected (Asimov, MINOS) | +0.077 -0.068 |
 | goodness of fit | p = 0.154 |
 | mu_ttbar (from emu_CRtt) | 1.111 +0.038 -0.038 |
+| tau_h ID scale factor pT dependence (`TauIDpT_tautau`) | +-6.3 % on the signal: mu_Z 1.019 with one scale factor per decay mode, 0.954 with the pT-split ones |
+
+The uncertainty contains the model dependence of the tau_h ID scale factor (`TauIDpT_tautau`, section "Cross-check fits"). Without it the same fit gives 1.019 +0.037 -0.036, i.e. 1981 +73 -70 pb (`ztautau_flatsf`): the parameter is degenerate with mu_Z, so the central value, the scale factors and the pulls below are the same and only the uncertainty of mu_Z grows.
 
 tau_h ID scale factors (fitted, TauPOG prior-free):
 
@@ -36,7 +39,7 @@ The four channels do not measure mu_Z the same way. The e mu channel has no tau_
 
 | fit | mu_Z | sigma(60-120) [pb] | GoF p |
 |---|---|---|---|
-| four channels (the measurement) | 1.019 +0.037 -0.036 | 1981 +73 -70 | 0.154 |
+| four channels (the measurement) | 1.019 +0.079 -0.070 | 1981 +153 -136 | 0.154 |
 | e mu alone (no tau_h) | 0.960 +0.042 -0.040 | 1868 +82 -78 | 0.034 |
 | tau channels alone, scale factors free | 1.203 +0.091 -0.084 | 2340 +176 -163 | 0.476 |
 
@@ -46,9 +49,10 @@ The two differ by +0.243 in mu_Z, i.e. 2.6 sigma of their (uncorrelated-limit) c
 
 | fit | mu_Z | sigma(60-120) [pb] | what it tests |
 |---|---|---|---|
+| `ztautau_flatsf` | 1.019 +0.037 -0.036 | 1981 +73 -70 | the measurement without `TauIDpT_tautau`: one scale factor per decay mode, no uncertainty on that (the result quoted until 17 Sep 2026) |
 | `ztautau_taulep` | 1.203 +0.091 -0.084 | 2340 +176 -163 | tau_h tau_h + mu tau_h + e tau_h (no e mu), scale factors free |
 | `ztautau_ptsplit` | 0.954 +0.035 -0.033 | 1856 +68 -65 | l tau_h regions split at pT(tau_h) = 40 GeV, own scale factors below |
-| `ztautau_emutrig2x` | 1.055 +0.049 -0.046 | 2053 +95 -90 | e mu trigger variation doubled (2% per leg, the pre-review treatment) |
+| `ztautau_emutrig2x` | 1.055 +0.087 -0.077 | 2053 +169 -150 | e mu trigger variation doubled (2% per leg, the pre-review treatment); carries `TauIDpT_tautau` like the measurement |
 
 Scale factors of the pT-split fit (the assumption behind the tau_h tau_h / (l tau_h)^2 lever: one scale factor per decay mode for pT(tau_h) > 30 GeV in l tau_h and > 40 GeV in tau_h tau_h):
 
@@ -59,26 +63,27 @@ Scale factors of the pT-split fit (the assumption behind the tau_h tau_h / (l ta
 | DM10 | 0.904 +- 0.047 | 0.958 +- 0.037 | 1.060 |
 | DM11 | 0.786 +- 0.086 | 0.897 +- 0.051 | 1.140 |
 
-The scale factors below 40 GeV come out +6%, -0%, +6%, +14% relative to those above it (DM0, DM1, DM10, DM11), each 0.5-1 sigma on its own but coherent in sign, and mu_Z moves by -0.064 (1.8 times the total uncertainty) to 0.954. The single-scale-factor assumption is therefore worth more than any experimental systematic in the table below; the split is not the nominal model (the ratios are individually compatible with one and it doubles the number of free scale factors on the same data), but that spread should travel with the result. See REVIEW_v4_RESPONSE.md section 6.
+The scale factors below 40 GeV come out +6%, -0%, +6%, +14% relative to those above it (DM0, DM1, DM10, DM11), each 0.5-1 sigma on its own but coherent in sign, and mu_Z moves by -0.064 (1.8 times the uncertainty of `ztautau_flatsf`) to 0.954. The single-scale-factor assumption is therefore worth more than any experimental systematic; the split is not the nominal model (the ratios are individually compatible with one, it doubles the number of free scale factors on the same data and its goodness of fit is lower), so the measurement carries the spread between the two models as the nuisance parameter `TauIDpT_tautau` (group `Tau ID pT dependence` below; scripts/step5_fit.py `pt_model`). See REVIEW_v4_RESPONSE.md section 6.
 
 ## Grouped impacts on mu_Z
 
 The categories are not independent: mu_ttbar, the e mu trigger efficiency and mu_Z form one chain (the e mu control region fixes mu_ttbar x eff, the signal region mu_Z x eff), so `NormFactors` and `Emu trigger` contain the same degeneracy. Their quadrature sum therefore over-shoots the total. **The uncertainty of the measurement is the MINOS total, not the sum of the rows below.**
 
-Quadrature sum of all rows including data statistics: 0.0536 against the MINOS total 0.0367 (a factor 1.46 too large). A combination that needs a category breakdown should scale every row by 0.685 (`for_combination.channel_result.groups_rescaled` in results.json).
+Quadrature sum of all rows including data statistics: 0.0841 against the MINOS total 0.0743 (a factor 1.13 too large). A combination that needs a category breakdown should scale every row by 0.884 (`for_combination.channel_result.groups_rescaled` in results.json).
 
 | group | impact on mu_Z | rho with mumu / ee (recommended) |
 |---|---|---|
-| FullSyst | 0.0365 | - |
-| NormFactors | 0.0309 | 0.0 |
-| Emu trigger | 0.0252 | 0.0 |
+| FullSyst | 0.0742 | - |
+| Tau ID pT dependence | 0.0647 | 0.0 |
+| NormFactors | 0.0310 | 0.0 |
+| Emu trigger | 0.0253 | 0.0 |
 | Gammas | 0.0143 | 0.0 |
 | Tau trigger | 0.0124 | 0.0 |
 | Fakes | 0.0120 | 0.0 |
 | Electron energy | 0.0117 | 0.0 |
 | MET | 0.0110 | 0.0 |
 | Luminosity | 0.0105 | 1.0 |
-| Electron efficiency | 0.0090 | 0.0 |
+| Electron efficiency | 0.0091 | 0.0 |
 | Background normalisation | 0.0081 | 1.0 |
 | Tau energy scale | 0.0076 | 0.0 |
 | Pileup | 0.0066 | 1.0 |
@@ -88,9 +93,9 @@ Quadrature sum of all rows including data statistics: 0.0536 against the MINOS t
 | b tagging | 0.0043 | 0.0 |
 | L1 prefiring | 0.0038 | 1.0 |
 | Background modelling | 0.0029 | 0.0 |
-| Tau ID | 0.0025 | 0.0 |
+| Tau ID | 0.0026 | 0.0 |
 | Electron trigger | 0.0020 | 0.0 |
-| Jets | 0.0010 | 0.0 |
+| Jets | 0.0009 | 0.0 |
 | Data statistics | 0.0046 | 0.0 |
 
 ## Per-channel fits (one channel each, tau_h ID scale factors fixed to the TauPOG values)
@@ -115,7 +120,7 @@ See `docs/11-combination-inputs.md`. Every file below is committed.
 | etau | `fit/fitinputs/ztautau_etau.root` | `fit/ztautau_etau.config` | present | 1.099 +0.578 -0.288 |
 | emu | `fit/fitinputs/ztautau_emu.root` | `fit/ztautau_emu.config` | present | 0.960 +0.042 -0.040 |
 
-MultiFit of the four workspaces (`fit/comb.config`): mu_Z = 1.017 +0.037 -0.036, against the single-file fit 1.019 +0.037 -0.036: the two routes are the same model.
+MultiFit of the four workspaces (`fit/comb.config`): mu_Z = 1.019 +0.037 -0.036, against the single-file fit 1.019 +0.037 -0.036 (`ztautau_flatsf`: the channel workspaces do not carry `TauIDpT_tautau`): the two routes are the same model.
 
 ## Prefit yields per region
 

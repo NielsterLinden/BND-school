@@ -1,9 +1,11 @@
-executable = /project/atlas/users/sjankovy/BND/BND-school/z-tautau/condor/run_step5.sh
-arguments  = $(args)
+# CH (this z-tautau checkout) and params (the file with one job per line) come from condor/orchestrator.sh:
+#   condor_submit CH=<checkout>/z-tautau params=<file> condor/step5.sub
+executable = $(CH)/condor/run_step5.sh
+arguments  = $(CH) $(args)
 
-output = /project/atlas/users/sjankovy/BND/BND-school/z-tautau/condor/out/step5_$(Cluster).$(Process).log
-error  = /project/atlas/users/sjankovy/BND/BND-school/z-tautau/condor/err/step5_$(Cluster).$(Process).log
-log    = /project/atlas/users/sjankovy/BND/BND-school/z-tautau/condor/logs/step5_$(Cluster).log
+output = $(CH)/condor/out/step5_$(Cluster).$(Process).log
+error  = $(CH)/condor/err/step5_$(Cluster).$(Process).log
+log    = $(CH)/condor/logs/step5_$(Cluster).log
 
 stream_output = True
 stream_error  = True
@@ -19,4 +21,4 @@ request_memory = 6GB
 
 JobBatchName = "ztt_fit"
 
-queue args from /project/atlas/users/sjankovy/BND/BND-school/z-tautau/condor/params_step5.txt
+queue args from $(params)

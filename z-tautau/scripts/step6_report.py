@@ -34,11 +34,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from ztautau import analysis_v4 as an, config, plotting  # noqa: E402
 
 JOB = config.JOB_V4
-VARIANT_JOBS = {"taulep": f"{JOB}_taulep", "ptsplit": f"{JOB}_ptsplit", "emutrig2x": f"{JOB}_emutrig2x"}
+VARIANT_JOBS = {"flatsf": f"{JOB}_flatsf", "taulep": f"{JOB}_taulep", "ptsplit": f"{JOB}_ptsplit", "emutrig2x": f"{JOB}_emutrig2x"}
 VARIANT_LABEL = {
+    "flatsf": "the measurement without `TauIDpT_tautau`: one scale factor per decay mode, no uncertainty on that (the result quoted until 17 Sep 2026)",
     "taulep": "tau_h tau_h + mu tau_h + e tau_h (no e mu), scale factors free",
     "ptsplit": "l tau_h regions split at pT(tau_h) = 40 GeV, own scale factors below",
-    "emutrig2x": "e mu trigger variation doubled (2% per leg, the pre-review treatment)",
+    "emutrig2x": "e mu trigger variation doubled (2% per leg, the pre-review treatment); carries `TauIDpT_tautau` like the measurement",
 }
 # Correlation of each uncertainty category with the z-mumu / z-ee channels, for the combination
 # (combination/comb/model.py CORRELATION). Categories the combination already knows keep its value;
@@ -49,6 +50,7 @@ CATEGORY_RHO = {
     "Tau ID": 0.0, "Tau trigger": 0.0, "Tau energy scale": 0.0, "Gammas": 0.0, "Fakes": 0.0, "MET": 0.0,
     "Electron trigger": 0.0, "Emu trigger": 0.0, "Electron energy": 0.0, "Muon efficiency ": 0.0,
     "Jets": 0.0, "b tagging": 0.0, "Background modelling": 0.0, "NormFactors": 0.0, "Tau ID (fitted)": 0.0,
+    "Tau ID pT dependence": 0.0,
 }
 
 
@@ -77,7 +79,8 @@ def summarise(res):
                                "err_up": up * s60, "err_down": dn * s60, "prediction": s60},
            "tau_id_sf": res.get("tau_id_sf"), "tau_es": res.get("tau_es"), "mu_ttbar": res.get("mu_ttbar"),
            "channels": res.get("channels"), "tau_id_fixed": res.get("tau_id_fixed", False),
-           "region_set": res.get("region_set", "nominal"), "scaled_systematics": res.get("scaled_systematics", {})}
+           "region_set": res.get("region_set", "nominal"), "scaled_systematics": res.get("scaled_systematics", {}),
+           "tauid_pt_model": res.get("tauid_pt_model")}
     ranking = sorted(res.get("ranking", []), key=lambda r: -max(abs(r["dpoi_up_post"]), abs(r["dpoi_down_post"])))
     out["ranking"] = [{"name": r["name"], "pull": r["pull"], "constraint": 0.5 * (abs(r["err_up"]) + abs(r["err_down"])),
                        "impact_up": r["dpoi_up_post"], "impact_down": r["dpoi_down_post"]} for r in ranking[:20]]
@@ -183,7 +186,7 @@ def main():
         if res.get(k):
             copy_trex_plots(j, "" if k == "combined" else f"_{k}")
     for k, j in VARIANT_JOBS.items():
-        if variants.get(k):
+        if variants.get(k) and k != "flatsf":      # flatsf has the measurement's central values: the same plots
             copy_trex_plots(j, f"_{k}")
 
     # ------------------------------------------------------------------ RESULTS.md
@@ -206,7 +209,19 @@ def main():
                f"(status {f['asimov_minos_status']}) |"),
               f"| goodness of fit | p = {f['gof_probability']:.3f}" + (f" (chi2/ndf {f['gof_chi2_ndf']})" if f['gof_chi2_ndf'] else "") + " |",
               f"| mu_ttbar (from emu_CRtt) | {f['mu_ttbar']['value']:.3f} +{f['mu_ttbar']['err_up']:.3f} -{f['mu_ttbar']['err_down']:.3f} |"
-              if f.get("mu_ttbar") else "| mu_ttbar | n/a |", ""]
+              if f.get("mu_ttbar") else "| mu_ttbar | n/a |"]
+        ptm, flat = f.get("tauid_pt_model"), variants.get("flatsf")
+        if ptm:
+            L.append(f"| tau_h ID scale factor pT dependence (`{ptm['name']}`) | +-{100 * ptm['rel']:.1f} % on the signal: mu_Z "
+                     f"{ptm['mu_flatsf']:.3f} with one scale factor per decay mode, {ptm['mu_ptsplit']:.3f} with the pT-split ones |")
+        L.append("")
+        if ptm and flat:
+            sf = flat["sigma_60_120_pb"]
+            L += [f"The uncertainty contains the model dependence of the tau_h ID scale factor (`{ptm['name']}`, section "
+                  f"\"Cross-check fits\"). Without it the same fit gives {flat['mu']:.3f} +{flat['mu_err_up']:.3f} "
+                  f"-{flat['mu_err_down']:.3f}, i.e. {sf['value']:.0f} +{sf['err_up']:.0f} -{sf['err_down']:.0f} pb "
+                  f"(`{VARIANT_JOBS['flatsf']}`): the parameter is degenerate with mu_Z, so the central value, the scale "
+                  f"factors and the pulls below are the same and only the uncertainty of mu_Z grows.", ""]
         if f.get("tau_id_sf"):
             L += ["tau_h ID scale factors (fitted, TauPOG prior-free):", "", "| DM | fitted | TauPOG |", "|---|---|---|"]
             for dm, v in f["tau_id_sf"].items():
@@ -265,18 +280,21 @@ def main():
                              f"{lo['value']:.3f} +- {0.5 * (lo['err_up'] + lo['err_down']):.3f} | "
                              f"{lo['value'] / hi['value']:.3f} |")
             L.append("")
-            if f and ratios:
-                shift = pts["mu"] - f["mu"]
-                tot = 0.5 * (f["mu_err_up"] + f["mu_err_down"])
+            ref = variants.get("flatsf") or f
+            if ref and ratios:
+                shift = pts["mu"] - ref["mu"]
+                tot = 0.5 * (ref["mu_err_up"] + ref["mu_err_down"])
                 L += [f"The scale factors below 40 GeV come out "
                       f"{', '.join(f'{100 * (r - 1):+.0f}%' for r in ratios)} relative to those above it "
                       f"(DM{', DM'.join(str(d) for d in config.TAU_DMS)}), each 0.5-1 sigma on its own but "
                       f"coherent in sign, and mu_Z moves by {shift:+.3f} ({abs(shift) / tot:.1f} times the "
-                      f"total uncertainty) to {pts['mu']:.3f}. The single-scale-factor assumption is therefore "
-                      f"worth more than any experimental systematic in the table below; the split is not the "
-                      f"nominal model (the ratios are individually compatible with one and it doubles the "
-                      f"number of free scale factors on the same data), but that spread should travel with "
-                      f"the result. See REVIEW_v4_RESPONSE.md section 6.", ""]
+                      f"uncertainty of `{VARIANT_JOBS['flatsf']}`) to {pts['mu']:.3f}. The single-scale-factor "
+                      f"assumption is therefore worth more than any experimental systematic; the split is not the "
+                      f"nominal model (the ratios are individually compatible with one, it doubles the number of "
+                      f"free scale factors on the same data and its goodness of fit is lower), so the measurement "
+                      f"carries the spread between the two models as the nuisance parameter `TauIDpT_tautau` "
+                      f"(group `Tau ID pT dependence` below; scripts/step5_fit.py `pt_model`). "
+                      f"See REVIEW_v4_RESPONSE.md section 6.", ""]
     if f:
         gsum, gscale = f.get("grouped_impact_quadrature_sum"), f.get("grouped_impact_scale")
         L += ["## Grouped impacts on mu_Z", "",
@@ -316,10 +334,13 @@ def main():
         mu = f"{r['poi_value']:.3f} +{r['poi_err_up']:.3f} -{r['poi_err_down']:.3f}" if r else "n/a"
         L.append(f"| {ch} | `fit/fitinputs/{JOB}_{ch}.root` | `fit/{JOB}_{ch}.config` | {'present' if ok else 'missing'} | {mu} |")
     L.append("")
-    if comb_mf and comb_mf.get("poi_value") and f:
+    single = variants.get("flatsf") or f      # the channel workspaces do not carry TauIDpT_tautau
+    if comb_mf and comb_mf.get("poi_value") and single:
         L += [f"MultiFit of the four workspaces (`fit/comb.config`): mu_Z = {comb_mf['poi_value']:.3f} "
               f"+{comb_mf['poi_err_up']:.3f} -{comb_mf['poi_err_down']:.3f}, against the single-file fit "
-              f"{f['mu']:.3f} +{f['mu_err_up']:.3f} -{f['mu_err_down']:.3f}: the two routes are the same model.", ""]
+              f"{single['mu']:.3f} +{single['mu_err_up']:.3f} -{single['mu_err_down']:.3f}"
+              + (f" (`{VARIANT_JOBS['flatsf']}`: the channel workspaces do not carry `TauIDpT_tautau`)" if variants.get("flatsf") else "")
+              + ": the two routes are the same model.", ""]
     if yields:
         keys = sorted({k for r in yields["regions"].values() for k in r})
         L += ["## Prefit yields per region", "", "| region | " + " | ".join(keys) + " |", "|---|" + "---:|" * len(keys)]
@@ -350,6 +371,12 @@ def main():
                  + (f",   expected ±{0.5 * (exp['err_up'] + exp['err_down']):.3f}" if exp else ",   expected: MINOS did not converge")
                  + f",   GoF p = {f['gof_probability']:.2f}"
                  + (f",   μ_tt̄ = {f['mu_ttbar']['value']:.2f} ± {0.5 * (f['mu_ttbar']['err_up'] + f['mu_ttbar']['err_down']):.2f}" if f.get("mu_ttbar") else ""))
+        ptm, flat = f.get("tauid_pt_model"), variants.get("flatsf")
+        if ptm and flat:
+            sf = flat["sigma_60_120_pb"]
+            B.append(f"includes the τh ID scale-factor pT dependence ({ptm['name']}, ±{100 * ptm['rel']:.1f} % on the signal: μ_Z "
+                     f"{ptm['mu_flatsf']:.3f} flat, {ptm['mu_ptsplit']:.3f} pT-split);   without it "
+                     f"{sf['value']:.0f} +{sf['err_up']:.0f} −{sf['err_down']:.0f} pb")
         if f.get("tau_id_sf"):
             B.append(f"τh ID SF ({config.TAU_WP}):  " + "  ".join(
                 f"{dm} {v['value']:.3f} ± {0.5 * (v['err_up'] + v['err_down']):.3f} (POG {v['pog'][0]:.2f} ± {v['pog'][1]:.2f})"

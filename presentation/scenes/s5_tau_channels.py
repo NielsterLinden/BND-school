@@ -22,7 +22,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from manim import Arc, DashedLine, GrowFromEdge, Indicate, Line, Polygon, Rectangle, Transform  # noqa: E402
+from manim import AnimationGroup, Arc, DashedLine, GrowFromEdge, Indicate, Line, Polygon, Rectangle, Transform  # noqa: E402
 from channel_common import *  # noqa: E402,F401,F403
 
 TAU_COL = CHANNEL_LINE["tautau"]
@@ -273,3 +273,53 @@ class TautauChannelsB(TautauChannels):
 
 class TautauChannelsC(TautauChannels):
     K = 3
+
+
+# ---------------------------------------------------------------------------
+# Section opener: TauChallenges + TautauChannels a/b/c merged into one quicker clip
+# ---------------------------------------------------------------------------
+class TauIntro(Scene):
+    """(5-01) The challenges slide at ~0.55x its run time, cleared, then the three final states
+    drawn together (each step on all three columns at once, lagged left to right)."""
+
+    def construct(self):
+        white_background(self)
+        TC = TauChallenges
+        L = TC.lifetime_parts(self)
+        self.play(FadeIn(L["beam"]), FadeIn(L["pv"], scale=0.5), Create(L["others"]), run_time=0.4)
+        self.play(Create(L["tau"]), FadeIn(L["lab_tau"]), run_time=0.5, rate_func=EASE)
+        self.play(FadeIn(L["tau_tip"]), FadeIn(L["sv"], scale=0.5),
+                  Flash(L["sv"].get_center(), color=SLATE, line_length=0.2, flash_radius=0.4), run_time=0.35)
+        self.play(Create(L["ruler"]), FadeIn(L["lab_ct"]), FadeIn(L["lab_t"]), run_time=0.45)
+        self.play(LaggedStart(*[Create(p) for p in L["prongs"]], lag_ratio=0.15), Create(L["nu"]),
+                  FadeIn(L["nu_lab"]), run_time=0.6, rate_func=EASE)
+        self.play(L["nu"].animate.set_stroke(opacity=0.25), run_time=0.35)
+        B = TC.br_parts(self)
+        self.play(GrowFromEdge(B["had"], LEFT), GrowFromEdge(B["lep"], LEFT), run_time=0.45)
+        self.play(FadeIn(B["lab_had"]), FadeIn(B["lab_lep"]), run_time=0.25)
+        J = TC.jet_parts(self)
+        self.play(FadeIn(J["tau_cone"]), Create(J["tau_trk"]), FadeIn(J["lab_tau"]),
+                  FadeIn(J["jet_cone"]), Create(J["jet_trk"]), FadeIn(J["lab_jet"]), run_time=0.6)
+        self.play(J["jet_cone"].animate.stretch(0.4, 1, about_point=J["jet_cone"].get_left()),
+                  *[J["jet_trk"][j].animate.set_opacity(0.0) for j in (0, 1, 4, 5)],
+                  FadeIn(J["fake"]), run_time=0.6, rate_func=EASE)
+        row = TC.bkg_row(self)
+        self.play(LaggedStart(*[FadeIn(m, shift=UP * 0.15) for m in row], lag_ratio=0.2), run_time=0.7)
+        self.wait(0.3)
+        # clear, then the three final states together
+        self.play(FadeOut(VGroup(*L.values(), *B.values(), *J.values(), row)), run_time=0.4)
+        D = [diagram(k, i) for i, k in enumerate(KINDS)]
+
+        def step(anims, rt, lag=0.12):
+            self.play(LaggedStart(*anims, lag_ratio=lag), run_time=rt)
+
+        step([FadeIn(d["final"], shift=DOWN * 0.15) for d in D], 0.35)
+        step([AnimationGroup(FadeIn(d["lab_z"]), Create(d["z"])) for d in D], 0.45)
+        step([AnimationGroup(FadeIn(d["v0"]), Create(d["taus"]), FadeIn(d["tau_tips"]), FadeIn(d["lab_taus"]))
+              for d in D], 0.5)
+        step([AnimationGroup(Create(d["legs"]), Create(d["vtx"]), Create(d["nus"])) for d in D], 0.7)
+        step([FadeIn(d["labs"]) for d in D], 0.3)
+        step([AnimationGroup(GrowFromEdge(d["bar"], DOWN), FadeIn(d["frac"], scale=0.8)) for d in D], 0.5)
+        step([AnimationGroup(Indicate(d["nus"], color=SLATE, scale_factor=1.0), FadeIn(d["nnu"])) for d in D], 0.6)
+        step([FadeIn(d["bkg"], shift=UP * 0.1) for d in D], 0.5)
+        self.wait(0.1)

@@ -9,6 +9,15 @@ combination without breaking it.
 > `combLieke/output/` is the final result: read and present it, do not regenerate it. Only
 > `presentation/` still shows pre-freeze numbers; updating it is the animation agents' job.
 
+> **Z → ττ v4 arrived after the freeze (merge 5b7cc83).** On `main`, `z-tautau/` is now the four-channel measurement
+> (τhτh + μτh + eτh + eμ) and its fits are not run yet (`z-tautau/RESUME.md`). `run.py` does not reproduce
+> `combLieke/output/` on `main`: `channels.json` → `tautau` points at v3 keys (`signal_prediction.A_unc.*`,
+> `fit/results/ztautau_fit_result.json`, sample `DYtautau`, `tautau_SR2` bin drop) that v4 no longer has. The v3 inputs
+> are at the tag. Adopting v4 is a new combination, not a rerun; `z-tautau/docs/11-combination-inputs.md` §3–5 lists what
+> it needs: signal `DYtautau_tDM*` only, the `nominal` region set (never the pT-split copies), no acceptance block
+> (inside the ττ fit), decorrelate `Muon*`/`Electron*`, decide `mu_ttbar` vs `XS_TTbar`, and drop `mumu_CRemu`
+> (it overlaps the ττ eμ channel).
+
 The combination is **one TRExFitter v1.8.0 MultiFit** over the three
 channel likelihoods. There is no covariance/BLUE combination any more: it and its slide deck were
 removed on 16 Sep 2026 (last present in git commit 9501c41).

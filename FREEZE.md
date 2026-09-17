@@ -8,6 +8,13 @@ Every channel and combination output (`z-*/fit/`, `z-*/output/`, `combination/co
 `combination/combLieke/checks/`) is read-only from here on. If a number is needed that is not below, read it from
 the listed file; do not regenerate it.
 
+> **After the freeze (merge 5b7cc83, 17 Sep):** z-tautau pushed its four-channel v4 measurement (τhτh + μτh + eτh + eμ).
+> On `main` it replaces the v3 τhτh inputs: `z-tautau/fit/ztautau.config` and `fit/fitinputs/ztautau.root` are the
+> four-channel ones, and `z-tautau/fit/results/` (with `ztautau_fit_result.json`) is gone until z-tautau runs its fits
+> (`z-tautau/RESUME.md`). The combination and the ττ numbers below are the **v3** ones; their inputs are at the tag
+> (`git show zmumu-freeze-2026-09-17:z-tautau/fit/...`). `combination/combLieke/run.py` no longer reproduces the freeze
+> on `main` (the ττ acceptance keys `signal_prediction.A_unc.*` and the v3 fit result are missing): check out the tag to rerun it.
+
 All results: CMS Open Data 2016 G+H, NanoAODv9, √s = 13 TeV, L = 16393.381 pb⁻¹ ± 1.2 %.
 Theory reference: aMC@NLO (NNLO-normalised, 6077.22 pb for m > 50 GeV).
 
@@ -61,7 +68,7 @@ kept in `z-mumu/fit/results/zmumu_v2_15sep_fit_result.json`.
 > **σ(pp → Z/γ\* → ττ, 60–120 GeV) = 2082 ± 41 (stat) ⁺²²²₋₁₉₄ (syst+stat) ± 76 (acc) pb** (prediction 1944.9 pb)
 > **σ_fid(τhτh) = 4.82 ± 0.09 (stat) ± 0.47 (syst) pb** (prediction 4.50 pb); μ_Z = 1.071 ⁺⁰·¹¹⁴₋₀.₁₀₀
 
-Source: `z-tautau/fit/results/ztautau_fit_result.json`, `z-tautau/handoff.md`. Acceptance 3.7 %.
+Source: `z-tautau/fit/results/ztautau_fit_result.json` and `z-tautau/handoff.md` **at the tag** (replaced on `main` by v4, see the top). Acceptance 3.7 %.
 
 ### Z → ee (`z-ee/`, delivery of 16 Sep 14:44, unchanged by the freeze)
 

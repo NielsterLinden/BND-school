@@ -206,7 +206,8 @@ def r_w_per_event(rw, arr, mask, shift: int = 0):
 def fake_weights(arr, mask, tables, fr, osss, rw, kin=None, variation: str | None = None, direction: int = 0, with_err=False):
     """Per-event fake weight w = sum_p R_p FF_p (corrected) for the events in `mask` (zeros elsewhere).
 
-    variation: None | 'osss' (C +- rel_unc) | 'wmt' (r_W shifted) | 'frac' (f_W +- 20% relative) | 'tt' (tt FF +- 30%)
+    variation: None | 'osss' (C +- rel_unc) | 'wmt' (r_W shifted) | 'frac' (f_W +- config.LTAU_FF_FRAC_SYST,
+               relative) | 'tt' (tt FF +- 30%)
                | 'qcdstat' / 'wstat' (every bin of that table by its statistical error).
     with_err: also the weight for the sum of squares, w sqrt(1 + (delta w_stat / w)^2)."""
     n = len(arr["t_pt"])
@@ -214,7 +215,7 @@ def fake_weights(arr, mask, tables, fr, osss, rw, kin=None, variation: str | Non
     w2 = np.zeros(n)
     if not mask.any():
         return (w, w2) if with_err else w
-    f_qcd, f_w, f_tt = fraction_per_event(fr, arr, mask, kin, shift_w=0.2 * direction if variation == "frac" else 0.0)
+    f_qcd, f_w, f_tt = fraction_per_event(fr, arr, mask, kin, shift_w=config.LTAU_FF_FRAC_SYST * direction if variation == "frac" else 0.0)
     ff_qcd, rel_qcd = evaluate(tables["qcd"], arr, mask, kin, shift=direction if variation == "qcdstat" else 0)
     ff_w, rel_w = evaluate(tables["w"], arr, mask, kin, shift=direction if variation == "wstat" else 0)
     ff_tt, rel_tt = evaluate(tables["tt"], arr, mask, kin)

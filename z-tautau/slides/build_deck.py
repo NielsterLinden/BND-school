@@ -9,6 +9,11 @@
 Uses slides/build_comparison_deck.py (copied from the HHARD workfolder, unchanged). Numbers come from
 output/results.json; nothing is typed in by hand. Optional: variants/tight/output/results.json adds the
 working-point comparison slide.
+
+NOTE (17 Sep 2026): this deck builder still expects the v3 schema of output/results.json
+(the tau_h tau_h-only measurement), which no longer exists: output/ now holds the four-channel
+result (docs/10-v4-plan.md) and its results.json has a different layout. SUPERSEDED -- the deck
+has to be rebuilt against the new schema before it is shown again.
 """
 from __future__ import annotations
 

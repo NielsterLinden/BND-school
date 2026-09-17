@@ -116,8 +116,8 @@ reference is σ(60–120) of the aMC@NLO sample normalised to 6077.22 pb (m > 50
 | pileup, L1 prefiring | all MC | v3 (lumi-by-LS profile, NanoAOD weights) |
 | muon ID, iso, IsoMu24 trigger | genuine muons | Muon POG json (section 2), ±1σ each |
 | electron reco, ID | genuine electrons | EGM json, ±1σ each |
-| Ele27 trigger efficiency | eτh, EM_EL | **in situ**: eμ events of SingleMuon (IsoMu24, μ pT > 26): ε(Ele27 ‖ electron) in data and simulation vs pT, η → SF ± stat ⊕ 2 % |
-| eμ cross-trigger efficiency | eμ | **in situ**: the electron legs from SingleMuon eμ events, the muon legs from SingleElectron eμ events; SF(pT_e) × SF(pT_μ) ± stat ⊕ 2 % |
+| Ele27 trigger efficiency | eτh, EM_EL | **in situ**: eμ events of SingleMuon (IsoMu24, μ pT > 26): ε(Ele27 ‖ electron) in data and simulation vs pT, η → SF ± stat ⊕ 2 % above 35 GeV (`ElectronTrigger`); in the 29–35 GeV turn-on bin the flat 2 % is replaced by the step to the next pT bin of the measured table (4 % / 2 % / 13 % for \|η_SC\| < 0.8 / < 1.479 / < 2.1) as a separate parameter `ElectronTrigger_lowpt` |
+| eμ cross-trigger efficiency | eμ | **in situ**: the electron legs from SingleMuon eμ events, the muon legs from SingleElectron eμ events; SF(pT_e) × SF(pT_μ), varied by the statistical error of **both** table bins and the 2 % of the paper **once per event** (2.7–2.9 % in total). Applying the 2 % per leg, as the first version did, doubles the prior and moves μ_Z by one standard deviation |
 | di-τ trigger | τhτh | TauPOG (v3) |
 | τh ID SF per DM | genuine τh, every channel | **free NormFactors** `TauIDSF_DM0/1/10/11` (nominal = POG value) |
 | τh energy scale per DM | genuine τh, every channel | POG central value; **±3 % prior**, constrained in situ |
@@ -142,9 +142,20 @@ that decay mode, `Expression` products (`TauIDSF_DM0*TauIDSF_DM1`, `TauIDSF_DM1*
 τhτh templates with two genuine legs, `mu_ttbar` on tt̄. Nuisance parameters: section 9. The τhτh templates
 carry **no** POG ID SF (the NormFactor is the SF); their v3 `TauID_DM*` NPs are gone.
 
-Outputs: `fit_v4/ztautau_v4.config`, `fit_v4/fitinputs/ztautau_v4.root`, `fit_v4/results/ztautau_v4_fit_result.json`.
-The v3 chain and its outputs (`fit/`, `output/`) are untouched: `run_all.py` still produces v3-style τhτh-only
-results, `run_v4.py` the combined one.
+Outputs: `fit/ztautau.config`, `fit/fitinputs/ztautau.root`, `fit/results/ztautau_fit_result.json` — the
+canonical names of `fitting/CONVENTIONS.md`, because this is the only measurement of the channel. The τhτh
+Data and fake templates come from `fit/fitinputs/tautau_base.root` (`run_tautau_base.py`).
+
+**Regions that exist in the file but are not in the fit.** `mutau_SRlo/hi_dm*` and `etau_SRlo/hi_dm*` hold the
+same events as `mutau_SR_dm*` / `etau_SR_dm*`, split at pT(τh) = 40 GeV. They are filled by step 4 (tagged
+`"ptsplit"` in `meta["region_sets"]`) and fitted only by the cross-check job `ztautau_ptsplit`, which gives
+the 30–40 GeV part its own `TauIDSF_DM*_lowpt` scale factors. That is the test of the one model assumption
+the τhτh / (ℓτh)² lever rests on: the τhτh legs are above 40 GeV, most of the ℓτh signal is not, and a
+scale factor that varies between 30 and 40 GeV would show up in μ_Z as ≈ 1–2 times that variation.
+
+**Cross-check jobs of step 5** (`run_all.py --help`, `REVIEW_v4_RESPONSE.md`): `ztautau_<ch>` (one channel,
+scale factors free: the workspaces of the MultiFit), `ztautau_<ch>_fixedid` (POG scale factors fixed),
+`ztautau_taulep` (the three τ channels without eμ), `ztautau_ptsplit`, `ztautau_emutrig2x`.
 
 ## 9. Systematic uncertainties: CMS Table 2 ↔ v4
 
@@ -155,7 +166,7 @@ results, `run_v4.py` the combined one.
 | τh ES (3 % prior) | `TauES_DM*` ±3 % prior, m_ττ recomputed, migration in/out of the selection | implemented |
 | Rate of e misidentified as τh | `TauFakeEle` (VSe at Tight in eτh, VVLoose elsewhere) | TAU json |
 | Rate of μ misidentified as τh | `TauFakeMu` (VSmu Tight in μτh, VLoose elsewhere) | TAU json |
-| Electron ID and trigger | `ElectronReco`, `ElectronID`, `ElectronTrigger` | EGM json / in situ |
+| Electron ID and trigger | `ElectronReco`, `ElectronID`, `ElectronTrigger`, `ElectronTrigger_lowpt` | EGM json / in situ (plateau and turn-on separately) |
 | e ES | `ElectronScale`, `ElectronRes` | NanoAOD variations |
 | Muon ID and trigger | `MuonID`, `MuonIso`, `MuonTrigger` | Muon POG json |
 | μ ES | `MuonScale` ±0.2 % | estimate |
@@ -178,54 +189,41 @@ results, `run_v4.py` the combined one.
   VVVLoose) so every sideband is inside. Trigger objects of ids 11/13/15. Per-file provenance with the
   category counts; measured rates: SingleMuon 2.5 %, MuonEG 1.4 %, SingleElectron 1.6 %, DY 2.7 %, tt̄ 25 %.
   The Tau stream is **not** re-skimmed: τhτh reuses `skims_v1` / `ntuples_v1`.
-* `scripts/step2_ntuples_v4.py` → `ntuples_v4/<sample>_<channel>.root` for `mutau`, `etau`, `emu`
+* `scripts/step2_ntuples_lepton.py` → `ntuples_v4/<sample>_<channel>.root` for `mutau`, `etau`, `emu`
   (+ `_trig` side samples), one flat tree with the pair, the region flags, MET, jets, masses and weights.
-* `scripts/step3_fakes_v4.py` (lepton-channel fake factors, fractions, OS/SS, closure; `output_v4/data/fakes_<ch>.json`),
-  `scripts/step3c_trigger_v4.py` (in-situ trigger efficiencies; `external/trigger_insitu_v4.json`),
-  `scripts/step4_histograms_v4.py` (all regions, all variations, DM-split templates → `fit_v4/fitinputs/`), `step4b_export_channels_v4.py` (one file per channel),
-  `scripts/step5_fit_v4.py` (TRExFitter), `scripts/step6_report_v4.py`, `run_v4.py`.
+* `scripts/step3d_fakes_lepton.py` (lepton-channel fake factors, fractions, OS/SS, closure; `output/data/fakes_<ch>.json`),
+  `scripts/step3c_trigger.py` (in-situ trigger efficiencies; `external/trigger_insitu_v4.json`),
+  `scripts/step4_histograms.py` (all regions, all variations, DM-split templates → `fit/fitinputs/`),
+  `scripts/step4b_export_channels.py` (one file per channel), `scripts/step5_fit.py` (TRExFitter),
+  `scripts/step5b_multifit.py` (the MultiFit of the four channel workspaces), `scripts/step6_report.py`,
+  `run_all.py`. The τhτh base (`fit/fitinputs/tautau_base.root`) comes from `run_tautau_base.py`
+  (`scripts/step1_skim.py`, `step2_ntuples_tautau.py`, `step3_fakefactors.py`, `step3b_bdt.py`,
+  `step4a_tautau_base.py`).
 
 ## 11. Limitations (v4)
 
 * SM H→ττ not simulated (≤ 0.2 %). EWK Z→ττ absent (0.3 %, as v3).
 * The eμ channel shares events with z-mumu's `mumu_CRemu` (section 4).
 * The τh ID scale factor is one number per decay mode for pT > 30 (μτh, eτh) and pT > 40 (τhτh): the
-  TauPOG DM-binned SFs are derived for pT > 40; the in-situ fit absorbs a common offset, a pT dependence
-  between 30 and 40 GeV would show up as a pull of `TauES` or of the fake NPs (checked in the SS regions).
+  TauPOG DM-binned SFs are derived for pT > 40. This is the assumption the τhτh / (ℓτh)² lever rests on and
+  it is now *measured* rather than asserted — the `ztautau_ptsplit` fit gives the 30–40 GeV ℓτh regions their
+  own scale factors and the result is in `output/RESULTS.md`.
+* With the scale factors free, the eμ channel (no τh) and the three τ channels measure μ_Z in different ways
+  and the combined number is their compromise; both are quoted (`docs/11-combination-inputs.md` §7).
+* `MET_Unclustered` changes the ℓτh *yield* by −3.8 % / +2.9 % through the m_T < 40 GeV cut and the MET term
+  of the likelihood mass. It is one nuisance parameter for both the shape and that normalisation, on purpose
+  (`REVIEW_v4_RESPONSE.md` §4), and the fit constrains it to ≈ 0.3 of its prior.
 * Muon momentum scale, b-tag (if no efficiency map) and W+jets/single-top/diboson normalisations are
   estimates rather than measurements; they are marked as such in the results tables.
 
-## 12. Result (17 September 2026, `output_v4/RESULTS.md`)
+## 12. Result
 
-| quantity | value |
-|---|---|
-| σ(pp → Z/γ* → ττ, 60 < m_LHE < 120 GeV) | **2053 +90 −86 pb** (stat ±9); prediction 1945 pb (aMC@NLO acceptance, NNLO normalisation 6077.22 pb for m > 50 GeV) |
-| μ_Z | 1.055 +0.046 −0.044 (stat ±0.005, syst ±0.045); expected ±0.009; goodness of fit p = 0.09 |
-| μ_tt̄ (from `emu_CRtt`) | 1.153 ± 0.048 |
-| τh ID SF DM0 (Tight, fitted) | 0.962 +0.043 −0.043 (TauPOG 0.902 ± 0.126) |
-| τh ID SF DM1 (Tight, fitted) | 0.935 +0.038 −0.038 (TauPOG 0.892 ± 0.053) |
-| τh ID SF DM10 (Tight, fitted) | 0.867 +0.038 −0.038 (TauPOG 0.938 ± 0.148) |
-| τh ID SF DM11 (Tight, fitted) | 0.771 +0.051 −0.051 (TauPOG 0.812 ± 0.149) |
-| τh energy scale DM0 | -0.74 ± 0.90 % relative to the POG central value (prior ±3 %) |
-| τh energy scale DM1 | -0.26 ± 0.59 % relative to the POG central value (prior ±3 %) |
-| τh energy scale DM10 | +0.53 ± 1.00 % relative to the POG central value (prior ±3 %) |
-| τh energy scale DM11 | +3.26 ± 2.20 % relative to the POG central value (prior ±3 %) |
-| tautau alone, POG τh ID SFs fixed | μ_Z = 1.043 +0.079 −0.072 |
-| mutau alone, POG τh ID SFs fixed | μ_Z = 1.049 +0.056 −0.051 |
-| etau alone, POG τh ID SFs fixed | μ_Z = 1.017 +0.068 −0.063 |
-| emu alone, POG τh ID SFs fixed | μ_Z = 0.978 +0.056 −0.053 |
+The full tables are `output/RESULTS.md` (regenerated by `scripts/step6_report.py`); the headline is
+injected here by `scripts/update_docs.py`:
 
-Grouped impacts on μ_Z: NormFactors 4.04 %, Electron efficiency 3.89 %, Tau trigger 1.96 %, Gammas 1.83 %, Fakes 1.80 %, MET 1.50 %, Electron energy 1.36 %, Background normalisation 1.18 %, Tau energy scale 1.06 %, Luminosity 0.98 %, b tagging 0.86 %, Pileup 0.76 %, Muon momentum 0.66 %, Muon efficiency 0.60 %, Signal modelling 0.47 %, Background modelling 0.45 %, L1 prefiring 0.36 %, Jets 0.27 %, Tau ID 0.26 %; data statistics 0.46 %.
-
-Ranking (post-fit impact on μ_Z, `output_v4/plots/fit_ranking.png`): mu_ttbar 4.06 % (pull +0.15, constraint 0.05), EmuTrigger 3.67 % (pull -1.62, constraint 0.71), TauIDSF_DM1 3.26 % (pull +0.04, constraint 0.04), TauIDSF_DM10 3.13 % (pull -0.07, constraint 0.04), TauIDSF_DM0 2.96 % (pull +0.06, constraint 0.04), TauIDSF_DM11 2.17 % (pull -0.04, constraint 0.05), MET_Unclustered 1.51 % (pull +1.05, constraint 0.32), ElectronScale 1.37 % (pull -0.78, constraint 0.82), TauTrigger_DM1 1.24 % (pull -0.50, constraint 0.90), FakeOSSS_tautau_c0 0.99 % (pull -0.01, constraint 0.62).
-
-Compared with v3 (τhτh alone, POG τh ID scale factors as priors: μ_Z = 1.071 +0.114 −0.100), the four-channel fit is 2.4× more precise; the τh ID scale factors come out at 4–5 % precision each (POG: 5–15 %) and the energy scales at 0.6–1.0 % (DM11: 2.2 %), against CMS 2.2 % / 0.9 % with 2.3 fb⁻¹ and one inclusive SF. The four channels agree with each other and with the prediction within their uncertainties.
-
-Prefit yields (data / Z→ττ signal / fakes): tautau_SR0 15742 / 795 / 12351; tautau_SR1 2704 / 1630 / 1044; tautau_SR2 2714 / 2749 / 197; mutau_SR_dm0 11244 / 6313 / 2231; mutau_SR_dm1 23866 / 15545 / 5309; mutau_SR_dm10 10795 / 7316 / 2797; mutau_SR_dm11 2611 / 1794 / 710; etau_SR_dm0 2639 / 1113 / 586; etau_SR_dm1 10106 / 5206 / 2504; etau_SR_dm10 4940 / 2877 / 1429; etau_SR_dm11 1211 / 692 / 492; emu_SR 79300 / 52985 / 15241; emu_CRtt 45931 / 116 / 406.
-
-Fake estimates: mutau: C_OS/SS 1.05 ± 0.03, same-sign closure 0.966 ± 0.014, 11048 fakes in the SR; etau: C_OS/SS 1.14 ± 0.14, same-sign closure 1.025 ± 0.021, 5012 fakes in the SR; eμ multijet 15241 events (OS/SS 1.7–2.9 vs ΔR, SB1/SB2 within 2 %).
-
-Things to look at in a review: the top of the ranking is μ_tt̄ and the τh ID scale factors (as intended: they are the parameters the data determine) followed by `EmuTrigger` (pulled −1.6σ; the in-situ cross-trigger SF carries a conservative 2 % per leg), `MET_Unclustered` (+1.0σ, constrained to 0.3), `TauFakeMu` (+1.0σ); the eμ-alone μ_Z (0.98) versus the τ channels (1.02–1.05); the τES of DM11 (+1.1σ); the 130–150 GeV m_ττ bin of the lepton channels (the leptonic likelihood mass sits ~10 % above m_LHE).
+<!-- RESULT:BEGIN -->
+_(filled by `python scripts/update_docs.py` after step 6)_
+<!-- RESULT:END -->
 
 ## 13. Channel readiness and the per-channel exports for a combination
 

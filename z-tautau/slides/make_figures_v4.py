@@ -3,8 +3,8 @@
 
     source ../setup.sh && python slides/make_figures_v4.py
 
-Inputs: output_v4/results.json, fit_v4/fitinputs/ztautau_v4.root (+ meta), fit_v4/results/ztautau_v4/ (post-fit
-totals, ranking / pull plots copied as PNG), output_v4/data/fakes_*.json, external/trigger_insitu_v4.json.
+Inputs: output/results.json, fit/fitinputs/ztautau.root (+ meta), fit/results/ztautau/ (post-fit
+totals, ranking / pull plots copied as PNG), output/data/fakes_*.json, external/trigger_insitu_v4.json.
 """
 
 from __future__ import annotations

@@ -7,6 +7,11 @@ Every figure is drawn on DARK_BG = #222222 so it blends with the slides. Inputs:
 output/data/{fakefactors,bdt,yields}.json, fit/fitinputs/ztautau.root, fit/results/ztautau/ (post-fit total
 histograms and yield tables) and, for the two control plots of the signal-dominated category, the ntuples.
 The deck itself is assembled by slides/build_deck.py (PyMuPDF, run in the betterplottingtool venv).
+
+NOTE (17 Sep 2026): this deck builder still expects the v3 schema of output/results.json
+(the tau_h tau_h-only measurement), which no longer exists: output/ now holds the four-channel
+result (docs/10-v4-plan.md) and its results.json has a different layout. SUPERSEDED -- the deck
+has to be rebuilt against the new schema before it is shown again.
 """
 
 from __future__ import annotations

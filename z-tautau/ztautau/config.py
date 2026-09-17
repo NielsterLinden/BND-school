@@ -193,7 +193,9 @@ REGION_LABELS = ["BDT < 0.55 (fake dominated)", "0.55 < BDT < 0.90", "BDT > 0.90
 # The fake-dominated category is the fake sideband: its bins below this m_tt are dropped from the fit
 # (S/B = 0.09 there with a 15% closure prior; left in, its OS/SS parameter was 49% correlated with mu_Z).
 SIDEBAND_REGION_MTT_MIN = 110.0
-JOB = "ztautau"
+# The tau_h tau_h chain (steps 1-4a) no longer produces a measurement of its own: it produces the base
+# templates (Data, Fakes and the BDT categories) that step 4 copies into the four-channel fit inputs.
+JOB = "tautau_base"
 DY_XSEC_PB = 6077.22             # sigma(Z/gamma* -> ll, m > 50) summed over flavours, NNLO (all channels)
 
 # ------------------------------------------------------------------------------ processing
@@ -225,7 +227,11 @@ LEP_TRIG_MATCH_DR = 0.3
 # combination; electrons: Fall17V2 MVA noIso 90% + relative isolation 0.10, EGM 'wp90noiso' scale factors)
 MU_PT_MIN_MUTAU = 26.0                 # IsoMu24 plateau (z-mumu uses the same threshold)
 MU_ETA_MAX, MU_DXY, MU_DZ, MU_ISO = 2.4, 0.045, 0.2, 0.15
-EL_PT_MIN_ETAU = 29.0                  # Ele27_WPTight plateau
+EL_PT_MIN_ETAU = 29.0                  # Ele27_WPTight: 29 GeV is still on the turn-on (see ELE27_PLATEAU_PT)
+# Above this the in-situ Ele27 scale factor is flat; between EL_PT_MIN_ETAU and it the measurement changes
+# by 4-13% from one pT bin to the next, so the turn-on has its own nuisance parameter `ElectronTrigger_lowpt`
+# (REVIEW_v4.md finding 7) instead of sharing the flat 2% of the plateau.
+ELE27_PLATEAU_PT = 35.0
 EL_ETA_MAX, EL_DXY, EL_DZ, EL_ISO = 2.1, 0.045, 0.2, 0.10
 EL_GAP = (1.4442, 1.566)               # ECAL barrel-endcap transition (supercluster |eta|) excluded
 # e mu: leading lepton on the plateau of the 23 GeV leg, trailing above the 8 / 12 GeV leg
@@ -260,6 +266,12 @@ LTAU_FF_PT_BINS = [30.0, 35.0, 40.0, 45.0, 50.0, 60.0, 80.0, 1000.0]
 LTAU_FF_NJET_BINS = [0, 1, 2]
 LTAU_FF_MT_BINS = [0.0, 20.0, 40.0, 60.0, 80.0, 100.0, 150.0, 1000.0]
 LTAU_FF_OSSS_SYST = 0.05
+# Prior on the W+jets fraction of the application region (the multijet fraction compensates). The first
+# iteration used 20%, an estimate; the fit then pulled `FakeFrac_etau` by +2.6 sigma and `FakeFrac_mutau`
+# by +1.5 sigma and constrained both to ~0.6 of the prior (REVIEW_v4.md finding 6): the composition of the
+# AR, taken from the LO inclusive W+jets sample, is not known to 20%. The prior is now 40%, which the data
+# still constrain to ~25%; the fitted fake yield barely moves, the pulls become acceptable.
+LTAU_FF_FRAC_SYST = 0.40
 LTAU_FF_WTT_SYST = 0.30                    # the paper's 30% on the W/ttbar part of the tau_h tau_h fakes
 # signal definition of the combined measurement: Z/gamma* -> tau tau with 60 < m_LHE < 120 GeV, every decay.
 # The simulation outside the window (DYtautau_out) is a theory-normalised background. (v3 used the
@@ -278,9 +290,18 @@ FIT_BINS_CRTT = [0.0, 100.0, 150.0, 200.0, 300.0, 500.0]
 # one region per decay mode measures SF(DM) x mu_Z, the e mu channel fixes mu_Z
 LTAU_DM_REGIONS = True
 LTAU_REGIONS = [f"{ch}_SR_dm{dm}" for ch in ("mutau", "etau") for dm in TAU_DMS] if LTAU_DM_REGIONS else ["mutau_SR", "etau_SR"]
-REGIONS_V4 = REGIONS + LTAU_REGIONS + ["emu_SR", "emu_CRtt"]
-JOB_V4 = "ztautau_v4"
-FIT_DIR_V4 = _VARIANT / "fit_v4"
-OUTPUT_DIR_V4 = _VARIANT / "output_v4"
-PLOT_DIR_V4 = OUTPUT_DIR_V4 / "plots"
-DATA_DIR_V4 = OUTPUT_DIR_V4 / "data"
+# The tau_h ID scale factor of the fit is one number per decay mode, measured by tau_h tau_h regions with
+# pT(tau_h) > 40 GeV and l tau_h regions with pT(tau_h) > 30 GeV. A pT dependence of the scale factor between
+# 30 and 40 GeV would bias the tau_h tau_h / (l tau_h)^2 lever (REVIEW_v4.md finding 4). Step 4 therefore also
+# fills every l tau_h region split at this pT; the alternative fit `ztautau_ptsplit` (step 5 --region-set ptsplit)
+# gives the 30-40 GeV part its own scale factors and measures the difference. The nominal fit is unchanged.
+LTAU_PT_SPLIT = 40.0
+LTAU_PTSPLIT_REGIONS = [f"{ch}_SR{tag}_dm{dm}" for ch in ("mutau", "etau") for dm in TAU_DMS for tag in ("lo", "hi")]
+REGIONS_V4 = REGIONS + LTAU_REGIONS + LTAU_PTSPLIT_REGIONS + ["emu_SR", "emu_CRtt"]
+# The four-channel measurement is *the* measurement: it owns the canonical job name and output paths
+# (fitting/CONVENTIONS.md section 1: the combination reads fit/ztautau.config and fit/results/ztautau/).
+JOB_V4 = "ztautau"
+FIT_DIR_V4 = FIT_DIR
+OUTPUT_DIR_V4 = OUTPUT_DIR
+PLOT_DIR_V4 = PLOT_DIR
+DATA_DIR_V4 = DATA_DIR

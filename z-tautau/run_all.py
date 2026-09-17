@@ -1,19 +1,34 @@
 #!/usr/bin/env python
-"""Run the Z -> tau_h tau_h measurement end to end.
+"""Run the Z -> tautau measurement (four channels: tau_h tau_h, mu tau_h, e tau_h, e mu) end to end.
 
-    source ../setup.sh                 # LCG_110 (python 3.13, uproot, awkward, hist, ROOT) + TRExFitter
-    python run_all.py                  # steps 0-6
-    python run_all.py --from 3         # from the fake factors on (ntuples exist)
-    python run_all.py --only 5         # just the fit
+    source ../setup.sh
+    python run_all.py                  # steps 1-6 (skims: hours; from the ntuples on: ~4 h with the ranking)
+    python run_all.py --from 3         # from the fake factors / trigger efficiencies on
+    python run_all.py --only 5         # just the fits
 
-Steps (each is a standalone script in scripts/, documented in docs/):
-    0 external inputs and file lists        (network; seconds)
-    1 skims of data and simulation          (dCache/EOS; ~1 h on 12 cores, resumable)
-    2 flat ntuples                          (~5 min)
-    3 fake factors, closure corrections, OS/SS correction, closure; then the k-fold BDT (step3b)
-    4 histograms per BDT category, systematic variations, control plots, fit inputs
-    5 TRExFitter fit (MC-subtracted fake factor; --ff-variant nosub on request)
-    6 report: output/results.json, output/RESULTS.md, summary plots
+Steps (each a standalone script in scripts/, documented in docs/10-v4-plan.md):
+    1 skims (SingleMuon, SingleElectron, MuonEG, all simulation)                 step1_skim.py --v4
+    2 flat ntuples of the lepton channels                                        step2_ntuples_lepton.py
+    3 in-situ trigger efficiencies + b-tag efficiencies; lepton-channel fakes     step3c_trigger.py, step3d_fakes_lepton.py
+    4 templates of all channels (tau_h tau_h from fit/fitinputs/tautau_base.root) step4_histograms.py, step4b_export_channels.py
+    5 TRExFitter fits: the measurement (with ranking), the cross-checks of REVIEW_v4.md, the per-channel
+      workspaces and their MultiFit                                              step5_fit.py, step5b_multifit.py
+    6 report, and the result block injected into README/handoff/docs                step6_report.py, update_docs.py
+
+The tau_h tau_h base templates must exist: `python run_tautau_base.py --from 3` (fake factors, BDT and
+fit/fitinputs/tautau_base.root, ~25 min from the ntuples).
+
+The step-5 jobs, and why each exists:
+    ztautau              the measurement: four channels, tau_h ID scale factors free, ranking and impacts
+    ztautau_<ch>         one channel, scale factors free: the workspaces the MultiFit (and a combination) reads
+    ztautau_<ch>_fixedid one channel with the TauPOG scale factors fixed: the per-channel cross-check numbers
+    ztautau_taulep       tau_h tau_h + mu tau_h + e tau_h without e mu, scale factors free: what the
+                         tau_h tau_h / (l tau_h)^2 lever alone says about mu_Z (REVIEW_v4.md finding 2)
+    ztautau_ptsplit      the l tau_h regions split at pT(tau_h) = 40 GeV with their own scale factors below
+                         it: the test of the assumption the lever rests on (finding 4)
+    ztautau_emutrig2x    the e mu trigger variation doubled (the 2% of the paper applied once per leg
+                         instead of once per event, i.e. the v4 treatment before the review): how much of
+                         the answer the trigger prior sets (finding 3)
 """
 
 from __future__ import annotations
@@ -25,20 +40,27 @@ import time
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+CHANNELS = ("tautau", "mutau", "etau", "emu")
+FIT = "scripts/step5_fit.py"
 STEPS = {
-    0: [["scripts/step0_external.py"]],
-    1: [["scripts/step1_skim.py"]],
-    2: [["scripts/step2_ntuples.py"]],
-    3: [["scripts/step3_fakefactors.py"], ["scripts/step3b_bdt.py"]],
-    4: [["scripts/step4_histograms.py"]],
-    5: [["scripts/step5_fit.py"]],
-    6: [["scripts/step6_report.py"]],
+    1: [["scripts/step1_skim.py", "--v4"]],
+    2: [["scripts/step2_ntuples_lepton.py"]],
+    3: [["scripts/step3c_trigger.py"], ["scripts/step3d_fakes_lepton.py"]],
+    4: [["scripts/step4_histograms.py"], ["scripts/step4b_export_channels.py"]],
+    5: [[FIT]]
+       + [[FIT, "--channels", ch, "--job", f"ztautau_{ch}", "--skip-ranking", "--skip-asimov"] for ch in CHANNELS]
+       + [[FIT, "--channels", ch, "--job", f"ztautau_{ch}_fixedid", "--skip-ranking", "--skip-asimov", "--fix-tauid"] for ch in CHANNELS]
+       + [[FIT, "--channels", "tautau", "mutau", "etau", "--job", "ztautau_taulep", "--skip-ranking", "--skip-asimov"],
+          [FIT, "--job", "ztautau_ptsplit", "--region-set", "ptsplit", "--skip-ranking", "--skip-asimov"],
+          [FIT, "--job", "ztautau_emutrig2x", "--scale-syst", "EmuTrigger=2.0", "--skip-ranking", "--skip-asimov"],
+          ["scripts/step5b_multifit.py"]],
+    6: [["scripts/step6_report.py"], ["scripts/update_docs.py"]],
 }
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--from", dest="start", type=int, default=0)
+    ap.add_argument("--from", dest="start", type=int, default=1)
     ap.add_argument("--to", dest="stop", type=int, default=6)
     ap.add_argument("--only", type=int, default=None)
     args = ap.parse_args()

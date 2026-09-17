@@ -222,6 +222,7 @@ if R4:
                "**Not included**: SM H→ττ (≤ 0.2 % of the signal), EWK Z (0.3 %). Luminosity 1.2 % (record 1059).",
                "",
                "Orthogonality: no μμ channel; every channel vetoes a second muon (loose, pT > 10, iso < 0.3) or electron (WP90, pT > 10, iso < 0.3). Known overlap with z-mumu's tt̄ *control* region (eμ events of the SingleMuon stream): drop it in a joint fit.",
+               "Per-channel exports for a combination: fit_v4/fitinputs/ztautau_v4_<ch>.root + config + workspace per channel (tau ID SFs free, shared NP names); the MultiFit of the four workspaces (fit_v4/comb_v4.config) reproduces the single-file fit exactly: mu_Z = 1.055 +0.046 -0.044.",
                "Everything reproducible: python run_v4.py --from 3 (docs/10-v4-plan.md)."], size=13)
 
 # ---------------------------------------------------------------- 1. result

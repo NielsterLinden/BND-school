@@ -13,8 +13,8 @@ region overlaps z-mumu's tt̄ control region, see `docs/11-combination-inputs.md
 
 Design, selections and the systematics map against the paper's Table 2: [`docs/10-v4-plan.md`](docs/10-v4-plan.md).
 Numbers: [`output/RESULTS.md`](output/RESULTS.md). For the combination: [`docs/11-combination-inputs.md`](docs/11-combination-inputs.md).
-The measurement was reviewed in [`REVIEW_v4.md`](REVIEW_v4.md); what was changed in answer to it is
-[`REVIEW_v4_RESPONSE.md`](REVIEW_v4_RESPONSE.md).
+The measurement was reviewed in [`review/REVIEW_v4.md`](review/REVIEW_v4.md); what was changed in answer to it is
+[`review/REVIEW_v4_RESPONSE.md`](review/REVIEW_v4_RESPONSE.md).
 
 <!-- RESULT:BEGIN -->
 **Result** (four channels, τh ID scale factors and energy scale fitted in situ)
@@ -37,7 +37,7 @@ Ranking: TauIDpT_tautau 6.8 %, mu_ttbar 3.1 %, EmuTrigger 2.6 %, TauIDSF_DM1 2.2
 ## Quick start
 
 ```bash
-source ../setup.sh                  # LCG_110: python 3.13, uproot, awkward, hist, mplhep, xgboost; TRExFitter on PATH
+source ../fitting/setup.sh                  # LCG_110: python 3.13, uproot, awkward, hist, mplhep, xgboost; TRExFitter on PATH
 python run_tautau_base.py --from 3  # τhτh fake factors, BDT and base templates (~25 min from the ntuples)
 python run_all.py --from 3          # trigger efficiencies, fakes, templates, all fits, report (~4 h with the ranking)
 python run_all.py --only 5          # just the fits (~1 h without the ranking: see run_all.py --help)
@@ -68,7 +68,7 @@ ztautau/                  the library -- every physics choice is in config.py
 scripts/step*.py          one standalone script per step (docstring = usage)
 run_tautau_base.py        the τhτh base chain (steps 0-4a) -> fit/fitinputs/tautau_base.root
 run_all.py                the measurement (steps 1-6), including every cross-check fit
-review/                   the numerical studies behind REVIEW.md
+review/                   the numerical studies behind review/REVIEW_v3.md
 external/                 TauPOG / POG inputs converted to JSON, and the in-situ trigger tables (committed)
 filelists/                xrootd URL, size, adler32 of every input file
 fit/                      ztautau*.config (generated, committed), comb.config (MultiFit), bdt_info.json,
@@ -96,7 +96,7 @@ slides/                   the review deck: make_figures.py (dark vector figures 
 | [09-bdt](docs/09-bdt.md) | **the k-fold BDT**: inputs, training, validation, categories |
 | [10-v4-plan](docs/10-v4-plan.md) | **the four-channel measurement**: channels, objects, orthogonality, fakes per channel, in-situ τh ID / ES, systematics vs the CMS paper, the fit model, the result |
 | [11-combination-inputs](docs/11-combination-inputs.md) | **what the combination gets**: files, region and NP names, correlations, overlaps, the two routes, the caveats |
-| [REVIEW.md](REVIEW.md), [REVIEW_v4.md](REVIEW_v4.md), [REVIEW_v4_RESPONSE.md](REVIEW_v4_RESPONSE.md) | the reviews and what was done about them |
+| [review/REVIEW_v3.md](review/REVIEW_v3.md), [review/REVIEW_v4.md](review/REVIEW_v4.md), [review/REVIEW_v4_RESPONSE.md](review/REVIEW_v4_RESPONSE.md) | the reviews and what was done about them |
 
 ---
 
@@ -106,7 +106,7 @@ CMS 2016 Open Data (Tau dataset, Run2016G+H, 13 TeV, 16.4 fb⁻¹). Both τ deca
 data-driven fake factor (MC-subtracted, closure-corrected), Z→ττ and the small backgrounds from UL16
 simulation, MET-corrected di-τ mass, a **k-fold BDT** that sorts the signal region into three categories,
 and a binned profile-likelihood fit of m_ττ in the three categories with **TRExFitter v1.8.0**, using the
-shared `fitting/` conventions of all channels. This is the third iteration (v3): the first one was reviewed in [`REVIEW.md`](REVIEW.md), v2 fixed the review
+shared `fitting/` conventions of all channels. This is the third iteration (v3): the first one was reviewed in [`review/REVIEW_v3.md`](review/REVIEW_v3.md), v2 fixed the review
 findings, v2.1 fixed the fake-factor pulls, and v3 adopts the DeepTau **Tight** working point on both legs as the
 nominal (section "What changed" below).
 
@@ -140,9 +140,9 @@ The τhτh-only fit is no longer produced; `run_tautau_base.py` stops at the tem
 
 | v4: τh ID scale factors dominate (11 %) | decay-mode regions in μτh / eτh and free `TauIDSF_DM*` NormFactors: the scale factors are measured in situ at 4–5 % |
 | v4: trigger efficiency from the POG turn-on | in-situ Ele27 and eμ cross-trigger efficiencies from the other stream's events (`step3c_trigger.py`) |
-| `REVIEW_v4.md` (1, 5, 9) | Asimov MINOS, the order of the TRExFitter steps, the over-shoot of the grouped impacts, report hygiene |
-| `REVIEW_v4.md` (2, 4) | the eμ and τ-channel sub-measurements are quoted separately; the pT dependence of the τh ID scale factor is measured (`ztautau_ptsplit`) |
-| `REVIEW_v4.md` (3, 6, 7) | the eμ trigger, ℓτh fake-composition and Ele27 turn-on priors corrected (`REVIEW_v4_RESPONSE.md`) |
+| `review/REVIEW_v4.md` (1, 5, 9) | Asimov MINOS, the order of the TRExFitter steps, the over-shoot of the grouped impacts, report hygiene |
+| `review/REVIEW_v4.md` (2, 4) | the eμ and τ-channel sub-measurements are quoted separately; the pT dependence of the τh ID scale factor is measured (`ztautau_ptsplit`) |
+| `review/REVIEW_v4.md` (3, 6, 7) | the eμ trigger, ℓτh fake-composition and Ele27 turn-on priors corrected (`review/REVIEW_v4_RESPONSE.md`) |
 
 Still not done (see `CLAUDE.md`, open issues): HT-binned W+jets, the high-mass DY sample for the
 non-fiducial template, EWK Z→ττ, SM H→ττ.

@@ -7,7 +7,7 @@ Re-runs scripts/v2_5_fit.py (quick mode: h w f i) with different signal-region b
 the powheg SigModel template and with the template smoothing of the first v2 fit, and collects
 mu_Z, its uncertainty, the goodness of fit and the notable pulls / constraints into
 fit/results/stability.json (table in output/v2/RESULTS_v2.md). The nominal fit is the 5 GeV one;
-REVIEW.md F3 explains why the 2 GeV configuration of the first v2 result was not robust.
+review/README.md F3 explains why the 2 GeV configuration of the first v2 result was not robust.
 """
 
 from __future__ import annotations

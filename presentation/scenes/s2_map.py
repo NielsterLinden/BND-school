@@ -1,7 +1,7 @@
 """Section 2: how an analysis works, as one map with two parallel rows (schematic).
 
-Re-cut of 17 Sep 2026 (user's notes; replaces the one-row pipeline of s2_pipeline.py, whose clips
-are archived in clips/2_cms_methods/00_archive/pre_recut_2026-09-17/):
+Re-cut of 17 Sep 2026 (user's notes; replaces the one-row pipeline of s2_pipeline.py, which is kept
+as a library: its clips were removed, the map imports its icons, camera and masked_play):
 
     theory row (top, purple)       q qbar -> Z/gamma* -> l l  ->  [MC]  ->  simulated detector  ->  files
     experiment row (bottom)        the CMS slice -> L1 -> HLT -> RAW -> NanoAOD   (s2_trigger.py, 0.6x)
@@ -36,7 +36,7 @@ Physics behind the pictures (symbols only on screen): simulation runs through th
 description and reconstruction into the same NanoAOD format (z-mumu/docs/10-skims.md); correction factors
 come from data vs simulation in a control sample (tag and probe, docs/12; pile-up, docs/11) or from data
 alone (fake factor, docs/13) and are applied to the prediction; the fit scales the prediction by mu,
-sigma = mu sigma_pred (fitting/CONVENTIONS.md section 2). All shapes are schematic (seeded); no result numbers.
+sigma = mu sigma_pred (docs/CONVENTIONS.md section 2). All shapes are schematic (seeded); no result numbers.
 """
 from __future__ import annotations
 

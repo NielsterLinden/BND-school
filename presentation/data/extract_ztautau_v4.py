@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Freeze the numbers of the four-channel Z -> tautau measurement (z-tautau v4: tau_h tau_h + mu tau_h + e tau_h + e mu).
 
-    source setup.sh && python presentation/data/extract_ztautau_v4.py [--json PATH] [--check-only]
+    source fitting/setup.sh && python presentation/data/extract_ztautau_v4.py [--json PATH] [--check-only]
 
 Reads (read-only):
   z-tautau/fit/results/ztautau/Plots/<region>_{prefit,postfit}.yaml   TRExFitter per-bin dumps of the nominal four-channel fit
@@ -185,7 +185,7 @@ def verify(d, ck: Checker):
         t = f["tau_id_sf"][dm]
         ck.check(f"tau ID SF DM{dm} {v} +- {e} (POG {pog} +- {pe})", [t["value"], t["err"], t["pog"], t["pog_err"]], [v, e, pog, pe],
                  5e-3, H)
-    ck.check("lumi", f["lumi_pb"], LUMI_PB, 1e-6, "fitting/CONVENTIONS.md")
+    ck.check("lumi", f["lumi_pb"], LUMI_PB, 1e-6, "docs/CONVENTIONS.md")
     for ch, mu, s in (("tautau", 1.043, 2029), ("mutau", 1.048, 2038), ("etau", 1.016, 1976), ("emu", 0.960, 1868)):
         p = d["per_channel_fixedid"][ch]
         ck.check(f"{ch} alone (POG SFs) sigma {s}", p["sigma"], s, 0.5, R)

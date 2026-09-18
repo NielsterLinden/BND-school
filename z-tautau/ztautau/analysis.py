@@ -291,7 +291,7 @@ def subtraction_weights(key: str, w):
 def theory_weights(d, key: str, syst: str):
     """Per-event weight multipliers of the members of a theory variation, shape (n_events, n_members),
     each member renormalised so the *fiducial* generator-level yield of the sample is unchanged: on the
-    fiducial signal only the C factor varies (fitting/CONVENTIONS.md section 3); on the non-fiducial
+    fiducial signal only the C factor varies (docs/CONVENTIONS.md section 3); on the non-fiducial
     part the same multipliers vary the non-fiducial / fiducial ratio, i.e. the theory uncertainty of that
     background. None if the sample lacks the weights.
 

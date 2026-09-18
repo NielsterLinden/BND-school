@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Run the Z -> tautau measurement (four channels: tau_h tau_h, mu tau_h, e tau_h, e mu) end to end.
 
-    source ../setup.sh
+    source ../fitting/setup.sh
     python run_all.py                  # steps 1-6 (skims: hours; from the ntuples on: ~4 h with the ranking)
     python run_all.py --from 3         # from the fake factors / trigger efficiencies on
     python run_all.py --only 5         # just the fits
@@ -11,7 +11,7 @@ Steps (each a standalone script in scripts/, documented in docs/10-v4-plan.md):
     2 flat ntuples of the lepton channels                                        step2_ntuples_lepton.py
     3 in-situ trigger efficiencies + b-tag efficiencies; lepton-channel fakes     step3c_trigger.py, step3d_fakes_lepton.py
     4 templates of all channels (tau_h tau_h from fit/fitinputs/tautau_base.root) step4_histograms.py, step4b_export_channels.py
-    5 TRExFitter fits: the measurement (with ranking), the cross-checks of REVIEW_v4.md, the per-channel
+    5 TRExFitter fits: the measurement (with ranking), the cross-checks of review/REVIEW_v4.md, the per-channel
       workspaces and their MultiFit                                              step5_fit.py, step5b_multifit.py
     6 report, and the result block injected into README/handoff/docs                step6_report.py, update_docs.py
 
@@ -30,7 +30,7 @@ The step-5 jobs, and why each exists (the first two run before the measurement, 
     ztautau_<ch>         one channel, scale factors free: the workspaces the MultiFit (and a combination) reads
     ztautau_<ch>_fixedid one channel with the TauPOG scale factors fixed: the per-channel cross-check numbers
     ztautau_taulep       tau_h tau_h + mu tau_h + e tau_h without e mu, scale factors free: what the
-                         tau_h tau_h / (l tau_h)^2 lever alone says about mu_Z (REVIEW_v4.md finding 2)
+                         tau_h tau_h / (l tau_h)^2 lever alone says about mu_Z (review/REVIEW_v4.md finding 2)
     ztautau_emutrig2x    the e mu trigger variation doubled (the 2% of the paper applied once per leg
                          instead of once per event, i.e. the v4 treatment before the review): how much of
                          the answer the trigger prior sets (finding 3)

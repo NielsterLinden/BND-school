@@ -9,7 +9,7 @@
 
 Location: `/dcache/atlas/sjankovy/BND/collision_data/Tau/` (identical to CERN EOS; a file that fails on dCache
 is retried from EOS automatically). Certified lumisections: `datasets/GRL/GRL.txt`, runs 278820–284044.
-**L = 16393.381 pb⁻¹ ± 1.2 %** — the normtag value shared by all three channels (`fitting/CONVENTIONS.md`).
+**L = 16393.381 pb⁻¹ ± 1.2 %** — the normtag value shared by all three channels (`docs/CONVENTIONS.md`).
 
 The `Tau` primary dataset is the right one for τhτh: it is where the di-τ triggers are routed. Using it
 (rather than SingleMuon/SingleElectron) makes this channel's data statistically independent of z-mumu and
@@ -42,7 +42,7 @@ z-ee, which the combination needs.
   per sample to its own fiducial yield (`analysis.theory_weights`).
 * **Fiducial / non-fiducial split.** 38 % of the selected Z/γ*→ττ is outside the fiducial volume
   (30 % has m_LHE > 120 GeV: the two 40 GeV visible-pT cuts enrich the γ* continuum by two orders of
-  magnitude relative to the peak, `REVIEW.md` 3.1). It is a separate sample `DYtautau_nonfid` with a 5 %
+  magnitude relative to the peak, `review/REVIEW_v3.md` 3.1). It is a separate sample `DYtautau_nonfid` with a 5 %
   normalisation uncertainty plus the theory variations, and is *not* scaled by μ_Z.
 * **No QCD multijet simulation** is used anywhere: all jet→τh fakes come from the fake-factor method in data
   (`05-fake-factors.md`).

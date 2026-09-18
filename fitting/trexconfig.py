@@ -9,7 +9,7 @@ The channel code builds a list of blocks and calls `render`:
 A block is (kind, name, ordered list of (key, value)). Values: str, int, float, bool,
 list/tuple (comma-joined), or None (skipped). Strings are quoted unless they look like a
 keyword/number/list (TRExFitter accepts both; quoting protects labels with spaces or '#').
-Option names are those of TRExFitter-v1.8.0/jobSchema.config.
+Option names are those of TRExFitter v1.8.0 (`jobSchema.config` in its source tree).
 """
 
 from __future__ import annotations

@@ -1,6 +1,6 @@
 """Unit checks of the config adapter (no TRExFitter needed; the fit inputs of the channels must exist).
 
-    source ../../setup.sh && python -m pytest -q tests      (or: python tests/test_trexcfg.py)
+    source ../../fitting/setup.sh && python -m pytest -q tests      (or: python tests/test_trexcfg.py)
 """
 
 from __future__ import annotations

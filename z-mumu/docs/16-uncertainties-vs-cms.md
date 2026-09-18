@@ -5,7 +5,7 @@ JHEP 04 (2025) 162), was linked from `combination/docs/05-vs-published.md` §2 (
 uncertainty table apart row by row, says for each row whether this analysis does the same, better, less
 or nothing, closes the gaps that can be closed by a measurement, estimates the one that cannot (three
 options, carried to the end), and compares the two cross sections. The procedure is written up for the
-other channels in `fitting/UNCERTAINTY_PARITY.md` (agent: `.claude/agents/uncertainty-parity-auditor.md`).
+other channels in `docs/UNCERTAINTY_PARITY.md` (agent: `.claude/agents/uncertainty-parity-auditor.md`).
 
 Scripts: `scripts/v2_7_reco_tnp.py` (reconstruction efficiency), `scripts/v2_8_theory_acceptance.py`
 (generator-level acceptance studies), `zmumu/acceptance.py` (the acceptance block), `scripts/v2_5_fit.py`
@@ -285,7 +285,7 @@ the profiled luminosity. The parity module takes 1.2 % of the measured value and
 ## 7. Reproduce
 
 ```bash
-source ../setup.sh
+source ../fitting/setup.sh
 python scripts/v2_7_reco_tnp.py                     # reconstruction efficiency, ~15 min (dCache parents), then fits ~5 min
 python scripts/v2_8_theory_acceptance.py --files 12 # generator-level acceptance studies, ~4 min (EOS)
 python scripts/v2_5_fit.py                          # the fit with the reconstruction SF and the acceptance block, ~10 min

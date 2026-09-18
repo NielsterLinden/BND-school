@@ -8,7 +8,7 @@ Code: `ztautau/bdt.py`, `scripts/step3b_bdt.py`; the categories are used by `ste
 With DeepTau Medium on both legs and no kinematic selection, the signal region was 80 % jet → τh fakes
 (S/B = 0.2); with Tight (v3) it is 64 % (S/B = 0.28). The fakes come from the application region of the data, so every fake-related uncertainty
 (closure, OS/SS extrapolation, FF statistics, W+jets composition) acts on ~38 000 events and scales with B/S.
-The review (`REVIEW.md` section 4) quantified three ways out; the group chose a classifier, because it
+The review (`review/REVIEW_v3.md` section 4) quantified three ways out; the group chose a classifier, because it
 keeps the full signal and lets the fit see the fakes where they dominate and the signal where it dominates.
 
 A classifier on **mass-agnostic** kinematics separates Z → τhτh from QCD dijets at AUC ≈ 0.97: a Z decays
@@ -87,4 +87,4 @@ bulk); they are not tuned on data. All three regions share the 14 m_tt bins of t
   of on 38 000, and the fake normalisation is measured in a region with essentially no signal.
 * The τh ID, trigger and signal-modelling uncertainties are multiplicative on the signal and are *not*
   reduced by a classifier; those need the combination with ee/μμ (τh ID constrained in situ) and the
-  fixes of `REVIEW.md` 3.3–3.4.
+  fixes of `review/REVIEW_v3.md` 3.3–3.4.

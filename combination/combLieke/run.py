@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """TRExFitter MultiFit of Z -> ee, Z -> mumu and Z -> tautau (tau_h tau_h, mu tau_h, e tau_h, e mu); CMS Open Data 2016 G+H.
 
-    source ../../setup.sh
+    source ../../fitting/setup.sh
     python run.py prepare          # ee inputs from z-ee/Zee_fit.tar.gz; channel and MultiFit configs in work/
     python run.py condor --submit  # every fit below as one HTCondor DAG (mf/condor.py), ending with `results --interim`
     python run.py results          # -> output/result.json      (only once the channel results are final)

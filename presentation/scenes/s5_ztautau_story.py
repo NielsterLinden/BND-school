@@ -1672,7 +1672,7 @@ class TautauRain(Scene):
 
 class TautauStack(Scene):
     """tautau_d1_simulation / d2_gap: bars become points, the simulation stack slides in
-    and explains a third; the ratio panel opens at data / simulation = 2.97."""
+    and explains a third; the ratio panel opens at data / simulation = 2.89."""
 
     def construct(self):
         white_background(self)
@@ -1796,7 +1796,7 @@ class TautauFakes(Scene):
 
 class TautauTransfer(Scene):
     """tautau_f1_apply / f2_template: N_fake = C_OS/SS f x N_AR; the plot returns; the fake
-    template enters the bottom of the stack, the ratio drops to 1.02; N_fake = 13592 (64 %)."""
+    template enters the bottom of the stack, the ratio drops to 1.01; N_fake = 13592 (64 %)."""
 
     def construct(self):
         white_background(self)

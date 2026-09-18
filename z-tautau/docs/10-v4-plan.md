@@ -143,7 +143,7 @@ that decay mode, `Expression` products (`TauIDSF_DM0*TauIDSF_DM1`, `TauIDSF_DM1*
 carry **no** POG ID SF (the NormFactor is the SF); their v3 `TauID_DM*` NPs are gone.
 
 Outputs: `fit/ztautau.config`, `fit/fitinputs/ztautau.root`, `fit/results/ztautau_fit_result.json` — the
-canonical names of `fitting/CONVENTIONS.md`, because this is the only measurement of the channel. The τhτh
+canonical names of `docs/CONVENTIONS.md`, because this is the only measurement of the channel. The τhτh
 Data and fake templates come from `fit/fitinputs/tautau_base.root` (`run_tautau_base.py`).
 
 **Regions that exist in the file but are not in the fit.** `mutau_SRlo/hi_dm*` and `etau_SRlo/hi_dm*` hold the
@@ -153,7 +153,7 @@ the 30–40 GeV part its own `TauIDSF_DM*_lowpt` scale factors. That is the test
 the τhτh / (ℓτh)² lever rests on: the τhτh legs are above 40 GeV, most of the ℓτh signal is not, and a
 scale factor that varies between 30 and 40 GeV would show up in μ_Z as ≈ 1–2 times that variation.
 
-**Cross-check jobs of step 5** (`run_all.py --help`, `REVIEW_v4_RESPONSE.md`): `ztautau_<ch>` (one channel,
+**Cross-check jobs of step 5** (`run_all.py --help`, `review/REVIEW_v4_RESPONSE.md`): `ztautau_<ch>` (one channel,
 scale factors free: the workspaces of the MultiFit), `ztautau_<ch>_fixedid` (POG scale factors fixed),
 `ztautau_taulep` (the three τ channels without eμ), `ztautau_ptsplit`, `ztautau_emutrig2x`.
 
@@ -177,7 +177,7 @@ scale factors free: the workspaces of the MultiFit), `ztautau_<ch>_fixedid` (POG
 | Norm. tt̄ 7 % | `mu_ttbar` free + `emu_CRtt` | implemented |
 | Shape tt̄ | `TopPt` | implemented |
 | Norm. SM H 30 % | — | not simulated; ≤ 0.2 % of the signal (H→ττ σ×B = 3.3 pb vs 1900 pb), noted |
-| Norm. single top 15 %, diboson 15 %, W+jets 15 % | `XS_SingleTop`, `XS_WW/WZ/ZZ`, `XS_WJets` 10 % | `fitting/CONVENTIONS.md` values (shared with ee/μμ); the paper's 15 % noted |
+| Norm. single top 15 %, diboson 15 %, W+jets 15 % | `XS_SingleTop`, `XS_WW/WZ/ZZ`, `XS_WJets` 10 % | `docs/CONVENTIONS.md` values (shared with ee/μμ); the paper's 15 % noted |
 | PDF, scale dependence, UE and PS | `PDF`, `QCDScale`, `PS_ISR`, `PS_FSR` (fixed σ(60–120), per channel A×ε) | as v3, extended to all channels |
 | — (not in the paper) | `L1Prefiring`, `Pileup`, `BTag`, `MCStatNorm_WJets_tautau`, γ | as v3 |
 
@@ -224,7 +224,7 @@ scale factors free: the workspaces of the MultiFit), `ztautau_<ch>_fixedid` (POG
   and the combined number is their compromise; both are quoted (`docs/11-combination-inputs.md` §7).
 * `MET_Unclustered` changes the ℓτh *yield* by −3.8 % / +2.9 % through the m_T < 40 GeV cut and the MET term
   of the likelihood mass. It is one nuisance parameter for both the shape and that normalisation, on purpose
-  (`REVIEW_v4_RESPONSE.md` §4), and the fit constrains it to ≈ 0.3 of its prior.
+  (`review/REVIEW_v4_RESPONSE.md` §4), and the fit constrains it to ≈ 0.3 of its prior.
 * Muon momentum scale, b-tag (if no efficiency map) and W+jets/single-top/diboson normalisations are
   estimates rather than measurements; they are marked as such in the results tables.
 
@@ -277,7 +277,7 @@ correlated by name across the channel workspaces (`TauIDSF_DM*`, `TauES_DM*`, `T
 POG scale factors held fixed (a single ℓτh channel alone cannot separate μ_Z from its scale factors).
 
 Adding the other groups' channels: append `Fit:` blocks to `comb_v4.config` pointing at `../../z-mumu/fit/zmumu.config`
-and the z-ee config once it follows `fitting/CONVENTIONS.md`; drop z-mumu's `mumu_CRemu` (it shares events with
+and the z-ee config once it follows `docs/CONVENTIONS.md`; drop z-mumu's `mumu_CRemu` (it shares events with
 `emu_SR`); the shared names above then correlate automatically, and every channel's σ^pred(60–120) must be its own
 (`CONVENTIONS.md` §6). The per-channel signal templates are split by τh decay mode (`DYtautau_tDM<key>`), so a
 combination must scale all `DYtautau_*` templates with `mu_Z` (the exported configs do).

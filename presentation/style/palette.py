@@ -79,7 +79,7 @@ THEORY = PURPLE            # theory prediction band / line: chapter 1
 DETECTOR_ACCENT = CYAN     # anything "detector / method" that is not the detector drawing itself
 HIGHLIGHT = RED            # a single bright "look here"; in tautau clips Flash in SLATE instead
 
-# -- samples (fit-input names from fitting/CONVENTIONS.md) ---------------------
+# -- samples (fit-input names from docs/CONVENTIONS.md) ---------------------
 # Signals in their channel colour; backgrounds are tints of the slate and of the
 # two non-channel chapter colours, so they never compete with the signal.
 SAMPLE = {

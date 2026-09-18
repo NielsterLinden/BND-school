@@ -5,7 +5,7 @@
 The fit (`08-fit-and-results.md`) returns μ_Z, the signal strength of the **fiducial** Z/γ*→ττ template
 relative to the NNLO prediction σ(Z/γ*→ℓℓ, m > 50 GeV) = 6077.22 pb / 3 per flavour. The template is
 aMC@NLO FxFx (inclusive + jet-binned samples, `01-data-and-samples.md`) with all TauPOG corrections. The
-POI name `mu_Z` and the normalisation are those of every channel (`fitting/CONVENTIONS.md`), so the
+POI name `mu_Z` and the normalisation are those of every channel (`docs/CONVENTIONS.md`), so the
 combination fits one μ_Z.
 
 ## Fiducial volume
@@ -55,7 +55,7 @@ m > 200 GeV, so the γ* continuum is enriched by two orders of magnitude relativ
 the Z/γ*→ττ events with m_tt > 130 GeV — the bins that fix the fake normalisation — have m_LHE > 120 GeV.
 In v1 all of this was one template scaled by μ_Z, i.e. the measured "σ(60–120)" was a measurement of the
 whole DY spectrum weighted by the SM shape, and the fake sideband contained μ-dependent signal
-(`REVIEW.md` 3.1).
+(`review/REVIEW_v3.md` 3.1).
 
 In v2 the non-fiducial part is the sample **`DYtautau_nonfid`**, a background with
 

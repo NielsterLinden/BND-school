@@ -20,10 +20,10 @@ Per channel, same likelihood model: ee 2094 ⁺¹²²₋₁₁₄, μμ 1931 ⁺
 −2Δln L (one σ against three) = 1.95 for 2 dof, p = 0.38.
 
 This supersedes the combination **frozen on 17 Sep 2026** with τhτh only, 1945 ⁺³¹₋₃₀ pb (git tag
-`zmumu-freeze-2026-09-17`, `../FREEZE.md`). The ee and μμ inputs are the frozen ones.
+`zmumu-freeze-2026-09-17`, `../docs/FREEZE.md`). The ee and μμ inputs are the frozen ones.
 
 Everything is in `combLieke/`: `README.md` (method and result), `output/plots/`, `output/result.json`,
-`docs/`. Rerun with `source ../setup.sh && cd combLieke && python run.py prepare && python run.py condor --submit`
+`docs/`. Rerun with `source ../fitting/setup.sh && cd combLieke && python run.py prepare && python run.py condor --submit`
 (~15 min), then `python run.py results && python run.py plots`.
 
 ## Inputs
@@ -39,7 +39,7 @@ Everything is in `combLieke/`: `README.md` (method and result), `output/plots/`,
 1. σ = μ_Z × 1953.93 pb in every channel, via a constant per-channel reference factor.
 2. The μμ acceptance uncertainties are nuisance parameters in the fit; ee and ττ carry A × ε in their theory
    templates.
-3. Correlation by nuisance-parameter name, per `fitting/CONVENTIONS.md`. The ττ muon and electron parameters (POG)
+3. Correlation by nuisance-parameter name, per `docs/CONVENTIONS.md`. The ττ muon and electron parameters (POG)
    are decorrelated from μμ's (tag-and-probe) and ee's.
 4. **ee template systematics: shape and normalisation are separate parameters.** Only the
    normalisation part is correlated with μμ/ττ. Without this the correlated fit has no minimum,

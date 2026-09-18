@@ -102,7 +102,7 @@ assert abs(FK["yields"]["sr_fakes"] - 3869.955) < 0.01
 assert tuple(SR["stack_order"]) == ("Fakes", "WW", "WZ", "ZZ", "SingleTop", "TTbar", "DYtautau", "DYmumu")
 assert abs(SR["fakes"]["total"] - FK["yields"]["sr_fakes"]) < 1e-6
 assert len(FIT["sr_12bin"]["data"]) == 12 and len(FIT["sr_12bin"]["edges"]) == 13
-# ---- the freeze of 17 Sep 2026 (FREEZE.md)
+# ---- the freeze of 17 Sep 2026 (docs/FREEZE.md)
 assert abs(FIT["poi"]["value"] - 0.988286) < 1e-6 and round(FIT["poi"]["err_up"], 3) == round(FIT["poi"]["err_down"], 3) == 0.014
 assert abs(FIT["sigma_fid"]["value"] - 790.200) < 0.01 and abs(FIT["sigma_fid"]["syst"] - 6.118) < 0.01
 assert abs(FIT["sigma_60_120"]["value"] - 1931.043) < 0.01 and round(FIT["sigma_60_120"]["total"]) == 30

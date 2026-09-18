@@ -2,7 +2,7 @@
 """Freeze the di-tau mass shapes of the simulated genuine tau_h tau_h signal in the Z -> tautau signal region: m_vis, the
 MET-likelihood mass m_tt and the collinear mass m_col (defined events only), plus the docs/04 performance table.
 
-    source setup.sh && python presentation/data/extract_ztautau_mass.py [--json PATH] [--check-only] [--weighting auto|unit|weighted]
+    source fitting/setup.sh && python presentation/data/extract_ztautau_mass.py [--json PATH] [--check-only] [--weighting auto|unit|weighted]
 
 Reads (read-only, uproot through ztautau.analysis) the Drell-Yan ntuples of $BND_TAUTAU_CACHE/ntuples_v1 restricted to
 70 < m_LHE < 110 GeV, both legs genuine tau_h (genPartFlav 5), SR cuts (OS, both Tight, pT > 40).

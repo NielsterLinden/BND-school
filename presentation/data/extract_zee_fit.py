@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Freeze the Z -> ee template fit (z-ee delivery of 16 Sep 14:44, unchanged by the freeze) for section 3.
 
-    source setup.sh && python presentation/data/extract_zee_fit.py [--json PATH] [--check-only]
+    source fitting/setup.sh && python presentation/data/extract_zee_fit.py [--json PATH] [--check-only]
 
 Reads (read-only) z-ee/Zee_fit.tar.gz, unpacked into presentation/work/extract/zee_fit/:
   Plots/ee_SR_prefit.yaml, Plots/ee_SR_postfit.yaml    TRExFitter per-bin yields (what its plots show)
@@ -11,7 +11,7 @@ Reads (read-only) z-ee/Zee_fit.tar.gz, unpacked into presentation/work/extract/z
   reference_cross_section.txt                          sigma(Z/gamma* -> ee, 60 < m_LHE < 120) of the aMC@NLO sample
 and, for the result frame, combination/combLieke/config/references.json (published CMS / ATLAS values) and
 presentation/data/ztautau_reference.json (the prediction band the tau tau chapter already shows, anchor rule 06 B5).
-Writes presentation/data/zee_fit.json. Anchors: FREEZE.md "Z -> ee" (mu = 0.942 +- 0.015, 1840.8 +- 29.9 pb),
+Writes presentation/data/zee_fit.json. Anchors: docs/FREEZE.md "Z -> ee" (mu = 0.942 +- 0.015, 1840.8 +- 29.9 pb),
 z-ee/fit.config (samples, systematics).
 """
 
@@ -178,7 +178,7 @@ def build():
 
     return {
         "provenance": provenance("extract_zee_fit.py", [TARBALL, REFS, TT_REF], dataset=DATASET_EE,
-                                 version="z-ee delivery 16 Sep 2026 14:44 (Zee_fit.tar.gz), unchanged by the freeze (FREEZE.md)",
+                                 version="z-ee delivery 16 Sep 2026 14:44 (Zee_fit.tar.gz), unchanged by the freeze (docs/FREEZE.md)",
                                  note="the channel's own TRExFitter fit; the combination's ee line (2094 +122 -114 pb) uses a "
                                       "shape/normalisation split and is not shown in this chapter (deck owner, 17 Sep 2026)"),
         "edges": edges,
@@ -226,10 +226,10 @@ def verify(d, ck: Checker):
     ck.check("prefit total 6,513,342.6", sum(pre["total"]), 6513342.6, tol=0.1, source="Plots/ee_SR.png")
     ck.check("postfit total 6,320,132.1", sum(post["total"]), 6320132.1, tol=0.1, source="Plots/ee_SR_postFit.png")
     ck.check("mu_Z = 0.942 +- 0.015", [round(d["mu"]["value"], 3), round(d["mu"]["err_up"], 3), round(d["mu"]["err_down"], 3)],
-             [0.942, 0.015, 0.015], tol=1e-9, source="FREEZE.md Z -> ee, Fits/Zee_fit.txt")
+             [0.942, 0.015, 0.015], tol=1e-9, source="docs/FREEZE.md Z -> ee, Fits/Zee_fit.txt")
     ck.check("reference 1954.10 pb", d["sigma"]["ref"], 1954.1032472811223, tol=1e-6, source="reference_cross_section.txt")
     ck.check("sigma = 1840.8 +- 29.9 pb", [d["sigma"]["value"], d["sigma"]["err"]], [1840.8, 29.9], tol=0.05,
-             source="FREEZE.md Z -> ee")
+             source="docs/FREEZE.md Z -> ee")
     ck.check("stat (+) syst (+) MC stat == total", np.sqrt(d["mu"]["stat"] ** 2 + d["mu"]["syst"] ** 2 + d["mu"]["mcstat"] ** 2),
              d["mu"]["err_up"], tol=2e-5,
              source="Fits/Zee_fit_errDecomp_mu_Z.txt")

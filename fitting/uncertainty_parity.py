@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Uncertainty parity with a published measurement: budget, three estimate options, comparison, plots.
 
-Shared by the three channels (procedure: fitting/UNCERTAINTY_PARITY.md; agent:
+Shared by the three channels (procedure: docs/UNCERTAINTY_PARITY.md; agent:
 .claude/agents/uncertainty-parity-auditor.md). A channel writes one *parity file* (JSON) that maps
 every uncertainty row of the published measurement onto its own analysis; this module turns it into
 

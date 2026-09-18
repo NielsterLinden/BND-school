@@ -18,7 +18,7 @@ w = genWeight x sigma L / sum genWeight x w_PU(nTrueInt) x L1PreFiringWeight_Nom
   UL recommendation is 69.2 mb, so the profile is `avgpu x 69.2/80` (mean 24.7 for G+H,
   28.5 with 80 mb). That raw profile is ~4% too low and too narrow (the CSV has one average
   per lumisection and no bunch-to-bunch spread, which the official `pileupCalc.py` adds):
-  with it, data/MC in N_PV rises from 0.8 to 1.2 across the distribution (REVIEW.md F6).
+  with it, data/MC in N_PV rises from 0.8 to 1.2 across the distribution (review/README.md F6).
   `scripts/v2_2_pileup.py` therefore fits two parameters -- a scale of the per-lumisection
   mean and a relative Gaussian smearing per lumisection -- to the N_PV distribution of the
   Z -> mu mu signal region (`pileup.match_npv`); the **N_PV-matched profile** is the nominal
@@ -38,7 +38,7 @@ w = genWeight x sigma L / sum genWeight x w_PU(nTrueInt) x L1PreFiringWeight_Nom
   `scripts/v2_7_reco_tnp.py`), applied to every simulated template by `scripts/v2_5_fit.py` (per event,
   1.0002, in the SR; per muon in the e-mu region) and in the data/MC plots. Fully correlated between the two
   muons, so the `MuonReco` nuisance parameter is **0.27% per event**. Until 16 Sep the SF was assigned,
-  1 +- 0.4%/muon = 0.8% per event (the first v2 fit applied 0.4% per event, REVIEW.md F8).
+  1 +- 0.4%/muon = 0.8% per event (the first v2 fit applied 0.4% per event, review/README.md F8).
 - **Theory variations on the signal** (PDF Hessian members, alpha_s, 7-point muR/muF, PS ISR/FSR)
   are renormalised so that the *fiducial* generator yield stays constant
   (`Weighter.theory_renorm`): a fiducial cross section only carries their effect on the

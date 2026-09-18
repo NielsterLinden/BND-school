@@ -1,7 +1,7 @@
 # 11 — What the combination gets from Z → ττ, and how to use it
 
 Everything in this document is committed in the repository, so a combination can be built from a fresh
-checkout without running anything here. It is the channel-side counterpart of `fitting/CONVENTIONS.md`
+checkout without running anything here. It is the channel-side counterpart of `docs/CONVENTIONS.md`
 and of `z-mumu/docs/15-combination-inputs.md`.
 
 Read section 7 before quoting a number: the four-channel result is a likelihood compromise between two
@@ -30,7 +30,7 @@ Regenerate with `python run_all.py --from 4` (needs `fit/fitinputs/tautau_base.r
 
 ## 2. Regions, samples, histograms
 
-Histogram names follow `fitting/CONVENTIONS.md` §1: `<region>__<sample>`, `<region>__Data`,
+Histogram names follow `docs/CONVENTIONS.md` §1: `<region>__<sample>`, `<region>__Data`,
 `<region>__<sample>__<syst>Up|Down`. Every histogram is a `TH1D` of the di-τ mass `m_tt` with the sum of
 squared weights stored; all samples of a region share its binning; there are no dots in any name.
 

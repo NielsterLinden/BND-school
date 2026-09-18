@@ -2,7 +2,7 @@
 """Freeze the Z -> tautau jet -> tau_h fake-factor estimate: the era x DM x N_jets x pT table, the |eta(tau1)| and pT(tau2)
 closure corrections (before / after), C_OS/SS, the region counts and the fake yields per BDT category.
 
-    source setup.sh && python presentation/data/extract_ztautau_fakes.py [--json PATH] [--check-only] [--no-recompute]
+    source fitting/setup.sh && python presentation/data/extract_ztautau_fakes.py [--json PATH] [--check-only] [--no-recompute]
 
 Reads (read-only): z-tautau/output/data/fakefactors.json (mcsub: fakes.measure + closure_corrections + osss_correction),
 z-tautau/fit/fitinputs/ztautau.root.meta.json (C per era x N_jets x BDT category), z-tautau/output/data/yields.json, and --

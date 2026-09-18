@@ -6,7 +6,7 @@ parses with `fitting/run_trex.py`), `scripts/step6_report.py`. Numbers: `output/
 
 ## Set-up
 
-* **TRExFitter v1.8.0**, the build of the git submodule made with `fitting/build_trexfitter.sh` against the
+* **TRExFitter v1.8.0**, cloned and built outside the repository by `fitting/build_trexfitter.sh` against the
   LCG_110 ROOT (a build against another ROOT crashes at start-up, `CLAUDE.md`).
 * **Three regions** `tautau_SR0`, `tautau_SR1`, `tautau_SR2`: the BDT categories (score < 0.55, 0.55–0.90,
   > 0.90; `09-bdt.md`), each with the observable m_tt in 14 bins: 0, 40, 60, 70, …, 130, 150, 175, 200, 250,
@@ -16,7 +16,7 @@ parses with `fitting/run_trex.py`), `scripts/step6_report.py`. Numbers: `output/
   was 49 % correlated with μ_Z. SR2 is a nearly background-free Z peak (S/B ≈ 5.3).
 * Samples: Data; **DYtautau** (fiducial signal, `NormFactor mu_Z`, range 0–3); DYtautau_nonfid, DYee, DYmumu,
   DYlowmass, WJets, TTbar, SingleTop, WW, WZ, ZZ; **Fakes** (data × FF, MC subtracted). Histograms follow
-  `fitting/CONVENTIONS.md` (`tautau_SR<k>__<sample>[__<syst>Up/Down]`, TH1D with Sumw2, written by uproot).
+  `docs/CONVENTIONS.md` (`tautau_SR<k>__<sample>[__<syst>Up/Down]`, TH1D with Sumw2, written by uproot).
 * Nuisance parameters: `07-corrections-and-systematics.md` (39 NPs). Per-bin γ for the MC and fake-template
   statistics (the `Fakes` variance includes the FF statistics; W+jets has no per-bin γ: its statistical
   uncertainty is one normalisation parameter). Shape variations of τ ES and MET use TRExFitter smoothing (`Smoothing: 40`).

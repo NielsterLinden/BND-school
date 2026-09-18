@@ -68,7 +68,7 @@ correlation this induces is below 10⁻³ of either measurement and is not model
 ## Reproduce
 
 ```bash
-source ../../setup.sh
+source ../../fitting/setup.sh
 python checks/orthogonality.py --workers 8     # ~3 min: 152 SingleMuon + 100 Tau skim files
 ```
 

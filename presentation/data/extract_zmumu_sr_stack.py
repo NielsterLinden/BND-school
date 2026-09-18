@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Freeze the Z -> mumu signal-region m(mumu) stack in four correction stages (one new pass over the MC skims).
 
-    source setup.sh
+    source fitting/setup.sh
     python presentation/data/extract_zmumu_sr_stack.py --samples WW ST_tW_top --max-files 2 --check-fill-chunk \
            --parts-dir presentation/work/extract/smoke                       # smoke test (~20 s)
     python presentation/data/extract_zmumu_sr_stack.py --workers 8            # full run (~3-5 min)
@@ -13,7 +13,7 @@ Stages (prompt-prompt MC only in every stage, momentum calibration applied in ev
     prefiring  pileup x L1PreFiringWeight_Nom
     nominal    prefiring x SF_ID(mu1) SF_ID(mu2) SF_iso(mu1) SF_iso(mu2) x SF_trigger(event)   == histograms.pkl
 Block `recut` (17 Sep 2026): the same frozen weights in the order the talk tells them, tag-and-probe first, plus the
-measured reconstruction SF that the frozen fit inputs carry (FREEZE.md; flat per event, applied at merge time):
+measured reconstruction SF that the frozen fit inputs carry (docs/FREEZE.md; flat per event, applied at merge time):
     raw -> sf_id (x SF_ID SF_ID) -> sf_muon (x SF_iso SF_iso SF_trigger SF_reco) -> sf_pileup (x w_PU) -> final (x L1 prefiring)
 `final` == nominal x SF_reco == the frozen fit input (mumu_SR_prefit.yaml, results_v2.json /yields/SR); asserted.
 The worker is a copy of z-mumu/scripts/v2_4_histograms.py:process_file with BRANCHES and _FixedWeighter imported from
@@ -68,7 +68,7 @@ RECUT_LABELS = {
     "sf_muon": "raw x SF_ID SF_ID x SF_iso SF_iso x SF_trigger(event) x SF_reco(event): every tag-and-probe scale factor; the "
                "reconstruction SF (fit meta reco_sf.sf_per_event, flat) is applied at merge time, which is exact for a flat factor",
     "sf_pileup": "sf_muon x pileup weight w_PU(nTrueInt)",
-    "final": "sf_pileup x L1PreFiringWeight_Nom == stage `nominal` x SF_reco == the frozen fit input (FREEZE.md, mumu_SR_prefit.yaml)",
+    "final": "sf_pileup x L1PreFiringWeight_Nom == stage `nominal` x SF_reco == the frozen fit input (docs/FREEZE.md, mumu_SR_prefit.yaml)",
 }
 EDGES = H.edges("SR", "mass_fit")          # 60 x 1 GeV, 60-120
 PARTS_DEFAULT = WORK / "sr_stack"
@@ -351,7 +351,7 @@ def verify(d, ck: Checker):
     bkg = sum(d["mc"][s]["totals"]["nominal"] for s in SAMPLES_OUT if s != "DYmumu") + d["fakes"]["total"]
     ck.check("sum bkg + fakes 68 786.5 (nominal, before the reconstruction SF)", bkg, 68786.5, 0.05, "fit/results/zmumu_v2_15sep_fit_result.json counting n_bkg")
     ck.check("bkg_plus_fakes (nominal) == 15 Sep counting n_bkg 68786.525", d["totals"]["nominal"]["bkg_plus_fakes"], 68786.52541969114, 1e-6, "15 Sep fit result meta", rel=True)
-    ck.check("recut final: bkg + fakes 68 799.0", rc["totals"]["final"]["bkg_plus_fakes"], 68799.0, 0.05, "z-mumu/handoff.md:57 / FREEZE.md")
+    ck.check("recut final: bkg + fakes 68 799.0", rc["totals"]["final"]["bkg_plus_fakes"], 68799.0, 0.05, "z-mumu/handoff.md:57 / docs/FREEZE.md")
     ck.check("recut final: bkg + fakes == frozen counting n_bkg", rc["totals"]["final"]["bkg_plus_fakes"], fitres["meta"]["counting"]["n_bkg"], 1e-6,
              "fit/results/zmumu_fit_result.json meta.counting", rel=True)
     ck.check("fakes total 3869.955", d["fakes"]["total"], 3869.955, 5e-4, "fakes.json")

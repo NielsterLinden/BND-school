@@ -2,7 +2,7 @@
 """Build the tau_h tau_h base of the measurement: skims, ntuples, fake factors, BDT and the templates
 that the four-channel fit reads (`fit/fitinputs/tautau_base.root`).
 
-    source ../setup.sh                 # LCG_110 (python 3.13, uproot, awkward, hist, ROOT) + TRExFitter
+    source ../fitting/setup.sh                 # LCG_110 (python 3.13, uproot, awkward, hist, ROOT) + TRExFitter
     python run_tautau_base.py          # steps 0-4
     python run_tautau_base.py --from 3 # from the fake factors on (ntuples exist, ~25 min)
 

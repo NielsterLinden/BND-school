@@ -3,7 +3,7 @@
 
     python scripts/step4a_tautau_base.py [--ff-variant mcsub|nosub] [--no-plots]
 
-Fit inputs (fitting/CONVENTIONS.md): fit/fitinputs/tautau_base[_nosub].root with, for every BDT category
+Fit inputs (docs/CONVENTIONS.md): fit/fitinputs/tautau_base[_nosub].root with, for every BDT category
 region tautau_SR<k> (config.REGIONS),
     tautau_SR<k>__Data, tautau_SR<k>__<sample>, tautau_SR<k>__<sample>__<syst>Up/Down
 of the fit variable (config.FIT_VARIABLE). Samples: DYtautau (fiducial signal), DYtautau_nonfid, DYee,

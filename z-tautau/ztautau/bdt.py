@@ -6,7 +6,7 @@ mass-agnostic kinematics (dR, the pT balance of the tau tau + MET system, decay 
 at AUC ~ 0.89 and, used as a *category* variable with m_tt still fitted in each category, isolates a third
 of the signal at S/B ~ 5 while the fake-dominated category fixes the fake normalisation and shape.
 
-Rules that keep the fake-factor method valid (REVIEW.md 4.3):
+Rules that keep the fake-factor method valid (review/REVIEW_v3.md 4.3):
   * inputs never include the tau_1 isolation (raw DeepTau, isolation sums, leadTkPtOverTauPt) or the
     charge: the classifier must not learn the difference between the AR and the SR, nor OS vs SS;
   * k folds by event number: an event is always scored by the model that never saw it; this holds for

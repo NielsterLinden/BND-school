@@ -2,7 +2,7 @@
 """Freeze the Z -> tautau fit result (mu_Z, sigma_fid, sigma(60-120), grouped impacts, NPs, ranking, the 3 x 14-bin
 category plots pre/post-fit).
 
-    source setup.sh && python presentation/data/extract_ztautau_fit.py [--json PATH] [--check-only]
+    source fitting/setup.sh && python presentation/data/extract_ztautau_fit.py [--json PATH] [--check-only]
 
 Reads (read-only): z-tautau/fit/results/ztautau_fit_result.json, z-tautau/output/results.json (fit.mcsub),
 z-tautau/fit/results/ztautau/Plots/tautau_SR{0,1,2}_{prefit,postfit}.yaml (TRExFitter plot dumps, git-ignored, reached
@@ -30,7 +30,7 @@ CONFIG = ZTAUTAU / "fit" / "ztautau.config"
 REGIONS = ["tautau_SR0", "tautau_SR1", "tautau_SR2"]
 EDGES = [0, 40, 60, 70, 80, 90, 100, 110, 120, 130, 150, 175, 200, 250, 350]
 SAMPLES = ["DYtautau", "DYtautau_nonfid", "DYee", "DYmumu", "DYlowmass", "WJets", "TTbar", "SingleTop", "WW", "WZ", "ZZ", "Fakes"]
-# TRExFitter sample titles (z-tautau/scripts/step5_fit.py) -> fitting/CONVENTIONS.md names
+# TRExFitter sample titles (z-tautau/scripts/step5_fit.py) -> docs/CONVENTIONS.md names
 TITLE_TO_SAMPLE = {"Z#rightarrow#tau#tau (fiducial)": "DYtautau", "Z/#gamma*#rightarrow#tau#tau (non-fid.)": "DYtautau_nonfid",
                    "Z#rightarrowee": "DYee", "Z#rightarrow#mu#mu": "DYmumu", "Z/#gamma*#rightarrowll (m<50)": "DYlowmass",
                    "W+jets": "WJets", "t#bar{t}": "TTbar", "single t": "SingleTop", "WW": "WW", "WZ": "WZ", "ZZ": "ZZ",
@@ -157,7 +157,7 @@ def verify(d, ck: Checker):
     ck.check("prediction 1944.88 pb", s6["pred"], 1944.88, 5e-3, R + " (handoff: 1944.9)")
     ck.check("prediction 1944.9 pb rounded", s6["pred"], 1944.9, 0.05, H)
     ck.check("A 0.002314", s6["A"], 0.002314, 5e-7, H)
-    ck.check("lumi_pb", d["lumi_pb"], LUMI_PB, 1e-6, "fitting/CONVENTIONS.md")
+    ck.check("lumi_pb", d["lumi_pb"], LUMI_PB, 1e-6, "docs/CONVENTIONS.md")
     gi = d["grouped_impact"]
     for name, want in (("FullSyst", 0.1050), ("Tau ID", 0.0844), ("Fakes", 0.0650), ("Gammas", 0.0389), ("Tau trigger", 0.0302),
                        ("Background normalisation", 0.0257), ("Tau energy scale", 0.0147), ("Signal modelling", 0.0125), ("MET", 0.0081),

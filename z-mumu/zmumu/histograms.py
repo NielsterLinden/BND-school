@@ -9,7 +9,7 @@ MC enters the SR/SS only with *prompt* muons (genPartFlav 1 or 15); non-prompt m
 estimated from data with the fake factor (zmumu.fakes). In the e-mu regions (CRemu, SSemu)
 *all* MC events are kept: nothing data-driven replaces the non-prompt electrons there
 (W+jets jet -> e, Z -> mumu + conversion, Z -> tautau tau_h -> e, top b -> e), which are 9% of
-the OS e-mu region -- see REVIEW.md F1. DY_NLO is split by LHE flavour into DYmumu / DYee /
+the OS e-mu region -- see review/README.md F1. DY_NLO is split by LHE flavour into DYmumu / DYee /
 DYtautau. DY_powheg (raw generator weights) provides the SigModel template; for that
 comparison the DYmumu nominal is also filled with the powheg generator window
 50 < m_LHE < 120 GeV ("lhe50120") together with the fiducial sums needed to normalise it.

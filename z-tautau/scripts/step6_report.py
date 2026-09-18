@@ -7,7 +7,7 @@ Reads fit/results/ztautau_fit_result.json and every cross-check job of step 5 (p
 `ztautau_taulep`, `ztautau_ptsplit`, `ztautau_emutrig2x`, the MultiFit `comb`), output/data/yields_v4.json,
 the fake and in-situ trigger json files, and copies the key TRExFitter plots to output/plots/fit_*.png.
 
-What the report is careful about (REVIEW_v4.md):
+What the report is careful about (review/REVIEW_v4.md):
   * the expected (Asimov) uncertainty is quoted only if MINOS converged on it (finding 1);
   * the e mu channel and the three tau channels are quoted separately with their difference, because the
     combined number is their compromise, not a confirmation that they agree (finding 2);
@@ -294,7 +294,7 @@ def main():
                       f"free scale factors on the same data and its goodness of fit is lower), so the measurement "
                       f"carries the spread between the two models as the nuisance parameter `TauIDpT_tautau` "
                       f"(group `Tau ID pT dependence` below; scripts/step5_fit.py `pt_model`). "
-                      f"See REVIEW_v4_RESPONSE.md section 6.", ""]
+                      f"See review/REVIEW_v4_RESPONSE.md section 6.", ""]
     if f:
         gsum, gscale = f.get("grouped_impact_quadrature_sum"), f.get("grouped_impact_scale")
         L += ["## Grouped impacts on mu_Z", "",

@@ -4,7 +4,7 @@ with BND_TAUTAU_WP=Medium to reproduce the numbers quoted in REVIEW.md.
 
 Where does the eta(tau1) non-closure of the fake factor come from? (REVIEW.md section 3.5 / 6)
 
-    python review/eta_study.py        # after source ../setup.sh; writes review/eta_study.txt, review/review_eta.png
+    python review/eta_study.py        # after source ../fitting/setup.sh; writes review/eta_study.txt, review/review_eta.png
 """
 from __future__ import annotations
 import sys

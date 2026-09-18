@@ -2,7 +2,7 @@
 """Freeze real CMS 2016 Open Data events for the Z -> tautau event displays: one signal-region event with its MET-likelihood
 posterior on the (x1, x2) grid, and ten same-sign pairs for the fake-factor tally.
 
-    source setup.sh && python presentation/data/extract_ztautau_events.py [--seed 20260916] [--json PATH] [--check-only]
+    source fitting/setup.sh && python presentation/data/extract_ztautau_events.py [--seed 20260916] [--json PATH] [--check-only]
 
 Reads (read-only, uproot): the data ntuples data_2016G.root and data_2016H.root of $BND_TAUTAU_CACHE/ntuples_v1 (flat TTree
 'ntuple', candidates from 38 GeV: the analysis cuts at 40). The signal region is re-applied from the DeepTau bitmasks

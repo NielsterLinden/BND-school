@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Run the v2 (MC-based, TRExFitter) Z -> mu mu measurement end to end: the frozen result (17 Sep 2026).
 
-    source ../setup.sh
+    source ../fitting/setup.sh
     python run_v2.py                     # everything (skims take ~1.5 h the first time)
     python run_v2.py --from 2            # after the skims exist
     python run_v2.py --from 5            # fit, report and the CMS comparison only

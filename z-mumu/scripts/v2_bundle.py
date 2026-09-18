@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Laptop bundle: one ROOT file per sample from the per-file v2 skims, plus a manifest.
 
-    source ../setup.sh && python scripts/v2_bundle.py [--out DIR] [--samples KEY ...]
+    source ../fitting/setup.sh && python scripts/v2_bundle.py [--out DIR] [--samples KEY ...]
 
 Uses `hadd` from the LCG view (no python ROOT import). The `GenSums` and `Runs` trees are
 concatenated as well, so the per-sample sums are the sums over the entries of those trees.

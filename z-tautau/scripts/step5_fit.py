@@ -36,14 +36,14 @@ from ztautau import analysis_v4 as an, config  # noqa: E402
 
 
 def trex_environment():
-    """Put the TRExFitter v1.8.0 build on PATH (the submodule build, else the main checkout's)."""
+    """Put the TRExFitter v1.8.0 build on PATH ($TREXFITTER_HOME, else the shared build next to the main checkout)."""
     if shutil.which("trex-fitter"):
         return
     home = Path(os.environ.get("TREXFITTER_HOME", ""))
     if not (home / "build/bin/trex-fitter").exists():
         home = config.TREX_FALLBACK_HOME
     if not (home / "build/bin/trex-fitter").exists():
-        raise RuntimeError("no TRExFitter build: run fitting/build_trexfitter.sh (after source setup.sh)")
+        raise RuntimeError("no TRExFitter build: run fitting/build_trexfitter.sh (after source fitting/setup.sh)")
     os.environ["TREXFITTER_HOME"] = str(home)
     os.environ["PATH"] = f"{home / 'build/bin'}:{os.environ['PATH']}"
     os.environ["LD_LIBRARY_PATH"] = f"{home / 'build/lib'}:{os.environ.get('LD_LIBRARY_PATH', '')}"
@@ -63,7 +63,7 @@ def empty_bins(histo_path: Path, regions) -> dict:
     Such a bin carries no information, but with `MCstatThreshold: 0` its MC-statistics gamma is
     unconstrained and sits at zero, which makes the per-bin offset log(0): HESSE is then forced
     positive-definite and MINOS wanders into a region where every parameter is NaN. That is what made the
-    Asimov fit of the first v4 round fail (REVIEW_v4.md finding 1) and what the combination had to work
+    Asimov fit of the first v4 round fail (review/REVIEW_v4.md finding 1) and what the combination had to work
     around in its own copy of these inputs. They are dropped from the fit instead.
     """
     out = {}
@@ -85,7 +85,7 @@ def empty_bins(histo_path: Path, regions) -> dict:
 def select_regions(meta, channels, region_set="nominal"):
     """Regions of a fit: the channels asked for, in the region set asked for. 'nominal' is the measurement
     (one l tau_h region per decay mode); 'ptsplit' replaces the l tau_h regions by their pT(tau_h) split
-    (REVIEW_v4.md finding 4) and keeps the other channels as they are."""
+    (review/REVIEW_v4.md finding 4) and keeps the other channels as they are."""
     sets = meta.get("region_sets", {})
     out = []
     for r in meta["regions"]:
@@ -106,7 +106,7 @@ def pt_model(fitdir: Path) -> dict:
 
     The tau_h tau_h / (l tau_h)^2 lever assumes the tau_h ID scale factor is flat in pT from 30 GeV upwards.
     `ztautau_ptsplit` gives the l tau_h regions below 40 GeV their own scale factors and moves mu_Z by 6 %,
-    1.8 times the uncertainty of the fit without this parameter (REVIEW_v4_RESPONSE.md section 6). The split is
+    1.8 times the uncertainty of the fit without this parameter (review/REVIEW_v4_RESPONSE.md section 6). The split is
     not the nominal model, so the relative difference between the two fits (`ztautau_flatsf`: this model
     without the parameter; `ztautau_ptsplit`) is carried as one OVERALL parameter on the signal. It is
     degenerate with mu_Z by construction: the central value stays, the uncertainty grows.
@@ -280,7 +280,7 @@ def main():
     # The expected (Asimov) fit is run from its own copy of the config with Minuit2 strategy 3: with the
     # default strategy MINOS failed on mu_Z on the Asimov data set ("Invalid lower error", Hessian forced
     # pos-def) and the HESSE error of that non-positive-definite matrix was quoted as the expected
-    # uncertainty (REVIEW_v4.md finding 1). Strategy 2 cured that until TauIDpT_tautau, which is degenerate
+    # uncertainty (review/REVIEW_v4.md finding 1). Strategy 2 cured that until TauIDpT_tautau, which is degenerate
     # with mu_Z: with it strategy 2 ends on a Hessian forced pos-def (MINOS status 1), strategy 3 is clean
     # (the combination found the same for this likelihood). If MINOS still fails, nothing is quoted.
     cfg_asimov = fitdir / f"{job}_asimov.config"
@@ -345,7 +345,7 @@ def summarise(args, job, fitdir, meta, scale_systs):
                               "note": "sigma(pp -> Z/gamma* -> tautau, 60 < m_LHE < 120 GeV) = mu_Z x aMC@NLO prediction normalised to 6077.22 pb (m > 50)"}
     # The grouped impacts share nuisance parameters between categories (mu_ttbar <-> EmuTrigger <-> mu_Z),
     # so their quadrature sum over-shoots the MINOS total. Record the over-shoot instead of hiding it
-    # (REVIEW_v4.md finding 5): the total to quote is always the MINOS one.
+    # (review/REVIEW_v4.md finding 5): the total to quote is always the MINOS one.
     groups = {k: v for k, v in res.get("grouped_impact", {}).items() if k not in ("FullSyst", "Total")}
     quad = float(sum(v ** 2 for v in groups.values()) + (stat or 0.0) ** 2) ** 0.5
     res["grouped_impact_quadrature_sum"] = quad

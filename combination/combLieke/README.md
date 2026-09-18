@@ -12,7 +12,7 @@ Data 2016 G+H (16.4 fb⁻¹, √s = 13 TeV). Z → ττ is the four-channel meas
 
 This result (17 Sep 2026, fits on HTCondor) **supersedes the frozen three-channel combination**
 ee ⊕ μμ ⊕ τhτh = 1945 ⁺³¹₋₃₀ pb, which stays available at the git tag `zmumu-freeze-2026-09-17` (repository
-`FREEZE.md`; its TRExFitter jobs are in `work_freeze_2026-09-17/`, git-ignored). The ee and μμ inputs are the
+`docs/FREEZE.md`; its TRExFitter jobs are in `work_freeze_2026-09-17/`, git-ignored). The ee and μμ inputs are the
 frozen ones; what changed is ττ.
 
 All numbers: `output/result.json`. All figures: `output/plots/` (PDF and PNG).
@@ -76,7 +76,7 @@ The only changes, made by `mf/trexcfg.adapt_channel` and driven by `config/chann
    `z-mumu/zmumu/acceptance.py`) enter as OVERALL parameters `Acc_*` on the signal, read by key from
    `zmumu.root.meta.json`. ee and ττ have no such block: their theory templates are normalised to a constant
    σ(60–120), so `PDF`/`QCDScale`/`PS_*` carry A × ε inside their fits (adding `Acc_*` would double count).
-3. **Correlations by name,** as `fitting/CONVENTIONS.md` §3 prescribes. Shared are `Lumi`, `Pileup`,
+3. **Correlations by name,** as `docs/CONVENTIONS.md` §3 prescribes. Shared are `Lumi`, `Pileup`,
    `L1Prefiring`, `PDF`, `QCDScale`, `PS_FSR`, `PS_ISR`, `XS_TTbar` (ee, μμ), `XS_DYtautau`, `XS_WJets`,
    `XS_SingleTop/WW/WZ/ZZ`. Channel-specific: everything electron, muon, τ, MET, jets, fakes, MC statistics,
    the μμ `Acc_*`, `SigModel` → `SigModel_mumu`, and the ττ `MuonID/Iso/Trigger/Scale`,
@@ -249,7 +249,7 @@ uncertainty of the NNLO normalisation (6077.22 pb) is not public and not include
 ## Run
 
 ```bash
-source ../../setup.sh
+source ../../fitting/setup.sh
 python run.py prepare             # configs of every likelihood in work/ (git-ignored)
 python run.py condor --submit     # all fits as one HTCondor DAG (~15 min); ends with `results --interim` -> interim/result.json
 python run.py results && python run.py plots    # -> output/result.json, output/plots/

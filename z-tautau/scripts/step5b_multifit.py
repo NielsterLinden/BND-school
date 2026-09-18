@@ -30,7 +30,7 @@ from step5_fit import trex_environment  # noqa: E402
 
 LABELS = {"tautau": "#tau_{h}#tau_{h}", "mutau": "#mu#tau_{h}", "etau": "e#tau_{h}", "emu": "e#mu"}
 HEADER = """% Combination of the four Z -> tautau channels as a TRExFitter v1.8.0 MultiFit over the per-channel
-% workspaces (fitting/CONVENTIONS.md section 5, z-tautau/docs/11-combination-inputs.md). Each channel job
+% workspaces (docs/CONVENTIONS.md section 5, z-tautau/docs/11-combination-inputs.md). Each channel job
 % reads its own exported fit inputs (fit/fitinputs/ztautau_<channel>.root, scripts/step4b_export_channels.py)
 % with the tau_h ID scale factors free; shared nuisance-parameter names (TauIDSF_DM*, TauES_DM*, Lumi,
 % Pileup, ...) are correlated by name, so this MultiFit is the same model as the single-file fit of step 5.

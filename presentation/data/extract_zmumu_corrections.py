@@ -2,7 +2,7 @@
 """Freeze the Z -> mumu MC corrections: pileup profile/weights, L1 prefiring means, tag-and-probe scale factors,
 trigger efficiencies and the Z-peak momentum calibration.
 
-    source setup.sh && python presentation/data/extract_zmumu_corrections.py [--json PATH] [--check-only]
+    source fitting/setup.sh && python presentation/data/extract_zmumu_corrections.py [--json PATH] [--check-only]
 
 Reads (read-only): z-mumu/output/v2/tnp/tnp_result.json, tnp/pileup_weights.json, momentum.json, results_v2.json and
 presentation/data/zmumu_sr_stack.json (the signal-region event means of every weight, from the new MC pass).
@@ -128,7 +128,7 @@ def verify(d, ck: Checker):
     ck.check("pileup profile scale 1.035", p["scale"], 1.035, 1e-9, "output/v2/tnp/pileup_weights.json")
     ck.check("pileup rel_smear 0.09", p["rel_smear"], 0.09, 1e-9, "pileup_weights.json")
     ck.check("pileup sigma_mb 69.2", p["sigma_mb"], 69.2, 1e-9, "zmumu/pileup.py")
-    ck.check("lumi_pb 16393.381", d["lumi_pb"], 16393.381, 1e-9, "fitting/CONVENTIONS.md")
+    ck.check("lumi_pb 16393.381", d["lumi_pb"], 16393.381, 1e-9, "docs/CONVENTIONS.md")
     ck.check("csv_raw data profile integral == lumi_pb (exact)", sum(p["data_profile"]["csv_raw"]), 16393.381, 1e-7, "pileup_weights.json data.csv_raw", rel=True)
     ck.check("nominal (smeared) data profile integral == lumi_pb within 1e-5 (tails outside 100 bins)", sum(p["data_profile"]["nominal"]), 16393.381, 1e-5,
              "pileup_weights.json data.nominal.hist", rel=True)

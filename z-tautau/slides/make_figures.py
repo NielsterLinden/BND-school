@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 """Every figure of the slide deck, drawn dark and vector into slides/figs/ (PDF + PNG).
 
-    source ../setup.sh && python slides/make_figures.py
+    source ../fitting/setup.sh && python slides/make_figures.py
 
 Nothing here is typed by hand: the numbers come from output/results.json, the fit results in
 fit/results/*_fit_result.json, the fit inputs and their post-fit histograms, output/data/fakes_*.json and
 external/trigger_insitu_v4.json. Figures are drawn on `plotting.DARK_BG`, which is the deck background, so
-an embedded plot has no visible edge (prompts/presentation_style.md).
+an embedded plot has no visible edge (.claude/prompts/presentation_style.md).
 
 The deck itself is slides/build_deck.py.
 """

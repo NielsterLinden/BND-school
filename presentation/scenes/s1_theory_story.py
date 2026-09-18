@@ -1,8 +1,8 @@
 """Section 1 (theory): why we still care about the Z, told through its cross section.
 
-Brief: ``setup_and_reference/briefs/theory.md``. Every printed number is read from
+Brief: ``docs/briefs/theory.md``. Every printed number is read from
 ``presentation/data/theory_reference.json`` (``data/extract_theory_reference.py``) and checked at import.
-Five scenes, eight clips (manim sections, delivered by ``tools/deliver_chain.py``); a scene with two clips
+Four scenes, seven clips (manim sections, delivered by ``tools/deliver_chain.py``); a scene with two clips
 is a chain, the second clip opens on the first one's last frame.
 
     TheoryProcess       sm_to_process        the SM table builds; quarks, Z/gamma and leptons turn into the
@@ -14,8 +14,6 @@ is a chain, the second clip opens on the first one's last frame.
                                              four NNLO+NNLL predictions by PDF set, their 49 pb spread
                         lumi_limited         the CMS 2024 point; its error splits into stat / syst / lumi, the
                                              lumi part lights up above the PDF spread
-    TheoryEverywhere    z_everywhere         H -> tautau under the Z -> tautau tail (area ratio 1/560, schematic
-                                             shapes); Z -> mumu + jet becomes Z -> nunu + jet in a small slice
     TheoryUniversality  lepton_universality  1-01's frame; the lepton legs split into e, mu, tau; the three sit on a
                                              log mass axis (x207, x17), fly into the (g_A, g_V) plane and land
                                              on one point as sin^2 theta runs to 0.2315; equal BR bars; LEP ratios
@@ -24,8 +22,7 @@ is a chain, the second clip opens on the first one's last frame.
                         final_frame          the window becomes the prediction line of the final plot's sigma axis
                                              (1650-2400 pb): band, rows Z->ee, Z->mumu, Z->tautau | Z->ll, empty
 
-Schematic on purpose: the Feynman diagram, the protons, the m_tautau shapes of z_everywhere (Gaussians at the
-typical resolution; only their area ratio is a number) and the event of the small slice. Layout keeps the title
+Schematic on purpose: the Feynman diagram and the protons. Layout keeps the title
 band (y > 2.7) and the top-left block (x < -5.85, y > 0.22) empty.
 """
 from __future__ import annotations
@@ -374,64 +371,6 @@ class TheoryPrediction(Scene):
         self.play(*[TransformFromCopy(cms.bar, b) for b, _ in parts], *[FadeIn(lab) for _, lab in parts], run_time=1.2, rate_func=EASE)
         self.wait(0.3)
         pulse(self, parts[2][0], width=16, run_time=0.8)
-        self.wait(0.1)
-
-
-# ---------------------------------------------------------------------------
-# 1-06: the Z under the discoveries
-# ---------------------------------------------------------------------------
-
-class TheoryEverywhere(Scene):
-    def construct(self):
-        white_background(self)
-        clip_open(self, "z_everywhere")
-
-        # left: m_tautau, the Higgs under the Z tail (schematic shapes, area ratio from the JSON)
-        e_lo, e_hi = -3.5, 0.25
-        dax = DataAxes([40, 200, 40], [e_lo, e_hi, 1], 4.7, 3.8, x_ticks=[50, 100, 150, 200], y_ticks=[-3, -2, -1, 0],
-                       y_log=True, x_title=r"m_{\tau\tau}\ [\mathrm{GeV}]", tick_label_h=0.19)
-        dax.move_frame_to((-2.3, -0.25))
-        floor = 10 ** e_lo
-        ms = np.arange(40.0, 200.01, 1.0)
-        sz, sh = 13.0, 17.0                                   # typical di-tau mass resolution at 91 and 125 GeV
-        z = np.exp(-0.5 * ((ms - 91.0) / sz) ** 2)
-        h_peak = sz / sh / HIG["z_over_h_tautau"]             # equal-width Gaussians: area ratio = 1 / (Z/H)
-        h = h_peak * np.exp(-0.5 * ((ms - 125.0) / sh) ** 2)
-        zpoly = Polygon(dax.c2p(40, floor), *[dax.c2p(m, max(v, floor)) for m, v in zip(ms, z)], dax.c2p(200, floor),
-                        stroke_color=col(CHANNEL_LINE["tautau"]), stroke_width=2.0, fill_color=col(CHANNEL["tautau"]), fill_opacity=0.75)
-        hm = ms[(ms >= 88) & (ms <= 162)]
-        hv = h_peak * np.exp(-0.5 * ((hm - 125.0) / sh) ** 2)
-        hpoly = Polygon(dax.c2p(hm[0], floor), *[dax.c2p(m, max(v, floor)) for m, v in zip(hm, hv)], dax.c2p(hm[-1], floor),
-                        stroke_color=col(SLATE), stroke_width=3.0, fill_color=col(SLATE), fill_opacity=0.25)
-        zlab = tex(r"Z\to\tau\tau", 0.24, CHANNEL_LINE["tautau"]).move_to(dax.c2p(140, 10 ** -0.15))
-        hlab = tex(r"H\to\tau\tau", 0.24, SLATE)
-        hlab.move_to(dax.c2p(172, 10 ** -1.6))
-        ratio = tex(r"\sigma\mathcal{B}\,/\,%d" % round(HIG["z_over_h_tautau"], -1), 0.2, SLATE).next_to(hlab, DOWN, buff=0.12)
-        hptr = Line(hlab.get_bottom() + DOWN * 0.42 + LEFT * 0.35, dax.c2p(128, h_peak * 1.25), stroke_color=col(SLATE), stroke_width=2.0)
-        self.play(Create(dax.ax), FadeIn(VGroup(dax.x_ticks_v, dax.x_labels, dax.x_title, dax.y_ticks_v, dax.y_labels)), run_time=0.7)
-        self.play(FadeIn(zpoly, shift=UP * 0.2), FadeIn(zlab), run_time=1.0)
-        self.wait(0.3)
-        self.play(FadeIn(hpoly, shift=UP * 0.1), run_time=0.8)
-        self.play(FadeIn(hlab), FadeIn(ratio), Create(hptr), run_time=0.7)
-        self.wait(0.5)
-
-        # right: Z -> mumu + jet, seen as Z -> nunu + jet
-        det = mini_slice(0.6, (3.95, -0.1))
-        phi_z, phi_jet = math.radians(18), math.radians(200)
-        mu1 = signature(det, "mu", math.radians(-12), charge=-1, kappa=0.45, sw=3.0)
-        mu2 = signature(det, "mu", math.radians(52), charge=+1, kappa=0.45, sw=3.0)
-        jet = signature(det, "jet", phi_jet, sw=3.0, seed=4)
-        lab_mm = tex(r"Z\to\mu\mu+\mathrm{jet}", 0.24).move_to([3.95, -2.45, 0])
-        self.play(FadeIn(det), run_time=0.6)
-        self.play(Create(mu1[0]), Create(mu2[0]), FadeIn(jet), run_time=0.9)
-        self.play(FadeIn(VGroup(*mu1[1:])), FadeIn(VGroup(*mu2[1:])), FadeIn(lab_mm), run_time=0.5)
-        self.wait(0.5)
-        nu1 = signature(det, "nu", math.radians(-12))
-        nu2 = signature(det, "nu", math.radians(52))
-        met = signature(det, "met", phi_z)
-        lab_nn = tex(r"Z\to\nu\nu+\mathrm{jet}", 0.24).move_to(lab_mm)
-        self.play(FadeOut(mu1), FadeOut(mu2), FadeIn(nu1), FadeIn(nu2), ReplacementTransform(lab_mm, lab_nn), run_time=1.0)
-        self.play(FadeIn(met), run_time=0.6)
         self.wait(0.1)
 
 

@@ -2,7 +2,7 @@
 """Freeze the Z -> tautau k-fold BDT: the signal-region score distribution (data, fakes, simulation), the same-sign closure in
 the score, the three categories with their prefit yields, the held-out AUC and the feature importance.
 
-    source setup.sh && python presentation/data/extract_ztautau_bdt.py [--json PATH] [--check-only]
+    source fitting/setup.sh && python presentation/data/extract_ztautau_bdt.py [--json PATH] [--check-only]
 
 Reads (read-only): z-tautau/output/data/bdt.json (scripts/step3b_bdt.py: sr_score, ss_closure_score, training), z-tautau/fit/bdt_info.json,
 z-tautau/output/data/yields.json (the per-category yields of RESULTS.md, with the per-category C_OS/SS).

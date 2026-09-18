@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Event-level orthogonality of the three fitted selections, measured on 2016 G+H data.
 
-    source ../../../setup.sh
+    source ../../../fitting/setup.sh
     python checks/orthogonality.py [--workers 8] [--max-files N]
 
 An event can only be in two channels if it passes both offline selections, so each pair is

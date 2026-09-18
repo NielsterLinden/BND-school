@@ -1,11 +1,6 @@
 number	section	name	scene_file	scene_class
-1	1_theory	drell_yan	scenes/s1_drell_yan.py	DrellYan
 1	2_cms_methods	cms_logo_to_slice	scenes/s2_cms_logo.py	CMSLogoToSlice
-1	3_zee	ee_process	scenes/s3_zee.py	ZeeProcess
-2	3_zee	ee_detector	scenes/s3_zee.py	ZeeDetector
 1	4_zmumu	mumu_process	scenes/s4_zmumu.py	ZmumuProcess
-1	6_combination	three_to_one	scenes/s6_combination.py	ThreeToOne
-1	7_outro	mic_drop	scenes/s7_outro.py	MicDrop
 2	4_zmumu	mumu_into_detector	scenes/s4_zmumu.py	ZmumuIntoDetector
 3	4_zmumu	mumu_event_to_mass	scenes/s4_zmumu_story.py	MumuEvent
 4	4_zmumu	mumu_first_entry	scenes/s4_zmumu_story.py	MumuEvent
@@ -26,7 +21,6 @@ number	section	name	scene_file	scene_class
 19	4_zmumu	mumu_fit	scenes/s4_zmumu_story.py	MumuFit
 20	4_zmumu	mumu_sigma_fid	scenes/s4_zmumu_story.py	MumuFit
 21	4_zmumu	mumu_sigma_total	scenes/s4_zmumu_story.py	MumuFit
-1	5_ztautau	tau_intro	scenes/s5_tau_channels.py	TauIntro
 2	5_ztautau	tau_decay	scenes/s5_ztautau.py	TauDecay
 3	5_ztautau	tau_jet	scenes/s5_ztautau.py	TauJet
 4	5_ztautau	tautau_detector	scenes/s5_ztautau.py	ZtautauDetector
@@ -82,8 +76,6 @@ number	section	name	scene_file	scene_class
 2	1_theory	sm_to_process	scenes/s1_theory_story.py	TheoryProcess
 3	1_theory	factorisation	scenes/s1_theory_story.py	TheoryProcess
 4	1_theory	prediction	scenes/s1_theory_story.py	TheoryPrediction
-5	1_theory	lumi_limited	scenes/s1_theory_story.py	TheoryPrediction
-6	1_theory	z_everywhere	scenes/s1_theory_story.py	TheoryEverywhere
 7	1_theory	lepton_universality	scenes/s1_theory_story.py	TheoryUniversality
 8	1_theory	mass_window	scenes/s1_theory_story.py	TheoryMeasurement
 9	1_theory	final_frame	scenes/s1_theory_story.py	TheoryMeasurement

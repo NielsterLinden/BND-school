@@ -13,7 +13,7 @@ from . import config  # noqa: E402
 
 plt.style.use(hep.style.CMS)
 LUMI_LABEL = f"{config.LUMI_PB / 1000:.1f}"
-DARK_BG = "#222222"          # the slide-deck background (prompts/presentation_style.md): dark figures must match it
+DARK_BG = "#222222"          # the slide-deck background (.claude/prompts/presentation_style.md): dark figures must match it
 DARK_FG = "#E6E6E6"
 
 

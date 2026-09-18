@@ -2,8 +2,8 @@
 
 Guidance for agents working in this folder. Read `README.md` for what the analysis is, `docs/00-overview.md`
 for the physics, `docs/11-combination-inputs.md` for what the combination gets, and the two reviews
-(`REVIEW.md` of the first τhτh iteration, `REVIEW_v4.md` of the four-channel measurement, answered in
-`REVIEW_v4_RESPONSE.md`); this file is about working on the code without breaking it.
+(`review/REVIEW_v3.md` of the first τhτh iteration, `review/REVIEW_v4.md` of the four-channel measurement, answered in
+`review/REVIEW_v4_RESPONSE.md`); this file is about working on the code without breaking it.
 
 **There is one measurement and one set of results.** The four-channel fit (v4) owns the canonical paths
 `fit/` and `output/` and the job name `ztautau`; the τhτh-only fit of v3 is gone, and what survives of the
@@ -12,7 +12,7 @@ v3 chain is the *τhτh base templates* (Data, the fake estimate and the BDT cat
 
 ## Environment
 
-* `source ../setup.sh` (LCG_110: python 3.13, uproot 5.7, awkward 2.9, hist, mplhep 1.1, xgboost 2.1, ROOT 6.40).
+* `source ../fitting/setup.sh` (LCG_110: python 3.13, uproot 5.7, awkward 2.9, hist, mplhep 1.1, xgboost 2.1, ROOT 6.40).
   Nothing to pip-install; do not create a venv.
 * TRExFitter v1.8.0: `step5_fit.trex_environment` finds `trex-fitter` on PATH, else `$TREXFITTER_HOME`, else
   `config.TREX_FALLBACK_HOME`. Every channel must use this one binary. Never build another version.
@@ -49,7 +49,7 @@ BND_TAUTAU_WP=Medium python run_all.py --from 3   # another working point -> var
 Step 5 of `run_all.py` runs, besides the measurement, the cross-check fits the review of the four-channel
 result asked for: `ztautau_taulep` (no eμ), `ztautau_ptsplit` (τh ID scale factors split at pT = 40 GeV in
 the ℓτh channels) and `ztautau_emutrig2x` (the eμ trigger prior doubled). `run_all.py --help` says what each
-one tests; `REVIEW_v4_RESPONSE.md` says why.
+one tests; `review/REVIEW_v4_RESPONSE.md` says why.
 
 **The measurement carries the pT dependence of the τh ID scale factor as `TauIDpT_tautau`** (since 17 Sep 2026):
 one OVERALL parameter on the signal whose size is the relative difference in μ_Z between `ztautau_flatsf` (the
@@ -81,7 +81,7 @@ Hessian forced positive-definite was quoted as the expected uncertainty). If MIN
 
 ## Conventions you must keep
 
-* Histogram and nuisance-parameter names follow `../fitting/CONVENTIONS.md`, and what the combination may
+* Histogram and nuisance-parameter names follow `../docs/CONVENTIONS.md`, and what the combination may
   do with them is `docs/11-combination-inputs.md` — keep the two in step. Regions `tautau_SR0/1/2` (BDT
   categories), `mutau_SR_dm*`, `etau_SR_dm*`, `emu_SR`, `emu_CRtt`; POI `mu_Z` on every `DYtautau_tDM*`
   template (60 < m_LHE < 120 GeV, all decays), `DYtautau_out` is a theory-normalised background;
@@ -136,12 +136,12 @@ Hessian forced positive-definite was quoted as the expected uncertainty). If MIN
     save and load the `Booster` (`bdt.py` does).
 11. **The signal template is 38 % non-fiducial** (30 % has m_LHE > 120 GeV and sits in the high-m_tt bins).
     Never merge `DYtautau_nonfid` back into the signal: μ_Z would then scale the high-mass continuum and the
-    fake sideband would contain μ-dependent signal (REVIEW.md 3.1).
-12. **TRExFitter must really be v1.8.0**: `git submodule status` must show commit `f21d1b36` without a `+`.
-    This checkout once had the submodule at a v1.10 commit and a binary built against the StatAnalysis
+    fake sideband would contain μ-dependent signal (review/REVIEW_v3.md 3.1).
+12. **TRExFitter must really be v1.8.0**: `git -C $TREXFITTER_HOME describe --tags` must say `v1.8.0` (commit `f21d1b36`).
+    A checkout once had TRExFitter at a v1.10 commit and a binary built against the StatAnalysis
     ROOT; the symptoms were `Cannot find setting 'UseGammaPulls'` (schema mismatch) and a crash at start-up
-    (`TExMap::Add key not unique`, `munmap_chunk`) under LCG. Fix: `git submodule update --init`, then
-    `bash ../fitting/build_trexfitter.sh`.
+    (`TExMap::Add key not unique`, `munmap_chunk`) under LCG. Fix: remove `$TREXFITTER_HOME` and run
+    `bash ../fitting/build_trexfitter.sh` (it clones tag v1.8.0 and builds it against the LCG ROOT).
 13. **Jet-binned DY stitching** (`analysis.dy_norm`) needs the `sumw_npnlo` GenSums of *every* stitched
     sample, including the inclusive one; a sample skimmed without `LHE_NpNLO` is silently dropped from the
     stitching with a warning. The bin variable is `LHE_NpNLO` (partons of the NLO matrix element), **not**
@@ -184,7 +184,7 @@ Hessian forced positive-definite was quoted as the expected uncertainty). If MIN
 
 * The τh ID SF uncertainty still dominates: in the combined fit with ee/μμ the ττ channel should be
   used to constrain the τh ID nuisance parameters rather than μ_Z; decay-mode categories would help.
-* The DM-binned and pT-binned TauPOG ID prescriptions differ by 7 % per leg (REVIEW.md 3.3); the pT-binned
+* The DM-binned and pT-binned TauPOG ID prescriptions differ by 7 % per leg (review/REVIEW_v3.md 3.3); the pT-binned
   result should be quoted as a cross-check.
 * Trigger efficiency in situ (μτh tag-and-probe from SingleMuon) instead of the POG turn-on SFs.
 * W+jets: replace the inclusive sample by the HT-binned madgraph samples with LHE_HT stitching.

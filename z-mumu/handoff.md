@@ -34,9 +34,9 @@ Z-peak momentum calibration, **TRExFitter v1.8.0** profile-likelihood fit of m(�
 bins, MINOS on every parameter) with 24 nuisance parameters. Everything is in `docs/09`–`16`, `output/v2/RESULTS_v2.md`,
 `CLAUDE.md`; slide decks: v2 before the review <https://claude.ai/code/artifact/8072b961-01d5-47ed-9804-ee21f70ac985>
 (pre-review numbers), comparison with CMS <https://claude.ai/artifact/VCnvdCpXACmRdkXe9UrJ6A>.
-Reproduce: `source ../setup.sh && python run_v2.py --from 2` (~1 h; `--from 5` for fit, report and comparison only).
+Reproduce: `source ../fitting/setup.sh && python run_v2.py --from 2` (~1 h; `--from 5` for fit, report and comparison only).
 
-### What the combination gets (see `../fitting/CONVENTIONS.md`)
+### What the combination gets (see `../docs/CONVENTIONS.md`)
 
 | item | where |
 |---|---|
@@ -81,11 +81,11 @@ Settled with the other channels: the acceptance denominator is 60 < m_LHE < 120 
 
 ### Cross-channel checks answered (15 Sep 2026)
 
-Asked by the combination: "resolve the REVIEW.md shape-fit issue or supply a reviewed counting
+Asked by the combination: "resolve the review/README.md shape-fit issue or supply a reviewed counting
 configuration", "confirm the exact reference σ_fid^pred / A_60_120", "missing fit-input ROOT file",
 and for all channels "common truth mass definition, lepton universality, event orthogonality".
 
-- **Shape fit.** Fixed on 15 Sep (`REVIEW.md` §0, commit 3c95908): 12 × 5 GeV bins, two-sided
+- **Shape fit.** Fixed on 15 Sep (`review/README.md` §0, commit 3c95908): 12 × 5 GeV bins, two-sided
   `SigModel` inside 50 < m_LHE < 120 GeV, no smoothing, MINOS on every parameter; GoF p = 0.79, stable
   to ±0.2 % over the accepted binnings. The combination uses this fit (`../combination/combLieke/`).
   The 1-bin counting configuration exists as `fit/stab_1bin.config` + `fit/fitinputs/stab_1bin.root`
@@ -113,7 +113,7 @@ and for all channels "common truth mass definition, lepton universality, event o
   definition: Σw(LHE ee) / Σw = 0.33386, μμ 0.33380, ττ 0.33234 (by the same formula the ee reference
   would be 1954.1 pb). ee and μμ agree to 0.01 %; the ττ share is 0.44 % lower in the generator
   (the τ mass is in the matrix element). It is irrelevant for the combination of cross sections and
-  a 0.002 % effect on a MultiFit with one shared `mu_Z` (`fitting/CONVENTIONS.md` §6).
+  a 0.002 % effect on a MultiFit with one shared `mu_Z` (`docs/CONVENTIONS.md` §6).
 - **Lepton universality** is *assumed* in the normalisation (one 3-flavour NNLO cross section
   split by the generator's LHE flavour sums) and *tested* by the combination
   (one σ per channel in the MultiFit, compatibility test in `../combination/combLieke/README.md`). Nothing in this channel's σ_fid or σ(60–120) uses another
@@ -127,7 +127,7 @@ and for all channels "common truth mass definition, lepton universality, event o
   (computed from the `ZZ_4L` skim with the SR selection). No overlap treatment is needed;
   an electron veto in the SR would change nothing at the quoted precision.
 
-### Review of v2 (15 Sep 2026) and what was fixed the same day -- `REVIEW.md`
+### Review of v2 (15 Sep 2026) and what was fixed the same day -- `review/README.md`
 
 Slides: `review/deck/zmumu_review.pdf` (pre-fix numbers). Findings and fixes, all in the result above:
 the e-mu "excess" was the non-prompt-electron background removed by the prompt-only MC filter -> the e-mu
@@ -149,7 +149,7 @@ acceptance from our own pT(μμ) spectrum (0.38 %, absent before). The acceptanc
 evaluated for the 60–120 GeV denominator. Estimated with three options: the QED FSR model (a 0.12 / b 0 /
 c 0.10 %; the result carries c). Result: **σ(60–120) = 1931 ± 0.6 ± 20.2 ± 23.2 pb against CMS
 1952 ± 4 ± 18 ± 45 pb: −21 pb, −0.36σ**, whichever option. Plots `output/v2/plots/cms_parity_*`, `reco_*`;
-the same procedure for z-ee and z-tautau: `../fitting/UNCERTAINTY_PARITY.md`
+the same procedure for z-ee and z-tautau: `../docs/UNCERTAINTY_PARITY.md`
 (agent `.claude/agents/uncertainty-parity-auditor.md`).
 
 ### Open issues after v2

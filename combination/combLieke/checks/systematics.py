@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Size of every systematic uncertainty on each channel's signal yield, as it enters the combination.
 
-    source ../../../setup.sh
+    source ../../../fitting/setup.sh
     python checks/systematics.py          # after `python run.py prepare`
 
 For each Systematic of the generated channel configs (work/common/<channel>.config) on the signal sample:

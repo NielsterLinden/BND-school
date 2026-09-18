@@ -17,7 +17,7 @@ Samples: `Data`, `DYmumu` (signal, `NormFactor mu_Z`), `DYtautau`, `DYee`, `TTba
 fake factor replaces the non-prompt muons). In the e-mu regions **all** MC events enter, plus
 `WJets` (jet -> e): there is no data-driven estimate of the non-prompt electrons (W+jets, Z -> mumu
 + conversion, Z -> tautau with tau_h -> e, top b -> e), and dropping them was the 9% "excess" of the
-first v2 (REVIEW.md F1). The `SSemu` region, dominated by the charge-symmetric part of that
+first v2 (review/README.md F1). The `SSemu` region, dominated by the charge-symmetric part of that
 background, is the check that the MC describes it.
 
 ## Muon momentum scale and resolution
@@ -72,7 +72,7 @@ printed as a cross-check. Results: `fit/results/zmumu_fit_result.json`, `output/
 ## Why 5 GeV bins, and the stability of the result
 
 The first v2 fit used 30 bins of 2 GeV, smoothed `MuonScale`/`MuonRes` templates and a
-one-sided powheg `SigModel` built without the generator window. It was not robust (REVIEW.md
+one-sided powheg `SigModel` built without the generator window. It was not robust (review/README.md
 F3-F5): with 10 M events in 2 GeV bins the fit resolves shape differences of 10^-3 per bin,
 finer than the physics content and the MC statistics of the variation templates, so
 `SigModel`, `MuonScale`, `MuonRes` were constrained to 0.1-0.2 of their priors, `Lumi` to 0.8
@@ -139,5 +139,5 @@ covariance was ill-conditioned; MINOS fixes that, `UseMinos: all`).
 
 Momentum calibration and the previous v2 result (791.8 +- 6.2 +- 9.3 pb, 30 x 2 GeV, one-sided
 `SigModel`, `MuonReco` 0.4%, CSV pileup profile) are in the git history (commit fc9a998) and in
-REVIEW.md. Comparison: reviewer 797.2 pb (-0.9%), v1 773.2 pb, aMC@NLO 799.6 pb (ratio 0.988),
+review/README.md. Comparison: reviewer 797.2 pb (-0.9%), v1 773.2 pb, aMC@NLO 799.6 pb (ratio 0.988),
 madgraph LO 825.4 pb.

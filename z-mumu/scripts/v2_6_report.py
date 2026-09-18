@@ -35,7 +35,7 @@ V1 = {"sigma_fid": 773.2, "sigma_fid_err": 11.9, "revised": 776.9, "revised_err"
 def lineshape_plot(hall, gens, fakes_res):
     """powheg vs aMC@NLO lineshape: generator level (LHE mass, all generated mu mu events) and
     reconstructed level inside the powheg generator window, next to the pre-fit data/MC ratio.
-    Documents where the SigModel template comes from (REVIEW.md F3/F4)."""
+    Documents where the SigModel template comes from (review/README.md F3/F4)."""
     import matplotlib.pyplot as plt
     from zmumu import histograms as H
     hn = np.array(gens["DY_NLO"]["h_lhe_mll"]); hp = np.array(gens["DY_powheg"]["h_lhe_mll"])   # 1 GeV bins, 0-200

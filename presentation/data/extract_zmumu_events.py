@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Freeze real CMS 2016 Open Data events for the Z -> mumu event displays.
 
-    source setup.sh && python presentation/data/extract_zmumu_events.py [--files 6] [--seed 20260915] [--json PATH] [--check-only]
+    source fitting/setup.sh && python presentation/data/extract_zmumu_events.py [--files 6] [--seed 20260915] [--json PATH] [--check-only]
 
 Reads the first N data skim files of $BND_SKIM_DIR/data_2016G (SingleMuon Run2016G, NanoAODv9, record 30530) and
 z-mumu/output/v2/fakes.json. Signal-region events use the analysis selection (zmumu/regions.py dimuon_regions, FSR-recovered

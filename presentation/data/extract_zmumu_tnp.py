@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Freeze the Z -> mumu tag-and-probe inputs of the section-4 T&P clips (mumu_t1 ... mumu_t5).
 
-    source setup.sh && python presentation/data/extract_zmumu_tnp.py [--json PATH] [--check-only]
+    source fitting/setup.sh && python presentation/data/extract_zmumu_tnp.py [--json PATH] [--check-only]
 
 Reads (read-only): z-mumu/output/v2/tnp/tnp_fits.pkl (per-cell pass/fail m(mumu) spectra of data and simulation and the
 nominal fit of every cell), tnp_result.json, and the first data skim file of $BND_SKIM_DIR/data_2016G (two display events).
@@ -272,8 +272,8 @@ def verify(d, ck: Checker):
                  np.asarray(c[smp]["model_fail"]).reshape(60, 2).sum(1), 1e-9, rel=True)
     ck.check("background share of the failing probes, barrel 20-25 GeV: 61 %", cb[0]["data"]["bkg_frac_fail"], 0.610, 5e-4, "z-mumu/docs/17 section 5")
     ck.check("background share of the failing probes, barrel 40-45 GeV: 7.4 %", cb[4]["data"]["bkg_frac_fail"], 0.074, 5e-4, "z-mumu/docs/17 section 5")
-    ck.check("reconstruction SF per muon 1.0001 +- 0.0013", [d["reco"]["sf_reco_per_muon"], d["reco"]["sf_reco_per_muon_err"]], [1.0001, 0.0013], 5e-5, "FREEZE.md")
-    ck.check("reconstruction SF per event 1.0002", d["reco"]["sf_reco_per_event"], 1.0002, 5e-5, "FREEZE.md")
+    ck.check("reconstruction SF per muon 1.0001 +- 0.0013", [d["reco"]["sf_reco_per_muon"], d["reco"]["sf_reco_per_muon_err"]], [1.0001, 0.0013], 5e-5, "docs/FREEZE.md")
+    ck.check("reconstruction SF per event 1.0002", d["reco"]["sf_reco_per_event"], 1.0002, 5e-5, "docs/FREEZE.md")
     ax = d["apply_examples"]["events"]
     ck.check_true("apply examples: one event per rule", [x["rule"] for x in ax] == ["barrel", "forward", "overlap_endcap"])
     for x in ax:

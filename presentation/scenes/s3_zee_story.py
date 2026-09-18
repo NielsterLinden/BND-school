@@ -2,7 +2,7 @@
 
 The chapter opens on the three maps that section 2 ends on (2-21 map_three), grows the ee map and zooms into two
 of its nodes: the selection (what we keep, and why) and the fit (a template fit with nuisance parameters).
-Result version: the channel's own TRExFitter fit, z-ee delivery of 16 Sep 14:44 (FREEZE.md "Z -> ee"):
+Result version: the channel's own TRExFitter fit, z-ee delivery of 16 Sep 14:44 (docs/FREEZE.md "Z -> ee"):
 mu_Z = 0.942 +- 0.015, sigma(60-120) = 1841 +- 30 pb; the result frame is the one of the tau tau chapter (5-33).
 
     ZeeSelection (opens on 2-21's last frame)

@@ -6,7 +6,7 @@ combination without breaking it.
 > **The result is ee ⊕ μμ ⊕ ττ with the four-channel ττ: 1949 ⁺³⁰₋₃₀ pb** (17 Sep 2026, `combLieke/output/`,
 > `combLieke/README.md`). ττ = τhτh + μτh + eτh + eμ of z-tautau (inputs b7ec3d9, results e0b0b1d,
 > `z-tautau/docs/11-combination-inputs.md`). The user reopened the combination for it after the freeze; the **frozen**
-> three-channel result (ee ⊕ μμ ⊕ τhτh, 1945 ⁺³¹₋₃₀ pb, repository `FREEZE.md`) is at the git tag
+> three-channel result (ee ⊕ μμ ⊕ τhτh, 1945 ⁺³¹₋₃₀ pb, repository `docs/FREEZE.md`) is at the git tag
 > `zmumu-freeze-2026-09-17`, its TRExFitter jobs in `combLieke/work_freeze_2026-09-17/` (git-ignored). The ee and μμ
 > inputs are still the frozen ones: do not regenerate those channels. `presentation/` may still quote 1945.
 
@@ -17,7 +17,7 @@ removed on 16 Sep 2026 (last present in git commit 9501c41).
 ## Run
 
 ```bash
-source ../setup.sh               # LCG_110 + trex-fitter v1.8.0 on PATH
+source ../fitting/setup.sh               # LCG_110 + trex-fitter v1.8.0 on PATH
 cd combLieke
 python run.py prepare            # configs of every likelihood in work/ (seconds)
 python run.py condor --submit    # all fits as one HTCondor DAG (mf/condor.py); ends with `results --interim`

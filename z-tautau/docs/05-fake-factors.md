@@ -33,7 +33,7 @@ jet (genuine τh, e or μ), weighted like the signal-region prediction.
 * **MC subtraction (nominal since v2).** The determination and application regions contain genuine τ's
   (table below), mostly Z→ττ with τ1 failing the tight working point in the AR: ~1–2 % of the AR, but ~6 % of the signal,
   which the unsubtracted estimate double counts, and 3.9 % of the C numerator, which biases C up by 2.5 %.
-  v1 quoted the unsubtracted variant as nominal; the review (`REVIEW.md` 3.2) showed the bias (Δμ = −0.05
+  v1 quoted the unsubtracted variant as nominal; the review (`review/REVIEW_v3.md` 3.2) showed the bias (Δμ = −0.05
   and a 7 % over-prediction of the fakes in the purest fake phase space). Every simulated sample is
   subtracted; W+jets (1114 events with weights 20–200, 16 % of them negative) with **uniform weights**
   (each event carries the sample's mean weight, `analysis.subtraction_weights`): it is a real genuine-τ1
@@ -69,7 +69,7 @@ After the table, the FF still depends on two variables that are not binned (`ste
 
 | variable | same-sign obs/pred before correction | why |
 |---|---|---|
-| \|η(τ1)\| in 6 bins 0–0.4–0.8–1.2–1.5–1.8–2.1 | 0.92, 0.99, 1.08, **1.16**, 0.98, **0.93** | the FF itself varies by ±15 % with \|η\|, with the *same* shape in both eras, all pT and N_jets bins and inside every decay mode (`REVIEW.md` section 5): the DeepTau score distribution just below Medium is η-dependent (barrel–endcap transition) and the Medium efficiency for jets drops at the tracker/HLT edge. Not a trigger effect (the eras agree). |
+| \|η(τ1)\| in 6 bins 0–0.4–0.8–1.2–1.5–1.8–2.1 | 0.92, 0.99, 1.08, **1.16**, 0.98, **0.93** | the FF itself varies by ±15 % with \|η\|, with the *same* shape in both eras, all pT and N_jets bins and inside every decay mode (`review/REVIEW_v3.md` section 5): the DeepTau score distribution just below Medium is η-dependent (barrel–endcap transition) and the Medium efficiency for jets drops at the tracker/HLT edge. Not a trigger effect (the eras agree). |
 | pT(τ2) in 5 bins 40–45–50–60–80–∞ | 1.02, 0.99, 1.00, **0.94**, **0.95** | the isolation of the two jets in a dijet is correlated beyond what "τ2 Medium" conditions |
 
 Each correction is the same-sign obs/pred ratio (MC subtracted), applied multiplicatively in
@@ -124,7 +124,7 @@ value of its era and category:
 | OS/SS | 3 % ⊕ stat, one NP | C per (era, N_jets, BDT category), one NP per category (`FakeOSSS_tautau_c<k>`) | the charge correlation depends on the topology the BDT selects (3–6 % between categories) |
 | non-closure | one NP over all 14 m_tt bins, up = SS ratio, down = 1/ratio | one normalisation-type NP per **BDT category × mass region** (m_tt below / above 110 GeV): `FakeClosure_tautau_c<k>_lo|hi`, size = residual same-sign obs/pred deviation ⊕ its statistical error (the SR0 low-mass bins are not fitted, so `c0_lo` is not used) | v1's single NP tied the precise high-mass bins to the imprecise peak bins and was constrained to 0.32 σ by the former, which silently shrank the peak-bin uncertainty; per category and mass region the constraint comes from the right place |
 | η(τ1), pT(τ2) dependence | absorbed by the non-closure NP | corrected | see above |
-| W+jets composition of the AR (quark-jet FF ≠ QCD FF) | not covered | not covered, ≲ 1 % of the fakes | noted in `REVIEW.md` 3.5 |
+| W+jets composition of the AR (quark-jet FF ≠ QCD FF) | not covered | not covered, ≲ 1 % of the fakes | noted in `review/REVIEW_v3.md` 3.5 |
 
 The residual same-sign non-closure per category and mass region, and hence the NP sizes, are printed by
 step 4 and stored in `output/data/yields.json["meta"]["closure_nps"]` and `output/results.json`.

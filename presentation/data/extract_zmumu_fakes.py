@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Freeze the Z -> mumu fake-factor estimate (FF maps, SR template, closure, same-sign data).
 
-    source setup.sh && python presentation/data/extract_zmumu_fakes.py [--json PATH] [--check-only]
+    source fitting/setup.sh && python presentation/data/extract_zmumu_fakes.py [--json PATH] [--check-only]
 
 Reads (read-only): z-mumu/output/v2/fakes.json (scripts/v2_3_control.py, zmumu/fakes.py) and
 z-mumu/output/v2/histograms.pkl (`Data|SS|mass_fit|nominal`). Writes presentation/data/zmumu_fakes.json.

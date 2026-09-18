@@ -29,7 +29,7 @@ def trex_binary() -> str:
         home = os.environ.get("TREXFITTER_HOME")
         if home and (Path(home) / "build/bin/trex-fitter").exists():
             return str(Path(home) / "build/bin/trex-fitter")
-        raise RuntimeError("trex-fitter not on PATH: source setup.sh and run fitting/build_trexfitter.sh")
+        raise RuntimeError("trex-fitter not on PATH: source fitting/setup.sh and run fitting/build_trexfitter.sh")
     return exe
 
 

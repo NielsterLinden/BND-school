@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Freeze every Z -> mumu number the presentation prints: runs the six extractors in dependency order.
 #
-#   cd /project/atlas/Users/nterlind/BND-school && source setup.sh && bash presentation/data/extract_zmumu_all.sh [--check-only]
+#   cd /project/atlas/Users/nterlind/BND-school && source fitting/setup.sh && bash presentation/data/extract_zmumu_all.sh [--check-only]
 #
 # LCG env only (uproot/awkward; never ROOT, never pip). Reads z-mumu/ read-only; part files of the MC pass go to
 # presentation/work/extract/sr_stack (git-ignored, resumable: delete a part to redo it). Every extractor prints its
@@ -12,7 +12,7 @@ HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO="$(cd "$HERE/../.." && pwd)"
 cd "$REPO"
 if ! python -c "import uproot, awkward" 2>/dev/null; then
-    echo "extract_zmumu_all.sh: run 'source setup.sh' first (LCG env with uproot/awkward)" >&2
+    echo "extract_zmumu_all.sh: run 'source fitting/setup.sh' first (LCG env with uproot/awkward)" >&2
     exit 2
 fi
 MODE="${1:-}"

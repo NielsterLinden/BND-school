@@ -2,7 +2,7 @@
 """End-to-end self-test of the fitting helpers: toy histograms -> fit inputs -> config ->
 trex-fitter h/w/f -> parsed result. Run after building TRExFitter:
 
-    source setup.sh && python fitting/selftest.py [workdir]
+    source fitting/setup.sh && python fitting/selftest.py [workdir]
 """
 
 from __future__ import annotations

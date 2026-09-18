@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Dark-style figures for the Z->mumu summary deck (summary_deck/zmumu_summary.tex).
 
-    source ../../setup.sh && python summary_plots.py
+    source ../../fitting/setup.sh && python summary_plots.py
 
 Reuses the review's figure code (review/deck_plots.py) on the current v2 outputs and adds the
 pileup-matching, lineshape, stability and post-fit-ratio figures. Writes figures/<name>.pdf/.png.

@@ -16,7 +16,7 @@ The measured muon reconstruction scale factor (scripts/v2_7_reco_tnp.py) scales 
 event in the SR, per muon in the e-mu region -- and `MuonReco` is its measured uncertainty; `--no-reco-sf`
 restores the assigned 1 +- 0.4 %/muon of the 15 Sep 2026 result. The acceptance and its uncertainties
 (60-120 GeV denominator, pT(Z), generator, PS FSR, QED FSR estimate) come from zmumu/acceptance.py (docs/16).
-See docs/14-fit-and-systematics.md and fitting/CONVENTIONS.md.
+See docs/14-fit-and-systematics.md and docs/CONVENTIONS.md.
 """
 
 from __future__ import annotations
@@ -69,7 +69,7 @@ def rebin(values, factor):
 
 
 def build_inputs(hists_all, fakes_res, gens, regions_used, rebin_sr=5, sigmodel=True):
-    """{histogram name: hist.Hist} following fitting/CONVENTIONS.md, plus meta."""
+    """{histogram name: hist.Hist} following docs/CONVENTIONS.md, plus meta."""
     out, meta = {}, {}
     for region in regions_used:
         factor = rebin_sr if region == "SR" else 1
@@ -111,7 +111,7 @@ def build_inputs(hists_all, fakes_res, gens, regions_used, rebin_sr=5, sigmodel=
             # SigModel (SR only): powheg vs aMC@NLO, both inside the powheg generator window
             # 50 < m_LHE < 120 GeV and both normalised to the NLO fiducial prediction *in that window*,
             # so the template carries the generator difference in shape and C factor but not the
-            # edge migration from m_LHE > 120 (REVIEW.md F4). Two-sided: Down = mirrored ratio.
+            # edge migration from m_LHE > 120 (review/README.md F4). Two-sided: Down = mirrored ratio.
             pw = hists_all.get(f"DYmumu_powheg|{region}|mass_fit|nominal")
             win = hists_all.get(key("DYmumu", "lhe50120"))
             if sigmodel and region == "SR" and pw is not None and win is not None and "DY_powheg" in gens and "DY_NLO" in gens:

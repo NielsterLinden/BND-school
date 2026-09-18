@@ -21,12 +21,12 @@ converts them to the committed `external/tau_pog_UL2016postVFP.json`.
 every decay mode (Medium; the Tight pT-binned value is similar), 7 % per leg below the DM-binned values, i.e. ~14 % on the τhτh yield (μ_Z would
 be ~14 % higher with it). The DM-binned set is the POG's recommendation for selections with a
 decay-mode-dependent trigger like the di-τ trigger, and it is what is used; the pT-binned result is a
-cross-check to be quoted, not a nuisance parameter (`REVIEW.md` 3.3). In the combination with ee/μμ the
+cross-check to be quoted, not a nuisance parameter (`review/REVIEW_v3.md` 3.3). In the combination with ee/μμ the
 `TauID_DM*` parameters are measured in situ, which settles the question.
 
 ## Systematic uncertainties (nuisance parameters in the fit)
 
-Names follow `fitting/CONVENTIONS.md`: identical strings are correlated between channels; `_tautau`
+Names follow `docs/CONVENTIONS.md`: identical strings are correlated between channels; `_tautau`
 marks channel-specific parameters. "Prefit effect" = change of the fiducial Z→ττ (or fake) yield summed
 over the three categories. The complete list with per-category sizes is in
 `output/data/yields.json["prefit_norm_effects"]`.
@@ -52,7 +52,7 @@ over the three categories. The complete list with per-category sizes is in
 
 **Not a nuisance parameter (reported only): `SigModel_tautau`.** The fiducial C factor with madgraph LO
 instead of aMC@NLO, both normalised to the NLO fiducial cross section, is 0.867 (v1 used the LO/NLO
-difference of the whole template, 7.3 %, as a one-sided NP). Reasoning (`REVIEW.md` 3.4): the LO sample is
+difference of the whole template, 7.3 %, as a one-sided NP). Reasoning (`review/REVIEW_v3.md` 3.4): the LO sample is
 the worse model of the Z pT and hence of the visible-τ pT spectrum, whose slope at the 40 GeV threshold
 and on the trigger turn-on is what the number measures; an uncertainty built as "nominal minus a worse
 model" is a placeholder, it double counts `QCDScale`/`PS_ISR`, and its former name `SigModel` would have
@@ -76,4 +76,4 @@ be combined **on histograms**, never event by event; a sample with a handful of 
 * Z pT reweighting of the aMC@NLO sample (not needed at NLO; covered by `QCDScale`).
 * τh ID SF dependence on the VSe/VSmu working points; the DM- vs pT-binned prescription difference (above).
 * Trigger efficiency in situ: the POG SFs sit on the turn-on for both legs (data efficiency 0.3–0.6 at
-  40 GeV) and their uncertainty does not shrink with a higher threshold (`REVIEW.md` 3.7).
+  40 GeV) and their uncertainty does not shrink with a higher threshold (`review/REVIEW_v3.md` 3.7).

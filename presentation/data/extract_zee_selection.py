@@ -2,7 +2,7 @@
 """Freeze the real-data pictures of the Z -> ee selection clips (section 3): one selected event, the electron p_T
 spectrum, the m_ee spectra for the five electron-ID levels, a cutflow and two electron candidates for the ID clip.
 
-    source setup.sh && python presentation/data/extract_zee_selection.py [--json PATH] [--check-only] [--files N]
+    source fitting/setup.sh && python presentation/data/extract_zee_selection.py [--json PATH] [--check-only] [--files N]
 
 Reads (read-only) the z-ee team's NanoAOD cache of the SingleElectron primary dataset
 (/data/atlas/users/lvdurenw/nano_cache/Run2016{G,H}, records 30529 / 30562, the files z-ee.ipynb processed), the first

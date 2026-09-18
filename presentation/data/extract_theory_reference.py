@@ -3,7 +3,7 @@
 measurement it is set against, the generator-level m_ll spectrum of our Drell-Yan sample, and the literature constants of the
 lepton-universality and background clips.
 
-    source setup.sh && python presentation/data/extract_theory_reference.py [--json PATH] [--check-only]
+    source fitting/setup.sh && python presentation/data/extract_theory_reference.py [--json PATH] [--check-only]
 
 Reads (read-only):
   combination/combLieke/output/result.json    prediction: aMC@NLO sigma(Z/gamma* -> ll, 60 < m_LHE < 120) and its scale / PDF /

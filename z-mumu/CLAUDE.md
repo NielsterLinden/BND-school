@@ -24,7 +24,7 @@ v1 is kept frozen and reproducible (its `.venv` is python 3.9); everything new g
 ## Running v2
 
 ```bash
-source ../setup.sh                       # LCG_110 + trex-fitter (see ../CLAUDE.md)
+source ../fitting/setup.sh                       # LCG_110 + trex-fitter (see ../.claude/CLAUDE.md)
 python run_v2.py --from 2                # T&P → control → histograms → reco T&P → acceptance → fit → report → CMS comparison (~1 h)
 python run_v2.py --from 5                # fit, stability variants, report, CMS comparison (~20 min)
 python run_v2.py --from 2 --max-files 2 --workers 4      # smoke test on 2 files per sample
@@ -63,8 +63,8 @@ has `--summarise-only` / `--merge-only`. Change a cut → rerun from step 2 (T&P
 - `scripts/v2_5_fit.py` — TRExFitter config (NP list, categories), the reconstruction SF on the templates, and the σ extraction.
 - `zmumu/acceptance.py` — A(60–120), A(m>50) and every acceptance uncertainty (PDF, αs, scales, boson pT, generator, PS FSR, QED FSR estimate, MC stat); the `acceptance` block of the fit result and of `zmumu.root.meta.json`, which the combination reads.
 - `zmumu/recoeff.py` — reconstruction-efficiency probes (stand-alone, isolated track) for step 7.
-- `../fitting/uncertainty_parity.py`, `../fitting/UNCERTAINTY_PARITY.md` — the comparison with a published budget (docs/16).
-- `../fitting/CONVENTIONS.md` — histogram/NP naming shared with the other channels.
+- `../fitting/uncertainty_parity.py`, `../docs/UNCERTAINTY_PARITY.md` — the comparison with a published budget (docs/16).
+- `../docs/CONVENTIONS.md` — histogram/NP naming shared with the other channels.
 
 ## Traps (all cost time once)
 
@@ -72,8 +72,8 @@ has `--summarise-only` / `--merge-only`. Change a cut → rerun from step 2 (T&P
 - Skim `TrigObj` is filtered to muons; all other collections are unfiltered (cross-indices valid).
 - `GRL.txt` is the full-2016 JSON: the skim restricts to runs 278820–284044.
 - MC skims have **no trigger requirement**; data skims do. Category-C events carry `skim_prescale = 10`.
-- Only prompt–prompt MC events (`Muon_genPartFlav` 1 or 15) enter SR/SS; non-prompt muons are the fake factor. The e-μ regions (CRemu, SSemu) keep *all* MC (W+jets included): nothing replaces the non-prompt electrons there (REVIEW.md F1).
-- `mass_fit` is stored in 1 GeV bins; the fit rebins to 5 GeV (`--rebin`). 2 GeV bins over-constrain the shape NPs (REVIEW.md F3/F5).
+- Only prompt–prompt MC events (`Muon_genPartFlav` 1 or 15) enter SR/SS; non-prompt muons are the fake factor. The e-μ regions (CRemu, SSemu) keep *all* MC (W+jets included): nothing replaces the non-prompt electrons there (review/README.md F1).
+- `mass_fit` is stored in 1 GeV bins; the fit rebins to 5 GeV (`--rebin`). 2 GeV bins over-constrain the shape NPs (review/README.md F3/F5).
 - Jet multiplicities are lepton-cleaned (`regions.clean_jet_count`).
 - Signal theory variations must keep the fiducial yield fixed (`Weighter.theory_renorm`).
 - dCache stalls above ~8 readers; `batch.run_files` retries from EOS. Do not import ROOT in python.

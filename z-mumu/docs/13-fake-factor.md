@@ -57,6 +57,6 @@ prescaled paths (`HLT_Mu8/17`, `HLT_Mu3_PFJet40`, kept in the skim) would be the
 
 The `Fakes` fit template is written without Sumw2: the two-template fit's (sigma_b F)^2 is a
 fully correlated normalisation error, already carried by the two nuisance parameters, and would
-otherwise be double counted as per-bin gammas (REVIEW.md, section 7).
+otherwise be double counted as per-bin gammas (review/README.md, section 7).
 
 Numbers and the template: `RESULTS_v2.md`, `fakes.json`.

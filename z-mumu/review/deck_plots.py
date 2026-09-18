@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Figures for the Z->mumu review (REVIEW.md) and the LaTeX deck, on the dark deck background.
 
-    source ../../setup.sh && python deck_plots.py [--pass review_pass.pkl]
+    source ../../fitting/setup.sh && python deck_plots.py [--pass review_pass.pkl]
 
 Reads the v2 outputs (output/v2/histograms.pkl, tnp/fakes/momentum JSON, fit results) and the
 review skim pass (review/review_pass.pkl, produced by review/review_pass.py). Writes

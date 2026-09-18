@@ -30,7 +30,7 @@ What each node is (drawn lepton-generic, grounded in this project's Z->mumu anal
   3 corrections: tag and probe, SF       z-mumu/docs/12-tag-and-probe-fits.md
   4 backgrounds: simulation + Fakes      z-mumu/docs/13-fake-factor.md (same-sign control region)
   5 data vs prediction, ratio, syst.     z-mumu/docs/14-fit-and-systematics.md
-  6 fit: mu_Z, nuisance parameters,      fitting/CONVENTIONS.md section 2 (sigma_fid = mu x sigma_pred),
+  6 fit: mu_Z, nuisance parameters,      docs/CONVENTIONS.md section 2 (sigma_fid = mu x sigma_pred),
     sigma = (N - B)/(A eps L)            z-mumu/docs/06-cross-section.md
 Symbols only (user decision, 15 Sep 2026), except the stacked histograms: on the user's
 request (16 Sep 2026) the stacks of pipe_e / pipe_f are the real Z->mumu signal region

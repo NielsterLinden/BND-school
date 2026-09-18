@@ -1,4 +1,4 @@
-"""Shared helpers of the presentation/data extractors (run in the LCG env, `source setup.sh`).
+"""Shared helpers of the presentation/data extractors (run in the LCG env, `source fitting/setup.sh`).
 
 Every extractor freezes channel numbers into presentation/data/<name>.json with a provenance
 block and a list of assertions against the channel anchors (z-mumu/handoff.md,
@@ -24,7 +24,7 @@ V2 = ZMUMU / "output" / "v2"
 FIT_RESULTS = ZMUMU / "fit" / "results"
 WORK = PRESENTATION / "work" / "extract"                        # part files (git-ignored)
 
-LUMI_PB = 16393.381            # normtag, CMS Open Data record 1059 (fitting/CONVENTIONS.md)
+LUMI_PB = 16393.381            # normtag, CMS Open Data record 1059 (docs/CONVENTIONS.md)
 DATASET = "CMS 2016 Open Data, SingleMuon Run2016G+H, NanoAODv9 (records 30530, 30563)"
 
 # ---- Z -> tautau (z-tautau v3: DeepTau Tight on both legs, MC-subtracted fake factor) -----------------------

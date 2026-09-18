@@ -3,7 +3,7 @@
 BDT was trained on: the fiducial Z -> tautau simulation in the signal region and the fake estimate (application-region data
 weighted by the nominal fake factor).
 
-    source setup.sh && python presentation/data/extract_ztautau_bdt_inputs.py [--json PATH] [--check-only]
+    source fitting/setup.sh && python presentation/data/extract_ztautau_bdt_inputs.py [--json PATH] [--check-only]
 
 Reads (read-only, uproot through ztautau.analysis): the inclusive aMC@NLO ntuple DY_NLO of $BND_TAUTAU_CACHE/ntuples_v1
 (SR, LHE tautau, gen_fid, both legs genPartFlav 5; weights sigma x L / sumw x genWeight, sign kept, no scale factors), the

@@ -297,7 +297,7 @@ def dm_regions(channel):
     'ptsplit': the same regions split at config.LTAU_PT_SPLIT. They are always filled but never fitted
     together with the nominal ones (they hold the same events); the cross-check job `ztautau_ptsplit`
     (step 5 --region-set ptsplit) fits them with a separate tau_h ID scale factor below 40 GeV and so
-    tests the one assumption the tau_h tau_h / (l tau_h)^2 lever rests on (REVIEW_v4.md finding 4).
+    tests the one assumption the tau_h tau_h / (l tau_h)^2 lever rests on (review/REVIEW_v4.md finding 4).
     """
     if not config.LTAU_DM_REGIONS:
         return [(f"{channel}_SR", None, (0.0, np.inf), "nominal")]
@@ -578,7 +578,7 @@ def main():
             "signal_samples": sorted(t for t, i in registry.samples.items() if i["is_signal"]),
             "acceptance_in_fit": True,
             "acceptance_note": ("A x epsilon is profiled inside the fit: every theory variation member is "
-                                "renormalised to the same sigma(60 < m_LHE < 120) (fitting/CONVENTIONS.md section 3), "
+                                "renormalised to the same sigma(60 < m_LHE < 120) (docs/CONVENTIONS.md section 3), "
                                 "so PDF / QCDScale / PS_ISR / PS_FSR vary only the acceptance, per region. There is "
                                 "no A_unc block here on purpose -- adding Acc_* parameters on top would double count."),
             "signal_prediction": an.signal_prediction("tautau" if "tautau" in args.channels else "mutau"),

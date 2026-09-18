@@ -154,7 +154,7 @@ DY_INCLUSIVE = "DY_NLO"
 DY_STITCHED = ["DY_NLO", "DY_0J", "DY_1J", "DY_2J"]
 
 # Relative normalisation uncertainties of the backgrounds (OVERALL nuisance parameters; the names
-# follow fitting/CONVENTIONS.md, XS_DYll and XS_WJets are specific to this channel).
+# follow docs/CONVENTIONS.md, XS_DYll and XS_WJets are specific to this channel).
 XSEC_UNC = {"DYlowmass": 0.10, "TTbar": 0.06, "SingleTop": 0.10, "WW": 0.10, "WZ": 0.10, "ZZ": 0.10, "WJets": 0.10,
             "DYee": 0.05, "DYmumu": 0.05, "DYtautau_nonfid": 0.05}
 # Z/gamma* -> tautau outside the fiducial volume (mostly m_LHE > 120 GeV, docs/06-cross-section.md) is a

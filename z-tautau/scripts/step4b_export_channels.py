@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """Step 4b (v4) -- one fit-input file per channel, for the per-channel workspaces and the MultiFit combination
-(fitting/CONVENTIONS.md sections 1 and 5; docs/10-v4-plan.md section 13).
+(docs/CONVENTIONS.md sections 1 and 5; docs/10-v4-plan.md section 13).
 
     python scripts/step4b_export_channels.py
 

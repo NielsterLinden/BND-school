@@ -32,7 +32,7 @@ a data-driven **fake-factor** estimate of non-prompt muons (no QCD simulation), 
 momentum calibration, and a **TRExFitter v1.8.0** fit of the mass spectrum with 24 nuisance
 parameters. Full numbers: [`output/v2/RESULTS_v2.md`](output/v2/RESULTS_v2.md); machine-readable:
 `output/v2/results_v2.json`, `fit/results/zmumu_fit_result.json`; plots: `output/v2/plots/`;
-fit outputs: `fit/results/zmumu/`; comparison with CMS: `output/v2/cms_parity/`, slides <https://claude.ai/artifact/VCnvdCpXACmRdkXe9UrJ6A>. Review (15 Sep 2026): [`REVIEW.md`](REVIEW.md), slides `review/deck/zmumu_review.pdf`; its findings (e-mu non-prompt electrons, pileup profile, fit binning and `SigModel` template, `MuonReco`, lepton-cleaned jets) are fixed in the numbers above -- the review's "status after the fixes" section says what changed. Twelve-slide summary deck (pre-review numbers): <https://claude.ai/code/artifact/8072b961-01d5-47ed-9804-ee21f70ac985>. Agents: read [`CLAUDE.md`](CLAUDE.md).
+fit outputs: `fit/results/zmumu/`; comparison with CMS: `output/v2/cms_parity/`, slides <https://claude.ai/artifact/VCnvdCpXACmRdkXe9UrJ6A>. Review (15 Sep 2026): [`review/README.md`](review/README.md), slides `review/deck/zmumu_review.pdf`; its findings (e-mu non-prompt electrons, pileup profile, fit binning and `SigModel` template, `MuonReco`, lepton-cleaned jets) are fixed in the numbers above -- the review's "status after the fixes" section says what changed. Twelve-slide summary deck (pre-review numbers): <https://claude.ai/code/artifact/8072b961-01d5-47ed-9804-ee21f70ac985>. Agents: read [`CLAUDE.md`](CLAUDE.md).
 
 Uncertainty budget (impact on the fiducial cross section): luminosity 1.2% (external), L1 prefiring
 0.51%, muon efficiencies 0.48% (of which the measured reconstruction term 0.27%), signal modelling
@@ -52,14 +52,14 @@ Same volume, no simulation, medium ID, luminosity without normtag (0.63% low). F
 ([`docs/08-review-and-crosschecks.md`](docs/08-review-and-crosschecks.md)) found the trigger
 efficiency biased high, background in the tag-and-probe, the normtag luminosity, a 1.1%
 migration effect, and computed the acceptance; the external reviewer added the L1-prefiring
-(2%) and e-mu skim issues (`agent_reference/2026.09.14_1400_revisionpoints.md`). All of these
+(2%) and e-mu skim issues (`docs/revision-points-2026-09-14.md`). All of these
 are addressed in v2.
 
 ## Quick start
 
 ```bash
-# v2 (LCG_110 environment + TRExFitter; see ../CLAUDE.md for the one-time build)
-source ../setup.sh
+# v2 (LCG_110 environment + TRExFitter; see ../.claude/CLAUDE.md for the one-time build)
+source ../fitting/setup.sh
 python run_v2.py --from 2                 # T&P -> control -> histograms -> reco T&P -> acceptance -> fit -> report -> CMS comparison, ~1 h
 python run_v2.py --from 2 --max-files 2   # smoke test
 python scripts/v2_1_skim.py               # (re)make the skims from the NanoAOD parents, ~1.5 h
@@ -98,6 +98,8 @@ run_all.py             runs v1 steps 1-6; run_v2.py runs the v2 chain
 fit/                   v2 TRExFitter inputs (fitinputs/), config (zmumu.config) and results/
 filelists/             cernopendata-client listings (xrootd URL, size, adler32) for the review scripts
 docs/                  the physics documentation (read 00-overview.md first)
+review/                the independent review of v2: README.md (the report), fitcheck/, figures/, deck/
+summary_deck/          the channel's summary slides (LaTeX source, figures, PDF)
 output/                plots + results (committed); output/data/ pickles are git-ignored
 ```
 
@@ -124,6 +126,11 @@ matching page in `docs/`.
 | [13-fake-factor.md](docs/13-fake-factor.md) | non-prompt muons: fake factor, template fit, closure |
 | [14-fit-and-systematics.md](docs/14-fit-and-systematics.md) | regions, momentum calibration, nuisance parameters, extraction |
 | [15-combination-inputs.md](docs/15-combination-inputs.md) | what the combination gets |
+| [16-uncertainties-vs-cms.md](docs/16-uncertainties-vs-cms.md) | the uncertainty budget row by row against CMS-SMP-20-004; what was measured to close the gaps |
+| [17-how-tag-and-probe-works.md](docs/17-how-tag-and-probe-works.md) | explainer: tag and probe from the idea to the frozen numbers |
+| [data-access.md](docs/data-access.md) | cluster environment and data access (dCache, EOS, limits), as found on 14 Sep |
+| [revision-points-2026-09-14.md](docs/revision-points-2026-09-14.md) | the review points that led from v1 to v2 (luminosity normtag, L1 prefiring, …) |
+| [review/README.md](review/README.md) | the independent review of v2 (15 Sep), with its scripts, extra fits and slides in `review/` |
 
 ## Input data
 

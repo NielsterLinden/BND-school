@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Build slides/ztautau_slides.pdf: the Z -> tautau four-channel measurement, in the house style.
 
-    source ../setup.sh && python slides/make_figures.py          # the vector figures (LCG)
+    source ../fitting/setup.sh && python slides/make_figures.py          # the vector figures (LCG)
     env -u PYTHONPATH -u LD_LIBRARY_PATH -u PYTHONHOME \
         /project/atlas/users/sjankovy/boostHHbbtautau/HHARD_workfolder/betterplottingtool/venv/bin/python \
         slides/build_deck.py                                      # the deck (needs fitz / PyMuPDF)
@@ -10,7 +10,7 @@ Every number comes from output/results.json and output/data/yields_v4.json; noth
 so the deck cannot drift from the measurement. Page background = the figures' background (#222222), and
 every figure is embedded as vector, so any plot can be zoomed into without pixelation.
 
-Order follows prompts/presentation_style.md: the result first, then what the fit measures in situ, then
+Order follows .claude/prompts/presentation_style.md: the result first, then what the fit measures in situ, then
 the uncertainties, then the regions, the data-driven backgrounds and the in-situ corrections, and finally
 what the combination gets.
 """

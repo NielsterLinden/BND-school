@@ -2,7 +2,7 @@
 """Freeze the reference points of the sigma axis of the last Z -> tautau clip: this measurement, the published CMS and ATLAS
 13 TeV measurements of sigma(Z/gamma* -> ll) and the aMC@NLO prediction the signal strength multiplies.
 
-    source setup.sh && python presentation/data/extract_ztautau_reference.py [--json PATH] [--check-only]
+    source fitting/setup.sh && python presentation/data/extract_ztautau_reference.py [--json PATH] [--check-only]
 
 Reads (read-only): presentation/data/ztautau_fit.json (sigma_60_120: value, err_up/down, acc, pred), combination/result.md
 ("Comparison with published measurements" table: CMS-SMP-20-004 / arXiv:2408.03744 and arXiv:1603.09222, quoted verbatim).
@@ -34,7 +34,7 @@ ATLAS = {"value": 1981, "stat": 7, "syst": 38, "lumi": 42, "window": "66-116", "
          "reference": "arXiv:1603.09222", "note": "narrower mass window, not directly comparable"}
 # documents searched for an uncertainty on the predicted sigma(Z/gamma* -> ll, 60-120) (PDF + scale + alpha_s)
 THEORY_SEARCHED = ["combination/result.md", "combination/docs/00-overview.md", "combination/docs/01-inputs.md", "combination/docs/02-correlation-model.md",
-                   "combination/docs/03-method.md", "combination/docs/04-results.md", "fitting/CONVENTIONS.md", "z-tautau/docs/06-cross-section.md",
+                   "combination/docs/03-method.md", "combination/docs/04-results.md", "docs/CONVENTIONS.md", "z-tautau/docs/06-cross-section.md",
                    "z-tautau/handoff.md", "z-mumu/docs/06-cross-section.md", "z-mumu/docs/15-combination-inputs.md", "z-mumu/handoff.md"]
 # the published prediction whose relative uncertainty is drawn as the band (read off arXiv:2408.03744v2, Table 5,
 # "Z -> l+ l-" row, NNPDF3.1 column, on 2026-09-16; the other columns: NNPDF4.0 1970 +11 -14, CT18 1921 +30 -33,
@@ -77,7 +77,7 @@ def build():
               "published_prediction": THEORY_PUB,
               "label": "aMC@NLO / NNLO",
               "note": ("sigma^pred(Z/gamma* -> tautau, 60 < m_LHE < 120) = 6077.22 pb (FEWZ NNLO, all flavours) x sumw(LHE tautau, 60-120) / sumw of the "
-                       "aMC@NLO DYJetsToLL_M-50 sample (z-tautau/docs/06, fitting/CONVENTIONS.md section 6). The repository documents no PDF + scale + "
+                       "aMC@NLO DYJetsToLL_M-50 sample (z-tautau/docs/06, docs/CONVENTIONS.md section 6). The repository documents no PDF + scale + "
                        "alpha_s uncertainty on this number (only on the acceptance A: 3.7 %, and on the mumu reference 1953.9 pb the 0.47 % definitional spread; "
                        "the documents searched are listed in provenance.theory_searched), so unc_up / unc_down carry the relative uncertainty of the "
                        "published NNLO+NNLL prediction of the same quantity with the same PDF family (unc_source); the two central values agree to 0.25 %"),

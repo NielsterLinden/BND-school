@@ -381,7 +381,7 @@ the SFs lower the prediction by 2.5 %.
 The analysis is frozen, so these commands document how the outputs were made; they are not meant to be rerun.
 
 ```bash
-source setup.sh && cd z-mumu
+source fitting/setup.sh && cd z-mumu
 python scripts/v2_2_pileup.py                # pileup weights for the simulation, needed first
 python scripts/v2_2_tnp.py                   # ID/iso/anti-iso/trigger: fill (~30 min) + 400 fits per efficiency
 python scripts/v2_2_tnp.py --summarise-only  # refit and replot from the per-file parts

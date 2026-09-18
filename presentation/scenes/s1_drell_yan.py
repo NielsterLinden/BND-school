@@ -12,7 +12,7 @@ clip serves the ee / mumu / tautau openers; the per-channel subclasses below
 section 3-5 process clips through ``build_parts`` + ``SHIFT``.
 
 Source of the topology: any textbook (Drell & Yan 1970); the fitting contract
-in fitting/CONVENTIONS.md calls the signal DYee / DYmumu / DYtautau.
+in docs/CONVENTIONS.md calls the signal DYee / DYmumu / DYtautau.
 """
 from __future__ import annotations
 

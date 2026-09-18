@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Freeze the final combination (four-channel Z -> tautau, 1949 +30 -30 pb) for section 6.
 
-    source setup.sh && python presentation/data/extract_combination.py [--json PATH] [--check-only]
+    source fitting/setup.sh && python presentation/data/extract_combination.py [--json PATH] [--check-only]
 
 Reads (read-only) combination/combLieke/output/result.json, the file every figure of
 combination/combLieke/output/plots/ is drawn from (mf/plots.py), and writes presentation/data/combination_results.json:

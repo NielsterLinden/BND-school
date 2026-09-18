@@ -5,7 +5,7 @@
 ## Why a second version
 
 The data-only measurement (steps 1-6, docs 00-07) was reviewed twice (docs/08 and
-`agent_reference/2026.09.14_1400_revisionpoints.md`). The review points that cannot be fixed
+`docs/revision-points-2026-09-14.md`). The review points that cannot be fixed
 inside the data-only design are:
 
 | issue | v1 | v2 |

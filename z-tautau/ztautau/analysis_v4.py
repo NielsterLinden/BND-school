@@ -370,7 +370,7 @@ def _insitu_sf(name, pt, eta, syst, flat: float = TRIG_FLAT_UNC):
     """In-situ trigger scale factor of one leg. `syst` = +-1 shifts it by the statistical error of the
     table bin and, on top of that, by the flat `flat` (the paper's 2 % per *channel*, CMS
     arXiv:1801.03535 Table 2). A cross trigger has two legs but only one such flat term: the caller
-    passes flat=0 for the second leg (REVIEW_v4.md finding 3 -- applying it per leg made the e mu
+    passes flat=0 for the second leg (review/REVIEW_v4.md finding 3 -- applying it per leg made the e mu
     trigger prior 5.4 % instead of 2.7 % and moved mu_Z by one standard deviation)."""
     t = trigger_insitu().get(name)
     if t is None:
@@ -383,7 +383,7 @@ def _insitu_sf(name, pt, eta, syst, flat: float = TRIG_FLAT_UNC):
 def ele27_turnon_rel() -> np.ndarray:
     """Relative uncertainty of the Ele27_WPTight scale factor in the turn-on bin (EL_PT_MIN_ETAU to
     ELE27_PLATEAU_PT), per |eta_SC| bin: the step to the next pT bin of the in-situ table. The bin-averaged
-    scale factor mis-models an event at the edge of the bin by that much (REVIEW_v4.md finding 7:
+    scale factor mis-models an event at the edge of the bin by that much (review/REVIEW_v4.md finding 7:
     4 % / 2 % / 13 % in the three eta bins the e tau_h channel uses, against the flat 2 % of the plateau)."""
     t = trigger_insitu().get("ele27")
     if t is None:
@@ -477,7 +477,7 @@ def weights(d, key: str, channel: str, syst: str | None = None, direction: str |
                 w = w * pog.muon_sf("trig", pt, eta, sy[sign] if syst == "MuonTrigger" and sign else "nominal")
     if channel == "emu":
         # one nuisance parameter for the cross trigger: the statistical error of *both* legs plus the flat
-        # 2 % of the paper *once* (finding 3 of REVIEW_v4.md); total prior 2.3-2.7 % per event.
+        # 2 % of the paper *once* (finding 3 of review/REVIEW_v4.md); total prior 2.3-2.7 % per event.
         w = w * _insitu_sf("emu_e", kin["el_pt"], d["el_sceta"], sign if syst == "EmuTrigger" else 0)
         w = w * _insitu_sf("emu_mu", kin["mu_pt"], d["mu_eta"], sign if syst == "EmuTrigger" else 0, flat=0.0)
     if channel in LTAU:

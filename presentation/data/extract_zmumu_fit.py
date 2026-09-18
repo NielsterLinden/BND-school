@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Freeze the Z -> mumu fit result (mu_Z, sigma_fid, sigma(60-120), NPs, ranking, 12-bin SR plots).
 
-    source setup.sh && python presentation/data/extract_zmumu_fit.py [--json PATH] [--check-only]
+    source fitting/setup.sh && python presentation/data/extract_zmumu_fit.py [--json PATH] [--check-only]
 
 Reads (read-only): z-mumu/fit/results/zmumu_fit_result.json, z-mumu/output/v2/results_v2.json,
 z-mumu/fit/results/zmumu/Plots/mumu_SR_{prefit,postfit}.yaml (TRExFitter plot dumps),
@@ -30,7 +30,7 @@ PLOTS = FIT_RESULTS / "zmumu" / "Plots"
 HIST_PKL = V2 / "histograms.pkl"
 FAKES_JSON = V2 / "fakes.json"
 
-# TRExFitter sample titles (z-mumu/scripts/v2_5_fit.py:163-173) -> fitting/CONVENTIONS.md names
+# TRExFitter sample titles (z-mumu/scripts/v2_5_fit.py:163-173) -> docs/CONVENTIONS.md names
 TITLE_TO_SAMPLE = {"Z/#gamma* #rightarrow #mu#mu": "DYmumu", "Z/#gamma* #rightarrow #tau#tau": "DYtautau",
                    "Z/#gamma* #rightarrow ee": "DYee", "t#bar{t}": "TTbar", "tW": "SingleTop", "WW": "WW", "WZ": "WZ",
                    "ZZ": "ZZ", "W+jets (jet #rightarrow e)": "WJets", "Non-prompt (fake factor)": "Fakes"}
@@ -83,7 +83,7 @@ def build():
     out = {
         "provenance": provenance("extract_zmumu_fit.py", [FIT_JSON, RES_JSON, PLOTS / "mumu_SR_prefit.yaml", PLOTS / "mumu_SR_postfit.yaml", HIST_PKL, FAKES_JSON],
                                  fit_tool="TRExFitter v1.8.0, profile-likelihood fit of m(mumu) in 12 x 5 GeV bins, MINOS on every parameter",
-                                 anchors=["z-mumu/handoff.md:11-13", "z-mumu/output/v2/RESULTS_v2.md:7-37, 55-70", "fitting/CONVENTIONS.md section 6"],
+                                 anchors=["z-mumu/handoff.md:11-13", "z-mumu/output/v2/RESULTS_v2.md:7-37, 55-70", "docs/CONVENTIONS.md section 6"],
                                  units="cross sections in pb; grouped impacts and uncertainties on mu_Z are relative fractions (not %)",
                                  title_to_sample=TITLE_TO_SAMPLE),
         "poi": {"name": fit["poi"], "value": fit["mu"], "err_up": fit["mu_err_up"], "err_down": fit["mu_err_down"], "err_sym": fit["mu_err"],
@@ -96,7 +96,7 @@ def build():
         "sigma_60_120": {"value": fit["sigma_60_120_pb"], "stat": fit["sigma_60_120_stat_pb"], "syst": fit["sigma_60_120_syst_pb"],
                          "lumi": fit["sigma_60_120_lumi_pb"], "acc": fit["sigma_60_120_acc_pb"], "total": fit["sigma_60_120_tot_pb"],
                          "A": fit["A_60_120"], "A_rel_unc": fit["acceptance"]["A_rel_unc"], "pred": pred_60_120, "unit": "pb",
-                         "definition": "sigma(Z/gamma* -> mu mu, 60 < m_LHE < 120 GeV) = sigma_fid / A; pred = sigma_fid^pred / A (fitting/CONVENTIONS.md section 6)"},
+                         "definition": "sigma(Z/gamma* -> mu mu, 60 < m_LHE < 120 GeV) = sigma_fid / A; pred = sigma_fid^pred / A (docs/CONVENTIONS.md section 6)"},
         "sigma_m50": {"value": fit["sigma_m50_pb"], "total": fit["sigma_m50_tot_pb"], "A": fit["A_m50"], "pred": fit["meta"]["dy_xsec_pb"] / 3.0, "unit": "pb"},
         "C": meta["C_factor"],
         "reco_sf": dict(meta["reco_sf"]),
@@ -144,20 +144,20 @@ def verify(d, ck: Checker):
     ck.check("sigma(60-120) 1931 +- 30 pb", [s6["value"], s6["total"]], [1931.0, 30.0], 0.5, H)
     ck.check("sigma(60-120) exact 1931.043 +- 30.434", [s6["value"], s6["total"]], [1931.043, 30.434], 5e-4, "fit result")
     ck.check("A_60_120 0.409209", s6["A"], 0.409209, 5e-7, "z-mumu/handoff.md:99")
-    ck.check("A rel. unc. 0.70%", 100 * s6["A_rel_unc"], 0.70, 5e-3, "FREEZE.md (acceptance A(60-120) 0.4092 +- 0.70%)")
-    ck.check("sigma(60-120) == sigma_fid / A", s6["value"], sf["value"] / s6["A"], 1e-9, "fitting/CONVENTIONS.md section 6", rel=True)
+    ck.check("A rel. unc. 0.70%", 100 * s6["A_rel_unc"], 0.70, 5e-3, "docs/FREEZE.md (acceptance A(60-120) 0.4092 +- 0.70%)")
+    ck.check("sigma(60-120) == sigma_fid / A", s6["value"], sf["value"] / s6["A"], 1e-9, "docs/CONVENTIONS.md section 6", rel=True)
     ck.check("1/A = 2.4437 (the fiducial -> 60-120 factor)", 1.0 / s6["A"], 2.4437, 5e-5, "A_60_120")
-    ck.check("sigma^pred(60-120) 1953.9 pb", s6["pred"], 1953.9, 0.05, "fitting/CONVENTIONS.md section 6 / handoff.md:100")
+    ck.check("sigma^pred(60-120) 1953.9 pb", s6["pred"], 1953.9, 0.05, "docs/CONVENTIONS.md section 6 / handoff.md:100")
     ck.check("C factor 0.7916", d["C"], 0.7916, 5e-5, R + ":17")
     ck.check("C factor exact 0.791567", d["C"], 0.791567, 5e-7, "fit result meta")
     ck.check("counting cross-check 794.5 pb", d["counting"]["sigma_fid_pb"], 794.5, 0.05, R + ":19")
     ck.check("counting n_bkg 68 799", d["counting"]["n_bkg"], 68799.0, 0.05, "z-mumu/handoff.md:57")
     ck.check("counting == (N_obs - N_bkg) / (C L)", d["counting"]["sigma_fid_pb"],
              (d["counting"]["n_obs"] - d["counting"]["n_bkg"]) / (d["C"] * d["lumi_pb"]), 1e-9, "v2_5_fit.py counting", rel=True)
-    ck.check("reco SF per event 1.0002", d["reco_sf"]["sf_per_event"], 1.0002, 5e-5, "FREEZE.md / output/v2/tnp/reco_result.json")
+    ck.check("reco SF per event 1.0002", d["reco_sf"]["sf_per_event"], 1.0002, 5e-5, "docs/FREEZE.md / output/v2/tnp/reco_result.json")
     ck.check("counting n_obs", d["counting"]["n_obs"], 10378567, 0, "z-mumu/handoff.md:56")
     ck.check("GoF p 0.792272", d["gof_p"], 0.792272, 5e-7, R + ":9")
-    ck.check("lumi_pb", d["lumi_pb"], LUMI_PB, 1e-6, "fitting/CONVENTIONS.md")
+    ck.check("lumi_pb", d["lumi_pb"], LUMI_PB, 1e-6, "docs/CONVENTIONS.md")
     gi = d["grouped_impacts"]
     for name, want in (("FullSyst", 1.3947), ("Luminosity", 1.1661), ("Muon efficiency", 0.4752), ("L1 prefiring", 0.5082),
                        ("Signal modelling", 0.4542), ("Gammas", 0.3534), ("Muon momentum", 0.3502), ("Pileup", 0.1434),

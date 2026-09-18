@@ -3,7 +3,7 @@
 ## Team
 
 - Niels ter Linden (v1, with Claude Code agents); v2–v4 by Claude Code (Fable 5.1) for Samuel Jankovych,
-  after the reviews in `REVIEW.md` (the τhτh iteration) and `REVIEW_v4.md` (the four-channel measurement).
+  after the reviews in `review/REVIEW_v3.md` (the τhτh iteration) and `review/REVIEW_v4.md` (the four-channel measurement).
 
 ## State (17 September 2026)
 
@@ -49,7 +49,7 @@ Ranking: TauIDpT_tautau 6.8 %, mu_ttbar 3.1 %, EmuTrigger 2.6 %, TauIDSF_DM1 2.2
 
 ## What the review changed
 
-`REVIEW_v4.md` reviewed the four-channel measurement; `REVIEW_v4_RESPONSE.md` is the point-by-point answer.
+`review/REVIEW_v4.md` reviewed the four-channel measurement; `review/REVIEW_v4_RESPONSE.md` is the point-by-point answer.
 In short:
 
 * The eμ trigger prior applied the paper's 2 % **once per leg**, so it was 5.4 % instead of 2.7 %. Applying
@@ -109,7 +109,7 @@ its `--check` assertions on the ττ line will fail until then; §6 of `docs/11`
 - Skims: `/data/atlas/users/sjankovy/BND-school-cache/ztautau/skims_v1/` (DY samples re-skimmed with `LHE_NpNLO`;
   the rest are links to `/data/atlas/users/nterlind/BND-school-cache/ztautau/skims_v1/`)
 - **Ntuples (use these):** `/data/atlas/users/sjankovy/BND-school-cache/ztautau/ntuples_v1/`
-- Luminosity: **16393.381 pb⁻¹ ± 1.2 %** (normtag, as in z-mumu v2 and `fitting/CONVENTIONS.md`).
+- Luminosity: **16393.381 pb⁻¹ ± 1.2 %** (normtag, as in z-mumu v2 and `docs/CONVENTIONS.md`).
 
 - v4 skims / ntuples also cover SingleMuon, SingleElectron and MuonEG (Run2016G+H) and every simulation
   sample in the μτh / eτh / eμ selections; `docs/10-v4-plan.md` §10.
@@ -144,7 +144,7 @@ its `--check` assertions on the ττ line will fail until then; §6 of `docs/11`
 
 ```bash
 cd z-tautau
-source ../setup.sh
+source ../fitting/setup.sh
 python run_tautau_base.py --from 3   # τhτh fake factors, BDT, base templates (~25 min from the ntuples)
 python run_all.py --from 3           # trigger efficiencies, fakes, templates, all fits, report (~4 h)
 python run_all.py --only 4           # templates only (~50 min)

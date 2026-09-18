@@ -5,7 +5,7 @@
 export ATLAS_LOCAL_ROOT_BASE=/cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase
 cd "$1" || exit 1
 shift
-source ../setup.sh
+source ../fitting/setup.sh
 set -e
 set -o pipefail
 cd fit

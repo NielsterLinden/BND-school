@@ -14,7 +14,7 @@ CH=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)      # this checkout: the jo
 D=$CH/condor
 mkdir -p "$D"/{out,err,logs}
 cd "$CH" || exit 1
-source ../setup.sh
+source ../fitting/setup.sh
 set -o pipefail
 
 wait_for_batch() {           # $1 = JobBatchName, $2 = stage label

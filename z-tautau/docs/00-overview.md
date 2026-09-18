@@ -5,9 +5,9 @@ binned profile-likelihood fit (TRExFitter v1.8.0) in the same framework as Z→�
 channels can be fitted together. Four ττ final states are fitted simultaneously: **τhτh** (Tau dataset, three
 BDT categories), **μτh** (SingleMuon), **eτh** (SingleElectron) and **eμ** (MuonEG, with a tt̄ control
 region). The τh identification scale factors and the τh energy scale are measured *in situ* by that fit
-instead of being taken from the TauPOG. History: v1 was reviewed (`REVIEW.md`) and rebuilt, v3 was the
-τhτh-only measurement, v4 added the three lepton channels and was reviewed in turn (`REVIEW_v4.md`,
-answered in `REVIEW_v4_RESPONSE.md`). Sections 1–9 of these docs describe the τhτh part, which is still the
+instead of being taken from the TauPOG. History: v1 was reviewed (`review/REVIEW_v3.md`) and rebuilt, v3 was the
+τhτh-only measurement, v4 added the three lepton channels and was reviewed in turn (`review/REVIEW_v4.md`,
+answered in `review/REVIEW_v4_RESPONSE.md`). Sections 1–9 of these docs describe the τhτh part, which is still the
 backbone; `10-v4-plan.md` describes the four-channel measurement and `11-combination-inputs.md` what the
 combination gets.
 

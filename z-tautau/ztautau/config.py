@@ -44,16 +44,17 @@ BDT_DIR = CACHE_DIR / ("bdt" if TAU_WP == NOMINAL_WP else f"bdt_{TAU_WP.lower()}
 LUMIBYLS_CSV = Path("/data/atlas/users/nterlind/BND-school-cache/external/pp_2016lumibyls.csv")
 LUMIBYLS_URL = "root://eospublic.cern.ch//eos/opendata/cms/luminosity/2016/pp_2016lumibyls.csv"
 
-# TRExFitter v1.8.0: the build of the git submodule. A worktree without its own build falls back to
-# the main checkout, so every channel uses literally the same binary (fitting/CONVENTIONS.md).
-TREX_FALLBACK_HOME = Path("/project/atlas/Users/nterlind/BND-school/TRExFitter-v1.8.0")
+# TRExFitter v1.8.0 is built outside the repository by fitting/build_trexfitter.sh ($TREXFITTER_HOME, default
+# next to the checkout). Without it, fall back to the shared build next to the main checkout, so every
+# channel uses literally the same binary (docs/CONVENTIONS.md).
+TREX_FALLBACK_HOME = Path("/project/atlas/Users/nterlind/TRExFitter-v1.8.0")
 
 # ------------------------------------------------------------------------------ data set
 # Tau primary dataset, Run2016G + Run2016H (UL2016 NanoAODv9), docs/01-data-and-samples.md.
 RUN_MIN, RUN_MAX = 278820, 284044
 ERA_H_FIRST_RUN = 281613
 # Normtag luminosity of the certified lumisections (CMS Open Data record 1059), identical in all
-# three channels (fitting/CONVENTIONS.md section 2).
+# three channels (docs/CONVENTIONS.md section 2).
 LUMI_PB = 16393.381
 LUMI_REL_UNC = 0.012
 
@@ -136,12 +137,12 @@ ERA_LUMI_PB = (7653.261, 8740.119)       # (Run2016G, Run2016H), sum = LUMI_PB
 FF_DMS = TAU_DMS
 # Simulated events with a genuine leading tau are subtracted from the determination and application
 # regions (the classic fake factor; without it the application region double counts ~6% of the signal
-# and C_OS/SS is biased by +2.5%, REVIEW.md 3.2). The unsubtracted variant is only computed on request
+# and C_OS/SS is biased by +2.5%, review/REVIEW_v3.md 3.2). The unsubtracted variant is only computed on request
 # (step 4/5 --ff-variant nosub), it is not part of the nominal chain (v3).
 FF_SUBTRACT_MC = True
 # Factorised closure corrections of the FF, measured in same-sign data after the era x DM x N_jets x pT
 # table: the FF varies by +-15% with |eta(tau1)| (universal shape: barrel-endcap transition, tracker
-# edge, REVIEW.md section 5) and by -7% with pT(tau2) at 60-100 GeV (isolation correlation of the two
+# edge, review/REVIEW_v3.md section 5) and by -7% with pT(tau2) at 60-100 GeV (isolation correlation of the two
 # jets). Applied multiplicatively in fakes.evaluate; each is obs/pred in same-sign events.
 FF_CLOSURE_ETA_BINS = [0.0, 0.4, 0.8, 1.2, 1.5, 1.8, 2.1]
 FF_CLOSURE_PT2_BINS = [40.0, 45.0, 50.0, 60.0, 80.0, 1000.0]
@@ -230,7 +231,7 @@ MU_ETA_MAX, MU_DXY, MU_DZ, MU_ISO = 2.4, 0.045, 0.2, 0.15
 EL_PT_MIN_ETAU = 29.0                  # Ele27_WPTight: 29 GeV is still on the turn-on (see ELE27_PLATEAU_PT)
 # Above this the in-situ Ele27 scale factor is flat; between EL_PT_MIN_ETAU and it the measurement changes
 # by 4-13% from one pT bin to the next, so the turn-on has its own nuisance parameter `ElectronTrigger_lowpt`
-# (REVIEW_v4.md finding 7) instead of sharing the flat 2% of the plateau.
+# (review/REVIEW_v4.md finding 7) instead of sharing the flat 2% of the plateau.
 ELE27_PLATEAU_PT = 35.0
 EL_ETA_MAX, EL_DXY, EL_DZ, EL_ISO = 2.1, 0.045, 0.2, 0.10
 EL_GAP = (1.4442, 1.566)               # ECAL barrel-endcap transition (supercluster |eta|) excluded
@@ -268,7 +269,7 @@ LTAU_FF_MT_BINS = [0.0, 20.0, 40.0, 60.0, 80.0, 100.0, 150.0, 1000.0]
 LTAU_FF_OSSS_SYST = 0.05
 # Prior on the W+jets fraction of the application region (the multijet fraction compensates). The first
 # iteration used 20%, an estimate; the fit then pulled `FakeFrac_etau` by +2.6 sigma and `FakeFrac_mutau`
-# by +1.5 sigma and constrained both to ~0.6 of the prior (REVIEW_v4.md finding 6): the composition of the
+# by +1.5 sigma and constrained both to ~0.6 of the prior (review/REVIEW_v4.md finding 6): the composition of the
 # AR, taken from the LO inclusive W+jets sample, is not known to 20%. The prior is now 40%, which the data
 # still constrain to ~25%; the fitted fake yield barely moves, the pulls become acceptable.
 LTAU_FF_FRAC_SYST = 0.40
@@ -292,14 +293,14 @@ LTAU_DM_REGIONS = True
 LTAU_REGIONS = [f"{ch}_SR_dm{dm}" for ch in ("mutau", "etau") for dm in TAU_DMS] if LTAU_DM_REGIONS else ["mutau_SR", "etau_SR"]
 # The tau_h ID scale factor of the fit is one number per decay mode, measured by tau_h tau_h regions with
 # pT(tau_h) > 40 GeV and l tau_h regions with pT(tau_h) > 30 GeV. A pT dependence of the scale factor between
-# 30 and 40 GeV would bias the tau_h tau_h / (l tau_h)^2 lever (REVIEW_v4.md finding 4). Step 4 therefore also
+# 30 and 40 GeV would bias the tau_h tau_h / (l tau_h)^2 lever (review/REVIEW_v4.md finding 4). Step 4 therefore also
 # fills every l tau_h region split at this pT; the alternative fit `ztautau_ptsplit` (step 5 --region-set ptsplit)
 # gives the 30-40 GeV part its own scale factors and measures the difference. The nominal fit is unchanged.
 LTAU_PT_SPLIT = 40.0
 LTAU_PTSPLIT_REGIONS = [f"{ch}_SR{tag}_dm{dm}" for ch in ("mutau", "etau") for dm in TAU_DMS for tag in ("lo", "hi")]
 REGIONS_V4 = REGIONS + LTAU_REGIONS + LTAU_PTSPLIT_REGIONS + ["emu_SR", "emu_CRtt"]
 # The four-channel measurement is *the* measurement: it owns the canonical job name and output paths
-# (fitting/CONVENTIONS.md section 1: the combination reads fit/ztautau.config and fit/results/ztautau/).
+# (docs/CONVENTIONS.md section 1: the combination reads fit/ztautau.config and fit/results/ztautau/).
 JOB_V4 = "ztautau"
 FIT_DIR_V4 = FIT_DIR
 OUTPUT_DIR_V4 = OUTPUT_DIR

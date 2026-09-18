@@ -21,10 +21,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import numpy as np  # noqa: E402
 from manim import (  # noqa: E402
     BOLD, DEGREES, DOWN, ORIGIN, TAU, UP, AnimationGroup, Annulus, AnnularSector, ApplyFunction, Arc,
-    Circle, Dot, FadeIn, FadeOut, Line, Polygon, RoundedRectangle, Scene, Sector, Succession, Transform,
-    VGroup, ValueTracker, Wait, rate_functions,
+    Circle, Dot, FadeIn, FadeOut, Line, Polygon, Rectangle, RoundedRectangle, Scene, Sector, Succession,
+    Transform, VGroup, VMobject, ValueTracker, Wait, rate_functions,
 )
 from style.bnd_style import *  # noqa: E402,F401,F403
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import s6_combination_story as s6  # noqa: E402  (MicDropResults opens on the last frame of comb_published)
 
 EASE = rate_functions.ease_in_out_sine
 HAND_FILL = CMS["bg"]                      # off-white line-art hand
@@ -125,11 +128,12 @@ def delayed(delay: float, anim):
     return Succession(Wait(delay), anim) if delay > 0 else anim
 
 
-def shattered(det: CMSSlice) -> list[VGroup]:
-    """The same drawing as ``det``, cut into ``N_WEDGES`` angular wedges: every
+def shattered(det: CMSSlice, n_wedges: int = N_WEDGES) -> list[VGroup]:
+    """The same drawing as ``det``, cut into ``n_wedges`` angular wedges: every
     full ring becomes sectors / arcs, every segmented cell goes to the wedge
     its centre lies in. Returns the wedges (each drawn inside out)."""
     c = det.c
+    N_WEDGES = n_wedges
     dphi = TAU / N_WEDGES
     phi0 = TAU / 24                      # wedge edges on the dodecagon's edges (15 + 30 k degrees)
     # the ECAL and HCAL base rings are fully covered by their cells / towers: leave
@@ -269,4 +273,196 @@ class MicDrop(Scene):
         words = VGroup(thanks, quest).arrange(DOWN, buff=0.55).move_to(ORIGIN)
         self.play(FadeIn(thanks, shift=0.3 * UP), run_time=0.7, rate_func=EASE)
         self.play(FadeIn(quest, shift=0.3 * UP), run_time=0.6, rate_func=EASE)
+        self.wait(0.1)
+
+
+# ---------------------------------------------------------------------------
+# the closing clip of the talk: the results plot itself turns into the mic drop
+# ---------------------------------------------------------------------------
+
+N_WEDGES_X = 18        # more pieces, more sparks, more rays than MicDrop: "violent, chaotic, extreme"
+N_SPARKS_X = 170
+N_DEBRIS_X = 48
+N_CRACKS_X = 16
+BURSTS_X = [(0.00, 14), (0.20, 12), (0.42, 14), (0.65, 12), (0.88, 12), (1.12, 10)]
+
+
+def _crack(center, rng) -> VMobject:
+    """A jagged crack running outward from ``center``."""
+    a = rng.uniform(0, TAU)
+    pts, r, r_max = [np.asarray(center, dtype=float)], 0.2, rng.uniform(3.2, 7.0)
+    while r < r_max:
+        r += rng.uniform(0.35, 0.85)
+        pts.append(center + r * _dir(a + rng.uniform(-0.28, 0.28)))
+    m = VMobject(stroke_color=col(INK), stroke_width=rng.uniform(2.5, 6.0))
+    m.set_points_as_corners(pts)
+    return m
+
+
+class MicDropResults(Scene):
+    """The closing clip: opens on comb_published's last frame (the six-row result plot).
+
+    The CMS point of the published row grows into the CMS detector, our own combined point
+    hands over the microphone, and the drop takes the whole slide apart."""
+
+    def construct(self):
+        white_background(self)
+        st = s6.summary_state(6)
+        s6.restack(self, st, s6.ORDER_SUM)
+        self.wait(0.45)
+
+        cms_marker, comb_marker = st["row_cms"][4], st["row_comb"][4]
+        keep = (cms_marker, comb_marker)
+        fade = VGroup(*[m for k in s6.ORDER_SUM if k in st
+                        for m in ([st[k]] if k not in ("row_cms", "row_comb") else [x for x in st[k] if x not in keep])])
+
+        # 1. the CMS result opens out into the CMS detector
+        det = CMSSlice()
+        det0 = mini_slice(0.028, cms_marker.get_center())
+        self.add(det0)
+        self.bring_to_front(*keep)
+        self.play(FadeOut(fade), FadeOut(cms_marker, scale=0.2), Transform(det0, det), run_time=1.5, rate_func=EASE)
+        self.remove(det0)
+        self.add(det, comb_marker)
+        self.wait(0.2)
+
+        # 2. our own combined point hands over the microphone
+        mic = microphone(HEAD0)
+        handle_c = HEAD0 + [0.0, MIC_HEAD_R + 0.08 + MIC_HANDLE_H * 0.40, 0.0]
+        behind, fingers, thumb, knuckles, thumb_root = hand(handle_c)
+        hand_all = VGroup(behind, fingers)
+        mic0 = mic.copy().scale(0.05).move_to(comb_marker.get_center())
+        self.add(mic0)
+        self.play(FadeOut(comb_marker, scale=0.3), Transform(mic0, mic), run_time=1.0,
+                  rate_func=rate_functions.ease_out_cubic)
+        self.remove(mic0)
+        self.add(mic)
+        self.play(FadeIn(hand_all, shift=0.5 * UP), run_time=0.45, rate_func=EASE)
+        self.add(behind, mic, fingers)          # thumb behind the handle, fingers in front
+        self.wait(0.3)
+
+        # 3. the hand opens, the microphone falls harder
+        self.play(*[f.animate.rotate(78 * DEGREES, about_point=k) for f, k in zip(fingers, knuckles)],
+                  thumb.animate.rotate(-52 * DEGREES, about_point=thumb_root), run_time=0.42, rate_func=EASE)
+        self.play(mic.animate.shift(HEAD1 - HEAD0), run_time=0.5, rate_func=rate_functions.ease_in_quad)
+
+        # 4. impact: flash, stars, shock rings, cracks, sparks, debris, the detector in pieces
+        rng = np.random.default_rng(SEED + 3)
+        wedges = shattered(det, N_WEDGES_X)
+        self.remove(det)
+        self.add(*wedges)
+        wedge_dirs = [_dir(TAU / 24 + (k + 0.5) * TAU / N_WEDGES_X) for k in range(N_WEDGES_X)]
+
+        stars = VGroup(star_burst(HEAD1, 1.30, 0.50, 16, rng, fill_color=col(INK), fill_opacity=1.0, stroke_width=0),
+                       star_burst(HEAD1, 1.80, 0.62, 13, rng, fill_color=col(FLAG["BE"][1]), fill_opacity=1.0,
+                                  stroke_color=col(HIGHLIGHT), stroke_width=4.0),
+                       star_burst(HEAD1, 2.30, 0.70, 11, rng, fill_color=col(FLAG["NL"][0]), fill_opacity=0.55,
+                                  stroke_width=0)).scale(1 / 18, about_point=HEAD1)
+        flash = Rectangle(width=16, height=10, stroke_width=0, fill_color=col(HIGHLIGHT), fill_opacity=0.5).move_to(ORIGIN)
+
+        def shock_ring(delay, r_max, sw, t):
+            ring = Circle(radius=0.06, arc_center=HEAD1, fill_opacity=0, stroke_color=col(INK), stroke_width=sw)
+            return ring, delayed(delay, ApplyFunction(
+                lambda m, f=r_max / 0.06: m.scale(f, about_point=HEAD1).set_stroke(width=0.5, opacity=0.0),
+                ring, run_time=t, rate_func=rate_functions.ease_out_quad))
+
+        rings = [shock_ring(0.0, 5.5, 14.0, 0.7), shock_ring(0.08, 4.2, 9.0, 0.6), shock_ring(0.26, 6.0, 8.0, 0.7),
+                 shock_ring(0.50, 5.0, 7.0, 0.7), shock_ring(0.80, 6.5, 6.0, 0.8), shock_ring(1.15, 5.5, 4.0, 0.8)]
+
+        cracks, crack_anims = VGroup(), []
+        for _ in range(N_CRACKS_X):
+            cr = _crack(HEAD1, rng)
+            full = cr.copy()
+            cr.scale(1e-3, about_point=HEAD1)
+            cracks.add(cr)
+            crack_anims.append(Succession(
+                Transform(cr, full, run_time=0.16, rate_func=rate_functions.ease_out_cubic),
+                ApplyFunction(lambda m: m.set_stroke(opacity=0.0), cr, run_time=0.5)))
+
+        spark_cols = [INK, HIGHLIGHT] + FLAG["NL"][::2] + FLAG["BE"][1:] + FLAG["DE"][1:]
+        sparks, spark_anims = VGroup(), []
+        for _ in range(N_SPARKS_X):
+            a = rng.uniform(0, TAU)
+            ln = rng.uniform(0.12, 0.45)
+            sp = Line(HEAD1 + 0.15 * _dir(a), HEAD1 + (0.15 + ln) * _dir(a),
+                      stroke_color=col(spark_cols[rng.integers(len(spark_cols))]), stroke_width=rng.uniform(2, 6))
+            sparks.add(sp)
+            v = rng.uniform(3.5, 9.5) * _dir(a)
+            spark_anims.append(delayed(rng.uniform(0, 0.35), ApplyFunction(
+                lambda m, v=v: m.shift(v).set_stroke(opacity=0.0), sp,
+                run_time=rng.uniform(0.4, 0.9), rate_func=rate_functions.ease_out_quad)))
+
+        debris, debris_anims = VGroup(), []
+        for _ in range(N_DEBRIS_X):
+            a, r0 = rng.uniform(0, TAU), rng.uniform(0.2, 1.3)
+            c0 = HEAD1 + r0 * _dir(a)
+            s = rng.uniform(0.05, 0.19)
+            colour = spark_cols[rng.integers(len(spark_cols))]
+            tri = Polygon(*[c0 + s * _dir(b + rng.uniform(-0.35, 0.35)) for b in (0.0, TAU / 3, 2 * TAU / 3)],
+                          fill_color=col(colour), fill_opacity=1.0, stroke_color=col(INK), stroke_width=1.0)
+            debris.add(tri)
+            debris_anims.append(delayed(rng.uniform(0, 0.2), ApplyFunction(
+                lambda m, v=rng.uniform(4.0, 9.0) * _dir(a), ang=rng.uniform(-8, 8): m.shift(v).rotate(ang),
+                tri, run_time=rng.uniform(0.6, 1.0), rate_func=rate_functions.ease_out_quad)))
+
+        # the microphone itself is destroyed: its four pieces fly out spinning
+        mic_anims = [delayed(rng.uniform(0, 0.12), ApplyFunction(
+            lambda m, v=rng.uniform(3.0, 7.0) * _dir(rng.uniform(0, TAU)), ang=rng.uniform(-10, 10): m.shift(v).rotate(ang),
+            piece, run_time=rng.uniform(0.5, 0.9), rate_func=rate_functions.ease_out_quad)) for piece in mic]
+
+        shake = ValueTracker(0.0)
+        shaker = Dot(radius=0).set_opacity(0)
+
+        def _shake(m, dt):
+            amp = shake.get_value()
+            self.camera.frame_center = np.array([rng.normal(0, amp), rng.normal(0, amp), 0.0])
+
+        shaker.add_updater(_shake)
+
+        self.add(*[r for r, _ in rings], cracks, sparks, debris, stars, flash, shaker)
+        shake.set_value(0.34)
+        crack_out = [ApplyFunction(lambda m, v=0.22 * d: m.shift(v), w, run_time=0.18,
+                                   rate_func=rate_functions.ease_out_quad) for w, d in zip(wedges, wedge_dirs)]
+        impact = AnimationGroup(
+            Succession(ApplyFunction(lambda m: m.scale(18, about_point=HEAD1), stars, run_time=0.14,
+                                     rate_func=rate_functions.ease_out_cubic),
+                       FadeOut(stars, run_time=0.25)),
+            ApplyFunction(lambda m: m.set_fill(opacity=0.0), flash, run_time=0.32,
+                          rate_func=rate_functions.ease_out_quad),
+            *[a for _, a in rings], *crack_anims, *spark_anims, *debris_anims, *mic_anims, *crack_out,
+            FadeOut(hand_all, shift=2.2 * UP, run_time=0.5),
+            Succession(Wait(0.18), shake.animate(run_time=1.0, rate_func=rate_functions.ease_out_quad).set_value(0.0)),
+        )
+
+        # 5. the rays: more bursts, at random angles, each grows and flies off with the wedges
+        ray_anims, i = [], 0
+        for t0, n in BURSTS_X:
+            for _ in range(n):
+                a = rng.uniform(0, TAU)
+                r = flag_ray(RAY_ORDER[i % 3], a, HEAD1, rng.uniform(3.8, 6.8), rng.uniform(0.14, 0.48))
+                i += 1
+                full = r.copy()
+                r.scale(1e-3, about_point=HEAD1)
+                self.add(r)
+                ray_anims.append(Succession(
+                    Wait(t0 + rng.uniform(0, 0.16)),
+                    Transform(r, full, run_time=rng.uniform(0.18, 0.34), rate_func=rate_functions.ease_out_cubic),
+                    Wait(rng.uniform(0, 0.12)),
+                    ApplyFunction(lambda m, v=FLY * _dir(a): m.shift(v), r,
+                                  run_time=rng.uniform(0.4, 0.75), rate_func=rate_functions.ease_in_quad)))
+        wedge_anims = [delayed(rng.uniform(0.25, 0.9), ApplyFunction(
+            lambda m, v=FLY * d, ang=rng.uniform(-240, 240) * DEGREES: m.shift(v).rotate(ang), w,
+            run_time=rng.uniform(0.5, 0.85), rate_func=rate_functions.ease_in_quad))
+            for w, d in zip(wedges, wedge_dirs)]
+        self.play(AnimationGroup(impact, *ray_anims, *wedge_anims))
+        shaker.remove_updater(_shake)
+        self.camera.frame_center = ORIGIN.copy()
+        self.clear()
+
+        # the clean slide
+        thanks = text("Thank you!", weight=BOLD).scale_to_fit_height(0.95)
+        quest = text("Any questions?").scale_to_fit_height(0.48)
+        VGroup(thanks, quest).arrange(DOWN, buff=0.55).move_to(ORIGIN)
+        self.play(FadeIn(thanks, scale=1.7), run_time=0.55, rate_func=rate_functions.ease_out_back)
+        self.play(FadeIn(quest, shift=0.3 * UP), run_time=0.55, rate_func=EASE)
         self.wait(0.1)

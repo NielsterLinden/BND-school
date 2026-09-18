@@ -167,6 +167,10 @@ frozen ones and the last stage is the fit input.
 | # | candidate | what moves | source |
 |---|-----------|-----------|--------|
 | ✔ 6-01 | `three_to_one` | schematic: three channel points with error bars slide into one slate combined point next to the purple theory line (no numbers yet) | skeleton |
+| ✔ 6-02 | `comb_summary` | slide 1: `summary.png` drawn from an empty frame — axes, then the x labels with "CMS Open Data", then Z→ee, Z→μμ, Z→ττ, the divider and the combined row with 16.4 fb⁻¹, last the aMC@NLO line, band and legend (the figure's own colours, not the chapter colours) | data/combination_results.json |
+| ✔ 6-03 | `comb_orthogonality` | slide 2: the result plot shrinks into the top-right corner (in the title band, deck owner's call), a schematic m_ττ stack and the μμ eμ control region come up side by side; the ττ eμ part takes the control-region colours while the rest greys out, then the control region greys out and ττ is whole again | schematic + ZMUMU_FIG / ZTAUTAU_FIG |
+| ✔ 6-04 | `comb_impacts` | slide 3: the eμ plots leave, both panels of `impacts.png` open at once and each row lands in both simultaneously from the smallest impact upward; all rows but the top three dim and those three are outlined | data/combination_results.json |
+| ✔ 6-05 | `comb_published` | slide 4: the impacts fade, the corner result grows back to full size, rows shift up and tighten as CMS and then ATLAS join under the combined row (`combined_vs_published.png`) | data/combination_results.json |
 | | `three_to_one_numbers` | the same with the frozen σ values and uncertainties from `data/` | fitting/, handoffs |
 | | `correlation_matrix` | correlated nuisance parameters (Lumi, PDF, QCDScale …) light up across the three channels | fitting/CONVENTIONS.md |
 | | `chapter_bars` | the six chapter colours as the anchor of the talk, all lit | palette `CHAPTER` |
@@ -176,3 +180,4 @@ frozen ones and the last stage is the fit input.
 | # | candidate | what moves | source |
 |---|-----------|-----------|--------|
 | ✔ 7-01 | `mic_drop` | the CMS slice; a hand with a microphone comes in from the top, opens, the microphone drops into the centre and explodes (flash, shock rings, sparks, camera shake); the detector cracks into 12 wedges; NL / BE / DE rays (`FLAG`, outro only) come in five staggered bursts at random angles and fly off, the wedges tumble off with them; "Thank you! / Any questions?" centred on the clean slide (the one clip with words) | closing slide |
+| ✔ 7-02 | `mic_drop_results` | 7-01 grown out of the combination: opens on 6-05's last frame, the CMS published point opens out into the CMS detector and our own combined point hands over the microphone; the drop is harder and the explosion bigger (18 wedges, 170 sparks, debris, cracks, six shock rings, a frame flash, the microphone shatters too, six ray bursts) before the same closing slide. Supersedes 7-01 if the deck uses it | closing slide, s6_combination_story |

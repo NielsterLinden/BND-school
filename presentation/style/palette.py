@@ -153,3 +153,31 @@ FLAG = {
 }
 
 FONT = "DejaVu Sans"
+
+# -- section 6: figures redrawn in the colours of the analysis figures ----------
+# Deck owner's request (17 Sep 2026): the combination clips rebuild summary.png, impacts.png and
+# combined_vs_published.png (combination/combLieke/mf/plots.py) and two e mu mass plots in the colours of
+# those figures, not in the chapter colours. Copied from the plotting code; never used elsewhere.
+COMB_FIG = {
+    "ee":          "#8E44AD",   # mf/plots.py C_EE
+    "mumu":        "#2B6CB0",   # C_MUMU
+    "tautau":      "#EB811B",   # C_TAUTAU
+    "combined":    "#23373B",   # C_COMB
+    "prediction":  "#14B03D",   # C_PRED (band drawn at opacity 0.18)
+    "published":   "#8C8C94",   # C_GREY (published points)
+    "published_text": "#444444",
+    "separator":   "#999999",
+    "impact_up":   "#2B6CB0",   # theta_hat + delta theta_hat (opacity 0.85)
+    "impact_down": "#5FA8D3",   # theta_hat - delta theta_hat (opacity 0.85)
+    "pull_1sigma": "#7CCB7C",   # opacity 0.45
+    "pull_2sigma": "#FFE066",   # opacity 0.45
+}
+# z-mumu/zmumu/plotting.py COLOURS (datamc_CRemu_mass_fit.png)
+ZMUMU_FIG = {
+    "DYmumu": "#F2B134", "DYtautau": "#A04CB0", "DYee": "#4C9EE0", "TTbar": "#D62728", "SingleTop": "#E07B7B",
+    "WW": "#2CA6A4", "WZ": "#4DC0BE", "ZZ": "#7FD4D2", "WJets": "#8C6D4F", "MCStat": "#9A9A9A",
+}
+# z-tautau/ztautau/plotting.py COLORS (step4_*_m_vis.png)
+ZTAUTAU_FIG = {
+    "DYtautau": "#FFCC66", "Fakes": "#FF99CC", "TTbar": "#9999CC", "Diboson": "#66CC99", "WJets": "#D95F5F",
+}

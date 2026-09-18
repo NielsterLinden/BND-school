@@ -101,3 +101,8 @@ number	section	name	scene_file	scene_class
 14	3_zee	ee_fit_nuisance	scenes/s3_zee_story.py	ZeeFit
 15	3_zee	ee_fit_result	scenes/s3_zee_story.py	ZeeFit
 16	3_zee	ee_sigma	scenes/s3_zee_story.py	ZeeFit
+2	6_combination	comb_summary	scenes/s6_combination_story.py	CombSummary
+3	6_combination	comb_orthogonality	scenes/s6_combination_story.py	CombOrthogonality
+4	6_combination	comb_impacts	scenes/s6_combination_story.py	CombImpacts
+5	6_combination	comb_published	scenes/s6_combination_story.py	CombPublished
+2	7_outro	mic_drop_results	scenes/s7_outro.py	MicDropResults

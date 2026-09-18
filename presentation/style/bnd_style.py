@@ -33,6 +33,7 @@ from style.palette import (  # noqa: F401  (re-exported)
     mix, tint, shade,
     BG, INK, GREY, LIGHT_GREY, CHANNEL, CHANNEL_LINE, TRACK_OUTLINE, COMBINED, THEORY,
     DETECTOR_ACCENT, HIGHLIGHT, SAMPLE, PARTICLE, CMS, DETECTOR, DEPOSIT, FLAG, FONT,
+    COMB_FIG, ZMUMU_FIG, ZTAUTAU_FIG,
 )
 
 # ---------------------------------------------------------------------------
@@ -1617,7 +1618,7 @@ __all__ = [
     "mix", "tint", "shade",
     "BG", "INK", "GREY", "LIGHT_GREY", "CHANNEL", "CHANNEL_LINE", "TRACK_OUTLINE", "COMBINED",
     "THEORY", "DETECTOR_ACCENT", "HIGHLIGHT", "SAMPLE", "PARTICLE", "CMS", "DETECTOR", "DEPOSIT", "FLAG",
-    "FONT",
+    "FONT", "COMB_FIG", "ZMUMU_FIG", "ZTAUTAU_FIG",
     "col", "lighten", "darken", "text", "mathtex", "white_background", "load_data",
     "unit", "fline", "fermion", "arrow_tip_on", "dashed", "wavy", "gluon", "vertex_dot",
     "shower_tree", "hadron_blob", "pion_lines",

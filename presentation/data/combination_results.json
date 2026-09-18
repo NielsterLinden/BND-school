@@ -1,0 +1,468 @@
+{
+ "_doc": "Section 6 (combination): the numbers of combination/combLieke/output/plots/{summary,impacts,combined_vs_published}.png, frozen from output/result.json with the selection and formatting of mf/plots.py.",
+ "provenance": {
+  "extractor": "presentation/data/extract_combination.py",
+  "generated": "2026-09-17T18:57:12",
+  "git": {
+   "commit": "c672a1bf20f7683a52953db18ab80ec239a7c9bb",
+   "short": "c672a1bf",
+   "dirty_worktree": true
+  },
+  "lumi_pb": 16393.381,
+  "dataset": "CMS 2016 Open Data, SingleMuon Run2016G+H, NanoAODv9 (records 30530, 30563)",
+  "sources": [
+   "combination/combLieke/output/result.json",
+   "combination/combLieke/mf/plots.py",
+   "combination/combLieke/config/references.json"
+  ],
+  "result_inputs": "9140852 2026-09-17T18:25:46+02:00",
+  "observable": "sigma(pp -> Z/gamma* -> ll), 60 < m_ll(LHE) < 120 GeV, sqrt(s) = 13 TeV, per lepton flavour, lepton universality"
+ },
+ "header": {
+  "left": "CMS Open Data",
+  "right": "16.4 fb-1 (13 TeV)",
+  "lumi_pb": 16393.381
+ },
+ "poi_reference_pb": 1953.9313466473218,
+ "summary": {
+  "x_range_pb": [
+   1650,
+   2400
+  ],
+  "rows": [
+   {
+    "key": "ee",
+    "sigma_pb": 2093.7742131268706,
+    "up_pb": 121.82468856644054,
+    "down_pb": 114.46657390123606,
+    "value_tex": "2094\\ {}^{+122}_{-114}"
+   },
+   {
+    "key": "mumu",
+    "sigma_pb": 1931.064488097508,
+    "up_pb": 30.77695882044596,
+    "down_pb": 30.084094764924817,
+    "value_tex": "1931\\ {}^{+31}_{-30}"
+   },
+   {
+    "key": "tautau",
+    "sigma_pb": 1981.2668461869177,
+    "up_pb": 153.30740738929552,
+    "down_pb": 135.86212214702422,
+    "value_tex": "1981\\ {}^{+153}_{-136}"
+   },
+   {
+    "key": "combined",
+    "sigma_pb": 1949.3435158453938,
+    "up_pb": 30.180228187179868,
+    "down_pb": 29.647391108949144,
+    "stat_pb": 0.4733076288580941,
+    "value_tex": "1949\\ {}^{+30}_{-30}"
+   }
+  ]
+ },
+ "prediction": {
+  "label": "aMC@NLO",
+  "sigma_pb": 1953.931346647322,
+  "up_pb": 56.05842258438731,
+  "down_pb": 81.66364603449847,
+  "band_lo_pb": 1872.2677006128235,
+  "band_hi_pb": 2009.9897692317093
+ },
+ "published": [
+  {
+   "label": "CMS",
+   "detail": "206 pb$^{-1}$, ee + $\\mu\\mu$",
+   "window": [
+    60,
+    120
+   ],
+   "moved_to_60_120": false,
+   "window_scale": 1.0,
+   "sigma_pb": 1952.0,
+   "err_pb": 48.63126566315131,
+   "citation": "CMS-SMP-20-004, JHEP 04 (2025) 162, arXiv:2408.03744, Table 13",
+   "value_tex": "1952 \\pm 49"
+  },
+  {
+   "label": "ATLAS",
+   "detail": "81 pb$^{-1}$, ee + $\\mu\\mu$",
+   "window": [
+    66,
+    116
+   ],
+   "moved_to_60_120": true,
+   "window_scale": 1.0142539192371456,
+   "sigma_pb": 2009.2370140087853,
+   "err_pb": 57.883605350086164,
+   "citation": "ATLAS, PLB 759 (2016) 601, arXiv:1603.09222, Table 3",
+   "value_tex": "2009 \\pm 58"
+  }
+ ],
+ "impacts": {
+  "rows": [
+   {
+    "name": "Lumi",
+    "label_mpl": "Lumi",
+    "impact_up_pb": -22.08821690817465,
+    "impact_down_pb": 22.540942801192834,
+    "pull": -0.400994,
+    "err_up": 0.971854,
+    "err_down": 0.971854,
+    "free": false
+   },
+   {
+    "name": "ElectronID",
+    "label_mpl": "ElectronID",
+    "impact_up_pb": -12.530346793601144,
+    "impact_down_pb": 12.832580894300552,
+    "pull": -0.365599,
+    "err_up": 0.178542,
+    "err_down": 0.178542,
+    "free": false
+   },
+   {
+    "name": "mu_ttbar",
+    "label_mpl": "$\\mu_{t\\bar{t}}$ ($\\tau\\tau$, free)",
+    "impact_up_pb": 11.238133836809403,
+    "impact_down_pb": -11.260779901117045,
+    "pull": 0.11342,
+    "err_up": 0.0349345,
+    "err_down": 0.0349345,
+    "free": true,
+    "free_value": 1.11342,
+    "free_err": 0.0349345,
+    "free_text": "free: 1.113 \u00b1 0.035"
+   },
+   {
+    "name": "L1Prefiring",
+    "label_mpl": "L1Prefiring",
+    "impact_up_pb": 9.504801339198565,
+    "impact_down_pb": -9.418281259169023,
+    "pull": 0.241904,
+    "err_up": 0.979708,
+    "err_down": 0.979708,
+    "free": false
+   },
+   {
+    "name": "Acc_PDF",
+    "label_mpl": "Acc PDF",
+    "impact_up_pb": -9.173395043493711,
+    "impact_down_pb": 9.26182997624297,
+    "pull": -0.139481,
+    "err_up": 0.987481,
+    "err_down": 0.987481,
+    "free": false
+   },
+   {
+    "name": "SigModel_mumu",
+    "label_mpl": "SigModel mumu",
+    "impact_up_pb": -7.074736002000224,
+    "impact_down_pb": 7.048905029597546,
+    "pull": 0.605207,
+    "err_up": 0.116192,
+    "err_down": 0.116192,
+    "free": false
+   },
+   {
+    "name": "Acc_PTZ_mumu",
+    "label_mpl": "Acc PTZ mumu",
+    "impact_up_pb": -6.946929352616022,
+    "impact_down_pb": 6.94034460397782,
+    "pull": -0.104686,
+    "err_up": 0.99011,
+    "err_down": 0.99011,
+    "free": false
+   },
+   {
+    "name": "MuonScale",
+    "label_mpl": "MuonScale",
+    "impact_up_pb": 6.051833402716884,
+    "impact_down_pb": -6.035205446956915,
+    "pull": -0.423105,
+    "err_up": 0.11974,
+    "err_down": 0.11974,
+    "free": false
+   },
+   {
+    "name": "MuonIso",
+    "label_mpl": "MuonIso",
+    "impact_up_pb": -5.591917042343037,
+    "impact_down_pb": 5.639671124455098,
+    "pull": 0.0861072,
+    "err_up": 0.883616,
+    "err_down": 0.883616,
+    "free": false
+   },
+   {
+    "name": "Acc_QCDScale",
+    "label_mpl": "Acc QCDScale",
+    "impact_up_pb": -5.307932660421315,
+    "impact_down_pb": 5.363541546546898,
+    "pull": -0.0808052,
+    "err_up": 0.991502,
+    "err_down": 0.991502,
+    "free": false
+   },
+   {
+    "name": "MuonReco",
+    "label_mpl": "MuonReco",
+    "impact_up_pb": -5.050932070396794,
+    "impact_down_pb": 4.90817784621074,
+    "pull": -0.0530926,
+    "err_up": 0.991521,
+    "err_down": 0.991521,
+    "free": false
+   },
+   {
+    "name": "QCDScale_eeShape",
+    "label_mpl": "QCDScale (ee shape)",
+    "impact_up_pb": 4.59431785399878,
+    "impact_down_pb": -4.653209344786731,
+    "pull": -1.82769,
+    "err_up": 0.373668,
+    "err_down": 0.373668,
+    "free": false
+   },
+   {
+    "name": "TauIDpT_tautau",
+    "label_mpl": "TauIDpT tautau",
+    "impact_up_pb": -4.582086243768768,
+    "impact_down_pb": 4.641954700230043,
+    "pull": 0.184447,
+    "err_up": 0.48974,
+    "err_down": 0.48974,
+    "free": false
+   },
+   {
+    "name": "MuonID",
+    "label_mpl": "MuonID",
+    "impact_up_pb": -3.519167130506092,
+    "impact_down_pb": 3.563150125119123,
+    "pull": 0.0175771,
+    "err_up": 0.987107,
+    "err_down": 0.987107,
+    "free": false
+   },
+   {
+    "name": "MuonTrigger",
+    "label_mpl": "MuonTrigger",
+    "impact_up_pb": -2.8693286432381258,
+    "impact_down_pb": 2.831813161382497,
+    "pull": 0.044144,
+    "err_up": 0.965092,
+    "err_down": 0.965092,
+    "free": false
+   },
+   {
+    "name": "BTag",
+    "label_mpl": "BTag",
+    "impact_up_pb": -2.6142233666198513,
+    "impact_down_pb": 2.3992909184886457,
+    "pull": -0.0215329,
+    "err_up": 0.717456,
+    "err_down": 0.717456,
+    "free": false
+   },
+   {
+    "name": "Pileup",
+    "label_mpl": "Pileup",
+    "impact_up_pb": 2.402768916285678,
+    "impact_down_pb": -2.3476094343698244,
+    "pull": 0.151011,
+    "err_up": 0.436498,
+    "err_down": 0.436498,
+    "free": false
+   },
+   {
+    "name": "TauFakeEle",
+    "label_mpl": "TauFakeEle",
+    "impact_up_pb": 2.2507921361434495,
+    "impact_down_pb": -2.4171498509970024,
+    "pull": -0.0674315,
+    "err_up": 0.536385,
+    "err_down": 0.536385,
+    "free": false
+   },
+   {
+    "name": "XS_WW",
+    "label_mpl": "XS WW",
+    "impact_up_pb": 2.3170304087947935,
+    "impact_down_pb": -2.280003409775827,
+    "pull": 0.103297,
+    "err_up": 0.828817,
+    "err_down": 0.828817,
+    "free": false
+   },
+   {
+    "name": "MuonRes",
+    "label_mpl": "MuonRes",
+    "impact_up_pb": -2.2249220851138385,
+    "impact_down_pb": 2.1953395645255984,
+    "pull": 0.374317,
+    "err_up": 0.102942,
+    "err_down": 0.102942,
+    "free": false
+   }
+  ],
+  "x_lim_pb": 30.430272781610327,
+  "pull_x_range": [
+   -2.6,
+   2.6
+  ],
+  "top3_by_impact": [
+   "Lumi",
+   "ElectronID",
+   "mu_ttbar"
+  ]
+ },
+ "compatibility_p": 0.37724516508333933,
+ "checks": [
+  {
+   "name": "combined 1949.3 +30.2 -29.6 pb",
+   "ok": true,
+   "tol": 0.06,
+   "rel": false,
+   "max_diff": 0.047391108949142335,
+   "source": "combination/combLieke/README.md, combination/CLAUDE.md",
+   "shape": [
+    3
+   ]
+  },
+  {
+   "name": "tautau 1981 +153 -136 pb",
+   "ok": true,
+   "tol": 0.5,
+   "rel": false,
+   "max_diff": 0.3074073892955198,
+   "source": "combination/combLieke/README.md, combination/CLAUDE.md",
+   "shape": [
+    3
+   ]
+  },
+  {
+   "name": "mumu 1931 +31 -30 pb",
+   "ok": true,
+   "tol": 0.5,
+   "rel": false,
+   "max_diff": 0.22304117955404124,
+   "source": "summary.png",
+   "shape": [
+    3
+   ]
+  },
+  {
+   "name": "ee 2094 +122 -114 pb",
+   "ok": true,
+   "tol": 0.5,
+   "rel": false,
+   "max_diff": 0.46657390123606035,
+   "source": "summary.png",
+   "shape": [
+    3
+   ]
+  },
+  {
+   "name": "value strings as in summary.png",
+   "ok": true,
+   "source": "summary.png",
+   "detail": "['2094\\\\ {}^{+122}_{-114}', '1931\\\\ {}^{+31}_{-30}', '1981\\\\ {}^{+153}_{-136}', '1949\\\\ {}^{+30}_{-30}']"
+  },
+  {
+   "name": "prediction 1953.9 +56.1 -81.7 pb",
+   "ok": true,
+   "tol": 0.01,
+   "rel": false,
+   "max_diff": 0.0036460344984732274,
+   "source": "presentation/data/theory_reference.json (1-04)",
+   "shape": [
+    3
+   ]
+  },
+  {
+   "name": "CMS 1952 +- 49 pb",
+   "ok": true,
+   "tol": 0.01,
+   "rel": false,
+   "max_diff": 0.0012656631513081606,
+   "source": "combined_vs_published.png",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "ATLAS 2009 +- 58 pb (66-116 moved to 60-120)",
+   "ok": true,
+   "tol": 0.01,
+   "rel": false,
+   "max_diff": 0.003605350086161252,
+   "source": "combined_vs_published.png",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "published strings",
+   "ok": true,
+   "source": "combined_vs_published.png"
+  },
+  {
+   "name": "20 impact rows",
+   "ok": true,
+   "tol": 0.0,
+   "rel": false,
+   "max_diff": 0.0,
+   "source": "impacts.png",
+   "got": 20.0,
+   "want": 20.0
+  },
+  {
+   "name": "impacts.png row order (top 5 / bottom)",
+   "ok": true,
+   "source": "impacts.png",
+   "detail": "['Lumi', 'ElectronID', 'mu_ttbar', 'L1Prefiring', 'Acc_PDF', 'SigModel_mumu', 'Acc_PTZ_mumu', 'MuonScale', 'MuonIso', 'Acc_QCDScale', 'MuonReco', 'QCDScale_eeShape', 'TauIDpT_tautau', 'MuonID', 'MuonTrigger', 'BTag', 'Pileup', 'TauFakeEle', 'XS_WW', 'MuonRes']"
+  },
+  {
+   "name": "Lumi impact -22.1 / +22.5 pb",
+   "ok": true,
+   "tol": 0.01,
+   "rel": false,
+   "max_diff": 0.0017830918253487482,
+   "source": "impacts.png",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "mu_ttbar free 1.113 +- 0.035",
+   "ok": true,
+   "tol": 0.0006,
+   "rel": false,
+   "max_diff": 0.00042000000000008697,
+   "source": "impacts.png",
+   "shape": [
+    2
+   ]
+  },
+  {
+   "name": "QCDScale (ee shape) pull -1.83",
+   "ok": true,
+   "tol": 0.005,
+   "rel": false,
+   "max_diff": 0.0023100000000000342,
+   "source": "impacts.png",
+   "got": -1.82769,
+   "want": -1.83
+  },
+  {
+   "name": "compatibility p = 0.38",
+   "ok": true,
+   "tol": 0.005,
+   "rel": false,
+   "max_diff": 0.0027548349166606756,
+   "source": "CLAUDE.md",
+   "got": 0.37724516508333933,
+   "want": 0.38
+  }
+ ]
+}
